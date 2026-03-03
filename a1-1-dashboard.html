@@ -977,7 +977,12 @@
                 },
                 cache: { cacheLocation: 'sessionStorage' }
             });
-            await msalInstance.handleRedirectPromise().catch(() => {});
+            try {
+                const redirectResult = await msalInstance.handleRedirectPromise();
+                if (redirectResult && redirectResult.accessToken) {
+                    accessToken = redirectResult.accessToken;
+                }
+            } catch(e) { console.warn('handleRedirectPromise Fehler:', e); }
             msalBereit = true;
             resolve();
         };
@@ -986,23 +991,39 @@
     });
 
     async function getToken() {
-        // Warten bis MSAL vollständig geladen ist
         await msalBereitPromise;
         if (!msalInstance) throw new Error('MSAL konnte nicht geladen werden');
 
+        // Wenn wir nach einem Redirect schon ein Token haben, direkt verwenden
+        if (accessToken) return accessToken;
+
         const accounts = msalInstance.getAllAccounts();
         if (accounts.length === 0) {
-            // Noch nicht angemeldet → Weiterleitung zur Microsoft-Anmeldung
-            await msalInstance.loginRedirect({ scopes: MSAL_CONFIG.scopes });
-            return null; // Seite wird weitergeleitet, kein weiterer Code nötig
+            // Noch nicht angemeldet → Popup versuchen
+            try {
+                const result = await msalInstance.loginPopup({ scopes: MSAL_CONFIG.scopes });
+                accessToken = result.accessToken;
+                return accessToken;
+            } catch(popupErr) {
+                // Popup blockiert → Redirect
+                await msalInstance.loginRedirect({ scopes: MSAL_CONFIG.scopes });
+                return null;
+            }
         }
         const request = { scopes: MSAL_CONFIG.scopes, account: accounts[0] };
         try {
             const result = await msalInstance.acquireTokenSilent(request);
-            return result.accessToken;
+            accessToken = result.accessToken;
+            return accessToken;
         } catch {
-            await msalInstance.acquireTokenRedirect(request);
-            return null;
+            try {
+                const result = await msalInstance.acquireTokenPopup(request);
+                accessToken = result.accessToken;
+                return accessToken;
+            } catch {
+                await msalInstance.acquireTokenRedirect(request);
+                return null;
+            }
         }
     }
 
