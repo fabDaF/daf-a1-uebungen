@@ -923,7 +923,24 @@
         <h3>Lektion per E-Mail senden</h3>
         <div class="modal-betreff" id="modalBetreff"></div>
         <label for="empfaenger">E-Mail-Adresse des Schülers</label>
-        <input type="email" id="empfaenger" placeholder="schueler@beispiel.de" autocomplete="email">
+        <div style="position:relative;">
+            <input type="text" id="empfaenger" placeholder="Name oder E-Mail eingeben …"
+                autocomplete="off"
+                oninput="sucheKontakte(this.value)"
+                style="width:100%;box-sizing:border-box;">
+            <div id="kontaktVorschlaege" style="
+                display:none;
+                position:absolute;
+                top:100%;left:0;right:0;
+                background:white;
+                border:1px solid #ddd;
+                border-radius:8px;
+                box-shadow:0 4px 12px rgba(0,0,0,0.15);
+                max-height:200px;
+                overflow-y:auto;
+                z-index:1000;
+            "></div>
+        </div>
         <div id="modalStatus" style="font-size:0.9rem;min-height:1.2em;margin-bottom:0.5rem;"></div>
         <div class="modal-buttons">
             <button class="btn-abbrechen" onclick="schliesseModal()">Abbrechen</button>
@@ -940,7 +957,7 @@
         clientId: '9c408a7d-0b66-414d-9f20-8d391cd5d687',
         tenantId: '3f58e5ba-a927-4818-9ea5-3c55915e03d7',
         redirectUri: 'https://fabdaf.github.io/daf-a1-uebungen/a1-1-dashboard.html',
-        scopes: ['Mail.Send', 'User.Read']
+        scopes: ['Mail.Send', 'User.Read', 'Contacts.Read']
     };
 
     /* ── MSAL laden ── */
@@ -1060,6 +1077,68 @@
     document.addEventListener('keydown', e => {
         if (e.key === 'Escape') schliesseModal();
     });
+
+    /* ── Outlook-Kontakte suchen (Autovervollständigung) ── */
+    let sucheTimeout = null;
+
+    async function sucheKontakte(query) {
+        const vorschlaege = document.getElementById('kontaktVorschlaege');
+        if (!query || query.length < 2) {
+            vorschlaege.style.display = 'none';
+            return;
+        }
+        clearTimeout(sucheTimeout);
+        sucheTimeout = setTimeout(async () => {
+            try {
+                await msalBereitPromise;
+                const token = await getTokenSilent();
+                if (!token) return;
+                const resp = await fetch(
+                    'https://graph.microsoft.com/v1.0/me/people/?$search=' + encodeURIComponent(query) + '&$top=8&$filter=personType/class eq 'Person'',
+                    { headers: { 'Authorization': 'Bearer ' + token } }
+                );
+                if (!resp.ok) return;
+                const data = await resp.json();
+                const kontakte = (data.value || []).filter(k => k.scoredEmailAddresses && k.scoredEmailAddresses.length > 0);
+                if (kontakte.length === 0) {
+                    vorschlaege.style.display = 'none';
+                    return;
+                }
+                vorschlaege.innerHTML = kontakte.map(k => {
+                    const email = k.scoredEmailAddresses[0].address;
+                    const name = k.displayName || email;
+                    return '<div onclick="waehleKontakt('' + email.replace(/'/g, '') + '')" style="padding:10px 14px;cursor:pointer;border-bottom:1px solid #f0f0f0;" onmouseover="this.style.background='#f5f3ff'" onmouseout="this.style.background='white'">' +
+                        '<strong style="display:block;font-size:0.95em;">' + name + '</strong>' +
+                        '<span style="font-size:0.82em;color:#888;">' + email + '</span>' +
+                    '</div>';
+                }).join('');
+                vorschlaege.style.display = 'block';
+            } catch(e) {
+                console.warn('Kontaktsuche fehlgeschlagen:', e);
+            }
+        }, 300);
+    }
+
+    function waehleKontakt(email) {
+        document.getElementById('empfaenger').value = email;
+        document.getElementById('kontaktVorschlaege').style.display = 'none';
+    }
+
+    document.addEventListener('click', e => {
+        if (!e.target.closest('#kontaktVorschlaege') && e.target.id !== 'empfaenger') {
+            const v = document.getElementById('kontaktVorschlaege');
+            if (v) v.style.display = 'none';
+        }
+    });
+
+    async function getTokenSilent() {
+        const accounts = msalInstance ? msalInstance.getAllAccounts() : [];
+        if (accounts.length === 0) return null;
+        try {
+            const result = await msalInstance.acquireTokenSilent({ scopes: MSAL_CONFIG.scopes, account: accounts[0] });
+            return result.accessToken;
+        } catch { return null; }
+    }
 
     /* ── E-Mail senden via Microsoft Graph (Link-Version) ── */
     const BASE_URL = 'https://fabdaf.github.io/daf-a1-uebungen/';
