@@ -944,32 +944,40 @@
     };
 
     /* ── MSAL laden ── */
-    const msalScript = document.createElement('script');
-    msalScript.src = 'https://alcdn.msauth.net/browser/2.39.0/js/msal-browser.min.js';
-    document.head.appendChild(msalScript);
-
     let msalInstance = null;
     let accessToken  = null;
+    let msalBereit   = false;
 
-    msalScript.onload = () => {
-        msalInstance = new msal.PublicClientApplication({
-            auth: {
-                clientId:    MSAL_CONFIG.clientId,
-                authority:   'https://login.microsoftonline.com/' + MSAL_CONFIG.tenantId,
-                redirectUri: MSAL_CONFIG.redirectUri
-            },
-            cache: { cacheLocation: 'sessionStorage' }
-        });
-        msalInstance.handleRedirectPromise().catch(() => {});
-    };
+    const msalBereitPromise = new Promise((resolve) => {
+        const msalScript = document.createElement('script');
+        msalScript.src = 'https://alcdn.msauth.net/browser/2.39.0/js/msal-browser.min.js';
+        msalScript.onload = async () => {
+            msalInstance = new msal.PublicClientApplication({
+                auth: {
+                    clientId:    MSAL_CONFIG.clientId,
+                    authority:   'https://login.microsoftonline.com/' + MSAL_CONFIG.tenantId,
+                    redirectUri: MSAL_CONFIG.redirectUri
+                },
+                cache: { cacheLocation: 'sessionStorage' }
+            });
+            await msalInstance.handleRedirectPromise().catch(() => {});
+            msalBereit = true;
+            resolve();
+        };
+        msalScript.onerror = () => resolve(); // auch bei Fehler weitermachen
+        document.head.appendChild(msalScript);
+    });
 
     async function getToken() {
-        if (!msalInstance) throw new Error('MSAL nicht geladen');
+        // Warten bis MSAL vollständig geladen ist
+        await msalBereitPromise;
+        if (!msalInstance) throw new Error('MSAL konnte nicht geladen werden');
+
         const accounts = msalInstance.getAllAccounts();
         if (accounts.length === 0) {
             // Noch nicht angemeldet → Weiterleitung zur Microsoft-Anmeldung
             await msalInstance.loginRedirect({ scopes: MSAL_CONFIG.scopes });
-            return null; // Seite wird weitergeleitet
+            return null; // Seite wird weitergeleitet, kein weiterer Code nötig
         }
         const request = { scopes: MSAL_CONFIG.scopes, account: accounts[0] };
         try {
