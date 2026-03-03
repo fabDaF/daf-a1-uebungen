@@ -1047,7 +1047,9 @@
         if (e.key === 'Escape') schliesseModal();
     });
 
-    /* ── E-Mail senden via Microsoft Graph ── */
+    /* ── E-Mail senden via Microsoft Graph (Link-Version) ── */
+    const BASE_URL = 'https://fabdaf.github.io/daf-a1-uebungen/';
+
     async function sendeEmail() {
         const email = document.getElementById('empfaenger').value.trim();
         if (!email || !email.includes('@')) {
@@ -1068,36 +1070,30 @@
             return;
         }
 
-        /* HTML-Dateien als Base64-Anhänge laden */
-        statusEl.textContent = 'Dateien werden geladen …';
-        const anhaenge = [];
+        /* Links für alle Dateien zusammenstellen */
+        const linkListe = aktuelleDateien.map(dateiname => {
+            const url = BASE_URL + dateiname;
+            return '<li style="margin:8px 0;"><a href="' + url + '" style="color:#667eea;font-size:1.05em;">' + aktuellerBetreff + '</a></li>';
+        }).join('');
 
-        for (const dateiname of aktuelleDateien) {
-            try {
-                const resp = await fetch(dateiname);
-                const text = await resp.text();
-                const b64  = btoa(unescape(encodeURIComponent(text)));
-                anhaenge.push({
-                    '@odata.type':  '#microsoft.graph.fileAttachment',
-                    name:           dateiname,
-                    contentType:    'text/html',
-                    contentBytes:   b64
-                });
-            } catch {
-                console.warn('Datei nicht ladbar:', dateiname);
-            }
-        }
+        /* E-Mail-Text zusammenstellen */
+        const emailInhalt =
+            '<p>Hallo,</p>' +
+            '<p>hier ist dein Lernmaterial für die nächste Stunde:</p>' +
+            '<ul>' + linkListe + '</ul>' +
+            '<p>Einfach auf den Link klicken — die Übung öffnet sich direkt im Browser, auch auf dem Handy.</p>' +
+            '<p>Viel Erfolg! 🎯</p>' +
+            '<p style="color:#888;font-size:0.9em;">— Frank Burkert · <a href="https://fabdaf.github.io/daf-a1-uebungen" style="color:#888;">fabDaF</a></p>';
 
         /* E-Mail zusammenstellen */
         const nachricht = {
             message: {
-                subject: aktuellerBetreff,
+                subject: 'fabDaF – ' + aktuellerBetreff,
                 body: {
                     contentType: 'HTML',
-                    content: '<p>Hallo,</p><p>im Anhang findest du die Lernmaterialien für: <strong>' + aktuellerBetreff + '</strong></p><p>Viel Erfolg!</p><p>Frank Burkert</p>'
+                    content: emailInhalt
                 },
-                toRecipients: [{ emailAddress: { address: email } }],
-                attachments: anhaenge
+                toRecipients: [{ emailAddress: { address: email } }]
             },
             saveToSentItems: true
         };
