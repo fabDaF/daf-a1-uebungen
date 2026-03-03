@@ -1084,10 +1084,14 @@
             return;
         }
 
-        /* Links für alle Dateien zusammenstellen */
+        /* Links für alle Dateien zusammenstellen — Titel aus den Karten lesen */
         const linkListe = aktuelleDateien.map(dateiname => {
             const url = BASE_URL + dateiname;
-            return '<li style="margin:8px 0;"><a href="' + url + '" style="color:#667eea;font-size:1.05em;">' + aktuellerBetreff + '</a></li>';
+            // Titel aus der Karte lesen (data-titel oder card-title)
+            const karte = document.querySelector('.card-oeffnen[href="' + dateiname + '"]');
+            const titelEl = karte ? karte.closest('.card')?.querySelector('.card-title') : null;
+            const titel = titelEl ? titelEl.textContent.trim() : dateiname.replace('.html','').replace(/_/g,' ');
+            return '<li style="margin:8px 0;"><a href="' + url + '" style="color:#667eea;font-size:1.05em;">' + titel + '</a></li>';
         }).join('');
 
         /* E-Mail-Text zusammenstellen */
