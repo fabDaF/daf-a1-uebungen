@@ -926,7 +926,6 @@
         <div style="position:relative;">
             <input type="text" id="empfaenger" placeholder="Name oder E-Mail eingeben …"
                 autocomplete="off"
-                oninput="sucheKontakte(this.value)"
                 style="width:100%;box-sizing:border-box;">
             <div id="kontaktVorschlaege" style="
                 display:none;
@@ -944,7 +943,7 @@
         <div id="modalStatus" style="font-size:0.9rem;min-height:1.2em;margin-bottom:0.5rem;"></div>
         <div class="modal-buttons">
             <button class="btn-abbrechen" onclick="schliesseModal()">Abbrechen</button>
-            <button class="btn-senden" id="btnSenden" onclick="sendeEmail()">✉ Senden</button>
+            <button class="btn-senden" id="btnSenden">✉ Senden</button>
         </div>
     </div>
 </div>
@@ -1064,15 +1063,14 @@
     let aktuellerBetreff = '';
     let aktuelleDateien  = [];   // Array — entweder 1 Datei oder ganze Einheit
 
-    function oeffneModal(betreff, datei) {
+    function oeffneModal(betreff, datei, klickEvent) {
         aktuellerBetreff = betreff;
         aktuelleDateien  = datei ? [datei] : [];
 
         // Bei "Einheit senden": alle Dateien der Einheit sammeln
         if (!datei) {
-            // Button-Kontext: data-einheit am übergeordneten .einheit-div
-            const btn      = event.currentTarget;
-            const einheit  = btn.closest('.einheit');
+            const btn     = (klickEvent && klickEvent.currentTarget) || event.currentTarget;
+            const einheit = btn ? btn.closest('.einheit') : null;
             if (einheit) {
                 einheit.querySelectorAll('.card-oeffnen').forEach(a => {
                     aktuelleDateien.push(a.getAttribute('href'));
@@ -1082,9 +1080,11 @@
 
         document.getElementById('modalBetreff').textContent = 'Betreff: ' + betreff;
         document.getElementById('empfaenger').value = '';
-        document.getElementById('modalStatus').textContent = '';
+        const statusEl = document.getElementById('modalStatus');
+        statusEl.textContent = '';
+        statusEl.style.color = '';
         document.getElementById('modalOverlay').classList.add('aktiv');
-        setTimeout(() => document.getElementById('empfaenger').focus(), 100);
+        setTimeout(() => document.getElementById('empfaenger').focus(), 150);
     }
 
     function schliesseModal() {
@@ -1095,12 +1095,21 @@
         if (e.target === this) schliesseModal();
     });
 
-    document.addEventListener('keydown', e => {
+    document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape') schliesseModal();
+    });
+
+    /* ── Senden-Button via addEventListener (robuster als onclick) ── */
+    document.getElementById('btnSenden').addEventListener('click', function() {
+        sendeEmail();
     });
 
     /* ── Outlook-Kontakte suchen (Autovervollständigung) ── */
     let sucheTimeout = null;
+
+    document.getElementById('empfaenger').addEventListener('input', function() {
+        sucheKontakte(this.value);
+    });
 
     async function sucheKontakte(query) {
         const vorschlaege = document.getElementById('kontaktVorschlaege');
@@ -1109,7 +1118,7 @@
             return;
         }
         clearTimeout(sucheTimeout);
-        sucheTimeout = setTimeout(async () => {
+        sucheTimeout = setTimeout(async function() {
             try {
                 await msalBereitPromise;
                 const token = await getTokenSilent();
@@ -1127,19 +1136,22 @@
                 }
                 vorschlaege.innerHTML = '';
                 kontakte.forEach(function(k) {
-                    const email = k.scoredEmailAddresses[0].address;
-                    const name = k.displayName || email;
-                    const div = document.createElement('div');
-                    div.style.cssText = 'padding:10px 14px;cursor:pointer;border-bottom:1px solid #f0f0f0;';
-                    div.innerHTML = '<strong style="display:block;font-size:0.95em;">' + name + '</strong><span style="font-size:0.82em;color:#888;">' + email + '</span>';
+                    var emailAdresse = k.scoredEmailAddresses[0].address;
+                    var name = k.displayName || emailAdresse;
+                    var div = document.createElement('div');
+                    div.style.cssText = 'padding:10px 14px;cursor:pointer;border-bottom:1px solid #f0f0f0;background:white;';
+                    div.innerHTML = '<strong style="display:block;font-size:0.95em;">' + name + '</strong><span style="font-size:0.82em;color:#888;">' + emailAdresse + '</span>';
                     div.addEventListener('mouseover', function() { this.style.background = '#f5f3ff'; });
                     div.addEventListener('mouseout',  function() { this.style.background = 'white'; });
-                    div.addEventListener('click',     function() { waehleKontakt(email); });
+                    div.addEventListener('mousedown', function(e) {
+                        e.preventDefault(); // verhindert blur auf input
+                        waehleKontakt(emailAdresse);
+                    });
                     vorschlaege.appendChild(div);
                 });
                 vorschlaege.style.display = 'block';
-            } catch(e) {
-                console.warn('Kontaktsuche fehlgeschlagen:', e);
+            } catch(err) {
+                console.warn('Kontaktsuche fehlgeschlagen:', err);
             }
         }, 300);
     }
@@ -1150,17 +1162,17 @@
     }
 
     document.addEventListener('click', function(e) {
-        if (!e.target.closest('#kontaktVorschlaege') && e.target.id !== 'empfaenger') {
-            const v = document.getElementById('kontaktVorschlaege');
-            if (v) v.style.display = 'none';
+        var vorschlaege = document.getElementById('kontaktVorschlaege');
+        if (vorschlaege && !vorschlaege.contains(e.target) && e.target.id !== 'empfaenger') {
+            vorschlaege.style.display = 'none';
         }
     });
 
     async function getTokenSilent() {
-        const accounts = msalInstance ? msalInstance.getAllAccounts() : [];
+        var accounts = msalInstance ? msalInstance.getAllAccounts() : [];
         if (accounts.length === 0) return null;
         try {
-            const result = await msalInstance.acquireTokenSilent({ scopes: MSAL_CONFIG.scopes, account: accounts[0] });
+            var result = await msalInstance.acquireTokenSilent({ scopes: MSAL_CONFIG.scopes, account: accounts[0] });
             return result.accessToken;
         } catch(e) { return null; }
     }
@@ -1183,8 +1195,16 @@
         try {
             accessToken = await getToken();
         } catch (err) {
+            console.error('getToken Fehler:', err);
+            statusEl.style.color = 'red';
             statusEl.textContent = '⚠ Anmeldung fehlgeschlagen. Bitte erneut versuchen.';
             sendenBtn.disabled   = false;
+            return;
+        }
+
+        if (!accessToken) {
+            // loginRedirect wurde eingeleitet — Seite lädt neu, nichts tun
+            statusEl.textContent = 'Weiterleitung zur Anmeldung …';
             return;
         }
 
