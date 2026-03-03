@@ -964,14 +964,20 @@
     };
 
     async function getToken() {
+        if (!msalInstance) throw new Error('MSAL nicht geladen');
         const accounts = msalInstance.getAllAccounts();
-        const request  = { scopes: MSAL_CONFIG.scopes, account: accounts[0] };
+        if (accounts.length === 0) {
+            // Noch nicht angemeldet → Weiterleitung zur Microsoft-Anmeldung
+            await msalInstance.loginRedirect({ scopes: MSAL_CONFIG.scopes });
+            return null; // Seite wird weitergeleitet
+        }
+        const request = { scopes: MSAL_CONFIG.scopes, account: accounts[0] };
         try {
             const result = await msalInstance.acquireTokenSilent(request);
             return result.accessToken;
         } catch {
-            const result = await msalInstance.acquireTokenPopup(request);
-            return result.accessToken;
+            await msalInstance.acquireTokenRedirect(request);
+            return null;
         }
     }
 
