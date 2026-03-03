@@ -38,6 +38,13 @@ h2 { color: #333; font-size: 1.15em; margin-bottom: 16px; padding-bottom: 8px; b
 .score-box { text-align: right; font-size: 0.83rem; color: #888; margin-bottom: 8px; }
 .score-box span { font-weight: 700; color: #667eea; }
 
+/* ---- MULTIPLE CHOICE ---- */
+.mc-options { display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; }
+.mc-btn { background: white; border: 2px solid #c5cae9; border-radius: 10px; padding: 10px 16px; font-size: 0.92em; color: #444; cursor: pointer; text-align: left; transition: all 0.2s; font-family: inherit; }
+.mc-btn:hover { border-color: #667eea; background: #f0f2ff; color: #667eea; }
+.mc-btn.correct { background: #eafaf1; border-color: #27ae60; color: #1e8449; font-weight: 600; }
+.mc-btn.incorrect { background: #fdf2f2; border-color: #e74c3c; color: #c0392b; }
+
 /* ---- HILFE-BOX ---- */
 .help-box { background: #f8f9ff; border-left: 4px solid #667eea; border-radius: 0 10px 10px 0; padding: 14px 18px; margin-bottom: 20px; font-size: 0.9em; line-height: 1.7; color: #444; }
 .help-box strong { color: #667eea; }
