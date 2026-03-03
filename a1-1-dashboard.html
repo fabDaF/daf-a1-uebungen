@@ -1114,25 +1114,29 @@
                 await msalBereitPromise;
                 const token = await getTokenSilent();
                 if (!token) return;
-                const resp = await fetch(
-                    'https://graph.microsoft.com/v1.0/me/people/?$search=' + encodeURIComponent(query) + '&$top=8',
-                    { headers: { 'Authorization': 'Bearer ' + token } }
-                );
+                const url = 'https://graph.microsoft.com/v1.0/me/people/?$search=' + encodeURIComponent(query) + '&$top=8';
+                const resp = await fetch(url, { headers: { Authorization: 'Bearer ' + token } });
                 if (!resp.ok) return;
                 const data = await resp.json();
-                const kontakte = (data.value || []).filter(k => k.scoredEmailAddresses && k.scoredEmailAddresses.length > 0);
+                const kontakte = (data.value || []).filter(function(k) {
+                    return k.scoredEmailAddresses && k.scoredEmailAddresses.length > 0;
+                });
                 if (kontakte.length === 0) {
                     vorschlaege.style.display = 'none';
                     return;
                 }
-                vorschlaege.innerHTML = kontakte.map(k => {
+                vorschlaege.innerHTML = '';
+                kontakte.forEach(function(k) {
                     const email = k.scoredEmailAddresses[0].address;
                     const name = k.displayName || email;
-                    return '<div onclick="waehleKontakt('' + email.replace(/'/g, '') + '')" style="padding:10px 14px;cursor:pointer;border-bottom:1px solid #f0f0f0;" onmouseover="this.style.background='#f5f3ff'" onmouseout="this.style.background='white'">' +
-                        '<strong style="display:block;font-size:0.95em;">' + name + '</strong>' +
-                        '<span style="font-size:0.82em;color:#888;">' + email + '</span>' +
-                    '</div>';
-                }).join('');
+                    const div = document.createElement('div');
+                    div.style.cssText = 'padding:10px 14px;cursor:pointer;border-bottom:1px solid #f0f0f0;';
+                    div.innerHTML = '<strong style="display:block;font-size:0.95em;">' + name + '</strong><span style="font-size:0.82em;color:#888;">' + email + '</span>';
+                    div.addEventListener('mouseover', function() { this.style.background = '#f5f3ff'; });
+                    div.addEventListener('mouseout',  function() { this.style.background = 'white'; });
+                    div.addEventListener('click',     function() { waehleKontakt(email); });
+                    vorschlaege.appendChild(div);
+                });
                 vorschlaege.style.display = 'block';
             } catch(e) {
                 console.warn('Kontaktsuche fehlgeschlagen:', e);
@@ -1145,7 +1149,7 @@
         document.getElementById('kontaktVorschlaege').style.display = 'none';
     }
 
-    document.addEventListener('click', e => {
+    document.addEventListener('click', function(e) {
         if (!e.target.closest('#kontaktVorschlaege') && e.target.id !== 'empfaenger') {
             const v = document.getElementById('kontaktVorschlaege');
             if (v) v.style.display = 'none';
@@ -1158,7 +1162,7 @@
         try {
             const result = await msalInstance.acquireTokenSilent({ scopes: MSAL_CONFIG.scopes, account: accounts[0] });
             return result.accessToken;
-        } catch { return null; }
+        } catch(e) { return null; }
     }
 
     /* ── E-Mail senden via Microsoft Graph (Link-Version) ── */
