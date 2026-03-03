@@ -1085,6 +1085,16 @@
         statusEl.style.color = '';
         document.getElementById('modalOverlay').classList.add('aktiv');
         setTimeout(() => document.getElementById('empfaenger').focus(), 150);
+
+        // Sofort Token holen damit Kontaktsuche funktioniert
+        msalBereitPromise.then(() => {
+            const accounts = msalInstance ? msalInstance.getAllAccounts() : [];
+            if (accounts.length > 0 && !accessToken) {
+                msalInstance.acquireTokenSilent({ scopes: MSAL_CONFIG.scopes, account: accounts[0] })
+                    .then(r => { accessToken = r.accessToken; })
+                    .catch(() => {});
+            }
+        });
     }
 
     function schliesseModal() {
@@ -1121,7 +1131,17 @@
         sucheTimeout = setTimeout(async function() {
             try {
                 await msalBereitPromise;
-                const token = await getTokenSilent();
+                // Token holen — bei Bedarf Popup öffnen
+                let token = await getTokenSilent();
+                if (!token) {
+                    try {
+                        const result = await msalInstance.loginPopup({ scopes: MSAL_CONFIG.scopes });
+                        accessToken = result.accessToken;
+                        token = accessToken;
+                    } catch(e) {
+                        return; // Popup abgebrochen oder blockiert
+                    }
+                }
                 if (!token) return;
                 const url = 'https://graph.microsoft.com/v1.0/me/people/?$search=' + encodeURIComponent(query) + '&$top=8';
                 const resp = await fetch(url, { headers: { Authorization: 'Bearer ' + token } });
