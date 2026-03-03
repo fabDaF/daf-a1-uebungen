@@ -1115,7 +1115,7 @@
                 const token = await getTokenSilent();
                 if (!token) return;
                 const resp = await fetch(
-                    'https://graph.microsoft.com/v1.0/me/people/?$search=' + encodeURIComponent(query) + '&$top=8&$filter=personType/class eq 'Person'',
+                    'https://graph.microsoft.com/v1.0/me/people/?$search=' + encodeURIComponent(query) + '&$top=8',
                     { headers: { 'Authorization': 'Bearer ' + token } }
                 );
                 if (!resp.ok) return;
