@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Partizip II als Adjektiv – B1 Grammatik</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Segoe UI', sans-serif; font-size: 18px; background: #f0f2f5; min-height: 100vh; padding: 20px; color: #333; }
+
+.container { max-width: 1000px; margin: 0 auto; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.10); }
+
+.header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 28px 24px 20px; text-align: center; }
+.header h1 { font-size: 1.7em; margin-bottom: 6px; }
+.header p { opacity: 0.9; font-size: 0.95em; }
+.level-badge { display: inline-block; background: rgba(255,255,255,0.25); border: 1px solid rgba(255,255,255,0.5); border-radius: 20px; padding: 3px 12px; font-size: 0.8em; margin-bottom: 10px; letter-spacing: 1px; font-weight: 700; }
+
+/* NAV */
+.nav { display: flex; flex-wrap: nowrap; background: #f8f9fa; border-top: 1px solid #ddd; border-left: 1px solid #ddd; border-right: 1px solid #ddd; }
+.nav-btn { flex: 1; padding: 14px 8px; text-align: center; cursor: pointer; border-right: 1px solid #ddd; border-bottom: 2px solid transparent; transition: all 0.2s; font-size: 0.88em; font-weight: 500; color: #666; }
+.nav-btn:last-child { border-right: none; }
+.nav-btn:hover { background: #e8ebff; color: #667eea; }
+.nav-btn.active { background: white; color: #667eea; border-bottom: 3px solid #667eea; font-weight: 700; }
+
+.section { display: none; padding: 28px 24px; }
+.section.active { display: block; }
+.section-title { font-size: 1.25em; font-weight: 700; color: #667eea; margin-bottom: 6px; }
+.section-sub { color: #888; font-size: 0.88em; margin-bottom: 22px; }
+
+/* TIMER-BAR */
+.timer-bar {
+  display: flex; align-items: center; gap: 12px;
+  background: white; border-radius: 10px;
+  padding: 10px 16px; margin-bottom: 16px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.07);
+  font-size: 0.85rem; color: #666;
+}
+.timer-display { font-weight: 700; color: #667eea; font-size: 1rem; }
+.best-display  { color: #f39c12; font-weight: 600; }
+
+/* BUTTONS */
+.btn-row { display: flex; gap: 10px; margin-top: 20px; flex-wrap: wrap; }
+.btn { padding: 9px 20px; border: none; border-radius: 8px; font-size: 0.88em; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+.btn-sol { background: #667eea; color: white; }
+.btn-sol:hover { background: #5568d6; }
+.btn-rst { background: #f0f0f0; color: #555; }
+.btn-rst:hover { background: #e0e0e0; }
+
+/* ── ENTDECKUNGS-TAB ──────────────────────────────────────────────── */
+.entdeck-intro {
+  background: #f3e5f5; border-radius: 12px;
+  padding: 18px 22px; margin-bottom: 20px;
+  border-left: 5px solid #9c27b0; font-size: 0.97rem; line-height: 1.75;
+}
+.entdeck-intro h3 { color: #6a1b9a; margin-bottom: 10px; font-size: 1.05rem; }
+.hl { background: #e1bee7; border-radius: 4px; padding: 0 4px; color: #4a148c; font-weight: 700; }
+
+.progress-dots { display: flex; gap: 8px; margin-bottom: 20px; }
+.pdot { width: 14px; height: 14px; border-radius: 50%; background: #c5cae9; transition: background .3s; }
+.pdot.done { background: #667eea; }
+
+.mc-step { display: none; background: #fafbff; border-radius: 12px; padding: 18px 22px; margin-bottom: 16px; border: 1px solid #c5cae9; }
+.mc-step.active { display: block; }
+.mc-step h4 { color: #3949ab; margin-bottom: 12px; font-size: 0.97rem; }
+.mc-options { display: flex; flex-direction: column; gap: 8px; }
+.mc-btn { padding: 9px 16px; border: 2px solid #c5cae9; border-radius: 8px; background: #fff; cursor: pointer; text-align: left; font-size: 0.92rem; transition: all .2s; }
+.mc-btn:hover { border-color: #667eea; background: #f3f4ff; }
+.mc-btn.correct { border-color: #43a047; background: #e8f5e9; color: #2e7d32; font-weight: 700; }
+.mc-btn.wrong   { border-color: #e53935; background: #ffebee; color: #c62828; }
+.mc-feedback { margin-top: 10px; font-size: 0.88rem; min-height: 1.3em; }
+.mc-feedback.ok  { color: #2e7d32; font-weight: 700; }
+.mc-feedback.err { color: #c62828; }
+
+.regel-karte { display: none; background: linear-gradient(135deg, #e8eaf6, #ede7f6); border-radius: 14px; padding: 22px 26px; border-left: 5px solid #3949ab; margin-top: 10px; }
+.regel-karte h3 { color: #1a237e; margin-bottom: 12px; font-size: 1.05rem; }
+.regel-karte ul { margin-left: 18px; }
+.regel-karte li { color: #333; line-height: 1.8; font-size: 0.95rem; }
+.regel-karte .rk-example { background: #fff; border-radius: 8px; padding: 10px 14px; margin-top: 12px; border-left: 3px solid #7c4dff; font-size: 0.9rem; color: #333; }
+.regel-karte .rk-example b { color: #3949ab; }
+
+/* ── LÜCKENTEXT ──────────────────────────────────────────────────── */
+.ex-item { background: #f8f9ff; border-left: 4px solid #667eea; border-radius: 0 10px 10px 0; padding: 14px 18px; margin-bottom: 14px; line-height: 2.2; }
+.ex-num { font-weight: 700; color: #667eea; margin-right: 6px; }
+.ex-hint { color: #999; font-size: 0.82em; margin-left: 8px; }
+input.blank { border: 2px solid #c5cae9; border-radius: 6px; padding: 3px 8px; font-size: 0.9rem; font-family: inherit; outline: none; transition: border-color .2s, background .2s; background: white; margin: 0 2px; }
+input.blank:focus { border-color: #667eea; }
+input.blank.correct { border-color: #27ae60; background: #e8f5e9; }
+input.blank.wrong   { border-color: #e74c3c; background: #ffebee; }
+input.blank.s { width: 60px; }
+input.blank.m { width: 100px; }
+input.blank.l { width: 160px; }
+input.blank.xl { width: 220px; }
+.correction-hint { font-size: 0.78rem; color: #27ae60; font-weight: 700; margin-left: 4px; white-space: nowrap; }
+
+/* ── ZUORDNUNG ───────────────────────────────────────────────────── */
+.genius-wrap { margin-bottom: 10px; }
+.hilfe-box { background: #e8f4fd; border: 1px solid #90caf9; border-radius: 10px; padding: 14px 18px; margin-bottom: 20px; font-size: 0.88em; line-height: 1.7; }
+.hilfe-box h4 { color: #1565c0; margin-bottom: 6px; }
+.genus-categories { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 16px; }
+.drop-zone { background: #f0f0f0; border: 2px dashed #ccc; border-radius: 10px; padding: 12px; min-height: 120px; transition: background .2s; }
+.drop-zone.dragover { background: #e8eaff; border-color: #667eea; }
+.drop-zone-title { font-weight: 700; color: #667eea; text-align: center; margin-bottom: 8px; font-size: 0.88em; }
+
+/* ── CHIPS (Zuordnung & Satzbau) ─────────────────────────────────── */
+.chip {
+  background: white; border: 2px solid #667eea; color: #667eea;
+  padding: 8px 14px; border-radius: 20px; cursor: move;
+  font-weight: 500; font-size: 0.88em; transition: all 0.2s;
+  user-select: none; white-space: nowrap; display: inline-block;
+}
+.chip:hover { transform: scale(1.05); box-shadow: 0 4px 12px rgba(102,126,234,0.3); }
+.chip.correct   { background: #27ae60; border-color: #27ae60; color: white; }
+.chip.incorrect { background: #e74c3c; border-color: #e74c3c; color: white; }
+
+/* ── SATZBAU ─────────────────────────────────────────────────────── */
+.sb-item { background: #f8f9ff; padding: 16px 20px; margin-bottom: 18px; border-radius: 10px; border-left: 4px solid #667eea; }
+.chips-container { display: flex; flex-wrap: wrap; gap: 8px; padding: 14px; background: #f8f8f8; border-radius: 10px; min-height: 56px; margin-bottom: 10px; }
+.sentence-builder { display: flex; flex-wrap: wrap; gap: 6px; padding: 14px; background: white; border: 2px dashed #ccc; border-radius: 10px; min-height: 56px; align-items: center; margin-bottom: 6px; }
+.sentence-builder.correct   { border-color: #27ae60; background: #f0fff4; }
+.sentence-builder.incorrect { border-color: #e74c3c; background: #fff5f5; }
+.sb-punkt { font-size: 1.1em; font-weight: 700; color: #27ae60; margin-left: 2px; align-self: center; user-select: none; }
+.satzbau-feedback { font-size: 0.88em; font-weight: 600; margin-top: 4px; min-height: 1.2em; }
+.satzbau-feedback.correct   { color: #27ae60; }
+.satzbau-feedback.incorrect { color: #e74c3c; }
+
+/* ── ERKLÄRUNGSBOXEN (Tab 0-Erkl.) ──────────────────────────────── */
+.erkl-box { background: #f8f9ff; border-left: 4px solid #667eea; border-radius: 0 10px 10px 0; padding: 16px 20px; margin-bottom: 16px; line-height: 1.7; }
+.erkl-box h3 { color: #667eea; font-size: 1.0em; margin-bottom: 8px; }
+.erkl-box .formel { background: linear-gradient(135deg, #667eea, #764ba2); color: white; border-radius: 8px; padding: 10px 16px; margin-top: 10px; font-family: monospace; font-size: 0.92em; text-align: center; }
+.erkl-table { width: 100%; border-collapse: collapse; margin-top: 14px; font-size: 0.88em; }
+.erkl-table th { background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 8px 12px; text-align: left; }
+.erkl-table td { padding: 8px 12px; border-bottom: 1px solid #eee; }
+.erkl-table tr:nth-child(even) td { background: #f8f9ff; }
+.highlight { background: #fff3cd; border-radius: 3px; padding: 1px 3px; font-weight: 700; color: #667eea; }
+.achtung { background: #fff8e1; border: 1px solid #f39c12; border-radius: 8px; padding: 12px 16px; margin-top: 14px; font-size: 0.88em; }
+.achtung::before { content: "⚠️ "; }
+
+/* ── FOOTER ──────────────────────────────────────────────────────── */
+.author-footer { text-align: center; margin-top: 40px; padding: 16px; font-size: 0.8rem; color: #aaa; }
+.author-footer a { color: #aaa; }
+.author-name { font-weight: 700; }
+
+@media (max-width: 600px) {
+  body { padding: 10px; }
+  .header h1 { font-size: 1.2rem; }
+  .nav { flex-wrap: wrap; }
+  .nav-btn { flex: 1 1 33%; font-size: 0.75em; padding: 10px 4px; }
+  .genus-categories { grid-template-columns: repeat(2,1fr); }
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="header">
+  <div class="level-badge">B1 · GRAMMATIK</div>
+  <h1>✍️ Partizip II als Adjektiv</h1>
+  <p>Das Partizip II attributiv verwenden – mit Adjektivdeklination</p>
+</div>
+
+<div class="nav">
+  <div class="nav-btn active" onclick="showSection(0)">📖 Entdecken</div>
+  <div class="nav-btn" onclick="showSection(1)">🔀 Partizipien</div>
+  <div class="nav-btn" onclick="showSection(2)">✏️ Endungen</div>
+  <div class="nav-btn" onclick="showSection(3)">🔄 Umformung</div>
+  <div class="nav-btn" onclick="showSection(4)">🧩 Satzbau</div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     TAB 0: ENTDECKEN (kein Timer, kein Score, kein Reset)
+══════════════════════════════════════════════════════════ -->
+<div class="section active" id="sec-0">
+  <div class="section-title">📖 Entdecken – Was fällt dir auf?</div>
+  <div class="section-sub">Schau dir die Sätze genau an und beantworte die Fragen.</div>
+
+  <div class="entdeck-intro">
+    <h3>Lies die Satzpaare:</h3>
+    Das Mittagessen wurde <span class="hl">aufgegessen</span>. → Das <span class="hl">aufgegessene</span> Mittagessen …<br>
+    Das Auto wurde <span class="hl">gestohlen</span>. → Das <span class="hl">gestohlene</span> Auto wurde gefunden.<br>
+    Die Frau hat sich <span class="hl">verletzt</span>. → Die <span class="hl">verletzte</span> Frau kam ins Krankenhaus.<br>
+    Er isst 100g <span class="hl">gekochten</span> Schinken. → Die <span class="hl">gestressten</span> Eltern fuhren zurück.<br>
+    Mit dem <span class="hl">gesparten</span> Geld kauften wir ein Auto.
+  </div>
+
+  <div class="progress-dots">
+    <div class="pdot" id="pdot0"></div>
+    <div class="pdot" id="pdot1"></div>
+    <div class="pdot" id="pdot2"></div>
+    <div class="pdot" id="pdot3"></div>
+  </div>
+
+  <!-- Schritt 0 -->
+  <div class="mc-step active" id="mc-step0">
+    <h4>1. Wo steht das markierte Wort in der rechten Spalte?</h4>
+    <div class="mc-options">
+      <button class="mc-btn" onclick="mcCheck(0, this, false)">Am Ende des Satzes (wie im Passiv)</button>
+      <button class="mc-btn" onclick="mcCheck(0, this, true)">Direkt vor einem Nomen</button>
+      <button class="mc-btn" onclick="mcCheck(0, this, false)">Als Teil einer Verb-Klammer</button>
+    </div>
+    <div class="mc-feedback" id="mcfb0"></div>
+  </div>
+
+  <!-- Schritt 1 -->
+  <div class="mc-step" id="mc-step1">
+    <h4>2. Vergleiche: <em>gestohlen</em> vs. <em>gestohlen<b>e</b></em>. Was ist anders?</h4>
+    <div class="mc-options">
+      <button class="mc-btn" onclick="mcCheck(1, this, false)">Das Verb ist anders konjugiert.</button>
+      <button class="mc-btn" onclick="mcCheck(1, this, false)">Das Hilfsverb hat gewechselt.</button>
+      <button class="mc-btn" onclick="mcCheck(1, this, true)">Das Partizip II bekommt eine Adjektivendung.</button>
+    </div>
+    <div class="mc-feedback" id="mcfb1"></div>
+  </div>
+
+  <!-- Schritt 2 -->
+  <div class="mc-step" id="mc-step2">
+    <h4>3. <em>den <b>gekochten</b> Schinken</em> vs. <em>die <b>gestressten</b> Eltern</em> vs. <em>das <b>gestohlene</b> Auto</em> — welche Aussage stimmt?</h4>
+    <div class="mc-options">
+      <button class="mc-btn" onclick="mcCheck(2, this, false)">Das Partizip II ist immer auf <b>-en</b>.</button>
+      <button class="mc-btn" onclick="mcCheck(2, this, true)">Die Endung hängt von Genus, Kasus und Numerus ab – genau wie bei Adjektiven.</button>
+      <button class="mc-btn" onclick="mcCheck(2, this, false)">Die Endung ist immer <b>-e</b> im Singular.</button>
+    </div>
+    <div class="mc-feedback" id="mcfb2"></div>
+  </div>
+
+  <!-- Schritt 3 -->
+  <div class="mc-step" id="mc-step3">
+    <h4>4. Was beschreibt das Partizip II als Attribut?</h4>
+    <div class="mc-options">
+      <button class="mc-btn" onclick="mcCheck(3, this, false)">Eine Handlung, die gerade passiert.</button>
+      <button class="mc-btn" onclick="mcCheck(3, this, false)">Eine zukünftige Eigenschaft des Nomens.</button>
+      <button class="mc-btn" onclick="mcCheck(3, this, true)">Einen abgeschlossenen Zustand oder eine erlittene Aktion des Nomens.</button>
+    </div>
+    <div class="mc-feedback" id="mcfb3"></div>
+  </div>
+
+  <!-- Regelkarte -->
+  <div class="regel-karte" id="regelkarte">
+    <h3>✅ Die Regel: Partizip II als Adjektiv</h3>
+    <ul>
+      <li>Das Partizip II kann wie ein <strong>normales Adjektiv direkt vor einem Nomen</strong> stehen.</li>
+      <li>Es beschreibt einen <strong>abgeschlossenen Vorgang</strong> oder Zustand: <em>das gestohlene Auto</em> = das Auto, das gestohlen wurde.</li>
+      <li>Die Bildung: <strong>Partizip II + Adjektivendung + Nomen</strong></li>
+      <li>Die Endung richtet sich nach <strong>Genus, Kasus und Numerus</strong> – identisch mit der normalen Adjektivdeklination.</li>
+    </ul>
+    <div class="rk-example">
+      Nom. f.: die <b>verletzte</b> Frau &nbsp;|&nbsp; Akk. m.: den <b>gekochten</b> Schinken &nbsp;|&nbsp;
+      Dat. m.: dem <b>verletzten</b> Mann &nbsp;|&nbsp; Pl.: die <b>gestressten</b> Eltern
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     TAB 1: PARTIZIPIEN ZUORDNEN
+══════════════════════════════════════════════════════════ -->
+<div class="section" id="sec-1">
+  <div class="section-title">🔀 Partizip II bilden</div>
+  <div class="section-sub">Ordne die Verben in die richtige Kategorie.</div>
+
+  <div class="timer-bar">
+    ⏱️ <span class="timer-display" id="timer-1">0:00</span>
+    &nbsp;|&nbsp; 🏆 Best: <span class="best-display" id="best-1">–</span>
+  </div>
+
+  <div class="hilfe-box">
+    <h4>💡 Erinnerung</h4>
+    <strong>Schwache Verben:</strong> ge- + Stamm + -(e)t &nbsp;|&nbsp; <em>kaufen → gekauft</em><br>
+    <strong>Starke Verben:</strong> ge- + Stamm (oft Vokalwechsel) + -en &nbsp;|&nbsp; <em>schreiben → geschrieben</em><br>
+    <strong>Mischverben:</strong> ge- + Stamm (Vokalwechsel) + -t &nbsp;|&nbsp; <em>bringen → gebracht</em><br>
+    <strong>Spezielle Verben:</strong> kein ge- (-ieren) oder ge- zwischen Präfix &nbsp;|&nbsp; <em>telefonieren → telefoniert · einschlafen → eingeschlafen</em>
+  </div>
+
+  <div class="genus-categories">
+    <div class="drop-zone" data-cat="schwach" id="zone-schwach">
+      <div class="drop-zone-title">🔵 schwach<br><small style="font-weight:400">ge-…-(e)t</small></div>
+    </div>
+    <div class="drop-zone" data-cat="stark" id="zone-stark">
+      <div class="drop-zone-title">🔴 stark<br><small style="font-weight:400">ge-…-en</small></div>
+    </div>
+    <div class="drop-zone" data-cat="misch" id="zone-misch">
+      <div class="drop-zone-title">🟣 Mischverb<br><small style="font-weight:400">ge-…-t (+Vokal)</small></div>
+    </div>
+    <div class="drop-zone" data-cat="spez" id="zone-spez">
+      <div class="drop-zone-title">🟢 speziell<br><small style="font-weight:400">kein ge- / trennbar</small></div>
+    </div>
+  </div>
+  <div class="drop-zone" id="zone-bank" data-cat="bank" style="min-height:60px;display:flex;flex-wrap:wrap;gap:8px;padding:14px;">
+  </div>
+
+  <div class="btn-row">
+    <button class="btn btn-sol" onclick="showZuoSolution()">✅ Lösung anzeigen</button>
+    <button class="btn btn-rst" onclick="resetZuo()">🔄 Neu starten</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     TAB 2: ENDUNGEN (LÜCKENTEXT)
+══════════════════════════════════════════════════════════ -->
+<div class="section" id="sec-2">
+  <div class="section-title">✏️ Die richtige Endung</div>
+  <div class="section-sub">Ergänze die Partizip-II-Form mit der richtigen Adjektivendung.</div>
+
+  <div class="timer-bar">
+    ⏱️ <span class="timer-display" id="timer-2">0:00</span>
+    &nbsp;|&nbsp; 🏆 Best: <span class="best-display" id="best-2">–</span>
+  </div>
+
+  <div class="hilfe-box">
+    <h4>💡 Strategie</h4>
+    1. Finde das Nomen → bestimme Genus (der/die/das) und Numerus.<br>
+    2. Bestimme den Kasus (Wer? Wen? Wem? Wessen?).<br>
+    3. Wähle die Endung: <strong>-e</strong> (Nom./Akk. Sing. bei f. und n.) oder <strong>-en</strong> (alle anderen).
+  </div>
+
+  <div id="luecken-container"></div>
+
+  <div class="btn-row">
+    <button class="btn btn-sol" onclick="showLueckenLoesung()">✅ Lösung anzeigen</button>
+    <button class="btn btn-rst" onclick="resetLuecken()">🔄 Neu starten</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     TAB 3: UMFORMUNG
+══════════════════════════════════════════════════════════ -->
+<div class="section" id="sec-3">
+  <div class="section-title">🔄 Sätze umformulieren</div>
+  <div class="section-sub">Bilde aus dem Passiv- oder Perfektsatz eine Nominalphrase mit Partizip II als Adjektiv.</div>
+
+  <div class="timer-bar">
+    ⏱️ <span class="timer-display" id="timer-3">0:00</span>
+    &nbsp;|&nbsp; 🏆 Best: <span class="best-display" id="best-3">–</span>
+  </div>
+
+  <div class="hilfe-box">
+    <h4>💡 Vorgehen</h4>
+    Ausgangssatz: <em>Das Auto wurde gestohlen.</em><br>
+    Nominalphrase: <em>das <b>gestohlene</b> Auto</em>
+  </div>
+
+  <div id="umformung-container"></div>
+
+  <div class="btn-row">
+    <button class="btn btn-sol" onclick="showUmformungLoesung()">✅ Lösung anzeigen</button>
+    <button class="btn btn-rst" onclick="resetUmformung()">🔄 Neu starten</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     TAB 4: SATZBAU
+══════════════════════════════════════════════════════════ -->
+<div class="section" id="sec-4">
+  <div class="section-title">🧩 Satzbau</div>
+  <div class="section-sub">Bring die Chips in die richtige Reihenfolge. Das Partizip-II-Attribut steht direkt vor dem Nomen.</div>
+
+  <div class="timer-bar">
+    ⏱️ <span class="timer-display" id="timer-4">0:00</span>
+    &nbsp;|&nbsp; 🏆 Best: <span class="best-display" id="best-4">–</span>
+  </div>
+
+  <div id="satzbauContainer"></div>
+
+  <div class="btn-row">
+    <button class="btn btn-rst" onclick="resetSatzbau()">🔄 Neu starten</button>
+  </div>
+</div>
+
+</div><!-- /container -->
+
+<div class="author-footer">
+  <span class="author-name">&copy; Frank Burkert</span> &middot; DaF-Materialien &middot;
+  <a href="mailto:FrankBurkert@fabdaf.onmicrosoft.com">FrankBurkert@fabdaf.onmicrosoft.com</a>
+</div>
+
+<script>
+// ══════════════════════════════════════════════════════════
+// NAVIGATION
+// ══════════════════════════════════════════════════════════
+function showSection(idx) {
+  document.querySelectorAll('.section').forEach(function(s, i) { s.classList.toggle('active', i === idx); });
+  document.querySelectorAll('.nav-btn').forEach(function(b, i) { b.classList.toggle('active', i === idx); });
+}
+
+// ══════════════════════════════════════════════════════════
+// TIMER — Standard-Muster (Auto-Start / Auto-Stop)
+// Tab 0 hat keinen Timer — Arrays starten bei Index 1
+// ══════════════════════════════════════════════════════════
+var TIMER_PREFIX = 'partizip2-adj-b1-v2-';
+var timerStarted  = [false, false, false, false, false]; // 0-4
+var timerRunning  = [false, false, false, false, false];
+var timerSeconds  = [0, 0, 0, 0, 0];
+var timerIntervals = [null, null, null, null, null];
+
+function timerAutoStart(n) {
+  if (timerStarted[n]) return;
+  timerStarted[n] = true;
+  timerRunning[n] = true;
+  timerIntervals[n] = setInterval(function() {
+    timerSeconds[n]++;
+    var el = document.getElementById('timer-' + n);
+    if (el) el.textContent = fmtTime(timerSeconds[n]);
+  }, 1000);
+}
+
+function timerStop(n) {
+  if (!timerRunning[n]) return;
+  clearInterval(timerIntervals[n]);
+  timerRunning[n] = false;
+  var best = parseInt(localStorage.getItem(TIMER_PREFIX + n) || '999999');
+  if (timerSeconds[n] > 0 && timerSeconds[n] < best) {
+    localStorage.setItem(TIMER_PREFIX + n, timerSeconds[n]);
+    var el = document.getElementById('best-' + n);
+    if (el) el.textContent = fmtTime(timerSeconds[n]);
+  }
+}
+
+function timerResetOne(n) {
+  clearInterval(timerIntervals[n]);
+  timerRunning[n] = false;
+  timerStarted[n] = false;
+  timerSeconds[n] = 0;
+  var el = document.getElementById('timer-' + n);
+  if (el) el.textContent = '0:00';
+}
+
+function fmtTime(s) {
+  return Math.floor(s / 60) + ':' + (s % 60 < 10 ? '0' : '') + (s % 60);
+}
+
+function loadBestTimes() {
+  for (var i = 1; i <= 4; i++) {
+    var v = localStorage.getItem(TIMER_PREFIX + i);
+    if (v) {
+      var el = document.getElementById('best-' + i);
+      if (el) el.textContent = fmtTime(parseInt(v));
+    }
+  }
+}
+
+// ══════════════════════════════════════════════════════════
+// ENTDECKUNGS-TAB — MC-System
+// ══════════════════════════════════════════════════════════
+var mcDone = [false, false, false, false];
+
+function mcCheck(step, btn, correct) {
+  var btns = btn.parentElement.querySelectorAll('.mc-btn');
+  btns.forEach(function(b) { b.disabled = true; b.classList.remove('correct','wrong'); });
+  var fb = document.getElementById('mcfb' + step);
+  if (correct) {
+    btn.classList.add('correct');
+    fb.textContent = '✓ Richtig! Weiter zum nächsten Schritt.';
+    fb.className = 'mc-feedback ok';
+    mcDone[step] = true;
+    document.getElementById('pdot' + step).classList.add('done');
+    setTimeout(function() {
+      var next = document.getElementById('mc-step' + (step + 1));
+      if (next) { next.classList.add('active'); }
+      else { document.getElementById('regelkarte').style.display = 'block'; }
+    }, 700);
+  } else {
+    btn.classList.add('wrong');
+    fb.textContent = '✗ Nicht ganz — schau nochmal genau hin und versuche es erneut.';
+    fb.className = 'mc-feedback err';
+    setTimeout(function() {
+      btns.forEach(function(b) { b.disabled = false; b.classList.remove('wrong','correct'); });
+      fb.textContent = '';
+      fb.className = 'mc-feedback';
+    }, 1400);
+  }
+}
+
+// ══════════════════════════════════════════════════════════
+// TAB 1: ZUORDNUNG — Drag & Drop (modernes Muster)
+// ══════════════════════════════════════════════════════════
+var ZUO_DATA = [
+  { word: "kaufen",       cat: "schwach" },
+  { word: "arbeiten",     cat: "schwach" },
+  { word: "lieben",       cat: "schwach" },
+  { word: "prüfen",       cat: "schwach" },
+  { word: "sagen",        cat: "schwach" },
+  { word: "schreiben",    cat: "stark"   },
+  { word: "essen",        cat: "stark"   },
+  { word: "fahren",       cat: "stark"   },
+  { word: "schlafen",     cat: "stark"   },
+  { word: "vergessen",    cat: "stark"   },
+  { word: "bringen",      cat: "misch"   },
+  { word: "brennen",      cat: "misch"   },
+  { word: "rennen",       cat: "misch"   },
+  { word: "telefonieren", cat: "spez"    },
+  { word: "einschlafen",  cat: "spez"    },
+  { word: "entstehen",    cat: "spez"    }
+];
+
+var zuoDragged = null;
+
+function zuoMakeChip(item) {
+  var chip = document.createElement('div');
+  chip.className = 'chip';
+  chip.textContent = item.word;
+  chip.dataset.cat = item.cat;
+  chip.dataset.word = item.word;
+  chip.draggable = true;
+  chip.addEventListener('dragstart', function(e) {
+    zuoDragged = chip;
+    e.dataTransfer.setData('text/plain', '');
+    setTimeout(function() { chip.style.opacity = '0.4'; }, 0);
+  });
+  chip.addEventListener('dragend', function() {
+    chip.style.opacity = '';
+    zuoDragged = null;
+    colorAllZuoChips();
+  });
+  chip.addEventListener('click', function() {
+    // Klick-Modus: ausgewählt → nächste Zone aufnehmen
+    if (chip.classList.contains('zuo-selected')) {
+      chip.classList.remove('zuo-selected');
+      zuoSelectedChip = null;
+    } else {
+      if (zuoSelectedChip) zuoSelectedChip.classList.remove('zuo-selected');
+      zuoSelectedChip = chip;
+      chip.classList.add('zuo-selected');
+    }
+  });
+  return chip;
+}
+
+var zuoSelectedChip = null;
+
+function zuoRegisterZone(zone) {
+  zone.addEventListener('dragover', function(e) { e.preventDefault(); zone.classList.add('dragover'); });
+  zone.addEventListener('dragleave', function() { zone.classList.remove('dragover'); });
+  zone.addEventListener('drop', function(e) {
+    e.preventDefault();
+    zone.classList.remove('dragover');
+    if (!zuoDragged) return;
+    zone.appendChild(zuoDragged);
+    zuoDragged = null;
+    colorAllZuoChips();
+    timerAutoStart(1);
+    checkZuoAllOk();
+  });
+  zone.addEventListener('click', function(e) {
+    if (!zuoSelectedChip) return;
+    if (e.target === zone || e.target.classList.contains('drop-zone-title')) {
+      zone.appendChild(zuoSelectedChip);
+      zuoSelectedChip.classList.remove('zuo-selected');
+      zuoSelectedChip = null;
+      colorAllZuoChips();
+      timerAutoStart(1);
+      checkZuoAllOk();
+    }
+  });
+}
+
+function colorAllZuoChips() {
+  document.querySelectorAll('#sec-1 .chip').forEach(function(chip) {
+    var zone = chip.closest('.drop-zone');
+    chip.classList.remove('correct','incorrect');
+    if (zone && zone.dataset.cat !== 'bank') {
+      chip.classList.add(chip.dataset.cat === zone.dataset.cat ? 'correct' : 'incorrect');
+    }
+  });
+}
+
+function checkZuoAllOk() {
+  var chips = document.querySelectorAll('#sec-1 .chip');
+  var allOk = chips.length > 0 && Array.from(chips).every(function(c) { return c.classList.contains('correct'); });
+  if (allOk) timerStop(1);
+}
+
+function initZuo() {
+  // Bank leeren
+  var bank = document.getElementById('zone-bank');
+  bank.innerHTML = '';
+  // Kategorien-Titel erhalten, Chips entfernen
+  ['zone-schwach','zone-stark','zone-misch','zone-spez'].forEach(function(id) {
+    var z = document.getElementById(id);
+    var title = z.querySelector('.drop-zone-title');
+    z.innerHTML = '';
+    z.appendChild(title);
+  });
+  // Chips shuffeln und in Bank legen
+  var shuffled = ZUO_DATA.slice().sort(function() { return Math.random() - 0.5; });
+  shuffled.forEach(function(item) {
+    bank.appendChild(zuoMakeChip(item));
+  });
+}
+
+function showZuoSolution() {
+  timerStop(1);
+  var bank = document.getElementById('zone-bank');
+  var allChips = Array.from(document.querySelectorAll('#sec-1 .chip'));
+  ['zone-schwach','zone-stark','zone-misch','zone-spez'].forEach(function(id) {
+    var z = document.getElementById(id);
+    var title = z.querySelector('.drop-zone-title');
+    z.innerHTML = '';
+    z.appendChild(title);
+  });
+  bank.innerHTML = '';
+  allChips.forEach(function(chip) {
+    var targetId = 'zone-' + chip.dataset.cat;
+    var target = document.getElementById(targetId);
+    if (target) target.appendChild(chip);
+    chip.classList.remove('incorrect');
+    chip.classList.add('correct');
+  });
+}
+
+function resetZuo() {
+  timerResetOne(1);
+  initZuo();
+  zuoSelectedChip = null;
+}
+
+// ══════════════════════════════════════════════════════════
+// TAB 2: LÜCKENTEXT (Endungen)
+// ══════════════════════════════════════════════════════════
+var LUECKEN = [
+  { id:1,  segs: [{t:"Die "},{t:"erklär"},{b:"te",s:"s"},{t:" Übung ist nicht schwer."},{t:" – Nom., f., Sing.",hint:true}] },
+  { id:2,  segs: [{t:"Er isst 100g "},{t:"gekocht"},{b:"en",s:"s"},{t:" Schinken."},{t:" – Akk., m., Sing.",hint:true}] },
+  { id:3,  segs: [{t:"Das "},{t:"vergessen"},{b:"e",s:"s"},{t:" Kind weinte."},{t:" – Nom., n., Sing.",hint:true}] },
+  { id:4,  segs: [{t:"Die "},{t:"gestresst"},{b:"en",s:"s"},{t:" Eltern fuhren zurück."},{t:" – Nom., Pl.",hint:true}] },
+  { id:5,  segs: [{t:"Sie half dem "},{t:"verletzt"},{b:"en",s:"s"},{t:" Mann."},{t:" – Dat., m., Sing.",hint:true}] },
+  { id:6,  segs: [{t:"Das Rezept des "},{t:"gebraten"},{b:"en",s:"s"},{t:" Hähnchens ist geheim."},{t:" – Gen., n., Sing.",hint:true}] },
+  { id:7,  segs: [{t:"Wir kaufen eine "},{t:"gebraucht"},{b:"e",s:"s"},{t:" Waschmaschine."},{t:" – Akk., f., Sing.",hint:true}] },
+  { id:8,  segs: [{t:"Er zeigt mir den "},{t:"geschrieben"},{b:"en",s:"s"},{t:" Brief."},{t:" – Akk., m., Sing.",hint:true}] },
+  { id:9,  segs: [{t:"Mit dem "},{t:"gespart"},{b:"en",s:"s"},{t:" Geld kaufen wir ein Auto."},{t:" – Dat., n., Sing.",hint:true}] },
+  { id:10, segs: [{t:"Die Polizei fand das "},{t:"gestohlen"},{b:"e",s:"s"},{t:" Fahrrad."},{t:" – Akk., n., Sing.",hint:true}] }
+];
+
+function renderLuecken() {
+  var container = document.getElementById('luecken-container');
+  container.innerHTML = '';
+  LUECKEN.forEach(function(ex) {
+    var item = document.createElement('div');
+    item.className = 'ex-item';
+    var numSpan = document.createElement('strong');
+    numSpan.className = 'ex-num';
+    numSpan.textContent = ex.id + '. ';
+    item.appendChild(numSpan);
+    // Inline-Wrap für Stamm+Endung
+    var i = 0;
+    while (i < ex.segs.length) {
+      var seg = ex.segs[i];
+      if (seg.hint) {
+        var hintSpan = document.createElement('span');
+        hintSpan.className = 'ex-hint';
+        hintSpan.textContent = seg.t;
+        item.appendChild(hintSpan);
+        i++;
+      } else if (seg.b !== undefined) {
+        // Endungs-Lücke: direkt hinter vorherigem Textsegment (Stamm)
+        var inp = document.createElement('input');
+        inp.type = 'text';
+        inp.className = 'blank ' + (seg.s || 's');
+        inp.dataset.answer = seg.b;
+        inp.placeholder = '…';
+        (function(inp) {
+          inp.addEventListener('input', function() {
+            liveCheck(inp);
+            checkLueckeAllOk();
+            timerAutoStart(2);
+          });
+        })(inp);
+        item.appendChild(inp);
+        i++;
+      } else {
+        item.appendChild(document.createTextNode(seg.t));
+        i++;
+      }
+    }
+    container.appendChild(item);
+  });
+}
+
+function liveCheck(inp) {
+  var val = inp.value.trim().toLowerCase();
+  var ans = (inp.dataset.answer || '').toLowerCase();
+  inp.classList.remove('correct','wrong');
+  if (val.length === 0) return;
+  if (val === ans) { inp.classList.add('correct'); }
+  else if (ans.indexOf(val) === 0) { /* valid prefix */ }
+  else { inp.classList.add('wrong'); }
+}
+
+function checkLueckeAllOk() {
+  var inputs = document.querySelectorAll('#sec-2 input.blank');
+  var allOk = inputs.length > 0 && Array.from(inputs).every(function(i) { return i.classList.contains('correct'); });
+  if (allOk) timerStop(2);
+}
+
+function showLueckenLoesung() {
+  timerStop(2);
+  document.querySelectorAll('#sec-2 input.blank').forEach(function(inp) {
+    var next = inp.nextElementSibling;
+    if (next && next.classList.contains('correction-hint')) next.remove();
+    var user = inp.value.trim().toLowerCase();
+    var ans = inp.dataset.answer.toLowerCase();
+    if (user === ans) {
+      inp.classList.add('correct'); inp.classList.remove('wrong');
+    } else {
+      inp.value = inp.dataset.answer;
+      inp.classList.add('correct'); inp.classList.remove('wrong');
+      var hint = document.createElement('span');
+      hint.className = 'correction-hint';
+      inp.insertAdjacentElement('afterend', hint);
+    }
+  });
+}
+
+function resetLuecken() {
+  timerResetOne(2);
+  document.querySelectorAll('#sec-2 input.blank').forEach(function(inp) {
+    inp.value = '';
+    inp.classList.remove('correct','wrong');
+    var next = inp.nextElementSibling;
+    if (next && next.classList.contains('correction-hint')) next.remove();
+  });
+}
+
+// ══════════════════════════════════════════════════════════
+// TAB 3: UMFORMUNG
+// ══════════════════════════════════════════════════════════
+var UMFORMUNG = [
+  { id:1, vorlage:"Das Auto wurde gestohlen.",            before:"das",   answer:"gestohlene",    after:"Auto",      hint:"(n., Nom., Sing.)" },
+  { id:2, vorlage:"Die Frau hat sich verletzt.",          before:"die",   answer:"verletzte",     after:"Frau",      hint:"(f., Nom., Sing.)" },
+  { id:3, vorlage:"Der Brief wurde geschrieben.",         before:"den",   answer:"geschriebenen", after:"Brief",     hint:"(m., Akk., Sing.)" },
+  { id:4, vorlage:"Das Steak wird gebraten.",             before:"ein",   answer:"gebratenes",    after:"Steak",     hint:"(n., Nom., unb. Art.)" },
+  { id:5, vorlage:"Die Kinder haben sich verlaufen.",     before:"den",   answer:"verlaufenen",   after:"Kindern",   hint:"(Pl., Dat.)" },
+  { id:6, vorlage:"Der Mann hat sich nicht rasiert.",     before:"der",   answer:"unrasierte",    after:"Mann",      hint:"(m., Nom., Sing.)" },
+  { id:7, vorlage:"Das Formular wurde ausgefüllt.",       before:"das",   answer:"ausgefüllte",   after:"Formular",  hint:"(n., Nom., Sing.)" },
+  { id:8, vorlage:"Die Pizza wurde bestellt.",            before:"die",   answer:"bestellte",     after:"Pizza",     hint:"(f., Nom., Sing.)" }
+];
+
+function renderUmformung() {
+  var container = document.getElementById('umformung-container');
+  container.innerHTML = '';
+  UMFORMUNG.forEach(function(ex) {
+    var item = document.createElement('div');
+    item.className = 'ex-item';
+    var vorlage = document.createElement('div');
+    vorlage.style.cssText = 'color:#888;font-size:0.85em;margin-bottom:6px;';
+    vorlage.textContent = ex.id + '. Vorlage: ' + ex.vorlage;
+    item.appendChild(vorlage);
+    var aufgabe = document.createElement('div');
+    aufgabe.style.cssText = 'line-height:2.4;';
+    aufgabe.appendChild(document.createTextNode(ex.before + ' '));
+    var inp = document.createElement('input');
+    inp.type = 'text';
+    inp.className = 'blank l';
+    inp.dataset.answer = ex.answer;
+    inp.placeholder = '…';
+    (function(inp) {
+      inp.addEventListener('input', function() {
+        liveCheckUmf(inp);
+        checkUmfAllOk();
+        timerAutoStart(3);
+      });
+    })(inp);
+    aufgabe.appendChild(inp);
+    aufgabe.appendChild(document.createTextNode(' ' + ex.after));
+    var hintSpan = document.createElement('span');
+    hintSpan.className = 'ex-hint';
+    hintSpan.textContent = ' ' + ex.hint;
+    aufgabe.appendChild(hintSpan);
+    item.appendChild(aufgabe);
+    container.appendChild(item);
+  });
+}
+
+function liveCheckUmf(inp) {
+  var val = inp.value.trim().toLowerCase();
+  var ans = (inp.dataset.answer || '').toLowerCase();
+  inp.classList.remove('correct','wrong');
+  if (val.length === 0) return;
+  if (val === ans) { inp.classList.add('correct'); }
+  else if (ans.indexOf(val) === 0) { /* prefix ok */ }
+  else { inp.classList.add('wrong'); }
+}
+
+function checkUmfAllOk() {
+  var inputs = document.querySelectorAll('#sec-3 input.blank');
+  var allOk = inputs.length > 0 && Array.from(inputs).every(function(i) { return i.classList.contains('correct'); });
+  if (allOk) timerStop(3);
+}
+
+function showUmformungLoesung() {
+  timerStop(3);
+  document.querySelectorAll('#sec-3 input.blank').forEach(function(inp) {
+    inp.value = inp.dataset.answer;
+    inp.classList.add('correct'); inp.classList.remove('wrong');
+  });
+}
+
+function resetUmformung() {
+  timerResetOne(3);
+  document.querySelectorAll('#sec-3 input.blank').forEach(function(inp) {
+    inp.value = '';
+    inp.classList.remove('correct','wrong');
+  });
+}
+
+// ══════════════════════════════════════════════════════════
+// TAB 4: SATZBAU — nach satzbau-drag-drop Skill
+// ══════════════════════════════════════════════════════════
+var satzbauData = [
+  { parts: ['das vergessene Kind', 'war', 'sehr verängstigt'],
+    valid: [['das vergessene Kind','war','sehr verängstigt'],
+            ['sehr verängstigt','war','das vergessene Kind']], punct: '.' },
+  { parts: ['die gestressten Eltern', 'fuhren', 'schnell', 'zum Parkplatz zurück'],
+    valid: [['die gestressten Eltern','fuhren','schnell','zum Parkplatz zurück'],
+            ['schnell','fuhren','die gestressten Eltern','zum Parkplatz zurück']], punct: '.' },
+  { parts: ['er', 'aß', '100g gebratenen Schinken', 'zum Frühstück'],
+    valid: [['er','aß','100g gebratenen Schinken','zum Frühstück'],
+            ['zum Frühstück','aß','er','100g gebratenen Schinken']], punct: '.' },
+  { parts: ['die verletzte Frau', 'wurde', 'sofort', 'ins Krankenhaus gebracht'],
+    valid: [['die verletzte Frau','wurde','sofort','ins Krankenhaus gebracht'],
+            ['sofort','wurde','die verletzte Frau','ins Krankenhaus gebracht']], punct: '.' },
+  { parts: ['wir', 'kauften', 'eine gebrauchte Waschmaschine'],
+    valid: [['wir','kauften','eine gebrauchte Waschmaschine']], punct: '.' },
+  { parts: ['das gestohlene Fahrrad', 'wurde', 'nach zwei Tagen', 'gefunden'],
+    valid: [['das gestohlene Fahrrad','wurde','nach zwei Tagen','gefunden'],
+            ['nach zwei Tagen','wurde','das gestohlene Fahrrad','gefunden']], punct: '.' },
+  { parts: ['die erklärte Regel', 'ist', 'jetzt', 'klar'],
+    valid: [['die erklärte Regel','ist','jetzt','klar'],
+            ['jetzt','ist','die erklärte Regel','klar']], punct: '.' },
+  { parts: ['er', 'half', 'dem verletzten Mann', 'sofort'],
+    valid: [['er','half','dem verletzten Mann','sofort'],
+            ['sofort','half','er','dem verletzten Mann']], punct: '.' }
+];
+
+var sbDragged = null;
+
+function getSbCursor() {
+  var c = document.getElementById('sb-insert-cursor');
+  if (!c) {
+    c = document.createElement('div');
+    c.id = 'sb-insert-cursor';
+    c.style.cssText = 'width:3px;min-height:32px;background:#e67e22;border-radius:2px;align-self:stretch;pointer-events:none;flex-shrink:0;';
+  }
+  return c;
+}
+
+function getSbInsertPos(zone, clientX) {
+  var chips = Array.from(zone.querySelectorAll('.chip'));
+  for (var i = 0; i < chips.length; i++) {
+    var r = chips[i].getBoundingClientRect();
+    if (clientX < r.left + r.width / 2) return chips[i];
+  }
+  return null;
+}
+
+function sbUpdateCaps(row) {
+  var chips = Array.from(row.querySelectorAll('.chip'));
+  chips.forEach(function(c, i) {
+    var orig = c.dataset.orig;
+    var isProper = orig.charAt(0) === orig.charAt(0).toUpperCase()
+                && orig.charAt(0) !== orig.charAt(0).toLowerCase();
+    c.textContent = isProper ? orig : (i === 0 ? orig.charAt(0).toUpperCase() + orig.slice(1) : orig);
+  });
+}
+
+function sbMakeChip(word) {
+  var chip = document.createElement('div');
+  chip.className = 'chip';
+  chip.textContent = word;
+  chip.dataset.orig = word;
+  chip.draggable = true;
+  chip.addEventListener('dragstart', function(e) {
+    sbDragged = chip;
+    e.dataTransfer.setData('text/plain', '');
+    setTimeout(function() { chip.style.opacity = '0.4'; }, 0);
+  });
+  chip.addEventListener('dragend', function() {
+    chip.style.opacity = '';
+    sbDragged = null;
+    var c = document.getElementById('sb-insert-cursor');
+    if (c && c.parentNode) c.parentNode.removeChild(c);
+  });
+  return chip;
+}
+
+function sbRegisterZone(zone, idx) {
+  zone.addEventListener('dragover', function(e) {
+    e.preventDefault();
+    if (!sbDragged) return;
+    var cursor = getSbCursor();
+    var before = getSbInsertPos(zone, e.clientX);
+    if (before) zone.insertBefore(cursor, before);
+    else zone.appendChild(cursor);
+  });
+  zone.addEventListener('dragleave', function(e) {
+    if (!zone.contains(e.relatedTarget)) {
+      var c = document.getElementById('sb-insert-cursor');
+      if (c && c.parentNode === zone) zone.removeChild(c);
+    }
+  });
+  zone.addEventListener('drop', function(e) {
+    e.preventDefault();
+    if (!sbDragged) return;
+    var cursor = document.getElementById('sb-insert-cursor');
+    if (cursor && cursor.parentNode === zone) {
+      zone.insertBefore(sbDragged, cursor);
+      zone.removeChild(cursor);
+    } else {
+      zone.appendChild(sbDragged);
+    }
+    sbDragged = null;
+    var row = document.getElementById('sb-row-' + idx);
+    sbUpdateCaps(row);
+    timerAutoStart(4);
+    sbCheckAuto(idx);
+  });
+}
+
+function sbColorRow(idx) {
+  var row = document.getElementById('sb-row-' + idx);
+  var chips = Array.from(row.querySelectorAll('.chip'));
+  var order = chips.map(function(c) { return c.dataset.orig; });
+  var ok = satzbauData[idx].valid.some(function(v) {
+    return JSON.stringify(v) === JSON.stringify(order);
+  });
+  chips.forEach(function(c) {
+    c.classList.remove('correct','incorrect');
+    c.classList.add(ok ? 'correct' : 'incorrect');
+  });
+  var existing = row.querySelector('.sb-punkt');
+  if (existing) existing.parentNode.removeChild(existing);
+  if (ok) {
+    var punkt = document.createElement('span');
+    punkt.className = 'sb-punkt';
+    punkt.textContent = satzbauData[idx].punct || '.';
+    row.appendChild(punkt);
+  }
+  return ok;
+}
+
+function sbCheckAuto(idx) {
+  var bank = document.getElementById('sb-bank-' + idx);
+  var row  = document.getElementById('sb-row-' + idx);
+  var fb   = document.getElementById('sb-fb-' + idx);
+  if (bank.querySelectorAll('.chip').length > 0) {
+    row.querySelectorAll('.chip').forEach(function(c) { c.classList.remove('correct','incorrect'); });
+    row.classList.remove('correct','incorrect');
+    fb.textContent = '';
+    return;
+  }
+  setTimeout(function() {
+    var ok = sbColorRow(idx);
+    if (ok) {
+      row.classList.add('correct'); row.classList.remove('incorrect');
+      fb.className = 'satzbau-feedback correct';
+      fb.textContent = '✓ Korrekt!';
+      sbCheckAllDone();
+    } else {
+      row.classList.add('incorrect'); row.classList.remove('correct');
+      fb.className = 'satzbau-feedback incorrect';
+      fb.textContent = '✗ Falsche Reihenfolge – verschiebe die Chips!';
+    }
+  }, 500);
+}
+
+function sbCheckAllDone() {
+  var allOk = satzbauData.every(function(_, i) {
+    var row = document.getElementById('sb-row-' + i);
+    return row && row.classList.contains('correct');
+  });
+  if (allOk) timerStop(4);
+}
+
+function initSatzbau() {
+  var container = document.getElementById('satzbauContainer');
+  container.innerHTML = '';
+  satzbauData.forEach(function(ex, idx) {
+    var wrap = document.createElement('div');
+    wrap.className = 'sb-item';
+
+    var bank = document.createElement('div');
+    bank.className = 'chips-container';
+    bank.id = 'sb-bank-' + idx;
+
+    var row = document.createElement('div');
+    row.className = 'sentence-builder';
+    row.id = 'sb-row-' + idx;
+
+    var fb = document.createElement('div');
+    fb.className = 'satzbau-feedback';
+    fb.id = 'sb-fb-' + idx;
+
+    // Chips shuffeln
+    var parts = ex.parts.slice();
+    for (var i = parts.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var tmp = parts[i]; parts[i] = parts[j]; parts[j] = tmp;
+    }
+    parts.forEach(function(word) { bank.appendChild(sbMakeChip(word)); });
+
+    sbRegisterZone(bank, idx);
+    sbRegisterZone(row, idx);
+
+    // Lösungs-Button pro Satz
+    var solBtn = document.createElement('button');
+    solBtn.className = 'btn btn-sol';
+    solBtn.style.marginTop = '8px';
+    solBtn.style.fontSize = '0.8em';
+    solBtn.textContent = 'Lösung';
+    (function(i) { solBtn.addEventListener('click', function() { sbShowSolution(i); }); })(idx);
+
+    wrap.appendChild(bank);
+    wrap.appendChild(row);
+    wrap.appendChild(fb);
+    wrap.appendChild(solBtn);
+    container.appendChild(wrap);
+  });
+}
+
+function sbShowSolution(idx) {
+  var bank = document.getElementById('sb-bank-' + idx);
+  var row  = document.getElementById('sb-row-' + idx);
+  var fb   = document.getElementById('sb-fb-' + idx);
+  var solution = satzbauData[idx].valid[0];
+  var allChips = {};
+  Array.from(bank.querySelectorAll('.chip')).forEach(function(c) { allChips[c.dataset.orig] = c; });
+  Array.from(row.querySelectorAll('.chip')).forEach(function(c)  { allChips[c.dataset.orig] = c; });
+  while (bank.firstChild) bank.removeChild(bank.firstChild);
+  while (row.firstChild)  row.removeChild(row.firstChild);
+  solution.forEach(function(word, i) {
+    var chip = allChips[word];
+    if (chip) {
+      var orig = chip.dataset.orig;
+      var isProper = orig.charAt(0) === orig.charAt(0).toUpperCase()
+                  && orig.charAt(0) !== orig.charAt(0).toLowerCase();
+      chip.textContent = isProper ? orig : (i === 0 ? orig.charAt(0).toUpperCase() + orig.slice(1) : orig);
+      chip.classList.remove('correct','incorrect');
+      row.appendChild(chip);
+    }
+  });
+  fb.textContent = '';
+  setTimeout(function() { sbCheckAuto(idx); }, 100);
+}
+
+function resetSatzbau() {
+  timerResetOne(4);
+  initSatzbau();
+}
+
+// ══════════════════════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════════════════════
+window.addEventListener('DOMContentLoaded', function() {
+  // Zuordnung: Zonen registrieren
+  ['zone-schwach','zone-stark','zone-misch','zone-spez','zone-bank'].forEach(function(id) {
+    var z = document.getElementById(id);
+    if (z) zuoRegisterZone(z);
+  });
+  initZuo();
+  renderLuecken();
+  renderUmformung();
+  initSatzbau();
+  loadBestTimes();
+});
+</script>
+</body>
+</html>
