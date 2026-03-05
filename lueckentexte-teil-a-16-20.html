@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lückentexte A16–A20: Urlaub, Alltag, Studium</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f0f2f5; color: #333; line-height: 1.6; }
+.container { max-width: 900px; margin: 0 auto; padding: 20px; }
+h1 { text-align: center; font-size: 1.6em; margin-bottom: 4px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.subtitle { text-align: center; color: #888; font-size: 0.95em; margin-bottom: 20px; }
+.nav { display: flex; gap: 6px; margin-bottom: 20px; flex-wrap: wrap; justify-content: center; }
+.nav-btn { padding: 10px 18px; background: white; border: 2px solid #e0e0e0; border-radius: 25px; cursor: pointer; font-weight: 600; font-size: 0.9em; transition: all 0.2s; user-select: none; }
+.nav-btn:hover { border-color: #667eea; color: #667eea; }
+.nav-btn.active { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-color: transparent; }
+.section { display: none; }
+.section.active { display: block; }
+.card { background: white; border-radius: 12px; padding: 24px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.card h2 { color: #667eea; font-size: 1.15em; margin-bottom: 14px; }
+.btn-row { display: flex; gap: 10px; margin-top: 16px; flex-wrap: wrap; justify-content: center; }
+.btn { padding: 10px 20px; border: none; border-radius: 25px; font-weight: 600; font-size: 0.9em; cursor: pointer; transition: all 0.2s; }
+.btn-show { background: #f39c12; color: white; }
+.btn-show:hover { background: #e08e0b; }
+.btn-reset { background: #e0e0e0; color: #555; }
+.btn-reset:hover { background: #d0d0d0; }
+.timer-display { display: flex; justify-content: center; gap: 20px; margin-top: 10px; font-size: 0.95em; }
+.current-time { font-weight: 600; color: #667eea; }
+.best-time { font-weight: 600; color: #f39c12; }
+.ws-item { display: flex; align-items: flex-start; gap: 12px; padding: 12px 0; border-bottom: 1px solid #f0f0f0; flex-wrap: wrap; }
+.ws-item:last-child { border-bottom: none; }
+.ws-prompt { font-weight: 600; color: #764ba2; min-width: 160px; font-size: 0.95em; padding-top: 4px; }
+.ws-fields { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.ws-input { border: none; border-bottom: 2px solid #667eea; background: #fff; padding: 4px 8px; font-family: inherit; font-size: 0.95em; outline: none; transition: all 0.2s; width: 140px; }
+.ws-input:focus { border-bottom-color: #764ba2; background: #f0f7ff; }
+.ws-input.correct { border-bottom-color: #27ae60; background: #e8f8f0; }
+.ws-input.wrong { border-bottom-color: #e74c3c; background: #fdeaea; }
+.ws-input.artikel { width: 70px; }
+.ws-input.plural { width: 150px; }
+.ws-label { font-size: 0.8em; color: #999; }
+.genus-categories { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 20px; }
+.genus-cat { background: #f0f0f0; border: 2px dashed #ccc; border-radius: 10px; padding: 12px; min-height: 120px; }
+.genus-cat-title { font-weight: 700; color: #667eea; text-align: center; margin-bottom: 8px; font-size: 0.95em; }
+.chip-bank { display: flex; flex-wrap: wrap; gap: 8px; padding: 14px; background: #f8f8f8; border-radius: 10px; min-height: 60px; }
+.chip { background: white; border: 2px solid #667eea; color: #667eea; padding: 8px 14px; border-radius: 20px; cursor: move; font-weight: 500; font-size: 0.9em; transition: all 0.2s; user-select: none; }
+.chip:hover { transform: scale(1.05); box-shadow: 0 4px 12px rgba(102,126,234,0.3); }
+.chip.placed { background: #667eea; color: white; }
+.chip.correct { background: #27ae60; border-color: #27ae60; color: white; }
+.chip.wrong { background: #e74c3c; border-color: #e74c3c; color: white; }
+.luecken-text { line-height: 2.2; font-size: 1.0em; }
+.luecken-person { font-weight: 700; color: #764ba2; display: block; margin-top: 16px; margin-bottom: 4px; }
+.luecken-person:first-child { margin-top: 0; }
+.letter-group { display: inline-flex; align-items: baseline; white-space: nowrap; gap: 0; }
+.letter-input { width: 22px; height: 28px; border: none; border-bottom: 2px solid #667eea; background: #fff; text-align: center; font-family: inherit; font-size: 0.95em; outline: none; transition: all 0.2s; padding: 0; margin: 0 0.5px; }
+.letter-input:focus { border-bottom-color: #764ba2; background: #f0f7ff; }
+.letter-input.correct { border-bottom-color: #27ae60; background: #e8f8f0; color: #27ae60; font-weight: 600; }
+.letter-input.wrong { border-bottom-color: #e74c3c; background: #fdeaea; color: #e74c3c; }
+.letter-input.solved { border-bottom-color: #27ae60; background: #e8f8f0; color: #27ae60; font-weight: 600; }
+.text-title { font-weight: 700; color: #667eea; font-size: 1.05em; margin-bottom: 8px; display: block; }
+.satzbau-item { background: #f8f9ff; padding: 16px 20px; margin-bottom: 20px; border-radius: 10px; border-left: 4px solid #667eea; }
+.drop-row { background: white; border: 2px dashed #ccc; border-radius: 10px; padding: 14px; min-height: 60px; margin-bottom: 12px; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.chip.punct { min-width: 32px; padding: 8px 10px; font-size: 1.2em; font-weight: 700; text-align: center; }
+.help-toggle { background: none; border: 2px solid #667eea; color: #667eea; padding: 6px 14px; border-radius: 20px; cursor: pointer; font-size: 0.85em; font-weight: 600; margin-bottom: 12px; }
+.help-toggle:hover { background: #667eea; color: white; }
+.help-box { display: none; background: #f8f9ff; border-radius: 10px; padding: 14px 18px; margin-bottom: 16px; font-size: 0.9em; line-height: 1.7; border-left: 4px solid #667eea; }
+.help-box.show { display: block; }
+.author-footer { margin-top: 40px; padding: 16px 20px; text-align: center; font-size: 0.8em; color: #888; border-top: 1px solid #e0e0e0; }
+.author-footer a { color: #667eea; text-decoration: none; font-weight: 500; }
+.author-footer .author-name { font-weight: 600; color: #555; }
+@media (max-width: 600px) {
+    .genus-categories { grid-template-columns: 1fr; }
+    .nav-btn { padding: 8px 12px; font-size: 0.82em; }
+    .ws-item { flex-direction: column; gap: 6px; }
+    .letter-input { width: 20px; height: 26px; font-size: 0.9em; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+    <h1>Lückentexte A16 – A20</h1>
+    <div class="subtitle">Urlaub &middot; Alltag &middot; Tagesablauf &middot; Studium &middot; Teil A &middot; Niveau A1/A2</div>
+
+    <div class="nav">
+        <div class="nav-btn active" onclick="showSection(0)">&#x1F4DD; Wortschatz</div>
+        <div class="nav-btn" onclick="showSection(1)">&#x1F500; Genus</div>
+        <div class="nav-btn" onclick="showSection(2)">&#x270F;&#xFE0F; Lückentext</div>
+        <div class="nav-btn" onclick="showSection(3)">&#x1F9E9; Satzbau</div>
+    </div>
+
+    <!-- TAB 0: WORTSCHATZ -->
+    <div class="section active" id="sec-0">
+        <div class="card">
+            <h2>&#x1F4DD; Wortschatz: Englisch &rarr; Deutsch</h2>
+            <button class="help-toggle" onclick="toggleHelp('wsHelp')">&#x1F4A1; Hilfe</button>
+            <div class="help-box" id="wsHelp">
+                Bei Nomen: Artikel (der/die/das) &middot; deutsches Wort &middot; Plural.<br>
+                Bei Verben und Adjektiven: nur das deutsche Wort.
+            </div>
+            <div id="wsContainer"></div>
+            <div class="btn-row">
+                <button class="btn btn-show" onclick="showWSLoesung()">Lösungen</button>
+                <button class="btn btn-reset" onclick="resetWS()">Neu starten</button>
+            </div>
+            <div class="timer-display">
+                <span class="current-time">&#x23F1;&#xFE0F; <span id="timer-0">00:00</span></span>
+                <span class="best-time">&#x1F3C6; Best: <span id="best-0">--:--</span></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- TAB 1: GENUS -->
+    <div class="section" id="sec-1">
+        <div class="card">
+            <h2>&#x1F500; Genus: der, die oder das?</h2>
+            <button class="help-toggle" onclick="toggleHelp('genusHelp')">&#x1F4A1; Hilfe</button>
+            <div class="help-box" id="genusHelp">
+                Ziehe jedes Nomen in die richtige Spalte.<br>
+                Auf Mobilgeräten: Tippe auf ein Wort, dann auf die Spalte.
+            </div>
+            <div class="genus-categories">
+                <div class="genus-cat" data-cat="der" ondrop="dropGenus(event)" ondragover="allowDrop(event)">
+                    <div class="genus-cat-title">der</div>
+                </div>
+                <div class="genus-cat" data-cat="die" ondrop="dropGenus(event)" ondragover="allowDrop(event)">
+                    <div class="genus-cat-title">die</div>
+                </div>
+                <div class="genus-cat" data-cat="das" ondrop="dropGenus(event)" ondragover="allowDrop(event)">
+                    <div class="genus-cat-title">das</div>
+                </div>
+            </div>
+            <div class="chip-bank" id="genusBank" ondrop="dropGenus(event)" ondragover="allowDrop(event)"></div>
+            <div class="btn-row">
+                <button class="btn btn-show" onclick="showGenusLoesung()">Lösungen</button>
+                <button class="btn btn-reset" onclick="resetGenus()">Neu starten</button>
+            </div>
+            <div class="timer-display">
+                <span class="current-time">&#x23F1;&#xFE0F; <span id="timer-1">00:00</span></span>
+                <span class="best-time">&#x1F3C6; Best: <span id="best-1">--:--</span></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- TAB 2: LÜCKENTEXT -->
+    <div class="section" id="sec-2">
+        <div class="card">
+            <h2>&#x270F;&#xFE0F; Lückentext: Buchstaben ergänzen</h2>
+            <button class="help-toggle" onclick="toggleHelp('lueckenHelp')">&#x1F4A1; Hilfe</button>
+            <div class="help-box" id="lueckenHelp">
+                Ergänze die fehlenden Buchstaben. Jedes Feld = ein Buchstabe.<br>
+                Der Cursor springt automatisch weiter.<br>
+                Tipp: Lies den Titel und den ersten Satz als Kontext!
+            </div>
+            <div id="lueckenContainer"></div>
+            <div class="btn-row">
+                <button class="btn btn-show" onclick="showLueckenLoesung()">Lösungen</button>
+                <button class="btn btn-reset" onclick="resetLuecken()">Neu starten</button>
+            </div>
+            <div class="timer-display">
+                <span class="current-time">&#x23F1;&#xFE0F; <span id="timer-2">00:00</span></span>
+                <span class="best-time">&#x1F3C6; Best: <span id="best-2">--:--</span></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- TAB 3: SATZBAU -->
+    <div class="section" id="sec-3">
+        <div class="card">
+            <h2>&#x1F9E9; Satzbau: Sätze ordnen</h2>
+            <button class="help-toggle" onclick="toggleHelp('sbHelp')">&#x1F4A1; Hilfe</button>
+            <div class="help-box" id="sbHelp">
+                Bringe die Satzglieder in die richtige Reihenfolge.<br>
+                &#x1F539; Das Verb steht auf Position 2.<br>
+                &#x1F539; Standard: Subjekt – Verb – Rest
+            </div>
+            <div id="satzbauContainer"></div>
+            <div class="btn-row">
+                <button class="btn btn-show" onclick="showSatzbauLoesung()">Lösungen</button>
+                <button class="btn btn-reset" onclick="resetSatzbau()">Neu starten</button>
+            </div>
+            <div class="timer-display">
+                <span class="current-time">&#x23F1;&#xFE0F; <span id="timer-3">00:00</span></span>
+                <span class="best-time">&#x1F3C6; Best: <span id="best-3">--:--</span></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="author-footer">
+    <span class="author-name">&copy; Frank Burkert</span> &middot; DaF-Materialien &middot;
+    <a href="mailto:FrankBurkert@fabdaf.onmicrosoft.com">FrankBurkert@fabdaf.onmicrosoft.com</a>
+</div>
+
+<script>
+// ── DATA ──────────────────────────────────────────────
+const WORTSCHATZ = [{"id": 1, "type": "n", "en": "holiday destination / travel destination", "artikel": "das", "de": "Urlaubsziel", "plural": "Urlaubsziele"}, {"id": 2, "type": "n", "en": "sea / ocean", "artikel": "das", "de": "Meer", "plural": "Meere"}, {"id": 3, "type": "n", "en": "beach", "artikel": "der", "de": "Strand", "plural": "Strände"}, {"id": 4, "type": "n", "en": "mountain(s)", "artikel": "der", "de": "Berg", "plural": "Berge"}, {"id": 5, "type": "n", "en": "island", "artikel": "die", "de": "Insel", "plural": "Inseln"}, {"id": 6, "type": "v", "en": "to prefer / like better", "de": "lieber mögen"}, {"id": 7, "type": "n", "en": "restaurant", "artikel": "das", "de": "Restaurant", "plural": "Restaurants"}, {"id": 8, "type": "n", "en": "pizza", "artikel": "die", "de": "Pizza", "plural": "Pizzen"}, {"id": 9, "type": "n", "en": "pasta", "artikel": "die", "de": "Pasta", "plural": "Pasta"}, {"id": 10, "type": "n", "en": "daily routine / daily schedule", "artikel": "der", "de": "Tagesablauf", "plural": "Tagesabläufe"}, {"id": 11, "type": "n", "en": "alarm clock", "artikel": "der", "de": "Wecker", "plural": "Wecker"}, {"id": 12, "type": "n", "en": "breakfast", "artikel": "das", "de": "Frühstück", "plural": "Frühstücke"}, {"id": 13, "type": "v", "en": "to get up / wake up", "de": "aufstehen"}, {"id": 14, "type": "v", "en": "to go to sleep / go to bed", "de": "schlafen gehen"}, {"id": 15, "type": "n", "en": "university / college", "artikel": "die", "de": "Universität", "plural": "Universitäten"}, {"id": 16, "type": "n", "en": "lecture / university class", "artikel": "die", "de": "Vorlesung", "plural": "Vorlesungen"}, {"id": 17, "type": "n", "en": "language course", "artikel": "der", "de": "Sprachkurs", "plural": "Sprachkurse"}, {"id": 18, "type": "n", "en": "homesickness", "artikel": "das", "de": "Heimweh", "plural": "Heimweh"}, {"id": 19, "type": "adj", "en": "homesick", "de": "heimwehkrank"}, {"id": 20, "type": "n", "en": "foreign country / abroad", "artikel": "das", "de": "Ausland", "plural": "Ausland"}, {"id": 21, "type": "adj", "en": "foreign / international", "de": "ausländisch"}, {"id": 22, "type": "n", "en": "culture", "artikel": "die", "de": "Kultur", "plural": "Kulturen"}, {"id": 23, "type": "n", "en": "language", "artikel": "die", "de": "Sprache", "plural": "Sprachen"}, {"id": 24, "type": "v", "en": "to learn", "de": "lernen"}, {"id": 25, "type": "n", "en": "factory / company", "artikel": "die", "de": "Fabrik", "plural": "Fabriken"}, {"id": 26, "type": "n", "en": "colleague", "artikel": "der", "de": "Kollege", "plural": "Kollegen"}, {"id": 27, "type": "n", "en": "salary / wages", "artikel": "das", "de": "Gehalt", "plural": "Gehälter"}, {"id": 28, "type": "n", "en": "bus", "artikel": "der", "de": "Bus", "plural": "Busse"}, {"id": 29, "type": "n", "en": "schedule / timetable", "artikel": "der", "de": "Fahrplan", "plural": "Fahrpläne"}, {"id": 30, "type": "n", "en": "traffic / road traffic", "artikel": "der", "de": "Verkehr", "plural": "Verkehr"}];
+const GENUS_NOUNS = [{"id": 1, "type": "n", "en": "holiday destination / travel destination", "artikel": "das", "de": "Urlaubsziel", "plural": "Urlaubsziele"}, {"id": 2, "type": "n", "en": "sea / ocean", "artikel": "das", "de": "Meer", "plural": "Meere"}, {"id": 3, "type": "n", "en": "beach", "artikel": "der", "de": "Strand", "plural": "Strände"}, {"id": 4, "type": "n", "en": "mountain(s)", "artikel": "der", "de": "Berg", "plural": "Berge"}, {"id": 5, "type": "n", "en": "island", "artikel": "die", "de": "Insel", "plural": "Inseln"}, {"id": 7, "type": "n", "en": "restaurant", "artikel": "das", "de": "Restaurant", "plural": "Restaurants"}, {"id": 8, "type": "n", "en": "pizza", "artikel": "die", "de": "Pizza", "plural": "Pizzen"}, {"id": 9, "type": "n", "en": "pasta", "artikel": "die", "de": "Pasta", "plural": "Pasta"}, {"id": 10, "type": "n", "en": "daily routine / daily schedule", "artikel": "der", "de": "Tagesablauf", "plural": "Tagesabläufe"}, {"id": 11, "type": "n", "en": "alarm clock", "artikel": "der", "de": "Wecker", "plural": "Wecker"}, {"id": 12, "type": "n", "en": "breakfast", "artikel": "das", "de": "Frühstück", "plural": "Frühstücke"}, {"id": 15, "type": "n", "en": "university / college", "artikel": "die", "de": "Universität", "plural": "Universitäten"}, {"id": 16, "type": "n", "en": "lecture / university class", "artikel": "die", "de": "Vorlesung", "plural": "Vorlesungen"}, {"id": 17, "type": "n", "en": "language course", "artikel": "der", "de": "Sprachkurs", "plural": "Sprachkurse"}, {"id": 18, "type": "n", "en": "homesickness", "artikel": "das", "de": "Heimweh", "plural": "Heimweh"}, {"id": 20, "type": "n", "en": "foreign country / abroad", "artikel": "das", "de": "Ausland", "plural": "Ausland"}, {"id": 22, "type": "n", "en": "culture", "artikel": "die", "de": "Kultur", "plural": "Kulturen"}, {"id": 23, "type": "n", "en": "language", "artikel": "die", "de": "Sprache", "plural": "Sprachen"}, {"id": 25, "type": "n", "en": "factory / company", "artikel": "die", "de": "Fabrik", "plural": "Fabriken"}, {"id": 26, "type": "n", "en": "colleague", "artikel": "der", "de": "Kollege", "plural": "Kollegen"}, {"id": 27, "type": "n", "en": "salary / wages", "artikel": "das", "de": "Gehalt", "plural": "Gehälter"}, {"id": 28, "type": "n", "en": "bus", "artikel": "der", "de": "Bus", "plural": "Busse"}, {"id": 29, "type": "n", "en": "schedule / timetable", "artikel": "der", "de": "Fahrplan", "plural": "Fahrpläne"}, {"id": 30, "type": "n", "en": "traffic / road traffic", "artikel": "der", "de": "Verkehr", "plural": "Verkehr"}];
+const LUECKEN_DATA = [{"id": "A16", "title": "16 – Urlaubsziele", "persons": [{"name": "Maria", "text": "Maria fährt am liebsten ans Meer. Sie liebt den Strand und die Sonne. Jeden Sommer fährt sie nach Spanien oder nach Italien. Das Wetter ist dort immer sehr warm und das Essen schmeckt ihr sehr gut."}, {"name": "Horst", "text": "Horst geht lieber in die Berge. Er wandert gerne und findet das Meer zu heiß. Im Sommer fährt er meistens nach Österreich oder in die Schweiz. Dort kann er gut wandern und die Natur genießen."}, {"name": "Greta", "text": "Greta reist am liebsten auf Inseln. Letztes Jahr war sie auf Mallorca und dieses Jahr möchte sie nach Kreta fahren. Sie mag das blaue Wasser und den weißen Sand."}, {"name": "Anette", "text": "Anette bleibt lieber zu Hause. Sie findet Reisen zu anstrengend und zu teuer. Im Urlaub schläft sie lange und liest viele Bücher. Sie geht auch oft mit Freunden ins Restaurant."}, {"name": "Reza", "text": "Reza kommt aus dem Iran. Er fährt jeden Sommer zurück nach Teheran, um seine Familie zu besuchen. Er vermisst seine Eltern und seine Geschwister sehr."}, {"name": "Anja", "text": "Anja reist gerne in ferne Länder. Letztes Jahr war sie in Japan und davor in Thailand. Sie findet fremde Kulturen und Sprachen sehr interessant. Sie fotografiert auch gerne."}, {"name": "Julia", "text": "Julia mag keine langen Reisen. Sie fährt lieber an die Nordsee oder in den Schwarzwald. Das ist nicht so weit und man kann viel erleben. Außerdem spart sie so Geld."}, {"name": "Niko", "text": "Niko ist Grieche und wohnt in Deutschland. Im Urlaub fährt er nach Griechenland zurück. Er liebt das griechische Essen und das warme Klima. Seine Familie freut sich immer sehr, wenn er kommt."}]}, {"id": "A17", "title": "17 – Paul und Luigi erzählen", "persons": [{"name": "Paul", "text": "Paul arbeitet in einer Fabrik. Er fängt jeden Morgen um sechs Uhr an. Die Arbeit ist manchmal schwer, aber seine Kollegen sind nett. Paul verdient nicht viel Geld, aber es reicht zum Leben. Nach der Arbeit fährt er mit dem Bus nach Hause. Dann kocht er und schaut fern. Um zehn Uhr geht er schlafen."}, {"name": "Luigi", "text": "Luigi kommt aus Italien und arbeitet in Deutschland als Koch. Er arbeitet in einem italienischen Restaurant. Die Arbeit beginnt erst um zwölf Uhr mittags, aber sie dauert bis nach Mitternacht. Luigi mag seine Arbeit sehr. Er kocht gerne Pizza und Pasta. Am Montag hat das Restaurant geschlossen. Das ist sein freier Tag."}]}, {"id": "A18", "title": "18 – Carolin und Lukas", "persons": [{"name": "Carolin", "text": "Carolin steht jeden Morgen um halb sieben auf. Ihr Wecker klingelt um sechs Uhr dreißig. Zuerst duscht sie und dann frühstückt sie. Sie isst meistens ein Brötchen mit Marmelade und trinkt einen Kaffee. Um halb acht fährt sie mit dem Fahrrad zur Arbeit. Sie arbeitet als Ärztin in einem Krankenhaus. Die Arbeit ist sehr stressig, aber sie mag ihren Beruf."}, {"name": "Lukas", "text": "Lukas ist Student und steht meistens sehr spät auf. Er frühstückt nicht, weil er keine Zeit hat. Er trinkt nur schnell einen Kaffee und geht dann zur Uni. Seine erste Vorlesung beginnt um neun Uhr. Nach der Uni geht er manchmal mit Freunden in die Bibliothek oder in ein Cafe. Abends kocht er etwas Einfaches und lernt noch ein bisschen. Um Mitternacht geht er schlafen."}]}, {"id": "A19", "title": "19 – Tagesablauf", "persons": [{"name": "Morgens", "text": "Der Wecker klingelt um sieben Uhr. Man steht auf, duscht und frühstückt. Viele Menschen essen morgens ein Brötchen oder Müsli und trinken Kaffee oder Tee. Dann fahren sie mit dem Bus oder mit dem Auto zur Arbeit oder zur Schule."}, {"name": "Mittags", "text": "Um zwölf Uhr ist Mittagspause. Viele Leute essen in der Kantine oder gehen in ein Restaurant. Manche bringen ihr Essen von zu Hause mit. Die Mittagspause dauert meistens eine Stunde."}, {"name": "Nachmittags", "text": "Nach der Arbeit machen viele Menschen Sport oder erledigen Einkäufe. Andere holen ihre Kinder von der Schule ab. Der Nachmittag ist oft sehr beschäftigt."}, {"name": "Abends", "text": "Am Abend essen die meisten Menschen zu Hause. Sie kochen selbst oder bestellen etwas. Nach dem Essen schauen viele fern oder lesen. Manche treffen sich mit Freunden. Um circa zehn oder elf Uhr gehen die meisten schlafen."}]}, {"id": "A20", "title": "20 – Drei ausländische Studierende erzählen", "persons": [{"name": "Tom (USA)", "text": "Tom kommt aus den USA. Er studiert seit einem Jahr in Berlin. Am Anfang war alles sehr schwierig. Er konnte kaum Deutsch sprechen und hatte Heimweh. Aber jetzt geht es ihm viel besser. Er hat viele neue Freunde gefunden und spricht schon ganz gut Deutsch. Er findet das Studium in Deutschland sehr interessant."}, {"name": "Marisol (Mexiko)", "text": "Marisol kommt aus Mexiko. Sie studiert Germanistik an der Universität Hamburg. Sie wohnt in einem Studentenwohnheim und teilt sich die Küche mit vier anderen Studierenden. Das Leben in Deutschland ist für Marisol manchmal schwer, weil alles so teuer ist. Aber sie liebt die deutsche Kultur und die deutsche Sprache. Nach ihrem Studium möchte sie als Lehrerin arbeiten."}, {"name": "Li Wei (China)", "text": "Li Wei kommt aus China und studiert Ingenieurwissenschaften in München. Er lernt sehr fleißig und geht fast jeden Tag in die Bibliothek. In seiner Freizeit kocht er gerne chinesisches Essen und trifft sich mit anderen chinesischen Studierenden. Er vermisst seine Familie sehr, aber er weiß, dass das Studium in Deutschland sehr wichtig für seine Zukunft ist."}]}];
+const SATZBAU_DATA = [{"chips": ["Maria", "fährt", "am liebsten", "ans Meer"]}, {"chips": ["Luigi", "arbeitet", "in einem", "italienischen Restaurant"]}, {"chips": ["Carolin", "steht", "um halb sieben", "auf"]}, {"chips": ["Der Wecker", "klingelt", "um sieben Uhr"]}, {"chips": ["Tom", "hat", "viele neue Freunde", "gefunden"]}, {"chips": ["Marisol", "möchte", "nach ihrem Studium", "als Lehrerin", "arbeiten"]}];
+const TIMER_PREFIX = 'luecken-a16-20';
+
+// ── NAVIGATION ────────────────────────────────────────
+function showSection(idx) {
+    document.querySelectorAll('.section').forEach((s, i) => s.classList.toggle('active', i === idx));
+    document.querySelectorAll('.nav-btn').forEach((b, i) => b.classList.toggle('active', i === idx));
+}
+function toggleHelp(id) { document.getElementById(id).classList.toggle('show'); }
+
+// ── TIMER ─────────────────────────────────────────────
+const timerState = {};
+function initTimer(idx) { timerState[idx] = { interval: null, seconds: 0, running: false, stopped: false }; }
+function startTimer(idx) {
+    const s = timerState[idx];
+    if (!s || s.running || s.stopped) return;
+    s.running = true;
+    s.interval = setInterval(() => {
+        s.seconds++;
+        document.getElementById('timer-' + idx).textContent = formatTime(s.seconds);
+    }, 1000);
+}
+function stopTimer(idx) {
+    const s = timerState[idx];
+    if (!s || !s.running) return;
+    clearInterval(s.interval); s.running = false; s.stopped = true;
+    const key = TIMER_PREFIX + '-best-' + idx;
+    const prev = localStorage.getItem(key);
+    if (!prev || s.seconds < parseInt(prev)) {
+        localStorage.setItem(key, s.seconds);
+        document.getElementById('best-' + idx).textContent = formatTime(s.seconds);
+    }
+}
+function resetTimer(idx) {
+    const s = timerState[idx];
+    if (!s) return;
+    clearInterval(s.interval); s.seconds = 0; s.running = false; s.stopped = false;
+    document.getElementById('timer-' + idx).textContent = '00:00';
+}
+function formatTime(sec) {
+    return String(Math.floor(sec / 60)).padStart(2,'0') + ':' + String(sec % 60).padStart(2,'0');
+}
+function loadBestTimes() {
+    [0,1,2,3].forEach(idx => {
+        const val = localStorage.getItem(TIMER_PREFIX + '-best-' + idx);
+        const el = document.getElementById('best-' + idx);
+        if (val && el) el.textContent = formatTime(parseInt(val));
+    });
+}
+
+// ── WORTSCHATZ ────────────────────────────────────────
+function liveCheck(inp) {
+    var user = inp.value, answer = inp.dataset.answer, field = inp.dataset.field;
+    inp.classList.remove('correct','wrong');
+    if (!user) return;
+    var cu = field === 'artikel' ? user.toLowerCase() : user;
+    var ca = field === 'artikel' ? answer.toLowerCase() : answer;
+    if (cu === ca) inp.classList.add('correct');
+    else if (!ca.startsWith(cu)) inp.classList.add('wrong');
+}
+function checkAllWS() {
+    var inputs = document.querySelectorAll('.ws-input');
+    if ([...inputs].every(i => i.classList.contains('correct'))) stopTimer(0);
+}
+function initWS() {
+    const c = document.getElementById('wsContainer'); c.innerHTML = '';
+    initTimer(0);
+    [...WORTSCHATZ].sort(() => Math.random() - 0.5).forEach(item => {
+        const row = document.createElement('div'); row.className = 'ws-item';
+        const p = document.createElement('div'); p.className = 'ws-prompt'; p.textContent = item.en; row.appendChild(p);
+        const f = document.createElement('div'); f.className = 'ws-fields';
+        function makeInput(cls, ph, ans, field) {
+            const inp = document.createElement('input'); inp.className = 'ws-input ' + cls;
+            inp.placeholder = ph; inp.dataset.answer = ans; inp.dataset.field = field;
+            inp.onfocus = () => startTimer(0);
+            inp.oninput = function() { liveCheck(this); checkAllWS(); };
+            return inp;
+        }
+        if (item.type === 'n') {
+            f.appendChild(makeInput('artikel','Artikel', item.artikel, 'artikel'));
+            f.appendChild(makeInput('','Deutsch', item.de, 'word'));
+            f.appendChild(makeInput('plural','Plural', item.plural, 'plural'));
+        } else {
+            f.appendChild(makeInput('','Deutsch', item.de, 'word'));
+        }
+        row.appendChild(f); c.appendChild(row);
+    });
+}
+function showWSLoesung() {
+    document.querySelectorAll('.ws-input').forEach(inp => {
+        inp.value = inp.dataset.answer; inp.classList.add('solved');
+    });
+    stopTimer(0);
+}
+function resetWS() { initWS(); resetTimer(0); }
+
+// ── GENUS ─────────────────────────────────────────────
+let genusSelected = null;
+function initGenus() {
+    initTimer(1);
+    const bank = document.getElementById('genusBank'); bank.innerHTML = '';
+    document.querySelectorAll('.genus-cat').forEach(cat => {
+        Array.from(cat.children).forEach(ch => { if (!ch.classList.contains('genus-cat-title')) ch.remove(); });
+    });
+    [...GENUS_NOUNS].sort(() => Math.random() - 0.5).forEach(n => {
+        const chip = document.createElement('div');
+        chip.className = 'chip'; chip.textContent = n.de;
+        chip.dataset.artikel = n.artikel; chip.draggable = true;
+        chip.addEventListener('dragstart', e => { e.dataTransfer.setData('text', n.de); });
+        chip.addEventListener('click', () => handleGenusClick(chip));
+        bank.appendChild(chip);
+    });
+}
+function handleGenusClick(chip) {
+    if (genusSelected === chip) { chip.classList.remove('placed'); genusSelected = null; return; }
+    if (genusSelected) genusSelected.classList.remove('placed');
+    genusSelected = chip; chip.classList.add('placed');
+}
+function allowDrop(e) { e.preventDefault(); }
+function dropGenus(e) {
+    e.preventDefault();
+    const word = e.dataTransfer.getData('text');
+    const target = e.currentTarget;
+    const chip = [...document.querySelectorAll('.chip')].find(c => c.textContent === word);
+    if (!chip) return;
+    if (target.id === 'genusBank') { target.appendChild(chip); chip.classList.remove('placed'); }
+    else { target.appendChild(chip); chip.classList.add('placed'); }
+    if (genusSelected === chip) genusSelected = null;
+    checkGenusAll();
+}
+function checkGenusAll() {
+    var allOk = true;
+    document.querySelectorAll('.genus-cat').forEach(cat => {
+        const expected = cat.dataset.cat;
+        cat.querySelectorAll('.chip').forEach(chip => {
+            if (chip.dataset.artikel !== expected) allOk = false;
+        });
+    });
+    if (document.getElementById('genusBank').querySelectorAll('.chip').length > 0) allOk = false;
+    if (allOk && document.querySelectorAll('.genus-cat .chip').length === GENUS_NOUNS.length) stopTimer(1);
+}
+function showGenusLoesung() {
+    document.querySelectorAll('.genus-cat').forEach(cat => {
+        cat.querySelectorAll('.chip').forEach(chip => {
+            chip.classList.remove('placed','correct','wrong');
+            chip.classList.add(chip.dataset.artikel === cat.dataset.cat ? 'correct' : 'wrong');
+        });
+    });
+    GENUS_NOUNS.forEach(n => {
+        const chip = [...document.querySelectorAll('.chip')].find(c => c.textContent === n.de);
+        if (!chip) return;
+        if (chip.closest('.genus-cat')) return;
+        const cat = document.querySelector('.genus-cat[data-cat="' + n.artikel + '"]');
+        if (cat) { cat.appendChild(chip); chip.classList.add('correct'); }
+    });
+    stopTimer(1);
+}
+function resetGenus() { initGenus(); resetTimer(1); }
+
+// ── LÜCKENTEXT ────────────────────────────────────────
+function buildLuecken() {
+    initTimer(2);
+    const c = document.getElementById('lueckenContainer'); c.innerHTML = '';
+    LUECKEN_DATA.forEach(text => {
+        const card = document.createElement('div'); card.className = 'card';
+        const title = document.createElement('span'); title.className = 'text-title'; title.textContent = text.title;
+        card.appendChild(title);
+        const div = document.createElement('div'); div.className = 'luecken-text';
+        text.persons.forEach(person => {
+            const lbl = document.createElement('span'); lbl.className = 'luecken-person'; lbl.textContent = '▶ ' + person.name + ':';
+            div.appendChild(lbl);
+            const words = person.text.split(' ');
+            let sentenceCount = 0; let wordInSentence = 0;
+            words.forEach((word, wi) => {
+                const lastCh = word.slice(-1); const endsWithPunct = lastCh === '.' || lastCh === '!' || lastCh === '?';
+                if (wi > 0 && wordInSentence % 2 === 1 && sentenceCount > 0) {
+                    const clean = word.replace(/[.,!?:;]/g,'');
+                    const punct = word.slice(clean.length);
+                    const halfLen = Math.ceil(clean.length / 2);
+                    const visible = clean.slice(0, clean.length - halfLen);
+                    const hidden = clean.slice(clean.length - halfLen);
+                    const group = document.createElement('span'); group.className = 'letter-group';
+                    if (visible) { const vis = document.createTextNode(visible); group.appendChild(vis); }
+                    [...hidden].forEach(ch => {
+                        const inp = document.createElement('input');
+                        inp.className = 'letter-input'; inp.maxLength = 1;
+                        inp.dataset.answer = ch.toLowerCase();
+                        inp.onfocus = () => startTimer(2);
+                        inp.oninput = function() {
+                            this.classList.remove('correct','wrong');
+                            if (this.value.toLowerCase() === this.dataset.answer) {
+                                this.classList.add('correct');
+                                const next = this.nextElementSibling;
+                                if (next && next.classList.contains('letter-input')) next.focus();
+                            } else if (this.value.length > 0) {
+                                this.classList.add('wrong');
+                            }
+                            checkAllLetters();
+                        };
+                        group.appendChild(inp);
+                    });
+                    if (punct) { const p = document.createTextNode(punct); group.appendChild(p); }
+                    div.appendChild(document.createTextNode(' '));
+                    div.appendChild(group);
+                } else {
+                    div.appendChild(document.createTextNode((wi === 0 ? '' : ' ') + word));
+                }
+                wordInSentence++;
+                if (endsWithPunct) { sentenceCount++; wordInSentence = 0; }
+            });
+            div.appendChild(document.createTextNode(' '));
+        });
+        card.appendChild(div); c.appendChild(card);
+    });
+}
+function checkAllLetters() {
+    var inputs = document.querySelectorAll('.letter-input');
+    if ([...inputs].every(i => i.classList.contains('correct'))) stopTimer(2);
+}
+function showLueckenLoesung() {
+    document.querySelectorAll('.letter-input').forEach(inp => {
+        inp.value = inp.dataset.answer;
+        inp.classList.add('solved');
+    });
+    stopTimer(2);
+}
+function resetLuecken() { buildLuecken(); resetTimer(2); }
+
+// ── SATZBAU ───────────────────────────────────────────
+let sbDragged = null;
+function initSatzbau() {
+    initTimer(3);
+    const c = document.getElementById('satzbauContainer'); c.innerHTML = '';
+    SATZBAU_DATA.forEach((item, idx) => {
+        const block = document.createElement('div'); block.className = 'satzbau-item';
+        const drop = document.createElement('div'); drop.className = 'drop-row'; drop.dataset.idx = idx;
+        drop.ondragover = e => e.preventDefault();
+        drop.ondrop = e => { e.preventDefault(); if (sbDragged) { drop.appendChild(sbDragged); sbDragged = null; checkSatzbau(idx); } };
+        block.appendChild(drop);
+        const bank = document.createElement('div'); bank.className = 'chip-bank'; bank.dataset.idx = idx;
+        bank.ondragover = e => e.preventDefault();
+        bank.ondrop = e => { e.preventDefault(); if (sbDragged) { bank.appendChild(sbDragged); sbDragged = null; } };
+        [...item.chips].sort(() => Math.random() - 0.5).forEach(word => {
+            const chip = document.createElement('div'); chip.className = 'chip'; chip.textContent = word;
+            chip.draggable = true;
+            chip.ondragstart = () => { sbDragged = chip; chip.classList.add('placed'); };
+            chip.ondragend = () => chip.classList.remove('placed');
+            chip.onclick = () => {
+                if (chip.closest('.drop-row')) bank.appendChild(chip);
+                else drop.appendChild(chip);
+                checkSatzbau(idx);
+            };
+            bank.appendChild(chip);
+        });
+        block.appendChild(bank);
+        const fb = document.createElement('div'); fb.id = 'sb-fb-' + idx;
+        fb.style.cssText = 'margin-top:8px;font-size:0.9em;font-weight:600;min-height:1.4em;';
+        block.appendChild(fb);
+        c.appendChild(block);
+    });
+}
+function checkSatzbau(idx) {
+    const drop = document.querySelector('.drop-row[data-idx="' + idx + '"]');
+    const chips = [...drop.querySelectorAll('.chip')].map(c => c.textContent);
+    const sol = SATZBAU_DATA[idx].chips;
+    const fb = document.getElementById('sb-fb-' + idx);
+    if (chips.length === sol.length && chips.every((c,i) => c === sol[i])) {
+        fb.textContent = '✅ Richtig!'; fb.style.color = '#27ae60';
+        drop.querySelectorAll('.chip').forEach(c => { c.classList.add('correct'); c.draggable = false; });
+        if ([...document.querySelectorAll('.drop-row')].every((dr, i) => {
+            const ch = [...dr.querySelectorAll('.chip')].map(c => c.textContent);
+            return ch.length === SATZBAU_DATA[i].chips.length && ch.every((c,j) => c === SATZBAU_DATA[i].chips[j]);
+        })) stopTimer(3);
+    } else if (chips.length === sol.length) {
+        fb.textContent = '❌ Noch nicht ganz richtig.'; fb.style.color = '#e74c3c';
+    } else {
+        fb.textContent = '';
+    }
+}
+function showSatzbauLoesung() {
+    SATZBAU_DATA.forEach((item, idx) => {
+        const drop = document.querySelector('.drop-row[data-idx="' + idx + '"]');
+        const bank = document.querySelector('.chip-bank[data-idx="' + idx + '"]');
+        drop.innerHTML = '';
+        item.chips.forEach(word => {
+            const chip = document.createElement('div'); chip.className = 'chip correct'; chip.textContent = word;
+            drop.appendChild(chip);
+        });
+        bank.innerHTML = '';
+        document.getElementById('sb-fb-' + idx).textContent = '✅ Lösung';
+        document.getElementById('sb-fb-' + idx).style.color = '#27ae60';
+    });
+    stopTimer(3);
+}
+function resetSatzbau() { initSatzbau(); resetTimer(3); }
+
+// ── INIT ──────────────────────────────────────────────
+window.addEventListener('load', () => {
+    loadBestTimes();
+    initWS();
+    initGenus();
+    buildLuecken();
+    initSatzbau();
+});
+</script>
+</body>
+</html>
