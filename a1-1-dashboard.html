@@ -1495,7 +1495,7 @@
     document.querySelectorAll('.card-senden').forEach(function(btn) {
         var onclick = btn.getAttribute('onclick') || '';
         // Dateiname aus oeffneModal-Aufruf extrahieren
-        var match = onclick.match(/oeffneModal\([^,]+,\s*'([^']+)'\)/);
+        var match = onclick.match(/oeffneModal\(.*?,\s*'([^']+\.html)'\)/);
         if (!match) return;
         var dateiname = match[1];
         var url = BASE_URL + dateiname;
