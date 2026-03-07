@@ -524,6 +524,18 @@ function lc(inp,ans){
   if(ans.startsWith(v)){if(v===ans)inp.classList.add('ok');}
   else inp.classList.add('no');
 }
+function lcEnd(inp,ans){
+  // ans is like '-ig', '-ling', '-(i)smus' — accept with or without leading dash
+  var v=inp.value.trim().toLowerCase();
+  inp.classList.remove('ok','no');
+  if(!v)return;
+  var norm=ans.toLowerCase();
+  var noDash=norm.replace(/^-/,'');
+  // accept if user types the ending with or without dash
+  if(v===norm||v===noDash){inp.classList.add('ok');return;}
+  if(norm.startsWith(v)||noDash.startsWith(v)){return;} // still typing
+  inp.classList.add('no');
+}
 function shuffle(arr){
   var a=arr.slice();
   for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}
@@ -533,7 +545,7 @@ function buildGrid(id,words){
   var g=document.getElementById(id);
   shuffle(words).forEach(function(w){
     g.innerHTML+='<div class="fc"><div class="fw2">'+w.w+'</div>'
-      +'<input class="fi" type="text" placeholder="Artikel" oninput="lc(this,\''+w.a+'\')" autocomplete="off"></div>';
+      +'<input class="fi" type="text" placeholder="Endung" oninput="lcEnd(this,\''+w.e+'\')" autocomplete="off"></div>';
   });
 }
 function buildArt(id,words){
