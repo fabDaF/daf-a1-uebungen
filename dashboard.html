@@ -182,15 +182,7 @@
       box-shadow: 0 20px 60px rgba(0,0,0,0.25);
     }
     .modal h3 { font-size: 1.05rem; margin-bottom: 0.25rem; }
-    .modal-betreff { font-size: 0.85rem; color: #666; font-style: italic; margin-bottom: 1.1rem; }
-    .modal label { display: block; font-size: 0.85rem; font-weight: 600; color: #555; margin-bottom: 0.35rem; }
-    .modal input[type=text] {
-      width: 100%; padding: 0.6rem 0.9rem;
-      border: 2px solid #dde; border-radius: 8px;
-      font-size: 0.95rem; margin-bottom: 1rem;
-      transition: border-color 0.2s;
-    }
-    .modal input[type=text]:focus { outline: none; border-color: #667eea; }
+    .modal-betreff { font-size: 0.85rem; color: #666; font-style: italic; margin-bottom: 1.3rem; }
 
     .modal-optionen { display: flex; flex-direction: column; gap: 0.55rem; margin-bottom: 1.2rem; }
 
@@ -237,12 +229,10 @@
   <div class="modal">
     <h3>Lektion versenden</h3>
     <div class="modal-betreff" id="modalBetreff"></div>
-    <label for="empfaenger">E-Mail-Adresse des Schülers</label>
-    <input type="text" id="empfaenger" placeholder="name@beispiel.de" autocomplete="email">
     <div class="modal-optionen">
       <button class="btn-send-option" id="btnMail" onclick="sendeMail()">
         <span class="ico">✉️</span>
-        <span class="lbl">Per E-Mail senden<br><span class="sub">Öffnet Outlook mit vorausgefüllter Nachricht</span></span>
+        <span class="lbl">Per E-Mail senden<br><span class="sub">Öffnet Outlook — Empfänger aus Adressbuch wählen</span></span>
       </button>
       <a class="btn-send-option" id="btnWA" href="#" target="_blank" rel="noopener">
         <span class="ico">💬</span>
@@ -531,20 +521,16 @@ function oeffneModal(titel, url) {
   _titel = titel;
   _urls  = [url];
   document.getElementById('modalBetreff').textContent = titel;
-  document.getElementById('empfaenger').value = '';
   aktualisiereWAEinheit();
   document.getElementById('modalOverlay').classList.add('aktiv');
-  setTimeout(() => document.getElementById('empfaenger').focus(), 100);
 }
 
 function oeffneModalListe(titel, urls) {
   _titel = titel;
   _urls  = urls;
   document.getElementById('modalBetreff').textContent = titel;
-  document.getElementById('empfaenger').value = '';
   aktualisiereWAEinheit();
   document.getElementById('modalOverlay').classList.add('aktiv');
-  setTimeout(() => document.getElementById('empfaenger').focus(), 100);
 }
 
 function aktualisiereWAEinheit() {
@@ -554,15 +540,8 @@ function aktualisiereWAEinheit() {
   document.getElementById('btnWA').href = 'https://wa.me/?text=' + encodeURIComponent(text);
 }
 
-// E-Mail via mailto: — öffnet Outlook direkt, kein Login nötig
+// E-Mail via mailto: — öffnet Outlook direkt, Empfänger im Adressbuch wählen
 function sendeMail() {
-  const email = document.getElementById('empfaenger').value.trim();
-  if (!email || !email.includes('@')) {
-    document.getElementById('empfaenger').focus();
-    document.getElementById('empfaenger').style.borderColor = '#e74c3c';
-    setTimeout(() => document.getElementById('empfaenger').style.borderColor = '', 1500);
-    return;
-  }
   const betreff = encodeURIComponent('fabDaF – ' + _titel);
   const body = _urls.length === 1
     ? encodeURIComponent(
@@ -575,7 +554,7 @@ function sendeMail() {
         _urls.join('\n') +
         '\n\nEinfach auf den Link klicken – die Übung öffnet sich direkt im Browser.\n\nViel Erfolg! 🎯\n\n— Frank Burkert · fabDaF'
       );
-  window.location.href = `mailto:${email}?subject=${betreff}&body=${body}`;
+  window.location.href = `mailto:?subject=${betreff}&body=${body}`;
   schliesseModal();
 }
 
@@ -588,9 +567,6 @@ document.getElementById('modalOverlay').addEventListener('click', function(e) {
 });
 document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') schliesseModal();
-});
-document.getElementById('empfaenger').addEventListener('keydown', function(e) {
-  if (e.key === 'Enter') sendeMail();
 });
 
 // ═══════════════════════════════════════════════════════
