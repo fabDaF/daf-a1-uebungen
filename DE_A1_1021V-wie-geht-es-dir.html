@@ -576,7 +576,7 @@ function liveCheck(inp) {
     if (user.length === 0) return;
     var cmpUser = user;
     var cmpAnswer = answer;
-    if (field === 'art') { cmpUser = user.toLowerCase(); cmpAnswer = answer.toLowerCase(); }
+    if (field === 'art') { cmpUser = user; cmpAnswer = answer; }
     if (cmpUser === cmpAnswer) { inp.classList.add('correct'); }
     else if (cmpAnswer.indexOf(cmpUser) === 0) { /* prefix ok, keep typing */ }
     else { inp.classList.add('wrong'); }
@@ -947,8 +947,8 @@ function showDialogLoesung() {
     var total = 0;
     document.querySelectorAll('.dialog-blank').forEach(function(inp) {
         total++;
-        var user = inp.value.trim().toLowerCase();
-        var answer = inp.dataset.answer.toLowerCase();
+        var user = inp.value.trim();
+        var answer = inp.dataset.answer;
         var next = inp.nextElementSibling;
         if (next && next.classList.contains('correction-hint')) next.remove();
         if (user === answer) {
@@ -1046,8 +1046,8 @@ function liveCheckEndung(inp) {
     var answer = inp.dataset.answer.trim();
     inp.classList.remove('correct', 'wrong');
     if (!user) return;
-    if (user.toLowerCase() === answer.toLowerCase()) inp.classList.add('correct');
-    else if (!answer.toLowerCase().startsWith(user.toLowerCase())) inp.classList.add('wrong');
+    if (user === answer) inp.classList.add('correct');
+    else if (!answer.startsWith(user)) inp.classList.add('wrong');
 }
 
 function initPluralSchreiben() {
@@ -1084,8 +1084,8 @@ function liveCheckPl(inp) {
     var answer = inp.dataset.answer;
     inp.classList.remove('correct', 'wrong');
     if (!user) return;
-    if (user.toLowerCase() === answer.toLowerCase()) inp.classList.add('correct');
-    else if (!answer.toLowerCase().startsWith(user.toLowerCase())) inp.classList.add('wrong');
+    if (user === answer) inp.classList.add('correct');
+    else if (!answer.startsWith(user)) inp.classList.add('wrong');
 }
 
 function initIntl() {
@@ -1415,8 +1415,8 @@ function showVocabLoesung() {
         var user = inp.value.trim();
         var answer = inp.dataset.answer;
         if (field === 'art') {
-            user = user.toLowerCase();
-            answer = answer.toLowerCase();
+            user = user;
+            answer = answer;
         }
         var existing = inp.nextElementSibling;
         if (existing && existing.classList.contains('vocab-hint')) existing.remove();

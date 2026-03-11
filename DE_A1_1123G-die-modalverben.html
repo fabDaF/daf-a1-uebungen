@@ -582,8 +582,8 @@ function mcCheck(step, btn, correct) {
    ============================ */
 
 function liveCheck(inp) {
-  var val = inp.value.trim().toLowerCase();
-  var ans = (inp.dataset.answer || '').toLowerCase();
+  var val = inp.value.trim();
+  var ans = (inp.dataset.answer || '');
   inp.classList.remove('correct', 'wrong');
   if (val.length === 0) return;
   if (val === ans) { inp.classList.add('correct'); }
@@ -1054,8 +1054,8 @@ function vocabInit() {
 function vocabCheckAllOk() {
   var inputs = document.querySelectorAll('#vocab-container input');
   var allOk = inputs.length > 0 && Array.from(inputs).every(function(i) {
-    var val = i.value.trim().toLowerCase();
-    var ans = (i.dataset.answer || '').toLowerCase();
+    var val = i.value.trim();
+    var ans = (i.dataset.answer || '');
     return val === ans;
   });
   if (allOk) timerStop(5);

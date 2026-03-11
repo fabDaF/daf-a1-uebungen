@@ -471,7 +471,7 @@ function liveCheck(inp) {
     if (user.length === 0) return;
     var cmpUser = user;
     var cmpAnswer = answer;
-    if (field === 'art') { cmpUser = user.toLowerCase(); cmpAnswer = answer.toLowerCase(); }
+    if (field === 'art') { cmpUser = user; cmpAnswer = answer; }
     if (cmpUser === cmpAnswer) { inp.classList.add('correct'); }
     else if (cmpAnswer.indexOf(cmpUser) === 0) { /* prefix ok, keep typing */ }
     else { inp.classList.add('wrong'); }
@@ -699,8 +699,8 @@ function showLueckenLoesung() {
     var total = 0;
     document.querySelectorAll('#sec-1 .lueck-blank').forEach(function(inp) {
         total++;
-        var user = inp.value.trim().toLowerCase();
-        var answer = inp.dataset.answer.toLowerCase();
+        var user = inp.value.trim();
+        var answer = inp.dataset.answer;
         var next = inp.nextElementSibling;
         if (next && next.classList.contains('correction-hint')) next.remove();
         if (user === answer) { inp.classList.remove('wrong'); inp.classList.add('correct'); }
@@ -851,7 +851,7 @@ function showFALoesung() {
         var answer = inp.dataset.answer;
         var next = inp.nextElementSibling;
         if (next && next.classList.contains('correction-hint')) next.remove();
-        if (user.toLowerCase() === answer.toLowerCase()) {
+        if (user === answer) {
             inp.classList.remove('wrong'); inp.classList.add('correct');
         } else {
             inp.classList.add('wrong');
@@ -1143,7 +1143,7 @@ function showVocabLoesung() {
         var field = inp.dataset.field;
         var user = inp.value.trim();
         var answer = inp.dataset.answer;
-        if (field === 'art') { user = user.toLowerCase(); answer = answer.toLowerCase(); }
+        if (field === 'art') { user = user; answer = answer; }
         var existing = inp.nextElementSibling;
         if (existing && existing.classList.contains('vocab-hint')) existing.remove();
         if (user === answer) { inp.classList.remove('wrong'); inp.classList.add('correct'); }
