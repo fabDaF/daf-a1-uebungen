@@ -327,9 +327,9 @@ function shuffle(arr) {
     return a;
 }
 function norm(s) {
-    return s.trim().toLowerCase()
+    return s.trim()
         .replace(/ä/g,'ae').replace(/ö/g,'oe').replace(/ü/g,'ue')
-        .replace(/Ä/g,'ae').replace(/Ö/g,'oe').replace(/Ü/g,'ue')
+        .replace(/Ä/g,'Ae').replace(/Ö/g,'Oe').replace(/Ü/g,'Ue')
         .replace(/ß/g,'ss');
 }
 
