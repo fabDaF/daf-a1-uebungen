@@ -777,6 +777,7 @@ function selectPreisChip(chip) {
                     selectedPreisChip.classList.add('wrong');
                 }
                 selectedPreisChip = null;
+                checkAllDragDrop(1, PREIS_DATA.length, 1);
             }
         };
     });
@@ -811,6 +812,7 @@ function dropPreis(e) {
         } else {
             chip.classList.add('wrong');
         }
+        checkAllDragDrop(1, PREIS_DATA.length, 1);
     }
 }
 
@@ -836,6 +838,7 @@ function showPreisLoesung() {
         chip.classList.add('placed', 'correct');
         chip.classList.remove('wrong');
     });
+    stopTimer(1);
 }
 
 function resetPreis() {
@@ -978,6 +981,7 @@ function selectCafeChip(chip) {
                     selectedCafeChip.classList.add('wrong');
                 }
                 selectedCafeChip = null;
+                checkAllDragDrop(3, CAFE_DATA.length, 3);
             }
         };
     });
@@ -1010,6 +1014,7 @@ function dropCafe(e) {
         } else {
             chip.classList.add('wrong');
         }
+        checkAllDragDrop(3, CAFE_DATA.length, 3);
     }
 }
 
@@ -1028,6 +1033,7 @@ function showCafeLoesung() {
             chip.classList.remove('wrong');
         }
     });
+    stopTimer(3);
 }
 
 function resetCafe() {

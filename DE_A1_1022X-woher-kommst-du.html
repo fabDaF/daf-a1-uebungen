@@ -615,6 +615,7 @@ function selectWoherChip(chip) {
                     selectedWoherChip.classList.add('wrong');
                 }
                 selectedWoherChip = null;
+                checkAllDragDrop(0, WOHER_DATA.length, 0);
             }
         };
     });
@@ -645,6 +646,7 @@ function dropWoher(e) {
         } else {
             chip.classList.add('wrong');
         }
+        checkAllDragDrop(0, WOHER_DATA.length, 0);
     }
 }
 
@@ -663,6 +665,7 @@ function showWoherLoesung() {
             chip.classList.remove('wrong');
         }
     });
+    stopTimer(0);
 }
 
 function resetWoher() {
@@ -807,6 +810,7 @@ function selectArtChip(chip) {
                     selectedArtChip.classList.add('wrong');
                 }
                 selectedArtChip = null;
+                checkAllDragDrop(2, ART_DATA.length, 2);
             }
         };
     });
@@ -837,6 +841,7 @@ function dropArt(e) {
         } else {
             chip.classList.add('wrong');
         }
+        checkAllDragDrop(2, ART_DATA.length, 2);
     }
 }
 
@@ -855,6 +860,7 @@ function showArtLoesung() {
             chip.classList.remove('wrong');
         }
     });
+    stopTimer(2);
 }
 
 function resetArt() {

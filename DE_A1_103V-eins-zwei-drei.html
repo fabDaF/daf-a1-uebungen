@@ -734,6 +734,7 @@ function selectLautChip(chip) {
                     selectedLautChip.classList.add('wrong');
                 }
                 selectedLautChip = null;
+                checkAllDragDrop(3, LAUT_DATA.length, 3);
             }
         };
     });
@@ -764,6 +765,7 @@ function dropLaut(e) {
         } else {
             chip.classList.add('wrong');
         }
+        checkAllDragDrop(3, LAUT_DATA.length, 3);
     }
 }
 
@@ -782,6 +784,7 @@ function showLautLoesung() {
             chip.classList.remove('wrong');
         }
     });
+    stopTimer(3);
 }
 
 function resetLaut() {

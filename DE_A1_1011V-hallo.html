@@ -650,6 +650,7 @@ function selectBegChip(chip) {
                     selectedBegChip.classList.add('wrong');
                 }
                 selectedBegChip = null;
+                checkAllDragDrop(0, BEG_DATA.length, 0);
             }
         };
     });
@@ -680,6 +681,7 @@ function dropBeg(e) {
         } else {
             chip.classList.add('wrong');
         }
+        checkAllDragDrop(0, BEG_DATA.length, 0);
     }
 }
 
@@ -698,6 +700,7 @@ function showBegLoesung() {
             chip.classList.remove('wrong');
         }
     });
+    stopTimer(0);
 }
 
 function resetBeg() {
@@ -842,6 +845,7 @@ function selectRegionChip(chip) {
                     selectedRegionChip.classList.add('wrong');
                 }
                 selectedRegionChip = null;
+                checkAllDragDrop(2, REGION_DATA.length, 2);
             }
         };
     });
@@ -872,6 +876,7 @@ function dropRegion(e) {
         } else {
             chip.classList.add('wrong');
         }
+        checkAllDragDrop(2, REGION_DATA.length, 2);
     }
 }
 
@@ -890,6 +895,7 @@ function showRegionLoesung() {
             chip.classList.remove('wrong');
         }
     });
+    stopTimer(2);
 }
 
 function resetRegion() {
@@ -946,6 +952,7 @@ function selectInternChip(chip) {
                     selectedInternChip.classList.add('wrong');
                 }
                 selectedInternChip = null;
+                checkAllDragDrop(3, INTERN_DATA.length, 3);
             }
         };
     });
@@ -976,6 +983,7 @@ function dropIntern(e) {
         } else {
             chip.classList.add('wrong');
         }
+        checkAllDragDrop(3, INTERN_DATA.length, 3);
     }
 }
 
@@ -994,6 +1002,7 @@ function showInternLoesung() {
             chip.classList.remove('wrong');
         }
     });
+    stopTimer(3);
 }
 
 function resetIntern() {

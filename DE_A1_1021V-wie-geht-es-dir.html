@@ -704,6 +704,7 @@ function selectFormChip(chip) {
                     selectedFormChip.classList.add('wrong');
                 }
                 selectedFormChip = null;
+                checkAllDragDrop(0, FORM_DATA.length, 0);
             }
         };
     });
@@ -734,6 +735,7 @@ function dropForm(e) {
         } else {
             chip.classList.add('wrong');
         }
+        checkAllDragDrop(0, FORM_DATA.length, 0);
     }
 }
 
@@ -752,6 +754,7 @@ function showFormLoesung() {
             chip.classList.remove('wrong');
         }
     });
+    stopTimer(0);
 }
 
 function resetForm() {
@@ -808,6 +811,7 @@ function selectBefChip(chip) {
                     selectedBefChip.classList.add('wrong');
                 }
                 selectedBefChip = null;
+                checkAllDragDrop(1, BEF_DATA.length, 1);
             }
         };
     });
@@ -838,6 +842,7 @@ function dropBef(e) {
         } else {
             chip.classList.add('wrong');
         }
+        checkAllDragDrop(1, BEF_DATA.length, 1);
     }
 }
 
@@ -856,6 +861,7 @@ function showBefLoesung() {
             chip.classList.remove('wrong');
         }
     });
+    stopTimer(1);
 }
 
 function resetBef() {

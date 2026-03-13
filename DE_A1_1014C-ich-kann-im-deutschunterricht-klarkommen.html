@@ -667,6 +667,7 @@ function selectZeitChip(chip) {
                     selectedZeitChip.classList.add('wrong');
                 }
                 selectedZeitChip = null;
+                checkAllDragDrop(1, ZEIT_DATA.length, 1);
             }
         };
     });
@@ -697,6 +698,7 @@ function dropZeit(e) {
         } else {
             chip.classList.add('wrong');
         }
+        checkAllDragDrop(1, ZEIT_DATA.length, 1);
     }
 }
 
@@ -715,6 +717,7 @@ function showZeitLoesung() {
             chip.classList.remove('wrong');
         }
     });
+    stopTimer(1);
 }
 
 function resetZeit() {
@@ -858,6 +861,7 @@ function selectGenusChip(chip) {
                     selectedGenusChip.classList.add('wrong');
                 }
                 selectedGenusChip = null;
+                checkAllDragDrop(3, GENUS_DATA.length, 3);
             }
         };
     });
@@ -893,6 +897,7 @@ function dropGenus(e) {
         } else {
             chip.classList.add('wrong');
         }
+        checkAllDragDrop(3, GENUS_DATA.length, 3);
     }
 }
 
@@ -911,6 +916,7 @@ function showGenusLoesung() {
             chip.classList.remove('wrong');
         }
     });
+    stopTimer(3);
 }
 
 function resetGenus() {

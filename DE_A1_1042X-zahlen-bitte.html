@@ -764,6 +764,7 @@ function initZuord() {
                     selectedZuordChip.classList.add('wrong');
                 }
                 selectedZuordChip = null;
+                checkAllDragDrop(3, ZUORD_DATA.length, 3);
             }
         };
         slot.appendChild(dropZone);
@@ -816,6 +817,7 @@ function dropZuord(e) {
         } else {
             chip.classList.add('wrong');
         }
+        checkAllDragDrop(3, ZUORD_DATA.length, 3);
     }
 }
 
@@ -832,6 +834,7 @@ function showZuordLoesung() {
             }
         });
     });
+    stopTimer(3);
 }
 
 function resetZuord() {

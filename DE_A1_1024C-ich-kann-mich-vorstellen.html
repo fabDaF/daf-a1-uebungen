@@ -538,6 +538,7 @@ function selectBefindenChip(chip) {
                     selectedBefindenChip.classList.add('wrong');
                 }
                 selectedBefindenChip = null;
+                checkAllDragDrop(0, BEFINDEN_DATA.length, 0);
             }
         };
     });
@@ -568,6 +569,7 @@ function dropBefinden(e) {
         } else {
             chip.classList.add('wrong');
         }
+        checkAllDragDrop(0, BEFINDEN_DATA.length, 0);
     }
 }
 
@@ -586,6 +588,7 @@ function showBefindenLoesung() {
             chip.classList.remove('wrong');
         }
     });
+    stopTimer(0);
 }
 
 function resetBefinden() {

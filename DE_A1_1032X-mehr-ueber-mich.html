@@ -586,7 +586,7 @@ function selectLSChip(chip) {
     startTimer(0);
     document.querySelectorAll('#sec-0 .zuordnung-cat').forEach(function(cat) {
         cat.onclick = function() {
-            if (selectedLSChip) { cat.appendChild(selectedLSChip); selectedLSChip.style.outline = ''; selectedLSChip.classList.add('placed'); selectedLSChip = null; }
+            if (selectedLSChip) { cat.appendChild(selectedLSChip); selectedLSChip.style.outline = ''; selectedLSChip.classList.add('placed'); selectedLSChip = null; checkAllDragDrop(0, LS_DATA.length, 0); }
         };
     });
     document.getElementById('lsBank').onclick = function() {
@@ -610,6 +610,7 @@ function dropLS(e) {
         } else {
             chip.classList.add('wrong');
         }
+        checkAllDragDrop(0, LS_DATA.length, 0);
     }
 }
 
@@ -624,6 +625,7 @@ function showLSLoesung() {
         var targetCat = document.querySelector('#sec-0 .zuordnung-cat[data-cat="' + item.cat + '"]');
         if (chip && targetCat) { targetCat.appendChild(chip); chip.classList.add('placed', 'correct'); chip.classList.remove('wrong'); }
     });
+    stopTimer(0);
 }
 
 function resetLS() {
@@ -752,7 +754,7 @@ function selectFSChip(chip) {
     startTimer(2);
     document.querySelectorAll('#sec-2 .zuordnung-cat').forEach(function(cat) {
         cat.onclick = function() {
-            if (selectedFSChip) { cat.appendChild(selectedFSChip); selectedFSChip.style.outline = ''; selectedFSChip.classList.add('placed'); selectedFSChip = null; }
+            if (selectedFSChip) { cat.appendChild(selectedFSChip); selectedFSChip.style.outline = ''; selectedFSChip.classList.add('placed'); selectedFSChip = null; checkAllDragDrop(2, FS_DATA.length, 2); }
         };
     });
     document.getElementById('fsBank').onclick = function() {
@@ -776,6 +778,7 @@ function dropFS(e) {
         } else {
             chip.classList.add('wrong');
         }
+        checkAllDragDrop(2, FS_DATA.length, 2);
     }
 }
 
@@ -790,6 +793,7 @@ function showFSLoesung() {
         var targetCat = document.querySelector('#sec-2 .zuordnung-cat[data-cat="' + item.cat + '"]');
         if (chip && targetCat) { targetCat.appendChild(chip); chip.classList.add('placed', 'correct'); chip.classList.remove('wrong'); }
     });
+    stopTimer(2);
 }
 
 function resetFS() {
