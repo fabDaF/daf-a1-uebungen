@@ -260,7 +260,7 @@ function checkWsInput(inp) {
     const val = inp.value.trim();
     if (!val) { inp.className = inp.className.replace(/ ?(correct|wrong)/g,''); return; }
     const ans = inp.dataset.answer;
-    const ok = val.toLowerCase() === ans.toLowerCase();
+    const ok = val === ans;
     inp.classList.remove('correct','wrong');
     inp.classList.add(ok ? 'correct' : 'wrong');
 }
