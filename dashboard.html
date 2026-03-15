@@ -15,6 +15,9 @@
       --a21-color: #27ae60;
       --a21-dark:  #1e8449;
       --a21-light: #d5f5e3;
+      --a22-color: #00897b;
+      --a22-dark:  #00695c;
+      --a22-light: #e0f2f1;
       --grund-color: #9c27b0;
       --grund-dark:  #7b1fa2;
       --grund-light: #f3e5f5;
@@ -71,6 +74,7 @@
     .niveau-a11 > .niveau-header { background: linear-gradient(135deg, var(--a11-color), var(--a11-dark)); color: #3a2010; }
     .niveau-a12 > .niveau-header { background: linear-gradient(135deg, var(--a12-color), var(--a12-dark)); color: #fff; }
     .niveau-a21 > .niveau-header { background: linear-gradient(135deg, var(--a21-color), var(--a21-dark)); color: #fff; }
+    .niveau-a22 > .niveau-header { background: linear-gradient(135deg, var(--a22-color), var(--a22-dark)); color: #fff; }
     .niveau-grund > .niveau-header { background: linear-gradient(135deg, var(--grund-color), var(--grund-dark)); color: #fff; }
     .niveau-lueck > .niveau-header { background: linear-gradient(135deg, var(--lueck-color), var(--lueck-dark)); color: #fff; }
 
@@ -91,6 +95,7 @@
     }
     .niveau-a11 .einheit-header { background: #fdf8f3; }
     .niveau-a21 .einheit-header { background: #f0faf4; }
+    .niveau-a22 .einheit-header { background: #e8f5f3; }
     .niveau-grund .einheit-header { background: #faf3fc; }
     .niveau-lueck .einheit-header { background: #fef9f2; }
 
@@ -116,6 +121,7 @@
     .niveau-a11 .btn-einheit-senden { background: var(--a11-color); color: #3a2010; }
     .niveau-a12 .btn-einheit-senden { background: var(--a12-color); color: #fff; }
     .niveau-a21 .btn-einheit-senden { background: var(--a21-color); color: #fff; }
+    .niveau-a22 .btn-einheit-senden { background: var(--a22-color); color: #fff; }
     .niveau-grund .btn-einheit-senden { background: var(--grund-color); color: #fff; }
 
     /* ── EINHEIT-BODY ── */
@@ -132,6 +138,7 @@
     .karte:hover { background: #f9faff; }
     .niveau-a11 .karte:hover { background: #fdf6ee; }
     .niveau-a21 .karte:hover { background: #eafaf1; }
+    .niveau-a22 .karte:hover { background: #e0f2f1; }
     .niveau-grund .karte:hover { background: #faf3fc; }
 
     .karte-typ {
@@ -162,6 +169,7 @@
     .niveau-a11 .btn-oeffnen { background: var(--a11-color); color: #3a2010; }
     .niveau-a12 .btn-oeffnen { background: var(--a12-color); color: #fff; }
     .niveau-a21 .btn-oeffnen { background: var(--a21-color); color: #fff; }
+    .niveau-a22 .btn-oeffnen { background: var(--a22-color); color: #fff; }
     .niveau-grund .btn-oeffnen { background: var(--grund-color); color: #fff; }
 
     .btn-mail {
@@ -466,6 +474,30 @@ const KURSE = [
     ]
   },
   {
+    id: 'a22', label: 'A2.2',
+    titel: 'Deutsch A2.2 – Mittelstufe II',
+    basis: 'https://fabdaf.github.io/daf-a2-2-uebungen/',
+    einheiten: [
+      { nr:'Einheit 1', titel:'Sinneswahrnehmungen & Essen', karten: [
+        { typ:'V', label:'V – Wortschatz',    titel:'2011V · Sinneswahrnehmungen',              file:'DE_A2_2011V-sinneswahrnehmungen.html' },
+        { typ:'X', label:'X – Extra-Übungen', titel:'2012X · Im Feinkostladen',                 file:'DE_A2_2012X-im-feinkostladen.html' },
+        { typ:'G', label:'G – Grammatik',     titel:'2013G · Indirekte Rede',                   file:'DE_A2_2013G-indirekte-rede.html' },
+        { typ:'R', label:'R – Lesetext',      titel:'2014R · Ein neuer Ernährungsplan',          file:'DE_A2_2014R-ein-neuer-ernaehrungsplan.html' },
+        { typ:'V', label:'V – Wortschatz',    titel:'2015V · Deutsches Essen',                  file:'DE_A2_2015V-deutsches-essen.html' },
+        { typ:'X', label:'X – Extra-Übungen', titel:'2016X · Rezepte',                          file:'DE_A2_2016X-rezepte.html' },
+        { typ:'G', label:'G – Grammatik',     titel:'2017G · Das Passiv',                       file:'DE_A2_2017G-passiv.html' },
+        { typ:'S', label:'S – Sprechen',      titel:'2018S · Eine Unterhaltung über Essen',      file:'DE_A2_2018S-eine-unterhaltung-ueber-essen.html' },
+      ]},
+      { nr:'Einheit 2', titel:'Reisen & Sehenswürdigkeiten', karten: [
+        { typ:'V', label:'V – Wortschatz',    titel:'2021V · Reisen und Sehenswürdigkeiten',     file:'DE_A2_2021V-reisen-und-sehenswuerdigkeiten.html' },
+        { typ:'X', label:'X – Extra',         titel:'2022X · Mein letzter Urlaub',               file:'DE_A2_2022X-mein-letzter-urlaub.html' },
+        { typ:'G', label:'G – Grammatik',     titel:'2023G · Position Konnektoren',               file:'DE_A2_2023G-position-konnektoren.html' },
+        { typ:'R', label:'R – Lesen',          titel:'2024R · Mein bester Urlaub',                  file:'DE_A2_2024R-mein-bester-urlaub.html' },
+        { typ:'V', label:'V – Wortschatz',    titel:'2025V · Gespräche im Hotel',                  file:'DE_A2_2025V-gespraeche-im-hotel.html' },
+      ]},
+    ]
+  },
+  {
     id: 'grund', label: 'Grundlagen',
     titel: 'Niveauübergreifende Grundlagen',
     basis: 'https://fabdaf.github.io/daf-grundlagen/',
@@ -502,6 +534,8 @@ const KURSE = [
         { typ:'R', label:'R – Lesetext', titel:'Das Trolley-Problem',                               file:'Texte und Lesen/trolley_vollversion.html' },
         { typ:'R', label:'R – Lesetext', titel:'Verbraucherzentrale',                               file:'Texte und Lesen/verbraucherzentrale_komplett.html' },
         { typ:'R', label:'R – Lesetext', titel:'Bikman (Teil 3)',                                    file:'Texte und Lesen/Bikman 3.html' },
+        { typ:'R', label:'R – Lesetext', titel:'Die Eskalationsfalle (B2)',                           file:'Texte und Lesen/DE_B2_Eskalationsfalle-Iran.html' },
+        { typ:'R', label:'R – Lesetext', titel:'Chinas Aufstieg (B2)',                                file:'Texte und Lesen/DE_B2_Chinas-Aufstieg.html' },
       ]},
       { nr: 'Sachbuch', titel: 'Warum wir krank werden (B2)', karten: [
         { typ:'R', label:'R – Lesetext', titel:'Geleitwort',                                        file:'Warum wir krank werden/geleitwort_voll.html' },
