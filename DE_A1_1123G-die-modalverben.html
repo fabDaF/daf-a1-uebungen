@@ -1225,6 +1225,48 @@ loadBestTimes();
 })();
 /* ── Ende Tap-to-Select ─────────────────────────────────────────────── */
 
+/* ============================
+   LÖSUNGS-FUNKTIONEN
+   ============================ */
+
+function showZuoLoesung() {
+  // Alle Chips (Bank + Zonen) in ihre korrekten Zonen verschieben
+  var allChips = document.querySelectorAll('#sec-1 .chip');
+  allChips.forEach(function(chip) {
+    var targetZone = document.getElementById('zone-' + chip.dataset.cat);
+    if (targetZone) targetZone.appendChild(chip);
+  });
+  colorAllZuoChips();
+  timerStop(1);
+}
+
+function showKonjLoesung() {
+  document.querySelectorAll('#konj-table input.kt:not(.prefilled)').forEach(function(inp) {
+    inp.value = inp.dataset.answer;
+    inp.classList.remove('wrong');
+    inp.classList.add('correct');
+  });
+  timerStop(2);
+}
+
+function showModalLoesung() {
+  document.querySelectorAll('#modal-container input.blank').forEach(function(inp) {
+    inp.value = inp.dataset.answer;
+    inp.classList.remove('wrong');
+    inp.classList.add('correct');
+  });
+  timerStop(3);
+}
+
+function showVocabLoesung() {
+  document.querySelectorAll('#vocab-container input').forEach(function(inp) {
+    inp.value = inp.dataset.answer;
+    inp.classList.remove('wrong');
+    inp.classList.add('correct');
+  });
+  timerStop(5);
+}
+
 function wortschatzCheck(inp) {
     var user = inp.value;
     var answer = inp.dataset.answer || '';
