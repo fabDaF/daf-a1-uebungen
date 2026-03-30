@@ -124,7 +124,9 @@ input.blank.l  { width: 165px; }
 
 /* WORTSCHATZ */
 .luecken-item { background: #f8f9ff; padding: 14px 18px; border-radius: 10px; border-left: 4px solid #667eea; }
-.vocab-item { background: #f8f9ff; padding: 14px 18px; margin-bottom: 12px; border-radius: 10px; border-left: 4px solid #667eea; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+#vocab-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; margin-top: 8px; }
+@media(max-width:600px) { #vocab-container { grid-template-columns: 1fr; } }
+.vocab-item { background: #f8f9ff; padding: 14px 18px; border-radius: 10px; border-left: 4px solid #667eea; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
 .vocab-en { font-weight: 600; color: #764ba2; min-width: 140px; font-size: 0.95em; }
 .vocab-arrow { color: #ccc; font-size: 1.2em; }
 .vocab-inputs { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
