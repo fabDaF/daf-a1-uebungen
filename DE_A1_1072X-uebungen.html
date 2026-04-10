@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ein Treffen ausmachen (A1.1)</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; padding: 20px; }
+.container { max-width: 860px; margin: 0 auto; background: white; border-radius: 20px; padding: 30px 28px; box-shadow: 0 20px 60px rgba(0,0,0,0.15); }
+h1 { text-align: center; color: #333; margin-bottom: 4px; font-size: 1.5em; }
+.subtitle { text-align: center; color: #888; margin-bottom: 20px; font-size: 0.95em; }
+.nav { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 24px; justify-content: center; }
+.nav-btn { padding: 10px 16px; border-radius: 25px; cursor: pointer; border-right: 1px solid #ddd; font-weight: 600; font-size: 0.85em; border: 2px solid #e0e0e0; background: white; color: #555; transition: all 0.2s; user-select: none; }
+.nav-btn:hover { border-color: #667eea; color: #667eea; }
+.nav-btn:last-child { border-right: none; }
+        .nav-btn.active { background: linear-gradient(135deg, #667eea, #764ba2); color: white; border-color: transparent; }
+.section { display: none; }
+.section.active { display: block; }
+h2 { color: #333; font-size: 1.15em; margin-bottom: 16px; padding-bottom: 8px; border-bottom: 2px solid #f0f0f0; }
+.btn-row { display: flex; gap: 6px; }
+.btn { background: none; border: 1px solid #ddd; border-radius: 6px; padding: 4px 12px; font-size: 0.82em; color: #888; cursor: pointer; transition: all 0.15s; font-weight: 500; }
+.btn-show { background: #f0f0f0; color: #555; }
+.btn-show:hover { background: #e0e0e0; }
+.btn-reset:hover { background: #ffeaea; }
+
+/* Timer */
+.timer-bar { display: flex; align-items: center; justify-content: flex-end; gap: 10px; margin-bottom: 14px; }
+.timer-display { font-size: 0.85em; color: #888; font-variant-numeric: tabular-nums; min-width: 60px; text-align: right; }
+.timer-best { font-size: 0.78em; color: #aaa; }
+
+/* ═══════════════════════════════════════════
+   TAB 0 – REDEMITTEL
+═══════════════════════════════════════════ */
+.rm-intro { background: #f8f6ff; border-left: 4px solid #667eea; border-radius: 8px; padding: 14px 18px; margin-bottom: 22px; font-size: 0.95em; line-height: 1.7; color: #444; }
+.rm-intro strong { color: #667eea; }
+.rm-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
+@media(max-width:600px){ .rm-grid { grid-template-columns: 1fr; } }
+.rm-card { border-radius: 12px; padding: 14px 16px; }
+.rm-card h3 { font-size: 0.85em; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 10px; }
+.rm-card.einladen { background: #eef2ff; border: 1.5px solid #c7d2fe; }
+.rm-card.einladen h3 { color: #4338ca; }
+.rm-card.zusagen { background: #f0fdf4; border: 1.5px solid #bbf7d0; }
+.rm-card.zusagen h3 { color: #15803d; }
+.rm-card.absagen { background: #fff7ed; border: 1.5px solid #fed7aa; }
+.rm-card.absagen h3 { color: #c2410c; }
+.rm-card.verabschieden { background: #fdf4ff; border: 1.5px solid #e9d5ff; }
+.rm-card.verabschieden h3 { color: #7c3aed; }
+.rm-phrase-row { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; padding: 5px 0; border-bottom: 1px solid rgba(0,0,0,0.06); }
+.rm-phrase-row:last-child { border-bottom: none; }
+.rm-phrase { font-size: 0.92em; font-weight: 600; color: #222; }
+.rm-register { font-size: 0.75em; padding: 2px 7px; border-radius: 10px; white-space: nowrap; font-weight: 600; }
+.reg-inf { background: #dbeafe; color: #1d4ed8; }
+.reg-form { background: #fce7f3; color: #9d174d; }
+.reg-both { background: #f3f4f6; color: #374151; }
+.rm-legend { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 12px; font-size: 0.8em; }
+.rm-legend span { display: flex; align-items: center; gap: 5px; }
+
+/* ═══════════════════════════════════════════
+   FORMELL / INFORMELL – Zuordnung
+═══════════════════════════════════════════ */
+.zuo-area { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+@media(max-width:520px){ .zuo-area { grid-template-columns: 1fr; } }
+.zuo-zone { border-radius: 12px; padding: 14px; min-height: 130px; }
+.zuo-zone.formell { background: #fce7f3; border: 2px dashed #f9a8d4; }
+.zuo-zone.informell { background: #dbeafe; border: 2px dashed #93c5fd; }
+.zuo-zone h3 { font-size: 0.85em; font-weight: 700; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px; }
+.zuo-zone.formell h3 { color: #9d174d; }
+.zuo-zone.informell h3 { color: #1d4ed8; }
+.zuo-drop { min-height: 80px; border-radius: 8px; padding: 6px; display: flex; flex-wrap: wrap; gap: 6px; align-content: flex-start; }
+.chip-pool { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+.chip { padding: 8px 14px; border-radius: 20px; background: #f3f4f6; border: 2px solid #d1d5db; font-size: 0.88em; font-weight: 600; cursor: grab; color: #374151; transition: all 0.15s; user-select: none; }
+.chip:hover { border-color: #667eea; color: #667eea; }
+.chip.selected { border-color: #667eea; background: #eef2ff; color: #4338ca; }
+.chip.correct { background: #dcfce7; border-color: #86efac; color: #15803d; cursor: default; }
+.chip.wrong { background: #fee2e2; border-color: #fca5a5; color: #991b1b; cursor: default; }
+
+/* ═══════════════════════════════════════════
+   DIALOG – Lückentext
+═══════════════════════════════════════════ */
+.dialog-box { background: #f8f9fa; border-radius: 12px; padding: 16px 20px; margin-bottom: 20px; }
+.dialog-box h3 { font-size: 0.88em; font-weight: 700; color: #667eea; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+.dialog-line { display: flex; gap: 10px; margin-bottom: 8px; align-items: baseline; }
+.dialog-speaker { font-weight: 700; color: #444; min-width: 90px; font-size: 0.9em; }
+.dialog-text { font-size: 0.93em; color: #333; line-height: 1.6; flex: 1; }
+.luecke-wrap { display: inline-flex; align-items: center; }
+.luecke { border: none; border-bottom: 2px solid #667eea; background: transparent; font-size: 0.93em; font-family: inherit; color: #333; outline: none; padding: 1px 4px; min-width: 80px; text-align: center; transition: border-color 0.2s; }
+.luecke:focus { border-color: #764ba2; }
+.luecke.ok { border-color: #22c55e; color: #15803d; }
+.luecke.err { border-color: #ef4444; color: #991b1b; }
+.luecke.s  { min-width: 60px; }
+.luecke.m  { min-width: 100px; }
+.luecke.l  { min-width: 130px; }
+.luecke.xl { min-width: 160px; }
+
+/* ═══════════════════════════════════════════
+   SITUATIONEN – Multiple Choice
+═══════════════════════════════════════════ */
+.sit-card { background: #f8f9fa; border-radius: 12px; padding: 16px 18px; margin-bottom: 14px; }
+.sit-situation { font-size: 0.9em; color: #555; margin-bottom: 12px; line-height: 1.5; font-style: italic; }
+.sit-situation strong { color: #333; font-style: normal; }
+.sit-options { display: flex; flex-direction: column; gap: 8px; }
+.sit-opt { padding: 9px 16px; border-radius: 20px; border: 2px solid #e0e0e0; background: white; font-size: 0.9em; font-weight: 600; color: #555; cursor: pointer; text-align: left; transition: all 0.15s; }
+.sit-opt:hover:not([disabled]) { border-color: #667eea; color: #4338ca; }
+.sit-opt.correct { background: #dcfce7; border-color: #86efac; color: #15803d; }
+.sit-opt.wrong { background: #fee2e2; border-color: #fca5a5; color: #991b1b; }
+.sit-feedback { font-size: 0.82em; margin-top: 8px; min-height: 18px; color: #888; }
+
+/* ═══════════════════════════════════════════
+   SATZBAU
+═══════════════════════════════════════════ */
+.sb-rows { display: flex; flex-direction: column; gap: 14px; }
+.sb-row { background: #f8f9fa; border-radius: 10px; padding: 12px 14px; }
+.sb-nr { font-size: 0.78em; color: #aaa; margin-bottom: 6px; }
+.sb-target { min-height: 38px; border: 2px dashed #d1d5db; border-radius: 8px; padding: 5px 8px; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-bottom: 8px; background: white; }
+.sb-target.ok-row { border-color: #86efac; background: #f0fdf4; }
+.sb-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.sb-chip { padding: 6px 12px; background: white; border: 2px solid #d1d5db; border-radius: 16px; font-size: 0.88em; font-weight: 600; color: #374151; cursor: grab; transition: all 0.15s; user-select: none; }
+.sb-chip:hover { border-color: #667eea; color: #4338ca; }
+.sb-chip.selected { border-color: #667eea; background: #eef2ff; color: #4338ca; }
+.sb-chip.placed { opacity: 0.4; cursor: default; }
+.sb-placed-chip { padding: 6px 12px; background: #eef2ff; border: 2px solid #667eea; border-radius: 16px; font-size: 0.88em; font-weight: 600; color: #4338ca; cursor: grab; user-select: none; }
+.sb-placed-chip.selected { background: #c7d2fe; }
+.sb-punct { font-weight: 700; color: #555; }
+
+/* ═══════════════════════════════════════════
+   WORTSCHATZ
+═══════════════════════════════════════════ */
+.wort-grid { display: flex; flex-direction: column; gap: 8px; }
+.wort-row { display: flex; align-items: center; gap: 10px; padding: 8px 12px; background: #f8f9fa; border-radius: 8px; }
+.wort-en { flex: 0 0 200px; font-size: 0.88em; color: #888; }
+.wort-input { flex: 1; border: none; border-bottom: 2px solid #d1d5db; background: transparent; font-size: 0.92em; font-family: inherit; outline: none; padding: 2px 6px; transition: border-color 0.2s; }
+.wort-input:focus { border-color: #667eea; }
+.wort-input.ok { border-color: #22c55e; color: #15803d; }
+.wort-input.err { border-color: #ef4444; color: #991b1b; }
+.wort-badge { font-size: 0.75em; background: #667eea; color: white; border-radius: 8px; padding: 1px 7px; font-weight: 700; }
+
+.score-bar { text-align: center; margin-top: 16px; font-size: 0.9em; color: #888; }
+.score-bar strong { color: #667eea; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>💬 Ein Treffen ausmachen</h1>
+  <p class="subtitle">DE_A1_1072X &nbsp;·&nbsp; Kommunikation A1.1</p>
+
+  <nav class="nav">
+    <button class="nav-btn active" onclick="showSection(0)">💬 Redemittel</button>
+    <button class="nav-btn" onclick="showSection(1)">🔀 Formell?</button>
+    <button class="nav-btn" onclick="showSection(2)">✏️ Dialoge</button>
+    <button class="nav-btn" onclick="showSection(3)">📅 Termin</button>
+    <button class="nav-btn" onclick="showSection(4)">💡 Situationen</button>
+    <button class="nav-btn" onclick="showSection(5)">🧩 Satzbau</button>
+    <button class="nav-btn" onclick="showSection(6)">📝 Wortschatz</button>
+  </nav>
+
+  <!-- ═══ TAB 0: REDEMITTEL ═══ -->
+  <section class="section active" id="sec-0">
+    <h2>💬 Redemittel: Ein Treffen ausmachen</h2>
+
+    <div class="rm-intro">
+      Du willst ein Treffen vereinbaren — mit Freunden oder Kollegen.<br>
+      Hier findest du alle wichtigen Formeln auf einen Blick.<br>
+      <strong>Blau = informell</strong> (du/ihr) &nbsp;·&nbsp; <strong>Rosa = formell</strong> (Sie) &nbsp;·&nbsp; <strong>Grau = beides</strong>
+    </div>
+
+    <div class="rm-grid">
+
+      <div class="rm-card einladen">
+        <h3>📅 Einladen / Fragen</h3>
+        <div class="rm-phrase-row">
+          <span class="rm-phrase">Wann hast du Zeit?</span>
+          <span class="rm-register reg-inf">informell</span>
+        </div>
+        <div class="rm-phrase-row">
+          <span class="rm-phrase">Kannst du am Montag?</span>
+          <span class="rm-register reg-inf">informell</span>
+        </div>
+        <div class="rm-phrase-row">
+          <span class="rm-phrase">Wann haben Sie Zeit?</span>
+          <span class="rm-register reg-form">formell</span>
+        </div>
+        <div class="rm-phrase-row">
+          <span class="rm-phrase">Können Sie am Mittwoch?</span>
+          <span class="rm-register reg-form">formell</span>
+        </div>
+        <div class="rm-phrase-row">
+          <span class="rm-phrase">Wie wäre es mit …?</span>
+          <span class="rm-register reg-both">beides</span>
+        </div>
+        <div class="rm-phrase-row">
+          <span class="rm-phrase">Können wir uns treffen?</span>
+          <span class="rm-register reg-both">beides</span>
+        </div>
+      </div>
+
+      <div class="rm-card zusagen">
+        <h3>✅ Zusagen</h3>
+        <div class="rm-phrase-row">
+          <span class="rm-phrase">Das geht!</span>
+          <span class="rm-register reg-both">beides</span>
+        </div>
+        <div class="rm-phrase-row">
+          <span class="rm-phrase">Das passt!</span>
+          <span class="rm-register reg-both">beides</span>
+        </div>
+        <div class="rm-phrase-row">
+          <span class="rm-phrase">Klingt gut!</span>
+          <span class="rm-register reg-both">beides</span>
+        </div>
+        <div class="rm-phrase-row">
+          <span class="rm-phrase">Ja, gern!</span>
+          <span class="rm-register reg-both">beides</span>
+        </div>
+        <div class="rm-phrase-row">
+          <span class="rm-phrase">Sehr gut!</span>
+          <span class="rm-register reg-form">formell</span>
+        </div>
+        <div class="rm-phrase-row">
+          <span class="rm-phrase">Ja, das passt.</span>
+          <span class="rm-register reg-both">beides</span>
+        </div>
+      </div>
+
+      <div class="rm-card absagen">
+        <h3>❌ Absagen + Gegenvorschlag</h3>
+        <div class="rm-phrase-row">
+          <span class="rm-phrase">Das geht leider nicht.</span>
+          <span class="rm-register reg-both">beides</span>
+        </div>
+        <div class="rm-phrase-row">
+          <span class="rm-phrase">Ich habe keine Zeit.</span>
+          <span class="rm-register reg-inf">informell</span>
+        </div>
+        <div class="rm-phrase-row">
+          <span class="rm-phrase">Ich habe leider keine Zeit.</span>
+          <span class="rm-register reg-both">beides</span>
+        </div>
+        <div class="rm-phrase-row">
+          <span class="rm-phrase">Leider nicht.</span>
+          <span class="rm-register reg-both">beides</span>
+        </div>
+        <div class="rm-phrase-row">
+          <span class="rm-phrase">Wie wäre es mit Freitag?</span>
+          <span class="rm-register reg-both">→ Gegenvorschlag</span>
+        </div>
+        <div class="rm-phrase-row">
+          <span class="rm-phrase">Wie wär's mit …?</span>
+          <span class="rm-register reg-inf">informell</span>
+        </div>
+      </div>
+
+      <div class="rm-card verabschieden">
+        <h3>👋 Verabschieden</h3>
+        <div class="rm-phrase-row">
+          <span class="rm-phrase">Bis dann!</span>
+          <span class="rm-register reg-both">beides</span>
+        </div>
+        <div class="rm-phrase-row">
+          <span class="rm-phrase">Bis Samstag!</span>
+          <span class="rm-register reg-both">beides</span>
+        </div>
+        <div class="rm-phrase-row">
+          <span class="rm-phrase">Bis Mittwoch!</span>
+          <span class="rm-register reg-both">beides</span>
+        </div>
+        <div class="rm-phrase-row">
+          <span class="rm-phrase">Auf Wiederhören!</span>
+          <span class="rm-register reg-form">formell (Tel.)</span>
+        </div>
+        <div class="rm-phrase-row">
+          <span class="rm-phrase">Tschüss!</span>
+          <span class="rm-register reg-inf">informell</span>
+        </div>
+      </div>
+
+    </div><!-- end rm-grid -->
+
+    <div style="background:#f0fdf4; border-radius:10px; padding:12px 16px; font-size:0.88em; color:#166534; margin-top:4px;">
+      <strong>💡 Tipp für Meetings:</strong> Im Büroalltag kombinierst du oft:<br>
+      <em>„Können Sie am Donnerstag um 15 Uhr? — Das geht leider nicht. Wie wäre es mit Freitag um 10 Uhr? — Ja, das passt. Bis Freitag!"</em>
+    </div>
+  </section>
+
+  <!-- ═══ TAB 1: FORMELL / INFORMELL ═══ -->
+  <section class="section" id="sec-1">
+    <h2>🔀 Formell oder informell?</h2>
+    <div class="timer-bar">
+      <span class="timer-display" id="timer-1">0:00</span>
+      <span class="timer-best" id="best-1"></span>
+    </div>
+    <p style="font-size:0.9em;color:#666;margin-bottom:14px;">Ziehe (oder klicke) die Phrasen in die richtige Kategorie.</p>
+
+    <div id="zuo-pool" class="chip-pool"></div>
+
+    <div class="zuo-area">
+      <div class="zuo-zone formell">
+        <h3>🤝 Formell (Sie)</h3>
+        <div class="zuo-drop" id="zone-form" ondragover="event.preventDefault()" ondrop="zuoDrop(event,'form')"></div>
+      </div>
+      <div class="zuo-zone informell">
+        <h3>😊 Informell (du)</h3>
+        <div class="zuo-drop" id="zone-inf" ondragover="event.preventDefault()" ondrop="zuoDrop(event,'inf')"></div>
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-show" onclick="zuoCheck()">Prüfen</button>
+      <button class="btn btn-reset" onclick="zuoReset()">Neu starten</button>
+    </div>
+    <div class="score-bar" id="zuo-score"></div>
+  </section>
+
+  <!-- ═══ TAB 2: DIALOGE ═══ -->
+  <section class="section" id="sec-2">
+    <h2>✏️ Dialoge ergänzen</h2>
+    <div class="timer-bar">
+      <span class="timer-display" id="timer-2">0:00</span>
+      <span class="timer-best" id="best-2"></span>
+    </div>
+    <p style="font-size:0.9em;color:#666;margin-bottom:16px;">Ergänze die Lücken. Die Antwort erscheint grün, wenn sie richtig ist.</p>
+
+    <div class="dialog-box">
+      <h3>😊 Dialog 1: Informell — Rahim &amp; Anna (Freunde)</h3>
+      <div id="dialog-inf"></div>
+    </div>
+
+    <div class="dialog-box" style="margin-top:16px;">
+      <h3>🤝 Dialog 2: Formell — Frau Dupont &amp; Herr Abelli (Kollegen)</h3>
+      <div id="dialog-form"></div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-show" onclick="showDialogLoesung()">Lösungen zeigen</button>
+      <button class="btn btn-reset" onclick="resetDialoge()">Neu starten</button>
+    </div>
+  </section>
+
+  <!-- ═══ TAB 3: TERMIN ═══ -->
+  <section class="section" id="sec-3">
+    <h2>📅 Termin vereinbaren</h2>
+    <div class="timer-bar">
+      <span class="timer-display" id="timer-3">0:00</span>
+      <span class="timer-best" id="best-3"></span>
+    </div>
+    <p style="font-size:0.9em;color:#666;margin-bottom:16px;">Ergänze die Lücken mit: <strong>am, um, diese Woche, nächste Woche, Wie wäre es mit, Wie lange</strong></p>
+    <div id="termin-container"></div>
+    <div class="btn-row">
+      <button class="btn btn-show" onclick="showTerminLoesung()">Lösungen zeigen</button>
+      <button class="btn btn-reset" onclick="resetTermin()">Neu starten</button>
+    </div>
+  </section>
+
+  <!-- ═══ TAB 4: SITUATIONEN ═══ -->
+  <section class="section" id="sec-4">
+    <h2>💡 Welche Formel passt?</h2>
+    <div class="timer-bar">
+      <span class="timer-display" id="timer-4">0:00</span>
+      <span class="timer-best" id="best-4"></span>
+    </div>
+    <p style="font-size:0.9em;color:#666;margin-bottom:16px;">Lies die Situation und wähle die passende Antwort.</p>
+    <div id="sit-container"></div>
+    <div class="btn-row">
+      <button class="btn btn-reset" onclick="resetSituationen()">Neu starten</button>
+    </div>
+    <div class="score-bar" id="sit-score"></div>
+  </section>
+
+  <!-- ═══ TAB 5: SATZBAU ═══ -->
+  <section class="section" id="sec-5">
+    <h2>🧩 Satzbau</h2>
+    <div class="timer-bar">
+      <span class="timer-display" id="timer-5">0:00</span>
+      <span class="timer-best" id="best-5"></span>
+    </div>
+    <p style="font-size:0.9em;color:#666;margin-bottom:16px;">Bringe die Wörter in die richtige Reihenfolge.</p>
+    <div class="sb-rows" id="sb-container"></div>
+    <div class="btn-row">
+      <button class="btn btn-show" onclick="sbShowAll()">Lösungen zeigen</button>
+      <button class="btn btn-reset" onclick="sbReset()">Neu starten</button>
+    </div>
+  </section>
+
+  <!-- ═══ TAB 6: WORTSCHATZ ═══ -->
+  <section class="section" id="sec-6">
+    <h2>📝 Wortschatz</h2>
+    <div class="timer-bar">
+      <span class="timer-display" id="timer-6">0:00</span>
+      <span class="timer-best" id="best-6"></span>
+    </div>
+    <p style="font-size:0.9em;color:#666;margin-bottom:16px;">Tippe das deutsche Wort oder die Phrase (Englisch → Deutsch).</p>
+    <div class="wort-grid" id="wort-container"></div>
+    <div class="btn-row">
+      <button class="btn btn-show" onclick="showWortLoesung()">Lösungen zeigen</button>
+      <button class="btn btn-reset" onclick="resetWortschatz()">Neu starten</button>
+    </div>
+    <div class="score-bar" id="wort-score"></div>
+  </section>
+
+</div><!-- .container -->
+
+<script>
+'use strict';
+
+/* ══════════════════════════════════════
+   TIMER
+══════════════════════════════════════ */
+var TIMER_PREFIX = 'a1-1072x-treffen-';
+var timerStarted  = [false,false,false,false,false,false,false];
+var timerRunning  = [false,false,false,false,false,false,false];
+var timerSeconds  = [0,0,0,0,0,0,0];
+var timerIntervals= [null,null,null,null,null,null,null];
+
+function timerStart(n){
+  if(timerRunning[n]) return;
+  timerRunning[n]=true;
+  timerStarted[n]=true;
+  timerIntervals[n]=setInterval(function(){
+    timerSeconds[n]++;
+    document.getElementById('timer-'+n).textContent=fmtTime(timerSeconds[n]);
+  },1000);
+}
+function timerStop(n){
+  if(!timerRunning[n]) return;
+  clearInterval(timerIntervals[n]);
+  timerRunning[n]=false;
+  var key=TIMER_PREFIX+n;
+  var best=localStorage.getItem(key);
+  if(!best || timerSeconds[n]<parseInt(best)){
+    localStorage.setItem(key,timerSeconds[n]);
+  }
+  loadBestTimes();
+}
+function timerResetOne(n){
+  clearInterval(timerIntervals[n]);
+  timerRunning[n]=false; timerStarted[n]=false; timerSeconds[n]=0;
+  document.getElementById('timer-'+n).textContent='0:00';
+}
+function timerAutoStart(n){
+  if(!timerStarted[n]) timerStart(n);
+}
+function fmtTime(s){
+  return Math.floor(s/60)+':'+(s%60<10?'0':'')+s%60;
+}
+function loadBestTimes(){
+  for(var i=1;i<=6;i++){
+    var b=localStorage.getItem(TIMER_PREFIX+i);
+    var el=document.getElementById('best-'+i);
+    if(el) el.textContent=b?'Best: '+fmtTime(parseInt(b)):'';
+  }
+}
+loadBestTimes();
+
+/* ══════════════════════════════════════
+   NAV
+══════════════════════════════════════ */
+function showSection(n){
+  document.querySelectorAll('.section').forEach(function(s){s.classList.remove('active');});
+  document.querySelectorAll('.nav-btn').forEach(function(b){b.classList.remove('active');});
+  document.getElementById('sec-'+n).classList.add('active');
+  document.querySelectorAll('.nav-btn')[n].classList.add('active');
+}
+
+/* ══════════════════════════════════════
+   TAB 1: FORMELL / INFORMELL  (Zuordnung)
+══════════════════════════════════════ */
+var ZUO_DATA = [
+  {id:'z1', text:'Wann haben Sie Zeit?',       cat:'form'},
+  {id:'z2', text:'Hast du am Montag Zeit?',    cat:'inf'},
+  {id:'z3', text:'Können Sie am Donnerstag?',  cat:'form'},
+  {id:'z4', text:'Kannst du am Samstag?',      cat:'inf'},
+  {id:'z5', text:'Wann hast du Zeit?',         cat:'inf'},
+  {id:'z6', text:'Können wir ein Treffen vereinbaren?', cat:'form'},
+  {id:'z7', text:'Klingt gut!',                cat:'inf'},
+  {id:'z8', text:'Sehr gut!',                  cat:'form'},
+  {id:'z9', text:'Auf Wiederhören!',           cat:'form'},
+  {id:'z10',text:'Tschüss!',                   cat:'inf'},
+];
+
+var draggedChip = null;
+var clickedChip = null;
+
+function zuoInit(){
+  var pool=document.getElementById('zuo-pool');
+  pool.innerHTML='';
+  document.getElementById('zone-form').innerHTML='';
+  document.getElementById('zone-inf').innerHTML='';
+  document.getElementById('zuo-score').textContent='';
+  var arr=ZUO_DATA.slice().sort(function(){return Math.random()-0.5;});
+  arr.forEach(function(d){
+    var chip=makeZuoChip(d);
+    pool.appendChild(chip);
+  });
+}
+
+function makeZuoChip(d){
+  var chip=document.createElement('div');
+  chip.className='chip';
+  chip.textContent=d.text;
+  chip.dataset.id=d.id;
+  chip.dataset.cat=d.cat;
+  chip.draggable=true;
+  chip.addEventListener('dragstart',function(e){
+    draggedChip=chip;
+    e.dataTransfer.setData('text/plain','');
+  });
+  chip.addEventListener('click',function(){
+    if(chip.classList.contains('correct')||chip.classList.contains('wrong')) return;
+    if(clickedChip===chip){
+      chip.classList.remove('selected');
+      clickedChip=null;
+    } else if(clickedChip){
+      clickedChip.classList.remove('selected');
+      clickedChip=null;
+    } else {
+      chip.classList.add('selected');
+      clickedChip=chip;
+    }
+  });
+  return chip;
+}
+
+document.getElementById('zone-form').addEventListener('click',function(){ zuoDropClick('form'); });
+document.getElementById('zone-inf').addEventListener('click',function(){ zuoDropClick('inf'); });
+
+function zuoDropClick(cat){
+  if(!clickedChip) return;
+  var zone=document.getElementById('zone-'+cat);
+  zone.appendChild(clickedChip);
+  clickedChip.classList.remove('selected');
+  clickedChip=null;
+  timerAutoStart(1);
+}
+
+function zuoDrop(e,cat){
+  e.preventDefault();
+  if(!draggedChip) return;
+  document.getElementById('zone-'+cat).appendChild(draggedChip);
+  draggedChip=null;
+  timerAutoStart(1);
+}
+
+function zuoCheck(){
+  var correct=0, total=0;
+  ['form','inf'].forEach(function(cat){
+    var zone=document.getElementById('zone-'+cat);
+    zone.querySelectorAll('.chip').forEach(function(chip){
+      total++;
+      if(chip.dataset.cat===cat){
+        chip.classList.add('correct'); correct++;
+      } else {
+        chip.classList.add('wrong');
+      }
+    });
+  });
+  document.getElementById('zuo-score').innerHTML='<strong>'+correct+' / '+total+'</strong> richtig';
+  if(correct===total && total===ZUO_DATA.length) timerStop(1);
+}
+
+function zuoReset(){
+  timerResetOne(1);
+  zuoInit();
+}
+
+/* ══════════════════════════════════════
+   TAB 2: DIALOGE (Lückentext)
+══════════════════════════════════════ */
+var DIALOG_INF = [
+  {speaker:'Rahim:',   text:'Hi, Anna, wann ', blank:{ans:'treffen',sz:'m'}, after:' wir uns?'},
+  {speaker:'Anna:',    text:'Kannst du ', blank:{ans:'Freitagabend',sz:'l'}, after:'?'},
+  {speaker:'Rahim:',   text:'Das geht ', blank:{ans:'leider',sz:'m'}, after:' nicht. Ich fahre zu meinen Eltern. Wie wäre es mit ', blank2:{ans:'Samstag',sz:'m'}, after2:'?'},
+  {speaker:'Anna:',    text:'Samstag ', blank:{ans:'geht',sz:'s'}, after:'. Aber bitte nicht zu früh!'},
+  {speaker:'Rahim:',   text:'Gut. Dann um ', blank:{ans:'10',sz:'s'}, after:'?'},
+  {speaker:'Anna:',    text:'Um 10 Uhr?! Samstags schlafe ich mindestens bis ', blank:{ans:'Mittag',sz:'m'}, after:'!'},
+  {speaker:'Rahim:',   text:'Na gut. Dann um ', blank:{ans:'zwei',sz:'s'}, after:'. Bei mir zu Hause?'},
+  {speaker:'Anna:',    text:'', blank:{ans:'Klingt gut',sz:'xl'}, after:'! Bis dann!'},
+];
+
+var DIALOG_FORM = [
+  {speaker:'Frau Dupont:',  text:'Guten Tag, Herr Abelli. Können wir ein Treffen ', blank:{ans:'vereinbaren',sz:'l'}, after:'?'},
+  {speaker:'Herr Abelli:',  text:'Natürlich! Wann haben ', blank:{ans:'Sie',sz:'s'}, after:' Zeit?'},
+  {speaker:'Frau Dupont:',  text:'Können Sie ', blank:{ans:'am',sz:'s'}, after:' Mittwoch ', blank2:{ans:'um',sz:'s'}, after2:' 15 Uhr?'},
+  {speaker:'Herr Abelli:',  text:'Ja, das ', blank:{ans:'passt',sz:'m'}, after:'.'},
+  {speaker:'Frau Dupont:',  text:'Sehr gut! Bis ', blank:{ans:'Mittwoch',sz:'m'}, after:'!'},
+];
+
+function buildDialogLine(d, containerId){
+  var div=document.createElement('div');
+  div.className='dialog-line';
+  var sp=document.createElement('span');
+  sp.className='dialog-speaker';
+  sp.textContent=d.speaker;
+  div.appendChild(sp);
+  var txt=document.createElement('span');
+  txt.className='dialog-text';
+
+  function addText(t){ if(t){ var n=document.createTextNode(t); txt.appendChild(n); } }
+  function addInput(b){
+    var w=document.createElement('span');
+    w.className='luecke-wrap';
+    var inp=document.createElement('input');
+    inp.type='text';
+    inp.className='luecke '+b.sz;
+    inp.dataset.ans=b.ans.toLowerCase();
+    inp.addEventListener('input',function(){ liveCheckDialog(inp); timerAutoStart(2); });
+    w.appendChild(inp);
+    txt.appendChild(w);
+  }
+
+  addText(d.text);
+  if(d.blank) addInput(d.blank);
+  addText(d.after||'');
+  if(d.blank2) addInput(d.blank2);
+  addText(d.after2||'');
+
+  div.appendChild(txt);
+  return div;
+}
+
+function liveCheckDialog(inp){
+  var val=inp.value.trim().toLowerCase();
+  var ans=inp.dataset.ans;
+  if(val===ans){ inp.classList.add('ok'); inp.classList.remove('err'); }
+  else { inp.classList.remove('ok'); inp.classList.remove('err'); }
+  checkDialogAllOk();
+}
+
+function checkDialogAllOk(){
+  var all=document.querySelectorAll('#dialog-inf input, #dialog-form input');
+  var ok=true;
+  all.forEach(function(inp){ if(!inp.classList.contains('ok')) ok=false; });
+  if(ok && all.length>0) timerStop(2);
+}
+
+function dialogsInit(){
+  var inf=document.getElementById('dialog-inf');
+  var form=document.getElementById('dialog-form');
+  inf.innerHTML=''; form.innerHTML='';
+  DIALOG_INF.forEach(function(d){ inf.appendChild(buildDialogLine(d,'dialog-inf')); });
+  DIALOG_FORM.forEach(function(d){ form.appendChild(buildDialogLine(d,'dialog-form')); });
+}
+
+function showDialogLoesung(){
+  document.querySelectorAll('#dialog-inf input, #dialog-form input').forEach(function(inp){
+    inp.value=inp.dataset.ans;
+    inp.classList.add('ok');
+  });
+}
+
+function resetDialoge(){
+  timerResetOne(2);
+  dialogsInit();
+}
+
+/* ══════════════════════════════════════
+   TAB 3: TERMIN (Lückentext)
+══════════════════════════════════════ */
+var TERMIN_DATA = [
+  {id:1, segs:[
+    {t:'Treffen wir uns '},{b:'diese Woche',sz:'l'},{t:' Donnerstag?'}
+  ]},
+  {id:2, segs:[
+    {t:'Nein, lieber '},{b:'nächste Woche',sz:'l'},{t:' Donnerstag.'}
+  ]},
+  {id:3, segs:[
+    {t:'Können Sie '},{b:'am',sz:'s'},{t:' Mittwoch '},{b:'um',sz:'s'},{t:' 15 Uhr?'}
+  ]},
+  {id:4, segs:[
+    {t:'Ich habe '},{b:'am',sz:'s'},{t:' Dienstag Zeit.'}
+  ]},
+  {id:5, segs:[
+    {t:''},{b:'Wie wäre es mit',sz:'xl'},{t:' Freitag?'}
+  ]},
+  {id:6, segs:[
+    {t:''},{b:'Wie lange',sz:'m'},{t:' brauchen wir für das Meeting?'}
+  ]},
+  {id:7, segs:[
+    {t:'Für das Meeting brauchen wir ungefähr '},{b:'eine halbe Stunde',sz:'xl'},{t:'.'}
+  ]},
+  {id:8, segs:[
+    {t:'Können wir uns '},{b:'am',sz:'s'},{t:' Montag '},{b:'um',sz:'s'},{t:' 10 Uhr treffen?'}
+  ]},
+];
+
+function buildLueckenTermin(){
+  var cont=document.getElementById('termin-container');
+  cont.innerHTML='';
+  TERMIN_DATA.forEach(function(d){
+    var row=document.createElement('div');
+    row.style.cssText='background:#f8f9fa;border-radius:8px;padding:10px 14px;margin-bottom:8px;font-size:0.93em;';
+    d.segs.forEach(function(seg){
+      if(seg.t!==undefined){
+        row.appendChild(document.createTextNode(seg.t));
+      } else {
+        var inp=document.createElement('input');
+        inp.type='text';
+        inp.className='luecke '+seg.sz;
+        inp.dataset.ans=seg.b.toLowerCase();
+        inp.addEventListener('input',function(){ liveCheckTermin(inp); timerAutoStart(3); });
+        row.appendChild(inp);
+      }
+    });
+    cont.appendChild(row);
+  });
+}
+
+function liveCheckTermin(inp){
+  var val=inp.value.trim().toLowerCase();
+  if(val===inp.dataset.ans){ inp.classList.add('ok'); inp.classList.remove('err'); }
+  else { inp.classList.remove('ok','err'); }
+  var all=document.querySelectorAll('#termin-container input');
+  var ok=true;
+  all.forEach(function(i){ if(!i.classList.contains('ok')) ok=false; });
+  if(ok && all.length>0) timerStop(3);
+}
+
+function showTerminLoesung(){
+  document.querySelectorAll('#termin-container input').forEach(function(inp){
+    inp.value=inp.dataset.ans; inp.classList.add('ok');
+  });
+}
+function resetTermin(){
+  timerResetOne(3);
+  buildLueckenTermin();
+}
+
+/* ══════════════════════════════════════
+   TAB 4: SITUATIONEN (MC)
+══════════════════════════════════════ */
+var SIT_DATA = [
+  {
+    id:1,
+    situation:'Du bist Projektmanager bei E.ON. Du willst ein Meeting mit deiner Kollegin Frau Becker vereinbaren. Was sagst du?',
+    opts:[
+      {text:'Wann haben Sie Zeit?', correct:true},
+      {text:'Wann hast du Zeit?', correct:false},
+      {text:'Bis dann!', correct:false},
+    ],
+    feedback:'✅ Richtig! Mit Kollegen (Sie) fragst du: „Wann haben Sie Zeit?" oder „Können Sie am ...?"'
+  },
+  {
+    id:2,
+    situation:'Dein Freund fragt: „Kannst du am Freitag?" — Du hast leider keine Zeit. Was antwortest du und machst einen Gegenvorschlag?',
+    opts:[
+      {text:'Ja, das passt!', correct:false},
+      {text:'Das geht leider nicht. Wie wäre es mit Samstag?', correct:true},
+      {text:'Auf Wiederhören!', correct:false},
+    ],
+    feedback:'✅ Richtig! Nach einer Absage kommt oft ein Gegenvorschlag: „Wie wäre es mit ...?"'
+  },
+  {
+    id:3,
+    situation:'Dein Chef sagt: „Können Sie am Mittwoch um 14 Uhr?" — Du stimmst zu. Was sagst du?',
+    opts:[
+      {text:'Klingt gut!', correct:false},
+      {text:'Tschüss!', correct:false},
+      {text:'Ja, das passt.', correct:true},
+    ],
+    feedback:'✅ Richtig! Formelle Zusage: „Ja, das passt." oder „Sehr gut!"'
+  },
+  {
+    id:4,
+    situation:'Du vereinbarst ein Meeting für nächste Woche. Wie sagst du das?',
+    opts:[
+      {text:'Treffen wir uns diese Woche Dienstag?', correct:false},
+      {text:'Treffen wir uns nächste Woche Dienstag?', correct:true},
+      {text:'Treffen wir uns am Dienstag um nächste?', correct:false},
+    ],
+    feedback:'✅ Richtig! „nächste Woche + Wochentag" — kein Artikel, kein „am"!'
+  },
+  {
+    id:5,
+    situation:'Das Telefonat mit deiner Kollegin ist fertig. Ihr trefft euch am Donnerstag. Wie verabschiedest du dich formell?',
+    opts:[
+      {text:'Tschüss!', correct:false},
+      {text:'Bis Donnerstag! Auf Wiederhören!', correct:true},
+      {text:'Klingt gut!', correct:false},
+    ],
+    feedback:'✅ Richtig! Am Telefon: „Auf Wiederhören!" — und „Bis [Tag]!" ist immer passend.'
+  },
+  {
+    id:6,
+    situation:'Dein Kollege fragt: „Wie lange brauchen wir für das Meeting?" — Das Meeting dauert 30 Minuten. Was antwortest du?',
+    opts:[
+      {text:'Eine Viertelstunde.', correct:false},
+      {text:'Eine halbe Stunde.', correct:true},
+      {text:'Eine Dreiviertelstunde.', correct:false},
+    ],
+    feedback:'✅ Richtig! 30 Minuten = eine halbe Stunde.'
+  },
+];
+
+var sitAnswered = [];
+
+function sitInit(){
+  var cont=document.getElementById('sit-container');
+  cont.innerHTML='';
+  sitAnswered=[];
+  document.getElementById('sit-score').textContent='';
+  SIT_DATA.forEach(function(d,i){
+    var card=document.createElement('div');
+    card.className='sit-card';
+    var sit=document.createElement('div');
+    sit.className='sit-situation';
+    sit.innerHTML='<strong>Situation '+d.id+':</strong> '+d.situation;
+    card.appendChild(sit);
+    var opts=document.createElement('div');
+    opts.className='sit-options';
+    d.opts.forEach(function(o){
+      var btn=document.createElement('button');
+      btn.className='sit-opt';
+      btn.textContent=o.text;
+      btn.addEventListener('click',function(){
+        if(sitAnswered[i]) return;
+        sitAnswered[i]=true;
+        timerAutoStart(4);
+        var allBtns=opts.querySelectorAll('.sit-opt');
+        allBtns.forEach(function(b){ b.disabled=true; });
+        if(o.correct){
+          btn.classList.add('correct');
+          fb.textContent=d.feedback;
+        } else {
+          btn.classList.add('wrong');
+          allBtns.forEach(function(b){ if(b.textContent===d.opts.find(function(x){return x.correct;}).text) b.classList.add('correct'); });
+          fb.textContent='❌ Nicht ganz. Die richtige Antwort ist grün markiert.';
+        }
+        var done=sitAnswered.filter(Boolean).length;
+        if(done===SIT_DATA.length){
+          timerStop(4);
+          var correct=0;
+          SIT_DATA.forEach(function(dd,ii){
+            var c=cont.querySelectorAll('.sit-card')[ii].querySelector('.sit-opt.correct');
+            if(c && sitAnswered[ii]) correct++;
+          });
+          document.getElementById('sit-score').innerHTML='Fertig! <strong>'+done+' / '+SIT_DATA.length+'</strong> beantwortet.';
+        }
+      });
+      opts.appendChild(btn);
+    });
+    card.appendChild(opts);
+    var fb=document.createElement('div');
+    fb.className='sit-feedback';
+    card.appendChild(fb);
+    cont.appendChild(card);
+  });
+}
+
+function resetSituationen(){
+  timerResetOne(4);
+  sitInit();
+}
+
+/* ══════════════════════════════════════
+   TAB 5: SATZBAU
+══════════════════════════════════════ */
+var SB_DATA = [
+  {id:1, parts:['Wann','treffen','wir','uns'], valid:[['Wann','treffen','wir','uns']], punct:'?'},
+  {id:2, parts:['Können','Sie','am','Donnerstag','um','15','Uhr'], valid:[['Können','Sie','am','Donnerstag','um','15','Uhr']], punct:'?'},
+  {id:3, parts:['Das','geht','leider','nicht'], valid:[['Das','geht','leider','nicht']], punct:'.'},
+  {id:4, parts:['Wie','wäre','es','mit','Freitag'], valid:[['Wie','wäre','es','mit','Freitag']], punct:'?'},
+  {id:5, parts:['Treffen','wir','uns','diese','Woche','Samstag'], valid:[['Treffen','wir','uns','diese','Woche','Samstag']], punct:'?'},
+  {id:6, parts:['Für','das','Meeting','brauchen','wir','eine','halbe','Stunde'], valid:[['Für','das','Meeting','brauchen','wir','eine','halbe','Stunde']], punct:'.'},
+  {id:7, parts:['Ich','habe','am','Dienstag','leider','keine','Zeit'], valid:[['Ich','habe','am','Dienstag','leider','keine','Zeit']], punct:'.'},
+  {id:8, parts:['Bis','Mittwoch'], valid:[['Bis','Mittwoch']], punct:'!'},
+];
+
+var sbSelected = null;
+
+function sbInit(){
+  var cont=document.getElementById('sb-container');
+  cont.innerHTML='';
+  sbSelected=null;
+  SB_DATA.forEach(function(d){
+    var row=document.createElement('div');
+    row.className='sb-row';
+    var nr=document.createElement('div');
+    nr.className='sb-nr';
+    nr.textContent='Satz '+d.id+(d.punct||'');
+    row.appendChild(nr);
+    var target=document.createElement('div');
+    target.className='sb-target';
+    target.dataset.id=d.id;
+    target.addEventListener('dragover',function(e){ e.preventDefault(); });
+    target.addEventListener('drop',function(e){ e.preventDefault(); sbDropToTarget(target,d); timerAutoStart(5); });
+    target.addEventListener('click',function(){ sbClickTarget(target,d); timerAutoStart(5); });
+    row.appendChild(target);
+    var chips=document.createElement('div');
+    chips.className='sb-chips';
+    chips.dataset.id=d.id;
+    var shuffled=d.parts.slice().sort(function(){return Math.random()-0.5;});
+    shuffled.forEach(function(p){ chips.appendChild(makeSbChip(p,target,chips,d)); });
+    row.appendChild(chips);
+    if(d.punct){
+      var p=document.createElement('span');
+      p.className='sb-punct';
+      p.textContent=' '+d.punct;
+      row.appendChild(p);
+    }
+    cont.appendChild(row);
+  });
+}
+
+function makeSbChip(text,target,chips,d){
+  var chip=document.createElement('div');
+  chip.className='sb-chip';
+  chip.textContent=text;
+  chip.draggable=true;
+  chip.addEventListener('dragstart',function(e){
+    sbSelected=chip;
+    e.dataTransfer.setData('text/plain','');
+  });
+  chip.addEventListener('click',function(){
+    if(chip.classList.contains('placed')) return;
+    if(sbSelected===chip){ chip.classList.remove('selected'); sbSelected=null; }
+    else if(sbSelected){ sbSelected.classList.remove('selected'); sbSelected=null; chip.classList.add('selected'); sbSelected=chip; }
+    else { chip.classList.add('selected'); sbSelected=chip; }
+  });
+  return chip;
+}
+
+function sbDropToTarget(target,d){
+  if(!sbSelected) return;
+  var placed=document.createElement('div');
+  placed.className='sb-placed-chip';
+  placed.textContent=sbSelected.textContent;
+  placed.draggable=true;
+  placed.addEventListener('dragstart',function(e){ sbSelected=placed; e.dataTransfer.setData('text/plain',''); });
+  placed.addEventListener('click',function(){
+    if(sbSelected===placed){ placed.classList.remove('selected'); sbSelected=null; }
+    else { placed.classList.toggle('selected'); sbSelected=placed.classList.contains('selected')?placed:null; }
+  });
+  placed.addEventListener('dblclick',function(){ sbReturnChip(placed,target,d); });
+  target.appendChild(placed);
+  sbSelected.classList.add('placed');
+  sbSelected.classList.remove('selected');
+  sbSelected=null;
+  sbColorRow(target,d);
+}
+
+function sbClickTarget(target,d){
+  if(!sbSelected) return;
+  var placed=document.createElement('div');
+  placed.className='sb-placed-chip';
+  placed.textContent=sbSelected.textContent;
+  placed.draggable=true;
+  placed.addEventListener('dragstart',function(e){ sbSelected=placed; e.dataTransfer.setData('text/plain',''); });
+  placed.addEventListener('click',function(){
+    if(sbSelected===placed){ placed.classList.remove('selected'); sbSelected=null; }
+    else { placed.classList.toggle('selected'); sbSelected=placed.classList.contains('selected')?placed:null; }
+  });
+  placed.addEventListener('dblclick',function(){ sbReturnChip(placed,target,d); });
+  target.appendChild(placed);
+  sbSelected.classList.add('placed');
+  sbSelected.classList.remove('selected');
+  sbSelected=null;
+  sbColorRow(target,d);
+}
+
+function sbReturnChip(placed,target,d){
+  var chips=target.parentElement.querySelector('.sb-chips');
+  chips.querySelectorAll('.sb-chip').forEach(function(c){
+    if(c.textContent===placed.textContent && c.classList.contains('placed')){ c.classList.remove('placed','selected'); }
+  });
+  target.removeChild(placed);
+  sbColorRow(target,d);
+}
+
+function sbColorRow(target,d){
+  var placed=Array.from(target.querySelectorAll('.sb-placed-chip')).map(function(c){return c.textContent;});
+  var ok=d.valid.some(function(v){ return v.length===placed.length && v.every(function(w,i){return w===placed[i];}); });
+  if(ok){ target.classList.add('ok-row'); if(sbCheckAllOk()) timerStop(5); }
+  else target.classList.remove('ok-row');
+}
+
+function sbCheckAllOk(){
+  var rows=document.querySelectorAll('.sb-target');
+  var all=true;
+  rows.forEach(function(r){ if(!r.classList.contains('ok-row')) all=false; });
+  return all;
+}
+
+function sbShowAll(){
+  SB_DATA.forEach(function(d){
+    var rows=document.querySelectorAll('.sb-target');
+    rows.forEach(function(target){
+      if(parseInt(target.dataset.id)===d.id){
+        target.innerHTML='';
+        d.valid[0].forEach(function(w){
+          var p=document.createElement('div');
+          p.className='sb-placed-chip';
+          p.textContent=w;
+          target.appendChild(p);
+        });
+        target.classList.add('ok-row');
+        var chips=target.parentElement.querySelector('.sb-chips');
+        chips.querySelectorAll('.sb-chip').forEach(function(c){ c.classList.add('placed'); });
+      }
+    });
+  });
+}
+
+function sbReset(){
+  timerResetOne(5);
+  sbInit();
+}
+
+/* ══════════════════════════════════════
+   TAB 6: WORTSCHATZ
+══════════════════════════════════════ */
+var WORTSCHATZ = [
+  {id:1, en:'to meet (someone)', de:'treffen'},
+  {id:2, en:'the meeting (noun)', de:'das Treffen'},
+  {id:3, en:'to arrange / schedule', de:'vereinbaren'},
+  {id:4, en:'It works! / That\'s fine!', de:'Das geht!'},
+  {id:5, en:'That works out!', de:'Das passt!'},
+  {id:6, en:'Sounds good!', de:'Klingt gut!'},
+  {id:7, en:'That doesn\'t work, unfortunately.', de:'Das geht leider nicht.'},
+  {id:8, en:'How about ...?', de:'Wie wäre es mit ...?'},
+  {id:9, en:'When do you have time? (formal)', de:'Wann haben Sie Zeit?'},
+  {id:10, en:'Can you on Monday? (informal)', de:'Kannst du am Montag?'},
+  {id:11, en:'this week', de:'diese Woche'},
+  {id:12, en:'next week', de:'nächste Woche'},
+  {id:13, en:'How long ...?', de:'Wie lange ...?'},
+  {id:14, en:'to need / to take (time)', de:'brauchen'},
+  {id:15, en:'approximately', de:'ungefähr'},
+  {id:16, en:'half an hour', de:'eine halbe Stunde'},
+];
+
+function wortInit(){
+  var cont=document.getElementById('wort-container');
+  cont.innerHTML='';
+  document.getElementById('wort-score').textContent='';
+  WORTSCHATZ.forEach(function(w){
+    var row=document.createElement('div');
+    row.className='wort-row';
+    var badge=document.createElement('span');
+    badge.className='wort-badge';
+    badge.textContent='#'+w.id;
+    var en=document.createElement('span');
+    en.className='wort-en';
+    en.textContent=w.en;
+    var inp=document.createElement('input');
+    inp.type='text';
+    inp.className='wort-input';
+    inp.placeholder='Deutsch …';
+    inp.dataset.ans=w.de.toLowerCase();
+    inp.dataset.display=w.de;
+    inp.addEventListener('input',function(){ liveCheckWort(inp); timerAutoStart(6); });
+    row.appendChild(badge);
+    row.appendChild(en);
+    row.appendChild(inp);
+    cont.appendChild(row);
+  });
+}
+
+function liveCheckWort(inp){
+  var val=inp.value.trim().toLowerCase();
+  var ans=inp.dataset.ans;
+  if(val===ans){ inp.classList.add('ok'); inp.classList.remove('err'); }
+  else { inp.classList.remove('ok','err'); }
+  var all=document.querySelectorAll('#wort-container input');
+  var ok=0;
+  all.forEach(function(i){ if(i.classList.contains('ok')) ok++; });
+  document.getElementById('wort-score').innerHTML=ok+' / '+all.length+' richtig';
+  if(ok===all.length) timerStop(6);
+}
+
+function showWortLoesung(){
+  document.querySelectorAll('#wort-container input').forEach(function(inp){
+    inp.value=inp.dataset.display; inp.classList.add('ok');
+  });
+  document.getElementById('wort-score').innerHTML=WORTSCHATZ.length+' / '+WORTSCHATZ.length+' richtig';
+}
+
+function resetWortschatz(){
+  timerResetOne(6);
+  wortInit();
+}
+
+/* ══════════════════════════════════════
+   INIT
+══════════════════════════════════════ */
+zuoInit();
+dialogsInit();
+buildLueckenTermin();
+sitInit();
+sbInit();
+wortInit();
+</script>
+</body>
+</html>

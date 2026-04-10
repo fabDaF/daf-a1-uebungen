@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berufe und Arbeit (A1.1)</title>
+<style>
+
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; padding: 20px; }
+.container { max-width: 800px; margin: 0 auto; background: white; border-radius: 20px; padding: 30px 28px; box-shadow: 0 20px 60px rgba(0,0,0,0.15); }
+h1 { text-align: center; color: #333; margin-bottom: 4px; font-size: 1.5em; }
+.subtitle { text-align: center; color: #888; margin-bottom: 20px; font-size: 0.95em; }
+.nav { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 24px; justify-content: center; }
+.nav-btn { padding: 10px 16px; border-radius: 25px; cursor: pointer; border-right: 1px solid #ddd; font-weight: 600; font-size: 0.85em; border: 2px solid #e0e0e0; background: white; color: #555; transition: all 0.2s; user-select: none; }
+.nav-btn:hover { border-color: #667eea; color: #667eea; }
+.nav-btn:last-child { border-right: none; }
+        .nav-btn.active { background: linear-gradient(135deg, #667eea, #764ba2); color: white; border-color: transparent; }
+.section { display: none; }
+.section.active { display: block; }
+h2 { color: #333; font-size: 1.15em; margin-bottom: 16px; padding-bottom: 8px; border-bottom: 2px solid #f0f0f0; }
+.btn-row { display: flex; gap: 6px; }
+.btn { background: none; border: 1px solid #ddd; border-radius: 6px; padding: 4px 12px; font-size: 0.82em; color: #888; cursor: pointer; transition: all 0.15s; font-weight: 500; }
+.btn-show { background: #f0f0f0; color: #555; }
+.btn-show:hover { background: #e0e0e0; }
+.timer-display { display: flex; gap: 14px; font-size: 0.82em; color: #bbb; font-variant-numeric: tabular-nums; }
+.help-box { background: #f8f9ff; border-left: 4px solid #667eea; border-radius: 0 10px 10px 0; padding: 14px 18px; margin-bottom: 20px; font-size: 0.9em; line-height: 1.7; color: #444; }
+.help-box strong { color: #667eea; }
+
+/* L&uuml;cken */
+.ex-card { background: #f8f9ff; padding: 16px 20px; margin-bottom: 14px; border-radius: 10px; border-left: 4px solid #667eea; position: relative; }
+.ex-badge { position: absolute; top: 10px; right: 14px; background: linear-gradient(135deg, #667eea, #764ba2); color: white; font-size: 0.7em; padding: 3px 10px; border-radius: 12px; font-weight: 600; }
+.ex-sentence { font-size: 1.0em; line-height: 2.4; color: #333; display: block; }
+.nowrap-group { display: inline-flex; align-items: baseline; white-space: nowrap; gap: 0; }
+input.blank { border: none; border-bottom: 2px solid #667eea; background: #fff; padding: 4px 8px; font-family: inherit; font-size: 0.95em; outline: none; transition: all 0.2s; }
+input.blank:focus { border-bottom-color: #764ba2; background: #f0f7ff; }
+input.blank.s { min-width: 50px; width: 50px; }
+input.blank.m { min-width: 90px; width: 90px; }
+input.blank.l { min-width: 150px; width: 150px; }
+input.blank.xl { min-width: 200px; width: 200px; }
+input.blank.correct { border-bottom-color: #27ae60; background: #e8f8f0; }
+input.blank.wrong { border-bottom-color: #e74c3c; background: #fdeaea; }
+.correction-hint { color: #27ae60; font-weight: 600; font-size: 0.85em; margin-left: 4px; white-space: nowrap; }
+
+/* Zuordnung */
+.genus-categories { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 20px; }
+.genus-cat { background: #f0f0f0; border: 2px dashed #ccc; border-radius: 10px; padding: 12px; min-height: 120px; }
+.genus-cat-title { font-weight: 700; color: #667eea; text-align: center; margin-bottom: 8px; font-size: 0.95em; }
+.chip-bank { display: flex; flex-wrap: wrap; gap: 8px; padding: 14px; background: #f8f8f8; border-radius: 10px; min-height: 60px; }
+.chip { background: white; border: 2px solid #667eea; color: #667eea; padding: 8px 14px; border-radius: 20px; cursor: move; font-weight: 500; font-size: 0.9em; transition: all 0.2s; user-select: none; }
+.chip:hover { transform: scale(1.05); box-shadow: 0 4px 12px rgba(102,126,234,0.3); }
+.chip.placed { background: #667eea; color: white; }
+.chip.correct { background: #27ae60; border-color: #27ae60; color: white; }
+.chip.wrong { background: #e74c3c; border-color: #e74c3c; color: white; }
+
+/* Arbeitsort 6 Spalten */
+.ort-categories { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 20px; }
+.ort-cat { background: #f0f0f0; border: 2px dashed #ccc; border-radius: 10px; padding: 12px; min-height: 100px; }
+.ort-cat-title { font-weight: 700; color: #667eea; text-align: center; margin-bottom: 8px; font-size: 0.85em; }
+
+/* Aussprache 2 Spalten */
+.aussprache-categories { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 20px; }
+/* Aliase für neues satzbau-drag-drop Pattern */
+.chips-container { display: flex; flex-wrap: wrap; gap: 8px; padding: 14px; background: #f8f8f8; border-radius: 10px; min-height: 60px; margin-bottom: 10px; }
+.sentence-builder { background: white; border: 2px dashed #ccc; border-radius: 10px; padding: 14px; min-height: 60px; margin-bottom: 12px; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.chip.incorrect { background: #e74c3c; border-color: #e74c3c; color: white; }
+.sb-punkt { font-size: 1.1em; font-weight: 700; color: #27ae60; margin-left: 2px; align-self: center; user-select: none; }
+.satzbau-feedback { font-size: 0.9em; font-weight: 600; margin-top: 6px; min-height: 1.2em; }
+.satzbau-feedback.correct { color: #27ae60; }
+.satzbau-feedback.incorrect { color: #e74c3c; }
+/* Vocab */
+.vocab-item { display: flex; align-items: center; gap: 12px; padding: 10px 14px; border-bottom: 1px solid #f0f0f0; flex-wrap: wrap; }
+.vocab-en { color: #888; font-size: 0.9em; min-width: 180px; flex-shrink: 0; }
+.vocab-arrow { color: #667eea; font-weight: 700; flex-shrink: 0; }
+.vocab-inputs { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.vocab-inputs input { border: none; border-bottom: 2px solid #667eea; background: #fff; padding: 4px 8px; font-family: inherit; font-size: 0.9em; outline: none; }
+.vocab-inputs input.art { width: 50px; }
+.vocab-inputs input.wort { width: 130px; }
+.vocab-inputs input.plural { width: 140px; }
+.vocab-inputs input.correct { border-bottom-color: #27ae60; background: #e8f8f0; }
+.vocab-inputs input.wrong { border-bottom-color: #e74c3c; background: #fdeaea; }
+.vocab-hint { color: #27ae60; font-weight: 700; font-size: 0.85em; margin-left: 4px; }
+.satzbau-item { margin-bottom: 20px; }
+.placeholder-box { background: #f8f9ff; border: 2px dashed #c5cae9; border-radius: 10px; padding: 30px; text-align: center; color: #9fa8da; font-size: 0.95em; }
+.placeholder-box strong { display: block; font-size: 1.1em; color: #667eea; margin-bottom: 8px; }
+</style>
+</head>
+<body>
+<div class="container">
+    <h1>Berufe und Arbeit</h1>
+    <div class="subtitle">Berufe · Zuordnung · Arbeiten · DE_A1_1051V</div>
+
+    <div class="nav">
+        <div class="nav-btn active" onclick="showSection(0)">💼 Berufe</div>
+        <div class="nav-btn active" onclick="showSection(1)">🇩🇪 arbeiten</div>
+        <div class="nav-btn active" onclick="showSection(2)">👩 Femininum</div>
+        <div class="nav-btn active" onclick="showSection(3)">🏢 Arbeitsort</div>
+        <div class="nav-btn" onclick="showSection(4)">&#129513; Satzbau</div>
+        <div class="nav-btn" onclick="showSection(5)">&#128218; Wortschatz</div>
+    </div>
+
+<section class="section" id="sec-0">
+    <h2>💼 Berufe</h2>
+    <div id="content-0"></div>
+    <div class="btn-row">
+        <button class="btn btn-show" onclick="showBerufeLoesung()">Lösungen</button>
+        <button class="btn btn-reset" onclick="resetBerufe(); resetTimer(0);">Neu starten</button>
+    </div>
+    <div class="timer-display">
+        <span class="current-time">&#9201; <span id="timer-0">00:00</span></span>
+        <span class="best-time">&#127942; Best: <span id="best-0">--:--</span></span>
+    </div>
+</section>
+
+<section class="section" id="sec-1">
+    <h2>🇩🇪 arbeiten</h2>
+    <div id="content-1"></div>
+    <div class="btn-row">
+        <button class="btn btn-show" onclick="showArbeitenLoesung()">Lösungen</button>
+        <button class="btn btn-reset" onclick="resetArbeiten(); resetTimer(1);">Neu starten</button>
+    </div>
+    <div class="timer-display">
+        <span class="current-time">&#9201; <span id="timer-1">00:00</span></span>
+        <span class="best-time">&#127942; Best: <span id="best-1">--:--</span></span>
+    </div>
+</section>
+
+<section class="section" id="sec-2">
+    <h2>👩 Femininum</h2>
+    <div id="content-2"></div>
+    <div class="btn-row">
+        <button class="btn btn-show" onclick="showFemininumLoesung()">Lösungen</button>
+        <button class="btn btn-reset" onclick="resetFemininum(); resetTimer(2);">Neu starten</button>
+    </div>
+    <div class="timer-display">
+        <span class="current-time">&#9201; <span id="timer-2">00:00</span></span>
+        <span class="best-time">&#127942; Best: <span id="best-2">--:--</span></span>
+    </div>
+</section>
+
+<section class="section" id="sec-3">
+    <h2>🏢 Arbeitsort</h2>
+    <div id="arbeitsort_data_bank" class="chip-bank"></div>
+    <div class="genus-categories">
+        <div class="genus-cat" data-cat="schule" ondrop="dropARBEITSORT_DATA(event)" ondragover="allowDrop(event)">
+            <div class="genus-cat-title">Schule</div>
+        </div>
+        <div class="genus-cat" data-cat="krankenhaus" ondrop="dropARBEITSORT_DATA(event)" ondragover="allowDrop(event)">
+            <div class="genus-cat-title">Krankenhaus</div>
+        </div>
+        <div class="genus-cat" data-cat="buero" ondrop="dropARBEITSORT_DATA(event)" ondragover="allowDrop(event)">
+            <div class="genus-cat-title">Büro</div>
+        </div>
+    </div>
+    <div class="btn-row">
+        <button class="btn btn-show" onclick="showArbeitsortLoesung()">Lösungen</button>
+        <button class="btn btn-reset" onclick="resetArbeitsort(); resetTimer(3);">Neu starten</button>
+    </div>
+    <div class="timer-display">
+        <span class="current-time">&#9201; <span id="timer-3">00:00</span></span>
+        <span class="best-time">&#127942; Best: <span id="best-3">--:--</span></span>
+    </div>
+</section>
+
+    <section class="section" id="sec-4">
+        <h2>&#129513; Satzbau</h2>
+        <div class="help-box">
+            <strong>Tipp:</strong> Bringe die Satzteile in die richtige Reihenfolge!<br>
+            &#128313; Das Verb steht immer auf Position 2.
+        </div>
+        <div id="satzbauContainer"></div>
+        <div class="btn-row">
+            <button class="btn btn-show" onclick="showSatzbauLoesung()">Lösungen</button>
+            <button class="btn btn-reset" onclick="resetSatzbau(); resetTimer(4);">Neu starten</button>
+        </div>
+        <div class="timer-display">
+            <span class="current-time">&#9201; <span id="timer-4">00:00</span></span>
+            <span class="best-time">&#127942; Best: <span id="best-4">--:--</span></span>
+        </div>
+    </section>
+
+    <section class="section" id="sec-5">
+        <h2>&#128218; Wortschatz</h2>
+        <div class="help-box">
+            <strong>Aufgabe:</strong> Übersetze die Wörter ins Deutsche. Bei Nomen: Artikel + Wort + Plural!
+        </div>
+        <div id="vocabContainer"></div>
+        <div class="btn-row">
+            <button class="btn btn-show" onclick="showVocabLoesung()">Lösungen</button>
+            <button class="btn btn-reset" onclick="resetVocab(); resetTimer(5);">Neu starten</button>
+        </div>
+        <div class="timer-display">
+            <span class="current-time">&#9201; <span id="timer-5">00:00</span></span>
+            <span class="best-time">&#127942; Best: <span id="best-5">--:--</span></span>
+        </div>
+    </section>
+
+</div>
+
+<script>
+
+/* ========== TIMER & STATE ========== */
+const TIMER_PREFIX = 'DE_A1_1051V';
+var timerState = [
+    {seconds: 0, running: false, stopped: false, interval: null},
+    {seconds: 0, running: false, stopped: false, interval: null},
+    {seconds: 0, running: false, stopped: false, interval: null},
+    {seconds: 0, running: false, stopped: false, interval: null},
+    {seconds: 0, running: false, stopped: false, interval: null},
+    {seconds: 0, running: false, stopped: false, interval: null},
+    {seconds: 0, running: false, stopped: false, interval: null},
+];
+
+function startTimer(idx) {
+    var s = timerState[idx];
+    if (s.running || s.stopped) return;
+    s.running = true;
+    s.interval = setInterval(function() { s.seconds++; document.getElementById('timer-' + idx).textContent = formatTime(s.seconds); }, 1000);
+}
+
+function stopTimer(idx) {
+    var s = timerState[idx];
+    clearInterval(s.interval);
+    s.running = false;
+    s.stopped = true;
+    var best = localStorage.getItem(TIMER_PREFIX + '-best-' + idx);
+    if (!best || s.seconds < parseInt(best)) { localStorage.setItem(TIMER_PREFIX + '-best-' + idx, s.seconds); document.getElementById('best-' + idx).textContent = formatTime(s.seconds); }
+}
+
+function resetTimer(idx) {
+    var s = timerState[idx];
+    clearInterval(s.interval);
+    s.seconds = 0;
+    s.running = false;
+    s.stopped = false;
+    document.getElementById('timer-' + idx).textContent = '00:00';
+}
+
+function formatTime(sec) {
+    return String(Math.floor(sec / 60)).padStart(2, '0') + ':' + String(sec % 60).padStart(2, '0');
+}
+
+function loadBestTimes() {
+    document.querySelectorAll('[id^="best-"]').forEach(function(el) {
+        var idx = el.id.split('-')[1];
+        var val = localStorage.getItem(TIMER_PREFIX + '-best-' + idx);
+        if (val) el.textContent = formatTime(parseInt(val));
+    });
+}
+
+/* ========== LIVE INPUT FEEDBACK ========== */
+function liveCheck(inp) {
+    var user = inp.value;
+    var answer = inp.dataset.answer;
+    inp.classList.remove('correct', 'wrong');
+    if (user.length === 0) return;
+    if (user === answer) { inp.classList.add('correct'); }
+    else if (answer.indexOf(user) === 0) { }
+    else { inp.classList.add('wrong'); }
+}
+
+/* ========== AUTO-COMPLETE DETECTION ========== */
+function checkAllDragDrop(secId, dataLen, timerIdx) {
+    var cats = document.querySelectorAll('#sec-' + secId + ' .genus-cat');
+    var correctCount = 0;
+    cats.forEach(function(cat) {
+        cat.querySelectorAll('.chip').forEach(function(chip) {
+            if (chip.classList.contains('correct')) correctCount++;
+        });
+    });
+    if (correctCount === dataLen) stopTimer(timerIdx);
+}
+
+function checkAllInputs(secSelector, timerIdx) {
+    var inputs = document.querySelectorAll(secSelector);
+    var allCorrect = inputs.length > 0;
+    inputs.forEach(function(inp) {
+        if (!inp.classList.contains('correct')) allCorrect = false;
+    });
+    if (allCorrect) stopTimer(timerIdx);
+}
+
+/* ========== UNIVERSAL DRAG & DROP ========== */
+function allowDrop(e) { e.preventDefault(); }
+
+/* ========== GENERIC LUECKENTEXT RENDERER ========== */
+function renderLuecken(containerId, data, blankClass, timerIdx) {
+    var container = document.getElementById(containerId);
+    container.innerHTML = '';
+    data.forEach(function(ex) {
+        var card = document.createElement('div');
+        card.className = 'ex-card';
+        if (ex.verb) {
+            var badge = document.createElement('div');
+            badge.className = 'ex-badge';
+            badge.textContent = ex.verb;
+            card.appendChild(badge);
+        }
+        var sentence = document.createElement('div');
+        sentence.className = 'ex-sentence';
+        var skipNext = false;
+        ex.segments.forEach(function(seg, si) {
+            if (skipNext) { skipNext = false; return; }
+            if (seg.t !== undefined) {
+                var nextSeg = ex.segments[si + 1];
+                if (nextSeg && nextSeg.b !== undefined && !seg.t.endsWith(' ') && seg.t.length > 0) {
+                    var group = document.createElement('span');
+                    group.className = 'nowrap-group';
+                    var txt = document.createElement('span');
+                    txt.textContent = seg.t;
+                    group.appendChild(txt);
+                    var inp = document.createElement('input');
+                    inp.type = 'text';
+                    inp.className = 'blank ' + blankClass + ' ' + nextSeg.s;
+                    inp.dataset.answer = nextSeg.b;
+                    inp.setAttribute('autocomplete', 'off');
+                    inp.setAttribute('autocorrect', 'off');
+                    inp.setAttribute('autocapitalize', 'off');
+                    inp.setAttribute('spellcheck', 'false');
+                    inp.onfocus = function() { startTimer(timerIdx); };
+                    inp.oninput = function() { liveCheck(this); checkAllInputs('.' + blankClass, timerIdx); };
+                    group.appendChild(inp);
+                    sentence.appendChild(group);
+                    skipNext = true;
+                } else {
+                    var txt2 = document.createElement('span');
+                    txt2.textContent = seg.t;
+                    sentence.appendChild(txt2);
+                }
+            } else if (seg.b !== undefined) {
+                var inp2 = document.createElement('input');
+                inp2.type = 'text';
+                inp2.className = 'blank ' + blankClass + ' ' + seg.s;
+                inp2.dataset.answer = seg.b;
+                inp2.setAttribute('autocomplete', 'off');
+                inp2.setAttribute('autocorrect', 'off');
+                inp2.setAttribute('autocapitalize', 'off');
+                inp2.setAttribute('spellcheck', 'false');
+                inp2.onfocus = function() { startTimer(timerIdx); };
+                inp2.oninput = function() { liveCheck(this); checkAllInputs('.' + blankClass, timerIdx); };
+                sentence.appendChild(inp2);
+            }
+        });
+        card.appendChild(sentence);
+        container.appendChild(card);
+    });
+}
+
+function showLueckenLoesung(blankClass, timerIdx) {
+    document.querySelectorAll('.' + blankClass).forEach(function(inp) {
+        var answer = inp.dataset.answer;
+        if (inp.value.trim() === answer) {
+            inp.classList.remove('wrong');
+            inp.classList.add('correct');
+        } else {
+            inp.classList.add('wrong');
+            var hint = document.createElement('span');
+            hint.className = 'correction-hint';
+            hint.textContent = answer;
+            inp.insertAdjacentElement('afterend', hint);
+        }
+    });
+    stopTimer(timerIdx);
+}
+
+function resetLuecken(blankClass) {
+    document.querySelectorAll('.' + blankClass).forEach(function(inp) {
+        inp.value = '';
+        inp.classList.remove('correct', 'wrong');
+        var next = inp.nextElementSibling;
+        if (next && next.classList.contains('correction-hint')) next.remove();
+    });
+}
+
+/* ========== TAB NAVIGATION ========== */
+function showSection(secNum) {
+    document.querySelectorAll('.section').forEach(function(s) { s.classList.remove('active'); });
+    document.getElementById('sec-' + secNum).classList.add('active');
+    document.querySelectorAll('.nav-btn').forEach(function(b) { b.classList.remove('active'); });
+    document.querySelectorAll('.nav-btn')[secNum].classList.add('active');
+}
+
+var BERUFE_DATA = [
+    {
+        verb: "Lehrer",
+        segments: [
+            {t: "Der "},
+            {b: "Lehrer", s: "m"},
+            {t: " unterrichtet die Schüler."},
+        ]
+    },
+    {
+        verb: "Arzt",
+        segments: [
+            {t: "Der "},
+            {b: "Arzt", s: "m"},
+            {t: " hilft den Patienten."},
+        ]
+    },
+    {
+        verb: "Koch",
+        segments: [
+            {t: "Der "},
+            {b: "Koch", s: "m"},
+            {t: " kocht das Essen."},
+        ]
+    },
+    {
+        verb: "Ingenieur",
+        segments: [
+            {t: "Der "},
+            {b: "Ingenieur", s: "l"},
+            {t: " plant die Maschinen."},
+        ]
+    },
+];
+
+var ARBEITEN_DATA = [
+    {
+        verb: "ich",
+        segments: [
+            {t: "Ich "},
+            {b: "arbeite", s: "m"},
+            {t: " in einer Schule."},
+        ]
+    },
+    {
+        verb: "er",
+        segments: [
+            {t: "Er "},
+            {b: "arbeitet", s: "m"},
+            {t: " im Krankenhaus."},
+        ]
+    },
+    {
+        verb: "wir",
+        segments: [
+            {t: "Wir "},
+            {b: "arbeiten", s: "m"},
+            {t: " im Büro."},
+        ]
+    },
+    {
+        verb: "sie",
+        segments: [
+            {t: "Sie "},
+            {b: "arbeitet", s: "m"},
+            {t: " in einem Supermarkt."},
+        ]
+    },
+];
+
+var FEMININUM_DATA = [
+    {
+        verb: "Lehrerin",
+        segments: [
+            {t: "Die "},
+            {b: "Lehrerin", s: "m"},
+            {t: " unterrichtet."},
+        ]
+    },
+    {
+        verb: "Ärztin",
+        segments: [
+            {t: "Die "},
+            {b: "Ärztin", s: "m"},
+            {t: " behandelt Patienten."},
+        ]
+    },
+    {
+        verb: "Köchin",
+        segments: [
+            {t: "Die "},
+            {b: "Köchin", s: "m"},
+            {t: " arbeitet in der Küche."},
+        ]
+    },
+    {
+        verb: "Ingenieurin",
+        segments: [
+            {t: "Die "},
+            {b: "Ingenieurin", s: "l"},
+            {t: " ist sehr intelligent."},
+        ]
+    },
+];
+
+var ARBEITSORT_DATA = [
+    {word: "Lehrer", cat: "schule"},
+    {word: "Arzt", cat: "krankenhaus"},
+    {word: "Sekretärin", cat: "buero"},
+    {word: "Krankenschwester", cat: "krankenhaus"},
+    {word: "Schüler", cat: "schule"},
+    {word: "Manager", cat: "buero"},
+];
+
+
+function showBerufeLoesung() { showLueckenLoesung('berufe-blank', 0); }
+function resetBerufe() { resetLuecken('berufe-blank'); }
+renderLuecken('content-0', BERUFE_DATA, 'berufe-blank', 0);
+
+function showArbeitenLoesung() { showLueckenLoesung('arbeiten-blank', 1); }
+function resetArbeiten() { resetLuecken('arbeiten-blank'); }
+renderLuecken('content-1', ARBEITEN_DATA, 'arbeiten-blank', 1);
+
+function showFemininumLoesung() { showLueckenLoesung('femininum-blank', 2); }
+function resetFemininum() { resetLuecken('femininum-blank'); }
+renderLuecken('content-2', FEMININUM_DATA, 'femininum-blank', 2);
+
+function initArbeitsort() {
+    var bank = document.getElementById('arbeitsort_bank');
+    bank.innerHTML = '';
+    var shuffled = ARBEITSORT_DATA.slice().sort(function() { return Math.random() - 0.5; });
+    shuffled.forEach(function(item, idx) {
+        var chip = document.createElement('div');
+        chip.className = 'chip'; chip.textContent = item.word; chip.draggable = true;
+        chip.dataset.word = item.word; chip.dataset.cat = item.cat; chip.id = 'arbeitsort-chip-' + idx;
+        chip.ondragstart = function(e) { e.dataTransfer.setData('text', e.target.id); startTimer(3); };
+        bank.appendChild(chip);
+    });
+}
+
+function dropArbeitsort(e) {
+    e.preventDefault();
+    var chipId = e.dataTransfer.getData('text');
+    var chip = document.getElementById(chipId);
+    if (!chip) return;
+    var dt = e.currentTarget;
+    dt.appendChild(chip);
+    if (dt.id === 'arbeitsort_bank') {
+        chip.classList.remove('placed', 'correct', 'wrong');
+    } else {
+        chip.classList.add('placed');
+        chip.classList.remove('correct', 'wrong');
+        if (chip.dataset.cat === dt.dataset.cat) {
+            chip.classList.add('correct');
+        } else {
+            chip.classList.add('wrong');
+        }
+        checkAllDragDrop(3, ARBEITSORT_DATA.length, 3);
+    }
+}
+
+function showArbeitsortLoesung() {
+    document.querySelectorAll('#sec-3 .genus-cat').forEach(function(cat) {
+        var t = cat.querySelector('.genus-cat-title').textContent;
+        cat.innerHTML = '<div class="genus-cat-title">' + t + '</div>';
+    });
+    ARBEITSORT_DATA.forEach(function(item, idx) {
+        var chip = document.getElementById('arbeitsort-chip-' + idx);
+        var tc = document.querySelector('#sec-3 .genus-cat[data-cat="' + item.cat + '"]');
+        if (chip && tc) {
+            tc.appendChild(chip);
+            chip.classList.add('placed', 'correct');
+            chip.classList.remove('wrong');
+        }
+    });
+    stopTimer(3);
+}
+
+function resetArbeitsort() {
+    document.querySelectorAll('#sec-3 .chip').forEach(function(c) {
+        c.classList.remove('placed', 'correct', 'wrong');
+    });
+    document.querySelectorAll('#sec-3 .genus-cat').forEach(function(cat) {
+        var t = cat.querySelector('.genus-cat-title').textContent;
+        cat.innerHTML = '<div class="genus-cat-title">' + t + '</div>';
+    });
+    initArbeitsort();
+}
+initArbeitsort();
+
+var SATZBAU = [
+    { id:1, parts:["Maria","ist","Lehrerin"], valid:[
+        ["Maria","ist","Lehrerin"]
+    ]},
+    { id:2, parts:["er","arbeitet","im Krankenhaus"], valid:[
+        ["er","arbeitet","im Krankenhaus"]
+    ]},
+    { id:3, parts:["was","machst","du","beruflich"], valid:[
+        ["was","machst","du","beruflich"]
+    ], punct:"?" },
+    { id:4, parts:["sie","ist","\u00C4rztin","von Beruf"], valid:[
+        ["sie","ist","\u00C4rztin","von Beruf"]
+    ]},
+    { id:5, parts:["ich","arbeite","bei einer Computerfirma"], valid:[
+        ["ich","arbeite","bei einer Computerfirma"]
+    ]},
+    { id:6, parts:["der Sch\u00FCler","geht","zur Schule"], valid:[
+        ["der Sch\u00FCler","geht","zur Schule"]
+    ]},
+    { id:7, parts:["wo","arbeitest","du"], valid:[
+        ["wo","arbeitest","du"]
+    ], punct:"?" },
+    { id:8, parts:["mein Vater","ist","Ingenieur"], valid:[
+        ["mein Vater","ist","Ingenieur"]
+    ]}
+];
+var WORTSCHATZ = [
+    {id:1,type:"n",en:"the job / occupation",de:"Beruf",artikel:"der",plural:"Berufe"},
+    {id:2,type:"v",en:"to work",de:"Arbeiten"},
+    {id:3,type:"n",en:"the teacher (m)",de:"Lehrer",artikel:"der",plural:"Lehrer"},
+    {id:4,type:"n",en:"the teacher (f)",de:"Lehrerin",artikel:"die",plural:"Lehrerinnen"},
+    {id:5,type:"n",en:"the doctor (m)",de:"Arzt",artikel:"der",plural:"Ärzte"},
+    {id:6,type:"n",en:"the doctor (f)",de:"Ärztin",artikel:"die",plural:"Ärztinnen"},
+    {id:7,type:"n",en:"the cook (m)",de:"Koch",artikel:"der",plural:"Köche"},
+    {id:8,type:"n",en:"the cook (f)",de:"Köchin",artikel:"die",plural:"Köchinnen"},
+    {id:9,type:"n",en:"the pilot (m)",de:"Pilot",artikel:"der",plural:"Piloten"},
+    {id:10,type:"n",en:"the pilot (f)",de:"Pilotin",artikel:"die",plural:"Pilotinnen"},
+    {id:11,type:"n",en:"the student (m)",de:"Student",artikel:"der",plural:"Studenten"},
+    {id:12,type:"n",en:"the student (f)",de:"Studentin",artikel:"die",plural:"Studentinnen"},
+    {id:13,type:"v",en:"to work as (profession)",de:"arbeiten als"},
+    {id:14,type:"adv",en:"professionally / by trade",de:"Beruflich"},
+    {id:15,type:"n",en:"the company",de:"Firma",artikel:"die",plural:"Firmen"},
+    {id:16,type:"n",en:"the police officer (m)",de:"Polizist",artikel:"der",plural:"Polizisten"},
+    {id:17,type:"n",en:"the police officer (f)",de:"Polizistin",artikel:"die",plural:"Polizistinnen"},
+    {id:18,type:"n",en:"the IT specialist (m)",de:"Informatiker",artikel:"der",plural:"Informatiker"},
+    {id:19,type:"adv",en:"I work as...",de:"Ich arbeite als..."},
+    {id:20,type:"adv",en:"I work at...",de:"Ich arbeite bei..."}
+];
+
+/* ========== SATZBAU RENDERING & FUNCTIONS ========== */
+var sbDragged = null;
+
+function getSbCursor() {
+    var c = document.getElementById('sb-insert-cursor');
+    if (!c) {
+        c = document.createElement('div');
+        c.id = 'sb-insert-cursor';
+        c.style.cssText = 'width:3px;min-height:32px;background:#e67e22;border-radius:2px;align-self:stretch;pointer-events:none;flex-shrink:0;';
+    }
+    return c;
+}
+
+function getSbInsertPos(zone, clientX) {
+    var chips = Array.from(zone.querySelectorAll('.chip'));
+    for (var i = 0; i < chips.length; i++) {
+        var r = chips[i].getBoundingClientRect();
+        if (clientX < r.left + r.width / 2) return chips[i];
+    }
+    return null;
+}
+
+function sbCapitalize(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+function sbUpdateCapitalization(row) {
+    var chips = Array.from(row.querySelectorAll('.chip'));
+    chips.forEach(function(c, i) {
+        var orig = c.dataset.orig;
+        var isProper = orig.charAt(0) === orig.charAt(0).toUpperCase() && orig.charAt(0) !== orig.charAt(0).toLowerCase();
+        if (isProper) {
+            c.textContent = orig;
+        } else {
+            c.textContent = (i === 0) ? sbCapitalize(orig) : orig;
+        }
+    });
+}
+
+function sbMakeChip(word) {
+    var chip = document.createElement('div');
+    chip.className = 'chip';
+    chip.textContent = word;
+    chip.dataset.orig = word;
+    chip.draggable = true;
+    chip.addEventListener('dragstart', function(e) {
+        sbDragged = chip;
+        e.dataTransfer.setData('text/plain', '');
+        setTimeout(function() { chip.style.opacity = '0.4'; }, 0);
+    });
+    chip.addEventListener('dragend', function() {
+        chip.style.opacity = '';
+        sbDragged = null;
+        var c = document.getElementById('sb-insert-cursor');
+        if (c && c.parentNode) c.parentNode.removeChild(c);
+    });
+    return chip;
+}
+
+function sbRegisterZone(zone, idx) {
+    zone.addEventListener('dragover', function(e) {
+        e.preventDefault();
+        if (!sbDragged) return;
+        var cursor = getSbCursor();
+        var before = getSbInsertPos(zone, e.clientX);
+        if (before) zone.insertBefore(cursor, before);
+        else zone.appendChild(cursor);
+    });
+    zone.addEventListener('dragleave', function(e) {
+        if (!zone.contains(e.relatedTarget)) {
+            var c = document.getElementById('sb-insert-cursor');
+            if (c && c.parentNode === zone) zone.removeChild(c);
+        }
+    });
+    zone.addEventListener('drop', function(e) {
+        e.preventDefault();
+        if (!sbDragged) return;
+        var cursor = document.getElementById('sb-insert-cursor');
+        if (cursor && cursor.parentNode === zone) {
+            zone.insertBefore(sbDragged, cursor);
+            zone.removeChild(cursor);
+        } else {
+            zone.appendChild(sbDragged);
+        }
+        sbDragged = null;
+        var row = document.getElementById('sb-row-' + idx);
+        sbUpdateCapitalization(row);
+        sbCheckAuto(idx);
+    });
+}
+
+function sbColorRow(idx) {
+    var row = document.getElementById('sb-row-' + idx);
+    var chips = Array.from(row.querySelectorAll('.chip'));
+    var order = chips.map(function(c) { return c.dataset.orig; });
+    var ok = SATZBAU[idx].valid.some(function(v) { return v.length === order.length && v.every(function(p, i) { return p === order[i]; }); });
+    chips.forEach(function(c) { c.classList.remove('correct', 'wrong'); c.classList.add(ok ? 'correct' : 'wrong'); });
+    return ok;
+}
+
+function sbCheckAuto(idx) {
+    var row = document.getElementById('sb-row-' + idx);
+    var bank = document.getElementById('sb-bank-' + idx);
+    var bankChips = bank.querySelectorAll('.chip');
+    if (bankChips.length > 0) { sbColorRow(idx); return; }
+    if (sbColorRow(idx)) {
+        var allDone = true;
+        for (var i = 0; i < SATZBAU.length; i++) {
+            var b = document.getElementById('sb-bank-' + i);
+            if (b && b.querySelectorAll('.chip').length > 0) { allDone = false; break; }
+            if (!sbColorRow(i)) { allDone = false; break; }
+        }
+        if (allDone) stopTimer(4);
+    }
+}
+
+function renderSatzbau() {
+    var container = document.getElementById('satzbauContainer');
+    container.innerHTML = '';
+    SATZBAU.forEach(function(ex, idx) {
+        var item = document.createElement('div');
+        item.className = 'satzbau-item';
+        var rowId = 'sb-row-' + idx;
+        var bankId = 'sb-bank-' + idx;
+        var row = document.createElement('div');
+        row.id = rowId;
+        row.className = 'sentence-builder';
+        row.ondragover = function(e) { e.preventDefault(); };
+        sbRegisterZone(row, idx);
+        var bank = document.createElement('div');
+        bank.id = bankId;
+        bank.className = 'chips-container';
+        bank.ondragover = function(e) { e.preventDefault(); };
+        sbRegisterZone(bank, idx);
+        ex.parts.forEach(function(p) { bank.appendChild(sbMakeChip(p)); });
+        item.appendChild(row);
+        item.appendChild(bank);
+        container.appendChild(item);
+    });
+}
+
+function showSatzbauLoesung() {
+    SATZBAU.forEach(function(ex, idx) {
+        var row = document.getElementById('sb-row-' + idx);
+        var bank = document.getElementById('sb-bank-' + idx);
+        row.innerHTML = '';
+        bank.innerHTML = '';
+        ex.valid[0].forEach(function(part) { row.appendChild(sbMakeChip(part)); });
+        sbUpdateCapitalization(row);
+        sbColorRow(idx);
+    });
+    stopTimer(4);
+}
+
+function resetSatzbau() {
+    renderSatzbau();
+}
+
+renderSatzbau();
+
+/* ========== VOCAB INIT ========== */
+function initVocab() {
+    var container = document.getElementById('vocabContainer');
+    container.innerHTML = '';
+    WORTSCHATZ.forEach(function(item) {
+        var vocabItem = document.createElement('div');
+        vocabItem.className = 'vocab-item';
+        var enText = document.createElement('div');
+        enText.className = 'vocab-en';
+        enText.textContent = item.en;
+        vocabItem.appendChild(enText);
+        var arrow = document.createElement('div');
+        arrow.className = 'vocab-arrow';
+        arrow.textContent = '→';
+        vocabItem.appendChild(arrow);
+        var inputs = document.createElement('div');
+        inputs.className = 'vocab-inputs';
+        if (item.type === 'n') {
+            var artInput = document.createElement('input');
+            artInput.className = 'art';
+            artInput.placeholder = 'Art';
+            artInput.dataset.answer = item.artikel;
+            artInput.dataset.field = 'art';
+            artInput.oninput = function() { liveCheck(this); checkAllInputs('#vocabContainer input', 5); };
+            artInput.onfocus = function() { startTimer(5); };
+            inputs.appendChild(artInput);
+            var wortInput = document.createElement('input');
+            wortInput.className = 'wort';
+            wortInput.placeholder = 'Wort';
+            wortInput.dataset.answer = item.de;
+            wortInput.dataset.field = 'wort';
+            wortInput.oninput = function() { liveCheck(this); checkAllInputs('#vocabContainer input', 5); };
+            wortInput.onfocus = function() { startTimer(5); };
+            inputs.appendChild(wortInput);
+            var pluralInput = document.createElement('input');
+            pluralInput.className = 'plural';
+            pluralInput.placeholder = 'Plural';
+            pluralInput.dataset.answer = item.plural;
+            pluralInput.dataset.field = 'plural';
+            pluralInput.oninput = function() { liveCheck(this); checkAllInputs('#vocabContainer input', 5); };
+            pluralInput.onfocus = function() { startTimer(5); };
+            inputs.appendChild(pluralInput);
+        } else if (item.type === 'v' || item.type === 'adv') {
+            var input = document.createElement('input');
+            input.className = 'wort';
+            input.placeholder = 'Wort';
+            input.dataset.answer = item.de;
+            input.dataset.field = 'wort';
+            input.oninput = function() { liveCheck(this); checkAllInputs('#vocabContainer input', 5); };
+            input.onfocus = function() { startTimer(5); };
+            inputs.appendChild(input);
+        }
+        vocabItem.appendChild(inputs);
+        container.appendChild(vocabItem);
+    });
+}
+
+function showVocabLoesung() {
+    document.querySelectorAll('#vocabContainer input').forEach(function(inp) {
+        var answer = inp.dataset.answer;
+        if (inp.value.trim().toLowerCase() === answer.toLowerCase()) {
+            inp.classList.remove('wrong');
+            inp.classList.add('correct');
+        } else {
+            inp.classList.add('wrong');
+            var hint = document.createElement('span');
+            hint.className = 'vocab-hint';
+            hint.textContent = answer;
+            inp.insertAdjacentElement('afterend', hint);
+        }
+    });
+    stopTimer(5);
+}
+
+function resetVocab() {
+    document.querySelectorAll('#vocabContainer input').forEach(function(inp) {
+        inp.value = '';
+        inp.classList.remove('correct', 'wrong');
+        var next = inp.nextElementSibling;
+        if (next && next.classList.contains('vocab-hint')) next.remove();
+    });
+}
+
+initVocab();
+
+/* ========== INIT ========== */
+window.addEventListener('load', function() {
+    loadBestTimes();
+    showSection(0);
+});
+
+</script>
+</body>
+</html>

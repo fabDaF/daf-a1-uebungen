@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ich kann mich vorstellen – A1 Lerncheck</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Segoe UI', system-ui, sans-serif; background: #f0f2f5; color: #1a1a2e; min-height: 100vh; }
+.container { max-width: 860px; margin: 0 auto; padding: 16px; }
+h1 { text-align: center; font-size: 1.4rem; background: linear-gradient(135deg, #667eea, #764ba2);
+     -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: 12px 0 4px; }
+.subtitle { text-align: center; color: #666; font-size: 0.9rem; margin-bottom: 16px; }
+
+.nav { display: flex; gap: 4px; margin-bottom: 16px; flex-wrap: wrap; }
+.nav-btn { flex: 1; min-width: 110px; padding: 10px 8px; text-align: center; background: #e8e8e8;
+           border-radius: 8px 8px 0 0; cursor: pointer; border-right: 1px solid #ddd; font-size: 0.85rem; font-weight: 600;
+           transition: all 0.2s; border-bottom: 3px solid transparent; }
+.nav-btn:hover { background: #d8d8f8; }
+.nav-btn:last-child { border-right: none; }
+        .nav-btn.active { background: #fff; border-bottom: 3px solid #667eea; color: #667eea; }
+
+.section { display: none; background: #fff; border-radius: 0 0 12px 12px; padding: 20px;
+           box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+.section.active { display: block; }
+
+.btn-row { display: flex; gap: 6px; }
+.btn { padding: 10px 20px; border: none; border-radius: 8px; font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+.btn-check { background: linear-gradient(135deg, #667eea, #764ba2); color: #fff; }
+.btn-check:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(102,126,234,0.4); }
+.btn-show { background: #f0f0f0; color: #555; }
+.btn-show:hover { background: #e0e0e0; }
+.btn-reset { background: #fff; color: #888; border: 1px solid #ddd; }
+.btn-reset:hover { background: #f8f8f8; }
+.score { text-align: center; margin-top: 12px; font-weight: 600; color: #667eea; font-size: 1rem; }
+
+.help-toggle { background: none; border: 1px solid #667eea; color: #667eea; border-radius: 6px;
+               padding: 4px 12px; font-size: 0.8rem; cursor: pointer; margin-bottom: 12px; }
+.help-toggle:hover { background: #667eea; color: #fff; }
+.help-box { display: none; background: #f8f7ff; border-left: 3px solid #667eea; padding: 12px 16px;
+            margin-bottom: 16px; border-radius: 0 8px 8px 0; font-size: 0.85rem; line-height: 1.6; }
+.help-box.open { display: block; }
+.help-box p { margin-bottom: 6px; }
+
+/* === WORTSCHATZ === */
+.ws-item { display: flex; align-items: baseline; flex-wrap: wrap; gap: 6px; padding: 10px 14px;
+           background: #f8f7ff; border-radius: 8px; margin-bottom: 8px; font-size: 0.95rem; }
+.ws-en { font-weight: 600; color: #764ba2; min-width: 130px; }
+.ws-arrow { color: #999; }
+input.ws-input { border: none; border-bottom: 2px solid #667eea; background: transparent;
+                 font-size: 0.9rem; font-family: inherit; outline: none; padding: 2px 6px; text-align: center; }
+input.ws-input:focus { border-bottom-color: #764ba2; background: #f0eeff; }
+input.ws-input.s { min-width: 45px; width: 50px; }
+input.ws-input.m { min-width: 90px; width: 120px; }
+input.ws-input.correct { border-bottom-color: #2ecc71; background: #eafaf1; color: #27ae60; }
+input.ws-input.wrong { border-bottom-color: #e74c3c; background: #fdf0ef; color: #c0392b; }
+.ws-sol { display: none; color: #27ae60; font-weight: 600; font-size: 0.8rem; margin-left: 2px; }
+.ws-sep { color: #999; }
+
+/* === ZUORDNUNG === */
+.chip-bank { display: flex; flex-wrap: wrap; gap: 8px; padding: 12px; background: #f8f7ff;
+             border-radius: 8px; min-height: 50px; margin-bottom: 16px; justify-content: center; }
+.chip { padding: 8px 16px; background: linear-gradient(135deg, #667eea, #764ba2); color: #fff;
+        border-radius: 20px; cursor: grab; font-size: 0.9rem; user-select: none; transition: all 0.2s; }
+.chip:active { cursor: grabbing; transform: scale(1.05); }
+.chip.correct { background: linear-gradient(135deg, #2ecc71, #27ae60) !important; }
+.chip.wrong { background: linear-gradient(135deg, #e74c3c, #c0392b) !important; }
+.chip.zu-selected { outline: 2px solid #ffd700; outline-offset: 2px; }
+.categories { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+@media (max-width: 600px) { .categories { grid-template-columns: 1fr; } }
+.category h3 { font-size: 0.9rem; color: #667eea; margin-bottom: 6px; padding: 6px;
+               background: #f0eeff; border-radius: 6px; text-align: center; }
+.drop-zone { min-height: 70px; border: 2px dashed #d0d0e0; border-radius: 8px; padding: 8px;
+             display: flex; flex-wrap: wrap; gap: 6px; align-content: flex-start; transition: all 0.2s; }
+.drop-zone.over { border-color: #667eea; background: #f0eeff; }
+
+/* === LUECKENTEXT === */
+.ex-card { background: #f8f9ff; padding: 14px 18px; margin-bottom: 12px; border-radius: 10px; border-left: 4px solid #667eea; }
+.ex-num { font-weight: 700; color: #764ba2; margin-right: 8px; }
+.ex-sentence { line-height: 2.2; font-size: 0.95rem; }
+.badge { display: inline-block; background: #764ba2; color: #fff; font-size: 0.75rem; padding: 2px 8px;
+         border-radius: 10px; margin-left: 8px; vertical-align: middle; }
+.nowrap-group { display: inline-flex; align-items: baseline; white-space: nowrap; gap: 0; }
+input.blank { border: none; border-bottom: 2px solid #667eea; background: #fff; padding: 4px 8px;
+              font-family: inherit; font-size: 0.95em; outline: none; transition: all 0.2s; }
+input.blank:focus { border-bottom-color: #764ba2; background: #f0f7ff; }
+input.blank.s { min-width: 50px; width: 50px; }
+input.blank.m { min-width: 90px; width: 90px; }
+input.blank.l { min-width: 150px; width: 150px; }
+input.blank.correct { border-bottom-color: #27ae60; background: #e8f8f0; }
+input.blank.wrong { border-bottom-color: #e74c3c; background: #fdeaea; }
+.correction-hint { color: #27ae60; font-weight: 600; font-size: 0.85em; margin-left: 4px; white-space: nowrap; }
+
+/* === SATZBAU === */
+.sb-exercise { margin-bottom: 18px; }
+.sb-label { font-weight: 600; color: #764ba2; margin-bottom: 6px; font-size: 0.95rem; }
+.sb-bank { display: flex; flex-wrap: wrap; gap: 6px; padding: 10px; background: #f8f7ff;
+           border-radius: 8px; min-height: 44px; margin-bottom: 6px; }
+.sb-row { display: flex; flex-wrap: wrap; gap: 6px; padding: 10px; background: #fff;
+          border: 2px dashed #d0d0e0; border-radius: 8px; min-height: 44px; align-items: center; transition: all 0.2s; }
+.sb-row.over { border-color: #667eea; background: #f0eeff; }
+.sb-chip { padding: 6px 14px; background: linear-gradient(135deg, #667eea, #764ba2); color: #fff;
+           border-radius: 16px; cursor: grab; font-size: 0.9rem; user-select: none; transition: all 0.15s; }
+.sb-chip:active { cursor: grabbing; transform: scale(1.05); }
+.sb-chip.selected { outline: 2px solid #ffd700; outline-offset: 2px; }
+.sb-chip.correct { background: linear-gradient(135deg, #2ecc71, #27ae60) !important; }
+.sb-chip.wrong { background: linear-gradient(135deg, #e74c3c, #c0392b) !important; }
+.fixed-dot { font-weight: 700; font-size: 1.1rem; color: #333; padding-left: 2px; }
+
+/* === TIMER === */
+.timer-display { display: flex; gap: 14px; font-size: 0.82em; color: #bbb; font-variant-numeric: tabular-nums; }
+
+/* === FOOTER === */
+.author-footer { margin-top: 40px; padding: 16px 20px; text-align: center; font-size: 0.8em; color: #888; border-top: 1px solid #e0e0e0; }
+.author-footer a { color: #667eea; text-decoration: none; font-weight: 500; }
+.author-footer a:hover { text-decoration: underline; color: #764ba2; }
+.author-footer .author-name { font-weight: 600; color: #555; }
+</style>
+</head>
+<body>
+<div class="container">
+<h1>Ich kann mich vorstellen</h1>
+<p class="subtitle">A1 – Lerncheck DE_A1_1024C</p>
+
+<div class="nav">
+    <div class="nav-btn active" onclick="showSection(0)">📝 Wortschatz</div>
+    <div class="nav-btn" onclick="showSection(1)">🔀 Wie geht's?</div>
+    <div class="nav-btn" onclick="showSection(2)">✏️ Konjugation</div>
+    <div class="nav-btn" onclick="showSection(3)">🧩 Satzbau</div>
+</div>
+
+<!-- ============ TAB 0: WORTSCHATZ ============ -->
+<div class="section active" id="sec-0">
+    <button class="help-toggle" onclick="toggleHelp(0)">💡 Hilfe</button>
+    <div class="help-box" id="help-0">
+        <p>🔹 Übersetze von <strong>Englisch → Deutsch</strong>.</p>
+        <p>🔹 Bei Nomen: <strong>Artikel</strong> + deutsches Wort + <strong>Plural</strong>.</p>
+        <p>🔹 Bei Verben und Adjektiven: nur das deutsche Wort.</p>
+    </div>
+    <div id="ws-container"></div>
+    <div class="btn-row">
+        <button class="btn btn-check" onclick="startTimer(0);checkWS()">✔ Prüfen</button>
+        <button class="btn btn-show" onclick="showWS()">👁 Lösungen</button>
+        <button class="btn btn-reset" onclick="resetWS()">↻ Neu</button>
+    </div>
+    <div class="score" id="score-ws"></div>
+    <div class="timer-display">
+        <span class="current-time">⏱️ <span id="timer-0">00:00</span></span>
+        <span class="best-time">🏆 Best: <span id="best-0">--:--</span></span>
+    </div>
+</div>
+
+<!-- ============ TAB 1: ZUORDNUNG (Wie geht's?) ============ -->
+<div class="section" id="sec-1">
+    <button class="help-toggle" onclick="toggleHelp(1)">💡 Hilfe</button>
+    <div class="help-box" id="help-1">
+        <p>🔹 Ordne die Antworten den Kategorien zu: <strong>Gut</strong>, <strong>Es geht</strong> oder <strong>Nicht gut</strong>.</p>
+        <p>🔹 Klicke auf eine Antwort, dann auf die Kategorie – oder ziehe sie direkt.</p>
+    </div>
+    <div class="chip-bank" id="zu-bank"></div>
+    <div class="categories">
+        <div class="category" data-cat="gut"><h3>😊 Gut</h3><div class="drop-zone"></div></div>
+        <div class="category" data-cat="geht"><h3>😐 Es geht</h3><div class="drop-zone"></div></div>
+        <div class="category" data-cat="schlecht"><h3>😞 Nicht gut</h3><div class="drop-zone"></div></div>
+    </div>
+    <div class="btn-row">
+        <button class="btn btn-check" onclick="startTimer(1);checkZU()">✔ Prüfen</button>
+        <button class="btn btn-show" onclick="showZU()">👁 Lösungen</button>
+        <button class="btn btn-reset" onclick="resetZU()">↻ Neu</button>
+    </div>
+    <div class="score" id="score-zu"></div>
+    <div class="timer-display">
+        <span class="current-time">⏱️ <span id="timer-1">00:00</span></span>
+        <span class="best-time">🏆 Best: <span id="best-1">--:--</span></span>
+    </div>
+</div>
+
+<!-- ============ TAB 2: KONJUGATION (Lückentext) ============ -->
+<div class="section" id="sec-2">
+    <button class="help-toggle" onclick="toggleHelp(2)">💡 Hilfe</button>
+    <div class="help-box" id="help-2">
+        <p>🔹 Wähle das richtige Verb und konjugiere es.</p>
+        <p>🔹 Verbendungen: <strong>ich -e, du -st, er/sie/es -t, wir -en, ihr -t, sie/Sie -en</strong></p>
+        <p>🔹 Verben auf <strong>-d/-t</strong>: ein extra <strong>e</strong> bei du, er/sie/es, ihr (z.B. <em>antwortet</em>)</p>
+    </div>
+    <div id="luecken-container"></div>
+    <div class="btn-row">
+        <button class="btn btn-check" onclick="startTimer(2);checkLuecken()">✔ Prüfen</button>
+        <button class="btn btn-show" onclick="showLueckenLoesung()">👁 Lösungen</button>
+        <button class="btn btn-reset" onclick="resetLuecken()">↻ Neu</button>
+    </div>
+    <div class="score" id="lueckenScore"></div>
+    <div class="timer-display">
+        <span class="current-time">⏱️ <span id="timer-2">00:00</span></span>
+        <span class="best-time">🏆 Best: <span id="best-2">--:--</span></span>
+    </div>
+</div>
+
+<!-- ============ TAB 3: SATZBAU ============ -->
+<div class="section" id="sec-3">
+    <button class="help-toggle" onclick="toggleHelp(3)">💡 Hilfe</button>
+    <div class="help-box" id="help-3">
+        <p>🔹 Bringe die Satzteile in die richtige Reihenfolge.</p>
+        <p>🔹 Das <strong>Verb</strong> steht immer auf <strong>Position 2</strong>.</p>
+        <p>🔹 Achte auf: <strong>kommen + aus</strong>, <strong>wohnen/leben + in</strong></p>
+    </div>
+    <div id="sb-container"></div>
+    <div class="btn-row">
+        <button class="btn btn-check" onclick="startTimer(3);checkSB()">✔ Prüfen</button>
+        <button class="btn btn-show" onclick="showSB()">👁 Lösungen</button>
+        <button class="btn btn-reset" onclick="resetSB()">↻ Neu</button>
+    </div>
+    <div class="score" id="score-sb"></div>
+    <div class="timer-display">
+        <span class="current-time">⏱️ <span id="timer-3">00:00</span></span>
+        <span class="best-time">🏆 Best: <span id="best-3">--:--</span></span>
+    </div>
+</div>
+
+</div>
+
+<div class="author-footer">
+    <span class="author-name">&copy; Frank Burkert</span> &middot; DaF-Materialien &middot;
+    <a href="mailto:FrankBurkert@fabdaf.onmicrosoft.com">FrankBurkert@fabdaf.onmicrosoft.com</a>
+</div>
+
+<script>
+// ============ NAV & UTILS ============
+function showSection(i){document.querySelectorAll('.section').forEach((s,j)=>s.classList.toggle('active',j===i));document.querySelectorAll('.nav-btn').forEach((b,j)=>b.classList.toggle('active',j===i));}
+function toggleHelp(i){document.getElementById('help-'+i).classList.toggle('open');}
+function shuffle(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]];}return b;}
+
+// ============ TIMER ============
+const TIMER_PREFIX = 'vorstellen-a1';
+const timerState = {};
+function initTimer(idx){timerState[idx]={interval:null,seconds:0,running:false,stopped:false};}
+function startTimer(idx){const s=timerState[idx];if(s.running||s.stopped)return;s.running=true;s.interval=setInterval(()=>{s.seconds++;document.getElementById('timer-'+idx).textContent=formatTime(s.seconds);},1000);}
+function stopTimer(idx){const s=timerState[idx];if(!s.running)return;clearInterval(s.interval);s.running=false;s.stopped=true;const key=TIMER_PREFIX+'-best-'+idx;const prev=localStorage.getItem(key);if(!prev||s.seconds<parseInt(prev)){localStorage.setItem(key,s.seconds);document.getElementById('best-'+idx).textContent=formatTime(s.seconds);}}
+function resetTimer(idx){const s=timerState[idx];clearInterval(s.interval);s.seconds=0;s.running=false;s.stopped=false;document.getElementById('timer-'+idx).textContent='00:00';}
+function formatTime(sec){return String(Math.floor(sec/60)).padStart(2,'0')+':'+String(sec%60).padStart(2,'0');}
+function loadBestTimes(){document.querySelectorAll('[id^="best-"]').forEach(el=>{const idx=el.id.split('-')[1];const val=localStorage.getItem(TIMER_PREFIX+'-best-'+idx);if(val)el.textContent=formatTime(parseInt(val));});}
+
+// ============ TAB 0: WORTSCHATZ ============
+const WS=[
+    {id:1,type:"n",en:"place of residence",artikel:"der",de:"Wohnort",plural:"Wohnorte"},
+    {id:2,type:"n",en:"home country",artikel:"das",de:"Heimatland",plural:"Heimatl\u00e4nder"},
+    {id:3,type:"n",en:"ending (grammar)",artikel:"die",de:"Endung",plural:"Endungen"},
+    {id:4,type:"n",en:"colleague (m.)",artikel:"der",de:"Kollege",plural:"Kollegen"},
+    {id:5,type:"n",en:"colleague (f.)",artikel:"die",de:"Kollegin",plural:"Kolleginnen"},
+    {id:6,type:"n",en:"friend (m.)",artikel:"der",de:"Freund",plural:"Freunde"},
+    {id:7,type:"n",en:"friend (f.)",artikel:"die",de:"Freundin",plural:"Freundinnen"},
+    {id:8,type:"n",en:"sister",artikel:"die",de:"Schwester",plural:"Schwestern"},
+    {id:9,type:"n",en:"brother",artikel:"der",de:"Bruder",plural:"Br\u00fcder"},
+    {id:10,type:"v",en:"to come",de:"Kommen"},
+    {id:11,type:"v",en:"to live (reside)",de:"Wohnen"},
+    {id:12,type:"v",en:"to learn",de:"Lernen"},
+    {id:13,type:"v",en:"to write",de:"Schreiben"},
+    {id:14,type:"v",en:"to hear / listen",de:"h\u00f6ren"},
+    {id:15,type:"v",en:"to ask",de:"Fragen"},
+    {id:16,type:"v",en:"to answer",de:"Antworten"},
+    {id:17,type:"v",en:"to talk",de:"Reden"},
+    {id:18,type:"v",en:"to make / do",de:"Machen"}
+];
+function initWS(){
+    const c=document.getElementById('ws-container');c.innerHTML='';document.getElementById('score-ws').textContent='';
+    WS.forEach(w=>{
+        const d=document.createElement('div');d.className='ws-item';
+        const en=document.createElement('span');en.className='ws-en';en.textContent=w.en;d.appendChild(en);
+        d.appendChild(mkSp(' \u2192 ','ws-arrow'));
+        if(w.type==='n'){
+            d.appendChild(mkWI(w.id,0,w.artikel,'s'));d.appendChild(mkWSol(w.artikel));d.appendChild(mkSp(' '));
+            d.appendChild(mkWI(w.id,1,w.de,'m'));d.appendChild(mkWSol(w.de));d.appendChild(mkSp(', Pl.: '));
+            d.appendChild(mkWI(w.id,2,w.plural,'m'));d.appendChild(mkWSol(w.plural));
+        } else {d.appendChild(mkWI(w.id,0,w.de,'m'));d.appendChild(mkWSol(w.de));}
+        c.appendChild(d);
+    });
+}
+function mkWI(id,idx,ans,sz){const i=document.createElement('input');i.type='text';i.className='ws-input '+sz;i.dataset.answer=ans;i.autocomplete='off';i.spellcheck=false;i.onfocus=function(){startTimer(0);};return i;}
+function mkWSol(t){const s=document.createElement('span');s.className='ws-sol';s.textContent=t;return s;}
+function mkSp(t,cl){const s=document.createElement('span');s.className=cl||'ws-sep';s.textContent=t;return s;}
+function checkWS(){stopTimer(0);let ok=0,tot=0;document.querySelectorAll('.ws-input').forEach(i=>{tot++;const v=i.value.trim(),c=v.toLowerCase()===i.dataset.answer.toLowerCase();i.classList.toggle('correct',c);i.classList.toggle('wrong',!c&&v!=='');if(c)ok++;});document.getElementById('score-ws').textContent=ok+' von '+tot+' richtig';}
+function showWS(){stopTimer(0);let t=0;document.querySelectorAll('.ws-input').forEach(i=>{t++;i.value=i.dataset.answer;i.classList.add('correct');i.classList.remove('wrong');i.disabled=true;});document.getElementById('score-ws').textContent=t+' von '+t+' richtig';}
+function resetWS(){resetTimer(0);initWS();}
+
+// ============ TAB 1: ZUORDNUNG (Wie geht's?) ============
+const ZU=[
+    {word:"Sehr gut.",cat:"gut"},{word:"Prima.",cat:"gut"},{word:"Gut, danke.",cat:"gut"},
+    {word:"So lala.",cat:"geht"},{word:"Es geht.",cat:"geht"},
+    {word:"Schlecht.",cat:"schlecht"},{word:"Nicht so gut.",cat:"schlecht"},{word:"Ich bin krank.",cat:"schlecht"}
+];
+let zuSel=null;
+function initZU(){
+    zuSel=null;document.getElementById('score-zu').textContent='';
+    const bank=document.getElementById('zu-bank');bank.innerHTML='';
+    document.querySelectorAll('#sec-1 .drop-zone').forEach(dz=>dz.innerHTML='');
+    shuffle(ZU).forEach((item,idx)=>{
+        const ch=document.createElement('div');ch.className='chip';ch.textContent=item.word;
+        ch.dataset.cat=item.cat;ch.dataset.idx=idx;ch.draggable=true;
+        ch.addEventListener('dragstart',e=>{e.dataTransfer.setData('text/plain',idx);ch.style.opacity='0.5';startTimer(1);});
+        ch.addEventListener('dragend',()=>ch.style.opacity='1');
+        ch.addEventListener('click',()=>{startTimer(1);if(zuSel===ch){ch.classList.remove('zu-selected');zuSel=null;return;}if(zuSel)zuSel.classList.remove('zu-selected');zuSel=ch;ch.classList.add('zu-selected');});
+        bank.appendChild(ch);
+    });
+    document.querySelectorAll('#sec-1 .drop-zone').forEach(dz=>{
+        dz.addEventListener('dragover',e=>{e.preventDefault();dz.classList.add('over');});
+        dz.addEventListener('dragleave',()=>dz.classList.remove('over'));
+        dz.addEventListener('drop',e=>{e.preventDefault();dz.classList.remove('over');const id=e.dataTransfer.getData('text/plain');const ch=document.querySelector(`.chip[data-idx="${id}"]`);if(ch){ch.classList.remove('correct','wrong');dz.appendChild(ch);}});
+        dz.addEventListener('click',()=>{if(zuSel){zuSel.classList.remove('correct','wrong','zu-selected');dz.appendChild(zuSel);zuSel=null;}});
+    });
+    bank.addEventListener('dragover',e=>e.preventDefault());
+    bank.addEventListener('drop',e=>{e.preventDefault();const id=e.dataTransfer.getData('text/plain');const ch=document.querySelector(`.chip[data-idx="${id}"]`);if(ch){ch.classList.remove('correct','wrong');bank.appendChild(ch);}});
+    bank.addEventListener('click',e=>{if(zuSel&&e.target===bank){zuSel.classList.remove('correct','wrong','zu-selected');bank.appendChild(zuSel);zuSel=null;}});
+}
+function checkZU(){stopTimer(1);let ok=0,tot=0;document.querySelectorAll('#sec-1 .drop-zone .chip').forEach(ch=>{tot++;const cat=ch.closest('.category').dataset.cat;const c=ch.dataset.cat===cat;ch.classList.toggle('correct',c);ch.classList.toggle('wrong',!c);if(c)ok++;});tot+=document.querySelectorAll('#zu-bank .chip').length;document.getElementById('score-zu').textContent=ok+' von '+ZU.length+' richtig';}
+function showZU(){stopTimer(1);document.querySelectorAll('#sec-1 .chip').forEach(ch=>{const dz=document.querySelector(`#sec-1 .category[data-cat="${ch.dataset.cat}"] .drop-zone`);if(dz){ch.classList.add('correct');ch.classList.remove('wrong');dz.appendChild(ch);}});document.getElementById('score-zu').textContent=ZU.length+' von '+ZU.length+' richtig';}
+function resetZU(){resetTimer(1);initZU();}
+
+// ============ TAB 2: KONJUGATION (Lückentext) ============
+const LUECKEN = [
+    {id:1, verb:"antworten", segments:[
+        {t:"Ihr "},{b:"antwortet",s:"l"},{t:" auf die Fragen."}
+    ]},
+    {id:2, verb:"sprechen", segments:[
+        {t:"Frau \u00d6zgun, Sie "},{b:"sprechen",s:"l"},{t:" sehr gut Deutsch."}
+    ]},
+    {id:3, verb:"fragen", segments:[
+        {t:"Ich "},{b:"frage",s:"m"},{t:" meine Lehrerin."}
+    ]},
+    {id:4, verb:"schreiben", segments:[
+        {t:"Die Kinder "},{b:"schreiben",s:"l"},{t:" das Alphabet."}
+    ]},
+    {id:5, verb:"h\u00f6ren", segments:[
+        {t:"Frank "},{b:"h\u00f6rt",s:"m"},{t:" gerne klassische Musik."}
+    ]},
+    {id:6, verb:"wohnen", segments:[
+        {t:"Wir "},{b:"wohnen",s:"m"},{t:" in Berlin."}
+    ]},
+    {id:7, verb:"kommen", segments:[
+        {t:"Woher "},{b:"kommst",s:"m"},{t:" du?"}
+    ]},
+    {id:8, verb:"lernen", segments:[
+        {t:"Ich "},{b:"lerne",s:"m"},{t:" Deutsch."}
+    ]},
+    {id:9, verb:"leben", segments:[
+        {t:"Wo "},{b:"lebst",s:"m"},{t:" du?"}
+    ]},
+    {id:10, verb:"hei\u00dfen", segments:[
+        {t:"Wie "},{b:"hei\u00dfen",s:"m"},{t:" Sie?"}
+    ]}
+];
+
+function renderLuecken(){
+    const c=document.getElementById('luecken-container');c.innerHTML='';
+    LUECKEN.forEach(ex=>{
+        const card=document.createElement('div');card.className='ex-card';
+        const sentence=document.createElement('div');sentence.className='ex-sentence';
+        const num=document.createElement('span');num.className='ex-num';num.textContent=ex.id+'.';
+        sentence.appendChild(num);
+        const badge=document.createElement('span');badge.className='badge';badge.textContent=ex.verb;
+        let skipNext=false;
+        ex.segments.forEach((seg,si)=>{
+            if(skipNext){skipNext=false;return;}
+            if(seg.t!==undefined){
+                const next=ex.segments[si+1];
+                const frag=seg.t.length>0&&!seg.t.endsWith(' ')&&seg.t!=='.'&&next&&next.b!==undefined;
+                if(frag){
+                    const group=document.createElement('span');group.className='nowrap-group';
+                    const sp=document.createElement('span');sp.textContent=seg.t;group.appendChild(sp);
+                    const inp=document.createElement('input');inp.type='text';inp.className='blank '+next.s;
+                    inp.dataset.answer=next.b;inp.autocomplete='off';inp.spellcheck=false;
+                    inp.onfocus=function(){startTimer(2);};
+                    group.appendChild(inp);sentence.appendChild(group);skipNext=true;
+                } else {
+                    const sp=document.createElement('span');sp.textContent=seg.t;sentence.appendChild(sp);
+                }
+            } else {
+                const inp=document.createElement('input');inp.type='text';inp.className='blank '+seg.s;
+                inp.dataset.answer=seg.b;inp.autocomplete='off';inp.spellcheck=false;
+                inp.onfocus=function(){startTimer(2);};
+                sentence.appendChild(inp);
+            }
+        });
+        sentence.appendChild(badge);
+        card.appendChild(sentence);c.appendChild(card);
+    });
+}
+
+function checkLuecken(){
+    stopTimer(2);
+    let correct=0,total=0;
+    document.querySelectorAll('#sec-2 input.blank').forEach(inp=>{
+        inp.classList.remove('correct','wrong');
+        const user=inp.value.trim().toLowerCase();
+        const answer=inp.dataset.answer.toLowerCase();
+        total++;
+        if(user===answer){inp.classList.add('correct');correct++;}
+        else{inp.classList.add('wrong');}
+    });
+    document.getElementById('lueckenScore').textContent=correct+' von '+total+' richtig';
+}
+
+function showLueckenLoesung(){
+    stopTimer(2);
+    let total=0;
+    document.querySelectorAll('#sec-2 input.blank').forEach(inp=>{
+        total++;
+        const user=inp.value.trim().toLowerCase();
+        const answer=inp.dataset.answer.toLowerCase();
+        const next=inp.nextElementSibling;
+        if(next&&next.classList.contains('correction-hint'))next.remove();
+        if(user===answer){
+            inp.classList.remove('wrong');inp.classList.add('correct');
+        } else {
+            inp.classList.add('wrong');
+            const hint=document.createElement('span');
+            hint.className='correction-hint';
+            hint.textContent=inp.dataset.answer;
+            inp.insertAdjacentElement('afterend',hint);
+        }
+    });
+    document.getElementById('lueckenScore').textContent=total+' von '+total+' richtig';
+}
+
+function resetLuecken(){resetTimer(2);renderLuecken();document.getElementById('lueckenScore').textContent='';}
+
+// ============ TAB 3: SATZBAU ============
+const SB=[
+    {id:1,parts:["wir","kommen","aus Deutschland"],valid:[["wir","kommen","aus Deutschland"]]},
+    {id:2,parts:["wir","wohnen","in Tokio"],valid:[["wir","wohnen","in Tokio"]]},
+    {id:3,parts:["sie","kommt","aus Australien"],valid:[["sie","kommt","aus Australien"]]},
+    {id:4,parts:["sie","wohnt","in Barcelona"],valid:[["sie","wohnt","in Barcelona"]]},
+    {id:5,parts:["sie","kommen","aus den USA"],valid:[["sie","kommen","aus den USA"]]},
+    {id:6,parts:["sie","wohnen","in Toronto"],valid:[["sie","wohnen","in Toronto"]]},
+    {id:7,parts:["ich","hei\u00dfe","Maria"],valid:[["ich","hei\u00dfe","Maria"]]},
+    {id:8,parts:["er","kommt","aus England"],valid:[["er","kommt","aus England"]]},
+    {id:9,parts:["wo","wohnst","du"],valid:[["wo","wohnst","du"]]},
+    {id:10,parts:["wie","hei\u00dfen","Sie"],valid:[["wie","hei\u00dfen","Sie"]]}
+];
+let sbSel=null;
+function initSB(){
+    const c=document.getElementById('sb-container');c.innerHTML='';document.getElementById('score-sb').textContent='';sbSel=null;
+    SB.forEach(ex=>{
+        const w=document.createElement('div');w.className='sb-exercise';
+        const lbl=document.createElement('div');lbl.className='sb-label';lbl.textContent='Satz '+ex.id;w.appendChild(lbl);
+        const bank=document.createElement('div');bank.className='sb-bank';bank.dataset.sbId=ex.id;
+        const row=document.createElement('div');row.className='sb-row';row.dataset.sbId=ex.id;
+        const dot=document.createElement('span');dot.className='fixed-dot';dot.textContent='.';row.appendChild(dot);
+        shuffle(ex.parts).forEach(p=>{
+            const ch=document.createElement('div');ch.className='sb-chip';ch.textContent=p;ch.dataset.orig=p;ch.dataset.sbId=ex.id;ch.draggable=true;
+            ch.addEventListener('dragstart',e=>{e.dataTransfer.setData('text/plain',p);e.dataTransfer.setData('sb-id',ex.id);ch.style.opacity='0.5';startTimer(3);});
+            ch.addEventListener('dragend',()=>ch.style.opacity='1');
+            ch.addEventListener('click',()=>{startTimer(3);handleSbClick(ch,ex.id);});
+            bank.appendChild(ch);
+        });
+        row.addEventListener('dragover',e=>{e.preventDefault();row.classList.add('over');});
+        row.addEventListener('dragleave',()=>row.classList.remove('over'));
+        row.addEventListener('drop',e=>{
+            e.preventDefault();row.classList.remove('over');
+            const pt=e.dataTransfer.getData('text/plain'),sid=e.dataTransfer.getData('sb-id');
+            if(String(sid)!==String(ex.id))return;
+            const ch=[...document.querySelectorAll(`.sb-chip[data-sb-id="${ex.id}"]`)].find(c=>c.dataset.orig===pt);
+            if(!ch)return;ch.classList.remove('correct','wrong');
+            const chips=[...row.querySelectorAll('.sb-chip')];let ins=false;
+            for(const x of chips){if(x===ch)continue;const r=x.getBoundingClientRect();if(e.clientX<r.left+r.width/2){row.insertBefore(ch,x);ins=true;break;}}
+            if(!ins)row.insertBefore(ch,dot);updateCaps(ex.id);
+        });
+        bank.addEventListener('dragover',e=>e.preventDefault());
+        bank.addEventListener('drop',e=>{
+            e.preventDefault();const pt=e.dataTransfer.getData('text/plain'),sid=e.dataTransfer.getData('sb-id');
+            if(String(sid)!==String(ex.id))return;
+            const ch=[...document.querySelectorAll(`.sb-chip[data-sb-id="${ex.id}"]`)].find(c=>c.dataset.orig===pt);
+            if(ch){ch.classList.remove('correct','wrong');bank.appendChild(ch);updateCaps(ex.id);}
+        });
+        w.appendChild(bank);w.appendChild(row);c.appendChild(w);
+    });
+}
+function handleSbClick(chip,exId){
+    const row=document.querySelector(`.sb-row[data-sb-id="${exId}"]`),bank=document.querySelector(`.sb-bank[data-sb-id="${exId}"]`),dot=row.querySelector('.fixed-dot');
+    const inRow=chip.parentElement===row,inBank=chip.parentElement===bank;
+    if(sbSel===chip){chip.classList.remove('selected');sbSel=null;return;}
+    if(sbSel&&sbSel.dataset.sbId===String(exId)){if(sbSel.parentElement===row&&inRow){row.insertBefore(sbSel,chip);sbSel.classList.remove('selected');sbSel=null;updateCaps(exId);return;}sbSel.classList.remove('selected');sbSel=null;}
+    if(inBank){chip.classList.remove('correct','wrong');row.insertBefore(chip,dot);updateCaps(exId);}
+    else if(inRow){sbSel=chip;chip.classList.add('selected');const rh=()=>{if(sbSel===chip){chip.classList.remove('selected','correct','wrong');bank.appendChild(chip);sbSel=null;updateCaps(exId);}bank.removeEventListener('click',rh);};bank.addEventListener('click',rh);}
+}
+function updateCaps(exId){
+    const row=document.querySelector(`.sb-row[data-sb-id="${exId}"]`),bank=document.querySelector(`.sb-bank[data-sb-id="${exId}"]`);
+    [...row.querySelectorAll('.sb-chip'),...bank.querySelectorAll('.sb-chip')].forEach(c=>{if(c.dataset.orig)c.textContent=c.dataset.orig;});
+    const f=row.querySelector('.sb-chip');
+    if(f&&f.textContent!=='.')f.textContent=f.textContent.charAt(0).toUpperCase()+f.textContent.slice(1);
+}
+function checkSB(){stopTimer(3);let ok=0;SB.forEach(ex=>{const row=document.querySelector(`.sb-row[data-sb-id="${ex.id}"]`);const chips=[...row.querySelectorAll('.sb-chip')];const order=chips.map(c=>c.dataset.orig);const valid=ex.valid.some(v=>v.length===order.length&&v.every((p,i)=>p===order[i]));chips.forEach(c=>{c.classList.toggle('correct',valid);c.classList.toggle('wrong',!valid);});if(valid)ok++;});document.getElementById('score-sb').textContent=ok+' von '+SB.length+' richtig';}
+function showSB(){stopTimer(3);SB.forEach(ex=>{const row=document.querySelector(`.sb-row[data-sb-id="${ex.id}"]`),bank=document.querySelector(`.sb-bank[data-sb-id="${ex.id}"]`),dot=row.querySelector('.fixed-dot');[...row.querySelectorAll('.sb-chip')].forEach(c=>bank.appendChild(c));ex.valid[0].forEach(p=>{const ch=[...bank.querySelectorAll('.sb-chip')].find(c=>c.dataset.orig===p);if(ch){ch.classList.add('correct');ch.classList.remove('wrong');row.insertBefore(ch,dot);}});updateCaps(ex.id);});document.getElementById('score-sb').textContent=SB.length+' von '+SB.length+' richtig';}
+function resetSB(){resetTimer(3);initSB();}
+
+// ============ INIT ============
+for(let i=0;i<4;i++)initTimer(i);
+initWS();initZU();renderLuecken();initSB();loadBestTimes();
+</script>
+</body>
+</html>

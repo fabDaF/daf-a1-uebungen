@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>telc Deutsch A1 – Prüfungsübersicht</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&display=swap');
+  :root{--primary:#2d3a8c;--primary-light:#4a5bc7;--accent:#e8850c;--accent-light:#f5a623;--bg:#f8f7f4;--card-bg:#fff;--text:#2c2c2c;--text-light:#6b6b6b;--border:#e2e0dc;--success:#2d8c5a;--hoeren:#3b82f6;--lesen:#8b5cf6;--schreiben:#10b981;--sprechen:#f59e0b;}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);line-height:1.65;min-height:100vh;}
+  /* ══ LANGUAGE TOGGLE SYSTEM ══ */
+  body.lang-de .t.en{display:none}body.lang-en .t.de{display:none}
+  .lang-switch{position:fixed;top:12px;right:12px;z-index:1000;display:flex;background:rgba(255,255,255,.95);border:1px solid var(--border);border-radius:8px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.12);backdrop-filter:blur(8px);}
+  .lang-btn{padding:.45rem .7rem;font-size:.8rem;font-weight:600;border:none;background:transparent;cursor:pointer;color:var(--text-light);transition:all .2s;display:flex;align-items:center;gap:.3rem;}
+  .lang-btn:first-child{border-right:1px solid var(--border);}.lang-btn.active{background:var(--primary);color:#fff;}
+  .hero{background:linear-gradient(135deg,var(--primary) 0%,#1a2460 50%,#0f1740 100%);color:#fff;padding:2.5rem 1.5rem 2rem;text-align:center;position:relative;overflow:hidden;}
+  .hero::before{content:'';position:absolute;top:-50%;right:-20%;width:400px;height:400px;background:radial-gradient(circle,rgba(232,133,12,.15) 0%,transparent 70%);border-radius:50%;}
+  .hero-badge{display:inline-block;background:var(--accent);color:#fff;font-size:.8rem;font-weight:700;letter-spacing:.1em;padding:.3em 1em;border-radius:4px;text-transform:uppercase;margin-bottom:.8rem;}
+  .hero h1{font-family:'Source Serif 4',serif;font-size:clamp(1.6rem,5vw,2.4rem);font-weight:700;margin-bottom:.3rem;position:relative;}
+  .hero p{font-size:.95rem;opacity:.85;max-width:520px;margin:0 auto;}
+  .container{max-width:860px;margin:0 auto;padding:1.5rem 1rem;}
+  .format-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem;}
+  @media(max-width:600px){.format-grid{grid-template-columns:1fr;}}
+  .format-card{background:var(--card-bg);border-radius:12px;padding:1.2rem;border:1px solid var(--border);position:relative;overflow:hidden;transition:transform .2s;}
+  .format-card:hover{transform:translateY(-2px);}
+  .format-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;}
+  .format-card.schriftlich::before{background:linear-gradient(90deg,var(--primary),var(--primary-light));}
+  .format-card.muendlich::before{background:linear-gradient(90deg,var(--accent),var(--accent-light));}
+  .format-card h3{font-family:'Source Serif 4',serif;font-size:1.1rem;margin-bottom:.6rem;display:flex;align-items:center;gap:.5rem;}
+  .format-table{width:100%;border-collapse:collapse;font-size:.85rem;}
+  .format-table th{text-align:left;font-weight:600;color:var(--text-light);font-size:.75rem;text-transform:uppercase;letter-spacing:.05em;padding:.4rem 0;border-bottom:1px solid var(--border);}
+  .format-table td{padding:.5rem 0;border-bottom:1px solid #f0eeea;}.format-table td:last-child{text-align:right;font-weight:600;}
+  .pts{background:var(--primary);color:#fff;font-size:.75rem;padding:.15em .5em;border-radius:4px;font-weight:700;}.pts.accent{background:var(--accent);}
+  .bewertung-bar{background:var(--card-bg);border-radius:12px;padding:1.2rem;border:1px solid var(--border);margin-bottom:1.5rem;}
+  .bewertung-bar h3{font-family:'Source Serif 4',serif;font-size:1rem;margin-bottom:.8rem;}
+  .grade-row{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.5rem;}
+  .grade-chip{flex:1;min-width:90px;text-align:center;padding:.5rem .3rem;border-radius:8px;font-size:.78rem;font-weight:600;line-height:1.3;}
+  .grade-chip .label{display:block;font-size:.7rem;font-weight:400;opacity:.8;margin-top:2px;}
+  .grade-chip.sg{background:#dcfce7;color:#166534;}.grade-chip.g{background:#dbeafe;color:#1e40af;}.grade-chip.bf{background:#fef3c7;color:#92400e;}.grade-chip.ar{background:#fde68a;color:#78350f;border:2px solid #f59e0b;}.grade-chip.tn{background:#fee2e2;color:#991b1b;}
+  .bestehen-info{text-align:center;font-size:.85rem;color:var(--text-light);margin-top:.5rem;padding-top:.5rem;border-top:1px dashed var(--border);}.bestehen-info strong{color:var(--success);font-size:1rem;}
+  .section-title{font-family:'Source Serif 4',serif;font-size:1.3rem;font-weight:700;margin-bottom:1rem;text-align:center;color:var(--primary);}
+  .tab-nav{display:flex;gap:0;border-bottom:2px solid var(--border);overflow-x:auto;}
+  .tab-btn{flex:1;min-width:0;padding:.7rem .5rem;text-align:center;font-size:.82rem;font-weight:600;background:transparent;border:none;cursor:pointer;color:var(--text-light);border-bottom:3px solid transparent;margin-bottom:-2px;transition:all .2s;white-space:nowrap;}
+  .tab-btn:hover{color:var(--text);}.tab-btn.active{color:var(--primary);border-bottom-color:var(--primary);}
+  .tab-btn .tab-icon{display:block;font-size:1.3rem;margin-bottom:.15rem;}
+  .tab-btn[data-tab="0"].active{color:var(--hoeren);border-bottom-color:var(--hoeren);}
+  .tab-btn[data-tab="1"].active{color:var(--lesen);border-bottom-color:var(--lesen);}
+  .tab-btn[data-tab="2"].active{color:var(--schreiben);border-bottom-color:var(--schreiben);}
+  .tab-btn[data-tab="3"].active{color:var(--sprechen);border-bottom-color:var(--sprechen);}
+  .tab-btn[data-tab="4"].active{color:var(--success);border-bottom-color:var(--success);}
+  .tab-panel{display:none;background:var(--card-bg);border:1px solid var(--border);border-top:none;border-radius:0 0 12px 12px;padding:1.5rem;animation:fadeIn .3s;}
+  .tab-panel.active{display:block;}@keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+  .teil-card{background:#fafaf8;border:1px solid var(--border);border-radius:10px;padding:1rem 1.2rem;margin-bottom:1rem;}.teil-card:last-child{margin-bottom:0;}
+  .teil-card h4{font-family:'Source Serif 4',serif;font-size:1rem;margin-bottom:.4rem;display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;}
+  .teil-tag{font-size:.7rem;font-weight:700;padding:.15em .6em;border-radius:4px;text-transform:uppercase;letter-spacing:.05em;}
+  .teil-tag.hoeren{background:#dbeafe;color:#1e40af;}.teil-tag.lesen{background:#ede9fe;color:#5b21b6;}.teil-tag.schreiben{background:#d1fae5;color:#065f46;}.teil-tag.sprechen{background:#fef3c7;color:#92400e;}
+  .teil-card p{font-size:.88rem;margin-bottom:.5rem;}
+  .teil-meta{display:flex;gap:1rem;flex-wrap:wrap;margin-top:.6rem;padding-top:.6rem;border-top:1px dashed #e0ded8;font-size:.8rem;color:var(--text-light);}
+  .teil-meta span{display:flex;align-items:center;gap:.3rem;}
+  .beispiel{background:#f0f4ff;border-left:3px solid var(--primary-light);padding:.7rem 1rem;border-radius:0 6px 6px 0;margin:.6rem 0;font-size:.85rem;}
+  .beispiel.green{background:#ecfdf5;border-left-color:var(--success);}.beispiel.orange{background:#fffbeb;border-left-color:var(--accent);}
+  .beispiel strong{display:block;font-size:.78rem;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.25rem;}
+  .de-ex{font-style:italic;color:#1a1a1a;}
+  .themen-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:.5rem;margin:.6rem 0;}
+  .themen-chip{background:#fff;border:1px solid var(--border);border-radius:6px;padding:.4rem .6rem;font-size:.8rem;text-align:center;}
+  .roadmap-item{display:flex;gap:1rem;margin-bottom:1rem;align-items:flex-start;}
+  .roadmap-num{width:32px;height:32px;border-radius:50%;background:var(--primary);color:#fff;font-weight:700;font-size:.85rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .roadmap-content{flex:1;}.roadmap-content h4{font-size:.95rem;margin-bottom:.15rem;}.roadmap-content p{font-size:.82rem;color:var(--text-light);}
+  .roadmap-tags{display:flex;gap:.3rem;flex-wrap:wrap;margin-top:.3rem;}
+  .roadmap-tag{font-size:.7rem;padding:.15em .5em;border-radius:3px;font-weight:600;}
+  .roadmap-tag.h{background:#dbeafe;color:#1e40af;}.roadmap-tag.l{background:#ede9fe;color:#5b21b6;}.roadmap-tag.s{background:#d1fae5;color:#065f46;}.roadmap-tag.sp{background:#fef3c7;color:#92400e;}.roadmap-tag.grey{background:#f3f4f6;color:#6b7280;}
+  .hinweis-box{background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:.8rem 1rem;font-size:.85rem;margin-top:1rem;display:flex;gap:.5rem;align-items:flex-start;}
+  .hinweis-box .hw-icon{font-size:1.2rem;flex-shrink:0;}
+  .footer{text-align:center;padding:1.5rem;font-size:.78rem;color:var(--text-light);border-top:1px solid var(--border);margin-top:1rem;}
+</style>
+</head>
+<body class="lang-de">
+<div class="lang-switch">
+  <button class="lang-btn active" id="btn-de" onclick="setLang('de')">🇩🇪 DE</button>
+  <button class="lang-btn" id="btn-en" onclick="setLang('en')">🇬🇧 EN</button>
+</div>
+
+<div class="hero">
+  <div class="hero-badge"><span class="t de">Prüfungsvorbereitung</span><span class="t en">Exam Preparation</span></div>
+  <h1>telc Deutsch A1</h1>
+  <p><span class="t de">Start Deutsch 1 – Komplettübersicht aller Prüfungsteile, Aufgabenformate und Bewertungskriterien</span><span class="t en">Start Deutsch 1 – Complete overview of all exam sections, task formats and grading criteria</span></p>
+</div>
+<div class="container">
+<div class="format-grid">
+  <div class="format-card schriftlich">
+    <h3>✍️ <span class="t de">Schriftliche Prüfung</span><span class="t en">Written Exam</span></h3>
+    <table class="format-table">
+      <tr><th><span class="t de">Subtest</span><span class="t en">Section</span></th><th><span class="t de">Zeit</span><span class="t en">Time</span></th><th><span class="t de">Punkte</span><span class="t en">Points</span></th></tr>
+      <tr><td>1 – Hören <span class="t en">(Listening)</span></td><td><span class="t de">ca. 20 Min.</span><span class="t en">~20 min</span></td><td><span class="pts">15</span></td></tr>
+      <tr><td>2 – Lesen <span class="t en">(Reading)</span></td><td rowspan="2">45 Min.</td><td><span class="pts">15</span></td></tr>
+      <tr><td>3 – Schreiben <span class="t en">(Writing)</span></td><td><span class="pts">15</span></td></tr>
+      <tr><td colspan="2" style="font-weight:600"><span class="t de">Gesamt schriftlich</span><span class="t en">Written total</span></td><td><span class="pts">45</span></td></tr>
+    </table>
+  </div>
+  <div class="format-card muendlich">
+    <h3>🗣️ <span class="t de">Mündliche Prüfung</span><span class="t en">Oral Exam</span></h3>
+    <table class="format-table">
+      <tr><th><span class="t de">Subtest</span><span class="t en">Section</span></th><th><span class="t de">Zeit</span><span class="t en">Time</span></th><th><span class="t de">Punkte</span><span class="t en">Points</span></th></tr>
+      <tr><td><span class="t de">Sich vorstellen</span><span class="t en">Introduce yourself</span></td><td><span class="t de">ca. 3 Min.</span><span class="t en">~3 min</span></td><td rowspan="3"><span class="pts accent">15</span></td></tr>
+      <tr><td><span class="t de">Informationen erfragen</span><span class="t en">Ask for information</span></td><td><span class="t de">ca. 4 Min.</span><span class="t en">~4 min</span></td></tr>
+      <tr><td><span class="t de">Bitten formulieren</span><span class="t en">Make requests</span></td><td><span class="t de">ca. 4 Min.</span><span class="t en">~4 min</span></td></tr>
+      <tr><td colspan="2" style="font-weight:600"><span class="t de">Gesamt mündlich</span><span class="t en">Oral total</span></td><td><span class="pts accent">15</span></td></tr>
+    </table>
+  </div>
+</div>
+<div class="bewertung-bar">
+  <h3>📊 <span class="t de">Bewertungsskala (Gesamt: 60 Punkte)</span><span class="t en">Grading Scale (Total: 60 points)</span></h3>
+  <div class="grade-row">
+    <div class="grade-chip sg">54–60<span class="label"><span class="t de">sehr gut</span><span class="t en">very good</span></span></div>
+    <div class="grade-chip g">48–53,5<span class="label"><span class="t de">gut</span><span class="t en">good</span></span></div>
+    <div class="grade-chip bf">42–47,5<span class="label"><span class="t de">befriedigend</span><span class="t en">satisfactory</span></span></div>
+    <div class="grade-chip ar">36–41,5<span class="label"><span class="t de">ausreichend ✓</span><span class="t en">sufficient ✓</span></span></div>
+    <div class="grade-chip tn">0–35,5<span class="label"><span class="t de">teilgenommen</span><span class="t en">attended</span></span></div>
+  </div>
+  <div class="bestehen-info"><span class="t de">Zum Bestehen: mindestens <strong>36 von 60 Punkten</strong> (= 60 %)</span><span class="t en">To pass: at least <strong>36 out of 60 points</strong> (= 60%)</span></div>
+</div>
+
+<h2 class="section-title"><span class="t de">Die Prüfungsteile im Detail</span><span class="t en">Exam Sections in Detail</span></h2>
+<div class="tab-nav">
+  <button class="tab-btn active" data-tab="0" onclick="showTab(0)"><span class="tab-icon">🎧</span>Hören</button>
+  <button class="tab-btn" data-tab="1" onclick="showTab(1)"><span class="tab-icon">📖</span>Lesen</button>
+  <button class="tab-btn" data-tab="2" onclick="showTab(2)"><span class="tab-icon">✏️</span>Schreiben</button>
+  <button class="tab-btn" data-tab="3" onclick="showTab(3)"><span class="tab-icon">💬</span>Sprechen</button>
+  <button class="tab-btn" data-tab="4" onclick="showTab(4)"><span class="tab-icon">🗺️</span><span class="t de">Plan</span><span class="t en">Plan</span></button>
+</div>
+
+<!-- HÖREN -->
+<div class="tab-panel active" id="tab-0">
+  <div class="teil-card"><h4><span class="teil-tag hoeren">Teil 1</span> <span class="t de">Kurze Alltagsgespräche</span><span class="t en">Short everyday conversations</span></h4>
+    <p><span class="t de">Sie hören 6 kurze Gespräche (je zweimal) und wählen das passende Bild aus drei Optionen (a, b, c).</span><span class="t en">You listen to 6 short conversations (each played twice) and choose the correct picture from three options (a, b, c).</span></p>
+    <div class="beispiel"><strong><span class="t de">Beispiel-Fragen</span><span class="t en">Example questions (always in German)</span></strong>
+      <span class="de-ex">Was kostet der Pullover?</span> → <span class="t de">Preisschild wählen</span><span class="t en">choose the price tag</span> · <span class="de-ex">Wie spät ist es?</span> → <span class="t de">Uhr wählen</span><span class="t en">choose the clock</span> · <span class="de-ex">Was isst die Frau?</span> → <span class="t de">Essen wählen</span><span class="t en">choose the food</span> · <span class="de-ex">Wohin fährt Herr Albers?</span> → <span class="t de">Ziel wählen</span><span class="t en">choose destination</span></div>
+    <div class="teil-meta"><span>📝 6 <span class="t de">Aufgaben</span><span class="t en">tasks</span></span><span>🔁 2× <span class="t de">hören</span><span class="t en">listen</span></span><span>📊 MC a/b/c <span class="t de">mit Bildern</span><span class="t en">with pictures</span></span></div></div>
+  <div class="teil-card"><h4><span class="teil-tag hoeren">Teil 2</span> <span class="t de">Ansagen und Durchsagen</span><span class="t en">Announcements</span></h4>
+    <p><span class="t de">4 kurze Ansagen (je einmal hören). Ist die Aussage richtig (+) oder falsch (–)?</span><span class="t en">4 short announcements (each played once). Is the statement true (+) or false (–)?</span></p>
+    <div class="beispiel"><strong><span class="t de">Beispiel-Aussagen</span><span class="t en">Example statements (always in German)</span></strong>
+      <span class="de-ex">„Die Kunden sollen die Weihnachtsfeier besuchen."</span> · <span class="de-ex">„Die Fahrgäste sollen im Zug bleiben."</span> · <span class="de-ex">„Der Herr soll sofort zum Schalter kommen."</span></div>
+    <div class="teil-meta"><span>📝 4 <span class="t de">Aufgaben</span><span class="t en">tasks</span></span><span>1× <span class="t de">hören</span><span class="t en">listen</span></span><span>📊 <span class="t de">Richtig/Falsch</span><span class="t en">True/False</span></span></div></div>
+  <div class="teil-card"><h4><span class="teil-tag hoeren">Teil 3</span> <span class="t de">Telefonansagen &amp; Nachrichten</span><span class="t en">Phone messages &amp; voicemails</span></h4>
+    <p><span class="t de">5 Nachrichten (je zweimal), z.B. Anrufbeantworter. Richtige Antwort wählen (a, b, c).</span><span class="t en">5 messages (each played twice), e.g. voicemails. Choose the correct answer (a, b, c).</span></p>
+    <div class="beispiel"><strong><span class="t de">Beispiel-Fragen</span><span class="t en">Example questions (always in German)</span></strong>
+      <span class="de-ex">Die Nummer ist: 11833 / 11883 / 12833?</span> · <span class="de-ex">Wo treffen sich die Männer?</span> · <span class="de-ex">Was ist kaputt?</span></div>
+    <div class="teil-meta"><span>📝 5 <span class="t de">Aufgaben</span><span class="t en">tasks</span></span><span>🔁 2× <span class="t de">hören</span><span class="t en">listen</span></span><span>📊 MC a/b/c</span></div></div>
+  <div class="hinweis-box"><span class="hw-icon">💡</span><div><span class="t de"><strong>Tipp:</strong> Wir können Zahlen, Uhrzeiten und Wochentage gezielt üben – die häufigsten Stolpersteine. Die Hörtexte liegen als Transkripte vor und eignen sich als Lese-Übung.</span><span class="t en"><strong>Tip:</strong> We can specifically practise numbers, times and days of the week – the most common pitfalls. The listening transcripts are available and work well as reading exercises.</span></div></div>
+</div>
+
+<!-- LESEN -->
+<div class="tab-panel" id="tab-1">
+  <div class="teil-card"><h4><span class="teil-tag lesen">Teil 1</span> <span class="t de">Kurze persönliche Mitteilungen</span><span class="t en">Short personal messages</span></h4>
+    <p><span class="t de">Zwei kurze Texte (E-Mails, Briefe, Einladungen) lesen. Bei je 2–3 Aussagen entscheiden: richtig (+) oder falsch (–)?</span><span class="t en">Read two short texts (e-mails, letters, invitations). Decide for 2–3 statements each: true (+) or false (–)?</span></p>
+    <div class="beispiel"><strong><span class="t de">Beispiel</span><span class="t en">Example</span></strong>
+      <span class="de-ex">„Dein Zug kommt in Hannover um 12:36 Uhr an. Ich warte auf dich vor der Auskunft."</span><br>
+      <span class="t de"><em>Aussage:</em> <span class="de-ex">„Lis Zug kommt nach halb eins an."</span> → richtig (+), denn 12:36 ist nach 12:30.</span><span class="t en"><em>Statement:</em> <span class="de-ex">„Lis Zug kommt nach halb eins an."</span> → true (+), because 12:36 is after 12:30.</span></div>
+    <div class="teil-meta"><span>📝 5 <span class="t de">Aufgaben</span><span class="t en">tasks</span></span><span>📊 <span class="t de">Richtig/Falsch</span><span class="t en">True/False</span></span><span>🔑 <span class="t de">Detailverständnis</span><span class="t en">Detail comprehension</span></span></div></div>
+  <div class="teil-card"><h4><span class="teil-tag lesen">Teil 2</span> <span class="t de">Anzeigen zuordnen</span><span class="t en">Match ads</span></h4>
+    <p><span class="t de">5 Situationen lesen, passende Anzeige/Webseite wählen (a oder b).</span><span class="t en">Read 5 situations, choose the matching ad/website (a or b).</span></p>
+    <div class="beispiel"><strong><span class="t de">Beispiel</span><span class="t en">Example</span></strong>
+      <span class="de-ex">„Sie möchten Deutsch in Deutschland lernen."</span><br>
+      a) Sprachinstitut Fuchs, Dresden · b) Eviva-Idiomas – <span class="t de">Sprachkurse für Deutsche</span><span class="t en">courses for Germans abroad</span> → <strong>a</strong></div>
+    <div class="teil-meta"><span>📝 5 <span class="t de">Aufgaben</span><span class="t en">tasks</span></span><span>📊 a/b</span><span>🔑 <span class="t de">Selektives Lesen</span><span class="t en">Selective reading</span></span></div></div>
+  <div class="teil-card"><h4><span class="teil-tag lesen">Teil 3</span> <span class="t de">Alltagstexte (Schilder, Öffnungszeiten)</span><span class="t en">Everyday texts (signs, hours)</span></h4>
+    <p><span class="t de">5 kurze Alltagstexte lesen und richtig/falsch entscheiden.</span><span class="t en">Read 5 short everyday texts and decide true/false.</span></p>
+    <div class="beispiel"><strong><span class="t de">Beispiel</span><span class="t en">Example</span></strong>
+      <span class="de-ex">Post – Mo–Fr 8–12 und 13–18 Uhr, Sa 8–12 Uhr.</span><br>
+      <span class="t de"><span class="de-ex">„Samstagnachmittag – Briefmarken kaufen?"</span> → <strong>falsch</strong>, Sa nur bis 12 Uhr.</span><span class="t en"><span class="de-ex">„Samstagnachmittag – Briefmarken kaufen?"</span> → <strong>false</strong>, Saturday only until 12:00.</span></div>
+    <div class="teil-meta"><span>📝 5 <span class="t de">Aufgaben</span><span class="t en">tasks</span></span><span>📊 <span class="t de">Richtig/Falsch</span><span class="t en">True/False</span></span><span>🔑 <span class="t de">Alltagsverständnis</span><span class="t en">Everyday comprehension</span></span></div></div>
+</div>
+
+<!-- SCHREIBEN -->
+<div class="tab-panel" id="tab-2">
+  <div class="teil-card"><h4><span class="teil-tag schreiben">Teil 1</span> <span class="t de">Formular ausfüllen</span><span class="t en">Fill in a form</span></h4>
+    <p><span class="t de">Situationsbeschreibung lesen, 5 fehlende Informationen ins Formular eintragen.</span><span class="t en">Read a situation description, fill in 5 missing pieces of information in a form.</span></p>
+    <div class="beispiel green"><strong><span class="t de">Beispiel</span><span class="t en">Example</span></strong>
+      <span class="t de">Eva Kadavy: Urlaub mit Mann + 2 Söhne (8+11) in Seeheim. Busfahrt, keine Kreditkarte.</span><span class="t en">Eva Kadavy: holiday with husband + 2 sons (8+11) in Seeheim. Bus trip, no credit card.</span><br>
+      → <span class="de-ex">Anzahl der Personen:</span> <strong>4</strong> · <span class="de-ex">Kinder:</span> <strong>2</strong> · <span class="de-ex">Urlaubsort:</span> <strong>Seeheim</strong> · <span class="de-ex">Zahlungsweise:</span> <strong>bar</strong> <span class="t en">(cash)</span> · <span class="de-ex">Reisetermin:</span> <strong>Sonntag</strong> <span class="t en">(Sunday)</span></div>
+    <div class="teil-meta"><span>📝 5 <span class="t de">Lücken</span><span class="t en">blanks</span></span><span>🔑 <span class="t de">Textverständnis + Formular</span><span class="t en">Reading + form skills</span></span></div></div>
+  <div class="teil-card"><h4><span class="teil-tag schreiben">Teil 2</span> <span class="t de">Kurze Mitteilung</span><span class="t en">Short message</span></h4>
+    <p><span class="t de">Kurzen Text (ca. 30 Wörter) zu einer Situation schreiben. 3 Inhaltspunkte, Anrede + Gruß!</span><span class="t en">Write a short text (~30 words) for a given situation. Cover 3 content points, include greeting + sign-off!</span></p>
+    <div class="beispiel green"><strong><span class="t de">Beispiel</span><span class="t en">Example</span></strong>
+      <span class="t de">An die Touristeninformation Dresden: Kommen im August · Kulturprogramm-Infos · Hoteladressen</span><span class="t en">To tourist info Dresden: Coming in August · Cultural programme info · Hotel addresses</span></div>
+    <div class="teil-meta"><span>📝 ~30 <span class="t de">Wörter</span><span class="t en">words</span></span><span>📊 3 <span class="t de">Inhaltspunkte</span><span class="t en">content points</span></span><span>🔑 <span class="t de">Anrede + Gruß</span><span class="t en">Greeting + sign-off</span></span></div></div>
+  <div class="hinweis-box"><span class="hw-icon">📝</span><div><span class="t de"><strong>Bewertung Teil 2:</strong> (1) Aufgabenerfüllung (2) Kommunikative Gestaltung (3) Formale Richtigkeit</span><span class="t en"><strong>Grading Part 2:</strong> (1) Task fulfilment (2) Communicative design (3) Formal accuracy</span></div></div>
+</div>
+
+<!-- SPRECHEN -->
+<div class="tab-panel" id="tab-3">
+  <div class="teil-card"><h4><span class="teil-tag sprechen">Teil 1</span> <span class="t de">Sich vorstellen (~3 Min.)</span><span class="t en">Introduce yourself (~3 min)</span></h4>
+    <p><span class="t de">Sich den Prüfenden vorstellen. Stichworte:</span><span class="t en">Introduce yourself to the examiners. Prompts:</span></p>
+    <div class="themen-grid">
+      <div class="themen-chip">👤 Name?</div><div class="themen-chip">🎂 Alter? <span class="t en" style="font-size:.7rem">(Age)</span></div>
+      <div class="themen-chip">🌍 Land? <span class="t en" style="font-size:.7rem">(Country)</span></div><div class="themen-chip">🏠 Wohnort? <span class="t en" style="font-size:.7rem">(City)</span></div>
+      <div class="themen-chip">🗣️ Sprachen? <span class="t en" style="font-size:.7rem">(Languages)</span></div><div class="themen-chip">💼 Beruf? <span class="t en" style="font-size:.7rem">(Job)</span></div>
+      <div class="themen-chip">⚽ Hobby?</div>
+    </div>
+    <div class="beispiel orange"><strong><span class="t de">Zusätzlich</span><span class="t en">Additionally</span></strong>
+      • <span class="t de">Namen/Wohnort buchstabieren</span><span class="t en">Spell your name/city</span> · <span class="t de">Telefonnummer nennen</span><span class="t en">Give your phone number</span></div></div>
+  <div class="teil-card"><h4><span class="teil-tag sprechen">Teil 2</span> <span class="t de">Informationen erfragen (~4 Min.)</span><span class="t en">Ask for information (~4 min)</span></h4>
+    <p><span class="t de">Wortkarten zu zwei Alltagsthemen ziehen → Fragen stellen und Antworten geben.</span><span class="t en">Draw word cards for two everyday topics → ask questions and give answers.</span></p>
+    <div class="themen-grid">
+      <div class="themen-chip" style="border-color:var(--hoeren)">🍽️ Essen &amp; Trinken <span class="t en" style="font-size:.7rem">(Food)</span></div>
+      <div class="themen-chip" style="border-color:var(--lesen)">🛒 Einkaufen <span class="t en" style="font-size:.7rem">(Shopping)</span></div>
+    </div>
+    <div class="beispiel orange"><strong><span class="t de">Beispiel</span><span class="t en">Example</span></strong>
+      <span class="t de">Karte „Frühstück" →</span><span class="t en">Card "Frühstück" (breakfast) →</span> <span class="de-ex">„Was essen Sie gern zum Frühstück?"</span> <span class="t en">= What do you like to eat for breakfast?</span></div></div>
+  <div class="teil-card"><h4><span class="teil-tag sprechen">Teil 3</span> <span class="t de">Bitten formulieren (~4 Min.)</span><span class="t en">Make requests (~4 min)</span></h4>
+    <p><span class="t de">Bildkarten mit Gegenständen → höfliche Bitte formulieren. Partner/in reagiert.</span><span class="t en">Picture cards with objects → formulate a polite request. Your partner responds.</span></p>
+    <div class="beispiel orange"><strong><span class="t de">Beispiel</span><span class="t en">Example</span></strong>
+      <span class="de-ex">„Könnte ich bitte ein Glas Wasser haben?"</span> <span class="t en">= Could I please have a glass of water?</span><br>
+      <span class="t de"><em>Reaktion:</em></span><span class="t en"><em>Response:</em></span> <span class="de-ex">„Hier, bitte."</span> / <span class="de-ex">„Tut mir leid, ich habe keins."</span> <span class="t en">= Here you go. / Sorry, I don't have one.</span></div></div>
+</div>
+
+<!-- ÜBUNGSPLAN -->
+<div class="tab-panel" id="tab-4">
+  <p style="font-size:.9rem;margin-bottom:1.2rem;color:var(--text-light)"><span class="t de">Interaktive HTML-Übungen für die Prüfungsvorbereitung:</span><span class="t en">Interactive HTML exercises for exam preparation:</span></p>
+
+  <div class="roadmap-item"><div class="roadmap-num">1</div><div class="roadmap-content"><h4><span class="t de">Zahlen, Uhrzeiten &amp; Wochentage</span><span class="t en">Numbers, Times &amp; Days</span></h4><p><span class="t de">Zahlen erkennen, Uhrzeiten, Wochentage, Monate.</span><span class="t en">Recognise numbers, times, days and months.</span></p><div class="roadmap-tags"><span class="roadmap-tag h">Hören T1+T3</span><span class="roadmap-tag l">Lesen T3</span><span class="roadmap-tag s">Schreiben T1</span></div></div></div>
+  <div class="roadmap-item"><div class="roadmap-num">2</div><div class="roadmap-content"><h4><span class="t de">Leseverstehen: E-Mails &amp; Briefe</span><span class="t en">Reading: E-mails &amp; Letters</span></h4><p><span class="t de">Persönliche Texte lesen, Detailfragen richtig/falsch.</span><span class="t en">Read personal texts, true/false detail questions.</span></p><div class="roadmap-tags"><span class="roadmap-tag l">Lesen T1</span></div></div></div>
+  <div class="roadmap-item"><div class="roadmap-num">3</div><div class="roadmap-content"><h4><span class="t de">Anzeigen zuordnen</span><span class="t en">Match Ads</span></h4><p><span class="t de">Situationen mit Anzeigen verbinden.</span><span class="t en">Match situations with ads.</span></p><div class="roadmap-tags"><span class="roadmap-tag l">Lesen T2</span></div></div></div>
+  <div class="roadmap-item"><div class="roadmap-num">4</div><div class="roadmap-content"><h4><span class="t de">Alltagstexte verstehen</span><span class="t en">Understand Everyday Texts</span></h4><p><span class="t de">Schilder, Öffnungszeiten, Aushänge interpretieren.</span><span class="t en">Interpret signs, opening hours, notices.</span></p><div class="roadmap-tags"><span class="roadmap-tag l">Lesen T3</span></div></div></div>
+  <div class="roadmap-item"><div class="roadmap-num">5</div><div class="roadmap-content"><h4><span class="t de">Formulare ausfüllen</span><span class="t en">Fill in Forms</span></h4><p><span class="t de">Interaktive Formular-Übung mit Rückmeldung.</span><span class="t en">Interactive form exercise with feedback.</span></p><div class="roadmap-tags"><span class="roadmap-tag s">Schreiben T1</span></div></div></div>
+  <div class="roadmap-item"><div class="roadmap-num">6</div><div class="roadmap-content"><h4><span class="t de">Kurze Mitteilungen</span><span class="t en">Short Messages</span></h4><p><span class="t de">~30 Wörter mit Anrede, Inhalt und Gruß.</span><span class="t en">~30 words with greeting, content and sign-off.</span></p><div class="roadmap-tags"><span class="roadmap-tag s">Schreiben T2</span></div></div></div>
+  <div class="roadmap-item"><div class="roadmap-num">7</div><div class="roadmap-content"><h4><span class="t de">Sich vorstellen – Satzbaukasten</span><span class="t en">Introduce Yourself – Builder</span></h4><p><span class="t de">Vorstellungssätze bauen + Buchstabieren + Nummern.</span><span class="t en">Build introduction sentences + spelling + numbers.</span></p><div class="roadmap-tags"><span class="roadmap-tag sp">Sprechen T1</span></div></div></div>
+  <div class="roadmap-item"><div class="roadmap-num">8</div><div class="roadmap-content"><h4><span class="t de">Fragen zu Alltagsthemen</span><span class="t en">Everyday Topic Questions</span></h4><p><span class="t de">W-Fragen formulieren und beantworten.</span><span class="t en">Formulate and answer W-questions.</span></p><div class="roadmap-tags"><span class="roadmap-tag sp">Sprechen T2</span></div></div></div>
+  <div class="roadmap-item"><div class="roadmap-num">9</div><div class="roadmap-content"><h4><span class="t de">Bitten &amp; Reagieren</span><span class="t en">Requests &amp; Responses</span></h4><p><span class="t de">Höfliche Bitten formulieren und Reaktionen üben.</span><span class="t en">Practise polite requests and responses.</span></p><div class="roadmap-tags"><span class="roadmap-tag sp">Sprechen T3</span></div></div></div>
+  <div class="roadmap-item"><div class="roadmap-num" style="background:var(--accent)">+</div><div class="roadmap-content"><h4><span class="t de">Wortschatz &amp; Grammatik</span><span class="t en">Vocabulary &amp; Grammar</span></h4><p><span class="t de">Artikel, Konjugation, W-Fragen, Verneinung, Alltagswortschatz.</span><span class="t en">Articles, conjugation, W-questions, negation, everyday vocabulary.</span></p><div class="roadmap-tags"><span class="roadmap-tag grey"><span class="t de">Alle Teile</span><span class="t en">All sections</span></span></div></div></div>
+
+  <div class="hinweis-box"><span class="hw-icon">🚀</span><div><span class="t de"><strong>Empfehlung:</strong> Zuerst Lesen (15 Punkte, gut trainierbar) + Schreiben Teil 1 (5 sichere Punkte). Dann Sprechen Teil 1 (Vorstellen = fast geschenkte Punkte).</span><span class="t en"><strong>Recommendation:</strong> Start with Reading (15 points, highly trainable) + Writing Part 1 (5 easy points). Then Speaking Part 1 (introducing yourself = almost guaranteed points).</span></div></div>
+</div>
+
+</div>
+<div class="footer"><span class="t de">telc Deutsch A1 – Prüfungsübersicht · Basierend auf Übungstest 1</span><span class="t en">telc Deutsch A1 – Exam overview · Based on practice test 1</span></div>
+
+<script>
+function showTab(i){document.querySelectorAll('.tab-panel').forEach((p,j)=>p.classList.toggle('active',j===i));document.querySelectorAll('.tab-btn').forEach((b,j)=>b.classList.toggle('active',j===i));}
+function setLang(l){document.body.className='lang-'+l;document.getElementById('btn-de').classList.toggle('active',l==='de');document.getElementById('btn-en').classList.toggle('active',l==='en');document.documentElement.lang=l;try{localStorage.setItem('uiLang',l)}catch(e){}}
+try{const s=localStorage.getItem('uiLang');if(s)setLang(s)}catch(e){}
+</script>
+<div class="author-footer">
+  <span class="author-name">&copy; Frank Burkert</span> &middot; DaF-Materialien &middot;
+  <a href="mailto:FrankBurkert@fabdaf.onmicrosoft.com">FrankBurkert@fabdaf.onmicrosoft.com</a>
+</div>
+</body>
+</html>

@@ -1,0 +1,1367 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modalverben Übungen A1</title>
+    <style>
+        :root {
+            --primary: #2c5f8a;
+            --accent: #e67e22;
+            --success: #27ae60;
+            --error: #e74c3c;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 20px;
+            min-height: 100vh;
+            font-size: 18px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: var(--primary);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.95;
+        }
+
+        .tabs {
+            display: flex;
+            background: #f8f9fa;
+            border-bottom: 2px solid var(--primary);
+            overflow-x: auto;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 16px 20px;
+            background: #f8f9fa;
+            border: none;
+            cursor: pointer;
+            font-size: 1em;
+            color: var(--primary);
+            font-weight: 600;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            border-bottom: 3px solid transparent;
+        }
+
+        .tab-btn:hover {
+            background: #e8eaf0;
+            color: var(--accent);
+        }
+
+        .tab-btn.active {
+            background: white;
+            color: var(--accent);
+            border-bottom-color: var(--accent);
+        }
+
+        .tab-content {
+            display: none;
+            padding: 40px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Erklärung Tab */
+        .explanation-section {
+            margin-bottom: 40px;
+        }
+
+        .explanation-section h2 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 10px;
+        }
+
+        .conjugation-tables {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .verb-table {
+            background: #f8f9fa;
+            border-left: 4px solid var(--accent);
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .verb-table h3 {
+            color: var(--primary);
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .verb-forms {
+            display: grid;
+            gap: 8px;
+        }
+
+        .verb-form {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 12px;
+            background: white;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+
+        .pronoun {
+            font-weight: 600;
+            color: var(--primary);
+            min-width: 60px;
+        }
+
+        .form {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .meaning-section {
+            background: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid var(--accent);
+            margin-top: 20px;
+            border-radius: 4px;
+        }
+
+        .meaning-section p {
+            margin: 8px 0;
+            line-height: 1.6;
+        }
+
+        .word-order-box {
+            background: #d4edda;
+            border-left: 4px solid var(--success);
+            padding: 20px;
+            margin-top: 30px;
+            border-radius: 4px;
+        }
+
+        .word-order-box h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .word-order-example {
+            background: white;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 4px;
+            border-left: 3px solid var(--primary);
+        }
+
+        /* Bedeutung Tab */
+        .matching-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .matching-column h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--accent);
+        }
+
+        .match-item {
+            background: #f8f9fa;
+            padding: 15px;
+            margin-bottom: 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 2px solid transparent;
+            user-select: none;
+        }
+
+        .match-item:hover {
+            background: #e8eaf0;
+            border-color: var(--primary);
+        }
+
+        .match-item.selected {
+            background: var(--primary);
+            color: white;
+            border-color: var(--accent);
+        }
+
+        .match-item.correct {
+            background: var(--success);
+            color: white;
+            border-color: var(--success);
+        }
+
+        .match-item.incorrect {
+            background: var(--error);
+            color: white;
+            border-color: var(--error);
+        }
+
+        /* Lückentext Tab */
+        .sentence-group {
+            background: #f8f9fa;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .sentence-group p {
+            margin-bottom: 12px;
+            line-height: 1.8;
+            word-spacing: 3px;
+        }
+
+        .gap {
+            background: white;
+            border: 2px solid var(--primary);
+            border-radius: 4px;
+            padding: 4px 8px;
+            font-weight: 600;
+            color: var(--primary);
+            display: inline-block;
+            min-width: 50px;
+            text-align: center;
+            margin: 0 4px;
+        }
+
+        .gap.s {
+            width: 50px;
+        }
+
+        .gap.m {
+            width: 90px;
+        }
+
+        .gap.l {
+            width: 150px;
+        }
+
+        .gap input {
+            width: 100%;
+            border: none;
+            background: transparent;
+            font-weight: 600;
+            color: var(--primary);
+            text-align: center;
+            font-size: 1em;
+            font-family: inherit;
+        }
+
+        .gap input:focus {
+            outline: none;
+        }
+
+        .gap.correct {
+            background: #d4edda;
+            border-color: var(--success);
+        }
+
+        .gap.incorrect {
+            background: #f8d7da;
+            border-color: var(--error);
+        }
+
+        .hint {
+            color: #666;
+            font-size: 0.9em;
+            font-style: italic;
+        }
+
+        /* Multiple Choice Tab */
+        .mc-question {
+            background: #f8f9fa;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .mc-question-text {
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 1.05em;
+        }
+
+        .mc-options {
+            display: grid;
+            gap: 10px;
+        }
+
+        .mc-option {
+            background: white;
+            padding: 12px 16px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            user-select: none;
+        }
+
+        .mc-option:hover {
+            border-color: var(--primary);
+            background: #f0f5ff;
+        }
+
+        .mc-option.selected {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .mc-option.correct {
+            background: var(--success);
+            color: white;
+            border-color: var(--success);
+        }
+
+        .mc-option.incorrect {
+            background: var(--error);
+            color: white;
+            border-color: var(--error);
+        }
+
+        /* Satzbau Tab */
+        .satzbau-container {
+            margin-bottom: 40px;
+        }
+
+        .satzbau-item {
+            background: #f8f9fa;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .sb-punkt {
+            font-size: 1.1em;
+            font-weight: 700;
+            color: #27ae60;
+            margin-left: 2px;
+            align-self: center;
+            user-select: none;
+        }
+
+        .satzbau-instruction {
+            color: #666;
+            font-size: 0.95em;
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+
+        .chip-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 15px;
+            min-height: 50px;
+            padding: 12px;
+            background: white;
+            border-radius: 6px;
+            border: 2px dashed var(--primary);
+        }
+
+        .chip {
+            background: var(--primary);
+            color: white;
+            padding: 10px 16px;
+            border-radius: 20px;
+            cursor: move;
+            user-select: none;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            touch-action: none;
+        }
+
+        .chip:hover {
+            background: var(--accent);
+            transform: scale(1.05);
+        }
+
+        .chip.dragging {
+            opacity: 0.7;
+            transform: scale(0.95);
+        }
+
+        .drop-zone {
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            padding: 15px;
+            min-height: 80px;
+            margin-bottom: 15px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-content: flex-start;
+        }
+
+        .drop-zone.drag-over {
+            background: #f0f5ff;
+            border-color: var(--primary);
+        }
+
+        .drop-zone.correct {
+            background: #d4edda;
+            border-color: var(--success);
+        }
+
+        .drop-zone.incorrect {
+            background: #f8d7da;
+            border-color: var(--error);
+        }
+
+        .drop-zone .chip {
+            cursor: pointer;
+        }
+
+        .result-badge {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            margin-top: 10px;
+            font-size: 0.95em;
+        }
+
+        .result-badge.success {
+            background: var(--success);
+            color: white;
+        }
+
+        .result-badge.error {
+            background: var(--error);
+            color: white;
+        }
+
+        /* Footer */
+        .footer {
+            background: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            color: #666;
+            border-top: 1px solid #ddd;
+            font-size: 0.95em;
+        }
+
+        /* Timer Bar */
+        .timer-bar {
+            display: flex; align-items: center; gap: 12px;
+            background: white; border-radius: 10px;
+            padding: 10px 16px; margin-bottom: 16px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.07);
+            font-size: 0.85rem; color: #666;
+        }
+        .timer-display { font-weight: 700; color: var(--primary); font-size: 1rem; }
+        .best-display  { color: var(--accent); font-weight: 600; }
+
+        /* Author Footer */
+        .author-footer {
+            text-align: center;
+            padding: 12px 20px;
+            background: #f8f9fa;
+            border-top: 1px solid #ddd;
+            font-size: 0.85em;
+            color: #666;
+        }
+
+        .author-footer a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .author-footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .matching-container {
+                grid-template-columns: 1fr;
+            }
+
+            .conjugation-tables {
+                grid-template-columns: 1fr;
+            }
+
+            .tab-btn {
+                font-size: 0.9em;
+                padding: 12px 10px;
+            }
+
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            body {
+                font-size: 16px;
+            }
+        }
+    
+/* Aliase für neues satzbau-drag-drop Pattern */
+.chips-container { display: flex; flex-wrap: wrap; gap: 8px; padding: 14px; background: #f8f8f8; border-radius: 10px; min-height: 60px; margin-bottom: 10px; }
+.sentence-builder { background: white; border: 2px dashed #ccc; border-radius: 10px; padding: 14px; min-height: 60px; margin-bottom: 12px; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.chip.incorrect { background: #e74c3c; border-color: #e74c3c; color: white; }
+.sb-punkt { font-size: 1.1em; font-weight: 700; color: #27ae60; margin-left: 2px; align-self: center; user-select: none; }
+.satzbau-feedback { font-size: 0.9em; font-weight: 600; margin-top: 6px; min-height: 1.2em; }
+.satzbau-feedback.correct { color: #27ae60; }
+.satzbau-feedback.incorrect { color: #e74c3c; }
+</style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Modalverben A1</h1>
+            <p>Wollen, dürfen, möchten, können, müssen, sollen</p>
+        </div>
+
+        <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab(0)">📖 Erklärung</button>
+            <button class="tab-btn" onclick="switchTab(1)">🔤 Bedeutung</button>
+            <button class="tab-btn" onclick="switchTab(2)">✏️ Lückentext</button>
+            <button class="tab-btn" onclick="switchTab(3)">☑️ Multiple Choice</button>
+            <button class="tab-btn" onclick="switchTab(4)">🧩 Satzbau</button>
+        </div>
+
+        <!-- TAB 1: ERKLÄRUNG -->
+        <div id="tab-0" class="tab-content active">
+            <div class="explanation-section">
+                <h2>Konjugation der Modalverben</h2>
+                <div class="conjugation-tables">
+                    <div class="verb-table">
+                        <h3>können</h3>
+                        <div class="verb-forms">
+                            <div class="verb-form"><span class="pronoun">ich</span><span class="form">kann</span></div>
+                            <div class="verb-form"><span class="pronoun">du</span><span class="form">kannst</span></div>
+                            <div class="verb-form"><span class="pronoun">er/sie/es</span><span class="form">kann</span></div>
+                            <div class="verb-form"><span class="pronoun">wir</span><span class="form">können</span></div>
+                            <div class="verb-form"><span class="pronoun">ihr</span><span class="form">könnt</span></div>
+                            <div class="verb-form"><span class="pronoun">sie/Sie</span><span class="form">können</span></div>
+                        </div>
+                        <div class="meaning-section">
+                            <p><strong>Bedeutung:</strong> Fähigkeit / Möglichkeit</p>
+                            <p><em>„Ich kann Deutsch sprechen."</em></p>
+                        </div>
+                    </div>
+
+                    <div class="verb-table">
+                        <h3>müssen</h3>
+                        <div class="verb-forms">
+                            <div class="verb-form"><span class="pronoun">ich</span><span class="form">muss</span></div>
+                            <div class="verb-form"><span class="pronoun">du</span><span class="form">musst</span></div>
+                            <div class="verb-form"><span class="pronoun">er/sie/es</span><span class="form">muss</span></div>
+                            <div class="verb-form"><span class="pronoun">wir</span><span class="form">müssen</span></div>
+                            <div class="verb-form"><span class="pronoun">ihr</span><span class="form">müsst</span></div>
+                            <div class="verb-form"><span class="pronoun">sie/Sie</span><span class="form">müssen</span></div>
+                        </div>
+                        <div class="meaning-section">
+                            <p><strong>Bedeutung:</strong> Notwendigkeit / Pflicht</p>
+                            <p><em>„Ich muss zum Arzt gehen."</em></p>
+                        </div>
+                    </div>
+
+                    <div class="verb-table">
+                        <h3>wollen</h3>
+                        <div class="verb-forms">
+                            <div class="verb-form"><span class="pronoun">ich</span><span class="form">will</span></div>
+                            <div class="verb-form"><span class="pronoun">du</span><span class="form">willst</span></div>
+                            <div class="verb-form"><span class="pronoun">er/sie/es</span><span class="form">will</span></div>
+                            <div class="verb-form"><span class="pronoun">wir</span><span class="form">wollen</span></div>
+                            <div class="verb-form"><span class="pronoun">ihr</span><span class="form">wollt</span></div>
+                            <div class="verb-form"><span class="pronoun">sie/Sie</span><span class="form">wollen</span></div>
+                        </div>
+                        <div class="meaning-section">
+                            <p><strong>Bedeutung:</strong> Eigener Wunsch</p>
+                            <p><em>„Ich will ein Buch schreiben."</em></p>
+                        </div>
+                    </div>
+
+                    <div class="verb-table">
+                        <h3>dürfen</h3>
+                        <div class="verb-forms">
+                            <div class="verb-form"><span class="pronoun">ich</span><span class="form">darf</span></div>
+                            <div class="verb-form"><span class="pronoun">du</span><span class="form">darfst</span></div>
+                            <div class="verb-form"><span class="pronoun">er/sie/es</span><span class="form">darf</span></div>
+                            <div class="verb-form"><span class="pronoun">wir</span><span class="form">dürfen</span></div>
+                            <div class="verb-form"><span class="pronoun">ihr</span><span class="form">dürft</span></div>
+                            <div class="verb-form"><span class="pronoun">sie/Sie</span><span class="form">dürfen</span></div>
+                        </div>
+                        <div class="meaning-section">
+                            <p><strong>Bedeutung:</strong> Erlaubnis / Verbot</p>
+                            <p><em>„Du darfst hier parken." (negativ: darf nicht = Verbot)</em></p>
+                        </div>
+                    </div>
+
+                    <div class="verb-table">
+                        <h3>sollen</h3>
+                        <div class="verb-forms">
+                            <div class="verb-form"><span class="pronoun">ich</span><span class="form">soll</span></div>
+                            <div class="verb-form"><span class="pronoun">du</span><span class="form">sollst</span></div>
+                            <div class="verb-form"><span class="pronoun">er/sie/es</span><span class="form">soll</span></div>
+                            <div class="verb-form"><span class="pronoun">wir</span><span class="form">sollen</span></div>
+                            <div class="verb-form"><span class="pronoun">ihr</span><span class="form">sollt</span></div>
+                            <div class="verb-form"><span class="pronoun">sie/Sie</span><span class="form">sollen</span></div>
+                        </div>
+                        <div class="meaning-section">
+                            <p><strong>Bedeutung:</strong> Auftrag / Pflicht von anderen</p>
+                            <p><em>„Wir sollen um 9 Uhr da sein."</em></p>
+                        </div>
+                    </div>
+
+                    <div class="verb-table">
+                        <h3>möchten</h3>
+                        <div class="verb-forms">
+                            <div class="verb-form"><span class="pronoun">ich</span><span class="form">möchte</span></div>
+                            <div class="verb-form"><span class="pronoun">du</span><span class="form">möchtest</span></div>
+                            <div class="verb-form"><span class="pronoun">er/sie/es</span><span class="form">möchte</span></div>
+                            <div class="verb-form"><span class="pronoun">wir</span><span class="form">möchten</span></div>
+                            <div class="verb-form"><span class="pronoun">ihr</span><span class="form">möchtet</span></div>
+                            <div class="verb-form"><span class="pronoun">sie/Sie</span><span class="form">möchten</span></div>
+                        </div>
+                        <div class="meaning-section">
+                            <p><strong>Bedeutung:</strong> Höflicher Wunsch (Konjunktiv von „wollen")</p>
+                            <p><em>„Ich möchte einen Kaffee bitte."</em></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="word-order-box">
+                <h3>Wortstellung im Satz</h3>
+                <p><strong>Regel:</strong> Das Modalverb steht auf Position 2, der Infinitiv am Ende des Satzes.</p>
+                <div class="word-order-example">
+                    <strong>Position 1:</strong> Subjekt<br>
+                    <strong>Position 2:</strong> Modalverb (konjugiert)<br>
+                    <strong>Position 3+:</strong> Objekt / Adverbien<br>
+                    <strong>Ende:</strong> Infinitiv
+                </div>
+                <div class="word-order-example" style="margin-top: 20px;">
+                    <p><em>Alex will ein Buch schreiben.</em></p>
+                    <p style="font-size: 0.9em; color: #666;">1. Alex | 2. will | 3. ein Buch | Ende: schreiben</p>
+                </div>
+                <div class="word-order-example">
+                    <p><em>Louise möchte Kaffee trinken.</em></p>
+                    <p style="font-size: 0.9em; color: #666;">1. Louise | 2. möchte | 3. Kaffee | Ende: trinken</p>
+                </div>
+                <div style="background: #fff3cd; border-left: 4px solid var(--accent); padding: 15px; margin-top: 20px; border-radius: 4px;">
+                    <p><strong>⚠️ Ausnahme: möchten beim Bestellen</strong></p>
+                    <p style="margin-top: 8px;">Bei Bestellungen (Restaurant, Café, Geschäft) kann der Infinitiv wegfallen — das Objekt macht klar, was gemeint ist:</p>
+                    <p style="margin-top: 8px;"><em>„Ich möchte bitte einen Kaffee."</em> ✓ (kein Infinitiv nötig)</p>
+                    <p style="margin-top: 4px;"><em>„Ich möchte bitte bezahlen."</em> ✓ (mit Infinitiv)</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 2: BEDEUTUNG -->
+        <div id="tab-1" class="tab-content">
+            <h2 style="color: var(--primary); margin-bottom: 30px; border-bottom: 2px solid var(--accent); padding-bottom: 10px;">
+                Modalverben zuordnen - Klicke ein Satz und eine Bedeutung an, um sie zu verbinden
+            </h2>
+            <div class="timer-bar">⏱ Zeit: <span class="timer-display" id="timer-1">0:00</span> &nbsp;|&nbsp; Bestzeit: <span class="best-display" id="best-1">—</span></div>
+            <div class="matching-container">
+                <div>
+                    <div class="matching-column">
+                        <h3>Sätze</h3>
+                        <div id="meanings-left"></div>
+                    </div>
+                </div>
+                <div>
+                    <div class="matching-column">
+                        <h3>Bedeutungen</h3>
+                        <div id="meanings-right"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 3: LÜCKENTEXT -->
+        <div id="tab-2" class="tab-content">
+            <h2 style="color: var(--primary); margin-bottom: 30px; border-bottom: 2px solid var(--accent); padding-bottom: 10px;">
+                Ergänze die Modalverben
+            </h2>
+            <div class="timer-bar">⏱ Zeit: <span class="timer-display" id="timer-2">0:00</span> &nbsp;|&nbsp; Bestzeit: <span class="best-display" id="best-2">—</span></div>
+            <div id="lueckentext-container"></div>
+        </div>
+
+        <!-- TAB 4: MULTIPLE CHOICE -->
+        <div id="tab-3" class="tab-content">
+            <h2 style="color: var(--primary); margin-bottom: 30px; border-bottom: 2px solid var(--accent); padding-bottom: 10px;">
+                Wähle die richtige Antwort
+            </h2>
+            <div class="timer-bar">⏱ Zeit: <span class="timer-display" id="timer-3">0:00</span> &nbsp;|&nbsp; Bestzeit: <span class="best-display" id="best-3">—</span></div>
+            <div id="mc-container"></div>
+        </div>
+
+        <!-- TAB 5: SATZBAU -->
+        <div id="tab-4" class="tab-content">
+            <h2 style="color: var(--primary); margin-bottom: 30px; border-bottom: 2px solid var(--accent); padding-bottom: 10px;">
+                Satzbau - Ordne die Wörter richtig
+            </h2>
+            <div class="timer-bar">⏱ Zeit: <span class="timer-display" id="timer-4">0:00</span> &nbsp;|&nbsp; Bestzeit: <span class="best-display" id="best-4">—</span></div>
+            <div id="satzbau-container"></div>
+        </div>
+
+        <div class="footer">
+            <p>Modalverben – Interaktive Grammatik-Übung für A1-Deutschlerner</p>
+            <p style="font-size: 0.9em; margin-top: 10px;">Für DaF-Unterricht</p>
+        </div>
+    </div>
+
+    <script>
+        // ============ TIMER-SYSTEM ============
+        var TIMER_PREFIX = 'modalverben-a1-';
+        var timerStarted  = [false, false, false, false, false];
+        var timerRunning  = [false, false, false, false, false];
+        var timerSeconds  = [0, 0, 0, 0, 0];
+        var timerIntervals = [null, null, null, null, null];
+
+        function timerAutoStart(n) {
+            if (timerStarted[n]) return;
+            timerStarted[n] = true;
+            timerRunning[n] = true;
+            timerIntervals[n] = setInterval(function() {
+                timerSeconds[n]++;
+                var el = document.getElementById('timer-' + n);
+                if (el) el.textContent = fmtTime(timerSeconds[n]);
+            }, 1000);
+        }
+
+        function timerStop(n) {
+            if (!timerRunning[n]) return;
+            clearInterval(timerIntervals[n]);
+            timerRunning[n] = false;
+            var best = parseInt(localStorage.getItem(TIMER_PREFIX + n) || '999999');
+            if (timerSeconds[n] > 0 && timerSeconds[n] < best) {
+                localStorage.setItem(TIMER_PREFIX + n, timerSeconds[n]);
+                var el = document.getElementById('best-' + n);
+                if (el) el.textContent = fmtTime(timerSeconds[n]);
+            }
+        }
+
+        function fmtTime(s) {
+            return Math.floor(s / 60) + ':' + (s % 60 < 10 ? '0' : '') + (s % 60);
+        }
+
+        function loadBestTimes() {
+            for (var i = 1; i <= 4; i++) {
+                var v = localStorage.getItem(TIMER_PREFIX + i);
+                var el = document.getElementById('best-' + i);
+                if (v && el) el.textContent = fmtTime(parseInt(v));
+            }
+        }
+
+        // ============ TAB SWITCHING ============
+        function switchTab(index) {
+            const tabs = document.querySelectorAll('.tab-content');
+            const buttons = document.querySelectorAll('.tab-btn');
+            
+            tabs.forEach(tab => tab.classList.remove('active'));
+            buttons.forEach(btn => btn.classList.remove('active'));
+            
+            document.getElementById('tab-' + index).classList.add('active');
+            buttons[index].classList.add('active');
+        }
+
+        // ============ TAB 2: BEDEUTUNG ============
+        const meaningData = [
+            { sentence: '„Ich kann Deutsch sprechen."', meaning: 'Fähigkeit' },
+            { sentence: '„Du musst das lernen."', meaning: 'Pflicht' },
+            { sentence: '„Er will nach Berlin fahren."', meaning: 'Wunsch' },
+            { sentence: '„Sie darf hier parken."', meaning: 'Erlaubnis' },
+            { sentence: '„Wir sollen um 9 Uhr da sein."', meaning: 'Auftrag' },
+            { sentence: '„Ich möchte einen Kaffee bitte."', meaning: 'höflicher Wunsch' },
+            { sentence: '„Kinder dürfen das nicht machen."', meaning: 'Verbot' },
+            { sentence: '„Er muss zum Arzt gehen."', meaning: 'Notwendigkeit' },
+            { sentence: '„Sie will Ärztin werden."', meaning: 'eigener Wunsch' },
+            { sentence: '„Du kannst morgen kommen."', meaning: 'Möglichkeit' }
+        ];
+
+        function initMeanings() {
+            const leftDiv = document.getElementById('meanings-left');
+            const rightDiv = document.getElementById('meanings-right');
+            
+            leftDiv.innerHTML = '';
+            rightDiv.innerHTML = '';
+
+            meaningData.forEach((item, idx) => {
+                const leftItem = document.createElement('div');
+                leftItem.className = 'match-item';
+                leftItem.textContent = item.sentence;
+                leftItem.dataset.index = idx;
+                leftItem.onclick = () => selectMeaning('left', idx);
+                leftDiv.appendChild(leftItem);
+            });
+
+            const shuffledMeanings = [...meaningData].sort(() => Math.random() - 0.5);
+            shuffledMeanings.forEach((item, idx) => {
+                const rightItem = document.createElement('div');
+                rightItem.className = 'match-item';
+                rightItem.textContent = item.meaning;
+                rightItem.dataset.originalIndex = meaningData.findIndex(d => d.meaning === item.meaning);
+                rightItem.onclick = () => selectMeaning('right', meaningData.findIndex(d => d.meaning === item.meaning));
+                rightDiv.appendChild(rightItem);
+            });
+        }
+
+        let selectedLeft = null;
+        let selectedRight = null;
+
+        function selectMeaning(side, idx) {
+            timerAutoStart(1);
+            const items = side === 'left' ? 
+                document.querySelectorAll('#meanings-left .match-item') :
+                document.querySelectorAll('#meanings-right .match-item');
+            
+            if (side === 'left') {
+                items.forEach((item, i) => item.classList.toggle('selected', i === idx));
+                selectedLeft = idx;
+            } else {
+                items.forEach((item, i) => item.classList.toggle('selected', i === idx));
+                selectedRight = idx;
+            }
+
+            if (selectedLeft !== null && selectedRight !== null) {
+                checkMeaning();
+                selectedLeft = null;
+                selectedRight = null;
+            }
+        }
+
+        function checkMeaning() {
+            const allLeft = document.querySelectorAll('#meanings-left .match-item');
+            const allRight = document.querySelectorAll('#meanings-right .match-item');
+            
+            const leftSelected = Array.from(allLeft).find(item => item.classList.contains('selected'));
+            const rightSelected = Array.from(allRight).find(item => item.classList.contains('selected'));
+            
+            if (!leftSelected || !rightSelected) return;
+
+            const leftIdx = parseInt(leftSelected.dataset.index);
+            const rightIdx = parseInt(rightSelected.dataset.originalIndex);
+
+            if (leftIdx === rightIdx) {
+                leftSelected.classList.add('correct');
+                rightSelected.classList.add('correct');
+                leftSelected.classList.remove('selected');
+                rightSelected.classList.remove('selected');
+                // Alle gepaart? → Timer stoppen
+                const allCorrect = document.querySelectorAll('#meanings-left .match-item.correct').length;
+                if (allCorrect === meaningData.length) timerStop(1);
+            } else {
+                leftSelected.classList.add('incorrect');
+                rightSelected.classList.add('incorrect');
+                setTimeout(() => {
+                    leftSelected.classList.remove('incorrect', 'selected');
+                    rightSelected.classList.remove('incorrect', 'selected');
+                }, 1000);
+            }
+        }
+
+        // ============ TAB 3: LÜCKENTEXT ============
+        const lueckenData = [
+            { sentence: 'Ich _____ (wollen) ein Buch schreiben.', answer: 'will', size: 'm' },
+            { sentence: 'Du _____ (müssen) das lernen.', answer: 'musst', size: 'm' },
+            { sentence: 'Er _____ (können) gut kochen.', answer: 'kann', size: 'm' },
+            { sentence: 'Wir _____ (möchten) einen Kaffee bitte.', answer: 'möchten', size: 'm' },
+            { sentence: 'Sie _____ (dürfen) hier nicht rauchen.', answer: 'darf', size: 'm' },
+            { sentence: 'Ihr _____ (sollen) um 8 Uhr kommen.', answer: 'sollt', size: 'm' },
+            { sentence: 'Louise _____ (wollen) ein neues Kleid kaufen.', answer: 'will', size: 'm' },
+            { sentence: 'Alex _____ (können) gut Deutsch sprechen.', answer: 'kann', size: 'm' },
+            { sentence: 'Die Kinder _____ (dürfen) heute länger aufbleiben.', answer: 'dürfen', size: 'm' },
+            { sentence: 'Ich _____ (möchten) bitte die Rechnung.', answer: 'möchte', size: 'm' }
+        ];
+
+        function initLueckentext() {
+            const container = document.getElementById('lueckentext-container');
+            container.innerHTML = '';
+
+            lueckenData.forEach((item, idx) => {
+                const group = document.createElement('div');
+                group.className = 'sentence-group';
+                
+                const parts = item.sentence.split('_____');
+                let html = parts[0];
+                html += `<div class="gap ${item.size}"><input type="text" id="gap-${idx}" onkeyup="liveCheck('modalverben-a1', ${idx}, '${item.answer.toLowerCase()}')"></div>`;
+                html += parts[1].replace('(', '<span class="hint">(').replace(')', ')</span>');
+                
+                group.innerHTML = html;
+                container.appendChild(group);
+            });
+        }
+
+        function liveCheck(prefix, idx, correct) {
+            timerAutoStart(2);
+            const input = document.getElementById('gap-' + idx);
+            const value = input.value.trim();
+            const gap = input.parentElement;
+
+            if (value === correct) {
+                gap.classList.add('correct');
+                gap.classList.remove('incorrect');
+                // Alle Lücken korrekt? → Timer stoppen
+                const allCorrect = document.querySelectorAll('#lueckentext-container .gap.correct').length;
+                if (allCorrect === lueckenData.length) timerStop(2);
+            } else if (value.length > 0) {
+                gap.classList.add('incorrect');
+                gap.classList.remove('correct');
+            } else {
+                gap.classList.remove('correct', 'incorrect');
+            }
+        }
+
+        // ============ TAB 4: MULTIPLE CHOICE ============
+        const mcData = [
+            {
+                question: '„Ich ___ Deutsch sprechen." (Fähigkeit)',
+                options: ['kann', 'will', 'darf', 'soll'],
+                correct: 0
+            },
+            {
+                question: '„Sie ___ zum Arzt gehen." (Notwendigkeit)',
+                options: ['muss', 'kann', 'will', 'darf'],
+                correct: 0
+            },
+            {
+                question: '„Er ___ ein neues Auto kaufen." (Wunsch)',
+                options: ['will', 'soll', 'darf', 'muss'],
+                correct: 0
+            },
+            {
+                question: '„Kinder ___ hier nicht spielen." (Verbot)',
+                options: ['dürfen', 'können', 'wollen', 'sollen'],
+                correct: 0
+            },
+            {
+                question: '„Du ___ um 9 Uhr da sein." (Auftrag)',
+                options: ['sollst', 'willst', 'darfst', 'kannst'],
+                correct: 0
+            },
+            {
+                question: '„Ich ___ bitte einen Tee." (höflicher Wunsch)',
+                options: ['möchte', 'will', 'kann', 'muss'],
+                correct: 0
+            },
+            {
+                question: 'Wo steht der Infinitiv im Satz?',
+                options: ['Am Ende', 'An Position 2', 'An Position 1', 'Irgendwo'],
+                correct: 0
+            },
+            {
+                question: '„Wir ___ heute früh aufstehen." (Notwendigkeit)',
+                options: ['müssen', 'möchten', 'dürfen', 'sollen'],
+                correct: 0
+            },
+            {
+                question: 'Welche Form ist richtig: „er wollen"?',
+                options: ['er will', 'er wollt', 'er wollst', 'er wölle'],
+                correct: 0
+            },
+            {
+                question: '„Ihr ___ das Zimmer aufräumen!" (Auftrag)',
+                options: ['sollt', 'wollt', 'dürft', 'könnt'],
+                correct: 0
+            }
+        ];
+
+        function initMC() {
+            const container = document.getElementById('mc-container');
+            container.innerHTML = '';
+
+            mcData.forEach((item, qIdx) => {
+                const question = document.createElement('div');
+                question.className = 'mc-question';
+                
+                const qText = document.createElement('div');
+                qText.className = 'mc-question-text';
+                qText.textContent = (qIdx + 1) + '. ' + item.question;
+                question.appendChild(qText);
+                
+                const options = document.createElement('div');
+                options.className = 'mc-options';
+                
+                item.options.forEach((opt, oIdx) => {
+                    const option = document.createElement('div');
+                    option.className = 'mc-option';
+                    option.textContent = opt;
+                    option.onclick = () => checkMC(qIdx, oIdx);
+                    options.appendChild(option);
+                });
+                
+                question.appendChild(options);
+                container.appendChild(question);
+            });
+        }
+
+        function checkMC(qIdx, oIdx) {
+            timerAutoStart(3);
+            const question = document.querySelectorAll('.mc-question')[qIdx];
+            const options = question.querySelectorAll('.mc-option');
+
+            if (options[oIdx].classList.contains('correct') || options[oIdx].classList.contains('incorrect')) {
+                return;
+            }
+
+            options.forEach(opt => opt.classList.remove('selected'));
+
+            if (oIdx === mcData[qIdx].correct) {
+                options[oIdx].classList.add('correct');
+            } else {
+                options[oIdx].classList.add('incorrect');
+                options[mcData[qIdx].correct].classList.add('correct');
+            }
+            // Alle richtig? → Timer stoppen
+            const allCorrect = document.querySelectorAll('#mc-container .mc-option.correct').length;
+            if (allCorrect === mcData.length) timerStop(3);
+        }
+
+        // ============ TAB 5: SATZBAU ============
+        const satzbauData = [
+            {
+                parts: ['Alex', 'will', 'ein Buch', 'schreiben'],
+                valid: [['Alex', 'will', 'ein Buch', 'schreiben']],
+                punct: '.'
+            },
+            {
+                parts: ['ich', 'kann', 'gut', 'kochen'],
+                valid: [['ich', 'kann', 'gut', 'kochen'], ['gut', 'kann', 'ich', 'kochen']],
+                punct: '.'
+            },
+            {
+                parts: ['Louise', 'möchte', 'einen Kaffee', 'trinken'],
+                valid: [['Louise', 'möchte', 'einen Kaffee', 'trinken']],
+                punct: '.'
+            },
+            {
+                parts: ['du', 'musst', 'das', 'lernen'],
+                valid: [['du', 'musst', 'das', 'lernen'], ['das', 'musst', 'du', 'lernen']],
+                punct: '.'
+            },
+            {
+                parts: ['er', 'darf', 'hier', 'parken'],
+                valid: [['er', 'darf', 'hier', 'parken'], ['hier', 'darf', 'er', 'parken']],
+                punct: '.'
+            },
+            {
+                parts: ['wir', 'sollen', 'um 9 Uhr', 'kommen'],
+                valid: [['wir', 'sollen', 'um 9 Uhr', 'kommen'], ['um 9 Uhr', 'sollen', 'wir', 'kommen']],
+                punct: '.'
+            },
+            {
+                parts: ['die Kinder', 'dürfen', 'heute', 'spielen'],
+                valid: [['die Kinder', 'dürfen', 'heute', 'spielen'], ['heute', 'dürfen', 'die Kinder', 'spielen']],
+                punct: '.'
+            },
+            {
+                parts: ['ich', 'möchte', 'bitte', 'bezahlen'],
+                valid: [['ich', 'möchte', 'bitte', 'bezahlen'], ['bitte', 'möchte', 'ich', 'bezahlen']],
+                punct: '.'
+            },
+            {
+                parts: ['ich', 'möchte', 'bitte', 'einen Kaffee'],
+                valid: [['ich', 'möchte', 'bitte', 'einen Kaffee'], ['bitte', 'möchte', 'ich', 'einen Kaffee']],
+                punct: '.'
+            },
+            {
+                parts: ['sie', 'will', 'Ärztin', 'werden'],
+                valid: [['sie', 'will', 'Ärztin', 'werden']],
+                punct: '.'
+            },
+            {
+                parts: ['ihr', 'müsst', 'das Zimmer', 'aufräumen'],
+                valid: [['ihr', 'müsst', 'das Zimmer', 'aufräumen'], ['das Zimmer', 'müsst', 'ihr', 'aufräumen']],
+                punct: '.'
+            }
+        ];
+
+        // ===== SATZBAU DRAG & DROP =====
+        var sbDragged = null;
+        var sbCursor  = null;
+
+        function sbShuffle(arr) {
+            var a = arr.slice();
+            for (var i = a.length - 1; i > 0; i--) {
+                var j = Math.floor(Math.random() * (i + 1));
+                var t = a[i]; a[i] = a[j]; a[j] = t;
+            }
+            return a;
+        }
+
+        function getSbCursor() {
+            if (!sbCursor) {
+                sbCursor = document.createElement('div');
+                sbCursor.id = 'sb-insert-cursor';
+                sbCursor.style.cssText = 'width:3px;min-height:36px;background:var(--accent);border-radius:2px;display:inline-block;vertical-align:middle;pointer-events:none;flex-shrink:0;';
+            }
+            return sbCursor;
+        }
+
+        function getSbInsertPos(zone, clientX) {
+            var chips = Array.from(zone.querySelectorAll('.chip'));
+            for (var i = 0; i < chips.length; i++) {
+                var r = chips[i].getBoundingClientRect();
+                if (clientX < r.left + r.width / 2) return chips[i];
+            }
+            return null;
+        }
+
+        function sbCapitalize(str) {
+            return str.charAt(0).toUpperCase() + str.slice(1);
+        }
+
+        function sbUpdateCapitalization(row) {
+            var chips = Array.from(row.querySelectorAll('.chip'));
+            chips.forEach(function(c, i) {
+                var orig = c.dataset.orig;
+                // Eigenname: beginnt bereits mit Großbuchstaben → nie verändern
+                var isProper = orig.charAt(0) === orig.charAt(0).toUpperCase() && orig.charAt(0) !== orig.charAt(0).toLowerCase();
+                if (isProper) {
+                    c.textContent = orig;
+                } else {
+                    c.textContent = (i === 0) ? sbCapitalize(orig) : orig;
+                }
+            });
+        }
+
+        function sbMakeChip(word) {
+            var chip = document.createElement('div');
+            chip.className = 'chip';
+            chip.textContent = word;
+            chip.dataset.orig = word;
+            chip.draggable = true;
+            chip.addEventListener('dragstart', function(e) {
+                sbDragged = chip;
+                e.dataTransfer.setData('text/plain', '');
+                setTimeout(function() { chip.style.opacity = '0.4'; }, 0);
+            });
+            chip.addEventListener('dragend', function() {
+                chip.style.opacity = '';
+                sbDragged = null;
+                var c = document.getElementById('sb-insert-cursor');
+                if (c && c.parentNode) c.parentNode.removeChild(c);
+            });
+            return chip;
+        }
+
+        function sbRegisterZone(zone, idx) {
+            zone.addEventListener('dragover', function(e) {
+                e.preventDefault();
+                if (!sbDragged) return;
+                var cursor = getSbCursor();
+                var before = getSbInsertPos(zone, e.clientX);
+                if (before) zone.insertBefore(cursor, before);
+                else zone.appendChild(cursor);
+            });
+            zone.addEventListener('dragleave', function(e) {
+                if (!zone.contains(e.relatedTarget)) {
+                    var c = document.getElementById('sb-insert-cursor');
+                    if (c && c.parentNode === zone) zone.removeChild(c);
+                }
+            });
+            zone.addEventListener('drop', function(e) {
+                e.preventDefault();
+                if (!sbDragged) return;
+                var cursor = document.getElementById('sb-insert-cursor');
+                if (cursor && cursor.parentNode === zone) {
+                    zone.insertBefore(sbDragged, cursor);
+                    zone.removeChild(cursor);
+                } else {
+                    zone.appendChild(sbDragged);
+                }
+                sbDragged = null;
+                // Großschreibung sofort anpassen
+                var row = document.getElementById('sb-row-' + idx);
+                sbUpdateCapitalization(row);
+                sbCheckAuto(idx);
+            });
+        }
+
+        function sbColorRow(idx) {
+            var row = document.getElementById('sb-row-' + idx);
+            var chips = Array.from(row.querySelectorAll('.chip'));
+            var order = chips.map(function(c) { return c.dataset.orig; });
+            var ok = satzbauData[idx].valid.some(function(v) {
+                return JSON.stringify(v) === JSON.stringify(order);
+            });
+            chips.forEach(function(c) {
+                c.classList.remove('correct', 'incorrect');
+                c.classList.add(ok ? 'correct' : 'incorrect');
+            });
+            // Punkt: nur bei korrektem Satz anhängen
+            var existing = row.querySelector('.sb-punkt');
+            if (existing) existing.parentNode.removeChild(existing);
+            if (ok) {
+                var punkt = document.createElement('span');
+                punkt.className = 'sb-punkt';
+                punkt.textContent = '.';
+                row.appendChild(punkt);
+            }
+            return ok;
+        }
+
+        function sbCheckAllDone() {
+            var rows = document.querySelectorAll('#satzbau-container .drop-zone');
+            var allOk = rows.length > 0 && Array.from(rows).every(function(row) {
+                return Array.from(row.querySelectorAll('.chip')).every(function(c) {
+                    return c.classList.contains('correct');
+                });
+            });
+            if (allOk) timerStop(4);
+        }
+
+        function sbCheckAuto(idx) {
+            var bank = document.getElementById('sb-bank-' + idx);
+            var row  = document.getElementById('sb-row-' + idx);
+            var fb   = document.getElementById('sb-fb-' + idx);
+
+            if (bank.querySelectorAll('.chip').length > 0) {
+                row.querySelectorAll('.chip').forEach(function(c) {
+                    c.classList.remove('correct', 'incorrect');
+                });
+                row.classList.remove('correct', 'incorrect');
+                fb.textContent = '';
+                return;
+            }
+
+            // Kurze Pause, damit das Auge die neue Chip-Position wahrnimmt
+            setTimeout(function() {
+                timerAutoStart(4);
+                var ok = sbColorRow(idx);
+                if (ok) {
+                    row.classList.add('correct'); row.classList.remove('incorrect');
+                    fb.className = 'satzbau-instruction correct';
+                    fb.textContent = '✓ Korrekt!';
+                    fb.style.color = 'var(--success)';
+                    sbCheckAllDone();
+                } else {
+                    row.classList.add('incorrect'); row.classList.remove('correct');
+                    fb.className = 'satzbau-instruction incorrect';
+                    fb.textContent = '✗ Falsche Reihenfolge – verschiebe die Chips!';
+                    fb.style.color = 'var(--error)';
+                }
+            }, 500);
+        }
+
+        function initSatzbau() {
+            var container = document.getElementById('satzbau-container');
+            container.innerHTML = '';
+
+            satzbauData.forEach(function(item, idx) {
+                var sbItem = document.createElement('div');
+                sbItem.className = 'satzbau-item';
+
+                var instr = document.createElement('div');
+                instr.className = 'satzbau-instruction';
+                instr.textContent = (idx + 1) + '. Ordne die Wörter korrekt an:';
+                sbItem.appendChild(instr);
+
+                // Bank oben
+                var bank = document.createElement('div');
+                bank.className = 'chip-group';
+                bank.id = 'sb-bank-' + idx;
+                sbRegisterZone(bank, idx);
+                sbShuffle(item.parts).forEach(function(part) {
+                    bank.appendChild(sbMakeChip(part));
+                });
+                sbItem.appendChild(bank);
+
+                // Row unten
+                var row = document.createElement('div');
+                row.className = 'drop-zone';
+                row.id = 'sb-row-' + idx;
+                sbRegisterZone(row, idx);
+                sbItem.appendChild(row);
+
+                // Feedback
+                var fb = document.createElement('div');
+                fb.className = 'satzbau-instruction';
+                fb.id = 'sb-fb-' + idx;
+                sbItem.appendChild(fb);
+
+                // Lösungs-Button
+                var btn = document.createElement('button');
+                btn.textContent = '💡 Lösung zeigen';
+                btn.style.cssText = 'margin-top:8px;padding:6px 14px;background:#f0f0f0;border:1px solid #ccc;border-radius:16px;cursor:pointer;font-size:0.85em;color:#555;';
+                btn.onclick = function() { sbShowSolution(idx); };
+                sbItem.appendChild(btn);
+
+                container.appendChild(sbItem);
+            });
+        }
+
+        function sbShowSolution(idx) {
+            var bank = document.getElementById('sb-bank-' + idx);
+            var row  = document.getElementById('sb-row-' + idx);
+            var fb   = document.getElementById('sb-fb-' + idx);
+            var solution = satzbauData[idx].valid[0];
+            bank.innerHTML = '';
+            row.innerHTML = '';
+            solution.forEach(function(word) {
+                var chip = sbMakeChip(word);
+                chip.classList.add('correct');
+                row.appendChild(chip);
+            });
+            row.classList.add('correct'); row.classList.remove('incorrect');
+            fb.textContent = '✓ Korrekt!';
+            fb.style.color = 'var(--success)';
+        }
+
+        // ============ INITIALIZATION ============
+        document.addEventListener('DOMContentLoaded', () => {
+            initMeanings();
+            initLueckentext();
+            initMC();
+            initSatzbau();
+            loadBestTimes();
+        });
+    </script>
+<div class="author-footer">
+  <span class="author-name">&copy; Frank Burkert</span> &middot; DaF-Materialien &middot;
+  <a href="mailto:FrankBurkert@fabdaf.onmicrosoft.com">FrankBurkert@fabdaf.onmicrosoft.com</a>
+</div>
+</body>
+</html>

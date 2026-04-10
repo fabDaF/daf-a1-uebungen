@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Woher kommst du? - A1 Übungen</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        h1 {
+            font-size: 2em;
+            margin-bottom: 8px;
+        }
+        .subtitle {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        .nav {
+            display: flex;
+            background: #f8f9fa;
+            border-bottom: 1px solid #ddd;
+            overflow-x: auto;
+        }
+        .nav-btn {
+            flex: 1;
+            padding: 15px 10px;
+            text-align: center;
+            cursor: pointer;
+            border-right: 1px solid #ddd; border: none;
+            background: transparent;
+            font-size: 0.95em;
+            font-weight: 500;
+            color: #6c757d;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+        .nav-btn:hover {
+            background: #e9ecef;
+        }
+        .nav-btn:last-child { border-right: none; }
+        .nav-btn.active {
+            background: white;
+            color: #667eea;
+            border-bottom: 3px solid #667eea;
+        }
+        .section {
+            display: none;
+            padding: 30px;
+        }
+        .section.active {
+            display: block;
+        }
+        .buttons {
+            display: flex;
+            gap: 10px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .btn-check {
+            background: #667eea;
+            color: white;
+        }
+        .btn-check:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+        .btn-show {
+            background: #764ba2;
+            color: white;
+        }
+        .btn-show:hover {
+            background: #633d89;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(118, 75, 162, 0.4);
+        }
+        .btn-reset {
+            background: #6c757d;
+            color: white;
+        }
+        .btn-reset:hover {
+            background: #5a6268;
+        }
+        .help-box {
+            background: #e7f3ff;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        .help-box h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        .help-box ul {
+            margin-left: 20px;
+        }
+        .help-box li {
+            margin: 5px 0;
+        }
+        .word-list {
+            background: #f8f9fa;
+            border: 2px solid #667eea;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        .word-list h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1em;
+        }
+        .word-list .words {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .word-list .word {
+            background: white;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.95em;
+            color: #495057;
+        }
+
+        /* Typ 1: Lückenübung */
+        .exercise {
+            margin: 20px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            position: relative;
+        }
+        .verb-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #667eea;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+        .sentence {
+            font-size: 1.1em;
+            line-height: 2;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            gap: 0;
+        }
+        .nowrap-group {
+            display: inline-flex;
+            align-items: baseline;
+            white-space: nowrap;
+            gap: 0;
+        }
+        input.blank {
+            border: none;
+            border-bottom: 2px solid #667eea;
+            background: white;
+            font-size: 1em;
+            padding: 2px 6px;
+            text-align: center;
+            font-family: inherit;
+            transition: all 0.3s;
+        }
+        input.blank:focus {
+            outline: none;
+            border-bottom: 2px solid #764ba2;
+            background: #f0f4ff;
+        }
+        input.blank.correct {
+            background: #d4edda;
+            border-bottom: 2px solid #28a745;
+        }
+        input.blank.incorrect {
+            background: #f8d7da;
+            border-bottom: 2px solid #dc3545;
+        }
+        input.blank.s { min-width: 45px; max-width: 60px; }
+        input.blank.m { min-width: 90px; max-width: 120px; }
+        input.blank.l { min-width: 150px; max-width: 180px; }
+        .solution {
+            display: none;
+            color: #28a745;
+            font-weight: 600;
+            margin-left: 8px;
+        }
+        .solution.visible {
+            display: inline;
+        }
+
+        /* Typ 2: Zuordnung */
+        .chip-bank {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            min-height: 80px;
+            margin-bottom: 20px;
+        }
+        .chip {
+            padding: 10px 16px;
+            background: white;
+            border: 2px solid #667eea;
+            border-radius: 20px;
+            cursor: move;
+            user-select: none;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        .chip:hover {
+            background: #667eea;
+            color: white;
+            transform: scale(1.05);
+        }
+        .chip.dragging {
+            opacity: 0.5;
+        }
+        .chip.correct {
+            background: #28a745;
+            color: white;
+            border-color: #28a745;
+        }
+        .chip.incorrect {
+            background: #dc3545;
+            color: white;
+            border-color: #dc3545;
+        }
+        .categories {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .category {
+            background: white;
+            border: 2px dashed #dee2e6;
+            border-radius: 8px;
+            padding: 15px;
+        }
+        .category h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            text-align: center;
+            font-size: 1.1em;
+        }
+        .drop-zone {
+            min-height: 100px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-content: flex-start;
+        }
+
+        /* Typ 4: Wortschatz */
+        .vocab-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .vocab-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            flex-wrap: wrap;
+        }
+        .vocab-en {
+            min-width: 150px;
+            font-weight: 600;
+            color: #495057;
+        }
+        .vocab-arrow {
+            color: #667eea;
+            font-size: 1.2em;
+        }
+        .vocab-inputs {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Woher kommst du?</h1>
+            <div class="subtitle">Interaktive A1 Übungen</div>
+        </div>
+
+        <div class="nav">
+            <div class="nav-btn active" onclick="showSection(0)">📝 Adjektive</div>
+            <div class="nav-btn" onclick="showSection(1)">📚 Wortschatz</div>
+            <div class="nav-btn" onclick="showSection(2)">🔀 Formell/Informell</div>
+            <div class="nav-btn" onclick="showSection(3)">✏️ Verben</div>
+            <div class="nav-btn" onclick="showSection(4)">🧩 Präpositionen</div>
+        </div>
+
+        <!-- Tab 1: Adjektive -->
+        <div class="section active" id="sec-0">
+            <h2>Adjektive ergänzen</h2>
+            <div class="word-list">
+                <h3>📝 Wähle aus diesen Adjektiven:</h3>
+                <div class="words" id="adjektive-wordlist"></div>
+            </div>
+            <div class="help-box">
+                <h3>💡 Hilfe</h3>
+                <ul>
+                    <li>Wähle das passende Adjektiv aus dem Kontext</li>
+                    <li>Achte auf die richtige Endung</li>
+                </ul>
+            </div>
+            <div id="adjektive-container"></div>
+            <div class="buttons">
+                <button class="btn btn-check" onclick="checkAdjektive()">Prüfen</button>
+                <button class="btn btn-show" onclick="showAdjektiveSolutions()">Lösungen anzeigen</button>
+                <button class="btn btn-reset" onclick="resetAdjektive()">Neu starten</button>
+            </div>
+        </div>
+
+        <!-- Tab 2: Wortschatz -->
+        <div class="section" id="sec-1">
+            <h2>Wortschatz: Englisch → Deutsch</h2>
+            <div class="help-box">
+                <h3>💡 Hilfe</h3>
+                <ul>
+                    <li>Bei Nomen: Artikel + deutsches Wort + Plural angeben</li>
+                    <li>Bei Verben und Adjektiven: nur die deutsche Übersetzung</li>
+                </ul>
+            </div>
+            <div id="wortschatz-container"></div>
+            <div class="buttons">
+                <button class="btn btn-check" onclick="checkWortschatz()">Prüfen</button>
+                <button class="btn btn-show" onclick="showWortschatzSolutions()">Lösungen anzeigen</button>
+                <button class="btn btn-reset" onclick="resetWortschatz()">Neu starten</button>
+            </div>
+        </div>
+
+        <!-- Tab 3: Formell/Informell -->
+        <div class="section" id="sec-2">
+            <h2>Formell oder informell?</h2>
+            <div class="help-box">
+                <h3>💡 Hilfe</h3>
+                <ul>
+                    <li>Formell: Sie, Ihnen (z.B. beim Arzt, im Amt)</li>
+                    <li>Informell: du, dir (z.B. bei Freunden, in der Familie)</li>
+                </ul>
+            </div>
+            <div class="chip-bank" id="formell-bank"></div>
+            <div class="categories">
+                <div class="category" data-cat="formell">
+                    <h3>Formell</h3>
+                    <div class="drop-zone"></div>
+                </div>
+                <div class="category" data-cat="informell">
+                    <h3>Informell</h3>
+                    <div class="drop-zone"></div>
+                </div>
+            </div>
+            <div class="buttons">
+                <button class="btn btn-check" onclick="checkFormell()">Prüfen</button>
+                <button class="btn btn-show" onclick="showFormellSolutions()">Lösungen anzeigen</button>
+                <button class="btn btn-reset" onclick="resetFormell()">Neu starten</button>
+            </div>
+        </div>
+
+        <!-- Tab 4: Verben -->
+        <div class="section" id="sec-3">
+            <h2>Verben konjugieren</h2>
+            <div class="help-box">
+                <h3>💡 Hilfe</h3>
+                <ul>
+                    <li>Regelmäßige Verben: Stamm + Endung</li>
+                    <li>ich: -e, du: -st, Sie: -en</li>
+                </ul>
+            </div>
+            <div id="verben-container"></div>
+            <div class="buttons">
+                <button class="btn btn-check" onclick="checkVerben()">Prüfen</button>
+                <button class="btn btn-show" onclick="showVerbenSolutions()">Lösungen anzeigen</button>
+                <button class="btn btn-reset" onclick="resetVerben()">Neu starten</button>
+            </div>
+        </div>
+
+        <!-- Tab 5: Präpositionen -->
+        <div class="section" id="sec-4">
+            <h2>Präpositionen: aus / in + Artikel</h2>
+            <div class="help-box">
+                <h3>💡 Hilfe</h3>
+                <ul>
+                    <li>aus der Türkei, aus dem Irak, aus den USA</li>
+                    <li>in der Türkei, in den USA, in Deutschland (kein Artikel)</li>
+                </ul>
+            </div>
+            <div id="praep-container"></div>
+            <div class="buttons">
+                <button class="btn btn-check" onclick="checkPraep()">Prüfen</button>
+                <button class="btn btn-show" onclick="showPraepSolutions()">Lösungen anzeigen</button>
+                <button class="btn btn-reset" onclick="resetPraep()">Neu starten</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Navigation
+        function showSection(idx) {
+            document.querySelectorAll('.section').forEach((s, i) => s.classList.toggle('active', i === idx));
+            document.querySelectorAll('.nav-btn').forEach((b, i) => b.classList.toggle('active', i === idx));
+        }
+
+        // ========== TAB 1: ADJEKTIVE ==========
+        const ADJEKTIVE_WORDS = ["einfach", "gern", "unregelmäßig", "still", "warm", "groß", "klein", "schön", "schwer", "glücklich", "spannend"];
+        
+        const ADJEKTIVE = [
+            {
+                id: 1,
+                segments: [
+                    {t: "Ich esse "},
+                    {b: "gern", s: "m"},
+                    {t: " Schokolade."}
+                ]
+            },
+            {
+                id: 2,
+                segments: [
+                    {t: "Die Prüfung war ganz "},
+                    {b: "einfach", s: "m"},
+                    {t: "."}
+                ]
+            },
+            {
+                id: 3,
+                segments: [
+                    {t: "Das Verb \"fahren\" ist "},
+                    {b: "unregelmäßig", s: "l"},
+                    {t: "."}
+                ]
+            },
+            {
+                id: 4,
+                segments: [
+                    {t: "Er sagt nichts und fragt auch nie etwas. Er ist sehr "},
+                    {b: "still", s: "m"},
+                    {t: "."}
+                ]
+            },
+            {
+                id: 5,
+                segments: [
+                    {t: "Komm rein! Hier ist es "},
+                    {b: "warm", s: "m"},
+                    {t: "."}
+                ]
+            },
+            {
+                id: 6,
+                segments: [
+                    {t: "Ein Elefant ist "},
+                    {b: "groß", s: "m"},
+                    {t: ", eine Maus ist "},
+                    {b: "klein", s: "m"},
+                    {t: "."}
+                ]
+            },
+            {
+                id: 7,
+                segments: [
+                    {t: "Vielen Dank! Die Blumen sind sehr "},
+                    {b: "schön", s: "m"},
+                    {t: "."}
+                ]
+            },
+            {
+                id: 8,
+                segments: [
+                    {t: "Ich kann den Koffer nicht tragen. Er ist zu "},
+                    {b: "schwer", s: "m"},
+                    {t: "."}
+                ]
+            },
+            {
+                id: 9,
+                segments: [
+                    {t: "Sie haben geheiratet. Sie sind sehr "},
+                    {b: "glücklich", s: "m"},
+                    {t: "."}
+                ]
+            },
+            {
+                id: 10,
+                segments: [
+                    {t: "Er kann das Buch nicht weglegen. Es ist so "},
+                    {b: "spannend", s: "m"},
+                    {t: "."}
+                ]
+            }
+        ];
+
+        function renderAdjektiveWordlist() {
+            const container = document.getElementById('adjektive-wordlist');
+            container.innerHTML = '';
+            
+            ADJEKTIVE_WORDS.forEach(word => {
+                const span = document.createElement('span');
+                span.className = 'word';
+                span.textContent = word;
+                container.appendChild(span);
+            });
+        }
+
+        function renderAdjektive() {
+            const container = document.getElementById('adjektive-container');
+            container.innerHTML = '';
+            
+            ADJEKTIVE.forEach(ex => {
+                const div = document.createElement('div');
+                div.className = 'exercise';
+                
+                const sentence = document.createElement('div');
+                sentence.className = 'sentence';
+                
+                let blankIdx = 0;
+                let buffer = [];
+                
+                ex.segments.forEach((seg, segIdx) => {
+                    if (seg.t) {
+                        const span = document.createElement('span');
+                        span.textContent = seg.t;
+                        buffer.push(span);
+                    } else if (seg.b) {
+                        const currentBlankIdx = blankIdx;
+                        
+                        // Check if we need nowrap-group
+                        if (buffer.length > 0) {
+                            const lastSpan = buffer[buffer.length - 1];
+                            const text = lastSpan.textContent;
+                            if (text && !text.endsWith(' ')) {
+                                // Create nowrap group
+                                const group = document.createElement('div');
+                                group.className = 'nowrap-group';
+                                group.appendChild(lastSpan);
+                                buffer.pop();
+                                
+                                const input = document.createElement('input');
+                                input.type = 'text';
+                                input.className = `blank ${seg.s}`;
+                                input.dataset.solution = seg.b;
+                                input.dataset.exId = ex.id;
+                                input.dataset.blankIdx = currentBlankIdx;
+                                group.appendChild(input);
+                                
+                                const sol = document.createElement('span');
+                                sol.className = 'solution';
+                                sol.textContent = `(${seg.b})`;
+                                group.appendChild(sol);
+                                
+                                buffer.push(group);
+                            } else {
+                                // Normal input
+                                const input = document.createElement('input');
+                                input.type = 'text';
+                                input.className = `blank ${seg.s}`;
+                                input.dataset.solution = seg.b;
+                                input.dataset.exId = ex.id;
+                                input.dataset.blankIdx = currentBlankIdx;
+                                buffer.push(input);
+                                
+                                const sol = document.createElement('span');
+                                sol.className = 'solution';
+                                sol.textContent = `(${seg.b})`;
+                                buffer.push(sol);
+                            }
+                        } else {
+                            // Normal input
+                            const input = document.createElement('input');
+                            input.type = 'text';
+                            input.className = `blank ${seg.s}`;
+                            input.dataset.solution = seg.b;
+                            input.dataset.exId = ex.id;
+                            input.dataset.blankIdx = currentBlankIdx;
+                            buffer.push(input);
+                            
+                            const sol = document.createElement('span');
+                            sol.className = 'solution';
+                            sol.textContent = `(${seg.b})`;
+                            buffer.push(sol);
+                        }
+                        blankIdx++;
+                    }
+                });
+                
+                buffer.forEach(el => sentence.appendChild(el));
+                div.appendChild(sentence);
+                container.appendChild(div);
+            });
+        }
+
+        function checkAdjektive() {
+            document.querySelectorAll('#adjektive-container input.blank').forEach(input => {
+                const userAnswer = input.value.trim().toLowerCase();
+                const solution = input.dataset.solution.toLowerCase();
+                
+                if (userAnswer === solution) {
+                    input.className = input.className.replace(/\s*(correct|incorrect)/g, '') + ' correct';
+                } else {
+                    input.className = input.className.replace(/\s*(correct|incorrect)/g, '') + ' incorrect';
+                }
+            });
+        }
+
+        function showAdjektiveSolutions() {
+            document.querySelectorAll('#adjektive-container .solution').forEach(sol => {
+                sol.classList.add('visible');
+            });
+        }
+
+        function resetAdjektive() {
+            document.querySelectorAll('#adjektive-container input.blank').forEach(input => {
+                input.value = '';
+                input.className = input.className.replace(/\s*(correct|incorrect)/g, '');
+            });
+            document.querySelectorAll('#adjektive-container .solution').forEach(sol => {
+                sol.classList.remove('visible');
+            });
+        }
+
+        // ========== TAB 2: WORTSCHATZ ==========
+        const WORTSCHATZ = [
+            { id:1, type:"v", en:"to live", de:"Wohnen" },
+            { id:2, type:"v", en:"to come", de:"Kommen" },
+            { id:3, type:"v", en:"to learn", de:"Lernen" },
+            { id:4, type:"v", en:"to write", de:"Schreiben" },
+            { id:5, type:"v", en:"to hear/listen", de:"hören" },
+            { id:6, type:"v", en:"to ask", de:"Fragen" },
+            { id:7, type:"n", en:"hometown", artikel:"der", de:"Wohnort", plural:"Wohnorte" },
+            { id:8, type:"n", en:"home country", artikel:"das", de:"Heimatland", plural:"Heimatländer" },
+            { id:9, type:"n", en:"country", artikel:"das", de:"Land", plural:"Länder" },
+            { id:10, type:"n", en:"language", artikel:"die", de:"Sprache", plural:"Sprachen" },
+            { id:11, type:"n", en:"city", artikel:"die", de:"Stadt", plural:"Städte" },
+            { id:12, type:"a", en:"important", de:"Wichtig" },
+            { id:13, type:"a", en:"new", de:"Neu" },
+            { id:14, type:"a", en:"beautiful", de:"schön" }
+        ];
+
+        function renderWortschatz() {
+            const container = document.getElementById('wortschatz-container');
+            container.innerHTML = '';
+            
+            const list = document.createElement('div');
+            list.className = 'vocab-list';
+            
+            WORTSCHATZ.forEach(w => {
+                const row = document.createElement('div');
+                row.className = 'vocab-row';
+                
+                const enSpan = document.createElement('span');
+                enSpan.className = 'vocab-en';
+                enSpan.textContent = w.en;
+                row.appendChild(enSpan);
+                
+                const arrow = document.createElement('span');
+                arrow.className = 'vocab-arrow';
+                arrow.textContent = '→';
+                row.appendChild(arrow);
+                
+                const inputs = document.createElement('div');
+                inputs.className = 'vocab-inputs';
+                
+                if (w.type === 'n') {
+                    // Artikel
+                    const inp1 = document.createElement('input');
+                    inp1.type = 'text';
+                    inp1.className = 'blank s';
+                    inp1.dataset.solution = w.artikel;
+                    inp1.dataset.vocabId = w.id;
+                    inp1.dataset.fieldIdx = 0;
+                    inputs.appendChild(inp1);
+                    
+                    const sol1 = document.createElement('span');
+                    sol1.className = 'solution';
+                    sol1.textContent = `(${w.artikel})`;
+                    inputs.appendChild(sol1);
+                    
+                    inputs.appendChild(document.createTextNode(' '));
+                    
+                    // Deutsches Wort
+                    const inp2 = document.createElement('input');
+                    inp2.type = 'text';
+                    inp2.className = 'blank m';
+                    inp2.dataset.solution = w.de;
+                    inp2.dataset.vocabId = w.id;
+                    inp2.dataset.fieldIdx = 1;
+                    inputs.appendChild(inp2);
+                    
+                    const sol2 = document.createElement('span');
+                    sol2.className = 'solution';
+                    sol2.textContent = `(${w.de})`;
+                    inputs.appendChild(sol2);
+                    
+                    inputs.appendChild(document.createTextNode(', Pl.: '));
+                    
+                    // Plural
+                    const inp3 = document.createElement('input');
+                    inp3.type = 'text';
+                    inp3.className = 'blank m';
+                    inp3.dataset.solution = w.plural;
+                    inp3.dataset.vocabId = w.id;
+                    inp3.dataset.fieldIdx = 2;
+                    inputs.appendChild(inp3);
+                    
+                    const sol3 = document.createElement('span');
+                    sol3.className = 'solution';
+                    sol3.textContent = `(${w.plural})`;
+                    inputs.appendChild(sol3);
+                } else {
+                    // Verb oder Adjektiv - nur 1 Feld
+                    const inp = document.createElement('input');
+                    inp.type = 'text';
+                    inp.className = 'blank m';
+                    inp.dataset.solution = w.de;
+                    inp.dataset.vocabId = w.id;
+                    inp.dataset.fieldIdx = 0;
+                    inputs.appendChild(inp);
+                    
+                    const sol = document.createElement('span');
+                    sol.className = 'solution';
+                    sol.textContent = `(${w.de})`;
+                    inputs.appendChild(sol);
+                }
+                
+                row.appendChild(inputs);
+                list.appendChild(row);
+            });
+            
+            container.appendChild(list);
+        }
+
+        function checkWortschatz() {
+            document.querySelectorAll('#wortschatz-container input.blank').forEach(input => {
+                const userAnswer = input.value.trim().toLowerCase();
+                const solution = input.dataset.solution.toLowerCase();
+                
+                if (userAnswer === solution) {
+                    input.className = input.className.replace(/\s*(correct|incorrect)/g, '') + ' correct';
+                } else {
+                    input.className = input.className.replace(/\s*(correct|incorrect)/g, '') + ' incorrect';
+                }
+            });
+        }
+
+        function showWortschatzSolutions() {
+            document.querySelectorAll('#wortschatz-container .solution').forEach(sol => {
+                sol.classList.add('visible');
+            });
+        }
+
+        function resetWortschatz() {
+            document.querySelectorAll('#wortschatz-container input.blank').forEach(input => {
+                input.value = '';
+                input.className = input.className.replace(/\s*(correct|incorrect)/g, '');
+            });
+            document.querySelectorAll('#wortschatz-container .solution').forEach(sol => {
+                sol.classList.remove('visible');
+            });
+        }
+
+        // ========== TAB 3: FORMELL/INFORMELL ==========
+        const FORMELL_DATA = [
+            { word: "Wie heißen Sie?", cat: "formell" },
+            { word: "Woher kommen Sie?", cat: "formell" },
+            { word: "Wohnen Sie in Deutschland?", cat: "formell" },
+            { word: "Wie geht es dir?", cat: "informell" },
+            { word: "Wo wohnst du?", cat: "informell" }
+        ];
+
+        let draggedChip = null;
+
+        function renderFormell() {
+            const bank = document.getElementById('formell-bank');
+            bank.innerHTML = '';
+            
+            // Shuffle
+            const shuffled = [...FORMELL_DATA].sort(() => Math.random() - 0.5);
+            
+            shuffled.forEach(item => {
+                const chip = document.createElement('div');
+                chip.className = 'chip';
+                chip.textContent = item.word;
+                chip.dataset.cat = item.cat;
+                chip.draggable = true;
+                
+                chip.addEventListener('dragstart', (e) => {
+                    draggedChip = chip;
+                    chip.classList.add('dragging');
+                });
+                
+                chip.addEventListener('dragend', () => {
+                    chip.classList.remove('dragging');
+                });
+                
+                bank.appendChild(chip);
+            });
+            
+            // Setup drop zones
+            document.querySelectorAll('#sec-2 .drop-zone').forEach(zone => {
+                zone.innerHTML = '';
+                
+                zone.addEventListener('dragover', (e) => {
+                    e.preventDefault();
+                });
+                
+                zone.addEventListener('drop', (e) => {
+                    e.preventDefault();
+                    if (draggedChip) {
+                        zone.appendChild(draggedChip);
+                    }
+                });
+            });
+            
+            // Bank also accepts drops
+            bank.addEventListener('dragover', (e) => {
+                e.preventDefault();
+            });
+            
+            bank.addEventListener('drop', (e) => {
+                e.preventDefault();
+                if (draggedChip) {
+                    bank.appendChild(draggedChip);
+                }
+            });
+        }
+
+        function checkFormell() {
+            document.querySelectorAll('#sec-2 .category').forEach(cat => {
+                const catType = cat.dataset.cat;
+                const zone = cat.querySelector('.drop-zone');
+                
+                zone.querySelectorAll('.chip').forEach(chip => {
+                    if (chip.dataset.cat === catType) {
+                        chip.className = 'chip correct';
+                    } else {
+                        chip.className = 'chip incorrect';
+                    }
+                });
+            });
+        }
+
+        function showFormellSolutions() {
+            // Move all chips to correct categories
+            document.querySelectorAll('#sec-2 .category').forEach(cat => {
+                const catType = cat.dataset.cat;
+                const zone = cat.querySelector('.drop-zone');
+                
+                FORMELL_DATA.forEach(item => {
+                    if (item.cat === catType) {
+                        const chip = Array.from(document.querySelectorAll('#sec-2 .chip')).find(c => c.textContent === item.word);
+                        if (chip) {
+                            zone.appendChild(chip);
+                            chip.className = 'chip';
+                        }
+                    }
+                });
+            });
+        }
+
+        function resetFormell() {
+            renderFormell();
+        }
+
+        // ========== TAB 4: VERBEN ==========
+        const VERBEN_DATA = [
+            { id: 1, verb: "leben", segments: [{t: "ich "}, {b: "lebe", s: "m"}] },
+            { id: 2, verb: "leben", segments: [{t: "du "}, {b: "lebst", s: "m"}] },
+            { id: 3, verb: "leben", segments: [{t: "Sie "}, {b: "leben", s: "m"}] },
+            { id: 4, verb: "lernen", segments: [{t: "ich "}, {b: "lerne", s: "m"}] },
+            { id: 5, verb: "lernen", segments: [{t: "du "}, {b: "lernst", s: "m"}] },
+            { id: 6, verb: "lernen", segments: [{t: "Sie "}, {b: "lernen", s: "m"}] },
+            { id: 7, verb: "schreiben", segments: [{t: "ich "}, {b: "schreibe", s: "m"}] },
+            { id: 8, verb: "schreiben", segments: [{t: "du "}, {b: "schreibst", s: "m"}] },
+            { id: 9, verb: "schreiben", segments: [{t: "Sie "}, {b: "schreiben", s: "m"}] }
+        ];
+
+        function renderVerben() {
+            const container = document.getElementById('verben-container');
+            container.innerHTML = '';
+            
+            VERBEN_DATA.forEach(ex => {
+                const div = document.createElement('div');
+                div.className = 'exercise';
+                
+                const badge = document.createElement('div');
+                badge.className = 'verb-badge';
+                badge.textContent = ex.verb;
+                div.appendChild(badge);
+                
+                const sentence = document.createElement('div');
+                sentence.className = 'sentence';
+                
+                let blankIdx = 0;
+                let buffer = [];
+                
+                ex.segments.forEach(seg => {
+                    if (seg.t) {
+                        const span = document.createElement('span');
+                        span.textContent = seg.t;
+                        buffer.push(span);
+                    } else if (seg.b) {
+                        const currentBlankIdx = blankIdx;
+                        
+                        const input = document.createElement('input');
+                        input.type = 'text';
+                        input.className = `blank ${seg.s}`;
+                        input.dataset.solution = seg.b;
+                        input.dataset.exId = ex.id;
+                        input.dataset.blankIdx = currentBlankIdx;
+                        buffer.push(input);
+                        
+                        const sol = document.createElement('span');
+                        sol.className = 'solution';
+                        sol.textContent = `(${seg.b})`;
+                        buffer.push(sol);
+                        
+                        blankIdx++;
+                    }
+                });
+                
+                buffer.forEach(el => sentence.appendChild(el));
+                div.appendChild(sentence);
+                container.appendChild(div);
+            });
+        }
+
+        function checkVerben() {
+            document.querySelectorAll('#verben-container input.blank').forEach(input => {
+                const userAnswer = input.value.trim().toLowerCase();
+                const solution = input.dataset.solution.toLowerCase();
+                
+                if (userAnswer === solution) {
+                    input.className = input.className.replace(/\s*(correct|incorrect)/g, '') + ' correct';
+                } else {
+                    input.className = input.className.replace(/\s*(correct|incorrect)/g, '') + ' incorrect';
+                }
+            });
+        }
+
+        function showVerbenSolutions() {
+            document.querySelectorAll('#verben-container .solution').forEach(sol => {
+                sol.classList.add('visible');
+            });
+        }
+
+        function resetVerben() {
+            document.querySelectorAll('#verben-container input.blank').forEach(input => {
+                input.value = '';
+                input.className = input.className.replace(/\s*(correct|incorrect)/g, '');
+            });
+            document.querySelectorAll('#verben-container .solution').forEach(sol => {
+                sol.classList.remove('visible');
+            });
+        }
+
+        // ========== TAB 5: PRÄPOSITIONEN ==========
+        const PRAEP_DATA = [
+            { id: 1, segments: [{t: "Ich komme aus "}, {b: "der", s: "s"}, {t: " Türkei."}] },
+            { id: 2, segments: [{t: "Ich komme aus "}, {b: "dem", s: "s"}, {t: " Irak."}] },
+            { id: 3, segments: [{t: "Ich komme aus "}, {b: "den", s: "s"}, {t: " USA."}] },
+            { id: 4, segments: [{t: "Ich komme aus "}, {b: "den", s: "s"}, {t: " Niederlanden."}] },
+            { id: 5, segments: [{t: "Ich wohne in "}, {b: "der", s: "s"}, {t: " Türkei."}] },
+            { id: 6, segments: [{t: "Ich wohne in "}, {b: "den", s: "s"}, {t: " USA."}] },
+            { id: 7, segments: [{t: "Er kommt aus "}, {b: "der", s: "s"}, {t: " Schweiz."}] },
+            { id: 8, segments: [{t: "Sie wohnt in "}, {b: "den", s: "s"}, {t: " Niederlanden."}] },
+            { id: 9, segments: [{t: "Ich lebe in "}, {b: "der", s: "s"}, {t: " Schweiz."}] },
+            { id: 10, segments: [{t: "Wir kommen aus "}, {b: "dem", s: "s"}, {t: " Irak."}] }
+        ];
+
+        function renderPraep() {
+            const container = document.getElementById('praep-container');
+            container.innerHTML = '';
+            
+            PRAEP_DATA.forEach(ex => {
+                const div = document.createElement('div');
+                div.className = 'exercise';
+                
+                const sentence = document.createElement('div');
+                sentence.className = 'sentence';
+                
+                let blankIdx = 0;
+                let buffer = [];
+                
+                ex.segments.forEach(seg => {
+                    if (seg.t) {
+                        const span = document.createElement('span');
+                        span.textContent = seg.t;
+                        buffer.push(span);
+                    } else if (seg.b) {
+                        const currentBlankIdx = blankIdx;
+                        
+                        const input = document.createElement('input');
+                        input.type = 'text';
+                        input.className = `blank ${seg.s}`;
+                        input.dataset.solution = seg.b;
+                        input.dataset.exId = ex.id;
+                        input.dataset.blankIdx = currentBlankIdx;
+                        buffer.push(input);
+                        
+                        const sol = document.createElement('span');
+                        sol.className = 'solution';
+                        sol.textContent = `(${seg.b})`;
+                        buffer.push(sol);
+                        
+                        blankIdx++;
+                    }
+                });
+                
+                buffer.forEach(el => sentence.appendChild(el));
+                div.appendChild(sentence);
+                container.appendChild(div);
+            });
+        }
+
+        function checkPraep() {
+            document.querySelectorAll('#praep-container input.blank').forEach(input => {
+                const userAnswer = input.value.trim().toLowerCase();
+                const solution = input.dataset.solution.toLowerCase();
+                
+                if (userAnswer === solution) {
+                    input.className = input.className.replace(/\s*(correct|incorrect)/g, '') + ' correct';
+                } else {
+                    input.className = input.className.replace(/\s*(correct|incorrect)/g, '') + ' incorrect';
+                }
+            });
+        }
+
+        function showPraepSolutions() {
+            document.querySelectorAll('#praep-container .solution').forEach(sol => {
+                sol.classList.add('visible');
+            });
+        }
+
+        function resetPraep() {
+            document.querySelectorAll('#praep-container input.blank').forEach(input => {
+                input.value = '';
+                input.className = input.className.replace(/\s*(correct|incorrect)/g, '');
+            });
+            document.querySelectorAll('#praep-container .solution').forEach(sol => {
+                sol.classList.remove('visible');
+            });
+        }
+
+        // Initialize all tabs
+        renderAdjektiveWordlist();
+        renderAdjektive();
+        renderWortschatz();
+        renderFormell();
+        renderVerben();
+        renderPraep();
+    </script>
+<div class="author-footer">
+  <span class="author-name">&copy; Frank Burkert</span> &middot; DaF-Materialien &middot;
+  <a href="mailto:FrankBurkert@fabdaf.onmicrosoft.com">FrankBurkert@fabdaf.onmicrosoft.com</a>
+</div>
+</body>
+</html>

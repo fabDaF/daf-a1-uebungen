@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Die Wochentage (A1.1)</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; padding: 20px; }
+.container { max-width: 860px; margin: 0 auto; background: white; border-radius: 20px; padding: 30px 28px; box-shadow: 0 20px 60px rgba(0,0,0,0.15); }
+h1 { text-align: center; color: #333; margin-bottom: 4px; font-size: 1.5em; }
+.subtitle { text-align: center; color: #888; margin-bottom: 20px; font-size: 0.95em; }
+.nav { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 24px; justify-content: center; }
+.nav-btn { padding: 10px 16px; border-radius: 25px; cursor: pointer; border-right: 1px solid #ddd; font-weight: 600; font-size: 0.85em; border: 2px solid #e0e0e0; background: white; color: #555; transition: all 0.2s; user-select: none; }
+.nav-btn:hover { border-color: #667eea; color: #667eea; }
+.nav-btn:last-child { border-right: none; }
+        .nav-btn.active { background: linear-gradient(135deg, #667eea, #764ba2); color: white; border-color: transparent; }
+.section { display: none; }
+.section.active { display: block; }
+h2 { color: #333; font-size: 1.15em; margin-bottom: 16px; padding-bottom: 8px; border-bottom: 2px solid #f0f0f0; }
+.btn-row { display: flex; gap: 6px; }
+.btn { background: none; border: 1px solid #ddd; border-radius: 6px; padding: 4px 12px; font-size: 0.82em; color: #888; cursor: pointer; transition: all 0.15s; font-weight: 500; }
+.btn-show { background: #f0f0f0; color: #555; }
+.btn-show:hover { background: #e0e0e0; }
+.btn-reset:hover { background: #ffeaea; }
+.timer-bar { display: flex; align-items: center; justify-content: flex-end; gap: 10px; margin-bottom: 14px; }
+.timer-display { font-size: 0.85em; color: #888; font-variant-numeric: tabular-nums; min-width: 60px; text-align: right; }
+.timer-best { font-size: 0.78em; color: #aaa; }
+.wt-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; margin-bottom: 20px; }
+@media(max-width:600px){ .wt-grid { grid-template-columns: repeat(4, 1fr); } }
+.wt-card { background: linear-gradient(135deg, #667eea, #764ba2); color: white; border-radius: 10px; padding: 10px 6px; text-align: center; }
+.wt-card .wt-name { font-weight: 700; font-size: 0.85em; }
+.wt-card .wt-short { font-size: 0.72em; opacity: 0.85; margin-top: 2px; }
+.wt-card.weekend { background: linear-gradient(135deg, #f093fb, #f5576c); }
+.info-box { background: #f8f6ff; border-left: 4px solid #667eea; border-radius: 8px; padding: 14px 18px; margin-bottom: 14px; font-size: 0.93em; line-height: 1.75; }
+.info-box strong { color: #667eea; }
+.regel-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
+@media(max-width:520px){ .regel-grid { grid-template-columns: 1fr; } }
+.regel-card { border-radius: 10px; padding: 14px; }
+.regel-card.blau { background: #eef2ff; border: 1.5px solid #c7d2fe; }
+.regel-card.blau h3 { color: #4338ca; font-size: 0.88em; margin-bottom: 8px; }
+.regel-card.gruen { background: #f0fdf4; border: 1.5px solid #bbf7d0; }
+.regel-card.gruen h3 { color: #15803d; font-size: 0.88em; margin-bottom: 8px; }
+.regel-card p { font-size: 0.88em; line-height: 1.6; color: #333; }
+.sagt-box { background: #fffbeb; border: 1.5px solid #fde68a; border-radius: 10px; padding: 12px 16px; margin-bottom: 12px; font-size: 0.9em; }
+.sagt-box .sagt-label { font-size: 0.75em; font-weight: 700; color: #92400e; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+.tz-table { width: 100%; border-collapse: collapse; margin-bottom: 16px; font-size: 0.9em; }
+.tz-table th { background: #667eea; color: white; padding: 8px 12px; text-align: left; }
+.tz-table td { padding: 8px 12px; border-bottom: 1px solid #f0f0f0; }
+.tz-table tr:nth-child(even) td { background: #f8f9fa; }
+.tz-table .nomen { font-weight: 600; color: #4338ca; }
+.tz-table .adverb { font-weight: 600; color: #15803d; }
+.zuo-area { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+@media(max-width:520px){ .zuo-area { grid-template-columns: 1fr; } }
+.zuo-zone { border-radius: 12px; padding: 14px; min-height: 100px; }
+.zuo-zone.einmal { background: #eef2ff; border: 2px dashed #c7d2fe; }
+.zuo-zone.einmal h3 { color: #4338ca; font-size: 0.85em; font-weight: 700; margin-bottom: 8px; text-transform: uppercase; }
+.zuo-zone.regelm { background: #f0fdf4; border: 2px dashed #bbf7d0; }
+.zuo-zone.regelm h3 { color: #15803d; font-size: 0.85em; font-weight: 700; margin-bottom: 8px; text-transform: uppercase; }
+.zuo-drop { min-height: 60px; border-radius: 8px; padding: 6px; display: flex; flex-wrap: wrap; gap: 6px; align-content: flex-start; }
+.chip-pool { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+.chip { padding: 8px 14px; border-radius: 20px; background: #f3f4f6; border: 2px solid #d1d5db; font-size: 0.88em; font-weight: 600; cursor: grab; color: #374151; transition: all 0.15s; user-select: none; }
+.chip:hover { border-color: #667eea; color: #667eea; }
+.chip.selected { border-color: #667eea; background: #eef2ff; color: #4338ca; }
+.chip.correct { background: #dcfce7; border-color: #86efac; color: #15803d; cursor: default; }
+.chip.wrong { background: #fee2e2; border-color: #fca5a5; color: #991b1b; cursor: default; }
+.raetsel-card { background: #f8f9fa; border-radius: 12px; padding: 16px 18px; margin-bottom: 14px; }
+.raetsel-frage { font-size: 0.93em; font-weight: 600; color: #333; margin-bottom: 10px; }
+.raetsel-opts { display: flex; flex-wrap: wrap; gap: 8px; }
+.raetsel-opt { padding: 8px 16px; border-radius: 20px; border: 2px solid #e0e0e0; background: white; font-size: 0.88em; font-weight: 600; color: #555; cursor: pointer; transition: all 0.15s; }
+.raetsel-opt:hover:not([disabled]) { border-color: #667eea; color: #4338ca; }
+.raetsel-opt.correct { background: #dcfce7; border-color: #86efac; color: #15803d; }
+.raetsel-opt.wrong { background: #fee2e2; border-color: #fca5a5; color: #991b1b; }
+.raetsel-fb { font-size: 0.82em; margin-top: 8px; color: #888; min-height: 16px; }
+.luecken-container { display: flex; flex-direction: column; gap: 8px; }
+.luecke-row { background: #f8f9fa; border-radius: 8px; padding: 10px 14px; font-size: 0.93em; line-height: 1.8; }
+.luecke-row .nr { font-size: 0.75em; color: #aaa; margin-right: 6px; font-weight: 600; }
+.luecke { border: none; border-bottom: 2px solid #667eea; background: transparent; font-size: 0.93em; font-family: inherit; color: #333; outline: none; padding: 1px 4px; text-align: center; transition: border-color 0.2s; }
+.luecke:focus { border-color: #764ba2; }
+.luecke.ok { border-color: #22c55e; color: #15803d; }
+.luecke.s { min-width: 70px; }
+.luecke.m { min-width: 120px; }
+.luecke.l { min-width: 160px; }
+.sb-rows { display: flex; flex-direction: column; gap: 14px; }
+.sb-row { background: #f8f9fa; border-radius: 10px; padding: 12px 14px; }
+.sb-nr { font-size: 0.78em; color: #aaa; margin-bottom: 6px; }
+.sb-target { min-height: 38px; border: 2px dashed #d1d5db; border-radius: 8px; padding: 5px 8px; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-bottom: 8px; background: white; }
+.sb-target.ok-row { border-color: #86efac; background: #f0fdf4; }
+.sb-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.sb-chip { padding: 6px 12px; background: white; border: 2px solid #d1d5db; border-radius: 16px; font-size: 0.88em; font-weight: 600; color: #374151; cursor: grab; transition: all 0.15s; user-select: none; }
+.sb-chip:hover { border-color: #667eea; color: #4338ca; }
+.sb-chip.selected { border-color: #667eea; background: #eef2ff; color: #4338ca; }
+.sb-chip.placed { opacity: 0.4; cursor: default; }
+.sb-placed-chip { padding: 6px 12px; background: #eef2ff; border: 2px solid #667eea; border-radius: 16px; font-size: 0.88em; font-weight: 600; color: #4338ca; cursor: grab; user-select: none; }
+.sb-punct { font-weight: 700; color: #555; }
+.wort-grid { display: flex; flex-direction: column; gap: 8px; }
+.wort-row { display: flex; align-items: center; gap: 10px; padding: 8px 12px; background: #f8f9fa; border-radius: 8px; }
+.wort-en { flex: 0 0 240px; font-size: 0.88em; color: #888; }
+.wort-input { flex: 1; border: none; border-bottom: 2px solid #d1d5db; background: transparent; font-size: 0.92em; font-family: inherit; outline: none; padding: 2px 6px; transition: border-color 0.2s; }
+.wort-input:focus { border-color: #667eea; }
+.wort-input.ok { border-color: #22c55e; color: #15803d; }
+.wort-badge { font-size: 0.75em; background: #667eea; color: white; border-radius: 8px; padding: 1px 7px; font-weight: 700; }
+.score-bar { text-align: center; margin-top: 16px; font-size: 0.9em; color: #888; }
+.score-bar strong { color: #667eea; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>📅 Die Wochentage</h1>
+  <p class="subtitle">DE_A1_1071V &nbsp;·&nbsp; Wortschatz A1.1</p>
+
+  <nav class="nav">
+    <button class="nav-btn active" onclick="showSection(0)">📅 Übersicht</button>
+    <button class="nav-btn" onclick="showSection(1)">⏰ Tageszeiten</button>
+    <button class="nav-btn" onclick="showSection(2)">🔀 einmal / regelmäßig</button>
+    <button class="nav-btn" onclick="showSection(3)">🧩 Rätsel</button>
+    <button class="nav-btn" onclick="showSection(4)">✏️ am oder -s?</button>
+    <button class="nav-btn" onclick="showSection(5)">🧩 Satzbau</button>
+    <button class="nav-btn" onclick="showSection(6)">📝 Wortschatz</button>
+  </nav>
+
+  <!-- TAB 0: ÜBERSICHT -->
+  <section class="section active" id="sec-0">
+    <h2>📅 Die Wochentage — Übersicht</h2>
+    <div class="wt-grid">
+      <div class="wt-card"><div class="wt-name">Montag</div><div class="wt-short">Mo</div></div>
+      <div class="wt-card"><div class="wt-name">Dienstag</div><div class="wt-short">Di</div></div>
+      <div class="wt-card"><div class="wt-name">Mittwoch</div><div class="wt-short">Mi</div></div>
+      <div class="wt-card"><div class="wt-name">Donnerstag</div><div class="wt-short">Do</div></div>
+      <div class="wt-card"><div class="wt-name">Freitag</div><div class="wt-short">Fr</div></div>
+      <div class="wt-card weekend"><div class="wt-name">Samstag</div><div class="wt-short">Sa</div></div>
+      <div class="wt-card weekend"><div class="wt-name">Sonntag</div><div class="wt-short">So</div></div>
+    </div>
+    <div class="info-box">
+      Alle Wochentage sind <strong>Maskulinum</strong>: <strong>der</strong> Montag, <strong>der</strong> Dienstag …<br>
+      Eine <strong>Woche</strong> hat <strong>7 Tage</strong>. Ein <strong>Tag</strong> hat <strong>24 Stunden</strong>.
+    </div>
+    <div class="regel-grid">
+      <div class="regel-card blau">
+        <h3>📌 gestern / heute / morgen</h3>
+        <p>
+          <strong style="color:#4338ca">Gestern</strong> war Mittwoch.<br>
+          <strong style="color:#4338ca">Heute</strong> ist Donnerstag.<br>
+          <strong style="color:#4338ca">Morgen</strong> ist Freitag. Juhu!
+        </p>
+      </div>
+      <div class="regel-card gruen">
+        <h3>📌 übermorgen / vorgestern</h3>
+        <p>
+          <strong style="color:#15803d">übermorgen</strong> = in zwei Tagen<br>
+          <em>Heute ist Do. Übermorgen ist Sa.</em><br><br>
+          <strong style="color:#15803d">vorgestern</strong> = vor zwei Tagen<br>
+          <em>Heute ist Do. Vorgestern war Di.</em>
+        </p>
+      </div>
+    </div>
+    <div class="regel-grid">
+      <div class="regel-card blau">
+        <h3>📌 am + Wochentag → einmal</h3>
+        <p>
+          <em>Ich gehe <strong style="color:#4338ca">am Dienstag</strong> ins Kino.</em><br>
+          <em><strong style="color:#4338ca">Am Sonntag</strong> jogge ich.</em>
+        </p>
+      </div>
+      <div class="regel-card gruen">
+        <h3>📌 Wochentag + -s → regelmäßig</h3>
+        <p>
+          <em>Ich schwimme <strong style="color:#15803d">dienstags</strong>. (= jeden Di.)</em><br>
+          <em><strong style="color:#15803d">Freitags</strong> singe ich im Chor.</em>
+        </p>
+      </div>
+    </div>
+    <div class="regel-grid">
+      <div class="regel-card blau">
+        <h3>📌 Tag + Tageszeit kombinieren</h3>
+        <p>
+          <em>am <strong style="color:#4338ca">Samstagvormittag</strong></em><br>
+          <em>heute <strong style="color:#4338ca">Nachmittag</strong></em><br>
+          <em>morgen <strong style="color:#4338ca">früh</strong></em><br>
+          <em>Donnerstagmorgen arbeite ich nicht.</em>
+        </p>
+      </div>
+      <div class="regel-card gruen">
+        <h3>📌 Feiertag / Brückentag</h3>
+        <p>
+          <strong style="color:#15803d">der Feiertag</strong>: Jeder hat frei.<br>
+          <strong style="color:#15803d">der Brückentag</strong>: Freitag zw. Feiertag und Wochenende.<br>
+          <em>→ das lange Wochenende</em>
+        </p>
+      </div>
+    </div>
+    <div class="sagt-box">
+      <div class="sagt-label">So sagt man das!</div>
+      <p>In Nord- und Mitteldeutschland: <strong>Samstag</strong> = <strong>Sonnabend</strong><br>
+      <em>Ich gehe Sonnabend ins Kino.</em></p>
+    </div>
+    <div class="sagt-box" style="background:#eef2ff;border-color:#c7d2fe;">
+      <div class="sagt-label" style="color:#4338ca;">Redewendung</div>
+      <p><strong>ewig und drei Tage</strong> = sehr lange<br>
+      <em>Das Meeting dauert ewig und drei Tage!</em></p>
+    </div>
+  </section>
+
+  <!-- TAB 1: TAGESZEITEN -->
+  <section class="section" id="sec-1">
+    <h2>⏰ Tageszeiten</h2>
+    <div class="timer-bar">
+      <span class="timer-display" id="timer-1">0:00</span>
+      <span class="timer-best" id="best-1"></span>
+    </div>
+    <table class="tz-table">
+      <tr><th>Nomen</th><th>Adverb (-s)</th><th>Beispiel</th></tr>
+      <tr><td class="nomen">der Morgen</td><td class="adverb">morgens</td><td><em>Morgens trinke ich Kaffee.</em></td></tr>
+      <tr><td class="nomen">der Vormittag</td><td class="adverb">vormittags</td><td><em>Vormittags arbeite ich konzentriert.</em></td></tr>
+      <tr><td class="nomen">der Mittag</td><td class="adverb">mittags</td><td><em>Mittags esse ich.</em></td></tr>
+      <tr><td class="nomen">der Nachmittag</td><td class="adverb">nachmittags</td><td><em>Nachmittags lerne ich Deutsch.</em></td></tr>
+      <tr><td class="nomen">der Abend</td><td class="adverb">abends</td><td><em>Abends bin ich zu Hause.</em></td></tr>
+      <tr><td class="nomen">die Nacht</td><td class="adverb">nachts</td><td><em>Nachts schlafe ich tief und gut.</em></td></tr>
+    </table>
+    <div class="info-box">
+      <strong>Kombination Tag + Tageszeit:</strong><br>
+      Ich gehe <strong>heute Nachmittag</strong> einkaufen. &nbsp;·&nbsp;
+      <strong>Morgen früh</strong> jogge ich. &nbsp;·&nbsp;
+      <strong>Gestern Abend</strong> war das Konzert fantastisch.<br>
+      <strong>Achtung:</strong> <em>morgen Morgen</em> ❌ → <em>morgen früh</em> ✅
+    </div>
+    <p style="font-size:0.9em;color:#666;margin-bottom:12px;">Ergänze mit der richtigen Kombination:</p>
+    <div id="tz-container" class="luecken-container"></div>
+    <div class="btn-row">
+      <button class="btn btn-show" onclick="showTzLoesung()">Lösungen zeigen</button>
+      <button class="btn btn-reset" onclick="resetTz()">Neu starten</button>
+    </div>
+  </section>
+
+  <!-- TAB 2: EINMAL / REGELMÄSSIG -->
+  <section class="section" id="sec-2">
+    <h2>🔀 einmal oder regelmäßig?</h2>
+    <div class="timer-bar">
+      <span class="timer-display" id="timer-2">0:00</span>
+      <span class="timer-best" id="best-2"></span>
+    </div>
+    <p style="font-size:0.9em;color:#666;margin-bottom:14px;">Ordne zu: <strong>einmal</strong> (am + Tag) oder <strong>regelmäßig</strong> (Tag + -s)?</p>
+    <div id="reg-pool" class="chip-pool"></div>
+    <div class="zuo-area">
+      <div class="zuo-zone einmal">
+        <h3>📌 einmal (am Montag)</h3>
+        <div class="zuo-drop" id="zone-einmal" ondragover="event.preventDefault()" ondrop="regDrop(event,'einmal')"></div>
+      </div>
+      <div class="zuo-zone regelm">
+        <h3>🔁 regelmäßig (montags)</h3>
+        <div class="zuo-drop" id="zone-regelm" ondragover="event.preventDefault()" ondrop="regDrop(event,'regelm')"></div>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-show" onclick="regCheck()">Prüfen</button>
+      <button class="btn btn-reset" onclick="regReset()">Neu starten</button>
+    </div>
+    <div class="score-bar" id="reg-score"></div>
+  </section>
+
+  <!-- TAB 3: RÄTSEL -->
+  <section class="section" id="sec-3">
+    <h2>🧩 Welcher Tag ist heute?</h2>
+    <div class="timer-bar">
+      <span class="timer-display" id="timer-3">0:00</span>
+      <span class="timer-best" id="best-3"></span>
+    </div>
+    <p style="font-size:0.9em;color:#666;margin-bottom:14px;">Rechne mit gestern, morgen, übermorgen und vorgestern!</p>
+    <div id="raetsel-container"></div>
+    <div class="btn-row">
+      <button class="btn btn-reset" onclick="raetselReset()">Neue Runde</button>
+    </div>
+    <div class="score-bar" id="raetsel-score"></div>
+  </section>
+
+  <!-- TAB 4: AM ODER -S? -->
+  <section class="section" id="sec-4">
+    <h2>✏️ am Montag oder montags?</h2>
+    <div class="timer-bar">
+      <span class="timer-display" id="timer-4">0:00</span>
+      <span class="timer-best" id="best-4"></span>
+    </div>
+    <p style="font-size:0.9em;color:#666;margin-bottom:14px;">Ergänze in der richtigen Form. Der Hinweis hilft dir.</p>
+    <div id="ams-container" class="luecken-container"></div>
+    <div class="btn-row">
+      <button class="btn btn-show" onclick="showAmsLoesung()">Lösungen zeigen</button>
+      <button class="btn btn-reset" onclick="resetAms()">Neu starten</button>
+    </div>
+  </section>
+
+  <!-- TAB 5: SATZBAU -->
+  <section class="section" id="sec-5">
+    <h2>🧩 Satzbau</h2>
+    <div class="timer-bar">
+      <span class="timer-display" id="timer-5">0:00</span>
+      <span class="timer-best" id="best-5"></span>
+    </div>
+    <p style="font-size:0.9em;color:#666;margin-bottom:16px;">Bringe die Wörter in die richtige Reihenfolge.</p>
+    <div class="sb-rows" id="sb-container"></div>
+    <div class="btn-row">
+      <button class="btn btn-show" onclick="sbShowAll()">Lösungen zeigen</button>
+      <button class="btn btn-reset" onclick="sbReset()">Neu starten</button>
+    </div>
+  </section>
+
+  <!-- TAB 6: WORTSCHATZ -->
+  <section class="section" id="sec-6">
+    <h2>📝 Wortschatz</h2>
+    <div class="timer-bar">
+      <span class="timer-display" id="timer-6">0:00</span>
+      <span class="timer-best" id="best-6"></span>
+    </div>
+    <p style="font-size:0.9em;color:#666;margin-bottom:16px;">Tippe das deutsche Wort (Englisch → Deutsch).</p>
+    <div class="wort-grid" id="wort-container"></div>
+    <div class="btn-row">
+      <button class="btn btn-show" onclick="showWortLoesung()">Lösungen zeigen</button>
+      <button class="btn btn-reset" onclick="resetWortschatz()">Neu starten</button>
+    </div>
+    <div class="score-bar" id="wort-score"></div>
+  </section>
+
+</div>
+<script>
+'use strict';
+var TIMER_PREFIX='a1-1071v-wochentage-';
+var timerStarted=[false,false,false,false,false,false,false];
+var timerRunning=[false,false,false,false,false,false,false];
+var timerSeconds=[0,0,0,0,0,0,0];
+var timerIntervals=[null,null,null,null,null,null,null];
+function timerStart(n){if(timerRunning[n])return;timerRunning[n]=true;timerStarted[n]=true;timerIntervals[n]=setInterval(function(){timerSeconds[n]++;document.getElementById('timer-'+n).textContent=fmtTime(timerSeconds[n]);},1000);}
+function timerStop(n){if(!timerRunning[n])return;clearInterval(timerIntervals[n]);timerRunning[n]=false;var key=TIMER_PREFIX+n;var best=localStorage.getItem(key);if(!best||timerSeconds[n]<parseInt(best))localStorage.setItem(key,timerSeconds[n]);loadBestTimes();}
+function timerResetOne(n){clearInterval(timerIntervals[n]);timerRunning[n]=false;timerStarted[n]=false;timerSeconds[n]=0;document.getElementById('timer-'+n).textContent='0:00';}
+function timerAutoStart(n){if(!timerStarted[n])timerStart(n);}
+function fmtTime(s){return Math.floor(s/60)+':'+(s%60<10?'0':'')+s%60;}
+function loadBestTimes(){for(var i=1;i<=6;i++){var b=localStorage.getItem(TIMER_PREFIX+i);var el=document.getElementById('best-'+i);if(el)el.textContent=b?'Best: '+fmtTime(parseInt(b)):'';}}
+loadBestTimes();
+
+function showSection(n){
+  document.querySelectorAll('.section').forEach(function(s){s.classList.remove('active');});
+  document.querySelectorAll('.nav-btn').forEach(function(b){b.classList.remove('active');});
+  document.getElementById('sec-'+n).classList.add('active');
+  document.querySelectorAll('.nav-btn')[n].classList.add('active');
+}
+
+/* TAB 1: TAGESZEITEN */
+var TZ_DATA=[
+  {id:1,segs:[{t:'Ich gehe '},{b:'heute Nachmittag',sz:'l'},{t:' zum Meeting.'}]},
+  {id:2,segs:[{t:''},{b:'Morgen früh',sz:'m'},{t:' habe ich keine Arbeitstermine.'}]},
+  {id:3,segs:[{t:''},{b:'Gestern Abend',sz:'m'},{t:' war das Konzert wunderschön.'}]},
+  {id:4,segs:[{t:'Am '},{b:'Donnerstagmorgen',sz:'l'},{t:' arbeite ich nicht.'}]},
+  {id:5,segs:[{t:''},{b:'Sonntagmittag',sz:'l'},{t:' frühstücken wir lange mit der Familie.'}]},
+  {id:6,segs:[{t:'Was machst du '},{b:'morgen Abend',sz:'m'},{t:'?'}]},
+];
+function buildTzLuecken(){
+  var cont=document.getElementById('tz-container');cont.innerHTML='';
+  TZ_DATA.forEach(function(d){
+    var row=document.createElement('div');row.className='luecke-row';
+    var nr=document.createElement('span');nr.className='nr';nr.textContent=d.id+'. ';row.appendChild(nr);
+    d.segs.forEach(function(seg){
+      if(seg.t!==undefined){row.appendChild(document.createTextNode(seg.t));}
+      else{var inp=document.createElement('input');inp.type='text';inp.className='luecke '+seg.sz;inp.dataset.ans=seg.b.toLowerCase();inp.addEventListener('input',function(){liveCheckTz(inp);timerAutoStart(1);});row.appendChild(inp);}
+    });
+    cont.appendChild(row);
+  });
+}
+function liveCheckTz(inp){
+  var val=inp.value.trim().toLowerCase();
+  if(val===inp.dataset.ans){inp.classList.add('ok');inp.classList.remove('err');}else inp.classList.remove('ok','err');
+  var all=document.querySelectorAll('#tz-container input');var ok=true;
+  all.forEach(function(i){if(!i.classList.contains('ok'))ok=false;});
+  if(ok&&all.length>0)timerStop(1);
+}
+function showTzLoesung(){document.querySelectorAll('#tz-container input').forEach(function(inp){inp.value=inp.dataset.ans;inp.classList.add('ok');});}
+function resetTz(){timerResetOne(1);buildTzLuecken();}
+
+/* TAB 2: EINMAL / REGELMÄSSIG */
+var REG_DATA=[
+  {id:'r1',text:'Ich lerne immer dienstags Deutsch.',cat:'regelm'},
+  {id:'r2',text:'Ich gehe montags zum Sport.',cat:'regelm'},
+  {id:'r3',text:'Wir fahren am Samstag nach München.',cat:'einmal'},
+  {id:'r4',text:'Ich frühstücke sonntags lange.',cat:'regelm'},
+  {id:'r5',text:'Ich gehe am Mittwoch zum Arzt.',cat:'einmal'},
+  {id:'r6',text:'Freitags singe ich im Chor.',cat:'regelm'},
+  {id:'r7',text:'Das Meeting ist am Donnerstag um 15 Uhr.',cat:'einmal'},
+  {id:'r8',text:'Donnerstags telefoniere ich mit Kunden.',cat:'regelm'},
+];
+var draggedChip=null,clickedChip=null;
+function regInit(){
+  var pool=document.getElementById('reg-pool');pool.innerHTML='';
+  document.getElementById('zone-einmal').innerHTML='';
+  document.getElementById('zone-regelm').innerHTML='';
+  document.getElementById('reg-score').textContent='';
+  REG_DATA.slice().sort(function(){return Math.random()-0.5;}).forEach(function(d){pool.appendChild(makeRegChip(d));});
+}
+function makeRegChip(d){
+  var chip=document.createElement('div');chip.className='chip';chip.textContent=d.text;chip.dataset.id=d.id;chip.dataset.cat=d.cat;chip.draggable=true;
+  chip.addEventListener('dragstart',function(e){draggedChip=chip;e.dataTransfer.setData('text/plain','');});
+  chip.addEventListener('click',function(){
+    if(chip.classList.contains('correct')||chip.classList.contains('wrong'))return;
+    if(clickedChip===chip){chip.classList.remove('selected');clickedChip=null;}
+    else if(clickedChip){clickedChip.classList.remove('selected');clickedChip=null;chip.classList.add('selected');clickedChip=chip;}
+    else{chip.classList.add('selected');clickedChip=chip;}
+  });
+  return chip;
+}
+document.getElementById('zone-einmal').addEventListener('click',function(){regDropClick('einmal');});
+document.getElementById('zone-regelm').addEventListener('click',function(){regDropClick('regelm');});
+function regDropClick(cat){if(!clickedChip)return;document.getElementById('zone-'+cat).appendChild(clickedChip);clickedChip.classList.remove('selected');clickedChip=null;timerAutoStart(2);}
+function regDrop(e,cat){e.preventDefault();if(!draggedChip)return;document.getElementById('zone-'+cat).appendChild(draggedChip);draggedChip=null;timerAutoStart(2);}
+function regCheck(){
+  var correct=0,total=0;
+  ['einmal','regelm'].forEach(function(cat){document.getElementById('zone-'+cat).querySelectorAll('.chip').forEach(function(chip){total++;if(chip.dataset.cat===cat){chip.classList.add('correct');correct++;}else chip.classList.add('wrong');});});
+  document.getElementById('reg-score').innerHTML='<strong>'+correct+' / '+total+'</strong> richtig';
+  if(correct===total&&total===REG_DATA.length)timerStop(2);
+}
+function regReset(){timerResetOne(2);regInit();}
+
+/* TAB 3: RÄTSEL */
+var TAGE=['Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Samstag','Sonntag'];
+var RTMPLS=[
+  {q:function(i){return 'Gestern war '+TAGE[i]+'. Welcher Tag ist heute?';},a:function(i){return TAGE[(i+1)%7];},opts:function(i){return shuffle([TAGE[(i+1)%7],TAGE[(i+2)%7],TAGE[i]]);}},
+  {q:function(i){return 'Morgen ist '+TAGE[i]+'. Welcher Tag ist heute?';},a:function(i){return TAGE[(i+6)%7];},opts:function(i){return shuffle([TAGE[(i+6)%7],TAGE[(i+5)%7],TAGE[i]]);}},
+  {q:function(i){return 'Übermorgen ist '+TAGE[i]+'. Welcher Tag ist heute?';},a:function(i){return TAGE[(i+5)%7];},opts:function(i){return shuffle([TAGE[(i+5)%7],TAGE[(i+6)%7],TAGE[(i+4)%7]]);}},
+  {q:function(i){return 'Vorgestern war '+TAGE[i]+'. Welcher Tag ist heute?';},a:function(i){return TAGE[(i+2)%7];},opts:function(i){return shuffle([TAGE[(i+2)%7],TAGE[(i+1)%7],TAGE[(i+3)%7]]);}},
+  {q:function(i){return 'Heute ist '+TAGE[i]+'. Was war vorgestern?';},a:function(i){return TAGE[(i+5)%7];},opts:function(i){return shuffle([TAGE[(i+5)%7],TAGE[(i+6)%7],TAGE[(i+4)%7]]);}},
+  {q:function(i){return 'Heute ist '+TAGE[i]+'. Was ist übermorgen?';},a:function(i){return TAGE[(i+2)%7];},opts:function(i){return shuffle([TAGE[(i+2)%7],TAGE[(i+1)%7],TAGE[(i+3)%7]]);}},
+];
+var raetselAnswered=[];
+function shuffle(arr){return arr.slice().sort(function(){return Math.random()-0.5;});}
+function raetselInit(){
+  var cont=document.getElementById('raetsel-container');cont.innerHTML='';raetselAnswered=[];
+  document.getElementById('raetsel-score').textContent='';
+  var used=[],count=0;
+  while(count<5){
+    var ti=Math.floor(Math.random()*RTMPLS.length);
+    var di=Math.floor(Math.random()*7);
+    var key=ti+'-'+di;if(used.indexOf(key)>=0)continue;
+    used.push(key);count++;
+    var tmpl=RTMPLS[ti],idx=di;
+    var ans=tmpl.a(idx);
+    var opts=shuffle(tmpl.opts(idx));
+    if(opts.indexOf(ans)<0)opts[0]=ans;
+    opts=shuffle(opts);
+    (function(q,a,options,i){
+      var card=document.createElement('div');card.className='raetsel-card';
+      var frage=document.createElement('div');frage.className='raetsel-frage';frage.textContent=(i+1)+'. '+q;card.appendChild(frage);
+      var optsDiv=document.createElement('div');optsDiv.className='raetsel-opts';
+      var fb=document.createElement('div');fb.className='raetsel-fb';
+      options.forEach(function(o){
+        var btn=document.createElement('button');btn.className='raetsel-opt';btn.textContent=o;
+        btn.addEventListener('click',function(){
+          if(raetselAnswered[i])return;raetselAnswered[i]=true;timerAutoStart(3);
+          optsDiv.querySelectorAll('.raetsel-opt').forEach(function(b){b.disabled=true;});
+          if(o===a){btn.classList.add('correct');fb.textContent='Richtig!';}
+          else{btn.classList.add('wrong');optsDiv.querySelectorAll('.raetsel-opt').forEach(function(b){if(b.textContent===a)b.classList.add('correct');});fb.textContent='Nicht ganz. Richtig: '+a;}
+          var done=raetselAnswered.filter(Boolean).length;
+          if(done===5){timerStop(3);document.getElementById('raetsel-score').innerHTML='Fertig! <strong>'+done+' / 5</strong> beantwortet.';}
+        });
+        optsDiv.appendChild(btn);
+      });
+      card.appendChild(optsDiv);card.appendChild(fb);cont.appendChild(card);
+    })(tmpl.q(idx),ans,opts,count-1);
+  }
+}
+function raetselReset(){timerResetOne(3);raetselInit();}
+
+/* TAB 4: AM ODER -S */
+var AMS_DATA=[
+  {id:1,segs:[{t:'Habt ihr '},{b:'am Montag',sz:'m'},{t:' Zeit? (einmal)'}]},
+  {id:2,segs:[{t:'Nein, '},{b:'montags',sz:'m'},{t:' haben wir nie Zeit. (regelmäßig)'}]},
+  {id:3,segs:[{t:'Das Meeting ist diese Woche '},{b:'am Mittwoch',sz:'m'},{t:'. (einmal)'}]},
+  {id:4,segs:[{t:''},{b:'Donnerstags',sz:'m'},{t:' lerne ich jede Woche Deutsch. (regelmäßig)'}]},
+  {id:5,segs:[{t:''},{b:'Freitags',sz:'m'},{t:' singe ich regelmäßig im Chor. (regelmäßig)'}]},
+  {id:6,segs:[{t:'Wir fahren '},{b:'am Samstag',sz:'m'},{t:' nach Berlin. (einmal)'}]},
+  {id:7,segs:[{t:''},{b:'Sonntags',sz:'m'},{t:' frühstücke ich lange. (regelmäßig)'}]},
+  {id:8,segs:[{t:'Ich gehe '},{b:'am Dienstag',sz:'m'},{t:' zum Arzt. (einmal)'}]},
+];
+function buildAmsLuecken(){
+  var cont=document.getElementById('ams-container');cont.innerHTML='';
+  AMS_DATA.forEach(function(d){
+    var row=document.createElement('div');row.className='luecke-row';
+    var nr=document.createElement('span');nr.className='nr';nr.textContent=d.id+'. ';row.appendChild(nr);
+    d.segs.forEach(function(seg){
+      if(seg.t!==undefined){row.appendChild(document.createTextNode(seg.t));}
+      else{var inp=document.createElement('input');inp.type='text';inp.className='luecke '+seg.sz;inp.dataset.ans=seg.b.toLowerCase();inp.addEventListener('input',function(){liveCheckAms(inp);timerAutoStart(4);});row.appendChild(inp);}
+    });
+    cont.appendChild(row);
+  });
+}
+function liveCheckAms(inp){
+  var val=inp.value.trim().toLowerCase();
+  if(val===inp.dataset.ans){inp.classList.add('ok');inp.classList.remove('err');}else inp.classList.remove('ok','err');
+  var all=document.querySelectorAll('#ams-container input');var ok=true;
+  all.forEach(function(i){if(!i.classList.contains('ok'))ok=false;});
+  if(ok&&all.length>0)timerStop(4);
+}
+function showAmsLoesung(){document.querySelectorAll('#ams-container input').forEach(function(inp){inp.value=inp.dataset.ans;inp.classList.add('ok');});}
+function resetAms(){timerResetOne(4);buildAmsLuecken();}
+
+/* TAB 5: SATZBAU */
+var SB_DATA=[
+  {id:1,parts:['Heute','ist','Donnerstag'],valid:[['Heute','ist','Donnerstag']],punct:'.'},
+  {id:2,parts:['Gestern','war','Mittwoch'],valid:[['Gestern','war','Mittwoch']],punct:'.'},
+  {id:3,parts:['Übermorgen','ist','Samstag'],valid:[['Übermorgen','ist','Samstag']],punct:'.'},
+  {id:4,parts:['Donnerstags','lerne','ich','Deutsch'],valid:[['Donnerstags','lerne','ich','Deutsch']],punct:'.'},
+  {id:5,parts:['Am','Freitag','gehe','ich','ins','Kino'],valid:[['Am','Freitag','gehe','ich','ins','Kino']],punct:'.'},
+  {id:6,parts:['Morgen','früh','jogge','ich'],valid:[['Morgen','früh','jogge','ich']],punct:'.'},
+  {id:7,parts:['Heute','Nachmittag','arbeite','ich','effizient'],valid:[['Heute','Nachmittag','arbeite','ich','effizient']],punct:'.'},
+  {id:8,parts:['Freitags','singe','ich','regelmäßig','im','Chor'],valid:[['Freitags','singe','ich','regelmäßig','im','Chor']],punct:'.'},
+];
+var sbSelected=null;
+function sbInit(){
+  var cont=document.getElementById('sb-container');cont.innerHTML='';sbSelected=null;
+  SB_DATA.forEach(function(d){
+    var row=document.createElement('div');row.className='sb-row';
+    var nr=document.createElement('div');nr.className='sb-nr';nr.textContent='Satz '+d.id+(d.punct||'');row.appendChild(nr);
+    var target=document.createElement('div');target.className='sb-target';target.dataset.id=d.id;
+    target.addEventListener('dragover',function(e){e.preventDefault();});
+    target.addEventListener('drop',function(e){e.preventDefault();sbDropToTarget(target,d);timerAutoStart(5);});
+    target.addEventListener('click',function(){sbClickTarget(target,d);timerAutoStart(5);});
+    row.appendChild(target);
+    var chips=document.createElement('div');chips.className='sb-chips';chips.dataset.id=d.id;
+    d.parts.slice().sort(function(){return Math.random()-0.5;}).forEach(function(p){chips.appendChild(makeSbChip(p,target,chips,d));});
+    row.appendChild(chips);
+    if(d.punct){var p=document.createElement('span');p.className='sb-punct';p.textContent=' '+d.punct;row.appendChild(p);}
+    cont.appendChild(row);
+  });
+}
+function makeSbChip(text,target,chips,d){
+  var chip=document.createElement('div');chip.className='sb-chip';chip.textContent=text;chip.draggable=true;
+  chip.addEventListener('dragstart',function(e){sbSelected=chip;e.dataTransfer.setData('text/plain','');});
+  chip.addEventListener('click',function(){
+    if(chip.classList.contains('placed'))return;
+    if(sbSelected===chip){chip.classList.remove('selected');sbSelected=null;}
+    else if(sbSelected){sbSelected.classList.remove('selected');sbSelected=null;chip.classList.add('selected');sbSelected=chip;}
+    else{chip.classList.add('selected');sbSelected=chip;}
+  });
+  return chip;
+}
+function makePlacedChip(text,target,d){
+  var placed=document.createElement('div');placed.className='sb-placed-chip';placed.textContent=text;placed.draggable=true;
+  placed.addEventListener('dragstart',function(e){sbSelected=placed;e.dataTransfer.setData('text/plain','');});
+  placed.addEventListener('click',function(){if(sbSelected===placed){placed.classList.remove('selected');sbSelected=null;}else{placed.classList.toggle('selected');sbSelected=placed.classList.contains('selected')?placed:null;}});
+  placed.addEventListener('dblclick',function(){sbReturnChip(placed,target,d);});
+  return placed;
+}
+function sbDropToTarget(target,d){if(!sbSelected)return;target.appendChild(makePlacedChip(sbSelected.textContent,target,d));sbSelected.classList.add('placed');sbSelected.classList.remove('selected');sbSelected=null;sbColorRow(target,d);}
+function sbClickTarget(target,d){if(!sbSelected)return;target.appendChild(makePlacedChip(sbSelected.textContent,target,d));sbSelected.classList.add('placed');sbSelected.classList.remove('selected');sbSelected=null;sbColorRow(target,d);}
+function sbReturnChip(placed,target,d){var chips=target.parentElement.querySelector('.sb-chips');chips.querySelectorAll('.sb-chip').forEach(function(c){if(c.textContent===placed.textContent&&c.classList.contains('placed'))c.classList.remove('placed','selected');});target.removeChild(placed);sbColorRow(target,d);}
+function sbColorRow(target,d){
+  var placed=Array.from(target.querySelectorAll('.sb-placed-chip')).map(function(c){return c.textContent;});
+  var ok=d.valid.some(function(v){return v.length===placed.length&&v.every(function(w,i){return w===placed[i];});});
+  if(ok){target.classList.add('ok-row');if(sbCheckAllOk())timerStop(5);}else target.classList.remove('ok-row');
+}
+function sbCheckAllOk(){var all=true;document.querySelectorAll('.sb-target').forEach(function(r){if(!r.classList.contains('ok-row'))all=false;});return all;}
+function sbShowAll(){
+  SB_DATA.forEach(function(d){
+    document.querySelectorAll('.sb-target').forEach(function(target){
+      if(parseInt(target.dataset.id)===d.id){
+        target.innerHTML='';
+        d.valid[0].forEach(function(w){target.appendChild(makePlacedChip(w,target,d));});
+        target.classList.add('ok-row');
+        target.parentElement.querySelector('.sb-chips').querySelectorAll('.sb-chip').forEach(function(c){c.classList.add('placed');});
+      }
+    });
+  });
+}
+function sbReset(){timerResetOne(5);sbInit();}
+
+/* TAB 6: WORTSCHATZ */
+var WORTSCHATZ=[
+  {id:1,en:'the week',de:'die Woche'},
+  {id:2,en:'the day',de:'der Tag'},
+  {id:3,en:'the weekday',de:'der Wochentag'},
+  {id:4,en:'the weekend',de:'das Wochenende'},
+  {id:5,en:'Saturday (also: Sonnabend in N/Central Germany)',de:'der Samstag'},
+  {id:6,en:'yesterday',de:'gestern'},
+  {id:7,en:'today',de:'heute'},
+  {id:8,en:'tomorrow',de:'morgen'},
+  {id:9,en:'the day after tomorrow',de:'übermorgen'},
+  {id:10,en:'the day before yesterday',de:'vorgestern'},
+  {id:11,en:'public holiday',de:'der Feiertag'},
+  {id:12,en:'bridge day',de:'der Brückentag'},
+  {id:13,en:'long weekend',de:'das lange Wochenende'},
+  {id:14,en:'morning (noun)',de:'der Morgen'},
+  {id:15,en:'in the mornings (adverb)',de:'morgens'},
+  {id:16,en:'afternoon (noun)',de:'der Nachmittag'},
+  {id:17,en:'in the afternoons (adverb)',de:'nachmittags'},
+  {id:18,en:'evening (noun)',de:'der Abend'},
+  {id:19,en:'in the evenings (adverb)',de:'abends'},
+  {id:20,en:'night (noun)',de:'die Nacht'},
+];
+function wortInit(){
+  var cont=document.getElementById('wort-container');cont.innerHTML='';document.getElementById('wort-score').textContent='';
+  WORTSCHATZ.forEach(function(w){
+    var row=document.createElement('div');row.className='wort-row';
+    var badge=document.createElement('span');badge.className='wort-badge';badge.textContent='#'+w.id;
+    var en=document.createElement('span');en.className='wort-en';en.textContent=w.en;
+    var inp=document.createElement('input');inp.type='text';inp.className='wort-input';inp.placeholder='Deutsch …';inp.dataset.ans=w.de.toLowerCase();inp.dataset.display=w.de;
+    inp.addEventListener('input',function(){liveCheckWort(inp);timerAutoStart(6);});
+    row.appendChild(badge);row.appendChild(en);row.appendChild(inp);cont.appendChild(row);
+  });
+}
+function liveCheckWort(inp){
+  var val=inp.value.trim().toLowerCase();
+  if(val===inp.dataset.ans){inp.classList.add('ok');inp.classList.remove('err');}else inp.classList.remove('ok','err');
+  var all=document.querySelectorAll('#wort-container input');var ok=0;all.forEach(function(i){if(i.classList.contains('ok'))ok++;});
+  document.getElementById('wort-score').innerHTML=ok+' / '+all.length+' richtig';
+  if(ok===all.length)timerStop(6);
+}
+function showWortLoesung(){document.querySelectorAll('#wort-container input').forEach(function(inp){inp.value=inp.dataset.display;inp.classList.add('ok');});document.getElementById('wort-score').innerHTML=WORTSCHATZ.length+' / '+WORTSCHATZ.length+' richtig';}
+function resetWortschatz(){timerResetOne(6);wortInit();}
+
+/* INIT */
+buildTzLuecken();regInit();raetselInit();buildAmsLuecken();sbInit();wortInit();
+</script>
+</body>
+</html>

@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dativ-Training A1</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f0f2f5; color: #1a1a2e; min-height: 100vh; }
+
+/* Header */
+.header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 24px 20px 16px; text-align: center; }
+.header h1 { font-size: 1.5em; margin-bottom: 4px; }
+.header h2 { font-size: 1em; font-weight: 400; opacity: 0.9; }
+
+/* Navigation */
+.nav { display: flex; gap: 6px; padding: 12px 16px; background: #fff; border-bottom: 2px solid #e8e8e8; flex-wrap: wrap; justify-content: center; }
+.nav-btn { padding: 10px 16px; border-radius: 20px; cursor: pointer; border-right: 1px solid #ddd; font-size: 0.95em; font-weight: 600; background: #f0f2f5; color: #555; transition: all 0.25s; white-space: nowrap; user-select: none; }
+.nav-btn:last-child { border-right: none; }
+        .nav-btn.active { background: linear-gradient(135deg, #667eea, #764ba2); color: #fff; }
+.nav-btn:hover { background: #e0e3ff; }
+
+/* Sections */
+.section { display: none; padding: 20px; max-width: 800px; margin: 0 auto; }
+.section.active { display: block; }
+.section-title { font-size: 1.1em; font-weight: 700; margin-bottom: 16px; color: #333; }
+
+/* Help box */
+.help-box { background: #e8f4fd; border-left: 4px solid #667eea; padding: 12px 16px; border-radius: 0 8px 8px 0; margin-bottom: 20px; font-size: 0.88em; line-height: 1.6; }
+.help-box strong { color: #667eea; }
+
+/* Buttons */
+.btn-row { display: flex; gap: 10px; margin-top: 20px; flex-wrap: wrap; }
+.btn { padding: 10px 20px; border: none; border-radius: 8px; font-size: 0.9em; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+.btn-show { background: #e0e0e0; color: #333; }
+.btn-show:hover { background: #d0d0d0; }
+.btn-reset { background: #fff; color: #667eea; border: 2px solid #667eea; }
+.btn-reset:hover { background: #f0f2ff; }
+
+/* LÜCKENÜBUNG */
+.ex-card { background: #fff; border-radius: 12px; padding: 20px; margin-bottom: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); position: relative; }
+.ex-card .badge { display: none; }
+.ex-sentence { font-size: 1.1em; line-height: 2.2; display: flex; flex-wrap: wrap; align-items: baseline; gap: 0; }
+.nowrap-group { display: inline-flex; align-items: baseline; white-space: nowrap; gap: 0; }
+input.blank { border: none; border-bottom: 2px solid #667eea; background: #f8f9ff; padding: 2px 6px; font-size: 1em; font-family: inherit; text-align: center; border-radius: 4px 4px 0 0; outline: none; transition: border-color 0.2s, background 0.2s; }
+input.blank:focus { border-bottom-color: #764ba2; background: #f0f0ff; }
+input.blank.s { min-width: 45px; width: 45px; }
+input.blank.m { min-width: 90px; width: 90px; }
+input.blank.l { min-width: 150px; width: 150px; }
+input.blank.correct { border-bottom-color: #27ae60; background: #eafaf1; }
+input.blank.wrong { border-bottom-color: #e74c3c; background: #fdf2f2; }
+.correction-hint { color: #27ae60; font-weight: 600; font-size: 0.85em; margin-left: 4px; white-space: nowrap; }
+
+/* ZUORDNUNG */
+.chip-bank { display: flex; flex-wrap: wrap; gap: 8px; min-height: 48px; padding: 12px; background: #f8f9ff; border-radius: 8px; border: 2px dashed #ccc; margin-bottom: 16px; }
+.chip { display: inline-block; padding: 8px 16px; background: linear-gradient(135deg, #667eea, #764ba2); color: white; border-radius: 20px; cursor: grab; font-size: 0.9em; font-weight: 500; user-select: none; transition: transform 0.15s, opacity 0.15s; }
+.chip:active { cursor: grabbing; transform: scale(1.05); }
+.chip.selected { outline: 3px solid #ffd700; }
+.chip.correct { background: linear-gradient(135deg, #27ae60, #2ecc71) !important; }
+.chip.wrong { background: linear-gradient(135deg, #e74c3c, #c0392b) !important; }
+.categories { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.category { background: #fff; border-radius: 12px; padding: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.category h3 { text-align: center; margin-bottom: 10px; color: #667eea; font-size: 0.95em; }
+.drop-zone { min-height: 60px; padding: 8px; background: #fafbff; border: 2px dashed #ddd; border-radius: 8px; display: flex; flex-wrap: wrap; gap: 6px; transition: border-color 0.2s, background 0.2s; }
+.drop-zone.drag-over { border-color: #667eea; background: #f0f2ff; }
+
+/* SATZBAU */
+.sb-exercise { background: #fff; border-radius: 12px; padding: 20px; margin-bottom: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.sb-exercise .sb-label { font-weight: 600; color: #667eea; margin-bottom: 10px; font-size: 0.9em; }
+.chip-bank[data-sb-id] { margin-bottom: 10px; }
+.drop-row { min-height: 48px; padding: 10px 12px; background: #f8f9ff; border: 2px dashed #ccc; border-radius: 8px; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; transition: border-color 0.2s; }
+.drop-row.drag-over { border-color: #667eea; background: #f0f2ff; }
+.drop-row .chip { font-size: 0.85em; }
+.fixed-dot { font-size: 1.2em; font-weight: 700; margin-left: 2px; color: #333; user-select: none; }
+.sb-exercise.correct-row .drop-row { border-color: #27ae60; background: #eafaf1; }
+.sb-exercise.wrong-row .drop-row { border-color: #e74c3c; background: #fdf2f2; }
+
+/* ENTDECKUNG */
+.discovery-box { background: #fff; border-radius: 12px; padding: 20px; margin-bottom: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.discovery-box h3 { color: #667eea; font-size: 1em; margin-bottom: 12px; }
+.discovery-box h4 { color: #333; font-size: 0.95em; margin-top: 14px; margin-bottom: 8px; font-weight: 600; }
+.example-list { list-style: none; margin-left: 0; }
+.example-list li { padding: 6px 0; font-size: 0.95em; line-height: 1.6; }
+.example-list li strong { color: #764ba2; }
+.example-list li em { color: #999; font-style: italic; font-size: 0.9em; }
+.table-wrapper { overflow-x: auto; margin-top: 12px; }
+.discovery-table { width: 100%; border-collapse: collapse; font-size: 0.85em; }
+.discovery-table th, .discovery-table td { padding: 8px; border: 1px solid #ddd; text-align: center; }
+.discovery-table th { background: #f0f2ff; color: #667eea; font-weight: 600; }
+.discovery-table td { background: #fff; }
+
+/* Responsive */
+@media (max-width: 600px) {
+    .header h1 { font-size: 1.2em; }
+    .nav-btn { font-size: 0.75em; padding: 10px 4px; }
+    .categories { grid-template-columns: 1fr; }
+    .ex-sentence { font-size: 1em; }
+    .discovery-table { font-size: 0.75em; }
+    .discovery-table th, .discovery-table td { padding: 4px; }
+}
+.author-footer { margin-top: 40px; padding: 16px 20px; text-align: center; font-size: 0.8em; color: #888; border-top: 1px solid #e0e0e0; }
+.author-footer a { color: #667eea; text-decoration: none; font-weight: 500; }
+.author-footer a:hover { text-decoration: underline; color: #764ba2; }
+.author-footer .author-name { font-weight: 600; color: #555; }
+
+.timer-display { display: flex; gap: 14px; font-size: 0.82em; color: #bbb; font-variant-numeric: tabular-nums; }
+</style>
+</head>
+<body>
+
+<div class="header">
+    <h1>Dativ-Training</h1>
+    <h2>dem, einem, der, einer — Akkusativ oder Dativ? — A1</h2>
+</div>
+
+<div class="nav">
+    <div class="nav-btn active" onclick="showSection(0)">📖 Entdeckung</div>
+    <div class="nav-btn" onclick="showSection(1)">🔀 Akk. oder Dat.?</div>
+    <div class="nav-btn" onclick="showSection(2)">✏️ Dativ-Artikel</div>
+    <div class="nav-btn" onclick="showSection(3)">✏️ Akk. vs. Dat.</div>
+    <div class="nav-btn" onclick="showSection(4)">🧩 Satzbau</div>
+</div>
+
+<!-- ============================================ -->
+<!-- SECTION 0: ENTDECKUNG                        -->
+<!-- ============================================ -->
+<div class="section active" id="sec-0">
+    <div class="section-title">📖 Entdeckung — Warum brauchen wir den Dativ?</div>
+
+    <div class="discovery-box">
+        <h3>Akkusativ vs. Dativ — Was ist der Unterschied?</h3>
+        <p style="font-size: 0.95em; line-height: 1.7; margin-bottom: 12px;">
+            <strong style="color: #667eea;">Akkusativ</strong> = das <strong>direkte Objekt</strong>. Die Sache oder Person, die direkt betroffen ist.<br>
+            Frage: <em>Wen? oder Was?</em>
+        </p>
+        <p style="font-size: 0.95em; line-height: 1.7; margin-bottom: 12px;">
+            <strong style="color: #667eea;">Dativ</strong> = das <strong>indirekte Objekt</strong>. Die Person, die etwas <strong>empfängt</strong>, der etwas <strong>gehört</strong>, oder für die etwas <strong>getan</strong> wird.<br>
+            Frage: <em>Wem?</em>
+        </p>
+        <p style="font-size: 0.88em; line-height: 1.7; background: #fff8e1; padding: 10px 14px; border-radius: 8px; border-left: 4px solid #f39c12;">
+            <strong>Einfache Regel:</strong> Wenn jemand etwas <strong>bekommt</strong>, <strong>gegeben</strong>, <strong>gezeigt</strong>, <strong>erzählt</strong> oder <strong>geschenkt</strong> bekommt — dann steht der <strong>Empfänger im Dativ</strong>.<br>
+            <em>Ich gebe <strong>dem Mann</strong> (Dativ = Empfänger) <strong>den Schlüssel</strong> (Akkusativ = die Sache).</em>
+        </p>
+    </div>
+
+    <div class="discovery-box">
+        <h3>Die Dativ-Artikel</h3>
+        <div class="table-wrapper">
+            <table class="discovery-table">
+                <tr>
+                    <th></th>
+                    <th>Nominativ<br>(Wer?)</th>
+                    <th>Akkusativ<br>(Wen? Was?)</th>
+                    <th style="background:#e8f4fd;"><strong>Dativ</strong><br>(Wem?)</th>
+                </tr>
+                <tr>
+                    <td><strong>maskulin</strong></td>
+                    <td>der / ein / kein</td>
+                    <td>den / einen / keinen</td>
+                    <td style="background:#e8f4fd;"><strong>dem / einem / keinem</strong></td>
+                </tr>
+                <tr>
+                    <td><strong>feminin</strong></td>
+                    <td>die / eine / keine</td>
+                    <td>die / eine / keine</td>
+                    <td style="background:#e8f4fd;"><strong>der / einer / keiner</strong></td>
+                </tr>
+                <tr>
+                    <td><strong>neutrum</strong></td>
+                    <td>das / ein / kein</td>
+                    <td>das / ein / kein</td>
+                    <td style="background:#e8f4fd;"><strong>dem / einem / keinem</strong></td>
+                </tr>
+                <tr>
+                    <td><strong>Plural</strong></td>
+                    <td>die / – / keine</td>
+                    <td>die / – / keine</td>
+                    <td style="background:#e8f4fd;"><strong>den ... -n / – / keinen</strong></td>
+                </tr>
+            </table>
+        </div>
+        <p style="font-size: 0.85em; color: #999; margin-top: 8px;">
+            Plural-Dativ: Das Nomen bekommt ein <strong>-n</strong> am Ende (wenn es nicht schon auf -n oder -s endet): <em>die Kinder → den Kinder<strong>n</strong></em>
+        </p>
+    </div>
+
+    <div class="discovery-box">
+        <h3>Wann braucht man den Dativ?</h3>
+
+        <h4>1. Verben mit Dativ (= der Empfänger)</h4>
+        <ul class="example-list">
+            <li><strong>geben</strong> — Ich gebe <strong>dem Kind</strong> einen Apfel. <em>(Wem gebe ich den Apfel?)</em></li>
+            <li><strong>zeigen</strong> — Er zeigt <strong>der Frau</strong> den Weg. <em>(Wem zeigt er den Weg?)</em></li>
+            <li><strong>schenken</strong> — Wir schenken <strong>dem Vater</strong> ein Buch. <em>(Wem schenken wir?)</em></li>
+            <li><strong>bringen</strong> — Sie bringt <strong>dem Lehrer</strong> die Hausaufgabe. <em>(Wem bringt sie?)</em></li>
+            <li><strong>erzählen</strong> — Ich erzähle <strong>meiner Mutter</strong> eine Geschichte. <em>(Wem erzähle ich?)</em></li>
+            <li><strong>erklären</strong> — Der Lehrer erklärt <strong>den Schülern</strong> die Grammatik. <em>(Wem erklärt er?)</em></li>
+        </ul>
+
+        <h4>2. Verben nur mit Dativ (kein Akkusativ!)</h4>
+        <ul class="example-list">
+            <li><strong>helfen</strong> — Ich helfe <strong>dem Mann</strong>. <em>(Wem helfe ich?)</em></li>
+            <li><strong>gefallen</strong> — Der Film gefällt <strong>mir</strong>. <em>(Wem gefällt er?)</em></li>
+            <li><strong>gehören</strong> — Das Buch gehört <strong>meinem Bruder</strong>. <em>(Wem gehört es?)</em></li>
+            <li><strong>danken</strong> — Ich danke <strong>dir</strong>. <em>(Wem danke ich?)</em></li>
+            <li><strong>schmecken</strong> — Die Suppe schmeckt <strong>den Kindern</strong>. <em>(Wem schmeckt sie?)</em></li>
+            <li><strong>antworten</strong> — Er antwortet <strong>der Lehrerin</strong>. <em>(Wem antwortet er?)</em></li>
+        </ul>
+
+        <h4>3. Präpositionen mit Dativ</h4>
+        <ul class="example-list">
+            <li><strong>mit</strong> — Ich fahre <strong>mit dem Bus</strong>.</li>
+            <li><strong>zu</strong> — Wir gehen <strong>zum Arzt</strong>. <em>(zu + dem = zum)</em></li>
+            <li><strong>von</strong> — Das Geschenk ist <strong>von meiner Schwester</strong>.</li>
+            <li><strong>bei</strong> — Er wohnt <strong>bei seinen Eltern</strong>.</li>
+            <li><strong>aus</strong> — Sie kommt <strong>aus der Türkei</strong>.</li>
+            <li><strong>nach</strong> — Wir fahren <strong>nach dem Unterricht</strong> nach Hause.</li>
+            <li><strong>seit</strong> — Ich lerne <strong>seit einem Jahr</strong> Deutsch.</li>
+        </ul>
+        <p style="font-size: 0.88em; color: #555; margin-top: 8px; font-style: italic;">
+            Merke: <strong>mit, nach, bei, seit, von, zu, aus</strong> → immer Dativ!
+        </p>
+    </div>
+</div>
+
+<!-- ============================================ -->
+<!-- SECTION 1: ZUORDNUNG                         -->
+<!-- ============================================ -->
+<div class="section" id="sec-1">
+    <div class="section-title">🔀 Zuordnung — Akkusativ oder Dativ?</div>
+    <div class="help-box">
+        <strong>Akkusativ</strong> (Wen? Was?) = direktes Objekt, die Sache.<br>
+        <strong>Dativ</strong> (Wem?) = indirektes Objekt, der Empfänger; oder nach Präpositionen (mit, zu, von, bei, aus, nach, seit).
+    </div>
+    <div class="chip-bank" id="zuo-bank"></div>
+    <div class="categories">
+        <div class="category" data-cat="akk">
+            <h3>🎯 Akkusativ (Wen? Was?)</h3>
+            <div class="drop-zone" data-cat="akk"></div>
+        </div>
+        <div class="category" data-cat="dat">
+            <h3>🤝 Dativ (Wem?)</h3>
+            <div class="drop-zone" data-cat="dat"></div>
+        </div>
+    </div>
+    <div class="btn-row">
+        <button class="btn btn-show" onclick="zuoShow()">👁 Lösungen</button>
+        <button class="btn btn-reset" onclick="zuoReset()">🔄 Neu starten</button>
+    </div>
+    <div class="timer-display"><span class="current-time">⏱️ <span id="timer-1">00:00</span></span><span class="best-time">🏆 Best: <span id="best-1">--:--</span></span></div>
+</div>
+
+<!-- ============================================ -->
+<!-- SECTION 2: LÜCKENÜBUNG 1 — Dativ-Artikel     -->
+<!-- ============================================ -->
+<div class="section" id="sec-2">
+    <div class="section-title">✏️ Dativ-Artikel einsetzen</div>
+    <div class="help-box">
+        Setze den richtigen Artikel im <strong>Dativ</strong> ein.<br>
+        <strong>maskulin/neutrum:</strong> dem / einem / keinem / meinem<br>
+        <strong>feminin:</strong> der / einer / keiner / meiner<br>
+        <strong>Plural:</strong> den (+n) / keinen
+    </div>
+    <div id="luecke-container-1"></div>
+    <div class="btn-row">
+        <button class="btn btn-show" onclick="lueckeShow(1)">👁 Lösungen</button>
+        <button class="btn btn-reset" onclick="lueckeReset(1)">🔄 Neu starten</button>
+    </div>
+    <div class="timer-display"><span class="current-time">⏱️ <span id="timer-2">00:00</span></span><span class="best-time">🏆 Best: <span id="best-2">--:--</span></span></div>
+</div>
+
+<!-- ============================================ -->
+<!-- SECTION 3: LÜCKENÜBUNG 2 — Akk. vs. Dat.    -->
+<!-- ============================================ -->
+<div class="section" id="sec-3">
+    <div class="section-title">✏️ Akkusativ oder Dativ? — Gemischte Übung</div>
+    <div class="help-box">
+        Ergänze den richtigen Artikel. Entscheide zuerst: Ist es <strong>Akkusativ</strong> (Wen? Was?) oder <strong>Dativ</strong> (Wem?)? Achte auch auf die Präpositionen!
+    </div>
+    <div id="luecke-container-2"></div>
+    <div class="btn-row">
+        <button class="btn btn-show" onclick="lueckeShow(2)">👁 Lösungen</button>
+        <button class="btn btn-reset" onclick="lueckeReset(2)">🔄 Neu starten</button>
+    </div>
+    <div class="timer-display"><span class="current-time">⏱️ <span id="timer-3">00:00</span></span><span class="best-time">🏆 Best: <span id="best-3">--:--</span></span></div>
+</div>
+
+<!-- ============================================ -->
+<!-- SECTION 4: SATZBAU                           -->
+<!-- ============================================ -->
+<div class="section" id="sec-4">
+    <div class="section-title">🧩 Satzbau — Sätze mit Dativ bauen</div>
+    <div class="help-box">
+        🔹 Verb auf Position <strong>2</strong><br>
+        🔹 Bei zwei Objekten: <strong>Dativ vor Akkusativ</strong> (Wem? vor Was?)<br>
+        🔹 <em>Ich gebe <strong>dem Kind</strong> <strong>einen Apfel</strong>.</em> (Dativ → Akkusativ)<br>
+        🔹 Nach Dativ-Präpositionen (mit, zu, von, bei, aus): immer Dativ
+    </div>
+    <div id="sb-container"></div>
+    <div class="btn-row">
+        <button class="btn btn-show" onclick="sbShow()">👁 Lösungen</button>
+        <button class="btn btn-reset" onclick="sbReset()">🔄 Neu starten</button>
+    </div>
+    <div class="timer-display"><span class="current-time">⏱️ <span id="timer-4">00:00</span></span><span class="best-time">🏆 Best: <span id="best-4">--:--</span></span></div>
+</div>
+
+<script>
+/* ========================================= */
+/*  TAB NAVIGATION                           */
+/* ========================================= */
+function showSection(idx) {
+    document.querySelectorAll('.section').forEach((s, i) => s.classList.toggle('active', i === idx));
+    document.querySelectorAll('.nav-btn').forEach((b, i) => b.classList.toggle('active', i === idx));
+}
+
+/* ========================================= */
+/*  HELPER                                   */
+/* ========================================= */
+function shuffle(arr) {
+    const a = [...arr];
+    for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+}
+function normalize(s) { return s.trim().toLowerCase().replace(/\s+/g, ' '); }
+
+/* ========================================= */
+/*  TIMER SYSTEM                             */
+/* ========================================= */
+const TIMER_PREFIX = 'dativ-a1';
+const timerState = {
+    1: { running:false, startTime:null, elapsed:0, interval:null },
+    2: { running:false, startTime:null, elapsed:0, interval:null },
+    3: { running:false, startTime:null, elapsed:0, interval:null },
+    4: { running:false, startTime:null, elapsed:0, interval:null }
+};
+
+function formatTime(s) {
+    return `${String(Math.floor(s/60)).padStart(2,'0')}:${String(s%60).padStart(2,'0')}`;
+}
+function startTimer(idx) {
+    if (timerState[idx].running) return;
+    timerState[idx].running = true;
+    timerState[idx].startTime = Date.now() - (timerState[idx].elapsed * 1000);
+    timerState[idx].interval = setInterval(() => {
+        timerState[idx].elapsed = Math.floor((Date.now() - timerState[idx].startTime) / 1000);
+        document.getElementById('timer-'+idx).textContent = formatTime(timerState[idx].elapsed);
+    }, 1000);
+}
+function stopTimer(idx) {
+    if (!timerState[idx].running) return;
+    clearInterval(timerState[idx].interval);
+    timerState[idx].running = false;
+    const t = timerState[idx].elapsed;
+    const key = TIMER_PREFIX + '-best-' + idx;
+    const prev = localStorage.getItem(key);
+    if (!prev || t < parseInt(prev)) {
+        localStorage.setItem(key, t);
+        document.getElementById('best-'+idx).textContent = formatTime(t);
+    }
+}
+function resetTimer(idx) {
+    if (timerState[idx].running) { clearInterval(timerState[idx].interval); timerState[idx].running = false; }
+    timerState[idx].elapsed = 0;
+    timerState[idx].startTime = null;
+    document.getElementById('timer-'+idx).textContent = '00:00';
+}
+function loadBestTimes() {
+    for (let i = 1; i <= 4; i++) {
+        const b = localStorage.getItem(TIMER_PREFIX + '-best-' + i);
+        if (b) document.getElementById('best-'+i).textContent = formatTime(parseInt(b));
+    }
+}
+function initTimerListeners() {
+    document.querySelectorAll('#zuo-bank .chip, #sec-1 .chip').forEach(chip => {
+        chip.addEventListener('mousedown', () => startTimer(1), { once: true });
+        chip.addEventListener('touchstart', () => startTimer(1), { once: true });
+    });
+    document.querySelectorAll('#sec-2 input.blank').forEach(inp => {
+        inp.addEventListener('focus', () => startTimer(2), { once: true });
+    });
+    document.querySelectorAll('#sec-3 input.blank').forEach(inp => {
+        inp.addEventListener('focus', () => startTimer(3), { once: true });
+    });
+    document.querySelectorAll('#sec-4 .chip').forEach(chip => {
+        chip.addEventListener('mousedown', () => startTimer(4), { once: true });
+        chip.addEventListener('touchstart', () => startTimer(4), { once: true });
+    });
+}
+
+/* ========================================= */
+/*  LIVE CHECK                               */
+/* ========================================= */
+function liveCheck(inp) {
+    var user = inp.value;
+    var answer = inp.dataset.sol || inp.dataset.answer;
+    var field = inp.dataset.field;
+    inp.classList.remove('correct', 'wrong');
+    if (user.length === 0) return;
+    var cmpUser = user;
+    var cmpAnswer = answer;
+    if (field === 'art') { cmpUser = user; cmpAnswer = answer; }
+    if (cmpUser === cmpAnswer) { inp.classList.add('correct'); }
+    else if (cmpAnswer.indexOf(cmpUser) === 0) { /* prefix */ }
+    else { inp.classList.add('wrong'); }
+}
+function checkAllInputs(secSelector, timerIdx) {
+    var inputs = document.querySelectorAll(secSelector);
+    var allCorrect = inputs.length > 0;
+    inputs.forEach(function(inp) {
+        if (!inp.classList.contains('correct')) allCorrect = false;
+    });
+    if (allCorrect) stopTimer(timerIdx);
+}
+
+/* ========================================= */
+/*  SECTION 1: ZUORDNUNG                     */
+/* ========================================= */
+const ZUO_ITEMS = [
+    { word: "Ich sehe den Mann.", cat: "akk" },
+    { word: "Er kauft einen Tisch.", cat: "akk" },
+    { word: "Ich brauche das Buch.", cat: "akk" },
+    { word: "Sie trinkt eine Milch.", cat: "akk" },
+    { word: "Er nimmt den Bus.", cat: "akk" },
+    { word: "Wir essen den Kuchen.", cat: "akk" },
+    { word: "Sie m\u00f6chte einen Kaffee.", cat: "akk" },
+    { word: "Ich helfe dem Mann.", cat: "dat" },
+    { word: "Er gibt dem Kind ein Buch.", cat: "dat" },
+    { word: "Sie f\u00e4hrt mit dem Bus.", cat: "dat" },
+    { word: "Das geh\u00f6rt meiner Schwester.", cat: "dat" },
+    { word: "Ich danke dir.", cat: "dat" },
+    { word: "Er kommt aus der T\u00fcrkei.", cat: "dat" },
+    { word: "Wir gehen zum Arzt.", cat: "dat" },
+    { word: "Das Essen schmeckt dem Kind.", cat: "dat" },
+    { word: "Sie zeigt der Frau den Weg.", cat: "dat" },
+];
+
+let zuoSelected = null;
+
+function zuoInit() {
+    const bank = document.getElementById('zuo-bank');
+    bank.innerHTML = '';
+    document.querySelectorAll('#sec-1 .drop-zone').forEach(z => z.innerHTML = '');
+    shuffle(ZUO_ITEMS).forEach((item, i) => {
+        const chip = document.createElement('div');
+        chip.className = 'chip';
+        chip.textContent = item.word;
+        chip.dataset.cat = item.cat;
+        chip.draggable = true;
+        chip.id = 'zuo-chip-' + i;
+        chip.addEventListener('dragstart', e => { e.dataTransfer.setData('text/plain', chip.id); chip.style.opacity = '0.5'; });
+        chip.addEventListener('dragend', () => chip.style.opacity = '1');
+        chip.addEventListener('click', () => {
+            if (zuoSelected === chip) { chip.classList.remove('selected'); zuoSelected = null; }
+            else { if (zuoSelected) zuoSelected.classList.remove('selected'); zuoSelected = chip; chip.classList.add('selected'); }
+        });
+        bank.appendChild(chip);
+    });
+    document.querySelectorAll('#sec-1 .drop-zone').forEach(zone => {
+        zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('drag-over'); });
+        zone.addEventListener('dragleave', () => zone.classList.remove('drag-over'));
+        zone.addEventListener('drop', e => {
+            e.preventDefault(); zone.classList.remove('drag-over');
+            const id = e.dataTransfer.getData('text/plain');
+            const chip = document.getElementById(id);
+            if (chip) { zone.appendChild(chip); chip.classList.remove('correct','wrong');
+                if (chip.dataset.cat === zone.dataset.cat) chip.classList.add('correct'); else chip.classList.add('wrong'); }
+        });
+        zone.addEventListener('click', () => {
+            if (zuoSelected) { zone.appendChild(zuoSelected); zuoSelected.classList.remove('correct','wrong');
+                if (zuoSelected.dataset.cat === zone.dataset.cat) zuoSelected.classList.add('correct'); else zuoSelected.classList.add('wrong');
+                zuoSelected.classList.remove('selected'); zuoSelected = null; }
+        });
+    });
+    bank.addEventListener('dragover', e => { e.preventDefault(); bank.classList.add('drag-over'); });
+    bank.addEventListener('dragleave', () => bank.classList.remove('drag-over'));
+    bank.addEventListener('drop', e => { e.preventDefault(); bank.classList.remove('drag-over');
+        const id = e.dataTransfer.getData('text/plain'); const chip = document.getElementById(id);
+        if (chip) { bank.appendChild(chip); chip.classList.remove('correct','wrong'); } });
+    bank.addEventListener('click', () => {
+        if (zuoSelected && !bank.contains(zuoSelected)) { bank.appendChild(zuoSelected); zuoSelected.classList.remove('correct','wrong','selected'); zuoSelected = null; }
+    });
+}
+function zuoShow() {
+    document.querySelectorAll('#sec-1 .chip').forEach(chip => {
+        const zone = document.querySelector(`#sec-1 .drop-zone[data-cat="${chip.dataset.cat}"]`);
+        zone.appendChild(chip); chip.classList.remove('wrong','selected'); chip.classList.add('correct');
+    });
+}
+function zuoReset() { resetTimer(1); zuoSelected = null; zuoInit(); initTimerListeners(); }
+
+/* ========================================= */
+/*  LÜCKENÜBUNGEN                            */
+/* ========================================= */
+
+/* --- Tab 2: Reine Dativ-Artikel --- */
+const LUECKEN_1 = [
+    { id:1, verb:"", segments:[{t:"Ich helfe "},{b:"dem",s:"s",field:"art"},{t:" Mann."}] },
+    { id:2, verb:"", segments:[{t:"Er gibt "},{b:"dem",s:"s",field:"art"},{t:" Kind einen Apfel."}] },
+    { id:3, verb:"", segments:[{t:"Sie zeigt "},{b:"der",s:"s",field:"art"},{t:" Frau den Weg."}] },
+    { id:4, verb:"", segments:[{t:"Ich fahre mit "},{b:"dem",s:"s",field:"art"},{t:" Bus."}] },
+    { id:5, verb:"", segments:[{t:"Das Buch geh\u00f6rt "},{b:"meinem",s:"m",field:"art"},{t:" Bruder."}] },
+    { id:6, verb:"", segments:[{t:"Wir gehen zu "},{b:"dem",s:"s",field:"art"},{t:" Arzt."}] },
+    { id:7, verb:"", segments:[{t:"Er kommt aus "},{b:"der",s:"s",field:"art"},{t:" Schweiz."}] },
+    { id:8, verb:"", segments:[{t:"Sie wohnt bei "},{b:"ihren",s:"m",field:"art"},{t:" Eltern."}] },
+    { id:9, verb:"", segments:[{t:"Seit "},{b:"einem",s:"m",field:"art"},{t:" Jahr lerne ich Deutsch."}] },
+    { id:10, verb:"", segments:[{t:"Die Suppe schmeckt "},{b:"den",s:"s",field:"art"},{t:" Kindern."}] },
+    { id:11, verb:"", segments:[{t:"Ich schenke "},{b:"meiner",s:"m",field:"art"},{t:" Mutter Blumen."}] },
+    { id:12, verb:"", segments:[{t:"Er erkl\u00e4rt "},{b:"dem",s:"s",field:"art"},{t:" Sch\u00fcler die Aufgabe."}] },
+    { id:13, verb:"", segments:[{t:"Ich antworte "},{b:"der",s:"s",field:"art"},{t:" Lehrerin."}] },
+    { id:14, verb:"", segments:[{t:"Das Kleid gef\u00e4llt "},{b:"meiner",s:"m",field:"art"},{t:" Freundin."}] },
+    { id:15, verb:"", segments:[{t:"Er bringt "},{b:"dem",s:"s",field:"art"},{t:" Chef den Kaffee."}] },
+    { id:16, verb:"", segments:[{t:"Wir danken "},{b:"dem",s:"s",field:"art"},{t:" Arzt."}] },
+    { id:17, verb:"", segments:[{t:"Das Spielzeug geh\u00f6rt "},{b:"dem",s:"s",field:"art"},{t:" M\u00e4dchen."}] },
+    { id:18, verb:"", segments:[{t:"Sie erz\u00e4hlt "},{b:"den",s:"s",field:"art"},{t:" Kindern eine Geschichte."}] },
+    { id:19, verb:"", segments:[{t:"Ich fahre mit "},{b:"der",s:"s",field:"art"},{t:" Stra\u00dfenbahn."}] },
+    { id:20, verb:"", segments:[{t:"Er kommt von "},{b:"der",s:"s",field:"art"},{t:" Arbeit."}] },
+    { id:21, verb:"", segments:[{t:"Ich gehe nach "},{b:"dem",s:"s",field:"art"},{t:" Unterricht nach Hause."}] },
+    { id:22, verb:"", segments:[{t:"Wir kaufen "},{b:"einem",s:"m",field:"art"},{t:" Freund ein Geschenk."}] },
+    { id:23, verb:"", segments:[{t:"Der Film gef\u00e4llt "},{b:"keinem",s:"m",field:"art"},{t:" Sch\u00fcler."}] },
+    { id:24, verb:"", segments:[{t:"Er schreibt "},{b:"seiner",s:"m",field:"art"},{t:" Oma einen Brief."}] },
+    { id:25, verb:"", segments:[{t:"Ich gebe "},{b:"dem",s:"s",field:"art"},{t:" Hund sein Futter."}] },
+];
+
+/* --- Tab 3: Gemischt Akkusativ + Dativ --- */
+const LUECKEN_2 = [
+    { id:1, verb:"", segments:[{t:"Ich sehe "},{b:"den",s:"s",field:"art"},{t:" Lehrer und ich helfe "},{b:"dem",s:"s",field:"art"},{t:" Sch\u00fcler."}] },
+    { id:2, verb:"", segments:[{t:"Er kauft "},{b:"einen",s:"m",field:"art"},{t:" Kuchen und gibt ihn "},{b:"dem",s:"s",field:"art"},{t:" Kind."}] },
+    { id:3, verb:"", segments:[{t:"Sie braucht "},{b:"einen",s:"m",field:"art"},{t:" Stift. — Ich gebe "},{b:"ihr",s:"s",field:"art"},{t:" meinen Stift."}] },
+    { id:4, verb:"", segments:[{t:"Wir nehmen "},{b:"den",s:"s",field:"art"},{t:" Bus und fahren mit "},{b:"dem",s:"s",field:"art"},{t:" Bus zum Bahnhof."}] },
+    { id:5, verb:"", segments:[{t:"Er trinkt "},{b:"einen",s:"m",field:"art"},{t:" Kaffee bei "},{b:"seiner",s:"m",field:"art"},{t:" Mutter."}] },
+    { id:6, verb:"", segments:[{t:"Ich m\u00f6chte "},{b:"das",s:"s",field:"art"},{t:" Brot. — Ich gebe "},{b:"dir",s:"s",field:"art"},{t:" das Brot."}] },
+    { id:7, verb:"", segments:[{t:"Sie sucht "},{b:"den",s:"s",field:"art"},{t:" Schl\u00fcssel. Er geh\u00f6rt "},{b:"ihrem",s:"m",field:"art"},{t:" Mann."}] },
+    { id:8, verb:"", segments:[{t:"Die Kinder essen "},{b:"die",s:"s",field:"art"},{t:" Schokolade. Sie schmeckt "},{b:"den",s:"s",field:"art"},{t:" Kindern gut."}] },
+    { id:9, verb:"", segments:[{t:"Er hat "},{b:"keinen",s:"m",field:"art"},{t:" Regenschirm und geht mit "},{b:"einem",s:"m",field:"art"},{t:" Freund nach Hause."}] },
+    { id:10, verb:"", segments:[{t:"Ich lese "},{b:"einen",s:"m",field:"art"},{t:" Roman und erz\u00e4hle "},{b:"meiner",s:"m",field:"art"},{t:" Schwester davon."}] },
+    { id:11, verb:"", segments:[{t:"Mein Vater bringt "},{b:"dem",s:"s",field:"art"},{t:" Nachbarn "},{b:"die",s:"s",field:"art"},{t:" Zeitung."}] },
+    { id:12, verb:"", segments:[{t:"Wir kochen "},{b:"eine",s:"m",field:"art"},{t:" Suppe f\u00fcr "},{b:"die",s:"s",field:"art"},{t:" Kinder."}] },
+    { id:13, verb:"", segments:[{t:"Er zeigt "},{b:"dem",s:"s",field:"art"},{t:" Touristen "},{b:"den",s:"s",field:"art"},{t:" Dom."}] },
+    { id:14, verb:"", segments:[{t:"Ich schenke "},{b:"meinem",s:"m",field:"art"},{t:" Vater "},{b:"eine",s:"m",field:"art"},{t:" Krawatte."}] },
+    { id:15, verb:"", segments:[{t:"Sie erkl\u00e4rt "},{b:"dem",s:"s",field:"art"},{t:" Sch\u00fcler "},{b:"die",s:"s",field:"art"},{t:" Grammatik."}] },
+    { id:16, verb:"", segments:[{t:"Er kennt "},{b:"den",s:"s",field:"art"},{t:" Weg nicht. Ich helfe "},{b:"ihm",s:"s",field:"art"},{t:" gern."}] },
+    { id:17, verb:"", segments:[{t:"Von "},{b:"der",s:"s",field:"art"},{t:" Schule gehen wir zu "},{b:"dem",s:"s",field:"art"},{t:" Spielplatz."}] },
+    { id:18, verb:"", segments:[{t:"Er liest "},{b:"die",s:"s",field:"art"},{t:" Zeitung seit "},{b:"einer",s:"m",field:"art"},{t:" Stunde."}] },
+    { id:19, verb:"", segments:[{t:"Seit "},{b:"einem",s:"m",field:"art"},{t:" Monat habe ich "},{b:"keinen",s:"m",field:"art"},{t:" Kontakt mit ihm."}] },
+    { id:20, verb:"", segments:[{t:"Sie gibt "},{b:"dem",s:"s",field:"art"},{t:" Kellner "},{b:"das",s:"s",field:"art"},{t:" Geld."}] },
+];
+
+function lueckeInit(tabNum) {
+    const data = tabNum === 1 ? LUECKEN_1 : LUECKEN_2;
+    const c = document.getElementById('luecke-container-' + tabNum);
+    const timerIdx = tabNum === 1 ? 2 : 3;
+    c.innerHTML = '';
+    data.forEach(ex => {
+        const card = document.createElement('div');
+        card.className = 'ex-card';
+        const badge = document.createElement('span');
+        badge.className = 'badge'; badge.textContent = ex.verb; card.appendChild(badge);
+        const sentence = document.createElement('div');
+        sentence.className = 'ex-sentence';
+        let blankIdx = 0;
+        for (let i = 0; i < ex.segments.length; i++) {
+            const seg = ex.segments[i];
+            if (seg.t !== undefined) {
+                const endsNoSpace = seg.t.length > 0 && !seg.t.endsWith(' ') && i + 1 < ex.segments.length && ex.segments[i + 1].b !== undefined;
+                if (endsNoSpace) {
+                    const group = document.createElement('span');
+                    group.className = 'nowrap-group';
+                    const txt = document.createElement('span');
+                    txt.textContent = seg.t; group.appendChild(txt);
+                    i++;
+                    const nextSeg = ex.segments[i];
+                    const inp = document.createElement('input');
+                    inp.type = 'text'; inp.className = 'blank ' + nextSeg.s;
+                    inp.dataset.exId = ex.id; inp.dataset.blankIdx = blankIdx;
+                    inp.dataset.sol = nextSeg.b; inp.dataset.answer = nextSeg.b;
+                    if (nextSeg.field) inp.dataset.field = nextSeg.field;
+                    inp.autocomplete = 'off'; inp.spellcheck = false;
+                    inp.oninput = function() { liveCheck(this); checkAllInputs('#luecke-container-' + tabNum + ' input.blank', timerIdx); };
+                    group.appendChild(inp); sentence.appendChild(group); blankIdx++;
+                } else {
+                    const txt = document.createElement('span');
+                    txt.textContent = seg.t; sentence.appendChild(txt);
+                }
+            } else if (seg.b !== undefined) {
+                const inp = document.createElement('input');
+                inp.type = 'text'; inp.className = 'blank ' + seg.s;
+                inp.dataset.exId = ex.id; inp.dataset.blankIdx = blankIdx;
+                inp.dataset.sol = seg.b; inp.dataset.answer = seg.b;
+                if (seg.field) inp.dataset.field = seg.field;
+                inp.autocomplete = 'off'; inp.spellcheck = false;
+                inp.oninput = function() { liveCheck(this); checkAllInputs('#luecke-container-' + tabNum + ' input.blank', timerIdx); };
+                sentence.appendChild(inp); blankIdx++;
+            }
+        }
+        card.appendChild(sentence); c.appendChild(card);
+    });
+}
+
+function lueckeShow(tabNum) {
+    document.querySelectorAll('#luecke-container-' + tabNum + ' input.blank').forEach(inp => {
+        const user = normalize(inp.value); const answer = normalize(inp.dataset.sol);
+        const next = inp.nextElementSibling;
+        if (next && next.classList.contains('correction-hint')) next.remove();
+        if (user === answer) { inp.classList.remove('wrong'); inp.classList.add('correct'); }
+        else { inp.classList.add('wrong');
+            const hint = document.createElement('span'); hint.className = 'correction-hint';
+            hint.textContent = inp.dataset.sol; inp.insertAdjacentElement('afterend', hint); }
+    });
+}
+
+function lueckeReset(tabNum) {
+    const timerIdx = tabNum === 1 ? 2 : 3;
+    resetTimer(timerIdx);
+    document.querySelectorAll('#luecke-container-' + tabNum + ' input.blank').forEach(inp => {
+        inp.value = ''; inp.classList.remove('correct', 'wrong');
+        const next = inp.nextElementSibling;
+        if (next && next.classList.contains('correction-hint')) next.remove();
+    });
+    initTimerListeners();
+}
+
+/* ========================================= */
+/*  SECTION 4: SATZBAU                       */
+/* ========================================= */
+const SATZBAU = [
+    { id:1, hint:"geben + Dativ + Akkusativ",
+      parts:["ich","gebe","dem Kind","einen Apfel"],
+      valid:[["ich","gebe","dem Kind","einen Apfel"]] },
+    { id:2, hint:"zeigen + Dativ + Akkusativ",
+      parts:["er","zeigt","der Frau","den Weg"],
+      valid:[["er","zeigt","der Frau","den Weg"]] },
+    { id:3, hint:"helfen + Dativ",
+      parts:["wir","helfen","dem Nachbarn","gern"],
+      valid:[["wir","helfen","dem Nachbarn","gern"]] },
+    { id:4, hint:"fahren + mit + Dativ",
+      parts:["sie","f\u00e4hrt","jeden Tag","mit dem Bus"],
+      valid:[["sie","f\u00e4hrt","jeden Tag","mit dem Bus"],["jeden Tag","f\u00e4hrt","sie","mit dem Bus"]] },
+    { id:5, hint:"schenken + Dativ + Akkusativ",
+      parts:["meine Mutter","schenkt","meinem Vater","eine Krawatte"],
+      valid:[["meine Mutter","schenkt","meinem Vater","eine Krawatte"]] },
+    { id:6, hint:"bringen + Dativ + Akkusativ",
+      parts:["er","bringt","dem Lehrer","die Hausaufgabe"],
+      valid:[["er","bringt","dem Lehrer","die Hausaufgabe"]] },
+    { id:7, hint:"gehören + Dativ",
+      parts:["das Buch","geh\u00f6rt","meinem Bruder"],
+      valid:[["das Buch","geh\u00f6rt","meinem Bruder"]] },
+    { id:8, hint:"gefallen + Dativ",
+      parts:["der Film","gef\u00e4llt","den Kindern","sehr gut"],
+      valid:[["der Film","gef\u00e4llt","den Kindern","sehr gut"]] },
+    { id:9, hint:"erklären + Dativ + Akkusativ",
+      parts:["die Lehrerin","erkl\u00e4rt","den Sch\u00fclern","die Aufgabe"],
+      valid:[["die Lehrerin","erkl\u00e4rt","den Sch\u00fclern","die Aufgabe"]] },
+    { id:10, hint:"kommen + aus + Dativ",
+      parts:["er","kommt","aus der T\u00fcrkei"],
+      valid:[["er","kommt","aus der T\u00fcrkei"]] },
+    { id:11, hint:"erzählen + Dativ + Akkusativ",
+      parts:["die Oma","erz\u00e4hlt","den Kindern","eine Geschichte"],
+      valid:[["die Oma","erz\u00e4hlt","den Kindern","eine Geschichte"]] },
+    { id:12, hint:"gehen + zu + Dativ",
+      parts:["wir","gehen","nach dem Unterricht","zum Arzt"],
+      valid:[["wir","gehen","nach dem Unterricht","zum Arzt"],["nach dem Unterricht","gehen","wir","zum Arzt"]] },
+];
+
+let sbSelected = null;
+
+function checkSatzbauAuto() {
+    SATZBAU.forEach(ex => {
+        const row = document.querySelector(`.drop-row[data-sb-id="${ex.id}"]`);
+        const wrapper = document.querySelector(`.sb-exercise[data-sb-id="${ex.id}"]`);
+        const chips = [...row.querySelectorAll('.chip')];
+        const answer = chips.map(c => c.dataset.orig);
+        const ok = ex.valid.some(v => v.length === answer.length && v.every((w, i) => w === answer[i]));
+        wrapper.classList.remove('correct-row', 'wrong-row');
+        wrapper.classList.add(ok ? 'correct-row' : 'wrong-row');
+    });
+}
+
+function sbInit() {
+    const c = document.getElementById('sb-container');
+    c.innerHTML = '';
+    SATZBAU.forEach(ex => {
+        const wrapper = document.createElement('div');
+        wrapper.className = 'sb-exercise'; wrapper.dataset.sbId = ex.id;
+        const label = document.createElement('div');
+        label.className = 'sb-label'; label.textContent = ex.hint || ('Satz ' + ex.id);
+        wrapper.appendChild(label);
+        const bank = document.createElement('div');
+        bank.className = 'chip-bank'; bank.dataset.sbId = ex.id;
+        shuffle(ex.parts).forEach((part, i) => {
+            const chip = document.createElement('div');
+            chip.className = 'chip'; chip.textContent = part;
+            chip.dataset.orig = part; chip.dataset.sbId = ex.id;
+            chip.draggable = true; chip.id = `sb-chip-${ex.id}-${i}`;
+            chip.addEventListener('dragstart', e => { e.dataTransfer.setData('text/plain', chip.id); chip.style.opacity = '0.5'; });
+            chip.addEventListener('dragend', () => chip.style.opacity = '1');
+            chip.addEventListener('click', () => sbChipClick(chip, ex.id));
+            bank.appendChild(chip);
+        });
+        wrapper.appendChild(bank);
+        const row = document.createElement('div');
+        row.className = 'drop-row'; row.dataset.sbId = ex.id;
+        const dot = document.createElement('span');
+        dot.className = 'fixed-dot'; dot.textContent = '.'; row.appendChild(dot);
+        row.addEventListener('dragover', e => { e.preventDefault(); row.classList.add('drag-over'); });
+        row.addEventListener('dragleave', () => row.classList.remove('drag-over'));
+        row.addEventListener('drop', e => {
+            e.preventDefault(); row.classList.remove('drag-over');
+            const id = e.dataTransfer.getData('text/plain');
+            const chip = document.getElementById(id); if (!chip) return;
+            const chips = [...row.querySelectorAll('.chip')];
+            let inserted = false;
+            for (const ch of chips) {
+                if (ch === chip) continue;
+                const rect = ch.getBoundingClientRect();
+                if (e.clientX < rect.left + rect.width / 2) { row.insertBefore(chip, ch); inserted = true; break; }
+            }
+            if (!inserted) row.insertBefore(chip, dot);
+            updateCaps(ex.id); checkSatzbauAuto();
+        });
+        row.addEventListener('click', e => {
+            if (sbSelected && sbSelected.dataset.sbId == ex.id && e.target === row) {
+                row.insertBefore(sbSelected, dot); sbSelected.classList.remove('selected');
+                sbSelected = null; updateCaps(ex.id); checkSatzbauAuto();
+            }
+        });
+        wrapper.appendChild(row);
+        bank.addEventListener('dragover', e => { e.preventDefault(); bank.classList.add('drag-over'); });
+        bank.addEventListener('dragleave', () => bank.classList.remove('drag-over'));
+        bank.addEventListener('drop', e => {
+            e.preventDefault(); bank.classList.remove('drag-over');
+            const id = e.dataTransfer.getData('text/plain'); const chip = document.getElementById(id);
+            if (chip) { bank.appendChild(chip); updateCaps(ex.id); checkSatzbauAuto(); }
+        });
+        c.appendChild(wrapper);
+    });
+}
+
+function sbChipClick(chip, exId) {
+    const row = document.querySelector(`.drop-row[data-sb-id="${exId}"]`);
+    const bank = document.querySelector(`.chip-bank[data-sb-id="${exId}"]`);
+    const dot = row.querySelector('.fixed-dot');
+    if (sbSelected === chip) { chip.classList.remove('selected'); sbSelected = null; return; }
+    if (sbSelected && sbSelected.dataset.sbId == exId) {
+        if (row.contains(sbSelected) && row.contains(chip)) {
+            row.insertBefore(sbSelected, chip); sbSelected.classList.remove('selected');
+            sbSelected = null; updateCaps(exId); checkSatzbauAuto(); return;
+        }
+        sbSelected.classList.remove('selected');
+    }
+    if (bank.contains(chip)) { row.insertBefore(chip, dot); updateCaps(exId); checkSatzbauAuto(); sbSelected = null; return; }
+    if (row.contains(chip)) { sbSelected = chip; chip.classList.add('selected'); }
+}
+
+function updateCaps(exId) {
+    const row = document.querySelector(`.drop-row[data-sb-id="${exId}"]`);
+    const bank = document.querySelector(`.chip-bank[data-sb-id="${exId}"]`);
+    [...row.querySelectorAll('.chip'), ...bank.querySelectorAll('.chip')].forEach(c => {
+        if (c.dataset.orig) c.textContent = c.dataset.orig;
+    });
+    const first = row.querySelector('.chip');
+    if (first && first.textContent !== '.')
+        first.textContent = first.textContent.charAt(0).toUpperCase() + first.textContent.slice(1);
+}
+
+function sbShow() {
+    SATZBAU.forEach(ex => {
+        const row = document.querySelector(`.drop-row[data-sb-id="${ex.id}"]`);
+        const bank = document.querySelector(`.chip-bank[data-sb-id="${ex.id}"]`);
+        const wrapper = document.querySelector(`.sb-exercise[data-sb-id="${ex.id}"]`);
+        const dot = row.querySelector('.fixed-dot');
+        const allChips = [...row.querySelectorAll('.chip'), ...bank.querySelectorAll('.chip')];
+        ex.valid[0].forEach(part => { const chip = allChips.find(c => c.dataset.orig === part); if (chip) row.insertBefore(chip, dot); });
+        wrapper.classList.remove('wrong-row'); wrapper.classList.add('correct-row'); updateCaps(ex.id);
+    });
+}
+
+function sbReset() {
+    resetTimer(4); sbSelected = null; sbInit();
+    document.querySelectorAll('.sb-exercise').forEach(w => w.classList.remove('correct-row', 'wrong-row'));
+    initTimerListeners();
+}
+
+/* ========================================= */
+/*  INIT                                     */
+/* ========================================= */
+zuoInit();
+lueckeInit(1);
+lueckeInit(2);
+sbInit();
+loadBestTimes();
+initTimerListeners();
+</script>
+<div class="author-footer">
+    <span class="author-name">&copy; Frank Burkert</span> &middot; DaF-Materialien &middot; <a href="mailto:FrankBurkert@fabdaf.onmicrosoft.com">FrankBurkert@fabdaf.onmicrosoft.com</a>
+</div>
+</body>
+</html>

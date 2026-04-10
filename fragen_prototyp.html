@@ -1,0 +1,1279 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alles über Fragen - A1</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 { font-size: 2em; margin-bottom: 10px; }
+        .header p { font-size: 1.1em; opacity: 0.9; }
+        
+        .nav {
+            display: flex;
+            background: #f5f5f5;
+            border-bottom: 2px solid #e0e0e0;
+            overflow-x: auto;
+        }
+        
+        .nav-btn {
+            flex: 1;
+            padding: 15px 10px;
+            text-align: center;
+            cursor: pointer;
+            border-right: 1px solid #ddd; border: none;
+            background: transparent;
+            font-size: 0.95em;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+        
+        .nav-btn:hover { background: #e8e8e8; }
+        .nav-btn:last-child { border-right: none; }
+        .nav-btn.active { background: white; border-bottom: 3px solid #667eea; font-weight: bold; }
+        
+        .section {
+            display: none;
+            padding: 30px;
+        }
+        
+        .section.active { display: block; }
+        
+        .buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            justify-content: center;
+        }
+        
+        .buttons button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn-check { background: #667eea; color: white; }
+        .btn-show { background: #764ba2; color: white; }
+        .btn-reset { background: #e0e0e0; color: #333; }
+        
+        .buttons button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        
+        .score {
+            text-align: center;
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #667eea;
+            margin-top: 15px;
+            min-height: 30px;
+        }
+        
+        .timer-display {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 1.1em;
+            color: #666;
+        }
+        
+        .current-time {
+            font-weight: bold;
+            color: #667eea;
+            margin-right: 20px;
+        }
+        
+        .best-time {
+            color: #f39c12;
+            font-weight: bold;
+        }
+        
+        /* Wortschatz */
+        .wortschatz-list {
+            margin-top: 20px;
+        }
+        
+        .wort-row {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border-bottom: 1px solid #e0e0e0;
+            gap: 15px;
+        }
+        
+        .wort-row:hover { background: #f9f9f9; }
+        
+        .en-word {
+            min-width: 150px;
+            font-weight: bold;
+            color: #764ba2;
+            font-size: 1.1em;
+        }
+        
+        .wort-inputs {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex: 1;
+        }
+        
+        .wort-inputs input {
+            padding: 8px;
+            border: 2px solid #e0e0e0;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+        
+        .wort-inputs input.s { width: 60px; }
+        .wort-inputs input.m { width: 150px; }
+        .wort-inputs input.correct { border-color: #28a745; background: #d4edda; }
+        .wort-inputs input.incorrect { border-color: #dc3545; background: #f8d7da; }
+        
+        .solution {
+            display: none;
+            color: #28a745;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        
+        .solution.show { display: inline; }
+        
+        /* Genus */
+        .chip-bank {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding: 20px;
+            background: #f5f5f5;
+            border-radius: 10px;
+            min-height: 80px;
+            margin-bottom: 20px;
+        }
+        
+        .chip {
+            padding: 10px 20px;
+            background: white;
+            border: 2px solid #667eea;
+            border-radius: 20px;
+            cursor: move;
+            user-select: none;
+            font-size: 1em;
+            transition: all 0.3s;
+        }
+        
+        .chip:hover {
+            background: #f0f0f0;
+            transform: translateY(-2px);
+        }
+        
+        .chip.dragging { opacity: 0.5; }
+        
+        .genus-categories {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .genus-category {
+            border: 2px dashed #ccc;
+            border-radius: 10px;
+            padding: 20px;
+            min-height: 250px;
+        }
+        
+        .genus-category h3 {
+            margin-bottom: 15px;
+            text-align: center;
+            padding: 10px;
+            border-radius: 5px;
+            color: white;
+        }
+        
+        .genus-category[data-genus="der"] h3 { background: #4285f4; }
+        .genus-category[data-genus="die"] h3 { background: #ea4335; }
+        .genus-category[data-genus="das"] h3 { background: #34a853; }
+        
+        .genus-drop-zone {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            min-height: 180px;
+        }
+        
+        .genus-category.drag-over {
+            background: #e3f2fd;
+            border-color: #667eea;
+        }
+        
+        /* Fragewörter Tabelle */
+        .frage-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        
+        .frage-table th {
+            background: #667eea;
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+        
+        .frage-table td {
+            padding: 15px;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .frage-table input {
+            width: 100%;
+            padding: 8px;
+            border: 2px solid #e0e0e0;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+        
+        .frage-table input.correct { border-color: #28a745; background: #d4edda; }
+        .frage-table input.incorrect { border-color: #dc3545; background: #f8d7da; }
+        
+        /* Deklination */
+        .dekl-exercise {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            font-size: 1.1em;
+        }
+        
+        .dekl-sentence {
+            margin: 10px 0;
+            line-height: 2;
+        }
+        
+        .dekl-blank {
+            display: inline-block;
+            width: 100px;
+            padding: 5px 10px;
+            border: 2px solid #e0e0e0;
+            border-radius: 5px;
+            background: white;
+            font-size: 1em;
+        }
+        
+        .dekl-blank.correct { border-color: #28a745; background: #d4edda; }
+        .dekl-blank.incorrect { border-color: #dc3545; background: #f8d7da; }
+        
+        /* Satzbau */
+        .satzbau-item {
+            margin: 20px 0;
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 10px;
+        }
+        
+        .satzbau-item h4 {
+            color: #764ba2;
+            margin-bottom: 15px;
+        }
+        
+        .sb-chip-bank {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding: 15px;
+            background: white;
+            border: 2px dashed #ccc;
+            border-radius: 8px;
+            min-height: 60px;
+            margin-bottom: 15px;
+        }
+        
+        .drop-row {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 15px;
+            background: white;
+            border: 2px solid #667eea;
+            border-radius: 8px;
+            min-height: 60px;
+            flex-wrap: wrap;
+        }
+        
+        .drop-row.drag-over {
+            background: #e3f2fd;
+        }
+        
+        .fixed-dot {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-left: 5px;
+        }
+        
+        .chip.selected-sb {
+            background: #e3f2fd;
+            border-color: #2196f3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🗣️ Alles über Fragen</h1>
+            <p>Grammatik A1</p>
+        </div>
+        
+        <div class="nav">
+            <div class="nav-btn active" onclick="showSection(0)">📚 Wortschatz</div>
+            <div class="nav-btn" onclick="showSection(1)">⚧ Genus</div>
+            <div class="nav-btn" onclick="showSection(2)">📝 Fragewörter</div>
+            <div class="nav-btn" onclick="showSection(3)">📊 Welch-/Wie viele</div>
+            <div class="nav-btn" onclick="showSection(4)">🧩 Satzbau</div>
+        </div>
+        
+        <!-- Tab 1: Wortschatz -->
+        <div class="section active" id="sec-0">
+            <h2>Wortschatz: Englisch → Deutsch</h2>
+            <p>Übersetze die Wörter ins Deutsche. Bei Nomen: Artikel + Wort + Plural</p>
+            <div class="wortschatz-list" id="wortschatz-list"></div>
+            <div class="buttons">
+                <button class="btn-check" onclick="checkWortschatz()">✓ Prüfen</button>
+                <button class="btn-show" onclick="showWortschatzSolution()">👁 Lösungen</button>
+                <button class="btn-reset" onclick="resetWortschatz()">↻ Neu starten</button>
+            </div>
+            <div class="score" id="wortschatz-score"></div>
+            <div class="timer-display">
+                <span class="current-time">⏱️ <span id="timer-0">00:00</span></span>
+                <span class="best-time">🏆 Best: <span id="best-0">--:--</span></span>
+            </div>
+        </div>
+        
+        <!-- Tab 2: Genus -->
+        <div class="section" id="sec-1">
+            <h2>Genus-Zuordnung</h2>
+            <p>Ziehe die Nomen zum richtigen Artikel:</p>
+            <div class="chip-bank" id="genus-bank"></div>
+            <div class="genus-categories">
+                <div class="genus-category" data-genus="der">
+                    <h3>der (Maskulinum)</h3>
+                    <div class="genus-drop-zone"></div>
+                </div>
+                <div class="genus-category" data-genus="die">
+                    <h3>die (Femininum)</h3>
+                    <div class="genus-drop-zone"></div>
+                </div>
+                <div class="genus-category" data-genus="das">
+                    <h3>das (Neutrum)</h3>
+                    <div class="genus-drop-zone"></div>
+                </div>
+            </div>
+            <div class="buttons">
+                <button class="btn-check" onclick="checkGenus()">✓ Prüfen</button>
+                <button class="btn-show" onclick="showGenusSolution()">👁 Lösungen</button>
+                <button class="btn-reset" onclick="resetGenus()">↻ Neu starten</button>
+            </div>
+            <div class="score" id="genus-score"></div>
+            <div class="timer-display">
+                <span class="current-time">⏱️ <span id="timer-1">00:00</span></span>
+                <span class="best-time">🏆 Best: <span id="best-1">--:--</span></span>
+            </div>
+        </div>
+        
+        <!-- Tab 3: Fragewörter -->
+        <div class="section" id="sec-2">
+            <h2>Fragewörter ergänzen</h2>
+            <p>Ergänze die Fragewörter: <strong>Wo / Wie / Was / Wer / Wann / Woher / Wohin / Warum</strong></p>
+            <table class="frage-table">
+                <thead>
+                    <tr>
+                        <th>Fragewort</th>
+                        <th>Verb</th>
+                        <th>Subjekt</th>
+                        <th>Rest</th>
+                    </tr>
+                </thead>
+                <tbody id="table-body"></tbody>
+            </table>
+            <div class="buttons">
+                <button class="btn-check" onclick="checkTable()">✓ Prüfen</button>
+                <button class="btn-show" onclick="showTableSolution()">👁 Lösungen</button>
+                <button class="btn-reset" onclick="resetTable()">↻ Neu starten</button>
+            </div>
+            <div class="score" id="table-score"></div>
+            <div class="timer-display">
+                <span class="current-time">⏱️ <span id="timer-2">00:00</span></span>
+                <span class="best-time">🏆 Best: <span id="best-2">--:--</span></span>
+            </div>
+        </div>
+        
+        <!-- Tab 4: Welch-/Wie viele -->
+        <div class="section" id="sec-3">
+            <h2>Welch- und Wie viel/viele</h2>
+            <p>Ergänze die richtige Form:</p>
+            <div class="dekl-exercise" id="dekl-exercise"></div>
+            <div class="buttons">
+                <button class="btn-check" onclick="checkDekl()">✓ Prüfen</button>
+                <button class="btn-show" onclick="showDeklSolution()">👁 Lösungen</button>
+                <button class="btn-reset" onclick="resetDekl()">↻ Neu starten</button>
+            </div>
+            <div class="score" id="dekl-score"></div>
+            <div class="timer-display">
+                <span class="current-time">⏱️ <span id="timer-3">00:00</span></span>
+                <span class="best-time">🏆 Best: <span id="best-3">--:--</span></span>
+            </div>
+        </div>
+        
+        <!-- Tab 5: Satzbau -->
+        <div class="section" id="sec-4">
+            <h2>Satzbau</h2>
+            <p><strong>Regeln:</strong> Verb auf Position 2 • Zeit vor Ort</p>
+            <div id="satzbau-container"></div>
+            <div class="buttons">
+                <button class="btn-check" onclick="checkSatzbau()">✓ Prüfen</button>
+                <button class="btn-show" onclick="showSatzbauSolution()">👁 Lösungen</button>
+                <button class="btn-reset" onclick="resetSatzbau()">↻ Neu starten</button>
+            </div>
+            <div class="score" id="satzbau-score"></div>
+            <div class="timer-display">
+                <span class="current-time">⏱️ <span id="timer-4">00:00</span></span>
+                <span class="best-time">🏆 Best: <span id="best-4">--:--</span></span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Daten - 25 Wortschatz-Einträge
+        const WORTSCHATZ = [
+            { id: 1, type: "n", en: "toilet", artikel: "die", de: "Toilette", plural: "Toiletten" },
+            { id: 2, type: "n", en: "waiter", artikel: "der", de: "Kellner", plural: "Kellner" },
+            { id: 3, type: "n", en: "menu", artikel: "die", de: "Speisekarte", plural: "Speisekarten" },
+            { id: 4, type: "n", en: "chair", artikel: "der", de: "Stuhl", plural: "Stühle" },
+            { id: 5, type: "v", en: "to close", de: "schließen" },
+            { id: 6, type: "n", en: "spoon", artikel: "der", de: "Löffel", plural: "Löffel" },
+            { id: 7, type: "n", en: "fork", artikel: "die", de: "Gabel", plural: "Gabeln" },
+            { id: 8, type: "n", en: "knife", artikel: "das", de: "Messer", plural: "Messer" },
+            { id: 9, type: "n", en: "password", artikel: "das", de: "Passwort", plural: "Passwörter" },
+            { id: 10, type: "v", en: "to ask", de: "fragen" },
+            { id: 11, type: "n", en: "question", artikel: "die", de: "Frage", plural: "Fragen" },
+            { id: 12, type: "n", en: "answer", artikel: "die", de: "Antwort", plural: "Antworten" },
+            { id: 13, type: "n", en: "coffee", artikel: "der", de: "Kaffee", plural: "Kaffees" },
+            { id: 14, type: "v", en: "to cost", de: "kosten" },
+            { id: 15, type: "n", en: "table", artikel: "der", de: "Tisch", plural: "Tische" },
+            { id: 16, type: "n", en: "glass", artikel: "das", de: "Glas", plural: "Gläser" },
+            { id: 17, type: "n", en: "plate", artikel: "der", de: "Teller", plural: "Teller" },
+            { id: 18, type: "v", en: "to drink", de: "trinken" },
+            { id: 19, type: "n", en: "tea", artikel: "der", de: "Tee", plural: "Tees" },
+            { id: 20, type: "n", en: "water", artikel: "das", de: "Wasser", plural: "Wasser" },
+            { id: 21, type: "n", en: "cake", artikel: "der", de: "Kuchen", plural: "Kuchen" },
+            { id: 22, type: "v", en: "to eat", de: "essen" },
+            { id: 23, type: "n", en: "bread", artikel: "das", de: "Brot", plural: "Brote" },
+            { id: 24, type: "n", en: "butter", artikel: "die", de: "Butter", plural: "" },
+            { id: 25, type: "n", en: "sugar", artikel: "der", de: "Zucker", plural: "" }
+        ];
+        
+        // 20 Genus-Wörter aus Wortschatz
+        const GENUS_WOERTER = [
+            { wort: "Toilette", genus: "die" },
+            { wort: "Kellner", genus: "der" },
+            { wort: "Speisekarte", genus: "die" },
+            { wort: "Stuhl", genus: "der" },
+            { wort: "Löffel", genus: "der" },
+            { wort: "Gabel", genus: "die" },
+            { wort: "Messer", genus: "das" },
+            { wort: "Passwort", genus: "das" },
+            { wort: "Frage", genus: "die" },
+            { wort: "Antwort", genus: "die" },
+            { wort: "Kaffee", genus: "der" },
+            { wort: "Tisch", genus: "der" },
+            { wort: "Glas", genus: "das" },
+            { wort: "Teller", genus: "der" },
+            { wort: "Tee", genus: "der" },
+            { wort: "Wasser", genus: "das" },
+            { wort: "Kuchen", genus: "der" },
+            { wort: "Brot", genus: "das" },
+            { wort: "Butter", genus: "die" },
+            { wort: "Zucker", genus: "der" }
+        ];
+        
+        // 10 Fragewörter-Übungen
+        const TABLE_DATA = [
+            { fragewort: "Wo", verb: "sind", subjekt: "die Toiletten", rest: "?" },
+            { fragewort: "Was", verb: "darf", subjekt: "es", rest: "sein?" },
+            { fragewort: "Wie", verb: "ist", subjekt: "das Passwort", rest: "?" },
+            { fragewort: "Wann", verb: "kommt", subjekt: "der Kellner", rest: "?" },
+            { fragewort: "Wer", verb: "bezahlt", subjekt: "", rest: "den Kaffee?" },
+            { fragewort: "Woher", verb: "kommst", subjekt: "du", rest: "?" },
+            { fragewort: "Wohin", verb: "gehst", subjekt: "du", rest: "?" },
+            { fragewort: "Warum", verb: "fragst", subjekt: "du", rest: "?" },
+            { fragewort: "Was", verb: "kostet", subjekt: "der Tee", rest: "?" },
+            { fragewort: "Wie", verb: "heißt", subjekt: "das", rest: "auf Deutsch?" }
+        ];
+        
+        const DEKL_EXERCISES = [
+            { text: "Welch___ Tee möchtest du?", answer: "en", context: "(Akkusativ maskulin)" },
+            { text: "Wie viel___ Kinder hast du?", answer: "e", context: "(Plural)" },
+            { text: "Welch___ Speisekarte möchtest du?", answer: "e", context: "(Akkusativ feminin)" },
+            { text: "Wie viel___ Geld brauchst du?", answer: "", context: "(Singular)" },
+            { text: "Welch___ Brot nimmst du?", answer: "es", context: "(Akkusativ neutrum)" },
+            { text: "Wie viel___ Stühle sind hier?", answer: "e", context: "(Plural)" },
+            { text: "Welch___ Löffel ist das?", answer: "er", context: "(Nominativ maskulin)" },
+            { text: "Welch___ Gabel brauchst du?", answer: "e", context: "(Akkusativ feminin)" }
+        ];
+        
+        // 10 Satzbau-Übungen
+        const SATZBAU = [
+            {
+                id: 1,
+                parts: ["der Kellner", "bringt", "den Kaffee"],
+                valid: [["der Kellner", "bringt", "den Kaffee"]]
+            },
+            {
+                id: 2,
+                parts: ["ich", "trinke", "heute", "einen Tee"],
+                valid: [
+                    ["ich", "trinke", "heute", "einen Tee"],
+                    ["heute", "trinke", "ich", "einen Tee"]
+                ]
+            },
+            {
+                id: 3,
+                parts: ["wir", "essen", "im Café"],
+                valid: [["wir", "essen", "im Café"]]
+            },
+            {
+                id: 4,
+                parts: ["sie", "fragt", "morgen", "den Kellner"],
+                valid: [
+                    ["sie", "fragt", "morgen", "den Kellner"],
+                    ["morgen", "fragt", "sie", "den Kellner"]
+                ]
+            },
+            {
+                id: 5,
+                parts: ["der Tisch", "steht", "im Restaurant"],
+                valid: [["der Tisch", "steht", "im Restaurant"]]
+            },
+            {
+                id: 6,
+                parts: ["ich", "bestelle", "jetzt", "das Wasser"],
+                valid: [
+                    ["ich", "bestelle", "jetzt", "das Wasser"],
+                    ["jetzt", "bestelle", "ich", "das Wasser"]
+                ]
+            },
+            {
+                id: 7,
+                parts: ["er", "bezahlt", "immer", "den Kuchen"],
+                valid: [
+                    ["er", "bezahlt", "immer", "den Kuchen"],
+                    ["immer", "bezahlt", "er", "den Kuchen"]
+                ]
+            },
+            {
+                id: 8,
+                parts: ["das Brot", "kostet", "drei Euro"],
+                valid: [["das Brot", "kostet", "drei Euro"]]
+            },
+            {
+                id: 9,
+                parts: ["wir", "suchen", "heute", "einen Tisch"],
+                valid: [
+                    ["wir", "suchen", "heute", "einen Tisch"],
+                    ["heute", "suchen", "wir", "einen Tisch"]
+                ]
+            },
+            {
+                id: 10,
+                parts: ["die Gabel", "liegt", "auf dem Tisch"],
+                valid: [["die Gabel", "liegt", "auf dem Tisch"]]
+            }
+        ];
+        
+        // Timer System
+        const timerState = {
+            0: { running: false, startTime: null, elapsed: 0, interval: null },
+            1: { running: false, startTime: null, elapsed: 0, interval: null },
+            2: { running: false, startTime: null, elapsed: 0, interval: null },
+            3: { running: false, startTime: null, elapsed: 0, interval: null },
+            4: { running: false, startTime: null, elapsed: 0, interval: null }
+        };
+        
+        function formatTime(seconds) {
+            const mins = Math.floor(seconds / 60);
+            const secs = seconds % 60;
+            return `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+        }
+        
+        function startTimer(tabIndex) {
+            if (timerState[tabIndex].running) return;
+            
+            timerState[tabIndex].running = true;
+            timerState[tabIndex].startTime = Date.now() - (timerState[tabIndex].elapsed * 1000);
+            
+            timerState[tabIndex].interval = setInterval(() => {
+                timerState[tabIndex].elapsed = Math.floor((Date.now() - timerState[tabIndex].startTime) / 1000);
+                document.getElementById(`timer-${tabIndex}`).textContent = formatTime(timerState[tabIndex].elapsed);
+            }, 1000);
+        }
+        
+        function stopTimer(tabIndex) {
+            if (!timerState[tabIndex].running) return;
+            
+            clearInterval(timerState[tabIndex].interval);
+            timerState[tabIndex].running = false;
+            
+            const currentTime = timerState[tabIndex].elapsed;
+            const bestKey = `best-time-${tabIndex}`;
+            const currentBest = localStorage.getItem(bestKey);
+            
+            if (!currentBest || currentTime < parseInt(currentBest)) {
+                localStorage.setItem(bestKey, currentTime);
+                document.getElementById(`best-${tabIndex}`).textContent = formatTime(currentTime);
+            }
+        }
+        
+        function resetTimer(tabIndex) {
+            stopTimer(tabIndex);
+            timerState[tabIndex].elapsed = 0;
+            timerState[tabIndex].startTime = null;
+            document.getElementById(`timer-${tabIndex}`).textContent = '00:00';
+        }
+        
+        function loadBestTimes() {
+            for (let i = 0; i < 5; i++) {
+                const bestTime = localStorage.getItem(`best-time-${i}`);
+                if (bestTime) {
+                    document.getElementById(`best-${i}`).textContent = formatTime(parseInt(bestTime));
+                }
+            }
+        }
+        
+        // Navigation
+        function showSection(idx) {
+            document.querySelectorAll('.section').forEach((s, i) => {
+                s.classList.toggle('active', i === idx);
+            });
+            document.querySelectorAll('.nav-btn').forEach((b, i) => {
+                b.classList.toggle('active', i === idx);
+            });
+        }
+        
+        // Tab 1: Wortschatz
+        function initWortschatz() {
+            const list = document.getElementById('wortschatz-list');
+            
+            WORTSCHATZ.forEach(w => {
+                const row = document.createElement('div');
+                row.className = 'wort-row';
+                
+                const enWord = document.createElement('div');
+                enWord.className = 'en-word';
+                enWord.textContent = w.en;
+                row.appendChild(enWord);
+                
+                const inputs = document.createElement('div');
+                inputs.className = 'wort-inputs';
+                
+                if (w.type === 'n') {
+                    const artikelInput = document.createElement('input');
+                    artikelInput.type = 'text';
+                    artikelInput.className = 's';
+                    artikelInput.dataset.id = w.id;
+                    artikelInput.dataset.field = 'artikel';
+                    artikelInput.dataset.answer = w.artikel;
+                    artikelInput.addEventListener('focus', () => startTimer(0), { once: true });
+                    inputs.appendChild(artikelInput);
+                    
+                    const deInput = document.createElement('input');
+                    deInput.type = 'text';
+                    deInput.className = 'm';
+                    deInput.dataset.id = w.id;
+                    deInput.dataset.field = 'de';
+                    deInput.dataset.answer = w.de;
+                    deInput.addEventListener('focus', () => startTimer(0), { once: true });
+                    inputs.appendChild(deInput);
+                    
+                    const plLabel = document.createElement('span');
+                    plLabel.textContent = ', Pl.: ';
+                    inputs.appendChild(plLabel);
+                    
+                    const plInput = document.createElement('input');
+                    plInput.type = 'text';
+                    plInput.className = 'm';
+                    plInput.dataset.id = w.id;
+                    plInput.dataset.field = 'plural';
+                    plInput.dataset.answer = w.plural;
+                    plInput.addEventListener('focus', () => startTimer(0), { once: true });
+                    inputs.appendChild(plInput);
+                    
+                    const sol = document.createElement('span');
+                    sol.className = 'solution';
+                    sol.textContent = ` (${w.artikel} ${w.de}, Pl.: ${w.plural || '-'})`;
+                    inputs.appendChild(sol);
+                } else {
+                    const deInput = document.createElement('input');
+                    deInput.type = 'text';
+                    deInput.className = 'm';
+                    deInput.dataset.id = w.id;
+                    deInput.dataset.field = 'de';
+                    deInput.dataset.answer = w.de;
+                    deInput.addEventListener('focus', () => startTimer(0), { once: true });
+                    inputs.appendChild(deInput);
+                    
+                    const sol = document.createElement('span');
+                    sol.className = 'solution';
+                    sol.textContent = ` (${w.de})`;
+                    inputs.appendChild(sol);
+                }
+                
+                row.appendChild(inputs);
+                list.appendChild(row);
+            });
+        }
+        
+        function checkWortschatz() {
+            stopTimer(0);
+            let correct = 0;
+            let total = 0;
+            
+            document.querySelectorAll('#wortschatz-list input').forEach(input => {
+                total++;
+                const answer = input.dataset.answer.toLowerCase();
+                const value = input.value.trim().toLowerCase();
+                
+                if (value === answer) {
+                    input.classList.remove('incorrect');
+                    input.classList.add('correct');
+                    correct++;
+                } else {
+                    input.classList.remove('correct');
+                    input.classList.add('incorrect');
+                }
+            });
+            
+            document.getElementById('wortschatz-score').textContent = 
+                `${correct} von ${total} richtig (${Math.round(correct/total*100)}%)`;
+        }
+        
+        function showWortschatzSolution() {
+            document.querySelectorAll('#wortschatz-list input').forEach(input => {
+                input.value = input.dataset.answer;
+                input.classList.remove('incorrect');
+                input.classList.add('correct');
+            });
+            
+            document.querySelectorAll('#wortschatz-list .solution').forEach(sol => {
+                sol.classList.add('show');
+            });
+        }
+        
+        function resetWortschatz() {
+            resetTimer(0);
+            document.querySelectorAll('#wortschatz-list input').forEach(input => {
+                input.value = '';
+                input.classList.remove('correct', 'incorrect');
+            });
+            
+            document.querySelectorAll('#wortschatz-list .solution').forEach(sol => {
+                sol.classList.remove('show');
+            });
+            
+            document.getElementById('wortschatz-score').textContent = '';
+        }
+        
+        // Tab 2: Genus
+        let draggedElement = null;
+        
+        function initGenus() {
+            const bank = document.getElementById('genus-bank');
+            const shuffled = [...GENUS_WOERTER].sort(() => Math.random() - 0.5);
+            
+            shuffled.forEach((w, idx) => {
+                const chip = document.createElement('div');
+                chip.className = 'chip';
+                chip.draggable = true;
+                chip.textContent = w.wort;
+                chip.dataset.genus = w.genus;
+                chip.dataset.id = idx;
+                
+                chip.addEventListener('dragstart', e => {
+                    startTimer(1);
+                    draggedElement = chip;
+                    chip.classList.add('dragging');
+                });
+                chip.addEventListener('dragend', e => {
+                    chip.classList.remove('dragging');
+                });
+                
+                bank.appendChild(chip);
+            });
+            
+            // Bank drop handler
+            bank.addEventListener('dragover', e => e.preventDefault());
+            bank.addEventListener('drop', e => {
+                e.preventDefault();
+                if (draggedElement) bank.appendChild(draggedElement);
+            });
+            
+            // Category drop handlers
+            document.querySelectorAll('.genus-category').forEach(cat => {
+                const zone = cat.querySelector('.genus-drop-zone');
+                
+                cat.addEventListener('dragover', e => {
+                    e.preventDefault();
+                    cat.classList.add('drag-over');
+                });
+                
+                cat.addEventListener('dragleave', e => {
+                    cat.classList.remove('drag-over');
+                });
+                
+                cat.addEventListener('drop', e => {
+                    e.preventDefault();
+                    cat.classList.remove('drag-over');
+                    if (draggedElement) zone.appendChild(draggedElement);
+                });
+            });
+        }
+        
+        function checkGenus() {
+            stopTimer(1);
+            let correct = 0;
+            const total = GENUS_WOERTER.length;
+            
+            document.querySelectorAll('.genus-category').forEach(cat => {
+                const genus = cat.dataset.genus;
+                const chips = cat.querySelectorAll('.chip');
+                
+                chips.forEach(chip => {
+                    if (chip.dataset.genus === genus) {
+                        chip.style.borderColor = '#28a745';
+                        chip.style.background = '#d4edda';
+                        correct++;
+                    } else {
+                        chip.style.borderColor = '#dc3545';
+                        chip.style.background = '#f8d7da';
+                    }
+                });
+            });
+            
+            document.getElementById('genus-score').textContent = 
+                `${correct} von ${total} richtig (${Math.round(correct/total*100)}%)`;
+        }
+        
+        function showGenusSolution() {
+            document.querySelectorAll('.genus-category').forEach(cat => {
+                const genus = cat.dataset.genus;
+                const zone = cat.querySelector('.genus-drop-zone');
+                
+                const correctChips = Array.from(document.querySelectorAll('.chip'))
+                    .filter(chip => chip.dataset.genus === genus);
+                
+                correctChips.forEach(chip => {
+                    zone.appendChild(chip);
+                    chip.style.borderColor = '#28a745';
+                    chip.style.background = '#d4edda';
+                });
+            });
+        }
+        
+        function resetGenus() {
+            resetTimer(1);
+            const bank = document.getElementById('genus-bank');
+            document.querySelectorAll('.chip').forEach(chip => {
+                chip.style.borderColor = '#667eea';
+                chip.style.background = 'white';
+                bank.appendChild(chip);
+            });
+            document.getElementById('genus-score').textContent = '';
+        }
+        
+        // Tab 3: Fragewörter
+        function initTable() {
+            const tbody = document.getElementById('table-body');
+            
+            TABLE_DATA.forEach((row, idx) => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>
+                        <input type="text" id="fw-${idx}" data-answer="${row.fragewort}" onfocus="startTimer(2)">
+                        <span class="solution" id="sol-${idx}">${row.fragewort}</span>
+                    </td>
+                    <td>${row.verb}</td>
+                    <td>${row.subjekt}</td>
+                    <td>${row.rest}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+        
+        function checkTable() {
+            stopTimer(2);
+            let correct = 0;
+            const total = TABLE_DATA.length;
+            
+            TABLE_DATA.forEach((row, idx) => {
+                const input = document.getElementById(`fw-${idx}`);
+                const answer = input.dataset.answer.toLowerCase();
+                const value = input.value.trim().toLowerCase();
+                
+                if (value === answer) {
+                    input.classList.remove('incorrect');
+                    input.classList.add('correct');
+                    correct++;
+                } else {
+                    input.classList.remove('correct');
+                    input.classList.add('incorrect');
+                }
+            });
+            
+            document.getElementById('table-score').textContent = 
+                `${correct} von ${total} richtig (${Math.round(correct/total*100)}%)`;
+        }
+        
+        function showTableSolution() {
+            TABLE_DATA.forEach((row, idx) => {
+                const input = document.getElementById(`fw-${idx}`);
+                const sol = document.getElementById(`sol-${idx}`);
+                
+                input.value = row.fragewort;
+                input.classList.remove('incorrect');
+                input.classList.add('correct');
+                sol.classList.add('show');
+            });
+        }
+        
+        function resetTable() {
+            resetTimer(2);
+            TABLE_DATA.forEach((row, idx) => {
+                const input = document.getElementById(`fw-${idx}`);
+                const sol = document.getElementById(`sol-${idx}`);
+                
+                input.value = '';
+                input.classList.remove('correct', 'incorrect');
+                sol.classList.remove('show');
+            });
+            
+            document.getElementById('table-score').textContent = '';
+        }
+        
+        // Tab 4: Welch-/Wie viele
+        function initDekl() {
+            const container = document.getElementById('dekl-exercise');
+            
+            DEKL_EXERCISES.forEach((ex, idx) => {
+                const sentDiv = document.createElement('div');
+                sentDiv.className = 'dekl-sentence';
+                
+                const parts = ex.text.split('___');
+                sentDiv.appendChild(document.createTextNode(parts[0]));
+                
+                const input = document.createElement('input');
+                input.type = 'text';
+                input.className = 'dekl-blank';
+                input.dataset.answer = ex.answer;
+                input.dataset.id = idx;
+                input.addEventListener('focus', () => startTimer(3), { once: true });
+                sentDiv.appendChild(input);
+                
+                if (parts[1]) {
+                    sentDiv.appendChild(document.createTextNode(parts[1]));
+                }
+                
+                const contextSpan = document.createElement('span');
+                contextSpan.style.color = '#666';
+                contextSpan.style.marginLeft = '10px';
+                contextSpan.style.fontSize = '0.9em';
+                contextSpan.textContent = ex.context;
+                sentDiv.appendChild(contextSpan);
+                
+                const sol = document.createElement('span');
+                sol.className = 'solution';
+                sol.textContent = ` → ${ex.answer || '(nichts)'}`;
+                sentDiv.appendChild(sol);
+                
+                container.appendChild(sentDiv);
+            });
+        }
+        
+        function checkDekl() {
+            stopTimer(3);
+            let correct = 0;
+            const total = DEKL_EXERCISES.length;
+            
+            DEKL_EXERCISES.forEach((ex, idx) => {
+                const input = document.querySelector(`.dekl-blank[data-id="${idx}"]`);
+                const answer = ex.answer.toLowerCase();
+                const value = input.value.trim().toLowerCase();
+                
+                if (value === answer) {
+                    input.classList.remove('incorrect');
+                    input.classList.add('correct');
+                    correct++;
+                } else {
+                    input.classList.remove('correct');
+                    input.classList.add('incorrect');
+                }
+            });
+            
+            document.getElementById('dekl-score').textContent = 
+                `${correct} von ${total} richtig (${Math.round(correct/total*100)}%)`;
+        }
+        
+        function showDeklSolution() {
+            DEKL_EXERCISES.forEach((ex, idx) => {
+                const input = document.querySelector(`.dekl-blank[data-id="${idx}"]`);
+                input.value = ex.answer;
+                input.classList.remove('incorrect');
+                input.classList.add('correct');
+            });
+            
+            document.querySelectorAll('#dekl-exercise .solution').forEach(sol => {
+                sol.classList.add('show');
+            });
+        }
+        
+        function resetDekl() {
+            resetTimer(3);
+            document.querySelectorAll('.dekl-blank').forEach(input => {
+                input.value = '';
+                input.classList.remove('correct', 'incorrect');
+            });
+            
+            document.querySelectorAll('#dekl-exercise .solution').forEach(sol => {
+                sol.classList.remove('show');
+            });
+            
+            document.getElementById('dekl-score').textContent = '';
+        }
+        
+        // Tab 5: Satzbau
+        let sbDraggedElement = null;
+        
+        function initSatzbau() {
+            const container = document.getElementById('satzbau-container');
+            
+            SATZBAU.forEach(ex => {
+                const item = document.createElement('div');
+                item.className = 'satzbau-item';
+                
+                const title = document.createElement('h4');
+                title.textContent = `Satz ${ex.id}`;
+                item.appendChild(title);
+                
+                // Chip Bank
+                const bank = document.createElement('div');
+                bank.className = 'sb-chip-bank';
+                bank.dataset.sbId = ex.id;
+                
+                const shuffled = [...ex.parts].sort(() => Math.random() - 0.5);
+                shuffled.forEach(part => {
+                    const chip = document.createElement('div');
+                    chip.className = 'chip';
+                    chip.draggable = true;
+                    chip.textContent = part;
+                    chip.dataset.orig = part;
+                    
+                    chip.addEventListener('dragstart', e => {
+                        startTimer(4);
+                        sbDraggedElement = chip;
+                        chip.classList.add('dragging');
+                    });
+                    chip.addEventListener('dragend', e => {
+                        chip.classList.remove('dragging');
+                    });
+                    
+                    bank.appendChild(chip);
+                });
+                
+                // Bank drop zone
+                bank.addEventListener('dragover', e => e.preventDefault());
+                bank.addEventListener('drop', e => {
+                    e.preventDefault();
+                    if (sbDraggedElement) {
+                        bank.appendChild(sbDraggedElement);
+                        updateCaps(ex.id);
+                    }
+                });
+                
+                item.appendChild(bank);
+                
+                // Drop Row
+                const row = document.createElement('div');
+                row.className = 'drop-row';
+                row.dataset.sbId = ex.id;
+                
+                const dot = document.createElement('span');
+                dot.className = 'fixed-dot';
+                dot.textContent = '.';
+                row.appendChild(dot);
+                
+                row.addEventListener('dragover', e => {
+                    e.preventDefault();
+                    row.classList.add('drag-over');
+                });
+                
+                row.addEventListener('dragleave', e => {
+                    row.classList.remove('drag-over');
+                });
+                
+                row.addEventListener('drop', e => {
+                    e.preventDefault();
+                    row.classList.remove('drag-over');
+                    
+                    if (!sbDraggedElement) return;
+                    
+                    const dot = row.querySelector('.fixed-dot');
+                    const chips = Array.from(row.querySelectorAll('.chip'));
+                    
+                    let inserted = false;
+                    for (const chip of chips) {
+                        if (chip === sbDraggedElement) continue;
+                        const rect = chip.getBoundingClientRect();
+                        if (e.clientX < rect.left + rect.width / 2) {
+                            row.insertBefore(sbDraggedElement, chip);
+                            inserted = true;
+                            break;
+                        }
+                    }
+                    
+                    if (!inserted) {
+                        row.insertBefore(sbDraggedElement, dot);
+                    }
+                    
+                    updateCaps(ex.id);
+                });
+                
+                item.appendChild(row);
+                container.appendChild(item);
+            });
+        }
+        
+        function updateCaps(exId) {
+            const row = document.querySelector(`.drop-row[data-sb-id="${exId}"]`);
+            const bank = document.querySelector(`.sb-chip-bank[data-sb-id="${exId}"]`);
+            
+            [...row.querySelectorAll('.chip'), ...bank.querySelectorAll('.chip')].forEach(c => {
+                c.textContent = c.dataset.orig;
+            });
+            
+            const first = row.querySelector('.chip');
+            if (first) {
+                first.textContent = first.textContent.charAt(0).toUpperCase() + first.textContent.slice(1);
+            }
+        }
+        
+        function checkSatzbau() {
+            stopTimer(4);
+            let correct = 0;
+            const total = SATZBAU.length;
+            
+            SATZBAU.forEach(ex => {
+                const row = document.querySelector(`.drop-row[data-sb-id="${ex.id}"]`);
+                const chips = Array.from(row.querySelectorAll('.chip'));
+                const answer = chips.map(c => c.dataset.orig);
+                
+                const isCorrect = ex.valid.some(validSeq => 
+                    validSeq.length === answer.length && 
+                    validSeq.every((word, i) => word === answer[i])
+                );
+                
+                chips.forEach(chip => {
+                    if (isCorrect) {
+                        chip.style.borderColor = '#28a745';
+                        chip.style.background = '#d4edda';
+                    } else {
+                        chip.style.borderColor = '#dc3545';
+                        chip.style.background = '#f8d7da';
+                    }
+                });
+                
+                if (isCorrect) correct++;
+            });
+            
+            document.getElementById('satzbau-score').textContent = 
+                `${correct} von ${total} richtig (${Math.round(correct/total*100)}%)`;
+        }
+        
+        function showSatzbauSolution() {
+            SATZBAU.forEach(ex => {
+                const row = document.querySelector(`.drop-row[data-sb-id="${ex.id}"]`);
+                const bank = document.querySelector(`.sb-chip-bank[data-sb-id="${ex.id}"]`);
+                const dot = row.querySelector('.fixed-dot');
+                
+                // Clear row
+                row.querySelectorAll('.chip').forEach(chip => bank.appendChild(chip));
+                
+                // Add in correct order
+                ex.valid[0].forEach(word => {
+                    const chip = Array.from(bank.querySelectorAll('.chip'))
+                        .find(c => c.dataset.orig === word);
+                    if (chip) {
+                        row.insertBefore(chip, dot);
+                        chip.style.borderColor = '#28a745';
+                        chip.style.background = '#d4edda';
+                    }
+                });
+                
+                updateCaps(ex.id);
+            });
+        }
+        
+        function resetSatzbau() {
+            resetTimer(4);
+            SATZBAU.forEach(ex => {
+                const row = document.querySelector(`.drop-row[data-sb-id="${ex.id}"]`);
+                const bank = document.querySelector(`.sb-chip-bank[data-sb-id="${ex.id}"]`);
+                
+                row.querySelectorAll('.chip').forEach(chip => {
+                    chip.style.borderColor = '#667eea';
+                    chip.style.background = 'white';
+                    chip.textContent = chip.dataset.orig;
+                    bank.appendChild(chip);
+                });
+            });
+            
+            document.getElementById('satzbau-score').textContent = '';
+        }
+        
+        // Init all
+        initWortschatz();
+        initGenus();
+        initTable();
+        initDekl();
+        initSatzbau();
+        loadBestTimes();
+    </script>
+<div class="author-footer">
+  <span class="author-name">&copy; Frank Burkert</span> &middot; DaF-Materialien &middot;
+  <a href="mailto:FrankBurkert@fabdaf.onmicrosoft.com">FrankBurkert@fabdaf.onmicrosoft.com</a>
+</div>
+</body>
+</html>
