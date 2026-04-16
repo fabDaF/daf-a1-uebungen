@@ -28,7 +28,7 @@ body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background
 h2 { color: #333; font-size: 1.15em; margin-bottom: 16px; padding-bottom: 8px; border-bottom: 2px solid #f0f0f0; }
 .timer-bar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; padding: 10px 16px; background: white; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
 .btn-row { display: flex; gap: 6px; }
-.btn { background: none; border: 1px solid #ddd; border-radius: 6px; padding: 4px 12px; font-size: 0.82em; color: #888; cursor: pointer; transition: all 0.15s; font-weight: 500; }
+.btn { background: #f5f7ff; border: 1px solid #c5cff5; border-radius: 8px; padding: 6px 16px; font-size: 0.85em; color: #667eea; cursor: pointer; transition: all 0.15s; font-weight: 500; }
 .btn:hover { background: #eee; color: #444; }
 .timer-display { display: flex; gap: 14px; font-size: 0.82em; color: #bbb; font-variant-numeric: tabular-nums; }
 .help-box { background: #f8f9ff; border-left: 4px solid #667eea; border-radius: 0 10px 10px 0; padding: 14px 18px; margin-bottom: 20px; font-size: 0.9em; line-height: 1.7; color: #444; }
@@ -170,7 +170,7 @@ input.blank.wrong { border-bottom-color: #e74c3c; background: #fdeaea; }
         </div>
         <div class="help-box">
             <strong>Aufgabe:</strong> Schreibe die informelle Uhrzeit!<br>
-            &#128313; 2:30 &rarr; <em>halb drei</em> &middot; 4:15 &rarr; <em>Viertel nach vier</em> &middot; 7:45 &rarr; <em>Viertel vor acht</em><br>
+            &#128313; 2:30 &rarr; <em>halb drei</em> &middot; 4:15 &rarr; <em>viertel nach vier</em> &middot; 7:45 &rarr; <em>viertel vor acht</em><br>
             &#128313; <strong>halb</strong> + n&auml;chste Stunde!
         </div>
                 <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr ;gap:14px;margin-bottom:22px;">
@@ -419,10 +419,10 @@ var INF_LUECKEN = [
         {t:"3:30 = "},{b:"halb vier",s:"l"}
     ]},
     { id:2, verb:"6:15", segments:[
-        {t:"6:15 = "},{b:"Viertel nach sechs",s:"xl"}
+        {t:"6:15 = "},{b:"viertel nach sechs",s:"xl"}
     ]},
     { id:3, verb:"8:45", segments:[
-        {t:"8:45 = "},{b:"Viertel vor neun",s:"xl"}
+        {t:"8:45 = "},{b:"viertel vor neun",s:"xl"}
     ]},
     { id:4, verb:"10:30", segments:[
         {t:"10:30 = "},{b:"halb elf",s:"l"}
@@ -499,8 +499,8 @@ var satzbauData = [
     { parts:["wie sp\u00E4t","ist","es"], valid:[
         ["wie sp\u00E4t","ist","es"]
     ], punct:"?" },
-    { parts:["es","ist","Viertel nach drei"], valid:[
-        ["es","ist","Viertel nach drei"]
+    { parts:["es","ist","viertel nach drei"], valid:[
+        ["es","ist","viertel nach drei"]
     ], punct:"." },
     { parts:["der Kurs","beginnt","um halb sieben"], valid:[
         ["der Kurs","beginnt","um halb sieben"]
