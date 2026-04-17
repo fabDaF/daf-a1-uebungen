@@ -22,7 +22,7 @@ body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background
 .section.active { display: block; padding: 28px 30px; }
 h2 { color: #333; font-size: 1.15em; margin-bottom: 16px; padding-bottom: 8px; border-bottom: 2px solid #f0f0f0; }
 .btn-row { display: flex; gap: 6px; }
-.btn { background: none; border: 1px solid #ddd; border-radius: 6px; padding: 4px 12px; font-size: 0.82em; color: #888; cursor: pointer; transition: all 0.15s; font-weight: 500; }
+.btn { background: #f5f7ff; border: 1px solid #c5cff5; border-radius: 8px; padding: 6px 16px; font-size: 0.85em; color: #667eea; cursor: pointer; transition: all 0.15s; font-weight: 500; }
 .btn-show { background: #f0f0f0; color: #555; }
 .btn-show:hover { background: #e0e0e0; }
 .timer-display { display: flex; gap: 14px; font-size: 0.82em; color: #bbb; font-variant-numeric: tabular-nums; }
@@ -165,7 +165,7 @@ input.blank.wrong { border-bottom-color: #e74c3c; background: #fdeaea; }
             <div class="mc-feedback" id="mcfb1"></div>
         </div>
         <div class="mc-step" id="mc-step2">
-            <h4>❓ Schritt 3: Welche Form ist richtig? — „Sie hat ___ Zeit."</h4>
+            <h4>❓ Schritt 3: Welche Form ist richtig? — „Sie hat ___ Zeit.“</h4>
             <div class="mc-options">
                 <button class="mc-btn" onclick="mcCheck(2, this, false)">nicht Zeit</button>
                 <button class="mc-btn" onclick="mcCheck(2, this, false)">keinen Zeit</button>
@@ -175,7 +175,7 @@ input.blank.wrong { border-bottom-color: #e74c3c; background: #fdeaea; }
             <div class="mc-feedback" id="mcfb2"></div>
         </div>
         <div class="mc-step" id="mc-step3">
-            <h4>❓ Schritt 4: Welche Form ist richtig? — „Ich habe ___ Hunger."</h4>
+            <h4>❓ Schritt 4: Welche Form ist richtig? — „Ich habe ___ Hunger.“</h4>
             <div class="mc-options">
                 <button class="mc-btn" onclick="mcCheck(3, this, false)">keine Hunger</button>
                 <button class="mc-btn" onclick="mcCheck(3, this, false)">nicht Hunger</button>

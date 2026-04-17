@@ -19,7 +19,7 @@ h1 { text-align: center; color: #333; margin-bottom: 4px; font-size: 1.5em; }
 .section.active { display: block; }
 h2 { color: #333; font-size: 1.15em; margin-bottom: 16px; padding-bottom: 8px; border-bottom: 2px solid #f0f0f0; }
 .btn-row { display: flex; gap: 6px; }
-.btn { background: none; border: 1px solid #ddd; border-radius: 6px; padding: 4px 12px; font-size: 0.82em; color: #888; cursor: pointer; transition: all 0.15s; font-weight: 500; }
+.btn { background: #f5f7ff; border: 1px solid #c5cff5; border-radius: 8px; padding: 6px 16px; font-size: 0.85em; color: #667eea; cursor: pointer; transition: all 0.15s; font-weight: 500; }
 .btn-show { background: #f0f0f0; color: #555; }
 .btn-show:hover { background: #e0e0e0; }
 .btn-reset:hover { background: #ffeaea; }
@@ -736,27 +736,27 @@ var SIT_DATA = [
       {text:'Wann hast du Zeit?', correct:false},
       {text:'Bis dann!', correct:false},
     ],
-    feedback:'✅ Richtig! Mit Kollegen (Sie) fragst du: „Wann haben Sie Zeit?" oder „Können Sie am ...?"'
+    feedback:'✅ Richtig! Mit Kollegen (Sie) fragst du: „Wann haben Sie Zeit?“ oder „Können Sie am ...?“'
   },
   {
     id:2,
-    situation:'Dein Freund fragt: „Kannst du am Freitag?" — Du hast leider keine Zeit. Was antwortest du und machst einen Gegenvorschlag?',
+    situation:'Dein Freund fragt: „Kannst du am Freitag?“ — Du hast leider keine Zeit. Was antwortest du und machst einen Gegenvorschlag?',
     opts:[
       {text:'Ja, das passt!', correct:false},
       {text:'Das geht leider nicht. Wie wäre es mit Samstag?', correct:true},
       {text:'Auf Wiederhören!', correct:false},
     ],
-    feedback:'✅ Richtig! Nach einer Absage kommt oft ein Gegenvorschlag: „Wie wäre es mit ...?"'
+    feedback:'✅ Richtig! Nach einer Absage kommt oft ein Gegenvorschlag: „Wie wäre es mit ...?“'
   },
   {
     id:3,
-    situation:'Dein Chef sagt: „Können Sie am Mittwoch um 14 Uhr?" — Du stimmst zu. Was sagst du?',
+    situation:'Dein Chef sagt: „Können Sie am Mittwoch um 14 Uhr?“ — Du stimmst zu. Was sagst du?',
     opts:[
       {text:'Klingt gut!', correct:false},
       {text:'Tschüss!', correct:false},
       {text:'Ja, das passt.', correct:true},
     ],
-    feedback:'✅ Richtig! Formelle Zusage: „Ja, das passt." oder „Sehr gut!"'
+    feedback:'✅ Richtig! Formelle Zusage: „Ja, das passt.“ oder „Sehr gut!“'
   },
   {
     id:4,
@@ -766,7 +766,7 @@ var SIT_DATA = [
       {text:'Treffen wir uns nächste Woche Dienstag?', correct:true},
       {text:'Treffen wir uns am Dienstag um nächste?', correct:false},
     ],
-    feedback:'✅ Richtig! „nächste Woche + Wochentag" — kein Artikel, kein „am"!'
+    feedback:'✅ Richtig! „nächste Woche + Wochentag“ — kein Artikel, kein „am“!'
   },
   {
     id:5,
@@ -776,11 +776,11 @@ var SIT_DATA = [
       {text:'Bis Donnerstag! Auf Wiederhören!', correct:true},
       {text:'Klingt gut!', correct:false},
     ],
-    feedback:'✅ Richtig! Am Telefon: „Auf Wiederhören!" — und „Bis [Tag]!" ist immer passend.'
+    feedback:'✅ Richtig! Am Telefon: „Auf Wiederhören!“ — und „Bis [Tag]!“ ist immer passend.'
   },
   {
     id:6,
-    situation:'Dein Kollege fragt: „Wie lange brauchen wir für das Meeting?" — Das Meeting dauert 30 Minuten. Was antwortest du?',
+    situation:'Dein Kollege fragt: „Wie lange brauchen wir für das Meeting?“ — Das Meeting dauert 30 Minuten. Was antwortest du?',
     opts:[
       {text:'Eine Viertelstunde.', correct:false},
       {text:'Eine halbe Stunde.', correct:true},
