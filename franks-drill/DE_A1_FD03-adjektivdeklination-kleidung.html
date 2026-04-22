@@ -779,9 +779,19 @@ function showSection(idx) {
     window.scrollTo({ top:0, behavior:'smooth' });
 }
 
+// ----- Shuffle (Fisher-Yates, non-destructive) -----
+function shuffleArr(arr) {
+    var a = arr.slice();
+    for (var i = a.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var t = a[i]; a[i] = a[j]; a[j] = t;
+    }
+    return a;
+}
+
 // ----- Karten rendern -----
 function renderCards(runde) {
-    var data = DRILL[runde];
+    var data = shuffleArr(DRILL[runde]);
     var container = document.getElementById('cards-' + runde);
     container.innerHTML = '';
     data.forEach(function(item, idx) {
