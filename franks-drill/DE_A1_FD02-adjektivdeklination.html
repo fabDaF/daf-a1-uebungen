@@ -311,7 +311,33 @@ h2 {
     color: #4b5563;
     font-weight: 500;
 }
-.dekl-chip.noun { font-weight: 600; }
+.dekl-chip.noun {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 8px;
+    padding: 8px 16px;
+    font-weight: 600;
+    border-width: 2px;
+}
+.dekl-chip.noun .noun-emoji {
+    font-size: 1.4em;
+    line-height: 1;
+    position: relative;
+    top: 3px;
+}
+.dekl-chip.noun .noun-art {
+    font-size: 0.82em;
+    font-weight: 400;
+    opacity: 0.85;
+}
+.dekl-chip.noun .noun-word {
+    font-weight: 700;
+    font-size: 1.0em;
+}
+.dekl-chip.noun[data-genus="m"]  { background: #dbeafe; border-color: #2563eb; color: #1d4ed8; }
+.dekl-chip.noun[data-genus="f"]  { background: #fce7f3; border-color: #db2777; color: #be185d; }
+.dekl-chip.noun[data-genus="n"]  { background: #d1fae5; border-color: #059669; color: #047857; }
+.dekl-chip.noun[data-genus="pl"] { background: #ede9fe; border-color: #7c3aed; color: #6d28d9; }
 .dekl-chip.adj { color: #7c3aed; font-style: italic; }
 .dekl-arrow { color: #9ca3af; font-size: 1.1em; }
 
@@ -490,8 +516,8 @@ input.blank.wrong {
 
     <div class="drill-explain">
         <h3>Wie funktioniert der Drill?</h3>
-        <p>Du siehst ein Nomen (z. B. <em>Vater</em>) und ein Adjektiv (z. B. <em>alt</em>). Du tippst das passende <strong>mein / meine</strong> in die erste Lücke und das <strong>Adjektiv mit der richtigen Endung</strong> in die zweite Lücke. Beispiel: „Das ist <strong>mein</strong> <strong>alter</strong> Vater." Beide Lücken werden sofort grün, wenn sie stimmen — kein Prüfen-Knopf.</p>
-        <p>Die Farbe des Kartenrands verrät nach der Lösung das Genus: <span style="color:#2563eb;font-weight:700">blau</span> = der, <span style="color:#db2777;font-weight:700">pink</span> = die, <span style="color:#059669;font-weight:700">grün</span> = das, <span style="color:#7c3aed;font-weight:700">lila</span> = die (Plural). Je mehr Karten du füllst, desto bunter wird die Seite. Das ist Absicht — du sollst Genus und Endung mit Farbe verknüpfen.</p>
+        <p>Jede Karte zeigt dir alles, was du wissen musst: ein <strong>Emoji</strong> für die Bedeutung, den <strong>Artikel</strong> (der · die · das · die Pl.) und das <strong>Nomen</strong>. Daneben steht das Adjektiv in der Grundform. Du tippst dann nur noch <em>mein / meine</em> in die erste Lücke und das <em>Adjektiv mit der passenden Endung</em> in die zweite. Beispiel: 👨 <strong>der Vater</strong> + <em>alt</em> → „Das ist <strong>mein alter</strong> Vater."</p>
+        <p>Stimmt ein Wort, wird es grün und der Cursor springt automatisch ins nächste Feld — kein Prüfen-Knopf, kein Klicken. Der <strong>Kartenrand und der Hintergrund des Nomen-Chips</strong> sind von Anfang an in Genus-Farbe: <span style="color:#2563eb;font-weight:700">blau</span> = der, <span style="color:#db2777;font-weight:700">pink</span> = die, <span style="color:#059669;font-weight:700">grün</span> = das, <span style="color:#7c3aed;font-weight:700">lila</span> = die (Plural). So hast du Artikel, Farbe und Symbol zugleich im Blick — und kannst dich auf die Endung konzentrieren.</p>
 
         <div class="genus-legend">
             <span class="genus-chip gm"><span class="dot"></span>der <span class="example">→ mein -er</span></span>
@@ -657,61 +683,61 @@ input.blank.wrong {
 //  Franks Drill 02 — Adjektivdeklination (Nominativ)
 // =========================================================
 
-// Jedes Item: n=Nomen, a=Adjektiv (Grundform), g=Genus (m/f/n/pl)
+// Jedes Item: n=Nomen, a=Adjektiv (Grundform), g=Genus (m/f/n/pl), e=Emoji
 var DRILL = {
     1: [
-        { n:"Vater",        a:"alt",        g:"m"  },
-        { n:"Mutter",       a:"nett",       g:"f"  },
-        { n:"Kind",         a:"klein",      g:"n"  },
-        { n:"Geschwister",  a:"laut",       g:"pl" },
-        { n:"Bruder",       a:"jung",       g:"m"  },
-        { n:"Schwester",    a:"lieb",       g:"f"  },
-        { n:"Baby",         a:"süß",        g:"n"  },
-        { n:"Eltern",       a:"freundlich", g:"pl" },
-        { n:"Sohn",         a:"fleißig",    g:"m"  },
-        { n:"Tochter",      a:"hübsch",     g:"f"  },
-        { n:"Haus",         a:"groß",       g:"n"  },
-        { n:"Freunde",      a:"lustig",     g:"pl" },
-        { n:"Hund",         a:"klein",      g:"m"  },
-        { n:"Oma",          a:"alt",        g:"f"  },
-        { n:"Auto",         a:"neu",        g:"n"  },
-        { n:"Kinder",       a:"müde",       g:"pl" }
+        { n:"Vater",        a:"alt",        g:"m",  e:"👨"     },
+        { n:"Mutter",       a:"nett",       g:"f",  e:"👩"     },
+        { n:"Kind",         a:"klein",      g:"n",  e:"🧒"     },
+        { n:"Geschwister",  a:"laut",       g:"pl", e:"👫"     },
+        { n:"Bruder",       a:"jung",       g:"m",  e:"🧔"     },
+        { n:"Schwester",    a:"lieb",       g:"f",  e:"👧"     },
+        { n:"Baby",         a:"süß",        g:"n",  e:"👶"     },
+        { n:"Eltern",       a:"freundlich", g:"pl", e:"👨‍👩‍👧"   },
+        { n:"Sohn",         a:"fleißig",    g:"m",  e:"👦"     },
+        { n:"Tochter",      a:"hübsch",     g:"f",  e:"👧"     },
+        { n:"Haus",         a:"groß",       g:"n",  e:"🏠"     },
+        { n:"Freunde",      a:"lustig",     g:"pl", e:"👯"     },
+        { n:"Hund",         a:"klein",      g:"m",  e:"🐶"     },
+        { n:"Oma",          a:"alt",        g:"f",  e:"👵"     },
+        { n:"Auto",         a:"neu",        g:"n",  e:"🚗"     },
+        { n:"Kinder",       a:"müde",       g:"pl", e:"🧒🧒"   }
     ],
     2: [
-        { n:"Onkel",        a:"reich",      g:"m"  },
-        { n:"Tante",        a:"jung",       g:"f"  },
-        { n:"Zimmer",       a:"hell",       g:"n"  },
-        { n:"Großeltern",   a:"glücklich",  g:"pl" },
-        { n:"Opa",          a:"freundlich", g:"m"  },
-        { n:"Freundin",     a:"schön",      g:"f"  },
-        { n:"Fahrrad",      a:"neu",        g:"n"  },
-        { n:"Brüder",       a:"klug",       g:"pl" },
-        { n:"Freund",       a:"nett",       g:"m"  },
-        { n:"Wohnung",      a:"klein",      g:"f"  },
-        { n:"Telefon",      a:"alt",        g:"n"  },
-        { n:"Schwestern",   a:"ruhig",      g:"pl" },
-        { n:"Garten",       a:"groß",       g:"m"  },
-        { n:"Küche",        a:"sauber",     g:"f"  },
-        { n:"Bad",          a:"neu",        g:"n"  },
-        { n:"Hunde",        a:"schnell",    g:"pl" }
+        { n:"Onkel",        a:"reich",      g:"m",  e:"💰👨"   },
+        { n:"Tante",        a:"jung",       g:"f",  e:"👩"     },
+        { n:"Zimmer",       a:"hell",       g:"n",  e:"🛋️"     },
+        { n:"Großeltern",   a:"glücklich",  g:"pl", e:"👴👵"   },
+        { n:"Opa",          a:"freundlich", g:"m",  e:"👴"     },
+        { n:"Freundin",     a:"schön",      g:"f",  e:"💕👩"   },
+        { n:"Fahrrad",      a:"neu",        g:"n",  e:"🚲"     },
+        { n:"Brüder",       a:"klug",       g:"pl", e:"👬"     },
+        { n:"Freund",       a:"nett",       g:"m",  e:"💕👨"   },
+        { n:"Wohnung",      a:"klein",      g:"f",  e:"🏢"     },
+        { n:"Telefon",      a:"alt",        g:"n",  e:"☎️"     },
+        { n:"Schwestern",   a:"ruhig",      g:"pl", e:"👭"     },
+        { n:"Garten",       a:"groß",       g:"m",  e:"🌳"     },
+        { n:"Küche",        a:"sauber",     g:"f",  e:"🍳"     },
+        { n:"Bad",          a:"neu",        g:"n",  e:"🛁"     },
+        { n:"Hunde",        a:"schnell",    g:"pl", e:"🐕🐕"   }
     ],
     3: [
-        { n:"Tisch",        a:"lang",       g:"m"  },
-        { n:"Tür",          a:"offen",      g:"f"  },
-        { n:"Bett",         a:"neu",        g:"n"  },
-        { n:"Freundinnen",  a:"nett",       g:"pl" },
-        { n:"Stuhl",        a:"alt",        g:"m"  },
-        { n:"Tasche",       a:"klein",      g:"f"  },
-        { n:"Handy",        a:"kaputt",     g:"n"  },
-        { n:"Kinder",       a:"lieb",       g:"pl" },
-        { n:"Computer",     a:"schnell",    g:"m"  },
-        { n:"Lampe",        a:"hell",       g:"f"  },
-        { n:"Buch",         a:"dick",       g:"n"  },
-        { n:"Großeltern",   a:"lieb",       g:"pl" },
-        { n:"Cousin",       a:"nett",       g:"m"  },
-        { n:"Cousine",      a:"jung",       g:"f"  },
-        { n:"Fenster",      a:"klein",      g:"n"  },
-        { n:"Bücher",       a:"neu",        g:"pl" }
+        { n:"Tisch",        a:"lang",       g:"m",  e:"🍽️"     },
+        { n:"Tür",          a:"offen",      g:"f",  e:"🚪"     },
+        { n:"Bett",         a:"neu",        g:"n",  e:"🛏️"     },
+        { n:"Freundinnen",  a:"nett",       g:"pl", e:"👭"     },
+        { n:"Stuhl",        a:"alt",        g:"m",  e:"🪑"     },
+        { n:"Tasche",       a:"klein",      g:"f",  e:"👜"     },
+        { n:"Handy",        a:"kaputt",     g:"n",  e:"📱"     },
+        { n:"Kinder",       a:"lieb",       g:"pl", e:"🧒🧒"   },
+        { n:"Computer",     a:"schnell",    g:"m",  e:"💻"     },
+        { n:"Lampe",        a:"hell",       g:"f",  e:"💡"     },
+        { n:"Buch",         a:"dick",       g:"n",  e:"📕"     },
+        { n:"Großeltern",   a:"lieb",       g:"pl", e:"👴👵"   },
+        { n:"Cousin",       a:"nett",       g:"m",  e:"🧑"     },
+        { n:"Cousine",      a:"jung",       g:"f",  e:"🧑‍🦰"    },
+        { n:"Fenster",      a:"klein",      g:"n",  e:"🪟"     },
+        { n:"Bücher",       a:"neu",        g:"pl", e:"📚"     }
     ]
 };
 
@@ -768,7 +794,11 @@ function renderCards(runde) {
         card.innerHTML =
             '<div class="dekl-badge">#' + (idx+1) + '</div>' +
             '<div class="dekl-inputs">' +
-                '<span class="dekl-chip noun">' + escapeHtml(item.n) + '</span>' +
+                '<span class="dekl-chip noun" data-genus="' + item.g + '">' +
+                    '<span class="noun-emoji">' + (item.e || '') + '</span>' +
+                    '<span class="noun-art">' + escapeHtml(genusLabel) + '</span>' +
+                    '<span class="noun-word">' + escapeHtml(item.n) + '</span>' +
+                '</span>' +
                 '<span class="dekl-arrow">+</span>' +
                 '<span class="dekl-chip adj">' + escapeHtml(item.a) + '</span>' +
             '</div>' +
@@ -820,6 +850,8 @@ function liveCheck(inp) {
     if (val === ans) {
         inp.classList.add('correct');
         checkCardState(inp);
+        // Auto-advance: Springe zum nächsten noch unbearbeiteten Feld
+        if (!wasCorrect) advanceFocus(inp);
         return;
     }
     if (ans.indexOf(val) === 0) {
@@ -832,6 +864,34 @@ function liveCheck(inp) {
     // Streak bricht
     state[runde].curStreak = 0;
     updateStreak(runde);
+}
+
+// Auto-Focus zum nächsten unbearbeiteten Input
+// Erst in derselben Karte (zweites Feld), dann zur nächsten Karte mit Lücke
+function advanceFocus(inp) {
+    var card = inp.closest('.dekl-card');
+    if (!card) return;
+    var runde = parseInt(card.dataset.runde, 10);
+    // 1) Noch ein Feld in derselben Karte offen?
+    var localInputs = Array.from(card.querySelectorAll('input.blank'));
+    var nextLocal = localInputs.find(function(i) { return !i.classList.contains('correct'); });
+    if (nextLocal) {
+        setTimeout(function() { nextLocal.focus(); }, 90);
+        return;
+    }
+    // 2) Sonst: erste offene Lücke in einer späteren Karte derselben Runde
+    var allCards = Array.from(document.querySelectorAll('#cards-' + runde + ' .dekl-card'));
+    var curIdx = allCards.indexOf(card);
+    for (var i = curIdx + 1; i < allCards.length; i++) {
+        var nextInp = allCards[i].querySelector('input.blank:not(.correct)');
+        if (nextInp) {
+            setTimeout(function() {
+                nextInp.focus();
+                nextInp.scrollIntoView({ behavior:'smooth', block:'center' });
+            }, 120);
+            return;
+        }
+    }
 }
 
 // Prüft den Gesamtstatus einer Karte (beide Inputs korrekt?)
