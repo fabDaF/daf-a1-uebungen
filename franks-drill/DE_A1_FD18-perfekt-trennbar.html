@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Franks Drill 16 — Perfekt (haben/sein + Partizip II)</title>
+<title>Franks Drill 18 — Perfekt III: Trennbare Verben</title>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -585,7 +585,7 @@ input.blank.wrong {
 
 <div class="header">
     <h1>Franks Drill</h1>
-    <p class="subtitle">A1 – Lektion FD16 · Perfekt (haben/sein + Partizip II)</p>
+    <p class="subtitle">A1 – Lektion FD18 · Perfekt III · Trennbare Verben (Präfix + ge + Stamm)</p>
     <div class="big-emoji">⏮️</div>
 </div>
 
@@ -596,15 +596,15 @@ input.blank.wrong {
     </div>
     <div class="nav-btn" onclick="showSection(1)">
         <span class="nav-emoji">🟢</span>
-        <span class="nav-label">Regelmäßig + haben</span>
+        <span class="nav-label">trb + haben · ge-t</span>
     </div>
     <div class="nav-btn" onclick="showSection(2)">
-        <span class="nav-emoji">🔴</span>
-        <span class="nav-label">Unregelmäßig (h/s)</span>
+        <span class="nav-emoji">🟩</span>
+        <span class="nav-label">trb + haben · ge-en</span>
     </div>
     <div class="nav-btn" onclick="showSection(3)">
         <span class="nav-emoji">👑</span>
-        <span class="nav-label">Boss — Sonderfälle</span>
+        <span class="nav-label">trb + sein</span>
     </div>
 </div>
 
@@ -612,8 +612,8 @@ input.blank.wrong {
 <div class="section active" id="sec-0">
     <div class="drill-hero">
         <span class="hero-emoji">⏮️</span>
-        <h2>Das wichtigste A1-Tempus: Perfekt.</h2>
-        <p>48 Sätze in der Vergangenheit. 3 Runden. Zwei Lücken pro Karte: das konjugierte Hilfsverb <em>haben</em> oder <em>sein</em>, und das Partizip II am Satzende — die große Satzklammer.</p>
+        <h2>Trennbare Verben — das „-ge-" rutscht in die Mitte.</h2>
+        <p>Fokus-Drill auf trennbare Verben im Perfekt: <strong>Präfix + ge + Stamm + t/en</strong>. 48 Sätze in drei Runden: 16 schwache (<em>eingekauft, aufgemacht</em>), 16 starke (<em>eingeladen, angefangen</em>), 16 mit <em>sein</em> (<em>aufgestanden, eingeschlafen, angekommen</em>). Alle drei Varianten aus dem A1-Kernwortschatz.</p>
     </div>
 
     <div class="drill-explain">
@@ -685,12 +685,12 @@ input.blank.wrong {
     </div>
 
     <button class="start-cta" onclick="showSection(1)">🟢 Runde 1 starten</button>
-    <p class="hinweis">Tipp: Runde 1 trainiert die Grundform — regelmäßige Verben mit <em>haben</em>. Danach wird's unregelmäßig und dann kommen die Sonderfälle.</p>
+    <p class="hinweis">Tipp: Das Präfix bleibt im Partizip II vorne — das „-ge-" steckt zwischen Präfix und Stamm: <em>einkaufen → ein<strong>ge</strong>kauft</em>, <em>anfangen → an<strong>ge</strong>fangen</em>, <em>aufstehen → auf<strong>ge</strong>standen</em>.</p>
 </div>
 
-<!-- SECTION 1: RUNDE 1 — regelmäßig + haben -->
+<!-- SECTION 1: RUNDE 1 — trennbar + haben, schwach (ge-t) -->
 <div class="section" id="sec-1">
-    <h2>🟢 Runde 1 — Regelmäßige Verben mit <em>haben</em></h2>
+    <h2>🟢 Runde 1 — Trennbar · haben · schwach (ge-t)</h2>
 
     <div class="control-bar">
         <button class="btn" onclick="showLoesung(1)">Lösung</button>
@@ -706,15 +706,14 @@ input.blank.wrong {
     </div>
 
     <div class="typ-tally">
-        <span class="tt-box get">ge-t <span class="tally-num" id="tget-1">0</span><span class="tally-max">/12</span></span>
-        <span class="tt-box geet">ge-et <span class="tally-num" id="tgeet-1">0</span><span class="tally-max">/4</span></span>
+        <span class="tt-box get">ge-t <span class="tally-num" id="tget-1">0</span><span class="tally-max">/16</span></span>
     </div>
 
     <div id="cards-1"></div>
 
     <div class="runden-ende" id="ende-1">
         <h3>🏆 Runde 1 geschafft!</h3>
-        <p>16 regelmäßige Perfekt-Sätze. Jetzt wird es unregelmäßig — mit Vokalwechsel im Partizip und beiden Hilfsverben.</p>
+        <p>16 trennbare Verben mit schwachem Partizip — <em>Präfix + ge + Stamm + t</em>. Jetzt die starken Trennbaren: der Stamm ändert sich, das Präfix bleibt.</p>
         <div class="stats">
             <div class="stat-box"><span class="stat-num" id="ende-time-1">00:00</span><span class="stat-lbl">Zeit</span></div>
             <div class="stat-box"><span class="stat-num" id="ende-streak-1">0</span><span class="stat-lbl">Längste Streak</span></div>
@@ -724,9 +723,9 @@ input.blank.wrong {
     </div>
 </div>
 
-<!-- SECTION 2: RUNDE 2 — unregelmäßig (haben + sein) -->
+<!-- SECTION 2: RUNDE 2 — trennbar + haben, stark (ge-en) -->
 <div class="section" id="sec-2">
-    <h2>🔴 Runde 2 — Unregelmäßige Verben (<em>haben</em> und <em>sein</em>)</h2>
+    <h2>🟩 Runde 2 — Trennbar · haben · stark (ge-en)</h2>
 
     <div class="control-bar">
         <button class="btn" onclick="showLoesung(2)">Lösung</button>
@@ -742,15 +741,14 @@ input.blank.wrong {
     </div>
 
     <div class="typ-tally">
-        <span class="tt-box haben">haben <span class="tally-num" id="thaben-2">0</span><span class="tally-max">/8</span></span>
-        <span class="tt-box sein">sein <span class="tally-num" id="tsein-2">0</span><span class="tally-max">/8</span></span>
+        <span class="tt-box haben">ge-en <span class="tally-num" id="thaben-2">0</span><span class="tally-max">/16</span></span>
     </div>
 
     <div id="cards-2"></div>
 
     <div class="runden-ende" id="ende-2">
         <h3>🏆 Runde 2 geschafft!</h3>
-        <p>32 Perfekt-Sätze im Kasten. Jetzt das Boss-Level: Sonderfälle — trennbar, -ieren, untrennbar, gemischt und regulär-mit-sein.</p>
+        <p>32 trennbare Perfekt-Sätze mit <em>haben</em>. Jetzt der Boss: trennbare Verben mit <em>sein</em> — fast alle drücken Bewegung oder Zustandsänderung aus (<em>aufstehen, einschlafen, ankommen, ausgehen</em>).</p>
         <div class="stats">
             <div class="stat-box"><span class="stat-num" id="ende-time-2">00:00</span><span class="stat-lbl">Zeit</span></div>
             <div class="stat-box"><span class="stat-num" id="ende-streak-2">0</span><span class="stat-lbl">Längste Streak</span></div>
@@ -760,9 +758,9 @@ input.blank.wrong {
     </div>
 </div>
 
-<!-- SECTION 3: RUNDE 3 — Sonderfälle -->
+<!-- SECTION 3: RUNDE 3 — trennbar + sein -->
 <div class="section" id="sec-3">
-    <h2>👑 Runde 3 — Boss-Level: Sonderfälle</h2>
+    <h2>👑 Runde 3 — Trennbar · sein (Bewegung · Zustandsänderung)</h2>
 
     <div class="control-bar">
         <button class="btn" onclick="showLoesung(3)">Lösung</button>
@@ -778,18 +776,14 @@ input.blank.wrong {
     </div>
 
     <div class="typ-tally">
-        <span class="tt-box trb">trennbar <span class="tally-num" id="ttrb-3">0</span><span class="tally-max">/6</span></span>
-        <span class="tt-box ier">-ieren <span class="tally-num" id="tier-3">0</span><span class="tally-max">/3</span></span>
-        <span class="tt-box utr">untrennbar <span class="tally-num" id="tutr-3">0</span><span class="tally-max">/3</span></span>
-        <span class="tt-box gem">gemischt <span class="tally-num" id="tgem-3">0</span><span class="tally-max">/2</span></span>
-        <span class="tt-box regs">reg + sein <span class="tally-num" id="tregs-3">0</span><span class="tally-max">/2</span></span>
+        <span class="tt-box sein">sein <span class="tally-num" id="tsein-3">0</span><span class="tally-max">/16</span></span>
     </div>
 
     <div id="cards-3"></div>
 
     <div class="runden-ende" id="ende-3">
         <h3>🎉 Boss besiegt!</h3>
-        <p>48 Perfekt-Sätze, sechs Partizip-Muster, beide Hilfsverben. Du beherrschst die Vergangenheit im Alltag.</p>
+        <p>48 trennbare Perfekt-Sätze. Du beherrschst das Muster <em>Präfix + ge + Stamm + t/en</em> und weißt: Bewegungs- und Zustandsverben wie <em>aufstehen, ankommen, einschlafen</em> nehmen <em>sein</em>. Die „ge-freien" Perfekte (-ieren + untrennbar) kommen in FD19.</p>
         <div class="stats">
             <div class="stat-box"><span class="stat-num" id="ende-time-3">00:00</span><span class="stat-lbl">Zeit</span></div>
             <div class="stat-box"><span class="stat-num" id="ende-streak-3">0</span><span class="stat-lbl">Längste Streak</span></div>
@@ -800,14 +794,14 @@ input.blank.wrong {
 </div>
 
 <div class="author-footer">
-    <span class="author-name">Franks Drill</span> · A1 · FD16 · Perfekt
+    <span class="author-name">Franks Drill</span> · A1 · FD18 · Perfekt III · Trennbare Verben
 </div>
 
 </div>
 
 <script>
 // =========================================================
-//  Franks Drill 16 — Perfekt (haben/sein + Partizip II)
+//  Franks Drill 18 — Perfekt III · Trennbare Verben
 // =========================================================
 
 // Item-Schema:
@@ -821,99 +815,78 @@ input.blank.wrong {
 //   e       = Emoji
 
 var DRILL = {
-    // Runde 1: regelmäßig + haben — 12 "ge-t" + 4 "ge-et"
+    // Runde 1: trennbar + haben, schwach (ge-t) (16)
     1: [
-        // ge-t (12)
-        { v:"machen",   cat:"reg", aux:"haben", subj:"Ich",         ansAux:"habe",  mid:"das Essen",       ansPP:"gemacht",  e:"🍳" },
-        { v:"kaufen",   cat:"reg", aux:"haben", subj:"Du",          ansAux:"hast",  mid:"neue Schuhe",     ansPP:"gekauft",  e:"👟" },
-        { v:"lernen",   cat:"reg", aux:"haben", subj:"Er",          ansAux:"hat",   mid:"Deutsch",         ansPP:"gelernt",  e:"📚" },
-        { v:"hören",    cat:"reg", aux:"haben", subj:"Wir",         ansAux:"haben", mid:"Musik",           ansPP:"gehört",   e:"🎵" },
-        { v:"üben",     cat:"reg", aux:"haben", subj:"Ihr",         ansAux:"habt",  mid:"Grammatik",       ansPP:"geübt",    e:"✏️" },
-        { v:"kochen",   cat:"reg", aux:"haben", subj:"Die Kinder",  ansAux:"haben", mid:"Suppe",           ansPP:"gekocht",  e:"🍲" },
-        { v:"spielen",  cat:"reg", aux:"haben", subj:"Ich",         ansAux:"habe",  mid:"Fußball",         ansPP:"gespielt", e:"⚽" },
-        { v:"wohnen",   cat:"reg", aux:"haben", subj:"Du",          ansAux:"hast",  mid:"in Berlin",       ansPP:"gewohnt",  e:"🏠" },
-        { v:"fragen",   cat:"reg", aux:"haben", subj:"Er",          ansAux:"hat",   mid:"nichts",          ansPP:"gefragt",  e:"❓" },
-        { v:"suchen",   cat:"reg", aux:"haben", subj:"Wir",         ansAux:"haben", mid:"den Schlüssel",   ansPP:"gesucht",  e:"🔑" },
-        { v:"sagen",    cat:"reg", aux:"haben", subj:"Sie",         ansAux:"hat",   mid:"die Wahrheit",    ansPP:"gesagt",   e:"💬" },
-        { v:"tanzen",   cat:"reg", aux:"haben", subj:"Ihr",         ansAux:"habt",  mid:"bis Mitternacht", ansPP:"getanzt",  e:"💃" },
-        // ge-et (4) — Stamm auf -t oder -d
-        { v:"arbeiten", cat:"reg", aux:"haben", subj:"Ich",         ansAux:"habe",  mid:"viel",            ansPP:"gearbeitet",  e:"💼" },
-        { v:"reden",    cat:"reg", aux:"haben", subj:"Du",          ansAux:"hast",  mid:"lange",           ansPP:"geredet",     e:"🗣️" },
-        { v:"antworten",cat:"reg", aux:"haben", subj:"Er",          ansAux:"hat",   mid:"nicht",           ansPP:"geantwortet", e:"📭" },
-        { v:"warten",   cat:"reg", aux:"haben", subj:"Wir",         ansAux:"haben", mid:"eine Stunde",     ansPP:"gewartet",    e:"⏳" }
+        { v:"einkaufen",    cat:"trb", aux:"haben", subj:"Ich",             ansAux:"habe",  mid:"im Supermarkt nur Obst",   ansPP:"eingekauft",   e:"🛒" },
+        { v:"aufpassen",    cat:"trb", aux:"haben", subj:"Der Lehrer",      ansAux:"hat",   mid:"gut auf die Kinder",       ansPP:"aufgepasst",   e:"👀" },
+        { v:"aufstellen",   cat:"trb", aux:"haben", subj:"Wir",             ansAux:"haben", mid:"den Weihnachtsbaum",       ansPP:"aufgestellt",  e:"🎄" },
+        { v:"aufmachen",    cat:"trb", aux:"haben", subj:"Du",              ansAux:"hast",  mid:"die Tür leise",            ansPP:"aufgemacht",   e:"🚪" },
+        { v:"aufhören",     cat:"trb", aux:"haben", subj:"Mein Onkel",      ansAux:"hat",   mid:"endlich mit dem Rauchen",  ansPP:"aufgehört",    e:"🚭" },
+        { v:"aussuchen",    cat:"trb", aux:"haben", subj:"Meine Schwester", ansAux:"hat",   mid:"das Geschenk selbst",      ansPP:"ausgesucht",   e:"🎁" },
+        { v:"zuhören",      cat:"trb", aux:"haben", subj:"Die Kinder",      ansAux:"haben", mid:"der Lehrerin aufmerksam",  ansPP:"zugehört",     e:"👂" },
+        { v:"zumachen",     cat:"trb", aux:"haben", subj:"Ihr",             ansAux:"habt",  mid:"alle Fenster",             ansPP:"zugemacht",    e:"🪟" },
+        { v:"mitmachen",    cat:"trb", aux:"haben", subj:"Marie",           ansAux:"hat",   mid:"beim Sportkurs gern",      ansPP:"mitgemacht",   e:"🤸" },
+        { v:"zurücklegen",  cat:"trb", aux:"haben", subj:"Der Kunde",       ansAux:"hat",   mid:"das Geld in die Kasse",    ansPP:"zurückgelegt", e:"💶" },
+        { v:"anmachen",     cat:"trb", aux:"haben", subj:"Ich",             ansAux:"habe",  mid:"im Wohnzimmer das Licht",  ansPP:"angemacht",    e:"💡" },
+        { v:"ausmachen",    cat:"trb", aux:"haben", subj:"Wir",             ansAux:"haben", mid:"den Fernseher endlich",    ansPP:"ausgemacht",   e:"📺" },
+        { v:"abholen",      cat:"trb", aux:"haben", subj:"Die Mutter",      ansAux:"hat",   mid:"ihr Kind aus dem Kindergarten", ansPP:"abgeholt", e:"👩‍👧" },
+        { v:"aufräumen",    cat:"trb", aux:"haben", subj:"Die Kinder",      ansAux:"haben", mid:"ihr ganzes Zimmer",        ansPP:"aufgeräumt",   e:"🧹" },
+        { v:"kennenlernen", cat:"trb", aux:"haben", subj:"Wir",             ansAux:"haben", mid:"uns vor drei Jahren",      ansPP:"kennengelernt", e:"🤝" },
+        { v:"vorstellen",   cat:"trb", aux:"haben", subj:"Der Kollege",     ansAux:"hat",   mid:"sich dem Chef kurz",       ansPP:"vorgestellt",  e:"👔" }
     ],
-    // Runde 2: unregelmäßig — 8 haben + 8 sein
+    // Runde 2: trennbar + haben, stark (ge-en) (16)
     2: [
-        // unr + haben (8)
-        { v:"essen",    cat:"unr", aux:"haben", subj:"Ich",          ansAux:"habe",  mid:"einen Apfel",      ansPP:"gegessen",     e:"🍎" },
-        { v:"trinken",  cat:"unr", aux:"haben", subj:"Du",           ansAux:"hast",  mid:"Kaffee",           ansPP:"getrunken",    e:"☕" },
-        { v:"lesen",    cat:"unr", aux:"haben", subj:"Er",           ansAux:"hat",   mid:"ein Buch",         ansPP:"gelesen",      e:"📖" },
-        { v:"sehen",    cat:"unr", aux:"haben", subj:"Wir",          ansAux:"haben", mid:"den Film",         ansPP:"gesehen",      e:"🎬" },
-        { v:"schreiben",cat:"unr", aux:"haben", subj:"Ich",          ansAux:"habe",  mid:"einen Brief",      ansPP:"geschrieben",  e:"✉️" },
-        { v:"sprechen", cat:"unr", aux:"haben", subj:"Sie",          ansAux:"hat",   mid:"mit mir",          ansPP:"gesprochen",   e:"🗣️" },
-        { v:"nehmen",   cat:"unr", aux:"haben", subj:"Ihr",          ansAux:"habt",  mid:"den Bus",          ansPP:"genommen",     e:"🚌" },
-        { v:"finden",   cat:"unr", aux:"haben", subj:"Die Gäste",    ansAux:"haben", mid:"ihr Hotel",        ansPP:"gefunden",     e:"🏨" },
-        // unr + sein (8)
-        { v:"gehen",    cat:"unr", aux:"sein",  subj:"Ich",          ansAux:"bin",   mid:"nach Hause",       ansPP:"gegangen",     e:"🏠" },
-        { v:"fahren",   cat:"unr", aux:"sein",  subj:"Du",           ansAux:"bist",  mid:"nach Berlin",      ansPP:"gefahren",     e:"🚆" },
-        { v:"kommen",   cat:"unr", aux:"sein",  subj:"Er",           ansAux:"ist",   mid:"spät",             ansPP:"gekommen",     e:"⏰" },
-        { v:"fliegen",  cat:"unr", aux:"sein",  subj:"Wir",          ansAux:"sind",  mid:"nach Paris",       ansPP:"geflogen",     e:"✈️" },
-        { v:"laufen",   cat:"unr", aux:"sein",  subj:"Ihr",          ansAux:"seid",  mid:"schnell",          ansPP:"gelaufen",     e:"🏃" },
-        { v:"schwimmen",cat:"unr", aux:"sein",  subj:"Sie",          ansAux:"ist",   mid:"im See",           ansPP:"geschwommen",  e:"🏊" },
-        { v:"sein",     cat:"unr", aux:"sein",  subj:"Ich",          ansAux:"bin",   mid:"krank",            ansPP:"gewesen",      e:"🤒" },
-        { v:"bleiben",  cat:"unr", aux:"sein",  subj:"Die Kinder",   ansAux:"sind",  mid:"zu Hause",         ansPP:"geblieben",    e:"🏡" }
+        { v:"einladen",     cat:"trb", aux:"haben", subj:"Er",              ansAux:"hat",   mid:"seine Freunde zur Party",  ansPP:"eingeladen",    e:"🎉" },
+        { v:"anfangen",     cat:"trb", aux:"haben", subj:"Ich",             ansAux:"habe",  mid:"gestern mit der Arbeit",   ansPP:"angefangen",    e:"🚀" },
+        { v:"aufschreiben", cat:"trb", aux:"haben", subj:"Du",              ansAux:"hast",  mid:"die Telefonnummer schnell",ansPP:"aufgeschrieben",e:"📝" },
+        { v:"ansehen",      cat:"trb", aux:"haben", subj:"Wir",             ansAux:"haben", mid:"den Film gemeinsam",       ansPP:"angesehen",     e:"🎬" },
+        { v:"fernsehen",    cat:"trb", aux:"haben", subj:"Mein Vater",      ansAux:"hat",   mid:"drei Stunden lang",        ansPP:"ferngesehen",   e:"📺" },
+        { v:"abgeben",      cat:"trb", aux:"haben", subj:"Die Studentin",   ansAux:"hat",   mid:"die Hausarbeit pünktlich", ansPP:"abgegeben",     e:"📄" },
+        { v:"anrufen",      cat:"trb", aux:"haben", subj:"Ich",             ansAux:"habe",  mid:"meine Mutter am Sonntag",  ansPP:"angerufen",     e:"📞" },
+        { v:"aussprechen",  cat:"trb", aux:"haben", subj:"Der Lehrer",      ansAux:"hat",   mid:"das schwere Wort richtig", ansPP:"ausgesprochen", e:"🗣️" },
+        { v:"mitnehmen",    cat:"trb", aux:"haben", subj:"Sie",             ansAux:"hat",   mid:"ihren Hund in den Zug",    ansPP:"mitgenommen",   e:"🐕" },
+        { v:"zurückgeben",  cat:"trb", aux:"haben", subj:"Der Student",     ansAux:"hat",   mid:"das Buch in die Bibliothek", ansPP:"zurückgegeben", e:"📚" },
+        { v:"anziehen",     cat:"trb", aux:"haben", subj:"Das Kind",        ansAux:"hat",   mid:"die warme Jacke allein",   ansPP:"angezogen",     e:"🧥" },
+        { v:"ausziehen",    cat:"trb", aux:"haben", subj:"Ich",             ansAux:"habe",  mid:"die nassen Schuhe sofort", ansPP:"ausgezogen",    e:"👟" },
+        { v:"vorlesen",     cat:"trb", aux:"haben", subj:"Die Oma",         ansAux:"hat",   mid:"den Enkeln ein Märchen",   ansPP:"vorgelesen",    e:"📖" },
+        { v:"aufessen",     cat:"trb", aux:"haben", subj:"Der Junge",       ansAux:"hat",   mid:"den ganzen Kuchen",        ansPP:"aufgegessen",   e:"🍰" },
+        { v:"austrinken",   cat:"trb", aux:"haben", subj:"Mein Gast",       ansAux:"hat",   mid:"sein Bier in einem Zug",   ansPP:"ausgetrunken",  e:"🍺" },
+        { v:"aussehen",     cat:"trb", aux:"haben", subj:"Der Kranke",      ansAux:"hat",   mid:"heute Morgen viel besser", ansPP:"ausgesehen",    e:"🤒" }
     ],
-    // Runde 3: Sonderfälle — trennbar 6 + -ieren 3 + untrennbar 3 + gemischt 2 + reg+sein 2
+    // Runde 3: trennbar + sein — Bewegung · Zustandsänderung (16)
     3: [
-        // trennbar + haben (3)
-        { v:"einkaufen",   cat:"trb", aux:"haben", subj:"Ich",          ansAux:"habe",  mid:"am Samstag",         ansPP:"eingekauft",     e:"🛒" },
-        { v:"anrufen",     cat:"trb", aux:"haben", subj:"Du",           ansAux:"hast",  mid:"deine Mutter",       ansPP:"angerufen",      e:"📞" },
-        { v:"aufmachen",   cat:"trb", aux:"haben", subj:"Wir",          ansAux:"haben", mid:"die Tür",            ansPP:"aufgemacht",     e:"🚪" },
-        // trennbar + sein (3)
-        { v:"aufstehen",   cat:"trb", aux:"sein",  subj:"Ich",          ansAux:"bin",   mid:"früh",               ansPP:"aufgestanden",   e:"⏰" },
-        { v:"ankommen",    cat:"trb", aux:"sein",  subj:"Er",           ansAux:"ist",   mid:"pünktlich",          ansPP:"angekommen",     e:"🚉" },
-        { v:"einschlafen", cat:"trb", aux:"sein",  subj:"Die Kinder",   ansAux:"sind",  mid:"schnell",            ansPP:"eingeschlafen",  e:"😴" },
-        // -ieren (3): 2 haben + 1 sein
-        { v:"telefonieren",cat:"ier", aux:"haben", subj:"Ich",          ansAux:"habe",  mid:"mit Oma",            ansPP:"telefoniert",    e:"☎️" },
-        { v:"studieren",   cat:"ier", aux:"haben", subj:"Du",           ansAux:"hast",  mid:"in München",         ansPP:"studiert",       e:"🎓" },
-        { v:"passieren",   cat:"ier", aux:"sein",  subj:"Es",           ansAux:"ist",   mid:"ein Unfall",         ansPP:"passiert",       e:"⚠️" },
-        // untrennbar + haben (3)
-        { v:"besuchen",    cat:"utr", aux:"haben", subj:"Wir",          ansAux:"haben", mid:"die Oma",            ansPP:"besucht",        e:"👵" },
-        { v:"verstehen",   cat:"utr", aux:"haben", subj:"Ihr",          ansAux:"habt",  mid:"die Aufgabe",        ansPP:"verstanden",     e:"💡" },
-        { v:"bekommen",    cat:"utr", aux:"haben", subj:"Ich",          ansAux:"habe",  mid:"ein Geschenk",       ansPP:"bekommen",       e:"🎁" },
-        // gemischt (2)
-        { v:"denken",      cat:"gem", aux:"haben", subj:"Er",           ansAux:"hat",   mid:"an dich",            ansPP:"gedacht",        e:"💭" },
-        { v:"bringen",     cat:"gem", aux:"haben", subj:"Sie",          ansAux:"hat",   mid:"Blumen",             ansPP:"gebracht",       e:"💐" },
-        // regulär + sein (2) — der fiese Fall: Partizip regelmäßig, aber sein wegen Bewegung
-        { v:"reisen",      cat:"reg", aux:"sein",  subj:"Ich",          ansAux:"bin",   mid:"im Sommer",          ansPP:"gereist",        e:"🧳" },
-        { v:"wandern",     cat:"reg", aux:"sein",  subj:"Du",           ansAux:"bist",  mid:"in den Alpen",       ansPP:"gewandert",      e:"🥾" }
+        { v:"aufstehen",      cat:"trb", aux:"sein", subj:"Er",            ansAux:"ist",  mid:"heute schon um 6 Uhr",      ansPP:"aufgestanden",   e:"⏰" },
+        { v:"einschlafen",    cat:"trb", aux:"sein", subj:"Das Baby",      ansAux:"ist",  mid:"sofort im Auto",            ansPP:"eingeschlafen",  e:"👶" },
+        { v:"aufwachen",      cat:"trb", aux:"sein", subj:"Ich",           ansAux:"bin",  mid:"schon um 7 Uhr",            ansPP:"aufgewacht",     e:"☀️" },
+        { v:"aussteigen",     cat:"trb", aux:"sein", subj:"Die Dame",      ansAux:"ist",  mid:"vor dem Museum aus dem Taxi", ansPP:"ausgestiegen", e:"🚖" },
+        { v:"einsteigen",     cat:"trb", aux:"sein", subj:"Der Mann",      ansAux:"ist",  mid:"am Bahnhof in den Bus",     ansPP:"eingestiegen",   e:"🚌" },
+        { v:"umsteigen",      cat:"trb", aux:"sein", subj:"Wir",           ansAux:"sind", mid:"in München in den ICE",     ansPP:"umgestiegen",    e:"🚆" },
+        { v:"ausgehen",       cat:"trb", aux:"sein", subj:"Ihr",           ansAux:"seid", mid:"am Samstag ins Restaurant", ansPP:"ausgegangen",    e:"🍽️" },
+        { v:"ankommen",       cat:"trb", aux:"sein", subj:"Der Zug",       ansAux:"ist",  mid:"pünktlich um 14 Uhr",       ansPP:"angekommen",     e:"🚉" },
+        { v:"weggehen",       cat:"trb", aux:"sein", subj:"Die Gäste",     ansAux:"sind", mid:"erst um Mitternacht",       ansPP:"weggegangen",    e:"🚶" },
+        { v:"zurückkommen",   cat:"trb", aux:"sein", subj:"Mein Vater",    ansAux:"ist",  mid:"um 22 Uhr von der Arbeit",  ansPP:"zurückgekommen", e:"🏠" },
+        { v:"mitkommen",      cat:"trb", aux:"sein", subj:"Marie",         ansAux:"ist",  mid:"leider nicht zur Party",    ansPP:"mitgekommen",    e:"😔" },
+        { v:"mitgehen",       cat:"trb", aux:"sein", subj:"Du",            ansAux:"bist", mid:"am Abend ins Kino",         ansPP:"mitgegangen",    e:"🎬" },
+        { v:"vorbeikommen",   cat:"trb", aux:"sein", subj:"Mein Freund",   ansAux:"ist",  mid:"gestern ganz kurz",         ansPP:"vorbeigekommen", e:"👋" },
+        { v:"weglaufen",      cat:"trb", aux:"sein", subj:"Der Hund",      ansAux:"ist",  mid:"aus dem Garten einfach",    ansPP:"weggelaufen",    e:"🐕" },
+        { v:"wegfahren",      cat:"trb", aux:"sein", subj:"Die Familie",   ansAux:"ist",  mid:"am Wochenende ans Meer",    ansPP:"weggefahren",    e:"🚗" },
+        { v:"losgehen",       cat:"trb", aux:"sein", subj:"Das Konzert",   ansAux:"ist",  mid:"pünktlich um 20 Uhr",       ansPP:"losgegangen",    e:"🎤" }
     ]
 };
 
 // Tally-Mapping pro Runde
-// R1: Partizip-Endung — get (ge-t) vs geet (ge-et)
-// R2: Hilfsverb — haben vs sein
-// R3: Kategorie — trb, ier, utr, gem, regs (= regelmäßig+sein)
+// FD18: R1 = trennbar schwach (ge-t)     → Kategorie "get"
+//       R2 = trennbar stark   (ge-en)    → Kategorie "haben" (reuse orange box)
+//       R3 = trennbar + sein              → Kategorie "sein"
 function tallyKeyOf(runde, item) {
-    if (runde === 1) {
-        return item.ansPP.endsWith("et") ? "geet" : "get";
-    }
-    if (runde === 2) {
-        return item.aux; // "haben" | "sein"
-    }
-    // R3
-    if (item.cat === "trb") return "trb";
-    if (item.cat === "ier") return "ier";
-    if (item.cat === "utr") return "utr";
-    if (item.cat === "gem") return "gem";
-    // reg + sein Sonderfall
-    if (item.cat === "reg" && item.aux === "sein") return "regs";
-    return null;
+    if (runde === 1) return "get";
+    if (runde === 2) return "haben";
+    return "sein";
 }
 var TALLY_KEYS = {
-    1: ["get", "geet"],
-    2: ["haben", "sein"],
-    3: ["trb", "ier", "utr", "gem", "regs"]
+    1: ["get"],
+    2: ["haben"],
+    3: ["sein"]
 };
 
 function emptyTally(runde) {
