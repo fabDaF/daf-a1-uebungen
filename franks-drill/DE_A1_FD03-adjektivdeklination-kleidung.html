@@ -311,7 +311,33 @@ h2 {
     color: #4b5563;
     font-weight: 500;
 }
-.dekl-chip.noun { font-weight: 600; }
+.dekl-chip.noun {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 8px;
+    padding: 8px 16px;
+    font-weight: 600;
+    border-width: 2px;
+}
+.dekl-chip.noun .noun-emoji {
+    font-size: 1.4em;
+    line-height: 1;
+    position: relative;
+    top: 3px;
+}
+.dekl-chip.noun .noun-art {
+    font-size: 0.82em;
+    font-weight: 400;
+    opacity: 0.85;
+}
+.dekl-chip.noun .noun-word {
+    font-weight: 700;
+    font-size: 1.0em;
+}
+.dekl-chip.noun[data-genus="m"]  { background: #dbeafe; border-color: #2563eb; color: #1d4ed8; }
+.dekl-chip.noun[data-genus="f"]  { background: #fce7f3; border-color: #db2777; color: #be185d; }
+.dekl-chip.noun[data-genus="n"]  { background: #d1fae5; border-color: #059669; color: #047857; }
+.dekl-chip.noun[data-genus="pl"] { background: #ede9fe; border-color: #7c3aed; color: #6d28d9; }
 .dekl-chip.adj { color: #7c3aed; font-style: italic; }
 .dekl-arrow { color: #9ca3af; font-size: 1.1em; }
 
@@ -490,8 +516,8 @@ input.blank.wrong {
 
     <div class="drill-explain">
         <h3>Wie funktioniert der Drill?</h3>
-        <p>Du siehst ein Kleidungsstück (z. B. <em>Pullover</em>) und ein Adjektiv (z. B. <em>warm</em>). Du tippst das passende <strong>mein / meine</strong> in die erste Lücke und das <strong>Adjektiv mit der richtigen Endung</strong> in die zweite Lücke. Beispiel: „Das ist <strong>mein</strong> <strong>warmer</strong> Pullover." Beide Lücken werden sofort grün, wenn sie stimmen — kein Prüfen-Knopf.</p>
-        <p>Die Farbe des Kartenrands verrät nach der Lösung das Genus: <span style="color:#2563eb;font-weight:700">blau</span> = der, <span style="color:#db2777;font-weight:700">pink</span> = die, <span style="color:#059669;font-weight:700">grün</span> = das, <span style="color:#7c3aed;font-weight:700">lila</span> = die (Plural). Je mehr Karten du füllst, desto bunter wird die Garderobe. Das ist Absicht — du sollst Genus und Endung mit Farbe verknüpfen.</p>
+        <p>Jede Karte zeigt dir alles, was du wissen musst: ein <strong>Emoji</strong> für die Bedeutung, den <strong>Artikel</strong> (der · die · das · die Pl.) und das <strong>Kleidungsstück</strong>. Daneben steht das Adjektiv in der Grundform. Du tippst dann nur noch <em>mein / meine</em> in die erste Lücke und das <em>Adjektiv mit der passenden Endung</em> in die zweite. Beispiel: 🧶 <strong>der Pullover</strong> + <em>warm</em> → „Das ist <strong>mein warmer</strong> Pullover."</p>
+        <p>Stimmt ein Wort, wird es grün und der Cursor springt automatisch ins nächste Feld — kein Prüfen-Knopf, kein Klicken. Der <strong>Kartenrand und der Hintergrund des Nomen-Chips</strong> sind von Anfang an in Genus-Farbe: <span style="color:#2563eb;font-weight:700">blau</span> = der, <span style="color:#db2777;font-weight:700">pink</span> = die, <span style="color:#059669;font-weight:700">grün</span> = das, <span style="color:#7c3aed;font-weight:700">lila</span> = die (Plural). So hast du Artikel, Farbe und Symbol zugleich im Blick — und kannst dich auf die Endung konzentrieren.</p>
 
         <div class="genus-legend">
             <span class="genus-chip gm"><span class="dot"></span>der <span class="example">→ mein -er</span></span>
@@ -657,61 +683,61 @@ input.blank.wrong {
 //  Franks Drill 03 — Adjektivdeklination Kleidung (Nominativ)
 // =========================================================
 
-// Jedes Item: n=Nomen, a=Adjektiv (Grundform), g=Genus (m/f/n/pl)
+// Jedes Item: n=Nomen, a=Adjektiv (Grundform), g=Genus (m/f/n/pl), e=Emoji
 var DRILL = {
     1: [
-        { n:"Pullover",     a:"warm",    g:"m"  },
-        { n:"Hose",         a:"blau",    g:"f"  },
-        { n:"Hemd",         a:"weiß",    g:"n"  },
-        { n:"Schuhe",       a:"schwarz", g:"pl" },
-        { n:"Rock",         a:"kurz",    g:"m"  },
-        { n:"Jacke",        a:"neu",     g:"f"  },
-        { n:"T-Shirt",      a:"groß",    g:"n"  },
-        { n:"Stiefel",      a:"hoch",    g:"pl" },
-        { n:"Mantel",       a:"dunkel",  g:"m"  },
-        { n:"Bluse",        a:"hell",    g:"f"  },
-        { n:"Kleid",        a:"schön",   g:"n"  },
-        { n:"Sandalen",     a:"leicht",  g:"pl" },
-        { n:"Schal",        a:"lang",    g:"m"  },
-        { n:"Jeans",        a:"alt",     g:"f"  },
-        { n:"Top",          a:"bunt",    g:"n"  },
-        { n:"Socken",       a:"warm",    g:"pl" }
+        { n:"Pullover",     a:"warm",    g:"m",  e:"🧶"    },
+        { n:"Hose",         a:"blau",    g:"f",  e:"👖"    },
+        { n:"Hemd",         a:"weiß",    g:"n",  e:"👔"    },
+        { n:"Schuhe",       a:"schwarz", g:"pl", e:"👞"    },
+        { n:"Rock",         a:"kurz",    g:"m",  e:"💃"    },
+        { n:"Jacke",        a:"neu",     g:"f",  e:"🧥"    },
+        { n:"T-Shirt",      a:"groß",    g:"n",  e:"👕"    },
+        { n:"Stiefel",      a:"hoch",    g:"pl", e:"👢"    },
+        { n:"Mantel",       a:"dunkel",  g:"m",  e:"🧥"    },
+        { n:"Bluse",        a:"hell",    g:"f",  e:"👚"    },
+        { n:"Kleid",        a:"schön",   g:"n",  e:"👗"    },
+        { n:"Sandalen",     a:"leicht",  g:"pl", e:"👡"    },
+        { n:"Schal",        a:"lang",    g:"m",  e:"🧣"    },
+        { n:"Jeans",        a:"alt",     g:"f",  e:"👖"    },
+        { n:"Top",          a:"bunt",    g:"n",  e:"🎽"    },
+        { n:"Socken",       a:"warm",    g:"pl", e:"🧦"    }
     ],
     2: [
-        { n:"Anzug",        a:"schwarz", g:"m"  },
-        { n:"Mütze",        a:"rot",     g:"f"  },
-        { n:"Sweatshirt",   a:"grau",    g:"n"  },
-        { n:"Strümpfe",     a:"grau",    g:"pl" },
-        { n:"Gürtel",       a:"braun",   g:"m"  },
-        { n:"Krawatte",     a:"blau",    g:"f"  },
-        { n:"Nachthemd",    a:"lang",    g:"n"  },
-        { n:"Handschuhe",   a:"warm",    g:"pl" },
-        { n:"Hut",          a:"groß",    g:"m"  },
-        { n:"Lederjacke",   a:"schwarz", g:"f"  },
-        { n:"Halstuch",     a:"gelb",    g:"n"  },
-        { n:"Hausschuhe",   a:"alt",     g:"pl" },
-        { n:"Schlafanzug",  a:"bunt",    g:"m"  },
-        { n:"Badehose",     a:"grün",    g:"f"  },
-        { n:"Polohemd",     a:"blau",    g:"n"  },
-        { n:"Shorts",       a:"kurz",    g:"pl" }
+        { n:"Anzug",        a:"schwarz", g:"m",  e:"🤵"    },
+        { n:"Mütze",        a:"rot",     g:"f",  e:"🧢"    },
+        { n:"Sweatshirt",   a:"grau",    g:"n",  e:"👕"    },
+        { n:"Strümpfe",     a:"grau",    g:"pl", e:"🧦"    },
+        { n:"Gürtel",       a:"braun",   g:"m",  e:"🪢"    },
+        { n:"Krawatte",     a:"blau",    g:"f",  e:"👔"    },
+        { n:"Nachthemd",    a:"lang",    g:"n",  e:"🌙"    },
+        { n:"Handschuhe",   a:"warm",    g:"pl", e:"🧤"    },
+        { n:"Hut",          a:"groß",    g:"m",  e:"🎩"    },
+        { n:"Lederjacke",   a:"schwarz", g:"f",  e:"🏍️🧥"  },
+        { n:"Halstuch",     a:"gelb",    g:"n",  e:"🧣"    },
+        { n:"Hausschuhe",   a:"alt",     g:"pl", e:"🥿"    },
+        { n:"Schlafanzug",  a:"bunt",    g:"m",  e:"😴"    },
+        { n:"Badehose",     a:"grün",    g:"f",  e:"🌊🩳"  },
+        { n:"Polohemd",     a:"blau",    g:"n",  e:"👕"    },
+        { n:"Shorts",       a:"kurz",    g:"pl", e:"🩳"    }
     ],
     3: [
-        { n:"Bademantel",   a:"dick",    g:"m"  },
-        { n:"Regenjacke",   a:"bunt",    g:"f"  },
-        { n:"Sommerkleid",  a:"hell",    g:"n"  },
-        { n:"Sportschuhe",  a:"neu",     g:"pl" },
-        { n:"Regenmantel",  a:"gelb",    g:"m"  },
-        { n:"Winterjacke",  a:"warm",    g:"f"  },
-        { n:"Minikleid",    a:"kurz",    g:"n"  },
-        { n:"Turnschuhe",   a:"weiß",    g:"pl" },
-        { n:"Pyjama",       a:"grün",    g:"m"  },
-        { n:"Sportjacke",   a:"leicht",  g:"f"  },
-        { n:"Unterhemd",    a:"weiß",    g:"n"  },
-        { n:"Winterstiefel",a:"hoch",    g:"pl" },
-        { n:"Hoodie",       a:"grau",    g:"m"  },
-        { n:"Sommerjacke",  a:"dünn",    g:"f"  },
-        { n:"Winterkleid",  a:"lang",    g:"n"  },
-        { n:"Gummistiefel", a:"grün",    g:"pl" }
+        { n:"Bademantel",   a:"dick",    g:"m",  e:"🛁🧥"  },
+        { n:"Regenjacke",   a:"bunt",    g:"f",  e:"🌧️🧥"  },
+        { n:"Sommerkleid",  a:"hell",    g:"n",  e:"☀️👗"  },
+        { n:"Sportschuhe",  a:"neu",     g:"pl", e:"👟"    },
+        { n:"Regenmantel",  a:"gelb",    g:"m",  e:"☔🧥"  },
+        { n:"Winterjacke",  a:"warm",    g:"f",  e:"❄️🧥"  },
+        { n:"Minikleid",    a:"kurz",    g:"n",  e:"👗"    },
+        { n:"Turnschuhe",   a:"weiß",    g:"pl", e:"👟"    },
+        { n:"Pyjama",       a:"grün",    g:"m",  e:"😴"    },
+        { n:"Sportjacke",   a:"leicht",  g:"f",  e:"🏃🧥"  },
+        { n:"Unterhemd",    a:"weiß",    g:"n",  e:"👕"    },
+        { n:"Winterstiefel",a:"hoch",    g:"pl", e:"❄️👢"  },
+        { n:"Hoodie",       a:"grau",    g:"m",  e:"🧥"    },
+        { n:"Sommerjacke",  a:"dünn",    g:"f",  e:"☀️🧥"  },
+        { n:"Winterkleid",  a:"lang",    g:"n",  e:"❄️👗"  },
+        { n:"Gummistiefel", a:"grün",    g:"pl", e:"🌧️👢"  }
     ]
 };
 
@@ -774,7 +800,11 @@ function renderCards(runde) {
         card.innerHTML =
             '<div class="dekl-badge">#' + (idx+1) + '</div>' +
             '<div class="dekl-inputs">' +
-                '<span class="dekl-chip noun">' + escapeHtml(item.n) + '</span>' +
+                '<span class="dekl-chip noun" data-genus="' + item.g + '">' +
+                    '<span class="noun-emoji">' + (item.e || '') + '</span>' +
+                    '<span class="noun-art">' + escapeHtml(genusLabel) + '</span>' +
+                    '<span class="noun-word">' + escapeHtml(item.n) + '</span>' +
+                '</span>' +
                 '<span class="dekl-arrow">+</span>' +
                 '<span class="dekl-chip adj">' + escapeHtml(item.a) + '</span>' +
             '</div>' +
@@ -826,6 +856,9 @@ function liveCheck(inp) {
     if (val === ans) {
         inp.classList.add('correct');
         checkCardState(inp);
+        // Auto-advance: Springe zum nächsten noch unbearbeiteten Feld
+        var wasCorrectAlready = wasCorrect;
+        if (!wasCorrectAlready) advanceFocus(inp);
         return;
     }
     if (ans.indexOf(val) === 0) {
@@ -838,6 +871,34 @@ function liveCheck(inp) {
     // Streak bricht
     state[runde].curStreak = 0;
     updateStreak(runde);
+}
+
+// Auto-Focus zum nächsten unbearbeiteten Input
+// Erst in derselben Karte (zweites Feld), dann zur nächsten Karte mit Lücke
+function advanceFocus(inp) {
+    var card = inp.closest('.dekl-card');
+    if (!card) return;
+    var runde = parseInt(card.dataset.runde, 10);
+    // 1) Noch ein Feld in derselben Karte offen?
+    var localInputs = Array.from(card.querySelectorAll('input.blank'));
+    var nextLocal = localInputs.find(function(i) { return !i.classList.contains('correct'); });
+    if (nextLocal) {
+        setTimeout(function() { nextLocal.focus(); }, 90);
+        return;
+    }
+    // 2) Sonst: erste offene Lücke in einer späteren Karte derselben Runde
+    var allCards = Array.from(document.querySelectorAll('#cards-' + runde + ' .dekl-card'));
+    var curIdx = allCards.indexOf(card);
+    for (var i = curIdx + 1; i < allCards.length; i++) {
+        var nextInp = allCards[i].querySelector('input.blank:not(.correct)');
+        if (nextInp) {
+            setTimeout(function() {
+                nextInp.focus();
+                nextInp.scrollIntoView({ behavior:'smooth', block:'center' });
+            }, 120);
+            return;
+        }
+    }
 }
 
 // Prüft den Gesamtstatus einer Karte (beide Inputs korrekt?)
