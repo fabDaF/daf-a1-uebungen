@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Franks Drill 25 — Vergangenheits-Megamix</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+}
+
+/* Header */
+.header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 30px;
+    text-align: center;
+}
+.header h1 { font-size: 2.2em; font-family: Georgia, 'Times New Roman', serif; color: white; margin-bottom: 8px; border: none; padding: 0; }
+.header .subtitle, .header p { font-size: 1.1em; font-family: Georgia, 'Times New Roman', serif; opacity: 0.95; color: rgba(255,255,255,0.9); margin: 0; }
+.header .big-emoji { font-size: 2.6em; display: block; margin-top: 8px; }
+
+/* Nav */
+.nav {
+    display: flex;
+    flex-wrap: nowrap;
+    background: #f8f9fa;
+    border-top: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+}
+.nav-btn {
+    flex: 1;
+    padding: 14px 10px;
+    text-align: center;
+    cursor: pointer;
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    transition: all 0.3s;
+    font-size: 0.92em;
+    font-weight: 500;
+    color: #666;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.nav-btn:last-child { border-right: none; }
+.nav-btn:hover { background: #e9ecef; color: #495057; }
+.nav-btn.active {
+    background: white;
+    color: #667eea;
+    font-weight: 600;
+    border-bottom: 3px solid #667eea;
+}
+.nav-emoji { font-size: 1.3em; line-height: 1.2; }
+.nav-label { font-size: 0.78em; margin-top: 2px; line-height: 1.2; }
+
+@media (max-width: 600px) {
+    body { padding: 8px; }
+    .nav { flex-wrap: wrap; }
+    .nav-btn {
+        flex: 1 1 25%;
+        min-width: 0;
+        font-size: 0.8em;
+        padding: 10px 6px;
+        border-right: 1px solid #ddd;
+    }
+    .nav-btn:last-child { border-right: 1px solid #ddd; }
+}
+
+.section { display: none; padding: 28px 30px 10px 30px; }
+.section.active { display: block; }
+
+h2 {
+    color: #333;
+    font-size: 1.25em;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+/* Drill-Hero */
+.drill-hero {
+    background: linear-gradient(135deg, #ff7e5f 0%, #feb47b 100%);
+    border-radius: 14px;
+    padding: 26px 30px;
+    margin-bottom: 22px;
+    color: white;
+    text-align: center;
+    box-shadow: 0 4px 16px rgba(255,126,95,0.25);
+}
+.drill-hero .hero-emoji { font-size: 3.4em; display: block; margin-bottom: 8px; }
+.drill-hero h2 { color: white; border: none; font-size: 1.7em; margin-bottom: 10px; padding: 0; }
+.drill-hero p { font-size: 1.05em; line-height: 1.6; opacity: 0.95; }
+
+/* Intro-Erklärbox */
+.drill-explain {
+    background: #f0f4ff;
+    border-left: 4px solid #667eea;
+    border-radius: 0 10px 10px 0;
+    padding: 18px 22px;
+    margin-bottom: 18px;
+    font-size: 0.97em;
+    line-height: 1.75;
+    color: #333;
+}
+.drill-explain h3 { color: #4a148c; margin-bottom: 10px; font-size: 1.1em; }
+.drill-explain p { margin-bottom: 8px; }
+.drill-explain .rule-highlight {
+    display: block;
+    margin-top: 10px;
+    padding: 12px 16px;
+    background: #dbeafe;
+    border-left: 4px solid #2563eb;
+    border-radius: 0 8px 8px 0;
+    font-weight: 600;
+    color: #1d4ed8;
+}
+.drill-explain .sonderfall {
+    display: block;
+    margin-top: 10px;
+    padding: 10px 14px;
+    background: #fef3c7;
+    border-left: 4px solid #f59e0b;
+    border-radius: 0 8px 8px 0;
+    color: #92400e;
+    font-size: 0.95em;
+}
+
+/* Klammer-Beispiel */
+.klammer-box {
+    background: white;
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin-top: 14px;
+    text-align: center;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 1.1em;
+    line-height: 2.2;
+    border: 1px dashed #c5cff5;
+}
+.klammer-box .kl-sub  { color: #4a148c; font-weight: 700; }
+.klammer-box .kl-aux  { color: #ea580c; font-weight: 700; background: #ffedd5; padding: 2px 8px; border-radius: 4px; }
+.klammer-box .kl-aux.sein { color: #1e40af; background: #dbeafe; }
+.klammer-box .kl-pp   { color: #16a34a; font-weight: 700; background: #dcfce7; padding: 2px 8px; border-radius: 4px; }
+.klammer-box .kl-arc  {
+    display: block;
+    font-size: 0.8em;
+    color: #888;
+    letter-spacing: 0.5em;
+    margin-top: 4px;
+}
+
+/* Partizip-Typ-Tabelle */
+.pp-tabelle {
+    margin-top: 14px;
+    border-collapse: collapse;
+    width: 100%;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    font-size: 0.88em;
+}
+.pp-tabelle th,
+.pp-tabelle td {
+    padding: 7px 9px;
+    text-align: left;
+    border: 1px solid #e5e7eb;
+}
+.pp-tabelle th { background: #f5f7ff; color: #4a148c; font-weight: 700; text-align: center; }
+.pp-tabelle td.cat { font-weight: 700; text-align: center; }
+.pp-tabelle td.cat.reg { background: #dcfce7; color: #14532d; }
+.pp-tabelle td.cat.unr { background: #fee2e2; color: #991b1b; }
+.pp-tabelle td.cat.trb { background: #fce7f3; color: #9d174d; }
+.pp-tabelle td.cat.ier { background: #ede9fe; color: #5b21b6; }
+.pp-tabelle td.cat.utr { background: #cffafe; color: #155e75; }
+.pp-tabelle td.cat.gem { background: #ffedd5; color: #9a3412; }
+.pp-tabelle td.pattern { font-family: 'Courier New', monospace; color: #4a148c; font-weight: 600; }
+.pp-tabelle td.beispiel { font-family: Georgia, 'Times New Roman', serif; color: #333; }
+
+/* Hilfsverb-Tabelle */
+.aux-tabelle {
+    margin-top: 10px;
+    border-collapse: collapse;
+    width: 100%;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    font-size: 0.88em;
+}
+.aux-tabelle th,
+.aux-tabelle td {
+    padding: 7px 9px;
+    text-align: center;
+    border: 1px solid #e5e7eb;
+}
+.aux-tabelle th { background: #f5f7ff; color: #4a148c; font-weight: 700; }
+.aux-tabelle th.haben { background: #ffedd5; color: #9a3412; }
+.aux-tabelle th.sein  { background: #dbeafe; color: #1e40af; }
+.aux-tabelle td.haben { background: #fff7ed; color: #9a3412; font-weight: 600; }
+.aux-tabelle td.sein  { background: #eff6ff; color: #1e40af; font-weight: 600; }
+.aux-tabelle td.row-label { background: #fafafa; color: #333; font-weight: 600; text-align: left; }
+
+/* Typ-Legende */
+.typ-legend {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 14px;
+    padding: 12px;
+    background: white;
+    border-radius: 10px;
+    justify-content: center;
+}
+.typ-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 0.85em;
+    font-weight: 600;
+    border: 2px solid;
+}
+.typ-chip .dot { width: 10px; height: 10px; border-radius: 50%; }
+.typ-chip.reg { border-color: #16a34a; background: #f0fdf4; color: #14532d; }
+.typ-chip.reg .dot { background: #16a34a; }
+.typ-chip.unr { border-color: #dc2626; background: #fef2f2; color: #991b1b; }
+.typ-chip.unr .dot { background: #dc2626; }
+.typ-chip.trb { border-color: #db2777; background: #fdf2f8; color: #9d174d; }
+.typ-chip.trb .dot { background: #db2777; }
+.typ-chip.ier { border-color: #7c3aed; background: #f5f3ff; color: #5b21b6; }
+.typ-chip.ier .dot { background: #7c3aed; }
+.typ-chip.utr { border-color: #0891b2; background: #ecfeff; color: #155e75; }
+.typ-chip.utr .dot { background: #0891b2; }
+.typ-chip.gem { border-color: #ea580c; background: #fff7ed; color: #9a3412; }
+.typ-chip.gem .dot { background: #ea580c; }
+
+/* Drill-Progress */
+.drill-progress {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 18px;
+    background: #fff7ed;
+    border: 1px solid #fed7aa;
+    border-radius: 10px;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+    font-variant-numeric: tabular-nums;
+}
+.drill-progress .streak { font-weight: 700; color: #ea580c; font-size: 1.05em; }
+.drill-progress .count { font-weight: 700; color: #4a148c; font-size: 1.0em; }
+.drill-progress .bar {
+    flex: 1; min-width: 140px; height: 10px;
+    background: #ffe4c7; border-radius: 5px; overflow: hidden;
+}
+.drill-progress .bar-fill {
+    height: 100%; width: 0%;
+    background: linear-gradient(90deg, #ff7e5f, #43a047);
+    transition: width 0.4s ease;
+}
+.drill-progress .time { font-size: 0.92em; color: #666; }
+.drill-progress .best { font-size: 0.82em; color: #999; }
+
+/* Typ-Tally */
+.typ-tally {
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 18px;
+}
+.tt-box {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 6px;
+    padding: 5px 14px;
+    border-radius: 20px;
+    font-size: 0.85em;
+    font-weight: 700;
+    border: 1px solid #e5e7eb;
+    background: #fafafa;
+    letter-spacing: 0.04em;
+}
+.tt-box.pf    { color: #14532d; border-color: #bbf7d0; background: #f0fdf4; }
+.tt-box.ps    { color: #1e40af; border-color: #bfdbfe; background: #eff6ff; }
+.tt-box.pm    { color: #9a3412; border-color: #fed7aa; background: #fff7ed; }
+.tt-box .tally-num { font-size: 1.05em; }
+.tt-box .tally-max { color: #888; font-weight: 400; }
+
+@media (max-width: 600px) {
+    .drill-progress { gap: 8px; padding: 10px 12px; }
+    .drill-progress .bar { flex: 1 1 100%; order: 99; }
+}
+
+/* Control-Bar */
+.control-bar {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-bottom: 14px;
+}
+.btn {
+    background: #f5f7ff;
+    border: 1px solid #c5cff5;
+    border-radius: 8px;
+    padding: 6px 16px;
+    font-size: 0.85em;
+    color: #667eea;
+    cursor: pointer;
+    transition: all 0.15s;
+    font-weight: 500;
+    margin-left: 6px;
+}
+.btn:hover { background: #667eea; color: white; border-color: #667eea; }
+
+/* Perfekt-Karte */
+.pf-card {
+    background: #f8f9ff;
+    padding: 18px 22px 22px;
+    margin-bottom: 14px;
+    border-radius: 12px;
+    border-left: 6px solid #cbd5e1;
+    position: relative;
+    transition: background 0.5s ease, border-color 0.3s ease;
+}
+.pf-card[data-cat="pf"] { border-left-color: #16a34a; }
+.pf-card[data-cat="ps"] { border-left-color: #2563eb; }
+.pf-card[data-cat="pm"] { border-left-color: #ea580c; }
+
+.pf-card[data-solved="1"][data-cat="pf"] { background: linear-gradient(90deg, #f0fdf4, #f8f9ff 70%); }
+.pf-card[data-solved="1"][data-cat="ps"] { background: linear-gradient(90deg, #eff6ff, #f8f9ff 70%); }
+.pf-card[data-solved="1"][data-cat="pm"] { background: linear-gradient(90deg, #fff7ed, #f8f9ff 70%); }
+.pf-card[data-solved="1"] { animation: cardPulse 0.5s ease; }
+
+@keyframes cardPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.015); box-shadow: 0 4px 14px rgba(0,0,0,0.08); }
+    100% { transform: scale(1); }
+}
+
+.pf-badge {
+    position: absolute;
+    top: 12px;
+    right: 14px;
+    background: #e5e7eb;
+    color: #666;
+    font-size: 0.72em;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-weight: 600;
+}
+
+.pf-inputs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+/* Infinitiv-Chip — Farbe nach Partizip-Kategorie */
+.pf-chip {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 8px;
+    padding: 8px 16px;
+    border: 2px solid;
+    border-radius: 8px;
+    font-size: 1.0em;
+    font-weight: 600;
+}
+.pf-chip .pf-emoji {
+    font-size: 1.4em;
+    line-height: 1;
+    position: relative;
+    top: 3px;
+}
+.pf-chip .pf-label {
+    font-size: 0.78em;
+    font-weight: 400;
+    opacity: 0.8;
+}
+.pf-chip .pf-word {
+    font-weight: 700;
+    font-size: 1.05em;
+    font-style: italic;
+}
+.pf-chip[data-cat="pf"] { background: #dcfce7; border-color: #16a34a; color: #14532d; }
+.pf-chip[data-cat="ps"] { background: #dbeafe; border-color: #2563eb; color: #1e40af; }
+.pf-chip[data-cat="pm"] { background: #ffedd5; border-color: #ea580c; color: #9a3412; }
+
+.cat-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 12px;
+    border-radius: 14px;
+    font-size: 0.78em;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+}
+.cat-badge[data-cat="pf"] { background: #16a34a; color: white; }
+.cat-badge[data-cat="ps"] { background: #2563eb; color: white; }
+.cat-badge[data-cat="pm"] { background: #ea580c; color: white; }
+
+.pf-satz {
+    font-size: 1.15em;
+    line-height: 2.0;
+    color: #222;
+    padding-right: 50px;
+    font-family: Georgia, 'Times New Roman', serif;
+}
+.pf-satz .subj {
+    font-weight: 700;
+    color: #4a148c;
+    background: #f3e8ff;
+    padding: 1px 6px;
+    border-radius: 4px;
+}
+
+input.blank {
+    border: none;
+    border-bottom: 2px solid #667eea;
+    background: transparent;
+    padding: 3px 6px;
+    font-family: inherit;
+    font-size: 1em;
+    outline: none;
+    transition: all 0.2s;
+    min-width: 7ch;
+    color: #333;
+    text-align: center;
+}
+input.blank.pp-input { min-width: 11ch; }
+input.blank:focus { border-bottom-color: #764ba2; background: #f0f0ff; }
+input.blank.correct {
+    border-bottom-color: #27ae60;
+    background: #e8f8f0;
+    color: #27ae60;
+    font-weight: 700;
+}
+input.blank.wrong {
+    border-bottom-color: #e74c3c;
+    background: #fdeaea;
+    color: #e74c3c;
+}
+
+/* Typ-Reveal (Kategorie) */
+.pf-typ-reveal {
+    display: none;
+    position: absolute;
+    bottom: 10px;
+    right: 14px;
+    font-size: 0.72em;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 10px;
+    letter-spacing: 0.04em;
+}
+.pf-card[data-solved="1"] .pf-typ-reveal { display: inline-block; }
+.pf-card[data-cat="pf"] .pf-typ-reveal { background: #bbf7d0; color: #14532d; }
+.pf-card[data-cat="ps"] .pf-typ-reveal { background: #bfdbfe; color: #1e40af; }
+.pf-card[data-cat="pm"] .pf-typ-reveal { background: #fed7aa; color: #9a3412; }
+
+/* Runden-Abschluss-Karte */
+.runden-ende {
+    display: none;
+    background: linear-gradient(135deg, #43a047 0%, #2e7d32 100%);
+    color: white;
+    border-radius: 14px;
+    padding: 28px 32px;
+    text-align: center;
+    margin-top: 22px;
+    box-shadow: 0 6px 20px rgba(67,160,71,0.3);
+    animation: popIn 0.5s ease;
+}
+.runden-ende.show { display: block; }
+.runden-ende h3 { color: white; border: none; font-size: 1.9em; margin-bottom: 12px; padding: 0; }
+.runden-ende p { font-size: 1.05em; line-height: 1.8; opacity: 0.98; }
+.runden-ende .stats { display: flex; justify-content: center; gap: 30px; margin-top: 16px; flex-wrap: wrap; }
+.runden-ende .stat-box {
+    background: rgba(255,255,255,0.2);
+    border-radius: 10px;
+    padding: 10px 18px;
+    min-width: 120px;
+}
+.runden-ende .stat-box .stat-num { font-size: 1.6em; font-weight: 700; display: block; }
+.runden-ende .stat-box .stat-lbl { font-size: 0.82em; opacity: 0.9; }
+.runden-ende .next-cta {
+    display: inline-block;
+    margin-top: 18px;
+    padding: 10px 24px;
+    background: white;
+    color: #2e7d32;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+    border: none;
+    font-size: 0.95em;
+    transition: transform 0.2s;
+}
+.runden-ende .next-cta:hover { transform: scale(1.05); }
+
+@keyframes popIn {
+    0% { transform: scale(0.85); opacity: 0; }
+    60% { transform: scale(1.05); opacity: 1; }
+    100% { transform: scale(1); }
+}
+
+.start-cta {
+    display: block;
+    width: fit-content;
+    margin: 20px auto 10px;
+    padding: 14px 32px;
+    background: linear-gradient(135deg, #ff7e5f, #feb47b);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.05em;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(255,126,95,0.3);
+    transition: transform 0.2s;
+}
+.start-cta:hover { transform: scale(1.04); }
+
+.author-footer {
+    text-align: center;
+    margin-top: 30px;
+    padding: 16px;
+    font-size: 0.8rem;
+    color: #aaa;
+}
+.author-footer a { color: #aaa; }
+.author-name { font-weight: 700; }
+
+.hinweis {
+    text-align: center;
+    font-size: 0.88em;
+    color: #666;
+    font-style: italic;
+    margin-top: 14px;
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="header">
+    <h1>Franks Drill</h1>
+    <p class="subtitle">A1 – Lektion FD25 · Vergangenheits-Megamix · Perfekt trifft Präteritum</p>
+    <div class="big-emoji">🕰️</div>
+</div>
+
+<div class="nav">
+    <div class="nav-btn active" onclick="showSection(0)">
+        <span class="nav-emoji">🚀</span>
+        <span class="nav-label">Start</span>
+    </div>
+    <div class="nav-btn" onclick="showSection(1)">
+        <span class="nav-emoji">🎲</span>
+        <span class="nav-label">Mix 1</span>
+    </div>
+    <div class="nav-btn" onclick="showSection(2)">
+        <span class="nav-emoji">🎲</span>
+        <span class="nav-label">Mix 2</span>
+    </div>
+    <div class="nav-btn" onclick="showSection(3)">
+        <span class="nav-emoji">👑</span>
+        <span class="nav-label">Boss-Mix</span>
+    </div>
+</div>
+
+<!-- SECTION 0: INTRO -->
+<div class="section active" id="sec-0">
+    <div class="drill-hero">
+        <span class="hero-emoji">🕰️</span>
+        <h2>Vergangenheits-Megamix — die große Integration von FD16–24.</h2>
+        <p>Zwei Vergangenheitsformen, eine Übung. 48 Sätze, in denen du pro Karte blitzschnell entscheidest: <strong>Perfekt</strong> (zwei Lücken, Hilfsverb + Partizip II) für alle Vollverben — oder <strong>Präteritum</strong> (eine Lücke) für <em>sein</em>, <em>haben</em> und die sechs Modalverben. Damit ist die A1-Vergangenheit komplett.</p>
+    </div>
+
+    <div class="drill-explain">
+        <h3>Die eine große Regel</h3>
+        <p>Im Alltag benutzen deutsche Muttersprachler <strong>zwei verschiedene Formen</strong> für die Vergangenheit — je nach Verb:</p>
+
+        <p class="rule-highlight">💡 <strong>Die Faustregel:</strong><br>
+        • <strong>Perfekt</strong> — für alle <em>Vollverben</em> (machen, gehen, essen, einkaufen, telefonieren …): zwei Teile — Hilfsverb + Partizip II.<br>
+        • <strong>Präteritum</strong> — für <em>sein</em>, <em>haben</em> und die sechs Modalverben (<em>können, müssen, dürfen, wollen, sollen, mögen</em>): ein einziges Wort.</p>
+
+        <div class="klammer-box">
+            <span style="color:#16a34a;font-weight:700;">Perfekt (Vollverb):</span><br>
+            <span class="kl-sub">Ich</span> <span class="kl-aux">habe</span> gestern Brot <span class="kl-pp">gekauft</span>.<br>
+            <span class="kl-sub">Er</span> <span class="kl-aux sein">ist</span> nach Hause <span class="kl-pp">gegangen</span>.<br>
+            <span class="kl-arc">└────── Satzklammer ──────┘</span>
+            <br><br>
+            <span style="color:#2563eb;font-weight:700;">Präteritum (sein/haben):</span><br>
+            <span class="kl-sub">Ich</span> <span style="color:#1e40af;font-weight:700;background:#dbeafe;padding:2px 8px;border-radius:4px;">war</span> gestern im Kino.<br>
+            <span class="kl-sub">Du</span> <span style="color:#9a3412;font-weight:700;background:#ffedd5;padding:2px 8px;border-radius:4px;">hattest</span> viel Glück.<br><br>
+            <span style="color:#ea580c;font-weight:700;">Präteritum (Modalverb):</span><br>
+            <span class="kl-sub">Wir</span> <span style="color:#9a3412;font-weight:700;background:#ffedd5;padding:2px 8px;border-radius:4px;">konnten</span> gestern nicht schlafen.
+        </div>
+
+        <h3 style="margin-top:14px;">Die drei Verb-Gruppen auf einen Blick</h3>
+
+        <table class="pp-tabelle">
+            <thead>
+                <tr>
+                    <th style="width:22%">Gruppe</th>
+                    <th style="width:30%">Form</th>
+                    <th>Beispiele</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="cat reg">Vollverben</td>       <td class="pattern">Perfekt (2 Teile)</td>    <td class="beispiel">ich <em>habe gemacht</em>, er <em>ist gefahren</em>, wir <em>haben telefoniert</em></td></tr>
+                <tr><td class="cat ier" style="background:#dbeafe;color:#1e40af;">sein + haben</td>  <td class="pattern">Präteritum (1 Wort)</td>  <td class="beispiel">ich <em>war</em>, du <em>warst</em>, sie <em>hatte</em>, wir <em>hatten</em></td></tr>
+                <tr><td class="cat gem">Modalverben</td>      <td class="pattern">Präteritum (1 Wort)</td>  <td class="beispiel">ich <em>konnte</em>, du <em>musstest</em>, er <em>durfte</em>, wir <em>wollten</em>, <em>sollten</em>, <em>mochten</em></td></tr>
+            </tbody>
+        </table>
+
+        <h3 style="margin-top:14px;">Hilfsverben im Perfekt (haben oder sein?)</h3>
+        <table class="aux-tabelle">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th class="haben">haben</th>
+                    <th class="sein">sein</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="row-label">ich</td>        <td class="haben">habe</td>  <td class="sein">bin</td></tr>
+                <tr><td class="row-label">du</td>         <td class="haben">hast</td>  <td class="sein">bist</td></tr>
+                <tr><td class="row-label">er/sie/es</td>  <td class="haben">hat</td>   <td class="sein">ist</td></tr>
+                <tr><td class="row-label">wir</td>        <td class="haben">haben</td> <td class="sein">sind</td></tr>
+                <tr><td class="row-label">ihr</td>        <td class="haben">habt</td>  <td class="sein">seid</td></tr>
+                <tr><td class="row-label">sie/Sie</td>    <td class="haben">haben</td> <td class="sein">sind</td></tr>
+            </tbody>
+        </table>
+
+        <p class="sonderfall">🟢 <strong>Perfekt (Vollverb):</strong> Die meisten Verben nehmen <em>haben</em>. Bewegungsverben (<em>gehen, fahren, kommen, fliegen</em>), Zustandsveränderungen (<em>aufstehen, einschlafen, passieren</em>) und die drei Sonderfälle <em>sein, werden, bleiben</em> nehmen <em>sein</em>.</p>
+
+        <p class="sonderfall">🔵 <strong>Präteritum sein + haben:</strong> <em>war, warst, war, waren, wart, waren</em> · <em>hatte, hattest, hatte, hatten, hattet, hatten</em>. Im Alltag <strong>niemals</strong> „ich bin gewesen“ oder „ich habe gehabt“ — immer das Präteritum.</p>
+
+        <p class="sonderfall">🟠 <strong>Präteritum Modalverben:</strong> Stamm + -te + Endung. <em>können, müssen, dürfen</em> verlieren den Umlaut (konnte, musste, durfte). <em>wollen, sollen</em> bleiben wie sie sind (wollte, sollte). <em>mögen</em> wird zu <em>mochte</em> (g→ch). Modalverben stehen auf Position 2, der Infinitiv bleibt am Satzende — eine Satzklammer wie im Präsens.</p>
+
+        <div class="typ-legend">
+            <span class="typ-chip reg"><span class="dot"></span>Perfekt (Vollverb)</span>
+            <span class="typ-chip ier" style="border-color:#2563eb;background:#eff6ff;color:#1e40af;"><span class="dot" style="background:#2563eb;"></span>Prät. sein/haben</span>
+            <span class="typ-chip gem"><span class="dot"></span>Prät. Modalverb</span>
+        </div>
+    </div>
+
+    <button class="start-cta" onclick="showSection(1)">🟢 Runde 1 starten</button>
+    <p class="hinweis">Tipp: Lies jeden Satz laut. Erkennst du eine Vollverb-Form? Dann Perfekt (zwei Lücken). Sind es <em>sein</em>, <em>haben</em> oder ein Modalverb? Dann Präteritum (eine Lücke). Die Farbe links und der Chip oben verraten es — aber trainiere, die Gruppe selbst zu erkennen.</p>
+</div>
+
+<!-- SECTION 1: RUNDE 1 — Mix 1 -->
+<div class="section" id="sec-1">
+    <h2>🎲 Runde 1 — Mix 1 (16 Sätze · Perfekt und Präteritum gemischt)</h2>
+
+    <div class="control-bar">
+        <button class="btn" onclick="showLoesung(1)">Lösung</button>
+        <button class="btn" onclick="resetRunde(1)">Neu</button>
+    </div>
+
+    <div class="drill-progress">
+        <span class="streak">🔥 Streak: <span id="streak-1">0</span></span>
+        <span class="count">✓ <span id="count-1">0</span>/16</span>
+        <div class="bar"><div class="bar-fill" id="bar-1"></div></div>
+        <span class="time">⏱ <span id="timer-1">00:00</span></span>
+        <span class="best">🏆 <span id="best-1">--:--</span></span>
+    </div>
+
+    <div class="typ-tally">
+        <span class="tt-box pf">Perfekt <span class="tally-num" id="tpf-1">0</span><span class="tally-max">/6</span></span>
+        <span class="tt-box ps">Prät. sein/haben <span class="tally-num" id="tps-1">0</span><span class="tally-max">/6</span></span>
+        <span class="tt-box pm">Prät. Modal <span class="tally-num" id="tpm-1">0</span><span class="tally-max">/4</span></span>
+    </div>
+
+    <div id="cards-1"></div>
+
+    <div class="runden-ende" id="ende-1">
+        <h3>🏆 Runde 1 geschafft!</h3>
+        <p>16 Sätze, drei Gruppen gemischt. Du hast pro Karte die richtige Form gewählt — Perfekt oder Präteritum. Runde 2 wird härter, mit selteneren Verben.</p>
+        <div class="stats">
+            <div class="stat-box"><span class="stat-num" id="ende-time-1">00:00</span><span class="stat-lbl">Zeit</span></div>
+            <div class="stat-box"><span class="stat-num" id="ende-streak-1">0</span><span class="stat-lbl">Längste Streak</span></div>
+            <div class="stat-box"><span class="stat-num" id="ende-best-1">--:--</span><span class="stat-lbl">Rekord</span></div>
+        </div>
+        <button class="next-cta" onclick="showSection(2)">🔴 Weiter zu Runde 2 →</button>
+    </div>
+</div>
+
+<!-- SECTION 2: RUNDE 2 — Mix 2 -->
+<div class="section" id="sec-2">
+    <h2>🎲 Runde 2 — Mix 2 (16 Sätze · härter gemischt)</h2>
+
+    <div class="control-bar">
+        <button class="btn" onclick="showLoesung(2)">Lösung</button>
+        <button class="btn" onclick="resetRunde(2)">Neu</button>
+    </div>
+
+    <div class="drill-progress">
+        <span class="streak">🔥 Streak: <span id="streak-2">0</span></span>
+        <span class="count">✓ <span id="count-2">0</span>/16</span>
+        <div class="bar"><div class="bar-fill" id="bar-2"></div></div>
+        <span class="time">⏱ <span id="timer-2">00:00</span></span>
+        <span class="best">🏆 <span id="best-2">--:--</span></span>
+    </div>
+
+    <div class="typ-tally">
+        <span class="tt-box pf">Perfekt <span class="tally-num" id="tpf-2">0</span><span class="tally-max">/7</span></span>
+        <span class="tt-box ps">Prät. sein/haben <span class="tally-num" id="tps-2">0</span><span class="tally-max">/4</span></span>
+        <span class="tt-box pm">Prät. Modal <span class="tally-num" id="tpm-2">0</span><span class="tally-max">/5</span></span>
+    </div>
+
+    <div id="cards-2"></div>
+
+    <div class="runden-ende" id="ende-2">
+        <h3>🏆 Runde 2 geschafft!</h3>
+        <p>32 von 48. Du wechselst blitzschnell zwischen Perfekt-Satzklammer und Präteritum-Einwortform. Der Boss-Mix wartet: seltene Verben, lange Sätze, alles gemischt.</p>
+        <div class="stats">
+            <div class="stat-box"><span class="stat-num" id="ende-time-2">00:00</span><span class="stat-lbl">Zeit</span></div>
+            <div class="stat-box"><span class="stat-num" id="ende-streak-2">0</span><span class="stat-lbl">Längste Streak</span></div>
+            <div class="stat-box"><span class="stat-num" id="ende-best-2">--:--</span><span class="stat-lbl">Rekord</span></div>
+        </div>
+        <button class="next-cta" onclick="showSection(3)">👑 Weiter zum Boss-Level →</button>
+    </div>
+</div>
+
+<!-- SECTION 3: RUNDE 3 — Boss-Mix -->
+<div class="section" id="sec-3">
+    <h2>👑 Runde 3 — Boss-Mix (alles auf einmal · seltener, kniffliger)</h2>
+
+    <div class="control-bar">
+        <button class="btn" onclick="showLoesung(3)">Lösung</button>
+        <button class="btn" onclick="resetRunde(3)">Neu</button>
+    </div>
+
+    <div class="drill-progress">
+        <span class="streak">🔥 Streak: <span id="streak-3">0</span></span>
+        <span class="count">✓ <span id="count-3">0</span>/16</span>
+        <div class="bar"><div class="bar-fill" id="bar-3"></div></div>
+        <span class="time">⏱ <span id="timer-3">00:00</span></span>
+        <span class="best">🏆 <span id="best-3">--:--</span></span>
+    </div>
+
+    <div class="typ-tally">
+        <span class="tt-box pf">Perfekt <span class="tally-num" id="tpf-3">0</span><span class="tally-max">/8</span></span>
+        <span class="tt-box ps">Prät. sein/haben <span class="tally-num" id="tps-3">0</span><span class="tally-max">/4</span></span>
+        <span class="tt-box pm">Prät. Modal <span class="tally-num" id="tpm-3">0</span><span class="tally-max">/4</span></span>
+    </div>
+
+    <div id="cards-3"></div>
+
+    <div class="runden-ende" id="ende-3">
+        <h3>🎉 Boss besiegt!</h3>
+        <p>48 Sätze aus allen drei Vergangenheits-Gruppen. Vollverben im Perfekt, <em>sein/haben</em> und Modalverben im Präteritum — du hast die ganze A1-Vergangenheit verinnerlicht. Das ist das natürliche Deutsch von Muttersprachlern. Gratulation!</p>
+        <div class="stats">
+            <div class="stat-box"><span class="stat-num" id="ende-time-3">00:00</span><span class="stat-lbl">Zeit</span></div>
+            <div class="stat-box"><span class="stat-num" id="ende-streak-3">0</span><span class="stat-lbl">Längste Streak</span></div>
+            <div class="stat-box"><span class="stat-num" id="ende-best-3">--:--</span><span class="stat-lbl">Rekord</span></div>
+        </div>
+        <button class="next-cta" onclick="resetRunde(3)">🔄 Nochmal Boss-Level</button>
+    </div>
+</div>
+
+<div class="author-footer">
+    <span class="author-name">Franks Drill</span> · A1 · FD25 · Vergangenheits-Megamix · Perfekt trifft Präteritum
+</div>
+
+</div>
+
+<script>
+// =========================================================
+//  Franks Drill 25 — Vergangenheits-Megamix · Perfekt + Präteritum
+// =========================================================
+
+// Item-Schema:
+//   v       = Infinitiv
+//   cat     = Form-Kategorie: pf (Perfekt) | ps (Prät. sein/haben) | pm (Prät. Modalverb)
+//   form    = "perfekt" (zwei Lücken) | "praet" (eine Lücke)
+//   subj    = Subjekt (fest im Satz)
+//   mid     = Satzmitte
+//   e       = Emoji
+//
+//   Nur bei form="perfekt":
+//   ansAux  = konjugiertes Hilfsverb (Lücke 1) — z.B. "habe", "bin"
+//   ansPP   = Partizip II (Lücke 2 am Satzende)
+//
+//   Nur bei form="praet":
+//   ans     = konjugiertes Präteritum (z.B. "war", "hatte", "konnte", "wollte")
+//   tail    = optionaler Satz-Rest NACH der Lücke (z.B. bei Modalverben der Infinitiv am Ende)
+
+var DRILL = {
+    // Runde 1 — Mix 1 (16): 6 Perfekt + 6 Prät. sein/haben + 4 Prät. Modal
+    1: [
+        // Perfekt (6)
+        { v:"machen",       cat:"pf", form:"perfekt", subj:"Ich",          ansAux:"habe",  mid:"gestern viel Sport",                     ansPP:"gemacht",     e:"🏋️" },
+        { v:"gehen",        cat:"pf", form:"perfekt", subj:"Wir",          ansAux:"sind",  mid:"nach dem Essen nach Hause",              ansPP:"gegangen",    e:"🏠" },
+        { v:"telefonieren", cat:"pf", form:"perfekt", subj:"Marie",        ansAux:"hat",   mid:"mit ihrer Freundin lange",               ansPP:"telefoniert", e:"📞" },
+        { v:"einkaufen",    cat:"pf", form:"perfekt", subj:"Ich",          ansAux:"habe",  mid:"am Samstag für die ganze Woche",         ansPP:"eingekauft",  e:"🛒" },
+        { v:"essen",        cat:"pf", form:"perfekt", subj:"Ihr",          ansAux:"habt",  mid:"zum Abendessen eine leckere Pasta",      ansPP:"gegessen",    e:"🍝" },
+        { v:"fahren",       cat:"pf", form:"perfekt", subj:"Sie (Plural)", ansAux:"sind",  mid:"mit dem Zug nach Berlin",                ansPP:"gefahren",    e:"🚄" },
+        // Präteritum sein/haben (6)
+        { v:"sein",         cat:"ps", form:"praet",   subj:"Ich",          ans:"war",      mid:"gestern im Kino",                        tail:"",              e:"🎬" },
+        { v:"haben",        cat:"ps", form:"praet",   subj:"Du",           ans:"hattest",  mid:"am Montag Geburtstag",                   tail:"",              e:"🎂" },
+        { v:"sein",         cat:"ps", form:"praet",   subj:"Wir",          ans:"waren",    mid:"letzten Sommer am Meer",                 tail:"",              e:"🏖️" },
+        { v:"haben",        cat:"ps", form:"praet",   subj:"Die Kinder",   ans:"hatten",   mid:"nach der Schule großen Hunger",          tail:"",              e:"🍎" },
+        { v:"sein",         cat:"ps", form:"praet",   subj:"Das Wetter",   ans:"war",      mid:"am Wochenende sehr schön",               tail:"",              e:"☀️" },
+        { v:"haben",        cat:"ps", form:"praet",   subj:"Ihr",          ans:"hattet",   mid:"gestern viel Arbeit im Büro",            tail:"",              e:"💼" },
+        // Präteritum Modalverben (4)
+        { v:"können",       cat:"pm", form:"praet",   subj:"Ich",          ans:"konnte",   mid:"gestern Nacht nicht",                    tail:"schlafen",      e:"😴" },
+        { v:"müssen",       cat:"pm", form:"praet",   subj:"Du",           ans:"musstest", mid:"heute früh aus dem Bett",                tail:"aufstehen",     e:"⏰" },
+        { v:"wollen",       cat:"pm", form:"praet",   subj:"Wir",          ans:"wollten",  mid:"am Freitag zusammen ins Kino",           tail:"gehen",         e:"🎥" },
+        { v:"sollen",       cat:"pm", form:"praet",   subj:"Der Praktikant",ans:"sollte",  mid:"pünktlich um acht im Büro",              tail:"sein",          e:"🕗" }
+    ],
+    // Runde 2 — Mix 2 (16): 7 Perfekt + 4 Prät. sein/haben + 5 Prät. Modal
+    2: [
+        // Perfekt (7)
+        { v:"lesen",        cat:"pf", form:"perfekt", subj:"Ich",          ansAux:"habe",  mid:"einen spannenden Krimi zu Ende",         ansPP:"gelesen",     e:"📖" },
+        { v:"besuchen",     cat:"pf", form:"perfekt", subj:"Mein Bruder",  ansAux:"hat",   mid:"unsere Oma am Wochenende",               ansPP:"besucht",     e:"👵" },
+        { v:"aufstehen",    cat:"pf", form:"perfekt", subj:"Du",           ansAux:"bist",  mid:"heute viel zu früh",                     ansPP:"aufgestanden",e:"🌅" },
+        { v:"kaufen",       cat:"pf", form:"perfekt", subj:"Marie",        ansAux:"hat",   mid:"sich neue Schuhe im Sale",               ansPP:"gekauft",     e:"👟" },
+        { v:"studieren",    cat:"pf", form:"perfekt", subj:"Wir",          ansAux:"haben", mid:"damals in München Biologie",             ansPP:"studiert",    e:"🧬" },
+        { v:"anrufen",      cat:"pf", form:"perfekt", subj:"Der Kunde",    ansAux:"hat",   mid:"gestern Abend schon zweimal",            ansPP:"angerufen",   e:"📱" },
+        { v:"fliegen",      cat:"pf", form:"perfekt", subj:"Ihr",          ansAux:"seid",  mid:"letzten Sommer nach Spanien",            ansPP:"geflogen",    e:"✈️" },
+        // Präteritum sein/haben (4)
+        { v:"sein",         cat:"ps", form:"praet",   subj:"Du",           ans:"warst",    mid:"am Samstagabend auf der Party",          tail:"",              e:"🎉" },
+        { v:"haben",        cat:"ps", form:"praet",   subj:"Ich",          ans:"hatte",    mid:"als Kind einen kleinen Hund",            tail:"",              e:"🐶" },
+        { v:"sein",         cat:"ps", form:"praet",   subj:"Ihr",          ans:"wart",     mid:"auch schon mal in Japan",                tail:"",              e:"🗾" },
+        { v:"haben",        cat:"ps", form:"praet",   subj:"Wir",          ans:"hatten",   mid:"gestern wirklich schlechtes Wetter",     tail:"",              e:"🌧️" },
+        // Präteritum Modalverben (5)
+        { v:"dürfen",       cat:"pm", form:"praet",   subj:"Ich",          ans:"durfte",   mid:"als Kind abends nie lange",              tail:"fernsehen",     e:"📺" },
+        { v:"mögen",        cat:"pm", form:"praet",   subj:"Marie",        ans:"mochte",   mid:"früher gar keinen Kaffee",               tail:"trinken",       e:"☕" },
+        { v:"können",       cat:"pm", form:"praet",   subj:"Wir",          ans:"konnten",  mid:"wegen des Schnees nicht",                tail:"fahren",        e:"❄️" },
+        { v:"wollen",       cat:"pm", form:"praet",   subj:"Die Kinder",   ans:"wollten",  mid:"unbedingt einen großen Hund",            tail:"haben",         e:"🐕" },
+        { v:"müssen",       cat:"pm", form:"praet",   subj:"Ihr",          ans:"musstet",  mid:"gestern alle Fenster",                   tail:"putzen",        e:"🪟" }
+    ],
+    // Runde 3 — Boss-Mix (16): 8 Perfekt + 4 Prät. sein/haben + 4 Prät. Modal — längere, anspruchsvollere Sätze
+    3: [
+        // Perfekt (8)
+        { v:"einladen",     cat:"pf", form:"perfekt", subj:"Wir",          ansAux:"haben", mid:"Marie zu ihrem dreißigsten Geburtstag",   ansPP:"eingeladen",   e:"🎂" },
+        { v:"bekommen",     cat:"pf", form:"perfekt", subj:"Du",           ansAux:"hast",  mid:"zu Weihnachten viele schöne Geschenke",    ansPP:"bekommen",     e:"🎁" },
+        { v:"einschlafen",  cat:"pf", form:"perfekt", subj:"Das Baby",     ansAux:"ist",   mid:"nach dem Schlaflied ganz schnell",         ansPP:"eingeschlafen",e:"👶" },
+        { v:"verstehen",    cat:"pf", form:"perfekt", subj:"Ich",          ansAux:"habe",  mid:"die schwere Frage sofort",                 ansPP:"verstanden",   e:"💡" },
+        { v:"organisieren", cat:"pf", form:"perfekt", subj:"Sie (sie, fem.)",ansAux:"hat", mid:"die Hochzeit ihres Bruders ganz alleine",  ansPP:"organisiert",  e:"💒" },
+        { v:"bringen",      cat:"pf", form:"perfekt", subj:"Der Vater",    ansAux:"hat",   mid:"die Kinder nach dem Essen ins Bett",        ansPP:"gebracht",     e:"🛏️" },
+        { v:"fallen",       cat:"pf", form:"perfekt", subj:"Die Blätter",  ansAux:"sind",  mid:"im Herbst von den Bäumen",                  ansPP:"gefallen",     e:"🍂" },
+        { v:"schreiben",    cat:"pf", form:"perfekt", subj:"Ihr",          ansAux:"habt",  mid:"der Oma eine lange, liebe E-Mail",          ansPP:"geschrieben",  e:"📧" },
+        // Präteritum sein/haben (4)
+        { v:"sein",         cat:"ps", form:"praet",   subj:"Meine Großeltern", ans:"waren", mid:"in ihrer Jugend oft im Theater",           tail:"",              e:"🎭" },
+        { v:"haben",        cat:"ps", form:"praet",   subj:"Du",           ans:"hattest",  mid:"letzte Woche eine schlimme Erkältung",      tail:"",              e:"🤒" },
+        { v:"sein",         cat:"ps", form:"praet",   subj:"Ich",          ans:"war",      mid:"als Student noch nie im Ausland",           tail:"",              e:"🌍" },
+        { v:"haben",        cat:"ps", form:"praet",   subj:"Der Opa",      ans:"hatte",    mid:"früher einen riesigen Bauernhof",           tail:"",              e:"🚜" },
+        // Präteritum Modalverben (4)
+        { v:"mögen",        cat:"pm", form:"praet",   subj:"Wir",          ans:"mochten",  mid:"als Kinder den Geschmack von Spinat gar nicht", tail:"",          e:"🥬" },
+        { v:"sollen",       cat:"pm", form:"praet",   subj:"Ich",          ans:"sollte",   mid:"eigentlich längst nach Hause",              tail:"fahren",        e:"🚗" },
+        { v:"können",       cat:"pm", form:"praet",   subj:"Die alte Dame", ans:"konnte", mid:"die kleine Schrift auf dem Schild nicht mehr", tail:"lesen", e:"👓" },
+        { v:"dürfen",       cat:"pm", form:"praet",   subj:"Ihr",          ans:"durftet",  mid:"gestern wirklich mit uns nach Berlin",      tail:"mitkommen",     e:"🚆" }
+    ]
+};
+
+// Tally-Mapping pro Runde
+// FD25: Megamix — jede Runde zählt die drei Form-Gruppen (pf / ps / pm)
+function tallyKeyOf(runde, item) {
+    return item.cat;
+}
+var TALLY_KEYS = {
+    1: ["pf", "ps", "pm"],
+    2: ["pf", "ps", "pm"],
+    3: ["pf", "ps", "pm"]
+};
+
+function emptyTally(runde) {
+    var t = {};
+    TALLY_KEYS[runde].forEach(function(k){ t[k] = 0; });
+    return t;
+}
+
+var state = {
+    1: { timer:null, sec:0, started:false, stopped:false, maxStreak:0, curStreak:0, solved:0, tally:emptyTally(1) },
+    2: { timer:null, sec:0, started:false, stopped:false, maxStreak:0, curStreak:0, solved:0, tally:emptyTally(2) },
+    3: { timer:null, sec:0, started:false, stopped:false, maxStreak:0, curStreak:0, solved:0, tally:emptyTally(3) }
+};
+var bestTime = { 1:null, 2:null, 3:null };
+
+function showSection(idx) {
+    document.querySelectorAll('.section').forEach(function(s,i){ s.classList.toggle('active', i===idx); });
+    document.querySelectorAll('.nav-btn').forEach(function(b,i){ b.classList.toggle('active', i===idx); });
+    window.scrollTo({ top:0, behavior:'smooth' });
+}
+
+function shuffleArr(arr) {
+    var a = arr.slice();
+    for (var i = a.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var t = a[i]; a[i] = a[j]; a[j] = t;
+    }
+    return a;
+}
+
+function catLabel(cat) {
+    return { pf:"Perfekt", ps:"Prät. sein/haben", pm:"Prät. Modalverb" }[cat] || cat;
+}
+
+function renderCards(runde) {
+    var data = shuffleArr(DRILL[runde]);
+    var container = document.getElementById('cards-' + runde);
+    container.innerHTML = '';
+    data.forEach(function(item, idx) {
+        var card = document.createElement('div');
+        card.className = 'pf-card';
+        card.setAttribute('data-cat', item.cat);
+        card.setAttribute('data-form', item.form);
+        card.setAttribute('data-solved', '0');
+        card.setAttribute('data-runde', runde);
+        card.setAttribute('data-idx', idx);
+        card.setAttribute('data-tally-key', tallyKeyOf(runde, item) || '');
+
+        var satzHtml;
+        if (item.form === 'perfekt') {
+            satzHtml =
+                '<span class="subj">' + escapeHtml(item.subj) + '</span> ' +
+                '<input class="blank aux-input" type="text" ' +
+                    'data-ans="' + escapeAttr(item.ansAux) + '" ' +
+                    'data-role="aux" ' +
+                    'data-runde="' + runde + '" ' +
+                    'data-idx="' + idx + '" ' +
+                    'autocomplete="off" autocorrect="off" spellcheck="false" placeholder=""> ' +
+                escapeHtml(item.mid) + ' ' +
+                '<input class="blank pp-input" type="text" ' +
+                    'data-ans="' + escapeAttr(item.ansPP) + '" ' +
+                    'data-role="pp" ' +
+                    'data-runde="' + runde + '" ' +
+                    'data-idx="' + idx + '" ' +
+                    'autocomplete="off" autocorrect="off" spellcheck="false" placeholder="">.';
+        } else {
+            // form === 'praet' — ein Blank, optional mit Infinitiv/Tail am Satzende
+            var tailHtml = (item.tail && item.tail.length > 0)
+                ? ' ' + escapeHtml(item.tail) + '.'
+                : '.';
+            satzHtml =
+                '<span class="subj">' + escapeHtml(item.subj) + '</span> ' +
+                '<input class="blank prt-input" type="text" ' +
+                    'data-ans="' + escapeAttr(item.ans) + '" ' +
+                    'data-role="prt" ' +
+                    'data-runde="' + runde + '" ' +
+                    'data-idx="' + idx + '" ' +
+                    'autocomplete="off" autocorrect="off" spellcheck="false" placeholder=""> ' +
+                escapeHtml(item.mid) + tailHtml;
+        }
+
+        card.innerHTML =
+            '<div class="pf-badge">#' + (idx+1) + '</div>' +
+            '<div class="pf-inputs">' +
+                '<span class="pf-chip" data-cat="' + escapeAttr(item.cat) + '">' +
+                    '<span class="pf-emoji">' + (item.e || '') + '</span>' +
+                    '<span class="pf-label">Infinitiv</span>' +
+                    '<span class="pf-word">' + escapeHtml(item.v) + '</span>' +
+                '</span>' +
+                '<span class="cat-badge" data-cat="' + escapeAttr(item.cat) + '">' + escapeHtml(catLabel(item.cat)) + '</span>' +
+            '</div>' +
+            '<div class="pf-satz">' + satzHtml + '</div>' +
+            '<span class="pf-typ-reveal">' + escapeHtml(catLabel(item.cat)) + '</span>';
+
+        container.appendChild(card);
+    });
+    container.querySelectorAll('input.blank').forEach(function(inp) {
+        inp.addEventListener('input', function() { liveCheck(inp); });
+    });
+}
+
+function escapeHtml(s) {
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+function escapeAttr(s) {
+    return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;');
+}
+
+function isAnyAnswer(val, inp) {
+    var primary = (inp.dataset.ans || '').toLowerCase();
+    return val === primary;
+}
+function isAnyPrefix(val, inp) {
+    var primary = (inp.dataset.ans || '').toLowerCase();
+    return primary.indexOf(val) === 0;
+}
+
+function liveCheck(inp) {
+    var runde = parseInt(inp.dataset.runde, 10);
+    var val = inp.value.trim().toLowerCase();
+    var wasCorrect = inp.classList.contains('correct');
+    inp.classList.remove('correct', 'wrong');
+
+    if (!state[runde].started && val.length > 0) startTimer(runde);
+
+    if (val.length === 0) {
+        if (wasCorrect) checkCardState(inp);
+        return;
+    }
+    if (isAnyAnswer(val, inp)) {
+        inp.classList.add('correct');
+        checkCardState(inp);
+        if (!wasCorrect) advanceFocus(inp);
+        return;
+    }
+    if (isAnyPrefix(val, inp)) {
+        if (wasCorrect) checkCardState(inp);
+        return;
+    }
+    inp.classList.add('wrong');
+    if (wasCorrect) checkCardState(inp);
+    state[runde].curStreak = 0;
+    updateStreak(runde);
+}
+
+function advanceFocus(inp) {
+    var card = inp.closest('.pf-card');
+    if (!card) return;
+    var runde = parseInt(card.dataset.runde, 10);
+
+    var withinCard = card.querySelectorAll('input.blank:not(.correct)');
+    if (withinCard.length > 0) {
+        var firstLocal = withinCard[0];
+        setTimeout((function(n){ return function(){ n.focus(); }; })(firstLocal), 120);
+        return;
+    }
+
+    var allCards = Array.from(document.querySelectorAll('#cards-' + runde + ' .pf-card'));
+    var curIdx = allCards.indexOf(card);
+    for (var i = curIdx + 1; i < allCards.length; i++) {
+        var nextInp = allCards[i].querySelector('input.blank:not(.correct)');
+        if (nextInp) {
+            setTimeout((function(n){ return function(){ n.focus(); n.scrollIntoView({ behavior:'smooth', block:'center' }); }; })(nextInp), 120);
+            return;
+        }
+    }
+    for (var j = 0; j < curIdx; j++) {
+        var prevInp = allCards[j].querySelector('input.blank:not(.correct)');
+        if (prevInp) {
+            setTimeout((function(n){ return function(){ n.focus(); n.scrollIntoView({ behavior:'smooth', block:'center' }); }; })(prevInp), 120);
+            return;
+        }
+    }
+}
+
+function checkCardState(inp) {
+    var card = inp.closest('.pf-card');
+    if (!card) return;
+    var runde = parseInt(card.dataset.runde, 10);
+    var tallyKey = card.dataset.tallyKey;
+    var inputs = card.querySelectorAll('input.blank');
+    var allCorrect = Array.from(inputs).every(function(i){ return i.classList.contains('correct'); });
+    var wasSolved = card.dataset.solved === '1';
+
+    if (allCorrect && !wasSolved) {
+        card.setAttribute('data-solved', '1');
+        state[runde].solved++;
+        state[runde].curStreak++;
+        if (state[runde].curStreak > state[runde].maxStreak) state[runde].maxStreak = state[runde].curStreak;
+        if (tallyKey && state[runde].tally.hasOwnProperty(tallyKey)) state[runde].tally[tallyKey]++;
+        updateStreak(runde);
+        updateProgress(runde);
+        updateTally(runde);
+        if (state[runde].solved === DRILL[runde].length) finishRunde(runde);
+    } else if (!allCorrect && wasSolved) {
+        card.setAttribute('data-solved', '0');
+        state[runde].solved = Math.max(0, state[runde].solved - 1);
+        if (tallyKey && state[runde].tally.hasOwnProperty(tallyKey)) {
+            state[runde].tally[tallyKey] = Math.max(0, state[runde].tally[tallyKey] - 1);
+        }
+        updateProgress(runde);
+        updateTally(runde);
+        var ende = document.getElementById('ende-' + runde);
+        if (ende) ende.classList.remove('show');
+    }
+}
+
+function updateProgress(runde) {
+    document.getElementById('count-' + runde).textContent = state[runde].solved;
+    var pct = (state[runde].solved / DRILL[runde].length) * 100;
+    document.getElementById('bar-' + runde).style.width = pct + '%';
+}
+function updateStreak(runde) {
+    document.getElementById('streak-' + runde).textContent = state[runde].curStreak;
+}
+function updateTally(runde) {
+    TALLY_KEYS[runde].forEach(function(k) {
+        var el = document.getElementById('t' + k + '-' + runde);
+        if (el) el.textContent = state[runde].tally[k];
+    });
+}
+
+function startTimer(runde) {
+    if (state[runde].started) return;
+    state[runde].started = true;
+    state[runde].stopped = false;
+    state[runde].sec = 0;
+    state[runde].timer = setInterval(function() {
+        state[runde].sec++;
+        document.getElementById('timer-' + runde).textContent = fmtTime(state[runde].sec);
+    }, 1000);
+}
+function stopTimer(runde) {
+    if (state[runde].stopped) return;
+    state[runde].stopped = true;
+    if (state[runde].timer) clearInterval(state[runde].timer);
+    if (bestTime[runde] === null || state[runde].sec < bestTime[runde]) {
+        bestTime[runde] = state[runde].sec;
+        document.getElementById('best-' + runde).textContent = fmtTime(bestTime[runde]);
+    }
+}
+function fmtTime(sec) {
+    var m = Math.floor(sec / 60);
+    var s = sec % 60;
+    return (m<10?'0':'') + m + ':' + (s<10?'0':'') + s;
+}
+
+function finishRunde(runde) {
+    stopTimer(runde);
+    var ende = document.getElementById('ende-' + runde);
+    document.getElementById('ende-time-' + runde).textContent = fmtTime(state[runde].sec);
+    document.getElementById('ende-streak-' + runde).textContent = state[runde].maxStreak;
+    document.getElementById('ende-best-' + runde).textContent =
+        (bestTime[runde] !== null) ? fmtTime(bestTime[runde]) : '--:--';
+    ende.classList.add('show');
+    setTimeout(function() { ende.scrollIntoView({ behavior:'smooth', block:'center' }); }, 300);
+}
+
+function showLoesung(runde) {
+    document.querySelectorAll('#cards-' + runde + ' .pf-card').forEach(function(card) {
+        var inputs = card.querySelectorAll('input.blank');
+        inputs.forEach(function(inp) {
+            inp.value = inp.dataset.ans;
+            inp.classList.remove('wrong');
+            inp.classList.add('correct');
+        });
+        card.setAttribute('data-solved', '1');
+    });
+    state[runde].solved = DRILL[runde].length;
+    state[runde].curStreak = 0;
+    state[runde].tally = emptyTally(runde);
+    DRILL[runde].forEach(function(item) {
+        var k = tallyKeyOf(runde, item);
+        if (k && state[runde].tally.hasOwnProperty(k)) state[runde].tally[k]++;
+    });
+    updateProgress(runde);
+    updateStreak(runde);
+    updateTally(runde);
+    stopTimer(runde);
+}
+
+function resetRunde(runde) {
+    if (state[runde].timer) clearInterval(state[runde].timer);
+    state[runde] = { timer:null, sec:0, started:false, stopped:false, maxStreak:0, curStreak:0, solved:0, tally:emptyTally(runde) };
+    document.getElementById('timer-' + runde).textContent = '00:00';
+    document.getElementById('streak-' + runde).textContent = '0';
+    document.getElementById('count-' + runde).textContent = '0';
+    document.getElementById('bar-' + runde).style.width = '0%';
+    updateTally(runde);
+    renderCards(runde);
+    document.getElementById('ende-' + runde).classList.remove('show');
+}
+
+[1,2,3].forEach(function(r) { renderCards(r); });
+
+</script>
+</body>
+</html>
