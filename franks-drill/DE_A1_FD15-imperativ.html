@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Franks Drill 15 — Imperativ (du · ihr · Sie)</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+}
+
+/* Header */
+.header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 30px;
+    text-align: center;
+}
+.header h1 { font-size: 2.2em; font-family: Georgia, 'Times New Roman', serif; color: white; margin-bottom: 8px; border: none; padding: 0; }
+.header .subtitle, .header p { font-size: 1.1em; font-family: Georgia, 'Times New Roman', serif; opacity: 0.95; color: rgba(255,255,255,0.9); margin: 0; }
+.header .big-emoji { font-size: 2.6em; display: block; margin-top: 8px; }
+
+/* Nav */
+.nav {
+    display: flex;
+    flex-wrap: nowrap;
+    background: #f8f9fa;
+    border-top: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+}
+.nav-btn {
+    flex: 1;
+    padding: 14px 10px;
+    text-align: center;
+    cursor: pointer;
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    transition: all 0.3s;
+    font-size: 0.92em;
+    font-weight: 500;
+    color: #666;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.nav-btn:last-child { border-right: none; }
+.nav-btn:hover { background: #e9ecef; color: #495057; }
+.nav-btn.active {
+    background: white;
+    color: #667eea;
+    font-weight: 600;
+    border-bottom: 3px solid #667eea;
+}
+.nav-emoji { font-size: 1.3em; line-height: 1.2; }
+.nav-label { font-size: 0.78em; margin-top: 2px; line-height: 1.2; }
+
+@media (max-width: 600px) {
+    body { padding: 8px; }
+    .nav { flex-wrap: wrap; }
+    .nav-btn {
+        flex: 1 1 25%;
+        min-width: 0;
+        font-size: 0.8em;
+        padding: 10px 6px;
+        border-right: 1px solid #ddd;
+    }
+    .nav-btn:last-child { border-right: 1px solid #ddd; }
+}
+
+.section { display: none; padding: 28px 30px 10px 30px; }
+.section.active { display: block; }
+
+h2 {
+    color: #333;
+    font-size: 1.25em;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+/* Drill-Hero */
+.drill-hero {
+    background: linear-gradient(135deg, #ff7e5f 0%, #feb47b 100%);
+    border-radius: 14px;
+    padding: 26px 30px;
+    margin-bottom: 22px;
+    color: white;
+    text-align: center;
+    box-shadow: 0 4px 16px rgba(255,126,95,0.25);
+}
+.drill-hero .hero-emoji { font-size: 3.4em; display: block; margin-bottom: 8px; }
+.drill-hero h2 { color: white; border: none; font-size: 1.7em; margin-bottom: 10px; padding: 0; }
+.drill-hero p { font-size: 1.05em; line-height: 1.6; opacity: 0.95; }
+
+/* Intro-Erklärbox */
+.drill-explain {
+    background: #f0f4ff;
+    border-left: 4px solid #667eea;
+    border-radius: 0 10px 10px 0;
+    padding: 18px 22px;
+    margin-bottom: 18px;
+    font-size: 0.97em;
+    line-height: 1.75;
+    color: #333;
+}
+.drill-explain h3 { color: #4a148c; margin-bottom: 10px; font-size: 1.1em; }
+.drill-explain p { margin-bottom: 8px; }
+.drill-explain .rule-highlight {
+    display: block;
+    margin-top: 10px;
+    padding: 12px 16px;
+    background: #dbeafe;
+    border-left: 4px solid #2563eb;
+    border-radius: 0 8px 8px 0;
+    font-weight: 600;
+    color: #1d4ed8;
+}
+.drill-explain .sonderfall {
+    display: block;
+    margin-top: 10px;
+    padding: 10px 14px;
+    background: #fef3c7;
+    border-left: 4px solid #f59e0b;
+    border-radius: 0 8px 8px 0;
+    color: #92400e;
+    font-size: 0.95em;
+}
+
+/* Imperativ-Tabelle */
+.imp-tabelle {
+    margin-top: 14px;
+    border-collapse: collapse;
+    width: 100%;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    font-size: 0.9em;
+}
+.imp-tabelle th,
+.imp-tabelle td {
+    padding: 8px 10px;
+    text-align: center;
+    border: 1px solid #e5e7eb;
+}
+.imp-tabelle th { background: #f5f7ff; color: #4a148c; font-weight: 700; }
+.imp-tabelle th.du    { background: #fee2e2; color: #991b1b; }
+.imp-tabelle th.ihr   { background: #dcfce7; color: #14532d; }
+.imp-tabelle th.Sie   { background: #dbeafe; color: #1e40af; }
+.imp-tabelle td.du    { background: #fef2f2; color: #991b1b; font-weight: 600; }
+.imp-tabelle td.ihr   { background: #f0fdf4; color: #14532d; font-weight: 600; }
+.imp-tabelle td.Sie   { background: #eff6ff; color: #1e40af; font-weight: 600; }
+.imp-tabelle td.row-label { background: #fafafa; color: #333; font-weight: 600; text-align: left; font-style: italic; }
+.imp-tabelle td.note { font-size: 0.82em; color: #6b7280; font-style: italic; text-align: left; background: #fafafa; }
+
+/* Typ-Legende */
+.typ-legend {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 14px;
+    padding: 12px;
+    background: white;
+    border-radius: 10px;
+    justify-content: center;
+}
+.typ-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 0.88em;
+    font-weight: 600;
+    border: 2px solid;
+}
+.typ-chip .dot { width: 10px; height: 10px; border-radius: 50%; }
+.typ-chip.du  { border-color: #dc2626; background: #fef2f2; color: #991b1b; }
+.typ-chip.du .dot  { background: #dc2626; }
+.typ-chip.ihr { border-color: #16a34a; background: #f0fdf4; color: #14532d; }
+.typ-chip.ihr .dot { background: #16a34a; }
+.typ-chip.Sie { border-color: #2563eb; background: #eff6ff; color: #1e40af; }
+.typ-chip.Sie .dot { background: #2563eb; }
+
+/* Drill-Progress */
+.drill-progress {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 18px;
+    background: #fff7ed;
+    border: 1px solid #fed7aa;
+    border-radius: 10px;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+    font-variant-numeric: tabular-nums;
+}
+.drill-progress .streak { font-weight: 700; color: #ea580c; font-size: 1.05em; }
+.drill-progress .count { font-weight: 700; color: #4a148c; font-size: 1.0em; }
+.drill-progress .bar {
+    flex: 1; min-width: 140px; height: 10px;
+    background: #ffe4c7; border-radius: 5px; overflow: hidden;
+}
+.drill-progress .bar-fill {
+    height: 100%; width: 0%;
+    background: linear-gradient(90deg, #ff7e5f, #43a047);
+    transition: width 0.4s ease;
+}
+.drill-progress .time { font-size: 0.92em; color: #666; }
+.drill-progress .best { font-size: 0.82em; color: #999; }
+
+/* Typ-Tally */
+.typ-tally {
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 18px;
+}
+.tt-box {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 6px;
+    padding: 5px 14px;
+    border-radius: 20px;
+    font-size: 0.85em;
+    font-weight: 700;
+    border: 1px solid #e5e7eb;
+    background: #fafafa;
+    letter-spacing: 0.04em;
+}
+.tt-box.du    { color: #991b1b; border-color: #fecaca; background: #fef2f2; }
+.tt-box.ihr   { color: #14532d; border-color: #bbf7d0; background: #f0fdf4; }
+.tt-box.Sie   { color: #1e40af; border-color: #bfdbfe; background: #eff6ff; }
+.tt-box.einf  { color: #4a148c; border-color: #e9d5ff; background: #faf5ff; }
+.tt-box.trb   { color: #9a3412; border-color: #fed7aa; background: #fff7ed; }
+.tt-box .tally-num { font-size: 1.05em; }
+.tt-box .tally-max { color: #888; font-weight: 400; }
+
+@media (max-width: 600px) {
+    .drill-progress { gap: 8px; padding: 10px 12px; }
+    .drill-progress .bar { flex: 1 1 100%; order: 99; }
+}
+
+/* Control-Bar */
+.control-bar {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-bottom: 14px;
+}
+.btn {
+    background: #f5f7ff;
+    border: 1px solid #c5cff5;
+    border-radius: 8px;
+    padding: 6px 16px;
+    font-size: 0.85em;
+    color: #667eea;
+    cursor: pointer;
+    transition: all 0.15s;
+    font-weight: 500;
+    margin-left: 6px;
+}
+.btn:hover { background: #667eea; color: white; border-color: #667eea; }
+
+/* Imperativ-Karte */
+.imp-card {
+    background: #f8f9ff;
+    padding: 18px 22px 22px;
+    margin-bottom: 14px;
+    border-radius: 12px;
+    border-left: 6px solid #cbd5e1;
+    position: relative;
+    transition: background 0.5s ease, border-color 0.3s ease;
+}
+.imp-card[data-pers="du"]  { border-left-color: #dc2626; }
+.imp-card[data-pers="ihr"] { border-left-color: #16a34a; }
+.imp-card[data-pers="Sie"] { border-left-color: #2563eb; }
+
+.imp-card[data-solved="1"][data-pers="du"]  { background: linear-gradient(90deg, #fef2f2, #f8f9ff 70%); }
+.imp-card[data-solved="1"][data-pers="ihr"] { background: linear-gradient(90deg, #f0fdf4, #f8f9ff 70%); }
+.imp-card[data-solved="1"][data-pers="Sie"] { background: linear-gradient(90deg, #eff6ff, #f8f9ff 70%); }
+.imp-card[data-solved="1"] { animation: cardPulse 0.5s ease; }
+
+@keyframes cardPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.015); box-shadow: 0 4px 14px rgba(0,0,0,0.08); }
+    100% { transform: scale(1); }
+}
+
+.imp-badge {
+    position: absolute;
+    top: 12px;
+    right: 14px;
+    background: #e5e7eb;
+    color: #666;
+    font-size: 0.72em;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-weight: 600;
+}
+
+.imp-inputs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+/* Person-Chip + Verb-Chip */
+.imp-chip {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 8px;
+    padding: 8px 16px;
+    border: 2px solid;
+    border-radius: 8px;
+    font-size: 1.0em;
+    font-weight: 600;
+}
+.imp-chip .imp-emoji {
+    font-size: 1.4em;
+    line-height: 1;
+    position: relative;
+    top: 3px;
+}
+.imp-chip .imp-label {
+    font-size: 0.78em;
+    font-weight: 400;
+    opacity: 0.8;
+}
+.imp-chip .imp-word {
+    font-weight: 700;
+    font-size: 1.05em;
+    font-style: italic;
+}
+.imp-chip .imp-pref-hl {
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 3px;
+}
+.imp-chip[data-pers="du"]  { background: #fee2e2; border-color: #dc2626; color: #991b1b; }
+.imp-chip[data-pers="ihr"] { background: #dcfce7; border-color: #16a34a; color: #14532d; }
+.imp-chip[data-pers="Sie"] { background: #dbeafe; border-color: #2563eb; color: #1e40af; }
+
+.pers-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 12px;
+    border-radius: 14px;
+    font-size: 0.85em;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    border: 2px solid;
+}
+.pers-badge[data-pers="du"]  { background: #dc2626; border-color: #dc2626; color: white; }
+.pers-badge[data-pers="ihr"] { background: #16a34a; border-color: #16a34a; color: white; }
+.pers-badge[data-pers="Sie"] { background: #2563eb; border-color: #2563eb; color: white; }
+
+.imp-satz {
+    font-size: 1.15em;
+    line-height: 2.0;
+    color: #222;
+    padding-right: 50px;
+    font-family: Georgia, 'Times New Roman', serif;
+}
+.imp-satz .sie-marker {
+    font-weight: 700;
+    color: #1e40af;
+    background: #dbeafe;
+    padding: 1px 6px;
+    border-radius: 4px;
+}
+
+input.blank {
+    border: none;
+    border-bottom: 2px solid #667eea;
+    background: transparent;
+    padding: 3px 6px;
+    font-family: inherit;
+    font-size: 1em;
+    outline: none;
+    transition: all 0.2s;
+    min-width: 8ch;
+    color: #333;
+    text-align: center;
+}
+input.blank.prefix-input { min-width: 6ch; }
+input.blank:focus { border-bottom-color: #764ba2; background: #f0f0ff; }
+input.blank.correct {
+    border-bottom-color: #27ae60;
+    background: #e8f8f0;
+    color: #27ae60;
+    font-weight: 700;
+}
+input.blank.wrong {
+    border-bottom-color: #e74c3c;
+    background: #fdeaea;
+    color: #e74c3c;
+}
+
+/* Typ-Reveal (Person) */
+.imp-typ-reveal {
+    display: none;
+    position: absolute;
+    bottom: 10px;
+    right: 14px;
+    font-size: 0.72em;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 10px;
+    letter-spacing: 0.04em;
+}
+.imp-card[data-solved="1"] .imp-typ-reveal { display: inline-block; }
+.imp-card[data-pers="du"]  .imp-typ-reveal { background: #fecaca; color: #991b1b; }
+.imp-card[data-pers="ihr"] .imp-typ-reveal { background: #bbf7d0; color: #14532d; }
+.imp-card[data-pers="Sie"] .imp-typ-reveal { background: #bfdbfe; color: #1e40af; }
+
+/* Runden-Abschluss-Karte */
+.runden-ende {
+    display: none;
+    background: linear-gradient(135deg, #43a047 0%, #2e7d32 100%);
+    color: white;
+    border-radius: 14px;
+    padding: 28px 32px;
+    text-align: center;
+    margin-top: 22px;
+    box-shadow: 0 6px 20px rgba(67,160,71,0.3);
+    animation: popIn 0.5s ease;
+}
+.runden-ende.show { display: block; }
+.runden-ende h3 { color: white; border: none; font-size: 1.9em; margin-bottom: 12px; padding: 0; }
+.runden-ende p { font-size: 1.05em; line-height: 1.8; opacity: 0.98; }
+.runden-ende .stats { display: flex; justify-content: center; gap: 30px; margin-top: 16px; flex-wrap: wrap; }
+.runden-ende .stat-box {
+    background: rgba(255,255,255,0.2);
+    border-radius: 10px;
+    padding: 10px 18px;
+    min-width: 120px;
+}
+.runden-ende .stat-box .stat-num { font-size: 1.6em; font-weight: 700; display: block; }
+.runden-ende .stat-box .stat-lbl { font-size: 0.82em; opacity: 0.9; }
+.runden-ende .next-cta {
+    display: inline-block;
+    margin-top: 18px;
+    padding: 10px 24px;
+    background: white;
+    color: #2e7d32;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+    border: none;
+    font-size: 0.95em;
+    transition: transform 0.2s;
+}
+.runden-ende .next-cta:hover { transform: scale(1.05); }
+
+@keyframes popIn {
+    0% { transform: scale(0.85); opacity: 0; }
+    60% { transform: scale(1.05); opacity: 1; }
+    100% { transform: scale(1); }
+}
+
+.start-cta {
+    display: block;
+    width: fit-content;
+    margin: 20px auto 10px;
+    padding: 14px 32px;
+    background: linear-gradient(135deg, #ff7e5f, #feb47b);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.05em;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(255,126,95,0.3);
+    transition: transform 0.2s;
+}
+.start-cta:hover { transform: scale(1.04); }
+
+.author-footer {
+    text-align: center;
+    margin-top: 30px;
+    padding: 16px;
+    font-size: 0.8rem;
+    color: #aaa;
+}
+.author-footer a { color: #aaa; }
+.author-name { font-weight: 700; }
+
+.hinweis {
+    text-align: center;
+    font-size: 0.88em;
+    color: #666;
+    font-style: italic;
+    margin-top: 14px;
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="header">
+    <h1>Franks Drill</h1>
+    <p class="subtitle">A1 – Lektion FD15 · Imperativ (du · ihr · Sie)</p>
+    <div class="big-emoji">📣</div>
+</div>
+
+<div class="nav">
+    <div class="nav-btn active" onclick="showSection(0)">
+        <span class="nav-emoji">🚀</span>
+        <span class="nav-label">Start</span>
+    </div>
+    <div class="nav-btn" onclick="showSection(1)">
+        <span class="nav-emoji">🔴</span>
+        <span class="nav-label">du-Imperativ</span>
+    </div>
+    <div class="nav-btn" onclick="showSection(2)">
+        <span class="nav-emoji">🟢</span>
+        <span class="nav-label">ihr-Imperativ</span>
+    </div>
+    <div class="nav-btn" onclick="showSection(3)">
+        <span class="nav-emoji">👑</span>
+        <span class="nav-label">Boss — Sie &amp; Mix</span>
+    </div>
+</div>
+
+<!-- SECTION 0: INTRO -->
+<div class="section active" id="sec-0">
+    <div class="drill-hero">
+        <span class="hero-emoji">📣</span>
+        <h2>Befehle, Bitten und Anweisungen.</h2>
+        <p>48 Imperativ-Sätze. 3 Runden. Die Person ist vorgegeben — du formst das Verb. Einfache Verben: eine Lücke. Trennbare Verben: die gleiche Satzklammer wie in FD14.</p>
+    </div>
+
+    <div class="drill-explain">
+        <h3>Wie funktioniert der Drill?</h3>
+        <p>Jede Karte hat einen farbigen Chip, der dir die <strong>Zielperson</strong> zeigt: <em>du</em> (zu einer vertrauten Person), <em>ihr</em> (zur Gruppe) oder <em>Sie</em> (höflich). Du setzt das Verb in die richtige Imperativform.</p>
+
+        <p class="rule-highlight">💡 Drei Regeln auf einen Blick:<br>
+        • <strong>du</strong> = Stamm (ohne <em>-st</em>, ohne Pronomen) — bei Vokalwechsel e→i/ie bleibt er, bei a→ä entfällt er.<br>
+        • <strong>ihr</strong> = wie Präsens <em>ihr</em>, ohne Pronomen: <em>ihr kommt</em> → <em>Kommt!</em><br>
+        • <strong>Sie</strong> = Infinitiv + <em>Sie</em>: <em>Kommen Sie!</em></p>
+
+        <table class="imp-tabelle">
+            <thead>
+                <tr>
+                    <th>Infinitiv</th>
+                    <th class="du">du</th>
+                    <th class="ihr">ihr</th>
+                    <th class="Sie">Sie</th>
+                    <th>Hinweis</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="row-label">kommen</td>   <td class="du">Komm!</td>    <td class="ihr">Kommt!</td>   <td class="Sie">Kommen Sie!</td>   <td class="note">regulär</td></tr>
+                <tr><td class="row-label">essen</td>    <td class="du">Iss!</td>     <td class="ihr">Esst!</td>    <td class="Sie">Essen Sie!</td>    <td class="note">e → i (bleibt bei du)</td></tr>
+                <tr><td class="row-label">nehmen</td>   <td class="du">Nimm!</td>    <td class="ihr">Nehmt!</td>   <td class="Sie">Nehmen Sie!</td>   <td class="note">e → i (bleibt bei du)</td></tr>
+                <tr><td class="row-label">lesen</td>    <td class="du">Lies!</td>    <td class="ihr">Lest!</td>    <td class="Sie">Lesen Sie!</td>    <td class="note">e → ie (bleibt bei du)</td></tr>
+                <tr><td class="row-label">fahren</td>   <td class="du">Fahr!</td>    <td class="ihr">Fahrt!</td>   <td class="Sie">Fahren Sie!</td>   <td class="note">a → ä entfällt beim du-Imperativ</td></tr>
+                <tr><td class="row-label">arbeiten</td> <td class="du">Arbeite!</td> <td class="ihr">Arbeitet!</td><td class="Sie">Arbeiten Sie!</td><td class="note">Stamm auf -t: <em>-e</em> Pflicht</td></tr>
+                <tr><td class="row-label">sein</td>     <td class="du">Sei!</td>     <td class="ihr">Seid!</td>    <td class="Sie">Seien Sie!</td>    <td class="note">unregelmäßig</td></tr>
+                <tr><td class="row-label">aufstehen</td><td class="du">Steh auf!</td><td class="ihr">Steht auf!</td><td class="Sie">Stehen Sie auf!</td><td class="note">trennbar → Satzklammer</td></tr>
+            </tbody>
+        </table>
+
+        <p class="sonderfall">⚠️ <strong>Satzklammer bleibt:</strong> Bei trennbaren Verben rutscht das Präfix ans Satzende — wie in FD14, nur dass jetzt die Imperativ-Form vorn steht. <em>Steh bitte auf! / Ruf mich morgen an! / Bringen Sie einen Ausweis mit!</em></p>
+
+        <p class="sonderfall">⚠️ <strong>Kein „du" / „ihr" im Satz!</strong> Pronomen weglassen. <em>Komm!</em> — nicht <em>Du kommst!</em> Anders bei <em>Sie</em>: hier bleibt das Pronomen. <em>Kommen Sie!</em></p>
+
+        <div class="typ-legend">
+            <span class="typ-chip du"><span class="dot"></span>du <em style="font-weight:400;">vertraut</em></span>
+            <span class="typ-chip ihr"><span class="dot"></span>ihr <em style="font-weight:400;">Gruppe</em></span>
+            <span class="typ-chip Sie"><span class="dot"></span>Sie <em style="font-weight:400;">höflich</em></span>
+        </div>
+    </div>
+
+    <button class="start-cta" onclick="showSection(1)">🔴 Runde 1 starten</button>
+    <p class="hinweis">Tipp: Runde 1 trainiert den <em>du</em>-Imperativ — die wichtigste Form im Alltag.</p>
+</div>
+
+<!-- SECTION 1: RUNDE 1 — du-Imperativ -->
+<div class="section" id="sec-1">
+    <h2>🔴 Runde 1 — <em>du</em>-Imperativ</h2>
+
+    <div class="control-bar">
+        <button class="btn" onclick="showLoesung(1)">Lösung</button>
+        <button class="btn" onclick="resetRunde(1)">Neu</button>
+    </div>
+
+    <div class="drill-progress">
+        <span class="streak">🔥 Streak: <span id="streak-1">0</span></span>
+        <span class="count">✓ <span id="count-1">0</span>/16</span>
+        <div class="bar"><div class="bar-fill" id="bar-1"></div></div>
+        <span class="time">⏱ <span id="timer-1">00:00</span></span>
+        <span class="best">🏆 <span id="best-1">--:--</span></span>
+    </div>
+
+    <div class="typ-tally">
+        <span class="tt-box einf">einfach <span class="tally-num" id="teinf-1">0</span><span class="tally-max">/12</span></span>
+        <span class="tt-box trb">trennbar <span class="tally-num" id="ttrb-1">0</span><span class="tally-max">/4</span></span>
+    </div>
+
+    <div id="cards-1"></div>
+
+    <div class="runden-ende" id="ende-1">
+        <h3>🏆 Runde 1 geschafft!</h3>
+        <p>16 Imperative für <em>du</em>. Jetzt zur Gruppe: <em>ihr</em>-Imperativ.</p>
+        <div class="stats">
+            <div class="stat-box"><span class="stat-num" id="ende-time-1">00:00</span><span class="stat-lbl">Zeit</span></div>
+            <div class="stat-box"><span class="stat-num" id="ende-streak-1">0</span><span class="stat-lbl">Längste Streak</span></div>
+            <div class="stat-box"><span class="stat-num" id="ende-best-1">--:--</span><span class="stat-lbl">Rekord</span></div>
+        </div>
+        <button class="next-cta" onclick="showSection(2)">🟢 Weiter zu Runde 2 →</button>
+    </div>
+</div>
+
+<!-- SECTION 2: RUNDE 2 — ihr-Imperativ -->
+<div class="section" id="sec-2">
+    <h2>🟢 Runde 2 — <em>ihr</em>-Imperativ</h2>
+
+    <div class="control-bar">
+        <button class="btn" onclick="showLoesung(2)">Lösung</button>
+        <button class="btn" onclick="resetRunde(2)">Neu</button>
+    </div>
+
+    <div class="drill-progress">
+        <span class="streak">🔥 Streak: <span id="streak-2">0</span></span>
+        <span class="count">✓ <span id="count-2">0</span>/16</span>
+        <div class="bar"><div class="bar-fill" id="bar-2"></div></div>
+        <span class="time">⏱ <span id="timer-2">00:00</span></span>
+        <span class="best">🏆 <span id="best-2">--:--</span></span>
+    </div>
+
+    <div class="typ-tally">
+        <span class="tt-box einf">einfach <span class="tally-num" id="teinf-2">0</span><span class="tally-max">/12</span></span>
+        <span class="tt-box trb">trennbar <span class="tally-num" id="ttrb-2">0</span><span class="tally-max">/4</span></span>
+    </div>
+
+    <div id="cards-2"></div>
+
+    <div class="runden-ende" id="ende-2">
+        <h3>🏆 Runde 2 geschafft!</h3>
+        <p>32 Imperative im Kasten. Jetzt kommt die höfliche Form und ein Mix aus allen drei Personen.</p>
+        <div class="stats">
+            <div class="stat-box"><span class="stat-num" id="ende-time-2">00:00</span><span class="stat-lbl">Zeit</span></div>
+            <div class="stat-box"><span class="stat-num" id="ende-streak-2">0</span><span class="stat-lbl">Längste Streak</span></div>
+            <div class="stat-box"><span class="stat-num" id="ende-best-2">--:--</span><span class="stat-lbl">Rekord</span></div>
+        </div>
+        <button class="next-cta" onclick="showSection(3)">👑 Weiter zum Boss-Level →</button>
+    </div>
+</div>
+
+<!-- SECTION 3: RUNDE 3 — Sie + Mix -->
+<div class="section" id="sec-3">
+    <h2>👑 Runde 3 — Boss-Level: <em>Sie</em> &amp; Mix aller drei Personen</h2>
+
+    <div class="control-bar">
+        <button class="btn" onclick="showLoesung(3)">Lösung</button>
+        <button class="btn" onclick="resetRunde(3)">Neu</button>
+    </div>
+
+    <div class="drill-progress">
+        <span class="streak">🔥 Streak: <span id="streak-3">0</span></span>
+        <span class="count">✓ <span id="count-3">0</span>/16</span>
+        <div class="bar"><div class="bar-fill" id="bar-3"></div></div>
+        <span class="time">⏱ <span id="timer-3">00:00</span></span>
+        <span class="best">🏆 <span id="best-3">--:--</span></span>
+    </div>
+
+    <div class="typ-tally">
+        <span class="tt-box Sie">Sie <span class="tally-num" id="tSie-3">0</span><span class="tally-max">/8</span></span>
+        <span class="tt-box du">du <span class="tally-num" id="tdu-3">0</span><span class="tally-max">/4</span></span>
+        <span class="tt-box ihr">ihr <span class="tally-num" id="tihr-3">0</span><span class="tally-max">/4</span></span>
+    </div>
+
+    <div id="cards-3"></div>
+
+    <div class="runden-ende" id="ende-3">
+        <h3>🎉 Boss besiegt!</h3>
+        <p>48 Imperative, drei Personen, Satzklammer im Griff. Du beherrschst Befehle, Bitten und höfliche Anweisungen.</p>
+        <div class="stats">
+            <div class="stat-box"><span class="stat-num" id="ende-time-3">00:00</span><span class="stat-lbl">Zeit</span></div>
+            <div class="stat-box"><span class="stat-num" id="ende-streak-3">0</span><span class="stat-lbl">Längste Streak</span></div>
+            <div class="stat-box"><span class="stat-num" id="ende-best-3">--:--</span><span class="stat-lbl">Rekord</span></div>
+        </div>
+        <button class="next-cta" onclick="resetRunde(3)">🔄 Nochmal Boss-Level</button>
+    </div>
+</div>
+
+<div class="author-footer">
+    <span class="author-name">Franks Drill</span> · A1 · FD15 · Imperativ
+</div>
+
+</div>
+
+<script>
+// =========================================================
+//  Franks Drill 15 — Imperativ (du · ihr · Sie)
+// =========================================================
+
+// Item-Schema:
+//   v     = Infinitiv (z.B. "aufstehen", "essen")
+//   pref  = Präfix bei trennbaren Verben (optional)
+//   pers  = Zielperson: "du" | "ihr" | "Sie"
+//   ansV  = Imperativform (Lücke 1) — z.B. "Iss", "Esst", "Essen", "Steh"
+//   ansP  = Präfix als Antwort (Lücke 2, nur bei trennbaren)
+//   mid   = Text zwischen ansV (bzw. "Sie") und ansP (oder Satzende)
+//   e     = Emoji
+
+var DRILL = {
+    // Runde 1: du-Imperativ (12 einfach + 4 trennbar)
+    1: [
+        { v:"kommen",   pers:"du", ansV:"Komm",    mid:"bitte",                e:"👉" },
+        { v:"gehen",    pers:"du", ansV:"Geh",     mid:"schnell nach Hause",   e:"🏠" },
+        { v:"essen",    pers:"du", ansV:"Iss",     mid:"dein Gemüse",          e:"🥦" },
+        { v:"lesen",    pers:"du", ansV:"Lies",    mid:"die Nachricht",        e:"📩" },
+        { v:"nehmen",   pers:"du", ansV:"Nimm",    mid:"den Bus",              e:"🚌" },
+        { v:"fahren",   pers:"du", ansV:"Fahr",    mid:"langsamer",            e:"🚗" },
+        { v:"trinken",  pers:"du", ansV:"Trink",   mid:"mehr Wasser",          e:"💧" },
+        { v:"arbeiten", pers:"du", ansV:"Arbeite", mid:"bitte leise",          e:"💻" },
+        { v:"warten",   pers:"du", ansV:"Warte",   mid:"einen Moment",         e:"⏳" },
+        { v:"sprechen", pers:"du", ansV:"Sprich",  mid:"lauter",               e:"🔊" },
+        { v:"geben",    pers:"du", ansV:"Gib",     mid:"mir das Buch",         e:"📖" },
+        { v:"schlafen", pers:"du", ansV:"Schlaf",  mid:"gut",                  e:"😴" },
+
+        { v:"aufstehen", pref:"auf", pers:"du", ansV:"Steh", ansP:"auf", mid:"jetzt",           e:"⏰" },
+        { v:"anrufen",   pref:"an",  pers:"du", ansV:"Ruf",  ansP:"an",  mid:"mich morgen",     e:"📞" },
+        { v:"mitkommen", pref:"mit", pers:"du", ansV:"Komm", ansP:"mit", mid:"heute Abend",     e:"👥" },
+        { v:"ausmachen", pref:"aus", pers:"du", ansV:"Mach", ansP:"aus", mid:"das Licht",       e:"💡" }
+    ],
+    // Runde 2: ihr-Imperativ (12 einfach + 4 trennbar)
+    2: [
+        { v:"kommen",   pers:"ihr", ansV:"Kommt",    mid:"jetzt her",          e:"👉" },
+        { v:"gehen",    pers:"ihr", ansV:"Geht",     mid:"nicht zu schnell",   e:"🚶" },
+        { v:"essen",    pers:"ihr", ansV:"Esst",     mid:"euer Frühstück",     e:"🥐" },
+        { v:"lesen",    pers:"ihr", ansV:"Lest",     mid:"die Aufgabe",        e:"📝" },
+        { v:"nehmen",   pers:"ihr", ansV:"Nehmt",    mid:"eure Bücher",        e:"📚" },
+        { v:"fahren",   pers:"ihr", ansV:"Fahrt",    mid:"vorsichtig",         e:"🚗" },
+        { v:"trinken",  pers:"ihr", ansV:"Trinkt",   mid:"Tee",                e:"🍵" },
+        { v:"arbeiten", pers:"ihr", ansV:"Arbeitet", mid:"zusammen",           e:"🤝" },
+        { v:"warten",   pers:"ihr", ansV:"Wartet",   mid:"hier",               e:"⏳" },
+        { v:"sprechen", pers:"ihr", ansV:"Sprecht",  mid:"bitte Deutsch",      e:"🗣️" },
+        { v:"geben",    pers:"ihr", ansV:"Gebt",     mid:"mir Bescheid",       e:"📨" },
+        { v:"schlafen", pers:"ihr", ansV:"Schlaft",  mid:"gut",                e:"😴" },
+
+        { v:"aufstehen",  pref:"auf", pers:"ihr", ansV:"Steht",   ansP:"auf", mid:"früh",                e:"⏰" },
+        { v:"anrufen",    pref:"an",  pers:"ihr", ansV:"Ruft",    ansP:"an",  mid:"mich später",         e:"📞" },
+        { v:"mitbringen", pref:"mit", pers:"ihr", ansV:"Bringt",  ansP:"mit", mid:"einen Kuchen",        e:"🎂" },
+        { v:"einkaufen",  pref:"ein", pers:"ihr", ansV:"Kauft",   ansP:"ein", mid:"bitte",               e:"🛒" }
+    ],
+    // Runde 3: Sie-Imperativ (5 einfach + 3 trennbar) + Mix du/ihr (4+4)
+    3: [
+        { v:"kommen",     pers:"Sie", ansV:"Kommen",   mid:"herein",                   e:"🚪" },
+        { v:"nehmen",     pers:"Sie", ansV:"Nehmen",   mid:"Platz",                    e:"💺" },
+        { v:"warten",     pers:"Sie", ansV:"Warten",   mid:"bitte einen Moment",       e:"⏳" },
+        { v:"geben",      pers:"Sie", ansV:"Geben",    mid:"mir Ihren Pass",           e:"🛂" },
+        { v:"fahren",     pers:"Sie", ansV:"Fahren",   mid:"vorsichtig",               e:"🚗" },
+
+        { v:"aufstehen",  pref:"auf", pers:"Sie", ansV:"Stehen", ansP:"auf", mid:"bitte",                 e:"⏰" },
+        { v:"anrufen",    pref:"an",  pers:"Sie", ansV:"Rufen",  ansP:"an",  mid:"mich morgen",           e:"📞" },
+        { v:"mitbringen", pref:"mit", pers:"Sie", ansV:"Bringen",ansP:"mit", mid:"einen Ausweis",         e:"🪪" },
+
+        { v:"essen",    pers:"du",  ansV:"Iss",     mid:"langsamer",            e:"🍽️" },
+        { v:"sein",     pers:"du",  ansV:"Sei",     mid:"ruhig",                e:"🤫" },
+        { v:"helfen",   pers:"du",  ansV:"Hilf",    mid:"mir bitte",            e:"🤲" },
+        { v:"einkaufen", pref:"ein", pers:"du", ansV:"Kauf", ansP:"ein", mid:"bitte",                 e:"🛒" },
+
+        { v:"trinken",   pers:"ihr", ansV:"Trinkt",   mid:"viel Wasser",          e:"💧" },
+        { v:"sein",      pers:"ihr", ansV:"Seid",     mid:"pünktlich",            e:"⏱️" },
+        { v:"sprechen",  pers:"ihr", ansV:"Sprecht",  mid:"Deutsch",              e:"🗣️" },
+        { v:"ausmachen", pref:"aus", pers:"ihr", ansV:"Macht", ansP:"aus", mid:"das Handy",            e:"📱" }
+    ]
+};
+
+// Tally-Mapping pro Runde: Wie werden Items in Tally-Buckets eingeordnet?
+// R1/R2: nach Verbtyp (einf/trb)
+// R3: nach Person (du/ihr/Sie)
+function tallyKeyOf(runde, item) {
+    if (runde === 3) return item.pers;
+    return item.pref ? "trb" : "einf";
+}
+var TALLY_KEYS = {
+    1: ["einf", "trb"],
+    2: ["einf", "trb"],
+    3: ["Sie", "du", "ihr"]
+};
+
+function emptyTally(runde) {
+    var t = {};
+    TALLY_KEYS[runde].forEach(function(k){ t[k] = 0; });
+    return t;
+}
+
+var state = {
+    1: { timer:null, sec:0, started:false, stopped:false, maxStreak:0, curStreak:0, solved:0, tally:emptyTally(1) },
+    2: { timer:null, sec:0, started:false, stopped:false, maxStreak:0, curStreak:0, solved:0, tally:emptyTally(2) },
+    3: { timer:null, sec:0, started:false, stopped:false, maxStreak:0, curStreak:0, solved:0, tally:emptyTally(3) }
+};
+var bestTime = { 1:null, 2:null, 3:null };
+
+function showSection(idx) {
+    document.querySelectorAll('.section').forEach(function(s,i){ s.classList.toggle('active', i===idx); });
+    document.querySelectorAll('.nav-btn').forEach(function(b,i){ b.classList.toggle('active', i===idx); });
+    window.scrollTo({ top:0, behavior:'smooth' });
+}
+
+function shuffleArr(arr) {
+    var a = arr.slice();
+    for (var i = a.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var t = a[i]; a[i] = a[j]; a[j] = t;
+    }
+    return a;
+}
+
+function renderCards(runde) {
+    var data = shuffleArr(DRILL[runde]);
+    var container = document.getElementById('cards-' + runde);
+    container.innerHTML = '';
+    data.forEach(function(item, idx) {
+        var card = document.createElement('div');
+        card.className = 'imp-card';
+        card.setAttribute('data-pers', item.pers);
+        card.setAttribute('data-solved', '0');
+        card.setAttribute('data-runde', runde);
+        card.setAttribute('data-idx', idx);
+
+        // Infinitiv-Chip mit (ggf.) unterstrichenem Präfix
+        var infHtml;
+        if (item.pref) {
+            var prefLen = item.pref.length;
+            var prefHl = item.v.substring(0, prefLen);
+            var prefRest = item.v.substring(prefLen);
+            infHtml = '<span class="imp-pref-hl">' + escapeHtml(prefHl) + '</span>' + escapeHtml(prefRest);
+        } else {
+            infHtml = escapeHtml(item.v);
+        }
+
+        // Satz aufbauen
+        var satzHtml = '';
+        // Lücke 1: ansV
+        satzHtml += '<input class="blank stem-input" type="text" ' +
+            'data-ans="' + escapeAttr(item.ansV) + '" ' +
+            'data-role="stem" ' +
+            'data-runde="' + runde + '" ' +
+            'data-idx="' + idx + '" ' +
+            'autocomplete="off" autocorrect="off" spellcheck="false" placeholder="">';
+        // "Sie" nur bei pers === "Sie"
+        if (item.pers === "Sie") {
+            satzHtml += ' <span class="sie-marker">Sie</span>';
+        }
+        // Mid-Text
+        if (item.mid) {
+            satzHtml += ' ' + escapeHtml(item.mid);
+        }
+        // Lücke 2: ansP (nur bei trennbaren)
+        if (item.ansP) {
+            satzHtml += ' <input class="blank prefix-input" type="text" ' +
+                'data-ans="' + escapeAttr(item.ansP) + '" ' +
+                'data-role="pref" ' +
+                'data-runde="' + runde + '" ' +
+                'data-idx="' + idx + '" ' +
+                'autocomplete="off" autocorrect="off" spellcheck="false" placeholder="">';
+        }
+        satzHtml += '!';
+
+        card.innerHTML =
+            '<div class="imp-badge">#' + (idx+1) + '</div>' +
+            '<div class="imp-inputs">' +
+                '<span class="imp-chip" data-pers="' + escapeAttr(item.pers) + '">' +
+                    '<span class="imp-emoji">' + (item.e || '') + '</span>' +
+                    '<span class="imp-label">Infinitiv</span>' +
+                    '<span class="imp-word">' + infHtml + '</span>' +
+                '</span>' +
+                '<span class="pers-badge" data-pers="' + escapeAttr(item.pers) + '">→ ' + escapeHtml(item.pers) + '</span>' +
+            '</div>' +
+            '<div class="imp-satz">' + satzHtml + '</div>' +
+            '<span class="imp-typ-reveal">' + escapeHtml(item.pers) + '</span>';
+
+        container.appendChild(card);
+    });
+    container.querySelectorAll('input.blank').forEach(function(inp) {
+        inp.addEventListener('input', function() { liveCheck(inp); });
+    });
+}
+
+function escapeHtml(s) {
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+function escapeAttr(s) {
+    return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;');
+}
+
+// Beim Imperativ ist Groß-/Kleinschreibung ambiguous — wir akzeptieren beides,
+// vergleichen aber über lowercase.
+function isAnyAnswer(val, inp) {
+    var primary = (inp.dataset.ans || '').toLowerCase();
+    return val === primary;
+}
+function isAnyPrefix(val, inp) {
+    var primary = (inp.dataset.ans || '').toLowerCase();
+    return primary.indexOf(val) === 0;
+}
+
+function liveCheck(inp) {
+    var runde = parseInt(inp.dataset.runde, 10);
+    var val = inp.value.trim().toLowerCase();
+    var wasCorrect = inp.classList.contains('correct');
+    inp.classList.remove('correct', 'wrong');
+
+    if (!state[runde].started && val.length > 0) startTimer(runde);
+
+    if (val.length === 0) {
+        if (wasCorrect) checkCardState(inp);
+        return;
+    }
+    if (isAnyAnswer(val, inp)) {
+        inp.classList.add('correct');
+        checkCardState(inp);
+        if (!wasCorrect) advanceFocus(inp);
+        return;
+    }
+    if (isAnyPrefix(val, inp)) {
+        if (wasCorrect) checkCardState(inp);
+        return;
+    }
+    inp.classList.add('wrong');
+    if (wasCorrect) checkCardState(inp);
+    state[runde].curStreak = 0;
+    updateStreak(runde);
+}
+
+function advanceFocus(inp) {
+    var card = inp.closest('.imp-card');
+    if (!card) return;
+    var runde = parseInt(card.dataset.runde, 10);
+
+    var withinCard = card.querySelectorAll('input.blank:not(.correct)');
+    if (withinCard.length > 0) {
+        var firstLocal = withinCard[0];
+        setTimeout((function(n){ return function(){ n.focus(); }; })(firstLocal), 120);
+        return;
+    }
+
+    var allCards = Array.from(document.querySelectorAll('#cards-' + runde + ' .imp-card'));
+    var curIdx = allCards.indexOf(card);
+    for (var i = curIdx + 1; i < allCards.length; i++) {
+        var nextInp = allCards[i].querySelector('input.blank:not(.correct)');
+        if (nextInp) {
+            setTimeout((function(n){ return function(){ n.focus(); n.scrollIntoView({ behavior:'smooth', block:'center' }); }; })(nextInp), 120);
+            return;
+        }
+    }
+    for (var j = 0; j < curIdx; j++) {
+        var prevInp = allCards[j].querySelector('input.blank:not(.correct)');
+        if (prevInp) {
+            setTimeout((function(n){ return function(){ n.focus(); n.scrollIntoView({ behavior:'smooth', block:'center' }); }; })(prevInp), 120);
+            return;
+        }
+    }
+}
+
+function checkCardState(inp) {
+    var card = inp.closest('.imp-card');
+    if (!card) return;
+    var runde = parseInt(card.dataset.runde, 10);
+    var idx = parseInt(card.dataset.idx, 10);
+    // Item aus DRILL direkt holen? Nein — wir haben die Items geshuffled.
+    // Aber für Tally brauchen wir nur pers und hasPref. Beide aus DOM ableitbar:
+    var pers = card.dataset.pers;
+    var hasPref = !!card.querySelector('input.prefix-input');
+    var tallyKey = (runde === 3) ? pers : (hasPref ? "trb" : "einf");
+
+    var inputs = card.querySelectorAll('input.blank');
+    var allCorrect = Array.from(inputs).every(function(i){ return i.classList.contains('correct'); });
+    var wasSolved = card.dataset.solved === '1';
+
+    if (allCorrect && !wasSolved) {
+        card.setAttribute('data-solved', '1');
+        state[runde].solved++;
+        state[runde].curStreak++;
+        if (state[runde].curStreak > state[runde].maxStreak) state[runde].maxStreak = state[runde].curStreak;
+        if (state[runde].tally.hasOwnProperty(tallyKey)) state[runde].tally[tallyKey]++;
+        updateStreak(runde);
+        updateProgress(runde);
+        updateTally(runde);
+        if (state[runde].solved === DRILL[runde].length) finishRunde(runde);
+    } else if (!allCorrect && wasSolved) {
+        card.setAttribute('data-solved', '0');
+        state[runde].solved = Math.max(0, state[runde].solved - 1);
+        if (state[runde].tally.hasOwnProperty(tallyKey)) {
+            state[runde].tally[tallyKey] = Math.max(0, state[runde].tally[tallyKey] - 1);
+        }
+        updateProgress(runde);
+        updateTally(runde);
+        var ende = document.getElementById('ende-' + runde);
+        if (ende) ende.classList.remove('show');
+    }
+}
+
+function updateProgress(runde) {
+    document.getElementById('count-' + runde).textContent = state[runde].solved;
+    var pct = (state[runde].solved / DRILL[runde].length) * 100;
+    document.getElementById('bar-' + runde).style.width = pct + '%';
+}
+function updateStreak(runde) {
+    document.getElementById('streak-' + runde).textContent = state[runde].curStreak;
+}
+function updateTally(runde) {
+    TALLY_KEYS[runde].forEach(function(k) {
+        var el = document.getElementById('t' + k + '-' + runde);
+        if (el) el.textContent = state[runde].tally[k];
+    });
+}
+
+function startTimer(runde) {
+    if (state[runde].started) return;
+    state[runde].started = true;
+    state[runde].stopped = false;
+    state[runde].sec = 0;
+    state[runde].timer = setInterval(function() {
+        state[runde].sec++;
+        document.getElementById('timer-' + runde).textContent = fmtTime(state[runde].sec);
+    }, 1000);
+}
+function stopTimer(runde) {
+    if (state[runde].stopped) return;
+    state[runde].stopped = true;
+    if (state[runde].timer) clearInterval(state[runde].timer);
+    if (bestTime[runde] === null || state[runde].sec < bestTime[runde]) {
+        bestTime[runde] = state[runde].sec;
+        document.getElementById('best-' + runde).textContent = fmtTime(bestTime[runde]);
+    }
+}
+function fmtTime(sec) {
+    var m = Math.floor(sec / 60);
+    var s = sec % 60;
+    return (m<10?'0':'') + m + ':' + (s<10?'0':'') + s;
+}
+
+function finishRunde(runde) {
+    stopTimer(runde);
+    var ende = document.getElementById('ende-' + runde);
+    document.getElementById('ende-time-' + runde).textContent = fmtTime(state[runde].sec);
+    document.getElementById('ende-streak-' + runde).textContent = state[runde].maxStreak;
+    document.getElementById('ende-best-' + runde).textContent =
+        (bestTime[runde] !== null) ? fmtTime(bestTime[runde]) : '--:--';
+    ende.classList.add('show');
+    setTimeout(function() { ende.scrollIntoView({ behavior:'smooth', block:'center' }); }, 300);
+}
+
+function showLoesung(runde) {
+    document.querySelectorAll('#cards-' + runde + ' .imp-card').forEach(function(card) {
+        var inputs = card.querySelectorAll('input.blank');
+        inputs.forEach(function(inp) {
+            inp.value = inp.dataset.ans;
+            inp.classList.remove('wrong');
+            inp.classList.add('correct');
+        });
+        card.setAttribute('data-solved', '1');
+    });
+    state[runde].solved = DRILL[runde].length;
+    state[runde].curStreak = 0;
+    state[runde].tally = emptyTally(runde);
+    DRILL[runde].forEach(function(item) {
+        var k = tallyKeyOf(runde, item);
+        if (state[runde].tally.hasOwnProperty(k)) state[runde].tally[k]++;
+    });
+    updateProgress(runde);
+    updateStreak(runde);
+    updateTally(runde);
+    stopTimer(runde);
+}
+
+function resetRunde(runde) {
+    if (state[runde].timer) clearInterval(state[runde].timer);
+    state[runde] = { timer:null, sec:0, started:false, stopped:false, maxStreak:0, curStreak:0, solved:0, tally:emptyTally(runde) };
+    document.getElementById('timer-' + runde).textContent = '00:00';
+    document.getElementById('streak-' + runde).textContent = '0';
+    document.getElementById('count-' + runde).textContent = '0';
+    document.getElementById('bar-' + runde).style.width = '0%';
+    updateTally(runde);
+    renderCards(runde);
+    document.getElementById('ende-' + runde).classList.remove('show');
+}
+
+[1,2,3].forEach(function(r) { renderCards(r); });
+
+</script>
+</body>
+</html>
