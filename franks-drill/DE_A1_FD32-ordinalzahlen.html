@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Franks Drill 32 — Ordinalzahlen (der erste · der zwanzigste · am fünften)</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+}
+
+/* Header */
+.header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 30px;
+    text-align: center;
+}
+.header h1 { font-size: 2.2em; font-family: Georgia, 'Times New Roman', serif; color: white; margin-bottom: 8px; border: none; padding: 0; }
+.header .subtitle, .header p { font-size: 1.1em; font-family: Georgia, 'Times New Roman', serif; opacity: 0.95; color: rgba(255,255,255,0.9); margin: 0; }
+.header .big-emoji { font-size: 2.6em; display: block; margin-top: 8px; }
+
+/* Nav */
+.nav {
+    display: flex;
+    flex-wrap: nowrap;
+    background: #f8f9fa;
+    border-top: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+}
+.nav-btn {
+    flex: 1;
+    padding: 14px 10px;
+    text-align: center;
+    cursor: pointer;
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    transition: all 0.3s;
+    font-size: 0.92em;
+    font-weight: 500;
+    color: #666;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.nav-btn:last-child { border-right: none; }
+.nav-btn:hover { background: #e9ecef; color: #495057; }
+.nav-btn.active {
+    background: white;
+    color: #667eea;
+    font-weight: 600;
+    border-bottom: 3px solid #667eea;
+}
+.nav-emoji { font-size: 1.3em; line-height: 1.2; }
+.nav-label { font-size: 0.78em; margin-top: 2px; line-height: 1.2; }
+
+@media (max-width: 600px) {
+    body { padding: 8px; }
+    .nav { flex-wrap: wrap; }
+    .nav-btn {
+        flex: 1 1 25%;
+        min-width: 0;
+        font-size: 0.8em;
+        padding: 10px 6px;
+        border-right: 1px solid #ddd;
+    }
+    .nav-btn:last-child { border-right: 1px solid #ddd; }
+}
+
+.section { display: none; padding: 28px 30px 10px 30px; }
+.section.active { display: block; }
+
+h2 {
+    color: #333;
+    font-size: 1.25em;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+/* Drill-Hero */
+.drill-hero {
+    background: linear-gradient(135deg, #ff7e5f 0%, #feb47b 100%);
+    border-radius: 14px;
+    padding: 26px 30px;
+    margin-bottom: 22px;
+    color: white;
+    text-align: center;
+    box-shadow: 0 4px 16px rgba(255,126,95,0.25);
+}
+.drill-hero .hero-emoji { font-size: 3.4em; display: block; margin-bottom: 8px; }
+.drill-hero h2 { color: white; border: none; font-size: 1.7em; margin-bottom: 10px; padding: 0; }
+.drill-hero p { font-size: 1.05em; line-height: 1.6; opacity: 0.95; }
+
+/* Intro-Erklärbox */
+.drill-explain {
+    background: #f0f4ff;
+    border-left: 4px solid #667eea;
+    border-radius: 0 10px 10px 0;
+    padding: 18px 22px;
+    margin-bottom: 18px;
+    font-size: 0.97em;
+    line-height: 1.75;
+    color: #333;
+}
+.drill-explain h3 { color: #4a148c; margin-bottom: 10px; font-size: 1.1em; }
+.drill-explain p { margin-bottom: 8px; }
+.drill-explain .rule-highlight {
+    display: block;
+    margin-top: 10px;
+    padding: 12px 16px;
+    background: #dbeafe;
+    border-left: 4px solid #2563eb;
+    border-radius: 0 8px 8px 0;
+    font-weight: 600;
+    color: #1d4ed8;
+}
+.drill-explain .sonderfall {
+    display: block;
+    margin-top: 10px;
+    padding: 10px 14px;
+    background: #fef3c7;
+    border-left: 4px solid #f59e0b;
+    border-radius: 0 8px 8px 0;
+    color: #92400e;
+    font-size: 0.95em;
+}
+
+/* Mnemonic */
+.mnemonic {
+    margin: 14px 0;
+    padding: 14px 18px;
+    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+    border: 2px dashed #f59e0b;
+    border-radius: 10px;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 1.08em;
+    text-align: center;
+    color: #78350f;
+    font-weight: 600;
+    line-height: 1.7;
+}
+.mnemonic .merksatz { font-size: 1.15em; font-style: italic; color: #92400e; }
+
+/* Klassen-Tabelle */
+.prt-tabelle {
+    margin-top: 10px;
+    border-collapse: collapse;
+    width: 100%;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    font-size: 0.92em;
+}
+.prt-tabelle th,
+.prt-tabelle td {
+    padding: 7px 10px;
+    text-align: center;
+    border: 1px solid #e5e7eb;
+}
+.prt-tabelle th { background: #f5f7ff; color: #4a148c; font-weight: 700; }
+.prt-tabelle td.row-label { background: #fafafa; color: #333; font-weight: 600; text-align: left; }
+
+.prt-tabelle th.reg { background: #dbeafe; color: #1e40af; }
+.prt-tabelle td.reg { background: #eff6ff; color: #1e40af; font-weight: 600; text-align: left; }
+.prt-tabelle th.irr { background: #fee2e2; color: #991b1b; }
+.prt-tabelle td.irr { background: #fef2f2; color: #991b1b; font-weight: 600; text-align: left; }
+.prt-tabelle th.gr  { background: #ffedd5; color: #9a3412; }
+.prt-tabelle td.gr  { background: #fff7ed; color: #9a3412; font-weight: 600; text-align: left; }
+
+/* Beispiel-Box */
+.kontrast-box {
+    margin-top: 14px;
+    background: white;
+    border-radius: 10px;
+    padding: 14px 18px;
+    border: 1px dashed #c5cff5;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 1.0em;
+    line-height: 1.95;
+}
+.kontrast-box .arrow { color: #6b7280; margin: 0 8px; }
+.kontrast-box .form  { font-weight: 700; }
+.kontrast-box .form.reg  { color: #1e40af; }
+.kontrast-box .form.irr  { color: #991b1b; }
+.kontrast-box .form.gr   { color: #9a3412; }
+.kontrast-box .hint { font-style: italic; color: #78350f; font-size: 0.9em; }
+
+/* Typ-Legende */
+.typ-legend {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 14px;
+    padding: 12px;
+    background: white;
+    border-radius: 10px;
+    justify-content: center;
+}
+.typ-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 0.85em;
+    font-weight: 600;
+    border: 2px solid;
+}
+.typ-chip .dot { width: 10px; height: 10px; border-radius: 50%; }
+.typ-chip.reg  { border-color: #2563eb; background: #eff6ff; color: #1e40af; }
+.typ-chip.reg  .dot { background: #2563eb; }
+.typ-chip.irr  { border-color: #dc2626; background: #fef2f2; color: #991b1b; }
+.typ-chip.irr  .dot { background: #dc2626; }
+.typ-chip.gr   { border-color: #ea580c; background: #fff7ed; color: #9a3412; }
+.typ-chip.gr   .dot { background: #ea580c; }
+
+/* Drill-Progress */
+.drill-progress {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 18px;
+    background: #fff7ed;
+    border: 1px solid #fed7aa;
+    border-radius: 10px;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+    font-variant-numeric: tabular-nums;
+}
+.drill-progress .streak { font-weight: 700; color: #ea580c; font-size: 1.05em; }
+.drill-progress .count { font-weight: 700; color: #4a148c; font-size: 1.0em; }
+.drill-progress .bar {
+    flex: 1; min-width: 140px; height: 10px;
+    background: #ffe4c7; border-radius: 5px; overflow: hidden;
+}
+.drill-progress .bar-fill {
+    height: 100%; width: 0%;
+    background: linear-gradient(90deg, #ff7e5f, #43a047);
+    transition: width 0.4s ease;
+}
+.drill-progress .time { font-size: 0.92em; color: #666; }
+.drill-progress .best { font-size: 0.82em; color: #999; }
+
+/* Typ-Tally */
+.typ-tally {
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 18px;
+}
+.tt-box {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 6px;
+    padding: 5px 14px;
+    border-radius: 20px;
+    font-size: 0.85em;
+    font-weight: 700;
+    border: 1px solid #e5e7eb;
+    background: #fafafa;
+    letter-spacing: 0.04em;
+}
+.tt-box.reg  { color: #1e40af; border-color: #bfdbfe; background: #eff6ff; }
+.tt-box.irr  { color: #991b1b; border-color: #fecaca; background: #fef2f2; }
+.tt-box.gr   { color: #9a3412; border-color: #fed7aa; background: #fff7ed; }
+.tt-box .tally-num { font-size: 1.05em; }
+.tt-box .tally-max { color: #888; font-weight: 400; }
+.tt-box .tally-sub { font-size: 0.78em; opacity: 0.7; margin-left: 2px; }
+
+@media (max-width: 600px) {
+    .drill-progress { gap: 8px; padding: 10px 12px; }
+    .drill-progress .bar { flex: 1 1 100%; order: 99; }
+}
+
+/* Control-Bar */
+.control-bar {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-bottom: 14px;
+}
+.btn {
+    background: #f5f7ff;
+    border: 1px solid #c5cff5;
+    border-radius: 8px;
+    padding: 6px 16px;
+    font-size: 0.85em;
+    color: #667eea;
+    cursor: pointer;
+    transition: all 0.15s;
+    font-weight: 500;
+    margin-left: 6px;
+}
+.btn:hover { background: #667eea; color: white; border-color: #667eea; }
+
+/* Ordinal-Karte */
+.pf-card {
+    background: #f8f9ff;
+    padding: 18px 22px 22px;
+    margin-bottom: 14px;
+    border-radius: 12px;
+    border-left: 6px solid #cbd5e1;
+    position: relative;
+    transition: background 0.5s ease, border-color 0.3s ease;
+}
+.pf-card[data-cat="reg"]  { border-left-color: #2563eb; }
+.pf-card[data-cat="irr"]  { border-left-color: #dc2626; }
+.pf-card[data-cat="gr"]   { border-left-color: #ea580c; }
+
+.pf-card[data-solved="1"][data-cat="reg"]  { background: linear-gradient(90deg, #eff6ff, #f8f9ff 70%); }
+.pf-card[data-solved="1"][data-cat="irr"]  { background: linear-gradient(90deg, #fef2f2, #f8f9ff 70%); }
+.pf-card[data-solved="1"][data-cat="gr"]   { background: linear-gradient(90deg, #fff7ed, #f8f9ff 70%); }
+.pf-card[data-solved="1"] { animation: cardPulse 0.5s ease; }
+
+@keyframes cardPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.015); box-shadow: 0 4px 14px rgba(0,0,0,0.08); }
+    100% { transform: scale(1); }
+}
+
+.pf-badge {
+    position: absolute;
+    top: 12px;
+    right: 14px;
+    background: #e5e7eb;
+    color: #666;
+    font-size: 0.72em;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-weight: 600;
+}
+
+.pf-inputs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.pf-chip {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 8px;
+    padding: 8px 16px;
+    border: 2px solid;
+    border-radius: 8px;
+    font-size: 1.0em;
+    font-weight: 600;
+}
+.pf-chip .pf-emoji {
+    font-size: 1.4em;
+    line-height: 1;
+    position: relative;
+    top: 3px;
+}
+.pf-chip .pf-label {
+    font-size: 0.78em;
+    font-weight: 400;
+    opacity: 0.8;
+}
+.pf-chip .pf-word {
+    font-weight: 700;
+    font-size: 1.15em;
+    font-variant-numeric: tabular-nums;
+}
+.pf-chip[data-cat="reg"]  { background: #dbeafe; border-color: #2563eb; color: #1e40af; }
+.pf-chip[data-cat="irr"]  { background: #fee2e2; border-color: #dc2626; color: #991b1b; }
+.pf-chip[data-cat="gr"]   { background: #ffedd5; border-color: #ea580c; color: #9a3412; }
+
+.cat-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 12px;
+    border-radius: 14px;
+    font-size: 0.78em;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+}
+.cat-badge[data-cat="reg"]  { background: #2563eb; color: white; }
+.cat-badge[data-cat="irr"]  { background: #dc2626; color: white; }
+.cat-badge[data-cat="gr"]   { background: #ea580c; color: white; }
+.pf-card[data-solved="0"] .cat-badge { visibility: hidden; }
+
+.pf-satz {
+    font-size: 1.1em;
+    line-height: 2.0;
+    color: #222;
+    padding-right: 50px;
+    font-family: Georgia, 'Times New Roman', serif;
+}
+.pf-satz .hilfsmarker { font-weight: 700; color: #4a148c; }
+
+input.blank {
+    border: none;
+    border-bottom: 2px solid #667eea;
+    background: transparent;
+    padding: 3px 6px;
+    font-family: inherit;
+    font-size: 1em;
+    outline: none;
+    transition: all 0.2s;
+    min-width: 12ch;
+    color: #333;
+    text-align: center;
+}
+input.blank:focus { border-bottom-color: #764ba2; background: #f0f0ff; }
+input.blank.correct {
+    border-bottom-color: #27ae60;
+    background: #e8f8f0;
+    color: #27ae60;
+    font-weight: 700;
+}
+input.blank.wrong {
+    border-bottom-color: #e74c3c;
+    background: #fdeaea;
+    color: #e74c3c;
+}
+
+.pf-typ-reveal {
+    display: none;
+    position: absolute;
+    bottom: 10px;
+    right: 14px;
+    font-size: 0.72em;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 10px;
+    letter-spacing: 0.04em;
+}
+.pf-card[data-solved="1"] .pf-typ-reveal { display: inline-block; }
+.pf-card[data-cat="reg"]  .pf-typ-reveal { background: #bfdbfe; color: #1e40af; }
+.pf-card[data-cat="irr"]  .pf-typ-reveal { background: #fecaca; color: #991b1b; }
+.pf-card[data-cat="gr"]   .pf-typ-reveal { background: #fed7aa; color: #9a3412; }
+
+.runden-ende {
+    display: none;
+    background: linear-gradient(135deg, #43a047 0%, #2e7d32 100%);
+    color: white;
+    border-radius: 14px;
+    padding: 28px 32px;
+    text-align: center;
+    margin-top: 22px;
+    box-shadow: 0 6px 20px rgba(67,160,71,0.3);
+    animation: popIn 0.5s ease;
+}
+.runden-ende.show { display: block; }
+.runden-ende h3 { color: white; border: none; font-size: 1.9em; margin-bottom: 12px; padding: 0; }
+.runden-ende p { font-size: 1.05em; line-height: 1.8; opacity: 0.98; }
+.runden-ende .stats { display: flex; justify-content: center; gap: 30px; margin-top: 16px; flex-wrap: wrap; }
+.runden-ende .stat-box {
+    background: rgba(255,255,255,0.2);
+    border-radius: 10px;
+    padding: 10px 18px;
+    min-width: 120px;
+}
+.runden-ende .stat-box .stat-num { font-size: 1.6em; font-weight: 700; display: block; }
+.runden-ende .stat-box .stat-lbl { font-size: 0.82em; opacity: 0.9; }
+.runden-ende .next-cta {
+    display: inline-block;
+    margin-top: 18px;
+    padding: 10px 24px;
+    background: white;
+    color: #2e7d32;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+    border: none;
+    font-size: 0.95em;
+    transition: transform 0.2s;
+}
+.runden-ende .next-cta:hover { transform: scale(1.05); }
+
+@keyframes popIn {
+    0% { transform: scale(0.85); opacity: 0; }
+    60% { transform: scale(1.05); opacity: 1; }
+    100% { transform: scale(1); }
+}
+
+.start-cta {
+    display: block;
+    width: fit-content;
+    margin: 20px auto 10px;
+    padding: 14px 32px;
+    background: linear-gradient(135deg, #ff7e5f, #feb47b);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.05em;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(255,126,95,0.3);
+    transition: transform 0.2s;
+}
+.start-cta:hover { transform: scale(1.04); }
+
+.author-footer {
+    text-align: center;
+    margin-top: 30px;
+    padding: 16px;
+    font-size: 0.8rem;
+    color: #aaa;
+}
+.author-footer a { color: #aaa; }
+.author-name { font-weight: 700; }
+
+.hinweis {
+    text-align: center;
+    font-size: 0.88em;
+    color: #666;
+    font-style: italic;
+    margin-top: 14px;
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="header">
+    <h1>Franks Drill</h1>
+    <p class="subtitle">A1 – Lektion FD32 · Ordinalzahlen (der erste · der zwanzigste · am fünften)</p>
+    <div class="big-emoji">🔢</div>
+</div>
+
+<div class="nav">
+    <div class="nav-btn active" onclick="showSection(0)">
+        <span class="nav-emoji">🚀</span>
+        <span class="nav-label">Start</span>
+    </div>
+    <div class="nav-btn" onclick="showSection(1)">
+        <span class="nav-emoji">🔵</span>
+        <span class="nav-label">1. – 19. (-te)</span>
+    </div>
+    <div class="nav-btn" onclick="showSection(2)">
+        <span class="nav-emoji">🟠</span>
+        <span class="nav-label">ab 20. (-ste)</span>
+    </div>
+    <div class="nav-btn" onclick="showSection(3)">
+        <span class="nav-emoji">📅</span>
+        <span class="nav-label">Datum (am …ten)</span>
+    </div>
+</div>
+
+<!-- SECTION 0: INTRO -->
+<div class="section active" id="sec-0">
+    <div class="drill-hero">
+        <span class="hero-emoji">🔢</span>
+        <h2>Ordnungszahlen. Zwei Endungen, vier Ausreißer, ein Reflex.</h2>
+        <p>Ordinalzahlen antworten auf die Frage „der wievielte?“. Von 1. bis 19. steht <strong>-te</strong>, ab 20. steht <strong>-ste</strong>. Vier Zahlen sind unregelmäßig — <em>der erste, der dritte, der siebte, der achte</em>. Und sobald „am“ vor dem Datum steht, wandert alles in den Dativ: <em>am fünften Mai</em>. 48 Sätze, drei Runden.</p>
+    </div>
+
+    <div class="drill-explain">
+        <h3>Die beiden Endungen und die vier Ausreißer</h3>
+        <p>Die Kernregel ist erstaunlich einfach: Zahl plus Suffix. Das Suffix wechselt bei 20.</p>
+
+        <div class="mnemonic">
+            <span class="merksatz">„Bis 19. klebst du <em>-te</em> an die Zahl,<br>ab 20. wird es <em>-ste</em> — das ist die Wahl.<br>Und erste, dritte, siebte, achte —<br>die vier bleiben im Gedächtnis mit Andacht.“</span>
+        </div>
+
+        <p class="rule-highlight">💡 Der Drei-Schritt-Reflex:<br>
+        1. <em>Welche Zahl?</em> — unter 20 oder ab 20?<br>
+        2. <em>Welches Suffix?</em> — <em>-te</em> (unter 20) oder <em>-ste</em> (ab 20).<br>
+        3. <em>Welcher Kasus?</em> — „der X-te“ (Nominativ) oder „am X-ten“ (Dativ, weil <em>am = an dem</em>).</p>
+
+        <h3 style="margin-top:14px;">Die drei Klassen</h3>
+
+        <table class="prt-tabelle">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th class="reg">Regulär (klein)</th>
+                    <th class="irr">Unregelmäßig</th>
+                    <th class="gr">Groß (ab 20.)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="row-label">Zahlenbereich</td>
+                    <td class="reg">2., 4., 5., 6., 9. – 19.</td>
+                    <td class="irr">1., 3., 7., 8.</td>
+                    <td class="gr">20., 30., 100., 1000. …</td>
+                </tr>
+                <tr>
+                    <td class="row-label">Suffix (Nominativ)</td>
+                    <td class="reg">-te</td>
+                    <td class="irr">-te (unregelmäßiger Stamm)</td>
+                    <td class="gr">-ste</td>
+                </tr>
+                <tr>
+                    <td class="row-label">Beispiel (Nominativ)</td>
+                    <td class="reg">der zweite, der zehnte</td>
+                    <td class="irr">der erste, der dritte,<br>der siebte, der achte</td>
+                    <td class="gr">der zwanzigste,<br>der hundertste</td>
+                </tr>
+                <tr>
+                    <td class="row-label">Datum (Dativ mit „am“)</td>
+                    <td class="reg">am zweiten, am zehnten</td>
+                    <td class="irr">am ersten, am dritten,<br>am siebten, am achten</td>
+                    <td class="gr">am zwanzigsten,<br>am hundertsten</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p class="sonderfall">⚠️ <strong>Die vier Ausreißer.</strong> <em>eins → erste</em> (nicht „einste“), <em>drei → dritte</em> (nicht „dreite“), <em>sieben → siebte</em> (das <em>en</em> fällt weg), <em>acht → achte</em> (nur ein <em>t</em>, nicht „achtte“). Alle anderen von 2. bis 19. sind einfach Zahl + <em>-te</em>.</p>
+
+        <h3 style="margin-top:14px;">Datum und Kasus</h3>
+        <div class="kontrast-box">
+            <span class="form reg">Der</span> fünfte Mai ist ein Dienstag. <span class="hint">(Nominativ: -e)</span><br>
+            <span class="form reg">Am</span> fünf<span class="form reg">ten</span> Mai treffen wir uns. <span class="hint">(Dativ: -en, weil <em>am</em> = an dem)</span><br>
+            <span class="form gr">Der</span> zwanzigste ist ein Sonntag. <span class="hint">(Nominativ: -ste)</span><br>
+            <span class="form gr">Am</span> zwanzig<span class="form gr">sten</span> feiern wir. <span class="hint">(Dativ: -sten)</span>
+        </div>
+        <p class="sonderfall">ℹ️ Im Drill tippst du nur die gebeugte Form. Der Rahmen „der …“ oder „am …“ steht schon im Satz und zeigt dir, ob Nominativ (-e/-ste) oder Dativ (-en/-sten) dran ist.</p>
+
+        <div class="typ-legend">
+            <span class="typ-chip reg"><span class="dot"></span>Regulär (klein)</span>
+            <span class="typ-chip irr"><span class="dot"></span>Unregelmäßig</span>
+            <span class="typ-chip gr"><span class="dot"></span>Groß (ab 20.)</span>
+        </div>
+    </div>
+
+    <button class="start-cta" onclick="showSection(1)">🔵 Runde 1 starten</button>
+    <p class="hinweis">Tipp: Runde 1 drillt 1. bis 19. im Nominativ (mit den vier Ausreißern). Runde 2 die großen Zahlen ab 20. mit <em>-ste</em>. Runde 3 das Datum im Dativ („am fünften Mai“), wo alle Endungen auf <em>-n</em> wandern.</p>
+</div>
+
+<!-- SECTION 1: RUNDE 1 — 1. bis 19. Nominativ -->
+<div class="section" id="sec-1">
+    <h2>🔵 Runde 1 — Ordinalzahlen 1. bis 19. (Nominativ: der X-te)</h2>
+
+    <div class="control-bar">
+        <button class="btn" onclick="showLoesung(1)">Lösung</button>
+        <button class="btn" onclick="resetRunde(1)">Neu</button>
+    </div>
+
+    <div class="drill-progress">
+        <span class="streak">🔥 Streak: <span id="streak-1">0</span></span>
+        <span class="count">✓ <span id="count-1">0</span>/16</span>
+        <div class="bar"><div class="bar-fill" id="bar-1"></div></div>
+        <span class="time">⏱ <span id="timer-1">00:00</span></span>
+        <span class="best">🏆 <span id="best-1">--:--</span></span>
+    </div>
+
+    <div class="typ-tally">
+        <span class="tt-box reg">Regulär <span class="tally-sub">(Zahl + -te)</span> <span class="tally-num" id="treg-1">0</span><span class="tally-max">/12</span></span>
+        <span class="tt-box irr">Ausreißer <span class="tally-sub">(1. 3. 7. 8.)</span> <span class="tally-num" id="tirr-1">0</span><span class="tally-max">/4</span></span>
+    </div>
+
+    <div id="cards-1"></div>
+
+    <div class="runden-ende" id="ende-1">
+        <h3>🏆 Runde 1 geschafft!</h3>
+        <p>16 Ordinalzahlen von 1. bis 19., alle im Nominativ. Zwölf reguläre (Zahl + -te) und vier Ausreißer (erste, dritte, siebte, achte). Die Endung ist immer <em>-te</em>, wenn der Artikel <em>der</em>/<em>die</em>/<em>das</em> davor steht. Weiter zu den großen Zahlen ab 20.</p>
+        <div class="stats">
+            <div class="stat-box"><span class="stat-num" id="ende-time-1">00:00</span><span class="stat-lbl">Zeit</span></div>
+            <div class="stat-box"><span class="stat-num" id="ende-streak-1">0</span><span class="stat-lbl">Längste Streak</span></div>
+            <div class="stat-box"><span class="stat-num" id="ende-best-1">--:--</span><span class="stat-lbl">Rekord</span></div>
+        </div>
+        <button class="next-cta" onclick="showSection(2)">🟠 Weiter zu Runde 2 →</button>
+    </div>
+</div>
+
+<!-- SECTION 2: RUNDE 2 — ab 20. Nominativ -->
+<div class="section" id="sec-2">
+    <h2>🟠 Runde 2 — Ordinalzahlen ab 20. (Nominativ: der X-ste)</h2>
+
+    <div class="control-bar">
+        <button class="btn" onclick="showLoesung(2)">Lösung</button>
+        <button class="btn" onclick="resetRunde(2)">Neu</button>
+    </div>
+
+    <div class="drill-progress">
+        <span class="streak">🔥 Streak: <span id="streak-2">0</span></span>
+        <span class="count">✓ <span id="count-2">0</span>/16</span>
+        <div class="bar"><div class="bar-fill" id="bar-2"></div></div>
+        <span class="time">⏱ <span id="timer-2">00:00</span></span>
+        <span class="best">🏆 <span id="best-2">--:--</span></span>
+    </div>
+
+    <div class="typ-tally">
+        <span class="tt-box gr">Ab 20. <span class="tally-sub">(Zahl + -ste)</span> <span class="tally-num" id="tgr-2">0</span><span class="tally-max">/16</span></span>
+    </div>
+
+    <div id="cards-2"></div>
+
+    <div class="runden-ende" id="ende-2">
+        <h3>🏆 Runde 2 geschafft!</h3>
+        <p>16 große Ordinalzahlen von 20. bis 1000., alle im Nominativ. Die Endung ist <em>-ste</em>, und auch bei zusammengesetzten Zahlen wie „einundzwanzigste“ oder „fünfundzwanzigste“ wird aus dem Kardinal einfach ein Ordinal. Jetzt kommt das Datum — und damit der Dativ.</p>
+        <div class="stats">
+            <div class="stat-box"><span class="stat-num" id="ende-time-2">00:00</span><span class="stat-lbl">Zeit</span></div>
+            <div class="stat-box"><span class="stat-num" id="ende-streak-2">0</span><span class="stat-lbl">Längste Streak</span></div>
+            <div class="stat-box"><span class="stat-num" id="ende-best-2">--:--</span><span class="stat-lbl">Rekord</span></div>
+        </div>
+        <button class="next-cta" onclick="showSection(3)">📅 Weiter zu Runde 3 →</button>
+    </div>
+</div>
+
+<!-- SECTION 3: RUNDE 3 — Datum im Dativ -->
+<div class="section" id="sec-3">
+    <h2>📅 Runde 3 — Datum im Dativ (am X-ten / am X-sten)</h2>
+
+    <div class="control-bar">
+        <button class="btn" onclick="showLoesung(3)">Lösung</button>
+        <button class="btn" onclick="resetRunde(3)">Neu</button>
+    </div>
+
+    <div class="drill-progress">
+        <span class="streak">🔥 Streak: <span id="streak-3">0</span></span>
+        <span class="count">✓ <span id="count-3">0</span>/16</span>
+        <div class="bar"><div class="bar-fill" id="bar-3"></div></div>
+        <span class="time">⏱ <span id="timer-3">00:00</span></span>
+        <span class="best">🏆 <span id="best-3">--:--</span></span>
+    </div>
+
+    <div class="typ-tally">
+        <span class="tt-box reg">Regulär <span class="tally-num" id="treg-3">0</span><span class="tally-max">/6</span></span>
+        <span class="tt-box irr">Ausreißer <span class="tally-num" id="tirr-3">0</span><span class="tally-max">/4</span></span>
+        <span class="tt-box gr">Ab 20. <span class="tally-num" id="tgr-3">0</span><span class="tally-max">/6</span></span>
+    </div>
+
+    <div id="cards-3"></div>
+
+    <div class="runden-ende" id="ende-3">
+        <h3>🎓 Runde 3 bestanden — Datum sitzt!</h3>
+        <p>48 Ordinalzahlen durchgearbeitet, drei Klassen abgehakt, Nominativ und Dativ sauber getrennt. Nächster Schritt: Konjunktiv II als Höflichkeit (FD33) — hätte, wäre, könnte, möchte.</p>
+        <div class="stats">
+            <div class="stat-box"><span class="stat-num" id="ende-time-3">00:00</span><span class="stat-lbl">Zeit</span></div>
+            <div class="stat-box"><span class="stat-num" id="ende-streak-3">0</span><span class="stat-lbl">Längste Streak</span></div>
+            <div class="stat-box"><span class="stat-num" id="ende-best-3">--:--</span><span class="stat-lbl">Rekord</span></div>
+        </div>
+        <button class="next-cta" onclick="resetRunde(3)">🔄 Nochmal</button>
+    </div>
+</div>
+
+<div class="author-footer">
+    <span class="author-name">Franks Drill</span> · A1 · FD32 · Ordinalzahlen
+</div>
+
+</div>
+
+<script>
+// =========================================================
+//  Franks Drill 32 — Ordinalzahlen
+//  Klassen: reg (regulär 1.-19.) · irr (1./3./7./8.) · gr (ab 20.)
+//  Formen:  Nominativ (-te/-ste) und Dativ nach „am“ (-ten/-sten)
+// =========================================================
+
+// Item-Schema:
+//   k     = Klasse: "reg" | "irr" | "gr"
+//   zahl  = Zahl mit Punkt (im Chip, z.B. "5." oder "20.")
+//   ans   = Antwort (z.B. "fünfte" oder "fünften")
+//   pre   = Satzteil vor der Lücke, endet mit Leerzeichen
+//   post  = Satzteil nach der Lücke (z.B. " Mai." oder ".")
+//   e     = Emoji
+
+var DRILL = {
+    // Runde 1: 1. bis 19. im Nominativ — 4 irr + 12 reg = 16
+    1: [
+        // Ausreißer (4)
+        { k:"irr", zahl:"1.",  ans:"erste",      pre:"Januar ist der ",                       post:" Monat im Jahr.",     e:"🌨️" },
+        { k:"irr", zahl:"3.",  ans:"dritte",     pre:"März ist der ",                         post:" Monat.",              e:"🌷" },
+        { k:"irr", zahl:"7.",  ans:"siebte",     pre:"Juli ist der ",                         post:" Monat.",              e:"☀️" },
+        { k:"irr", zahl:"8.",  ans:"achte",      pre:"August ist der ",                       post:" Monat.",              e:"🌻" },
+        // Regulär (12)
+        { k:"reg", zahl:"2.",  ans:"zweite",     pre:"Februar ist der ",                      post:" Monat.",              e:"💘" },
+        { k:"reg", zahl:"4.",  ans:"vierte",     pre:"April ist der ",                        post:" Monat.",              e:"🌦️" },
+        { k:"reg", zahl:"5.",  ans:"fünfte",     pre:"Mai ist der ",                          post:" Monat.",              e:"🌼" },
+        { k:"reg", zahl:"6.",  ans:"sechste",    pre:"Juni ist der ",                         post:" Monat.",              e:"🌞" },
+        { k:"reg", zahl:"9.",  ans:"neunte",     pre:"September ist der ",                    post:" Monat.",              e:"🍂" },
+        { k:"reg", zahl:"10.", ans:"zehnte",     pre:"Oktober ist der ",                      post:" Monat.",              e:"🎃" },
+        { k:"reg", zahl:"11.", ans:"elfte",      pre:"November ist der ",                     post:" Monat.",              e:"🍁" },
+        { k:"reg", zahl:"12.", ans:"zwölfte",    pre:"Dezember ist der ",                     post:" Monat.",              e:"🎄" },
+        { k:"reg", zahl:"13.", ans:"dreizehnte", pre:"Freitag der ",                          post:" bringt Unglück.",     e:"🐈‍⬛" },
+        { k:"reg", zahl:"14.", ans:"vierzehnte", pre:"Der ",                                  post:" Februar ist Valentinstag.", e:"💝" },
+        { k:"reg", zahl:"18.", ans:"achtzehnte", pre:"Der ",                                  post:" Geburtstag ist in Deutschland wichtig.", e:"🎂" },
+        { k:"reg", zahl:"19.", ans:"neunzehnte", pre:"Der ",                                  post:" Platz auf der Liste ist frei.", e:"📋" }
+    ],
+    // Runde 2: Ab 20. im Nominativ — 16 große Zahlen mit -ste
+    2: [
+        { k:"gr", zahl:"20.",   ans:"zwanzigste",           pre:"Der ",             post:" Platz in der Reihe ist belegt.",          e:"🏁" },
+        { k:"gr", zahl:"21.",   ans:"einundzwanzigste",     pre:"Der ",             post:" Teilnehmer kommt aus Italien.",           e:"🇮🇹" },
+        { k:"gr", zahl:"22.",   ans:"zweiundzwanzigste",    pre:"Der ",             post:" Gast ist mein Nachbar.",                  e:"🏠" },
+        { k:"gr", zahl:"25.",   ans:"fünfundzwanzigste",    pre:"Der ",             post:" Geburtstag ist ein Vierteljahrhundert.",  e:"🎉" },
+        { k:"gr", zahl:"30.",   ans:"dreißigste",           pre:"Der ",             post:" Geburtstag ist eine runde Zahl.",         e:"🎂" },
+        { k:"gr", zahl:"35.",   ans:"fünfunddreißigste",    pre:"Der ",             post:" Marathonläufer erreicht das Ziel.",        e:"🏃" },
+        { k:"gr", zahl:"40.",   ans:"vierzigste",           pre:"Der ",             post:" Hochzeitstag heißt Rubinhochzeit.",       e:"💍" },
+        { k:"gr", zahl:"50.",   ans:"fünfzigste",           pre:"Der ",             post:" Hochzeitstag heißt Goldene Hochzeit.",    e:"👑" },
+        { k:"gr", zahl:"60.",   ans:"sechzigste",           pre:"Der ",             post:" Geburtstag ist ein großes Fest.",         e:"🥂" },
+        { k:"gr", zahl:"70.",   ans:"siebzigste",           pre:"Der ",             post:" Jahrestag wird gefeiert.",                e:"📅" },
+        { k:"gr", zahl:"80.",   ans:"achtzigste",           pre:"Der ",             post:" Tag des Jahres liegt im März.",           e:"🗓️" },
+        { k:"gr", zahl:"90.",   ans:"neunzigste",           pre:"Der ",             post:" Gast bekommt ein Geschenk.",              e:"🎁" },
+        { k:"gr", zahl:"100.",  ans:"hundertste",           pre:"Der ",             post:" Kunde heute gewinnt einen Preis.",        e:"🏆" },
+        { k:"gr", zahl:"200.",  ans:"zweihundertste",       pre:"Der ",             post:" Besucher im Museum kommt vorbei.",        e:"🖼️" },
+        { k:"gr", zahl:"500.",  ans:"fünfhundertste",       pre:"Der ",             post:" Tag ohne Unfall wird gefeiert.",          e:"🎊" },
+        { k:"gr", zahl:"1000.", ans:"tausendste",           pre:"Der ",             post:" Artikel wird heute verkauft.",            e:"🛒" }
+    ],
+    // Runde 3: Datum im Dativ — 4 irr + 6 reg + 6 gr = 16
+    3: [
+        // Ausreißer (4) — Dativ: -ten
+        { k:"irr", zahl:"1.",  ans:"ersten",           pre:"Am ",            post:" Januar beginnt das neue Jahr.",            e:"🎆" },
+        { k:"irr", zahl:"3.",  ans:"dritten",          pre:"Am ",            post:" Oktober ist der Tag der Deutschen Einheit.",e:"🇩🇪" },
+        { k:"irr", zahl:"7.",  ans:"siebten",          pre:"Mein Geburtstag ist am ", post:" April.",                          e:"🎂" },
+        { k:"irr", zahl:"8.",  ans:"achten",           pre:"Am ",            post:" März ist der Weltfrauentag.",              e:"♀️" },
+        // Regulär (6) — Dativ: -ten
+        { k:"reg", zahl:"5.",  ans:"fünften",          pre:"Am ",            post:" Mai treffen wir uns im Park.",              e:"🌳" },
+        { k:"reg", zahl:"14.", ans:"vierzehnten",      pre:"Am ",            post:" Februar ist Valentinstag.",                 e:"💝" },
+        { k:"reg", zahl:"11.", ans:"elften",           pre:"Am ",            post:" November um 11:11 Uhr beginnt der Karneval.", e:"🃏" },
+        { k:"reg", zahl:"9.",  ans:"neunten",          pre:"Am ",            post:" November fiel 1989 die Mauer.",             e:"🧱" },
+        { k:"reg", zahl:"12.", ans:"zwölften",         pre:"Am ",            post:" Oktober 1492 kam Kolumbus in Amerika an.",  e:"⛵" },
+        { k:"reg", zahl:"6.",  ans:"sechsten",         pre:"Am ",            post:" Dezember kommt der Nikolaus.",              e:"🎅" },
+        // Groß (6) — Dativ: -sten
+        { k:"gr",  zahl:"25.", ans:"fünfundzwanzigsten", pre:"Am ",          post:" Dezember ist Weihnachten.",                 e:"🎄" },
+        { k:"gr",  zahl:"31.", ans:"einunddreißigsten", pre:"Am ",           post:" Dezember ist Silvester.",                   e:"🎆" },
+        { k:"gr",  zahl:"24.", ans:"vierundzwanzigsten", pre:"Am ",          post:" Dezember ist Heiligabend.",                 e:"🎁" },
+        { k:"gr",  zahl:"21.", ans:"einundzwanzigsten", pre:"Am ",           post:" März beginnt der Frühling.",                e:"🌷" },
+        { k:"gr",  zahl:"22.", ans:"zweiundzwanzigsten", pre:"Am ",          post:" Juni ist der längste Tag des Jahres.",      e:"☀️" },
+        { k:"gr",  zahl:"29.", ans:"neunundzwanzigsten", pre:"Am ",          post:" Februar gibt es nur alle vier Jahre.",      e:"🗓️" }
+    ]
+};
+
+function tallyKeyOf(runde, item) {
+    return item.k;
+}
+var TALLY_KEYS = {
+    1: ["reg", "irr"],
+    2: ["gr"],
+    3: ["reg", "irr", "gr"]
+};
+
+function emptyTally(runde) {
+    var t = {};
+    TALLY_KEYS[runde].forEach(function(k){ t[k] = 0; });
+    return t;
+}
+
+var state = {
+    1: { timer:null, sec:0, started:false, stopped:false, maxStreak:0, curStreak:0, solved:0, tally:emptyTally(1) },
+    2: { timer:null, sec:0, started:false, stopped:false, maxStreak:0, curStreak:0, solved:0, tally:emptyTally(2) },
+    3: { timer:null, sec:0, started:false, stopped:false, maxStreak:0, curStreak:0, solved:0, tally:emptyTally(3) }
+};
+var bestTime = { 1:null, 2:null, 3:null };
+
+function showSection(idx) {
+    document.querySelectorAll('.section').forEach(function(s,i){ s.classList.toggle('active', i===idx); });
+    document.querySelectorAll('.nav-btn').forEach(function(b,i){ b.classList.toggle('active', i===idx); });
+    window.scrollTo({ top:0, behavior:'smooth' });
+}
+
+function shuffleArr(arr) {
+    var a = arr.slice();
+    for (var i = a.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var t = a[i]; a[i] = a[j]; a[j] = t;
+    }
+    return a;
+}
+
+function catLabel(item) {
+    if (item.k === "reg") return "regulär · 1. – 19.";
+    if (item.k === "irr") return "Ausreißer · 1./3./7./8.";
+    if (item.k === "gr")  return "ab 20.";
+    return item.k;
+}
+
+function renderCards(runde) {
+    var data = shuffleArr(DRILL[runde]);
+    var container = document.getElementById('cards-' + runde);
+    container.innerHTML = '';
+    data.forEach(function(item, idx) {
+        var card = document.createElement('div');
+        card.className = 'pf-card';
+        card.setAttribute('data-cat', item.k);
+        card.setAttribute('data-solved', '0');
+        card.setAttribute('data-runde', runde);
+        card.setAttribute('data-idx', idx);
+        card.setAttribute('data-tally-key', tallyKeyOf(runde, item) || '');
+
+        var satzHtml =
+            escapeHtml(item.pre) +
+            '<input class="blank" type="text" ' +
+                'data-ans="' + escapeAttr(item.ans) + '" ' +
+                'data-role="ordinal" ' +
+                'data-runde="' + runde + '" ' +
+                'data-idx="' + idx + '" ' +
+                'autocomplete="off" autocorrect="off" spellcheck="false" placeholder="">' +
+            escapeHtml(item.post);
+
+        card.innerHTML =
+            '<div class="pf-badge">#' + (idx+1) + '</div>' +
+            '<div class="pf-inputs">' +
+                '<span class="pf-chip" data-cat="' + escapeAttr(item.k) + '">' +
+                    '<span class="pf-emoji">' + (item.e || '') + '</span>' +
+                    '<span class="pf-label">Ordinalzahl</span>' +
+                    '<span class="pf-word">' + escapeHtml(item.zahl) + '</span>' +
+                '</span>' +
+                '<span class="cat-badge" data-cat="' + escapeAttr(item.k) + '">' + escapeHtml(catLabel(item)) + '</span>' +
+            '</div>' +
+            '<div class="pf-satz">' + satzHtml + '</div>' +
+            '<span class="pf-typ-reveal">' + escapeHtml(catLabel(item)) + '</span>';
+
+        container.appendChild(card);
+    });
+    container.querySelectorAll('input.blank').forEach(function(inp) {
+        inp.addEventListener('input', function() { liveCheck(inp); });
+    });
+}
+
+function escapeHtml(s) {
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+function escapeAttr(s) {
+    return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;');
+}
+
+function isAnyAnswer(val, inp) {
+    var primary = inp.dataset.ans || '';
+    return val === primary || val.toLowerCase() === primary.toLowerCase();
+}
+function isAnyPrefix(val, inp) {
+    var primary = (inp.dataset.ans || '').toLowerCase();
+    return primary.indexOf(val.toLowerCase()) === 0;
+}
+
+function liveCheck(inp) {
+    var runde = parseInt(inp.dataset.runde, 10);
+    var val = inp.value.trim();
+    var wasCorrect = inp.classList.contains('correct');
+    inp.classList.remove('correct', 'wrong');
+
+    if (!state[runde].started && val.length > 0) startTimer(runde);
+
+    if (val.length === 0) {
+        if (wasCorrect) checkCardState(inp);
+        return;
+    }
+    if (isAnyAnswer(val, inp)) {
+        inp.classList.add('correct');
+        checkCardState(inp);
+        if (!wasCorrect) advanceFocus(inp);
+        return;
+    }
+    if (isAnyPrefix(val, inp)) {
+        if (wasCorrect) checkCardState(inp);
+        return;
+    }
+    inp.classList.add('wrong');
+    if (wasCorrect) checkCardState(inp);
+    state[runde].curStreak = 0;
+    updateStreak(runde);
+}
+
+function advanceFocus(inp) {
+    var card = inp.closest('.pf-card');
+    if (!card) return;
+    var runde = parseInt(card.dataset.runde, 10);
+
+    var withinCard = card.querySelectorAll('input.blank:not(.correct)');
+    if (withinCard.length > 0) {
+        var firstLocal = withinCard[0];
+        setTimeout((function(n){ return function(){ n.focus(); }; })(firstLocal), 120);
+        return;
+    }
+
+    var allCards = Array.from(document.querySelectorAll('#cards-' + runde + ' .pf-card'));
+    var curIdx = allCards.indexOf(card);
+    for (var i = curIdx + 1; i < allCards.length; i++) {
+        var nextInp = allCards[i].querySelector('input.blank:not(.correct)');
+        if (nextInp) {
+            setTimeout((function(n){ return function(){ n.focus(); n.scrollIntoView({ behavior:'smooth', block:'center' }); }; })(nextInp), 120);
+            return;
+        }
+    }
+    for (var j = 0; j < curIdx; j++) {
+        var prevInp = allCards[j].querySelector('input.blank:not(.correct)');
+        if (prevInp) {
+            setTimeout((function(n){ return function(){ n.focus(); n.scrollIntoView({ behavior:'smooth', block:'center' }); }; })(prevInp), 120);
+            return;
+        }
+    }
+}
+
+function checkCardState(inp) {
+    var card = inp.closest('.pf-card');
+    if (!card) return;
+    var runde = parseInt(card.dataset.runde, 10);
+    var tallyKey = card.dataset.tallyKey;
+    var inputs = card.querySelectorAll('input.blank');
+    var allCorrect = Array.from(inputs).every(function(i){ return i.classList.contains('correct'); });
+    var wasSolved = card.dataset.solved === '1';
+
+    if (allCorrect && !wasSolved) {
+        card.setAttribute('data-solved', '1');
+        state[runde].solved++;
+        state[runde].curStreak++;
+        if (state[runde].curStreak > state[runde].maxStreak) state[runde].maxStreak = state[runde].curStreak;
+        if (tallyKey && state[runde].tally.hasOwnProperty(tallyKey)) state[runde].tally[tallyKey]++;
+        updateStreak(runde);
+        updateProgress(runde);
+        updateTally(runde);
+        if (state[runde].solved === DRILL[runde].length) finishRunde(runde);
+    } else if (!allCorrect && wasSolved) {
+        card.setAttribute('data-solved', '0');
+        state[runde].solved = Math.max(0, state[runde].solved - 1);
+        if (tallyKey && state[runde].tally.hasOwnProperty(tallyKey)) {
+            state[runde].tally[tallyKey] = Math.max(0, state[runde].tally[tallyKey] - 1);
+        }
+        updateProgress(runde);
+        updateTally(runde);
+        var ende = document.getElementById('ende-' + runde);
+        if (ende) ende.classList.remove('show');
+    }
+}
+
+function updateProgress(runde) {
+    document.getElementById('count-' + runde).textContent = state[runde].solved;
+    var pct = (state[runde].solved / DRILL[runde].length) * 100;
+    document.getElementById('bar-' + runde).style.width = pct + '%';
+}
+function updateStreak(runde) {
+    document.getElementById('streak-' + runde).textContent = state[runde].curStreak;
+}
+function updateTally(runde) {
+    TALLY_KEYS[runde].forEach(function(k) {
+        var el = document.getElementById('t' + k + '-' + runde);
+        if (el) el.textContent = state[runde].tally[k];
+    });
+}
+
+function startTimer(runde) {
+    if (state[runde].started) return;
+    state[runde].started = true;
+    state[runde].stopped = false;
+    state[runde].sec = 0;
+    state[runde].timer = setInterval(function() {
+        state[runde].sec++;
+        document.getElementById('timer-' + runde).textContent = fmtTime(state[runde].sec);
+    }, 1000);
+}
+function stopTimer(runde) {
+    if (state[runde].stopped) return;
+    state[runde].stopped = true;
+    if (state[runde].timer) clearInterval(state[runde].timer);
+    if (bestTime[runde] === null || state[runde].sec < bestTime[runde]) {
+        bestTime[runde] = state[runde].sec;
+        document.getElementById('best-' + runde).textContent = fmtTime(bestTime[runde]);
+    }
+}
+function fmtTime(sec) {
+    var m = Math.floor(sec / 60);
+    var s = sec % 60;
+    return (m<10?'0':'') + m + ':' + (s<10?'0':'') + s;
+}
+
+function finishRunde(runde) {
+    stopTimer(runde);
+    var ende = document.getElementById('ende-' + runde);
+    document.getElementById('ende-time-' + runde).textContent = fmtTime(state[runde].sec);
+    document.getElementById('ende-streak-' + runde).textContent = state[runde].maxStreak;
+    document.getElementById('ende-best-' + runde).textContent =
+        (bestTime[runde] !== null) ? fmtTime(bestTime[runde]) : '--:--';
+    ende.classList.add('show');
+    setTimeout(function() { ende.scrollIntoView({ behavior:'smooth', block:'center' }); }, 300);
+}
+
+function showLoesung(runde) {
+    document.querySelectorAll('#cards-' + runde + ' .pf-card').forEach(function(card) {
+        var inputs = card.querySelectorAll('input.blank');
+        inputs.forEach(function(inp) {
+            inp.value = inp.dataset.ans;
+            inp.classList.remove('wrong');
+            inp.classList.add('correct');
+        });
+        card.setAttribute('data-solved', '1');
+    });
+    state[runde].solved = DRILL[runde].length;
+    state[runde].curStreak = 0;
+    state[runde].tally = emptyTally(runde);
+    DRILL[runde].forEach(function(item) {
+        var k = tallyKeyOf(runde, item);
+        if (k && state[runde].tally.hasOwnProperty(k)) state[runde].tally[k]++;
+    });
+    updateProgress(runde);
+    updateStreak(runde);
+    updateTally(runde);
+    stopTimer(runde);
+}
+
+function resetRunde(runde) {
+    if (state[runde].timer) clearInterval(state[runde].timer);
+    state[runde] = { timer:null, sec:0, started:false, stopped:false, maxStreak:0, curStreak:0, solved:0, tally:emptyTally(runde) };
+    document.getElementById('timer-' + runde).textContent = '00:00';
+    document.getElementById('streak-' + runde).textContent = '0';
+    document.getElementById('count-' + runde).textContent = '0';
+    document.getElementById('bar-' + runde).style.width = '0%';
+    updateTally(runde);
+    renderCards(runde);
+    document.getElementById('ende-' + runde).classList.remove('show');
+}
+
+[1,2,3].forEach(function(r) { renderCards(r); });
+
+</script>
+</body>
+</html>
