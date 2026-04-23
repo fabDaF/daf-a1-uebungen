@@ -1,4 +1,4 @@
-# Test-Protokoll FD30–FD39
+# Test-Protokoll FD30–FD40
 
 **Datum:** 2026-04-23
 **Session:** A1-Drill-Ausbau (morphologische Schlussphase + pragmatischer Block)
@@ -6,7 +6,7 @@
 
 ## Zusammenfassung
 
-Alle zehn Drills bestanden beide Test-Stufen ohne Befund.
+Alle elf Drills bestanden beide Test-Stufen ohne Befund.
 
 | Drill | Thema | Audit | Browser |
 |-------|-------|:-----:|:-------:|
@@ -20,6 +20,7 @@ Alle zehn Drills bestanden beide Test-Stufen ohne Befund.
 | FD37 | kein / nicht | ✅ | ✅ |
 | FD38 | Indefinitpronomen | ✅ | ✅ |
 | FD39 | Länder & Präpositionen | ✅ | ✅ |
+| FD40 | Uhrzeit (umgangssprachlich + offiziell) | ✅ | ✅ |
 
 ## Stufe 1 — Statischer Code-Audit
 
