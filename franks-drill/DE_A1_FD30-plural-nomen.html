@@ -415,6 +415,7 @@ h2 {
     font-weight: 700;
     letter-spacing: 0.04em;
 }
+.pf-card[data-solved="0"] .cat-badge { visibility: hidden; }
 .cat-badge[data-cat="e"]   { background: #2563eb; color: white; }
 .cat-badge[data-cat="er"]  { background: #7c3aed; color: white; }
 .cat-badge[data-cat="en"]  { background: #dc2626; color: white; }
@@ -931,7 +932,7 @@ function shuffleArr(arr) {
 }
 
 function catLabel(item) {
-    var um = item.um ? ' · Umlaut' : '';
+    var um = '';
     if (item.k === "e")   return "-e" + um;
     if (item.k === "er")  return "-er" + um;
     if (item.k === "en")  return "-en / -n";

@@ -453,6 +453,7 @@ h2 {
     font-weight: 700;
     letter-spacing: 0.04em;
 }
+.pf-card[data-solved="0"] .cat-badge { visibility: hidden; }
 .cat-badge[data-cat="mn"]    { background: #2563eb; color: white; }
 .cat-badge[data-cat="m"]     { background: #2563eb; color: white; }
 .cat-badge[data-cat="n"]     { background: #7c3aed; color: white; }
@@ -956,13 +957,13 @@ function shuffleArr(arr) {
 function catLabel(item) {
     var cat = item.cat;
     var ans = item.ans;
-    if (cat === "wo")    return "Wo? · Dativ · " + ans;
-    if (cat === "wohin") return "Wohin? · Akk. · " + ans;
-    if (cat === "mn")    return "mask./neutr. → " + ans;
-    if (cat === "m")     return "maskulin → " + ans;
-    if (cat === "n")     return "neutrum → " + ans;
-    if (cat === "f")     return "feminin → " + ans;
-    if (cat === "pl")    return "Plural → " + ans;
+    if (cat === "wo")    return "Wechsel · Wo? (Dativ)";
+    if (cat === "wohin") return "Wechsel · Wohin? (Akk)";
+    if (cat === "mn")    return "mask./neutr.";
+    if (cat === "m")     return "maskulin";
+    if (cat === "n")     return "neutrum";
+    if (cat === "f")     return "feminin";
+    if (cat === "pl")    return "Plural";
     return cat;
 }
 

@@ -388,6 +388,7 @@ h2 {
     font-weight: 700;
     letter-spacing: 0.04em;
 }
+.pf-card[data-solved="0"] .cat-badge { visibility: hidden; }
 .cat-badge[data-cat="sein"]  { background: #2563eb; color: white; }
 .cat-badge[data-cat="haben"] { background: #ea580c; color: white; }
 
@@ -844,7 +845,7 @@ function shuffleArr(arr) {
 }
 
 function catLabel(cat) {
-    return { sein:"sein → war", haben:"haben → hatte" }[cat] || cat;
+    return { sein:"sein (Infinitiv)", haben:"haben (Infinitiv)" }[cat] || cat;
 }
 
 function renderCards(runde) {

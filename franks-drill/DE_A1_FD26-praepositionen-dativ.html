@@ -415,6 +415,7 @@ h2 {
     font-weight: 700;
     letter-spacing: 0.04em;
 }
+.pf-card[data-solved="0"] .cat-badge { visibility: hidden; }
 .cat-badge[data-cat="mn"] { background: #2563eb; color: white; }
 .cat-badge[data-cat="f"]  { background: #dc2626; color: white; }
 .cat-badge[data-cat="pl"] { background: #16a34a; color: white; }
@@ -905,7 +906,7 @@ function shuffleArr(arr) {
 }
 
 function catLabel(cat) {
-    return { mn:"mask./neutr. → dem", f:"feminin → der", pl:"Plural → den" }[cat] || cat;
+    return { mn:"mask./neutr.", f:"feminin", pl:"Plural" }[cat] || cat;
 }
 
 function renderCards(runde) {

@@ -471,6 +471,7 @@ h2 {
     font-weight: 700;
     letter-spacing: 0.04em;
 }
+.pf-card[data-solved="0"] .cat-badge { visibility: hidden; }
 .cat-badge[data-cat="mn"]    { background: #2563eb; color: white; }
 .cat-badge[data-cat="m"]     { background: #2563eb; color: white; }
 .cat-badge[data-cat="n"]     { background: #7c3aed; color: white; }
@@ -983,10 +984,10 @@ function shuffleArr(arr) {
 function catLabel(item) {
     var cat = item.cat;
     var ans = item.ans;
-    if (cat === "dfix")  return "Fix-Dativ · " + ans;
-    if (cat === "afix")  return "Fix-Akk · " + ans;
-    if (cat === "wo")    return "Wechsel · Wo? · " + ans;
-    if (cat === "wohin") return "Wechsel · Wohin? · " + ans;
+    if (cat === "dfix")  return "Fix-Dativ";
+    if (cat === "afix")  return "Fix-Akk";
+    if (cat === "wo")    return "Wechsel · Wo? (Dativ)";
+    if (cat === "wohin") return "Wechsel · Wohin? (Akk)";
     return cat;
 }
 
