@@ -1,4 +1,4 @@
-# Test-Protokoll FD30–FD40
+# Test-Protokoll FD30–FD41
 
 **Datum:** 2026-04-23
 **Session:** A1-Drill-Ausbau (morphologische Schlussphase + pragmatischer Block)
@@ -6,7 +6,7 @@
 
 ## Zusammenfassung
 
-Alle elf Drills bestanden beide Test-Stufen ohne Befund.
+Alle zwölf Drills bestanden beide Test-Stufen ohne Befund. **Die A1-Drill-Serie ist vollständig** — alle HANDOVER-Kandidaten abgearbeitet.
 
 | Drill | Thema | Audit | Browser |
 |-------|-------|:-----:|:-------:|
@@ -21,6 +21,7 @@ Alle elf Drills bestanden beide Test-Stufen ohne Befund.
 | FD38 | Indefinitpronomen | ✅ | ✅ |
 | FD39 | Länder & Präpositionen | ✅ | ✅ |
 | FD40 | Uhrzeit (umgangssprachlich + offiziell) | ✅ | ✅ |
+| FD41 | Mengen- und Verpackungsangaben | ✅ | ✅ |
 
 ## Stufe 1 — Statischer Code-Audit
 
