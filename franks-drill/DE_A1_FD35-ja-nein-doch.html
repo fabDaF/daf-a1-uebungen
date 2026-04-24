@@ -172,12 +172,14 @@ h2 {
 .prt-tabelle th { background: #f5f7ff; color: #4a148c; font-weight: 700; }
 .prt-tabelle td.row-label { background: #fafafa; color: #333; font-weight: 600; text-align: left; }
 
-.prt-tabelle th.ja    { background: #dcfce7; color: #14532d; }
-.prt-tabelle td.ja    { background: #f0fdf4; color: #14532d; font-weight: 700; }
-.prt-tabelle th.nein  { background: #fee2e2; color: #991b1b; }
-.prt-tabelle td.nein  { background: #fef2f2; color: #991b1b; font-weight: 700; }
-.prt-tabelle th.doch  { background: #ffedd5; color: #9a3412; }
-.prt-tabelle td.doch  { background: #fff7ed; color: #9a3412; font-weight: 700; }
+.prt-tabelle th.ja      { background: #dcfce7; color: #14532d; }
+.prt-tabelle td.ja      { background: #f0fdf4; color: #14532d; font-weight: 700; }
+.prt-tabelle th.nein    { background: #fee2e2; color: #991b1b; }
+.prt-tabelle td.nein    { background: #fef2f2; color: #991b1b; font-weight: 700; }
+.prt-tabelle th.doch    { background: #ffedd5; color: #9a3412; }
+.prt-tabelle td.doch    { background: #fff7ed; color: #9a3412; font-weight: 700; }
+.prt-tabelle th.neinneg { background: #f5c6ca; color: #4c0519; }
+.prt-tabelle td.neinneg { background: #fbe9eb; color: #4c0519; font-weight: 700; }
 
 .kontrast-box {
     margin-top: 14px;
@@ -191,9 +193,10 @@ h2 {
 }
 .kontrast-box .arrow { color: #6b7280; margin: 0 8px; }
 .kontrast-box .form  { font-weight: 700; }
-.kontrast-box .form.ja   { color: #14532d; }
-.kontrast-box .form.nein { color: #991b1b; }
-.kontrast-box .form.doch { color: #9a3412; }
+.kontrast-box .form.ja      { color: #14532d; }
+.kontrast-box .form.nein    { color: #991b1b; }
+.kontrast-box .form.doch    { color: #9a3412; }
+.kontrast-box .form.neinneg { color: #4c0519; }
 .kontrast-box .hint { font-style: italic; color: #78350f; font-size: 0.9em; }
 .kontrast-box .q { color: #4a148c; font-weight: 700; }
 .kontrast-box .a { color: #333; }
@@ -219,12 +222,14 @@ h2 {
     border: 2px solid;
 }
 .typ-chip .dot { width: 10px; height: 10px; border-radius: 50%; }
-.typ-chip.ja    { border-color: #16a34a; background: #f0fdf4; color: #14532d; }
-.typ-chip.ja    .dot { background: #16a34a; }
-.typ-chip.nein  { border-color: #dc2626; background: #fef2f2; color: #991b1b; }
-.typ-chip.nein  .dot { background: #dc2626; }
-.typ-chip.doch  { border-color: #ea580c; background: #fff7ed; color: #9a3412; }
-.typ-chip.doch  .dot { background: #ea580c; }
+.typ-chip.ja      { border-color: #16a34a; background: #f0fdf4; color: #14532d; }
+.typ-chip.ja      .dot { background: #16a34a; }
+.typ-chip.nein    { border-color: #dc2626; background: #fef2f2; color: #991b1b; }
+.typ-chip.nein    .dot { background: #dc2626; }
+.typ-chip.doch    { border-color: #ea580c; background: #fff7ed; color: #9a3412; }
+.typ-chip.doch    .dot { background: #ea580c; }
+.typ-chip.neinneg { border-color: #7f1d1d; background: #fbe9eb; color: #4c0519; }
+.typ-chip.neinneg .dot { background: #7f1d1d; }
 
 .drill-progress {
     display: flex;
@@ -271,9 +276,10 @@ h2 {
     background: #fafafa;
     letter-spacing: 0.04em;
 }
-.tt-box.ja    { color: #14532d; border-color: #bbf7d0; background: #f0fdf4; }
-.tt-box.nein  { color: #991b1b; border-color: #fecaca; background: #fef2f2; }
-.tt-box.doch  { color: #9a3412; border-color: #fed7aa; background: #fff7ed; }
+.tt-box.ja      { color: #14532d; border-color: #bbf7d0; background: #f0fdf4; }
+.tt-box.nein    { color: #991b1b; border-color: #fecaca; background: #fef2f2; }
+.tt-box.doch    { color: #9a3412; border-color: #fed7aa; background: #fff7ed; }
+.tt-box.neinneg { color: #4c0519; border-color: #f5c6ca; background: #fbe9eb; }
 .tt-box .tally-num { font-size: 1.05em; }
 .tt-box .tally-max { color: #888; font-weight: 400; }
 .tt-box .tally-sub { font-size: 0.78em; opacity: 0.7; margin-left: 2px; }
@@ -312,13 +318,15 @@ h2 {
     position: relative;
     transition: background 0.5s ease, border-color 0.3s ease;
 }
-.pf-card[data-cat="ja"]   { border-left-color: #16a34a; }
-.pf-card[data-cat="nein"] { border-left-color: #dc2626; }
-.pf-card[data-cat="doch"] { border-left-color: #ea580c; }
+.pf-card[data-cat="ja"]      { border-left-color: #16a34a; }
+.pf-card[data-cat="nein"]    { border-left-color: #dc2626; }
+.pf-card[data-cat="doch"]    { border-left-color: #ea580c; }
+.pf-card[data-cat="neinneg"] { border-left-color: #7f1d1d; }
 
-.pf-card[data-solved="1"][data-cat="ja"]   { background: linear-gradient(90deg, #f0fdf4, #f8f9ff 70%); }
-.pf-card[data-solved="1"][data-cat="nein"] { background: linear-gradient(90deg, #fef2f2, #f8f9ff 70%); }
-.pf-card[data-solved="1"][data-cat="doch"] { background: linear-gradient(90deg, #fff7ed, #f8f9ff 70%); }
+.pf-card[data-solved="1"][data-cat="ja"]      { background: linear-gradient(90deg, #f0fdf4, #f8f9ff 70%); }
+.pf-card[data-solved="1"][data-cat="nein"]    { background: linear-gradient(90deg, #fef2f2, #f8f9ff 70%); }
+.pf-card[data-solved="1"][data-cat="doch"]    { background: linear-gradient(90deg, #fff7ed, #f8f9ff 70%); }
+.pf-card[data-solved="1"][data-cat="neinneg"] { background: linear-gradient(90deg, #fbe9eb, #f8f9ff 70%); }
 .pf-card[data-solved="1"] { animation: cardPulse 0.5s ease; }
 
 @keyframes cardPulse {
@@ -382,9 +390,10 @@ h2 {
     letter-spacing: 0.04em;
     margin-bottom: 10px;
 }
-.cat-badge[data-cat="ja"]   { background: #16a34a; color: white; }
-.cat-badge[data-cat="nein"] { background: #dc2626; color: white; }
-.cat-badge[data-cat="doch"] { background: #ea580c; color: white; }
+.cat-badge[data-cat="ja"]      { background: #16a34a; color: white; }
+.cat-badge[data-cat="nein"]    { background: #dc2626; color: white; }
+.cat-badge[data-cat="doch"]    { background: #ea580c; color: white; }
+.cat-badge[data-cat="neinneg"] { background: #7f1d1d; color: white; }
 .pf-card[data-solved="0"] .cat-badge { visibility: hidden; }
 
 .pf-satz {
@@ -442,9 +451,10 @@ input.blank.wrong {
     letter-spacing: 0.04em;
 }
 .pf-card[data-solved="1"] .pf-typ-reveal { display: inline-block; }
-.pf-card[data-cat="ja"]   .pf-typ-reveal { background: #bbf7d0; color: #14532d; }
-.pf-card[data-cat="nein"] .pf-typ-reveal { background: #fecaca; color: #991b1b; }
-.pf-card[data-cat="doch"] .pf-typ-reveal { background: #fed7aa; color: #9a3412; }
+.pf-card[data-cat="ja"]      .pf-typ-reveal { background: #bbf7d0; color: #14532d; }
+.pf-card[data-cat="nein"]    .pf-typ-reveal { background: #fecaca; color: #991b1b; }
+.pf-card[data-cat="doch"]    .pf-typ-reveal { background: #fed7aa; color: #9a3412; }
+.pf-card[data-cat="neinneg"] .pf-typ-reveal { background: #f5c6ca; color: #4c0519; }
 
 .runden-ende {
     display: none;
@@ -594,7 +604,7 @@ input.blank.wrong {
                 <tr>
                     <td class="row-label">Negative Frage<br>„Kommst du nicht?“</td>
                     <td class="doch">doch<br><span style="font-size:0.85em;font-style:italic;">(Doch, ich komme.)</span></td>
-                    <td class="nein">nein<br><span style="font-size:0.85em;font-style:italic;">(Nein, ich komme nicht.)</span></td>
+                    <td class="neinneg">nein<br><span style="font-size:0.85em;font-style:italic;">(Nein, ich komme nicht.)</span></td>
                 </tr>
             </tbody>
         </table>
@@ -604,16 +614,17 @@ input.blank.wrong {
         <h3 style="margin-top:14px;">Beispiele im Kontrast</h3>
         <div class="kontrast-box">
             <span class="q">Kommst du morgen?</span> <span class="arrow">→</span> <span class="form ja">Ja</span>, ich komme. / <span class="form nein">Nein</span>, ich komme nicht.<br>
-            <span class="q">Kommst du nicht morgen?</span> <span class="arrow">→</span> <span class="form doch">Doch</span>, ich komme. / <span class="form nein">Nein</span>, ich komme nicht.<br>
+            <span class="q">Kommst du nicht morgen?</span> <span class="arrow">→</span> <span class="form doch">Doch</span>, ich komme. / <span class="form neinneg">Nein</span>, ich komme nicht.<br>
             <span class="q">Magst du Pizza?</span> <span class="arrow">→</span> <span class="form ja">Ja</span>, sehr gern. / <span class="form nein">Nein</span>, nicht so.<br>
-            <span class="q">Magst du keine Pizza?</span> <span class="arrow">→</span> <span class="form doch">Doch</span>, ich liebe Pizza! / <span class="form nein">Nein</span>, wirklich nicht.
+            <span class="q">Magst du keine Pizza?</span> <span class="arrow">→</span> <span class="form doch">Doch</span>, ich liebe Pizza! / <span class="form neinneg">Nein</span>, wirklich nicht.
         </div>
         <p class="sonderfall">ℹ️ Im Drill liest du die Frage, schaust dir die Antwort an — und tippst die passende Partikel (<em>Ja</em>, <em>Nein</em> oder <em>Doch</em>) in die Lücke. Groß- oder Kleinschreibung wird akzeptiert.</p>
 
         <div class="typ-legend">
-            <span class="typ-chip ja"><span class="dot"></span>ja</span>
-            <span class="typ-chip nein"><span class="dot"></span>nein</span>
-            <span class="typ-chip doch"><span class="dot"></span>doch</span>
+            <span class="typ-chip ja"><span class="dot"></span>ja · Bestätigung</span>
+            <span class="typ-chip nein"><span class="dot"></span>nein · Verneinung</span>
+            <span class="typ-chip doch"><span class="dot"></span>doch · Widerspruch</span>
+            <span class="typ-chip neinneg"><span class="dot"></span>nein · Zustimmung zur Verneinung</span>
         </div>
     </div>
 
@@ -676,14 +687,14 @@ input.blank.wrong {
 
     <div class="typ-tally">
         <span class="tt-box doch">doch <span class="tally-sub">(Widerspruch)</span> <span class="tally-num" id="tdoch-2">0</span><span class="tally-max">/8</span></span>
-        <span class="tt-box nein">nein <span class="tally-sub">(Zustimmung zur Verneinung)</span> <span class="tally-num" id="tnein-2">0</span><span class="tally-max">/8</span></span>
+        <span class="tt-box neinneg">nein <span class="tally-sub">(Zustimmung zur Verneinung)</span> <span class="tally-num" id="tneinneg-2">0</span><span class="tally-max">/8</span></span>
     </div>
 
     <div id="cards-2"></div>
 
     <div class="runden-ende" id="ende-2">
         <h3>🏆 Runde 2 geschafft!</h3>
-        <p>16 negative Fragen. Hier liegt der Kern der Lektion: <em>doch</em> widerspricht („Nein, nein, ich tue es doch!“), <em>nein</em> bestätigt die Verneinung („Stimmt, ich tue es nicht.“). Im Megamix kommen jetzt alle drei Partikel durcheinander.</p>
+        <p>16 negative Fragen. Hier liegt der Kern der Lektion: <em>doch</em> widerspricht („Nein, nein, ich tue es doch!“), <em>nein</em> bestätigt die Verneinung („Stimmt, ich tue es nicht.“). Im Megamix kommen jetzt alle vier Kombinationen durcheinander — Bestätigung, Verneinung, Widerspruch und Zustimmung zur Verneinung.</p>
         <div class="stats">
             <div class="stat-box"><span class="stat-num" id="ende-time-2">00:00</span><span class="stat-lbl">Zeit</span></div>
             <div class="stat-box"><span class="stat-num" id="ende-streak-2">0</span><span class="stat-lbl">Längste Streak</span></div>
@@ -695,7 +706,7 @@ input.blank.wrong {
 
 <!-- SECTION 3: RUNDE 3 — Megamix -->
 <div class="section" id="sec-3">
-    <h2>🎓 Runde 3 — Megamix (ja · nein · doch)</h2>
+    <h2>🎓 Runde 3 — Megamix (alle vier Antwort-Kombinationen)</h2>
 
     <div class="control-bar">
         <button class="btn" onclick="showLoesung(3)">Lösung</button>
@@ -711,9 +722,10 @@ input.blank.wrong {
     </div>
 
     <div class="typ-tally">
-        <span class="tt-box ja">ja <span class="tally-num" id="tja-3">0</span><span class="tally-max">/5</span></span>
-        <span class="tt-box nein">nein <span class="tally-num" id="tnein-3">0</span><span class="tally-max">/5</span></span>
-        <span class="tt-box doch">doch <span class="tally-num" id="tdoch-3">0</span><span class="tally-max">/6</span></span>
+        <span class="tt-box ja">ja <span class="tally-sub">(pos. Frage)</span> <span class="tally-num" id="tja-3">0</span><span class="tally-max">/4</span></span>
+        <span class="tt-box nein">nein <span class="tally-sub">(pos. Frage)</span> <span class="tally-num" id="tnein-3">0</span><span class="tally-max">/4</span></span>
+        <span class="tt-box doch">doch <span class="tally-sub">(neg. Frage)</span> <span class="tally-num" id="tdoch-3">0</span><span class="tally-max">/4</span></span>
+        <span class="tt-box neinneg">nein <span class="tally-sub">(neg. Frage)</span> <span class="tally-num" id="tneinneg-3">0</span><span class="tally-max">/4</span></span>
     </div>
 
     <div id="cards-3"></div>
@@ -772,48 +784,49 @@ var DRILL = {
         { k:"nein", frage:"Kaufst du den blauen Pullover?",  ans:"Nein", post:", er ist zu teuer.",               e:"🧥" },
         { k:"nein", frage:"Ist der Laden jetzt noch offen?", ans:"Nein", post:", er macht um sieben zu.",         e:"🏪" }
     ],
-    // Runde 2: Negative Fragen — 8 doch + 8 nein
+    // Runde 2: Negative Fragen — 8 doch + 8 neinneg
     2: [
-        // doch (8, Widerspruch)
-        { k:"doch", frage:"Kommst du morgen nicht?",          ans:"Doch", post:", ich komme ganz sicher.",        e:"📅" },
-        { k:"doch", frage:"Hast du keinen Hunger?",           ans:"Doch", post:", ich habe großen Hunger.",       e:"🍞" },
-        { k:"doch", frage:"Lernst du kein Deutsch?",          ans:"Doch", post:", ich lerne jeden Tag.",           e:"📚" },
-        { k:"doch", frage:"Ist das nicht dein Auto?",         ans:"Doch", post:", das gehört mir.",                e:"🚗" },
-        { k:"doch", frage:"Magst du keine Pizza?",            ans:"Doch", post:", ich liebe Pizza!",              e:"🍕" },
-        { k:"doch", frage:"Kannst du nicht kochen?",          ans:"Doch", post:", ich koche sehr gern.",           e:"🍳" },
-        { k:"doch", frage:"Wohnst du nicht in München?",      ans:"Doch", post:", seit einem Jahr.",               e:"🏙️" },
-        { k:"doch", frage:"Hast du heute keine Zeit?",        ans:"Doch", post:", ich habe Zeit.",                 e:"⏰" },
-        // nein (8, Zustimmung zur Verneinung)
-        { k:"nein", frage:"Arbeitest du nicht am Wochenende?",ans:"Nein", post:", am Wochenende habe ich frei.",  e:"😴" },
-        { k:"nein", frage:"Ist der Film nicht interessant?",  ans:"Nein", post:", er ist wirklich langweilig.",    e:"😐" },
-        { k:"nein", frage:"Trinkst du keinen Kaffee?",        ans:"Nein", post:", nur Tee am Morgen.",             e:"🍵" },
-        { k:"nein", frage:"Hast du kein Ticket dabei?",       ans:"Nein", post:", ich habe es vergessen.",         e:"🎫" },
-        { k:"nein", frage:"Kennst du Berlin gar nicht?",      ans:"Nein", post:", ich war noch nie dort.",         e:"🏙️" },
-        { k:"nein", frage:"Kaufst du das Buch wirklich nicht?",ans:"Nein",post:", es ist viel zu teuer.",          e:"📕" },
-        { k:"nein", frage:"Fährt der Zug heute nicht?",       ans:"Nein", post:", er fällt leider aus.",           e:"🚆" },
-        { k:"nein", frage:"Sind die Kinder gar nicht da?",    ans:"Nein", post:", sie sind bei der Oma.",          e:"👶" }
+        // doch (8, Widerspruch — die Verneinung ist falsch)
+        { k:"doch",    frage:"Kommst du morgen nicht?",           ans:"Doch", post:", ich komme ganz sicher.",        e:"📅" },
+        { k:"doch",    frage:"Hast du keinen Hunger?",            ans:"Doch", post:", ich habe großen Hunger.",       e:"🍞" },
+        { k:"doch",    frage:"Lernst du kein Deutsch?",           ans:"Doch", post:", ich lerne jeden Tag.",          e:"📚" },
+        { k:"doch",    frage:"Ist das nicht dein Auto?",          ans:"Doch", post:", das gehört mir.",               e:"🚗" },
+        { k:"doch",    frage:"Magst du keine Pizza?",             ans:"Doch", post:", ich liebe Pizza!",              e:"🍕" },
+        { k:"doch",    frage:"Kannst du nicht kochen?",           ans:"Doch", post:", ich koche sehr gern.",          e:"🍳" },
+        { k:"doch",    frage:"Wohnst du nicht in München?",       ans:"Doch", post:", seit einem Jahr.",              e:"🏙️" },
+        { k:"doch",    frage:"Hast du heute keine Zeit?",         ans:"Doch", post:", ich habe Zeit.",                e:"⏰" },
+        // neinneg (8, Zustimmung zur Verneinung — die Verneinung ist richtig)
+        { k:"neinneg", frage:"Arbeitest du nicht am Wochenende?", ans:"Nein", post:", am Wochenende habe ich frei.",  e:"😴" },
+        { k:"neinneg", frage:"Ist der Film nicht interessant?",   ans:"Nein", post:", er ist wirklich langweilig.",   e:"😐" },
+        { k:"neinneg", frage:"Trinkst du keinen Kaffee?",         ans:"Nein", post:", nur Tee am Morgen.",            e:"🍵" },
+        { k:"neinneg", frage:"Hast du kein Ticket dabei?",        ans:"Nein", post:", ich habe es vergessen.",        e:"🎫" },
+        { k:"neinneg", frage:"Kennst du Berlin gar nicht?",       ans:"Nein", post:", ich war noch nie dort.",        e:"🏙️" },
+        { k:"neinneg", frage:"Kaufst du das Buch wirklich nicht?",ans:"Nein", post:", es ist viel zu teuer.",         e:"📕" },
+        { k:"neinneg", frage:"Fährt der Zug heute nicht?",        ans:"Nein", post:", er fällt leider aus.",          e:"🚆" },
+        { k:"neinneg", frage:"Sind die Kinder gar nicht da?",     ans:"Nein", post:", sie sind bei der Oma.",         e:"👶" }
     ],
-    // Runde 3: Megamix — 5 ja + 5 nein + 6 doch = 16
+    // Runde 3: Megamix — 4 ja + 4 nein + 4 doch + 4 neinneg = 16 (alle vier Kombinationen)
     3: [
-        // ja (5)
-        { k:"ja",   frage:"Bist du müde?",                    ans:"Ja",   post:", ich bin sehr müde.",             e:"😴" },
-        { k:"ja",   frage:"Gehst du jeden Tag zur Arbeit?",   ans:"Ja",   post:", von Montag bis Freitag.",        e:"💼" },
-        { k:"ja",   frage:"Hast du einen Bruder?",            ans:"Ja",   post:", einen jüngeren.",                e:"👦" },
-        { k:"ja",   frage:"Ist das dein Kugelschreiber?",     ans:"Ja",   post:", den habe ich gestern verloren.", e:"✏️" },
-        { k:"ja",   frage:"Regnet es draußen?",               ans:"Ja",   post:", es regnet stark.",               e:"🌧️" },
-        // nein (5)
-        { k:"nein", frage:"Kommst du heute Abend zur Party?", ans:"Nein", post:", ich bin leider krank.",          e:"🤒" },
-        { k:"nein", frage:"Hast du Geschwister?",             ans:"Nein", post:", ich bin ein Einzelkind.",        e:"👤" },
-        { k:"nein", frage:"Ist die Tür offen?",               ans:"Nein", post:", sie ist fest zu.",               e:"🚪" },
-        { k:"nein", frage:"Spielst du Fußball in der Freizeit?",ans:"Nein",post:", ich spiele nur Tennis.",         e:"🎾" },
-        { k:"nein", frage:"Ist es kalt draußen?",             ans:"Nein", post:", es ist sehr warm heute.",         e:"☀️" },
-        // doch (6)
-        { k:"doch", frage:"Hast du nicht gesagt, du kommst?", ans:"Doch", post:", und ich komme auch wirklich.",   e:"📅" },
-        { k:"doch", frage:"Magst du keinen Fisch?",           ans:"Doch", post:", Fisch mag ich sehr.",            e:"🐟" },
-        { k:"doch", frage:"Hast du kein Geld dabei?",         ans:"Doch", post:", ich habe 20 Euro.",              e:"💶" },
-        { k:"doch", frage:"Ist das nicht mein Platz?",        ans:"Doch", post:", du hast recht, er gehört dir.",  e:"💺" },
-        { k:"doch", frage:"Verstehst du mich nicht?",         ans:"Doch", post:", ich verstehe dich sehr gut.",    e:"👂" },
-        { k:"doch", frage:"Hast du heute keine Lust?",        ans:"Doch", post:", ich will mitkommen.",            e:"😊" }
+        // ja (4) — positive Frage, Bestätigung
+        { k:"ja",      frage:"Bist du müde?",                     ans:"Ja",   post:", ich bin sehr müde.",            e:"😴" },
+        { k:"ja",      frage:"Gehst du jeden Tag zur Arbeit?",    ans:"Ja",   post:", von Montag bis Freitag.",       e:"💼" },
+        { k:"ja",      frage:"Hast du einen Bruder?",             ans:"Ja",   post:", einen jüngeren.",               e:"👦" },
+        { k:"ja",      frage:"Regnet es draußen?",                ans:"Ja",   post:", es regnet stark.",              e:"🌧️" },
+        // nein (4) — positive Frage, Verneinung
+        { k:"nein",    frage:"Kommst du heute Abend zur Party?",  ans:"Nein", post:", ich bin leider krank.",         e:"🤒" },
+        { k:"nein",    frage:"Hast du Geschwister?",              ans:"Nein", post:", ich bin ein Einzelkind.",       e:"👤" },
+        { k:"nein",    frage:"Ist die Tür offen?",                ans:"Nein", post:", sie ist fest zu.",              e:"🚪" },
+        { k:"nein",    frage:"Spielst du Fußball in der Freizeit?", ans:"Nein", post:", ich spiele nur Tennis.",      e:"🎾" },
+        // doch (4) — negative Frage, Widerspruch
+        { k:"doch",    frage:"Hast du nicht gesagt, du kommst?",  ans:"Doch", post:", und ich komme auch wirklich.",  e:"📅" },
+        { k:"doch",    frage:"Magst du keinen Fisch?",            ans:"Doch", post:", Fisch mag ich sehr.",           e:"🐟" },
+        { k:"doch",    frage:"Hast du kein Geld dabei?",          ans:"Doch", post:", ich habe 20 Euro.",             e:"💶" },
+        { k:"doch",    frage:"Verstehst du mich nicht?",          ans:"Doch", post:", ich verstehe dich sehr gut.",   e:"👂" },
+        // neinneg (4) — negative Frage, Zustimmung zur Verneinung
+        { k:"neinneg", frage:"Fährst du morgen nicht nach Köln?", ans:"Nein", post:", ich bleibe zu Hause.",          e:"🚆" },
+        { k:"neinneg", frage:"Isst du keinen Zucker mehr?",       ans:"Nein", post:", ich habe ganz aufgehört.",      e:"🍰" },
+        { k:"neinneg", frage:"Kennst du meine Schwester nicht?",  ans:"Nein", post:", wir sind uns noch nie begegnet.", e:"👩" },
+        { k:"neinneg", frage:"Hast du wirklich kein Handy dabei?",ans:"Nein", post:", ich habe es zu Hause vergessen.", e:"📱" }
     ]
 };
 
@@ -822,8 +835,8 @@ function tallyKeyOf(runde, item) {
 }
 var TALLY_KEYS = {
     1: ["ja", "nein"],
-    2: ["doch", "nein"],
-    3: ["ja", "nein", "doch"]
+    2: ["doch", "neinneg"],
+    3: ["ja", "nein", "doch", "neinneg"]
 };
 
 function emptyTally(runde) {
@@ -855,9 +868,10 @@ function shuffleArr(arr) {
 }
 
 function catLabel(item) {
-    if (item.k === "ja")   return "Partikel · ja";
-    if (item.k === "nein") return "Partikel · nein";
-    if (item.k === "doch") return "Partikel · doch";
+    if (item.k === "ja")      return "Bestätigung";
+    if (item.k === "nein")    return "Verneinung";
+    if (item.k === "doch")    return "Widerspruch";
+    if (item.k === "neinneg") return "Zustimmung zur Verneinung";
     return item.k;
 }
 
