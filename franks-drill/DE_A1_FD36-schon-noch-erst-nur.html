@@ -72,13 +72,14 @@ body {
     body { padding: 8px; }
     .nav { flex-wrap: wrap; }
     .nav-btn {
-        flex: 1 1 25%;
+        flex: 1 1 20%;
         min-width: 0;
-        font-size: 0.8em;
-        padding: 10px 6px;
+        font-size: 0.78em;
+        padding: 10px 4px;
         border-right: 1px solid #ddd;
     }
     .nav-btn:last-child { border-right: 1px solid #ddd; }
+    .nav-label { font-size: 0.7em; }
 }
 
 .section { display: none; padding: 28px 30px 10px 30px; }
@@ -540,6 +541,10 @@ input.blank.wrong {
         <span class="nav-label">erst &amp; nur</span>
     </div>
     <div class="nav-btn" onclick="showSection(3)">
+        <span class="nav-emoji">🔁</span>
+        <span class="nav-label">schon ↔ erst</span>
+    </div>
+    <div class="nav-btn" onclick="showSection(4)">
         <span class="nav-emoji">🎓</span>
         <span class="nav-label">Megamix</span>
     </div>
@@ -620,7 +625,7 @@ input.blank.wrong {
     </div>
 
     <button class="start-cta" onclick="showSection(1)">🟢 Runde 1 starten</button>
-    <p class="hinweis">Tipp: Runde 1 drillt das wichtigste Paar <em>schon ↔ noch</em> (bereits vs. andauernd). Runde 2 bringt <em>erst</em> (später) und <em>nur</em> (beschränkt) dazu. Runde 3 mischt alle vier.</p>
+    <p class="hinweis">Tipp: Runde 1 drillt das Paar <em>schon ↔ noch</em> (bereits vs. andauernd). Runde 2 bringt <em>erst</em> (später) und <em>nur</em> (beschränkt). Runde 3 zwingt zur Entscheidung beim zentralen Kontrast <em>schon ↔ erst</em> — früher als erwartet gegen später als erwartet. Runde 4 mischt alle vier Partikel.</p>
 </div>
 
 <!-- SECTION 1: RUNDE 1 — schon & noch -->
@@ -685,19 +690,19 @@ input.blank.wrong {
 
     <div class="runden-ende" id="ende-2">
         <h3>🏆 Runde 2 geschafft!</h3>
-        <p>16 Sätze mit <em>erst</em> (später oder weniger als erwartet — mit offener Fortsetzung) und <em>nur</em> (beschränkt — mehr gibt es nicht). Beide bedeuten „weniger“, aber mit verschiedener Erwartung. Jetzt alle vier Partikel durcheinander.</p>
+        <p>16 Sätze mit <em>erst</em> (später oder weniger als erwartet — mit offener Fortsetzung) und <em>nur</em> (beschränkt — mehr gibt es nicht). Beide bedeuten „weniger“, aber mit verschiedener Erwartung. Jetzt der direkte Kontrast <em>schon</em> vs. <em>erst</em> — der Kern der Lektion.</p>
         <div class="stats">
             <div class="stat-box"><span class="stat-num" id="ende-time-2">00:00</span><span class="stat-lbl">Zeit</span></div>
             <div class="stat-box"><span class="stat-num" id="ende-streak-2">0</span><span class="stat-lbl">Längste Streak</span></div>
             <div class="stat-box"><span class="stat-num" id="ende-best-2">--:--</span><span class="stat-lbl">Rekord</span></div>
         </div>
-        <button class="next-cta" onclick="showSection(3)">🎓 Weiter zum Megamix →</button>
+        <button class="next-cta" onclick="showSection(3)">🔁 Weiter zu Runde 3 →</button>
     </div>
 </div>
 
-<!-- SECTION 3: RUNDE 3 — Megamix -->
+<!-- SECTION 3: RUNDE 3 — schon vs. erst (Kontrast) -->
 <div class="section" id="sec-3">
-    <h2>🎓 Runde 3 — Megamix (alle vier Partikel)</h2>
+    <h2>🔁 Runde 3 — schon vs. erst (früher als erwartet vs. später als erwartet)</h2>
 
     <div class="control-bar">
         <button class="btn" onclick="showLoesung(3)">Lösung</button>
@@ -713,23 +718,59 @@ input.blank.wrong {
     </div>
 
     <div class="typ-tally">
-        <span class="tt-box schon">schon <span class="tally-num" id="tschon-3">0</span><span class="tally-max">/4</span></span>
-        <span class="tt-box noch">noch <span class="tally-num" id="tnoch-3">0</span><span class="tally-max">/4</span></span>
-        <span class="tt-box erst">erst <span class="tally-num" id="terst-3">0</span><span class="tally-max">/4</span></span>
-        <span class="tt-box nur">nur <span class="tally-num" id="tnur-3">0</span><span class="tally-max">/4</span></span>
+        <span class="tt-box schon">schon <span class="tally-sub">(weiter als erwartet)</span> <span class="tally-num" id="tschon-3">0</span><span class="tally-max">/8</span></span>
+        <span class="tt-box erst">erst <span class="tally-sub">(weniger weit als erwartet)</span> <span class="tally-num" id="terst-3">0</span><span class="tally-max">/8</span></span>
     </div>
 
     <div id="cards-3"></div>
 
     <div class="runden-ende" id="ende-3">
-        <h3>🎓 Megamix bestanden — Partikel-Reflex sitzt!</h3>
-        <p>48 Sätze mit den vier wichtigsten Zeit- und Fokuspartikeln. Diese vier Wörter machen Deutsch in kleinen Details ausdrucksstärker — und sie zu beherrschen ist ein großer Schritt aus dem Schulbuchdeutsch ins natürliche Sprechen. Nächste pragmatische Einheit wäre <em>kein vs. nicht</em> (FD37).</p>
+        <h3>🏆 Runde 3 geschafft!</h3>
+        <p>16 Sätze, in denen <em>schon</em> und <em>erst</em> sich am selben Zeitpunkt treffen — und entgegengesetzte Einstellungen ausdrücken. „Es ist <em>schon</em> zehn Uhr" (spät, höchste Zeit) vs. „Es ist <em>erst</em> zehn Uhr" (noch früh, entspannt). Jetzt der Megamix mit allen vier Partikeln.</p>
         <div class="stats">
             <div class="stat-box"><span class="stat-num" id="ende-time-3">00:00</span><span class="stat-lbl">Zeit</span></div>
             <div class="stat-box"><span class="stat-num" id="ende-streak-3">0</span><span class="stat-lbl">Längste Streak</span></div>
             <div class="stat-box"><span class="stat-num" id="ende-best-3">--:--</span><span class="stat-lbl">Rekord</span></div>
         </div>
-        <button class="next-cta" onclick="resetRunde(3)">🔄 Nochmal</button>
+        <button class="next-cta" onclick="showSection(4)">🎓 Weiter zum Megamix →</button>
+    </div>
+</div>
+
+<!-- SECTION 4: RUNDE 4 — Megamix -->
+<div class="section" id="sec-4">
+    <h2>🎓 Runde 4 — Megamix (alle vier Partikel)</h2>
+
+    <div class="control-bar">
+        <button class="btn" onclick="showLoesung(4)">Lösung</button>
+        <button class="btn" onclick="resetRunde(4)">Neu</button>
+    </div>
+
+    <div class="drill-progress">
+        <span class="streak">🔥 Streak: <span id="streak-4">0</span></span>
+        <span class="count">✓ <span id="count-4">0</span>/16</span>
+        <div class="bar"><div class="bar-fill" id="bar-4"></div></div>
+        <span class="time">⏱ <span id="timer-4">00:00</span></span>
+        <span class="best">🏆 <span id="best-4">--:--</span></span>
+    </div>
+
+    <div class="typ-tally">
+        <span class="tt-box schon">schon <span class="tally-num" id="tschon-4">0</span><span class="tally-max">/4</span></span>
+        <span class="tt-box noch">noch <span class="tally-num" id="tnoch-4">0</span><span class="tally-max">/4</span></span>
+        <span class="tt-box erst">erst <span class="tally-num" id="terst-4">0</span><span class="tally-max">/4</span></span>
+        <span class="tt-box nur">nur <span class="tally-num" id="tnur-4">0</span><span class="tally-max">/4</span></span>
+    </div>
+
+    <div id="cards-4"></div>
+
+    <div class="runden-ende" id="ende-4">
+        <h3>🎓 Megamix bestanden — Partikel-Reflex sitzt!</h3>
+        <p>64 Sätze mit den vier wichtigsten Zeit- und Fokuspartikeln. Diese vier Wörter machen Deutsch in kleinen Details ausdrucksstärker — und sie zu beherrschen ist ein großer Schritt aus dem Schulbuchdeutsch ins natürliche Sprechen. Nächste pragmatische Einheit wäre <em>kein vs. nicht</em> (FD37).</p>
+        <div class="stats">
+            <div class="stat-box"><span class="stat-num" id="ende-time-4">00:00</span><span class="stat-lbl">Zeit</span></div>
+            <div class="stat-box"><span class="stat-num" id="ende-streak-4">0</span><span class="stat-lbl">Längste Streak</span></div>
+            <div class="stat-box"><span class="stat-num" id="ende-best-4">--:--</span><span class="stat-lbl">Rekord</span></div>
+        </div>
+        <button class="next-cta" onclick="resetRunde(4)">🔄 Nochmal</button>
     </div>
 </div>
 
@@ -795,8 +836,29 @@ var DRILL = {
         { k:"nur",  ans:"nur",  pre:"Ich habe ",                        post:" einen Bruder, sonst keine Geschwister.", e:"👦" },
         { k:"nur",  ans:"nur",  pre:"Diese Jacke kostet ",              post:" dreißig Euro, unglaublich günstig!", e:"💰" }
     ],
-    // Runde 3: Megamix — 4 schon + 4 noch + 4 erst + 4 nur = 16
+    // Runde 3: schon vs. erst — 8+8 = 16 Kontrastpaare (gleicher Kontext, entgegengesetzte Erwartung)
     3: [
+        // schon (8) — weiter als erwartet
+        { k:"schon", ans:"schon", pre:"Es ist ",                        post:" acht Uhr, wir sind zu spät!",                 e:"⏰" },
+        { k:"schon", ans:"schon", pre:"Wir sind ",                      post:" in Hamburg angekommen, die Fahrt war schnell.", e:"🏙️" },
+        { k:"schon", ans:"schon", pre:"Er ist ",                        post:" achtzehn und darf Alkohol kaufen.",           e:"🎂" },
+        { k:"schon", ans:"schon", pre:"Ich habe ",                      post:" die Hälfte des Buches gelesen.",              e:"📚" },
+        { k:"schon", ans:"schon", pre:"Sie wohnt ",                     post:" seit fünf Jahren in dieser Stadt.",           e:"🏠" },
+        { k:"schon", ans:"schon", pre:"Der Bus kommt ",                 post:" in zwei Minuten, beeil dich!",                e:"🚌" },
+        { k:"schon", ans:"schon", pre:"Es ist ",                        post:" der fünfzehnte Juli, der Sommer ist fast vorbei.", e:"🌞" },
+        { k:"schon", ans:"schon", pre:"Sie hat ",                       post:" mit zweiundzwanzig ihren Abschluss gemacht.", e:"🎓" },
+        // erst (8) — weniger weit als erwartet
+        { k:"erst", ans:"erst", pre:"Es ist ",                          post:" acht Uhr, du kannst noch eine Stunde schlafen.", e:"🌅" },
+        { k:"erst", ans:"erst", pre:"Wir sind ",                        post:" in Hannover, noch eine Stunde bis Hamburg.",  e:"🛤️" },
+        { k:"erst", ans:"erst", pre:"Er ist ",                          post:" sechzehn, er darf noch keinen Alkohol kaufen.", e:"🧒" },
+        { k:"erst", ans:"erst", pre:"Ich habe ",                        post:" fünfzig Seiten gelesen, das Buch ist noch lang.", e:"📖" },
+        { k:"erst", ans:"erst", pre:"Sie wohnt ",                       post:" seit drei Monaten in dieser Stadt.",          e:"🏡" },
+        { k:"erst", ans:"erst", pre:"Der Bus kommt ",                   post:" in zwanzig Minuten, wir haben Zeit.",         e:"⏳" },
+        { k:"erst", ans:"erst", pre:"Es ist ",                          post:" der fünfzehnte Juni, der Sommer hat kaum begonnen.", e:"🌷" },
+        { k:"erst", ans:"erst", pre:"Sie fängt ",                       post:" nächstes Jahr ihr Studium an.",               e:"📅" }
+    ],
+    // Runde 4: Megamix — 4 schon + 4 noch + 4 erst + 4 nur = 16
+    4: [
         // schon (4)
         { k:"schon", ans:"schon", pre:"Hast du heute ",                 post:" gefrühstückt?",                    e:"🥐" },
         { k:"schon", ans:"schon", pre:"Oh, es ist ",                    post:" spät, wir müssen gehen.",          e:"🕐" },
@@ -826,7 +888,8 @@ function tallyKeyOf(runde, item) {
 var TALLY_KEYS = {
     1: ["schon", "noch"],
     2: ["erst", "nur"],
-    3: ["schon", "noch", "erst", "nur"]
+    3: ["schon", "erst"],
+    4: ["schon", "noch", "erst", "nur"]
 };
 
 function emptyTally(runde) {
@@ -838,9 +901,10 @@ function emptyTally(runde) {
 var state = {
     1: { timer:null, sec:0, started:false, stopped:false, maxStreak:0, curStreak:0, solved:0, tally:emptyTally(1) },
     2: { timer:null, sec:0, started:false, stopped:false, maxStreak:0, curStreak:0, solved:0, tally:emptyTally(2) },
-    3: { timer:null, sec:0, started:false, stopped:false, maxStreak:0, curStreak:0, solved:0, tally:emptyTally(3) }
+    3: { timer:null, sec:0, started:false, stopped:false, maxStreak:0, curStreak:0, solved:0, tally:emptyTally(3) },
+    4: { timer:null, sec:0, started:false, stopped:false, maxStreak:0, curStreak:0, solved:0, tally:emptyTally(4) }
 };
-var bestTime = { 1:null, 2:null, 3:null };
+var bestTime = { 1:null, 2:null, 3:null, 4:null };
 
 function showSection(idx) {
     document.querySelectorAll('.section').forEach(function(s,i){ s.classList.toggle('active', i===idx); });
@@ -1099,7 +1163,7 @@ function resetRunde(runde) {
     document.getElementById('ende-' + runde).classList.remove('show');
 }
 
-[1,2,3].forEach(function(r) { renderCards(r); });
+[1,2,3,4].forEach(function(r) { renderCards(r); });
 
 </script>
 </body>
