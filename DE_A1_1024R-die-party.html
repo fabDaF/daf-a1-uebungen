@@ -344,6 +344,10 @@
 .schreib-name { width: 100%; max-width: 320px; padding: 10px 14px; border: 1.5px solid #c5cff5; border-radius: 8px; font-family: inherit; font-size: 0.95em; outline: none; transition: border-color 0.2s; margin-bottom: 12px; }
 .schreib-name:focus { border-color: #667eea; }
 .schreib-label { display: block; font-size: 0.88em; color: #555; margin-bottom: 6px; font-weight: 600; }
+.schreib-name-box { background: #fffaf0; border: 1.5px solid #ffd699; border-radius: 10px; padding: 14px 18px; margin-bottom: 18px; }
+.schreib-name-box .schreib-label { color: #b15c00; }
+.schreib-name.schreib-name-error { border-color: #c62828; box-shadow: 0 0 0 2px rgba(198,40,40,0.15); animation: schreib-name-shake 0.4s; }
+@keyframes schreib-name-shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-4px)} 75%{transform:translateX(4px)} }
 </style>
 </head>
 <body>
@@ -543,7 +547,12 @@ Bringe die Wörter in die richtige Reihenfolge.</div>
       <div class="section-sub">Fünf kleine Schreibaufgaben rund um „Die Party". Eine Antwort, ein Klick, ab an Frank — du musst nicht alle bearbeiten.</div>
 
       <div class="hilfe-box">
-        Schreiben ist das beste Training. Nimm dir Zeit für eine, zwei oder alle fünf Aufgaben. <strong>Jede Antwort kannst du direkt mit ihrem eigenen Senden-Button an Frank schicken</strong>. Der Sammelbutton am Ende schickt alle, die noch nicht abgegeben sind.
+        Schreiben ist das beste Training. Nimm dir Zeit für eine, zwei oder alle fünf Aufgaben. <strong>Jede Antwort kannst du einzeln an Frank schicken</strong>. Der Sammelbutton am Ende schickt alle, die noch nicht abgegeben sind.
+      </div>
+
+      <div class="schreib-name-box">
+        <label class="schreib-label" for="sw-name">Dein Name (Pflicht — damit Frank weiß, wer geschrieben hat):</label>
+        <input type="text" id="sw-name" class="schreib-name" placeholder="z. B. Maria Lopez" required>
       </div>
 
       <div class="schreib-aufgabe-karte">
@@ -553,7 +562,7 @@ Bringe die Wörter in die richtige Reihenfolge.</div>
         <textarea class="schreib-mini-textarea" data-aufgabe="1" data-titel="Party-Einladung"></textarea>
         <div class="schreib-mini-footer">
           <span class="schreib-mini-meta">Wörter: <strong class="wc-1">0</strong> <span class="schreib-mini-status" id="sw-status-1"></span></span>
-          <button class="schreib-mini-btn" id="sw-send-1" onclick="schreibSendenEinzeln(1)">📨 Diese Antwort senden</button>
+          <button class="schreib-mini-btn" id="sw-send-1" onclick="schreibSendenEinzeln(1)">📨 An Frank senden</button>
         </div>
       </div>
 
@@ -564,7 +573,7 @@ Bringe die Wörter in die richtige Reihenfolge.</div>
         <textarea class="schreib-mini-textarea" data-aufgabe="2" data-titel="Sprachen"></textarea>
         <div class="schreib-mini-footer">
           <span class="schreib-mini-meta">Wörter: <strong class="wc-2">0</strong> <span class="schreib-mini-status" id="sw-status-2"></span></span>
-          <button class="schreib-mini-btn" id="sw-send-2" onclick="schreibSendenEinzeln(2)">📨 Diese Antwort senden</button>
+          <button class="schreib-mini-btn" id="sw-send-2" onclick="schreibSendenEinzeln(2)">📨 An Frank senden</button>
         </div>
       </div>
 
@@ -575,7 +584,7 @@ Bringe die Wörter in die richtige Reihenfolge.</div>
         <textarea class="schreib-mini-textarea" data-aufgabe="3" data-titel="Lieblingsessen und -trinken"></textarea>
         <div class="schreib-mini-footer">
           <span class="schreib-mini-meta">Wörter: <strong class="wc-3">0</strong> <span class="schreib-mini-status" id="sw-status-3"></span></span>
-          <button class="schreib-mini-btn" id="sw-send-3" onclick="schreibSendenEinzeln(3)">📨 Diese Antwort senden</button>
+          <button class="schreib-mini-btn" id="sw-send-3" onclick="schreibSendenEinzeln(3)">📨 An Frank senden</button>
         </div>
       </div>
 
@@ -586,7 +595,7 @@ Bringe die Wörter in die richtige Reihenfolge.</div>
         <textarea class="schreib-mini-textarea" data-aufgabe="4" data-titel="Frage an Gwyneth oder Christine"></textarea>
         <div class="schreib-mini-footer">
           <span class="schreib-mini-meta">Wörter: <strong class="wc-4">0</strong> <span class="schreib-mini-status" id="sw-status-4"></span></span>
-          <button class="schreib-mini-btn" id="sw-send-4" onclick="schreibSendenEinzeln(4)">📨 Diese Antwort senden</button>
+          <button class="schreib-mini-btn" id="sw-send-4" onclick="schreibSendenEinzeln(4)">📨 An Frank senden</button>
         </div>
       </div>
 
@@ -597,12 +606,9 @@ Bringe die Wörter in die richtige Reihenfolge.</div>
         <textarea class="schreib-mini-textarea" data-aufgabe="5" data-titel="Urlaub-Mini-Dialog"></textarea>
         <div class="schreib-mini-footer">
           <span class="schreib-mini-meta">Wörter: <strong class="wc-5">0</strong> <span class="schreib-mini-status" id="sw-status-5"></span></span>
-          <button class="schreib-mini-btn" id="sw-send-5" onclick="schreibSendenEinzeln(5)">📨 Diese Antwort senden</button>
+          <button class="schreib-mini-btn" id="sw-send-5" onclick="schreibSendenEinzeln(5)">📨 An Frank senden</button>
         </div>
       </div>
-
-      <label class="schreib-label" for="sw-name">Dein Name (optional, für die Rückmeldung):</label>
-      <input type="text" id="sw-name" class="schreib-name" placeholder="z. B. Maria Lopez">
 
       <div class="schreib-actions">
         <button class="schreib-btn schreib-btn-primary" id="sw-btn-all" onclick="schreibSendenAlleNochOffenen()">📨 Alle noch nicht gesendeten Antworten schicken</button>
@@ -1678,7 +1684,21 @@ function schreibStatusZeigen(typ, text) {
 
 function schreibAktuellerName() {
   var nameInp = document.getElementById('sw-name');
-  return (nameInp && nameInp.value || '').trim() || 'Anonyme Einsenderin / anonymer Einsender';
+  return (nameInp && nameInp.value || '').trim();
+}
+
+function schreibNamePflicht() {
+  var name = schreibAktuellerName();
+  if (!name) {
+    var nameInp = document.getElementById('sw-name');
+    if (nameInp) {
+      nameInp.classList.add('schreib-name-error');
+      try { nameInp.focus(); nameInp.scrollIntoView({ behavior: 'smooth', block: 'center' }); } catch (e) {}
+      setTimeout(function () { nameInp.classList.remove('schreib-name-error'); }, 3000);
+    }
+    return false;
+  }
+  return true;
 }
 
 function schreibPostFormsubmit(subject, message, onOk, onErr) {
@@ -1703,6 +1723,11 @@ function schreibSendenEinzeln(nr) {
   var ta = document.querySelector('.schreib-mini-textarea[data-aufgabe="' + nr + '"]');
   var btn = document.getElementById('sw-send-' + nr);
   if (!ta || !btn) return;
+  if (!schreibNamePflicht()) {
+    var stN = document.getElementById('sw-status-' + nr);
+    if (stN) { stN.classList.add('error'); stN.textContent = 'Bitte zuerst deinen Namen oben eintragen.'; }
+    return;
+  }
   var text = ta.value.trim();
   if (text.length < SCHREIB_MIN_CHARS) {
     var st = document.getElementById('sw-status-' + nr);
@@ -1739,6 +1764,10 @@ function schreibSendenEinzeln(nr) {
 
 function schreibSendenAlleNochOffenen() {
   var btn = document.getElementById('sw-btn-all');
+  if (!schreibNamePflicht()) {
+    schreibStatusZeigen('error', '✗ Bitte zuerst deinen Namen oben eintragen.');
+    return;
+  }
   var offene = [];
   document.querySelectorAll('.schreib-mini-textarea').forEach(function (ta) {
     var nr = ta.dataset.aufgabe;
@@ -1820,7 +1849,7 @@ function schreibLeeren() {
     var karte = ta.closest('.schreib-aufgabe-karte');
     if (karte) karte.classList.remove('gesendet');
     var btn = document.getElementById('sw-send-' + nr);
-    if (btn) { btn.classList.remove('gesendet'); btn.innerHTML = '📨 Diese Antwort senden'; }
+    if (btn) { btn.classList.remove('gesendet'); btn.innerHTML = '📨 An Frank senden'; }
     var st = document.getElementById('sw-status-' + nr);
     if (st) { st.className = 'schreib-mini-status'; st.textContent = ''; }
   });
