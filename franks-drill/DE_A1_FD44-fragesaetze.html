@@ -1,0 +1,1140 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Franks Drill 44 — Fragesätze (W-Fragen · Ja/Nein-Fragen · Inversion)</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+}
+
+.header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 30px;
+    text-align: center;
+}
+.header h1 { font-size: 2.2em; font-family: Georgia, 'Times New Roman', serif; color: white; margin-bottom: 8px; border: none; padding: 0; }
+.header .subtitle, .header p { font-size: 1.1em; font-family: Georgia, 'Times New Roman', serif; opacity: 0.95; color: rgba(255,255,255,0.9); margin: 0; }
+.header .big-emoji { font-size: 2.6em; display: block; margin-top: 8px; }
+
+.nav {
+    display: flex;
+    flex-wrap: nowrap;
+    background: #f8f9fa;
+    border-top: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+}
+.nav-btn {
+    flex: 1;
+    padding: 14px 10px;
+    text-align: center;
+    cursor: pointer;
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    transition: all 0.3s;
+    font-size: 0.92em;
+    font-weight: 500;
+    color: #666;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.nav-btn:last-child { border-right: none; }
+.nav-btn:hover { background: #e9ecef; color: #495057; }
+.nav-btn.active {
+    background: white;
+    color: #667eea;
+    font-weight: 600;
+    border-bottom: 3px solid #667eea;
+}
+.nav-emoji { font-size: 1.3em; line-height: 1.2; }
+.nav-label { font-size: 0.78em; margin-top: 2px; line-height: 1.2; }
+
+@media (max-width: 600px) {
+    body { padding: 8px; }
+    .nav { flex-wrap: wrap; }
+    .nav-btn {
+        flex: 1 1 25%;
+        min-width: 0;
+        font-size: 0.8em;
+        padding: 10px 6px;
+        border-right: 1px solid #ddd;
+    }
+    .nav-btn:last-child { border-right: 1px solid #ddd; }
+}
+
+.section { display: none; padding: 28px 30px 10px 30px; }
+.section.active { display: block; }
+
+h2 {
+    color: #333;
+    font-size: 1.25em;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.drill-hero {
+    background: linear-gradient(135deg, #ff7e5f 0%, #feb47b 100%);
+    border-radius: 14px;
+    padding: 26px 30px;
+    margin-bottom: 22px;
+    color: white;
+    text-align: center;
+    box-shadow: 0 4px 16px rgba(255,126,95,0.25);
+}
+.drill-hero .hero-emoji { font-size: 3.4em; display: block; margin-bottom: 8px; }
+.drill-hero h2 { color: white; border: none; font-size: 1.7em; margin-bottom: 10px; padding: 0; }
+.drill-hero p { font-size: 1.05em; line-height: 1.6; opacity: 0.95; }
+
+.drill-explain {
+    background: #f0f4ff;
+    border-left: 4px solid #667eea;
+    border-radius: 0 10px 10px 0;
+    padding: 18px 22px;
+    margin-bottom: 18px;
+    font-size: 0.97em;
+    line-height: 1.75;
+    color: #333;
+}
+.drill-explain h3 { color: #4a148c; margin-bottom: 10px; font-size: 1.1em; }
+.drill-explain p { margin-bottom: 8px; }
+.drill-explain .rule-highlight {
+    display: block;
+    margin-top: 10px;
+    padding: 12px 16px;
+    background: #dbeafe;
+    border-left: 4px solid #2563eb;
+    border-radius: 0 8px 8px 0;
+    font-weight: 600;
+    color: #1d4ed8;
+}
+.drill-explain .sonderfall {
+    display: block;
+    margin-top: 10px;
+    padding: 10px 14px;
+    background: #fef3c7;
+    border-left: 4px solid #f59e0b;
+    border-radius: 0 8px 8px 0;
+    color: #92400e;
+    font-size: 0.95em;
+}
+
+.mnemonic {
+    margin: 14px 0;
+    padding: 14px 18px;
+    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+    border: 2px dashed #f59e0b;
+    border-radius: 10px;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 1.08em;
+    text-align: center;
+    color: #78350f;
+    font-weight: 600;
+    line-height: 1.7;
+}
+.mnemonic .merksatz { font-size: 1.15em; font-style: italic; color: #92400e; }
+
+/* Logik-Tabelle */
+.prt-tabelle {
+    margin-top: 10px;
+    border-collapse: collapse;
+    width: 100%;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    font-size: 0.92em;
+}
+.prt-tabelle th,
+.prt-tabelle td {
+    padding: 8px 10px;
+    text-align: center;
+    border: 1px solid #e5e7eb;
+}
+.prt-tabelle th { background: #f5f7ff; color: #4a148c; font-weight: 700; }
+.prt-tabelle td.row-label { background: #fafafa; color: #333; font-weight: 600; text-align: left; }
+
+.prt-tabelle th.ja      { background: #dcfce7; color: #14532d; }
+.prt-tabelle td.ja      { background: #f0fdf4; color: #14532d; font-weight: 700; }
+.prt-tabelle th.nein    { background: #fee2e2; color: #991b1b; }
+.prt-tabelle td.nein    { background: #fef2f2; color: #991b1b; font-weight: 700; }
+.prt-tabelle th.doch    { background: #ffedd5; color: #9a3412; }
+.prt-tabelle td.doch    { background: #fff7ed; color: #9a3412; font-weight: 700; }
+.prt-tabelle th.neinneg { background: #f5c6ca; color: #4c0519; }
+.prt-tabelle td.neinneg { background: #fbe9eb; color: #4c0519; font-weight: 700; }
+
+.kontrast-box {
+    margin-top: 14px;
+    background: white;
+    border-radius: 10px;
+    padding: 14px 18px;
+    border: 1px dashed #c5cff5;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 1.0em;
+    line-height: 1.95;
+}
+.kontrast-box .arrow { color: #6b7280; margin: 0 8px; }
+.kontrast-box .form  { font-weight: 700; }
+.kontrast-box .form.ja      { color: #14532d; }
+.kontrast-box .form.nein    { color: #991b1b; }
+.kontrast-box .form.doch    { color: #9a3412; }
+.kontrast-box .form.neinneg { color: #4c0519; }
+.kontrast-box .hint { font-style: italic; color: #78350f; font-size: 0.9em; }
+.kontrast-box .q { color: #4a148c; font-weight: 700; }
+.kontrast-box .a { color: #333; }
+
+.typ-legend {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 14px;
+    padding: 12px;
+    background: white;
+    border-radius: 10px;
+    justify-content: center;
+}
+.typ-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 0.85em;
+    font-weight: 600;
+    border: 2px solid;
+}
+.typ-chip .dot { width: 10px; height: 10px; border-radius: 50%; }
+.typ-chip.ja      { border-color: #16a34a; background: #f0fdf4; color: #14532d; }
+.typ-chip.ja      .dot { background: #16a34a; }
+.typ-chip.nein    { border-color: #dc2626; background: #fef2f2; color: #991b1b; }
+.typ-chip.nein    .dot { background: #dc2626; }
+.typ-chip.doch    { border-color: #ea580c; background: #fff7ed; color: #9a3412; }
+.typ-chip.doch    .dot { background: #ea580c; }
+.typ-chip.neinneg { border-color: #7f1d1d; background: #fbe9eb; color: #4c0519; }
+.typ-chip.neinneg .dot { background: #7f1d1d; }
+
+.drill-progress {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 18px;
+    background: #fff7ed;
+    border: 1px solid #fed7aa;
+    border-radius: 10px;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+    font-variant-numeric: tabular-nums;
+}
+.drill-progress .streak { font-weight: 700; color: #ea580c; font-size: 1.05em; }
+.drill-progress .count { font-weight: 700; color: #4a148c; font-size: 1.0em; }
+.drill-progress .bar {
+    flex: 1; min-width: 140px; height: 10px;
+    background: #ffe4c7; border-radius: 5px; overflow: hidden;
+}
+.drill-progress .bar-fill {
+    height: 100%; width: 0%;
+    background: linear-gradient(90deg, #ff7e5f, #43a047);
+    transition: width 0.4s ease;
+}
+.drill-progress .time { font-size: 0.92em; color: #666; }
+.drill-progress .best { font-size: 0.82em; color: #999; }
+
+.typ-tally {
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 18px;
+}
+.tt-box {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 6px;
+    padding: 5px 14px;
+    border-radius: 20px;
+    font-size: 0.85em;
+    font-weight: 700;
+    border: 1px solid #e5e7eb;
+    background: #fafafa;
+    letter-spacing: 0.04em;
+}
+.tt-box.ja      { color: #14532d; border-color: #bbf7d0; background: #f0fdf4; }
+.tt-box.nein    { color: #991b1b; border-color: #fecaca; background: #fef2f2; }
+.tt-box.doch    { color: #9a3412; border-color: #fed7aa; background: #fff7ed; }
+.tt-box.neinneg { color: #4c0519; border-color: #f5c6ca; background: #fbe9eb; }
+.tt-box.wfr     { color: #4a148c; border-color: #d8b4fe; background: #f5f3ff; }
+.tt-box.jnf     { color: #155e75; border-color: #a5f3fc; background: #ecfeff; }
+.tt-box .tally-num { font-size: 1.05em; }
+.tt-box .tally-max { color: #888; font-weight: 400; }
+.tt-box .tally-sub { font-size: 0.78em; opacity: 0.7; margin-left: 2px; }
+
+@media (max-width: 600px) {
+    .drill-progress { gap: 8px; padding: 10px 12px; }
+    .drill-progress .bar { flex: 1 1 100%; order: 99; }
+}
+
+.control-bar {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-bottom: 14px;
+}
+.btn {
+    background: #f5f7ff;
+    border: 1px solid #c5cff5;
+    border-radius: 8px;
+    padding: 6px 16px;
+    font-size: 0.85em;
+    color: #667eea;
+    cursor: pointer;
+    transition: all 0.15s;
+    font-weight: 500;
+    margin-left: 6px;
+}
+.btn:hover { background: #667eea; color: white; border-color: #667eea; }
+
+.pf-card {
+    background: #f8f9ff;
+    padding: 18px 22px 22px;
+    margin-bottom: 14px;
+    border-radius: 12px;
+    border-left: 6px solid #cbd5e1;
+    position: relative;
+    transition: background 0.5s ease, border-color 0.3s ease;
+}
+.pf-card[data-cat="ja"]      { border-left-color: #16a34a; }
+.pf-card[data-cat="nein"]    { border-left-color: #dc2626; }
+.pf-card[data-cat="doch"]    { border-left-color: #ea580c; }
+.pf-card[data-cat="neinneg"] { border-left-color: #7f1d1d; }
+.pf-card[data-cat="wfr"]     { border-left-color: #7c3aed; }
+.pf-card[data-cat="jnf"]     { border-left-color: #0891b2; }
+
+.pf-card[data-solved="1"][data-cat="ja"]      { background: linear-gradient(90deg, #f0fdf4, #f8f9ff 70%); }
+.pf-card[data-solved="1"][data-cat="nein"]    { background: linear-gradient(90deg, #fef2f2, #f8f9ff 70%); }
+.pf-card[data-solved="1"][data-cat="doch"]    { background: linear-gradient(90deg, #fff7ed, #f8f9ff 70%); }
+.pf-card[data-solved="1"][data-cat="neinneg"] { background: linear-gradient(90deg, #fbe9eb, #f8f9ff 70%); }
+.pf-card[data-solved="1"][data-cat="wfr"]     { background: linear-gradient(90deg, #f5f3ff, #f8f9ff 70%); }
+.pf-card[data-solved="1"][data-cat="jnf"]     { background: linear-gradient(90deg, #ecfeff, #f8f9ff 70%); }
+.pf-card[data-solved="1"] { animation: cardPulse 0.5s ease; }
+
+@keyframes cardPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.015); box-shadow: 0 4px 14px rgba(0,0,0,0.08); }
+    100% { transform: scale(1); }
+}
+
+.pf-badge {
+    position: absolute;
+    top: 12px;
+    right: 14px;
+    background: #e5e7eb;
+    color: #666;
+    font-size: 0.72em;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-weight: 600;
+}
+
+/* Frage-Zeile (neu in FD35) */
+.pf-frage {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 16px;
+    margin-bottom: 12px;
+    background: #f3e8ff;
+    border-left: 3px solid #667eea;
+    border-radius: 0 8px 8px 0;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 1.1em;
+    color: #4a148c;
+    font-style: italic;
+    padding-right: 50px;
+}
+.pf-frage .frage-emoji {
+    font-size: 1.4em;
+    font-style: normal;
+}
+.pf-frage .frage-text {
+    flex: 1;
+}
+.pf-frage .frage-label {
+    font-size: 0.75em;
+    font-weight: 600;
+    color: #667eea;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-style: normal;
+    margin-right: 6px;
+}
+
+.cat-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 12px;
+    border-radius: 14px;
+    font-size: 0.78em;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    margin-bottom: 10px;
+}
+.cat-badge[data-cat="ja"]      { background: #16a34a; color: white; }
+.cat-badge[data-cat="nein"]    { background: #dc2626; color: white; }
+.cat-badge[data-cat="doch"]    { background: #ea580c; color: white; }
+.cat-badge[data-cat="neinneg"] { background: #7f1d1d; color: white; }
+.cat-badge[data-cat="wfr"]     { background: #7c3aed; color: white; }
+.cat-badge[data-cat="jnf"]     { background: #0891b2; color: white; }
+.pf-card[data-solved="0"] .cat-badge { visibility: hidden; }
+
+.pf-satz {
+    font-size: 1.1em;
+    line-height: 2.0;
+    color: #222;
+    padding-right: 50px;
+    font-family: Georgia, 'Times New Roman', serif;
+}
+.pf-satz .antwort-label {
+    font-size: 0.75em;
+    font-weight: 600;
+    color: #667eea;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-right: 6px;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+input.blank {
+    border: none;
+    border-bottom: 2px solid #667eea;
+    background: transparent;
+    padding: 3px 6px;
+    font-family: inherit;
+    font-size: 1em;
+    outline: none;
+    transition: all 0.2s;
+    min-width: 7ch;
+    color: #333;
+    text-align: center;
+}
+input.blank:focus { border-bottom-color: #764ba2; background: #f0f0ff; }
+input.blank.correct {
+    border-bottom-color: #27ae60;
+    background: #e8f8f0;
+    color: #27ae60;
+    font-weight: 700;
+}
+input.blank.wrong {
+    border-bottom-color: #e74c3c;
+    background: #fdeaea;
+    color: #e74c3c;
+}
+
+.pf-typ-reveal {
+    display: none;
+    position: absolute;
+    bottom: 10px;
+    right: 14px;
+    font-size: 0.72em;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 10px;
+    letter-spacing: 0.04em;
+}
+.pf-card[data-solved="1"] .pf-typ-reveal { display: inline-block; }
+.pf-card[data-cat="ja"]      .pf-typ-reveal { background: #bbf7d0; color: #14532d; }
+.pf-card[data-cat="nein"]    .pf-typ-reveal { background: #fecaca; color: #991b1b; }
+.pf-card[data-cat="doch"]    .pf-typ-reveal { background: #fed7aa; color: #9a3412; }
+.pf-card[data-cat="neinneg"] .pf-typ-reveal { background: #f5c6ca; color: #4c0519; }
+.pf-card[data-cat="wfr"]     .pf-typ-reveal { background: #ddd6fe; color: #4a148c; }
+.pf-card[data-cat="jnf"]     .pf-typ-reveal { background: #a5f3fc; color: #155e75; }
+
+.runden-ende {
+    display: none;
+    background: linear-gradient(135deg, #43a047 0%, #2e7d32 100%);
+    color: white;
+    border-radius: 14px;
+    padding: 28px 32px;
+    text-align: center;
+    margin-top: 22px;
+    box-shadow: 0 6px 20px rgba(67,160,71,0.3);
+    animation: popIn 0.5s ease;
+}
+.runden-ende.show { display: block; }
+.runden-ende h3 { color: white; border: none; font-size: 1.9em; margin-bottom: 12px; padding: 0; }
+.runden-ende p { font-size: 1.05em; line-height: 1.8; opacity: 0.98; }
+.runden-ende .stats { display: flex; justify-content: center; gap: 30px; margin-top: 16px; flex-wrap: wrap; }
+.runden-ende .stat-box {
+    background: rgba(255,255,255,0.2);
+    border-radius: 10px;
+    padding: 10px 18px;
+    min-width: 120px;
+}
+.runden-ende .stat-box .stat-num { font-size: 1.6em; font-weight: 700; display: block; }
+.runden-ende .stat-box .stat-lbl { font-size: 0.82em; opacity: 0.9; }
+.runden-ende .next-cta {
+    display: inline-block;
+    margin-top: 18px;
+    padding: 10px 24px;
+    background: white;
+    color: #2e7d32;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+    border: none;
+    font-size: 0.95em;
+    transition: transform 0.2s;
+}
+.runden-ende .next-cta:hover { transform: scale(1.05); }
+
+@keyframes popIn {
+    0% { transform: scale(0.85); opacity: 0; }
+    60% { transform: scale(1.05); opacity: 1; }
+    100% { transform: scale(1); }
+}
+
+.start-cta {
+    display: block;
+    width: fit-content;
+    margin: 20px auto 10px;
+    padding: 14px 32px;
+    background: linear-gradient(135deg, #ff7e5f, #feb47b);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.05em;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(255,126,95,0.3);
+    transition: transform 0.2s;
+}
+.start-cta:hover { transform: scale(1.04); }
+
+.author-footer {
+    text-align: center;
+    margin-top: 30px;
+    padding: 16px;
+    font-size: 0.8rem;
+    color: #aaa;
+}
+.author-footer a { color: #aaa; }
+.author-name { font-weight: 700; }
+
+.hinweis {
+    text-align: center;
+    font-size: 0.88em;
+    color: #666;
+    font-style: italic;
+    margin-top: 14px;
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="header">
+    <h1>Franks Drill</h1>
+    <p class="subtitle">A1 – Lektion FD44 · Fragesätze (W-Fragen · Ja/Nein-Fragen · Inversion)</p>
+    <div class="big-emoji">❓</div>
+</div>
+
+<div class="nav">
+    <div class="nav-btn active" onclick="showSection(0)">
+        <span class="nav-emoji">🚀</span>
+        <span class="nav-label">Start</span>
+    </div>
+    <div class="nav-btn" onclick="showSection(1)">
+        <span class="nav-emoji">🔍</span>
+        <span class="nav-label">W-Fragen</span>
+    </div>
+    <div class="nav-btn" onclick="showSection(2)">
+        <span class="nav-emoji">🔁</span>
+        <span class="nav-label">Ja/Nein · Inversion</span>
+    </div>
+    <div class="nav-btn" onclick="showSection(3)">
+        <span class="nav-emoji">🎓</span>
+        <span class="nav-label">Megamix</span>
+    </div>
+</div>
+
+<!-- SECTION 0: INTRO -->
+<div class="section active" id="sec-0">
+    <div class="drill-hero">
+        <span class="hero-emoji">❓</span>
+        <h2>Wer fragt, gewinnt — wenn das Verb richtig sitzt.</h2>
+        <p>Im Deutschen gibt es zwei Arten von Fragen: <strong>W-Fragen</strong> beginnen mit einem Fragewort (<em>Wo, Was, Wie, Wann, Warum, Wer, Woher, Wohin</em>) und das Verb steht direkt dahinter auf <strong>Position 2</strong>. <strong>Ja/Nein-Fragen</strong> haben kein Fragewort — hier rückt das Verb auf <strong>Position 1</strong> ganz an den Anfang („Inversion“). 48 Fragen, drei Runden — bis der Reflex sitzt.</p>
+    </div>
+
+    <div class="drill-explain">
+        <h3>Zwei Frage-Typen, ein Grundprinzip</h3>
+        <p>Das deutsche Verb ist im Hauptsatz immer der Anker. Bei der <em>Aussage</em> sitzt es auf Position 2 („Du <strong>wohnst</strong> in Berlin.“). Bei der <em>W-Frage</em> bleibt es auf Position 2, davor steht das Fragewort („Wo <strong>wohnst</strong> du?“). Bei der <em>Ja/Nein-Frage</em> rückt es nach vorn auf Position 1 („<strong>Wohnst</strong> du in Berlin?“). Das ist <strong>Inversion</strong> — Subjekt und Verb tauschen den Platz.</p>
+
+        <div class="mnemonic">
+            <span class="merksatz">„Aussage: Subjekt — Verb — Rest.<br>W-Frage: Fragewort — Verb — Subjekt — Rest.<br>Ja/Nein-Frage: Verb — Subjekt — Rest.<br>Das Verb ist immer dabei. Es wandert nur.“</span>
+        </div>
+
+        <p class="rule-highlight">💡 Der Zwei-Schritt-Reflex:<br>
+        1. <em>Ist ein Fragewort da?</em> — Wenn ja: Fragewort + Verb + Subjekt.<br>
+        2. <em>Kein Fragewort?</em> — Verb wandert nach vorn, Subjekt direkt dahinter.</p>
+
+        <h3 style="margin-top:14px;">Die Frage-Matrix</h3>
+
+        <table class="prt-tabelle">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th class="ja">Position 1</th>
+                    <th class="ja">Position 2</th>
+                    <th class="ja">Position 3+</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="row-label">Aussage<br><em>„Du wohnst in Berlin.“</em></td>
+                    <td>Du</td>
+                    <td><strong>wohnst</strong></td>
+                    <td>in Berlin.</td>
+                </tr>
+                <tr>
+                    <td class="row-label">W-Frage<br><em>„Wo wohnst du?“</em></td>
+                    <td>Wo</td>
+                    <td><strong>wohnst</strong></td>
+                    <td>du?</td>
+                </tr>
+                <tr>
+                    <td class="row-label">Ja/Nein-Frage<br><em>„Wohnst du in Berlin?“</em></td>
+                    <td><strong>Wohnst</strong></td>
+                    <td>du</td>
+                    <td>in Berlin?</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p class="sonderfall">⚠️ <strong>Englische Falle: das „do“ verschwindet.</strong> Englisch braucht ein Hilfsverb (<em>„Do you live here?“</em>). Deutsch nicht — das Hauptverb selbst springt nach vorn (<em>„Wohnst du hier?“</em>). Wer von Englisch denkt, baut leicht „Tust du wohnen?“ — das gibt es im Deutschen nicht.</p>
+
+        <h3 style="margin-top:14px;">Die acht wichtigsten Fragewörter</h3>
+        <div class="kontrast-box">
+            <span class="q">Wo</span> <span class="arrow">→</span> Ort: <em>„Wo wohnst du?“</em> — <em>„In Berlin.“</em><br>
+            <span class="q">Woher</span> <span class="arrow">→</span> Herkunft: <em>„Woher kommst du?“</em> — <em>„Aus Polen.“</em><br>
+            <span class="q">Wohin</span> <span class="arrow">→</span> Richtung: <em>„Wohin fährst du?“</em> — <em>„Nach München.“</em><br>
+            <span class="q">Was</span> <span class="arrow">→</span> Sache: <em>„Was trinkst du?“</em> — <em>„Tee.“</em><br>
+            <span class="q">Wer</span> <span class="arrow">→</span> Person: <em>„Wer ist das?“</em> — <em>„Meine Schwester.“</em><br>
+            <span class="q">Wie</span> <span class="arrow">→</span> Art / Eigenschaft: <em>„Wie heißt du?“</em> — <em>„Anna.“</em><br>
+            <span class="q">Wann</span> <span class="arrow">→</span> Zeit: <em>„Wann kommst du?“</em> — <em>„Um sieben.“</em><br>
+            <span class="q">Warum</span> <span class="arrow">→</span> Grund: <em>„Warum lernst du Deutsch?“</em> — <em>„Für die Arbeit.“</em>
+        </div>
+        <p class="sonderfall">ℹ️ Im Drill steht oben der Hinweis (Antwort oder Aussage), unten die Frage mit einer Lücke. Du tippst nur das fehlende Wort — bei W-Fragen das Fragewort, bei Ja/Nein-Fragen die Verbform. Groß- oder Kleinschreibung wird akzeptiert.</p>
+
+        <div class="typ-legend">
+            <span class="typ-chip" style="border-color:#7c3aed;background:#f5f3ff;color:#4a148c;"><span class="dot" style="background:#7c3aed;"></span>W-Frage</span>
+            <span class="typ-chip" style="border-color:#0891b2;background:#ecfeff;color:#155e75;"><span class="dot" style="background:#0891b2;"></span>Ja/Nein-Frage · Inversion</span>
+        </div>
+    </div>
+
+    <button class="start-cta" onclick="showSection(1)">🔍 Runde 1 starten</button>
+    <p class="hinweis">Tipp: Runde 1 drillt acht Fragewörter (Wo, Was, Wie …) — du tippst das passende Fragewort. Runde 2 drillt die Inversion bei Ja/Nein-Fragen — du tippst die richtige Verbform am Satzanfang. Runde 3 mischt beides.</p>
+</div>
+
+<!-- SECTION 1: RUNDE 1 — W-Fragen -->
+<div class="section" id="sec-1">
+    <h2>🔍 Runde 1 — W-Fragen (Fragewort tippen)</h2>
+
+    <div class="control-bar">
+        <button class="btn" onclick="showLoesung(1)">Lösung</button>
+        <button class="btn" onclick="resetRunde(1)">Neu</button>
+    </div>
+
+    <div class="drill-progress">
+        <span class="streak">🔥 Streak: <span id="streak-1">0</span></span>
+        <span class="count">✓ <span id="count-1">0</span>/16</span>
+        <div class="bar"><div class="bar-fill" id="bar-1"></div></div>
+        <span class="time">⏱ <span id="timer-1">00:00</span></span>
+        <span class="best">🏆 <span id="best-1">--:--</span></span>
+    </div>
+
+    <div class="typ-tally">
+        <span class="tt-box wfr">W-Frage <span class="tally-sub">(Fragewort)</span> <span class="tally-num" id="twfr-1">0</span><span class="tally-max">/16</span></span>
+    </div>
+
+    <div id="cards-1"></div>
+
+    <div class="runden-ende" id="ende-1">
+        <h3>🏆 Runde 1 geschafft!</h3>
+        <p>16 W-Fragen. Du hast die acht wichtigsten A1-Fragewörter gedrillt: <em>Wo, Woher, Wohin, Was, Wer, Wie, Wann, Warum.</em> Das Verb steht dabei immer auf Position 2 — direkt hinter dem Fragewort. In Runde 2 dreht sich das: ohne Fragewort rückt das Verb selbst ganz nach vorn, auf Position 1.</p>
+        <div class="stats">
+            <div class="stat-box"><span class="stat-num" id="ende-time-1">00:00</span><span class="stat-lbl">Zeit</span></div>
+            <div class="stat-box"><span class="stat-num" id="ende-streak-1">0</span><span class="stat-lbl">Längste Streak</span></div>
+            <div class="stat-box"><span class="stat-num" id="ende-best-1">--:--</span><span class="stat-lbl">Rekord</span></div>
+        </div>
+        <button class="next-cta" onclick="showSection(2)">🔁 Weiter zu Runde 2 →</button>
+    </div>
+</div>
+
+<!-- SECTION 2: RUNDE 2 — Ja/Nein-Fragen, Inversion -->
+<div class="section" id="sec-2">
+    <h2>🔁 Runde 2 — Ja/Nein-Fragen (Verb auf Position 1)</h2>
+
+    <div class="control-bar">
+        <button class="btn" onclick="showLoesung(2)">Lösung</button>
+        <button class="btn" onclick="resetRunde(2)">Neu</button>
+    </div>
+
+    <div class="drill-progress">
+        <span class="streak">🔥 Streak: <span id="streak-2">0</span></span>
+        <span class="count">✓ <span id="count-2">0</span>/16</span>
+        <div class="bar"><div class="bar-fill" id="bar-2"></div></div>
+        <span class="time">⏱ <span id="timer-2">00:00</span></span>
+        <span class="best">🏆 <span id="best-2">--:--</span></span>
+    </div>
+
+    <div class="typ-tally">
+        <span class="tt-box jnf">Ja/Nein-Frage <span class="tally-sub">(Inversion)</span> <span class="tally-num" id="tjnf-2">0</span><span class="tally-max">/16</span></span>
+    </div>
+
+    <div id="cards-2"></div>
+
+    <div class="runden-ende" id="ende-2">
+        <h3>🏆 Runde 2 geschafft!</h3>
+        <p>16 Ja/Nein-Fragen. Du hast Aussagen mit <em>du</em>, <em>ihr</em> und <em>Sie</em> in Fragen verwandelt — das Verb wandert vom Platz 2 auf Platz 1, das Subjekt rutscht direkt dahinter. Im Megamix mischen sich jetzt beide Frage-Typen, und du musst beim Lesen sofort erkennen: Ist da ein Fragewort? Wenn nein — Inversion.</p>
+        <div class="stats">
+            <div class="stat-box"><span class="stat-num" id="ende-time-2">00:00</span><span class="stat-lbl">Zeit</span></div>
+            <div class="stat-box"><span class="stat-num" id="ende-streak-2">0</span><span class="stat-lbl">Längste Streak</span></div>
+            <div class="stat-box"><span class="stat-num" id="ende-best-2">--:--</span><span class="stat-lbl">Rekord</span></div>
+        </div>
+        <button class="next-cta" onclick="showSection(3)">🎓 Weiter zum Megamix →</button>
+    </div>
+</div>
+
+<!-- SECTION 3: RUNDE 3 — Megamix -->
+<div class="section" id="sec-3">
+    <h2>🎓 Runde 3 — Megamix (W-Fragen + Ja/Nein-Fragen)</h2>
+
+    <div class="control-bar">
+        <button class="btn" onclick="showLoesung(3)">Lösung</button>
+        <button class="btn" onclick="resetRunde(3)">Neu</button>
+    </div>
+
+    <div class="drill-progress">
+        <span class="streak">🔥 Streak: <span id="streak-3">0</span></span>
+        <span class="count">✓ <span id="count-3">0</span>/16</span>
+        <div class="bar"><div class="bar-fill" id="bar-3"></div></div>
+        <span class="time">⏱ <span id="timer-3">00:00</span></span>
+        <span class="best">🏆 <span id="best-3">--:--</span></span>
+    </div>
+
+    <div class="typ-tally">
+        <span class="tt-box wfr">W-Frage <span class="tally-sub">(Fragewort)</span> <span class="tally-num" id="twfr-3">0</span><span class="tally-max">/8</span></span>
+        <span class="tt-box jnf">Ja/Nein-Frage <span class="tally-sub">(Inversion)</span> <span class="tally-num" id="tjnf-3">0</span><span class="tally-max">/8</span></span>
+    </div>
+
+    <div id="cards-3"></div>
+
+    <div class="runden-ende" id="ende-3">
+        <h3>🎓 Megamix bestanden — Frage-Reflex sitzt!</h3>
+        <p>48 Fragen abgearbeitet. Der Verb-auf-Position-1-Reflex ist jetzt angelegt: kein Fragewort → Verb nach vorn, Subjekt direkt dahinter. Dazu die acht wichtigsten W-Fragewörter im Schlaf abrufbar. Damit deckst du die zwei zentralen Fragetypen des A1 vollständig ab — ein direkter Drill aus Bernds A1-Kapitel „Fragesätze“.</p>
+        <div class="stats">
+            <div class="stat-box"><span class="stat-num" id="ende-time-3">00:00</span><span class="stat-lbl">Zeit</span></div>
+            <div class="stat-box"><span class="stat-num" id="ende-streak-3">0</span><span class="stat-lbl">Längste Streak</span></div>
+            <div class="stat-box"><span class="stat-num" id="ende-best-3">--:--</span><span class="stat-lbl">Rekord</span></div>
+        </div>
+        <button class="next-cta" onclick="resetRunde(3)">🔄 Nochmal</button>
+    </div>
+</div>
+
+<div class="author-footer">
+    <span class="author-name">Franks Drill</span> · A1 · FD44 · Fragesätze (W-Fragen · Ja/Nein-Fragen · Inversion)
+</div>
+
+</div>
+
+<script>
+// =========================================================
+//  Franks Drill 44 — Fragesätze (W-Fragen · Ja/Nein-Fragen · Inversion)
+//  Quelle: Bernds A1, Kapitel „Fragesätze“ (S. 30–44)
+//  Klassen: wfr (W-Frage, lila) · jnf (Ja/Nein-Frage, türkis)
+// =========================================================
+
+// Item-Schema:
+//   k      = Klasse: "wfr" | "jnf"
+//   hint   = Hinweis oben in der Karte (Antwort bei W-Fragen, Aussage bei Ja/Nein-Fragen)
+//   ans    = Lösung in der Lücke (z.B. "Wo", "Wohnst")
+//   post   = Fortsetzung des Fragesatzes nach der Lücke (z.B. " wohnst du?")
+//   e      = Emoji
+
+var DRILL = {
+    // Runde 1: W-Fragen — 16 (Fragewort tippen)
+    1: [
+        // Wie (4)
+        { k:"wfr", hint:"Anna",                     ans:"Wie",   post:" heißt du?",                   e:"🪪" },
+        { k:"wfr", hint:"25 Jahre",                 ans:"Wie",   post:" alt bist du?",                e:"🎂" },
+        { k:"wfr", hint:"Mir geht es gut.",         ans:"Wie",   post:" geht es dir?",                e:"😊" },
+        { k:"wfr", hint:"Sehr interessant.",        ans:"Wie",   post:" findest du das Buch?",        e:"📕" },
+        // Wo (3)
+        { k:"wfr", hint:"In Berlin.",               ans:"Wo",    post:" wohnst du?",                  e:"🏠" },
+        { k:"wfr", hint:"Im Westen.",               ans:"Wo",    post:" liegt Köln?",                 e:"🗺️" },
+        { k:"wfr", hint:"Im Büro.",                 ans:"Wo",    post:" arbeitest du?",               e:"💼" },
+        // Woher (2)
+        { k:"wfr", hint:"Aus Polen.",               ans:"Woher", post:" kommst du?",                  e:"✈️" },
+        { k:"wfr", hint:"Aus Italien.",             ans:"Woher", post:" kommen Sie?",                 e:"🛂" },
+        // Wohin (1)
+        { k:"wfr", hint:"Nach München.",            ans:"Wohin", post:" fährst du?",                  e:"🚆" },
+        // Was (3)
+        { k:"wfr", hint:"Tee.",                     ans:"Was",   post:" trinkst du gern?",            e:"🍵" },
+        { k:"wfr", hint:"Ich fahre Rad.",           ans:"Was",   post:" machst du am Wochenende?",    e:"🚲" },
+        { k:"wfr", hint:"Medizin.",                 ans:"Was",   post:" studierst du?",               e:"🩺" },
+        // Wer (1)
+        { k:"wfr", hint:"Meine Schwester.",         ans:"Wer",   post:" ist das?",                    e:"👩" },
+        // Wann (1)
+        { k:"wfr", hint:"Um sieben.",               ans:"Wann",  post:" kommst du morgen?",           e:"⏰" },
+        // Warum (1)
+        { k:"wfr", hint:"Für die Arbeit.",          ans:"Warum", post:" lernst du Deutsch?",          e:"📚" }
+    ],
+    // Runde 2: Ja/Nein-Fragen — 16 (Inversion: Verb auf Position 1)
+    2: [
+        // du (8)
+        { k:"jnf", hint:"Du wohnst in Berlin.",      ans:"Wohnst",  post:" du in Berlin?",            e:"🏠" },
+        { k:"jnf", hint:"Du machst Sport.",          ans:"Machst",  post:" du Sport?",                e:"⚽" },
+        { k:"jnf", hint:"Du sprichst Englisch.",     ans:"Sprichst",post:" du Englisch?",             e:"💬" },
+        { k:"jnf", hint:"Du lernst Deutsch.",        ans:"Lernst",  post:" du Deutsch?",              e:"📚" },
+        { k:"jnf", hint:"Du trinkst Bier.",          ans:"Trinkst", post:" du Bier?",                 e:"🍺" },
+        { k:"jnf", hint:"Du hörst Musik.",           ans:"Hörst",   post:" du Musik?",                e:"🎵" },
+        { k:"jnf", hint:"Du hast einen Hund.",       ans:"Hast",    post:" du einen Hund?",           e:"🐕" },
+        { k:"jnf", hint:"Du bist müde.",             ans:"Bist",    post:" du müde?",                 e:"😴" },
+        // ihr (4)
+        { k:"jnf", hint:"Ihr wohnt in Hamburg.",     ans:"Wohnt",   post:" ihr in Hamburg?",          e:"⚓" },
+        { k:"jnf", hint:"Ihr spielt Tennis.",        ans:"Spielt",  post:" ihr Tennis?",              e:"🎾" },
+        { k:"jnf", hint:"Ihr arbeitet hier.",        ans:"Arbeitet",post:" ihr hier?",                e:"🏢" },
+        { k:"jnf", hint:"Ihr kommt aus Spanien.",    ans:"Kommt",   post:" ihr aus Spanien?",         e:"🇪🇸" },
+        // Sie (4)
+        { k:"jnf", hint:"Sie sprechen Deutsch.",     ans:"Sprechen",post:" Sie Deutsch?",             e:"💬" },
+        { k:"jnf", hint:"Sie kommen aus Frankreich.",ans:"Kommen",  post:" Sie aus Frankreich?",      e:"🇫🇷" },
+        { k:"jnf", hint:"Sie haben Kinder.",         ans:"Haben",   post:" Sie Kinder?",              e:"👶" },
+        { k:"jnf", hint:"Sie sind verheiratet.",     ans:"Sind",    post:" Sie verheiratet?",         e:"💍" }
+    ],
+    // Runde 3: Megamix — 8 W-Fragen + 8 Ja/Nein-Fragen
+    3: [
+        // wfr (8) — andere Sätze als Runde 1
+        { k:"wfr", hint:"Christa.",                  ans:"Wie",     post:" heißt deine Mutter?",      e:"👩" },
+        { k:"wfr", hint:"Seit zwei Jahren.",         ans:"Wie",     post:" lange lernst du Deutsch?", e:"📅" },
+        { k:"wfr", hint:"Lesen.",                    ans:"Was",     post:" ist dein Hobby?",          e:"📖" },
+        { k:"wfr", hint:"In Köln.",                  ans:"Wo",      post:" wohnt deine Schwester?",   e:"🏙️" },
+        { k:"wfr", hint:"Aus Marokko.",              ans:"Woher",   post:" kommt dein Freund?",      e:"🌍" },
+        { k:"wfr", hint:"Um achtzehn Uhr.",          ans:"Wann",    post:" kommst du nach Hause?",    e:"🕕" },
+        { k:"wfr", hint:"Weil ich krank bin.",       ans:"Warum",   post:" arbeitest du heute nicht?",e:"🤒" },
+        { k:"wfr", hint:"Nach Italien.",             ans:"Wohin",   post:" fahrt ihr im Sommer?",     e:"🏖️" },
+        // jnf (8) — neue Verben
+        { k:"jnf", hint:"Du verstehst die Frage.",   ans:"Verstehst",post:" du die Frage?",           e:"❓" },
+        { k:"jnf", hint:"Du isst gern Pizza.",       ans:"Isst",    post:" du gern Pizza?",           e:"🍕" },
+        { k:"jnf", hint:"Du fährst nach Berlin.",    ans:"Fährst",  post:" du nach Berlin?",          e:"🚄" },
+        { k:"jnf", hint:"Du gehst ins Kino.",        ans:"Gehst",   post:" du ins Kino?",             e:"🎬" },
+        { k:"jnf", hint:"Du liest die Zeitung.",     ans:"Liest",   post:" du die Zeitung?",          e:"📰" },
+        { k:"jnf", hint:"Ihr seht den Film.",        ans:"Seht",    post:" ihr den Film?",            e:"🎞️" },
+        { k:"jnf", hint:"Sie kennen die Lehrerin.",  ans:"Kennen",  post:" Sie die Lehrerin?",        e:"👩‍🏫" },
+        { k:"jnf", hint:"Sie helfen mir gern.",      ans:"Helfen",  post:" Sie mir gern?",            e:"🤝" }
+    ]
+};
+
+function tallyKeyOf(runde, item) {
+    return item.k;
+}
+var TALLY_KEYS = {
+    1: ["wfr"],
+    2: ["jnf"],
+    3: ["wfr", "jnf"]
+};
+
+function emptyTally(runde) {
+    var t = {};
+    TALLY_KEYS[runde].forEach(function(k){ t[k] = 0; });
+    return t;
+}
+
+var state = {
+    1: { timer:null, sec:0, started:false, stopped:false, maxStreak:0, curStreak:0, solved:0, tally:emptyTally(1) },
+    2: { timer:null, sec:0, started:false, stopped:false, maxStreak:0, curStreak:0, solved:0, tally:emptyTally(2) },
+    3: { timer:null, sec:0, started:false, stopped:false, maxStreak:0, curStreak:0, solved:0, tally:emptyTally(3) }
+};
+var bestTime = { 1:null, 2:null, 3:null };
+
+function showSection(idx) {
+    document.querySelectorAll('.section').forEach(function(s,i){ s.classList.toggle('active', i===idx); });
+    document.querySelectorAll('.nav-btn').forEach(function(b,i){ b.classList.toggle('active', i===idx); });
+    window.scrollTo({ top:0, behavior:'smooth' });
+}
+
+function shuffleArr(arr) {
+    var a = arr.slice();
+    for (var i = a.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var t = a[i]; a[i] = a[j]; a[j] = t;
+    }
+    return a;
+}
+
+function catLabel(item) {
+    if (item.k === "wfr") return "W-Frage";
+    if (item.k === "jnf") return "Ja/Nein-Frage";
+    return item.k;
+}
+
+function hintLabel(item) {
+    // Bei W-Fragen ist der Hinweis die ANTWORT, bei Ja/Nein-Fragen die AUSSAGE.
+    if (item.k === "wfr") return "Antwort:";
+    if (item.k === "jnf") return "Aussage:";
+    return "Hinweis:";
+}
+
+function renderCards(runde) {
+    var data = shuffleArr(DRILL[runde]);
+    var container = document.getElementById('cards-' + runde);
+    container.innerHTML = '';
+    data.forEach(function(item, idx) {
+        var card = document.createElement('div');
+        card.className = 'pf-card';
+        card.setAttribute('data-cat', item.k);
+        card.setAttribute('data-solved', '0');
+        card.setAttribute('data-runde', runde);
+        card.setAttribute('data-idx', idx);
+        card.setAttribute('data-tally-key', tallyKeyOf(runde, item) || '');
+
+        var fragezeile =
+            '<span class="antwort-label">Frage:</span>' +
+            '<input class="blank" type="text" ' +
+                'data-ans="' + escapeAttr(item.ans) + '" ' +
+                'data-role="frage" ' +
+                'data-runde="' + runde + '" ' +
+                'data-idx="' + idx + '" ' +
+                'autocomplete="off" autocorrect="off" spellcheck="false" placeholder="">' +
+            escapeHtml(item.post);
+
+        card.innerHTML =
+            '<div class="pf-badge">#' + (idx+1) + '</div>' +
+            '<div class="pf-frage">' +
+                '<span class="frage-emoji">' + (item.e || '❓') + '</span>' +
+                '<span class="frage-text"><span class="frage-label">' + escapeHtml(hintLabel(item)) + '</span>' + escapeHtml(item.hint) + '</span>' +
+            '</div>' +
+            '<span class="cat-badge" data-cat="' + escapeAttr(item.k) + '">' + escapeHtml(catLabel(item)) + '</span>' +
+            '<div class="pf-satz">' + fragezeile + '</div>' +
+            '<span class="pf-typ-reveal">' + escapeHtml(catLabel(item)) + '</span>';
+
+        container.appendChild(card);
+    });
+    container.querySelectorAll('input.blank').forEach(function(inp) {
+        inp.addEventListener('input', function() { liveCheck(inp); });
+    });
+}
+
+function escapeHtml(s) {
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+function escapeAttr(s) {
+    return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;');
+}
+
+function isAnyAnswer(val, inp) {
+    var primary = inp.dataset.ans || '';
+    return val === primary || val.toLowerCase() === primary.toLowerCase();
+}
+function isAnyPrefix(val, inp) {
+    var primary = (inp.dataset.ans || '').toLowerCase();
+    return primary.indexOf(val.toLowerCase()) === 0;
+}
+
+function liveCheck(inp) {
+    var runde = parseInt(inp.dataset.runde, 10);
+    var val = inp.value.trim();
+    var wasCorrect = inp.classList.contains('correct');
+    inp.classList.remove('correct', 'wrong');
+
+    if (!state[runde].started && val.length > 0) startTimer(runde);
+
+    if (val.length === 0) {
+        if (wasCorrect) checkCardState(inp);
+        return;
+    }
+    if (isAnyAnswer(val, inp)) {
+        inp.classList.add('correct');
+        checkCardState(inp);
+        if (!wasCorrect) advanceFocus(inp);
+        return;
+    }
+    if (isAnyPrefix(val, inp)) {
+        if (wasCorrect) checkCardState(inp);
+        return;
+    }
+    inp.classList.add('wrong');
+    if (wasCorrect) checkCardState(inp);
+    state[runde].curStreak = 0;
+    updateStreak(runde);
+}
+
+function advanceFocus(inp) {
+    var card = inp.closest('.pf-card');
+    if (!card) return;
+    var runde = parseInt(card.dataset.runde, 10);
+
+    var withinCard = card.querySelectorAll('input.blank:not(.correct)');
+    if (withinCard.length > 0) {
+        var firstLocal = withinCard[0];
+        setTimeout((function(n){ return function(){ n.focus(); }; })(firstLocal), 120);
+        return;
+    }
+
+    var allCards = Array.from(document.querySelectorAll('#cards-' + runde + ' .pf-card'));
+    var curIdx = allCards.indexOf(card);
+    for (var i = curIdx + 1; i < allCards.length; i++) {
+        var nextInp = allCards[i].querySelector('input.blank:not(.correct)');
+        if (nextInp) {
+            setTimeout((function(n){ return function(){ n.focus(); n.scrollIntoView({ behavior:'smooth', block:'center' }); }; })(nextInp), 120);
+            return;
+        }
+    }
+    for (var j = 0; j < curIdx; j++) {
+        var prevInp = allCards[j].querySelector('input.blank:not(.correct)');
+        if (prevInp) {
+            setTimeout((function(n){ return function(){ n.focus(); n.scrollIntoView({ behavior:'smooth', block:'center' }); }; })(prevInp), 120);
+            return;
+        }
+    }
+}
+
+function checkCardState(inp) {
+    var card = inp.closest('.pf-card');
+    if (!card) return;
+    var runde = parseInt(card.dataset.runde, 10);
+    var tallyKey = card.dataset.tallyKey;
+    var inputs = card.querySelectorAll('input.blank');
+    var allCorrect = Array.from(inputs).every(function(i){ return i.classList.contains('correct'); });
+    var wasSolved = card.dataset.solved === '1';
+
+    if (allCorrect && !wasSolved) {
+        card.setAttribute('data-solved', '1');
+        state[runde].solved++;
+        state[runde].curStreak++;
+        if (state[runde].curStreak > state[runde].maxStreak) state[runde].maxStreak = state[runde].curStreak;
+        if (tallyKey && state[runde].tally.hasOwnProperty(tallyKey)) state[runde].tally[tallyKey]++;
+        updateStreak(runde);
+        updateProgress(runde);
+        updateTally(runde);
+        if (state[runde].solved === DRILL[runde].length) finishRunde(runde);
+    } else if (!allCorrect && wasSolved) {
+        card.setAttribute('data-solved', '0');
+        state[runde].solved = Math.max(0, state[runde].solved - 1);
+        if (tallyKey && state[runde].tally.hasOwnProperty(tallyKey)) {
+            state[runde].tally[tallyKey] = Math.max(0, state[runde].tally[tallyKey] - 1);
+        }
+        updateProgress(runde);
+        updateTally(runde);
+        var ende = document.getElementById('ende-' + runde);
+        if (ende) ende.classList.remove('show');
+    }
+}
+
+function updateProgress(runde) {
+    document.getElementById('count-' + runde).textContent = state[runde].solved;
+    var pct = (state[runde].solved / DRILL[runde].length) * 100;
+    document.getElementById('bar-' + runde).style.width = pct + '%';
+}
+function updateStreak(runde) {
+    document.getElementById('streak-' + runde).textContent = state[runde].curStreak;
+}
+function updateTally(runde) {
+    TALLY_KEYS[runde].forEach(function(k) {
+        var el = document.getElementById('t' + k + '-' + runde);
+        if (el) el.textContent = state[runde].tally[k];
+    });
+}
+
+function startTimer(runde) {
+    if (state[runde].started) return;
+    state[runde].started = true;
+    state[runde].stopped = false;
+    state[runde].sec = 0;
+    state[runde].timer = setInterval(function() {
+        state[runde].sec++;
+        document.getElementById('timer-' + runde).textContent = fmtTime(state[runde].sec);
+    }, 1000);
+}
+function stopTimer(runde) {
+    if (state[runde].stopped) return;
+    state[runde].stopped = true;
+    if (state[runde].timer) clearInterval(state[runde].timer);
+    if (bestTime[runde] === null || state[runde].sec < bestTime[runde]) {
+        bestTime[runde] = state[runde].sec;
+        document.getElementById('best-' + runde).textContent = fmtTime(bestTime[runde]);
+    }
+}
+function fmtTime(sec) {
+    var m = Math.floor(sec / 60);
+    var s = sec % 60;
+    return (m<10?'0':'') + m + ':' + (s<10?'0':'') + s;
+}
+
+function finishRunde(runde) {
+    stopTimer(runde);
+    var ende = document.getElementById('ende-' + runde);
+    document.getElementById('ende-time-' + runde).textContent = fmtTime(state[runde].sec);
+    document.getElementById('ende-streak-' + runde).textContent = state[runde].maxStreak;
+    document.getElementById('ende-best-' + runde).textContent =
+        (bestTime[runde] !== null) ? fmtTime(bestTime[runde]) : '--:--';
+    ende.classList.add('show');
+    setTimeout(function() { ende.scrollIntoView({ behavior:'smooth', block:'center' }); }, 300);
+}
+
+function showLoesung(runde) {
+    document.querySelectorAll('#cards-' + runde + ' .pf-card').forEach(function(card) {
+        var inputs = card.querySelectorAll('input.blank');
+        inputs.forEach(function(inp) {
+            inp.value = inp.dataset.ans;
+            inp.classList.remove('wrong');
+            inp.classList.add('correct');
+        });
+        card.setAttribute('data-solved', '1');
+    });
+    state[runde].solved = DRILL[runde].length;
+    state[runde].curStreak = 0;
+    state[runde].tally = emptyTally(runde);
+    DRILL[runde].forEach(function(item) {
+        var k = tallyKeyOf(runde, item);
+        if (k && state[runde].tally.hasOwnProperty(k)) state[runde].tally[k]++;
+    });
+    updateProgress(runde);
+    updateStreak(runde);
+    updateTally(runde);
+    stopTimer(runde);
+}
+
+function resetRunde(runde) {
+    if (state[runde].timer) clearInterval(state[runde].timer);
+    state[runde] = { timer:null, sec:0, started:false, stopped:false, maxStreak:0, curStreak:0, solved:0, tally:emptyTally(runde) };
+    document.getElementById('timer-' + runde).textContent = '00:00';
+    document.getElementById('streak-' + runde).textContent = '0';
+    document.getElementById('count-' + runde).textContent = '0';
+    document.getElementById('bar-' + runde).style.width = '0%';
+    updateTally(runde);
+    renderCards(runde);
+    document.getElementById('ende-' + runde).classList.remove('show');
+}
+
+[1,2,3].forEach(function(r) { renderCards(r); });
+
+</script>
+</body>
+</html>
