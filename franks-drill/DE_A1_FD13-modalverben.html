@@ -425,6 +425,29 @@ input.blank.wrong {
     color: #e74c3c;
 }
 
+/* === Doppel-Lücke: visuelle Differenzierung der zwei Lücken (FD47-Pattern) === */
+/* Erste Lücke (Modalverb auf Position 2) — orange */
+input.blank.mod-input {
+    border-bottom-color: #ea580c;
+    color: #9a3412;
+}
+/* Zweite Lücke (Infinitiv am Satzende) — blau */
+input.blank.inf-input {
+    border-bottom-color: #2563eb;
+    color: #1e3a8a;
+}
+input.blank.mod-input.correct,
+input.blank.inf-input.correct {
+    border-bottom-color: #27ae60;
+    color: #27ae60;
+}
+input.blank.mod-input.wrong,
+input.blank.inf-input.wrong {
+    border-bottom-color: #e74c3c;
+    color: #e74c3c;
+}
+/* === /Doppel-Lücke === */
+
 /* Typ-Reveal */
 .mv-typ-reveal {
     display: none;
@@ -833,7 +856,7 @@ function renderCards(runde) {
         card.setAttribute('data-runde', runde);
         card.setAttribute('data-idx', idx);
 
-        // Satz aufbauen: {p} = Lücke, {I:xxx} = Infinitiv-Markierung
+        // Satz aufbauen: {p} = Lücke 1 (Modalverb), {I:xxx} = Lücke 2 (Infinitiv)
         var satzTeile = item.rest.split('{p}');
         var pre = satzTeile[0] || '';
         var post = satzTeile[1] || '';
@@ -844,11 +867,35 @@ function renderCards(runde) {
             post = ' ' + item.rest;
         }
 
-        function renderRest(txt) {
-            // Ersetze {I:verb} durch <span class="inf">verb</span>
-            return escapeHtml(txt).replace(/\{I:([^}]+)\}/g, function(_, v) {
-                return '<span class="inf">' + v + '</span>';
-            });
+        // Aus post den Infinitiv-Marker {I:xxx} extrahieren — wird zur zweiten Lücke
+        var inf = null, postBeforeInf = post, postAfterInf = '';
+        var infMatch = post.match(/\{I:([^}]+)\}/);
+        if (infMatch) {
+            inf = infMatch[1];
+            var splitIdx = post.indexOf(infMatch[0]);
+            postBeforeInf = post.slice(0, splitIdx);
+            postAfterInf = post.slice(splitIdx + infMatch[0].length);
+        }
+
+        var satzHtml =
+            '<span class="subj">' + escapeHtml(item.subj) + '</span> ' +
+            escapeHtml(pre) +
+            '<input class="blank mod-input" type="text" ' +
+                'data-ans="' + escapeAttr(item.ans) + '" ' +
+                'data-role="mod" ' +
+                'data-runde="' + runde + '" ' +
+                'data-idx="' + idx + '" ' +
+                'autocomplete="off" autocorrect="off" spellcheck="false" placeholder="">' +
+            escapeHtml(postBeforeInf);
+        if (inf) {
+            satzHtml +=
+                '<input class="blank inf-input" type="text" ' +
+                    'data-ans="' + escapeAttr(inf) + '" ' +
+                    'data-role="inf" ' +
+                    'data-runde="' + runde + '" ' +
+                    'data-idx="' + idx + '" ' +
+                    'autocomplete="off" autocorrect="off" spellcheck="false" placeholder="">' +
+                escapeHtml(postAfterInf);
         }
 
         card.innerHTML =
@@ -856,19 +903,11 @@ function renderCards(runde) {
             '<div class="mv-inputs">' +
                 '<span class="mv-chip" data-typ="' + escapeAttr(item.typ) + '">' +
                     '<span class="mv-emoji">' + (item.e || '') + '</span>' +
-                    '<span class="mv-label">Infinitiv</span>' +
+                    '<span class="mv-label">Modalverb</span>' +
                     '<span class="mv-word">' + escapeHtml(item.v) + '</span>' +
                 '</span>' +
             '</div>' +
-            '<div class="mv-satz">' +
-                '<span class="subj">' + escapeHtml(item.subj) + '</span> ' +
-                '<input class="blank" type="text" ' +
-                    'data-ans="' + escapeAttr(item.ans) + '" ' +
-                    'data-runde="' + runde + '" ' +
-                    'data-idx="' + idx + '" ' +
-                    'autocomplete="off" autocorrect="off" spellcheck="false" placeholder=""> ' +
-                renderRest(post || pre || item.rest) +
-            '</div>' +
+            '<div class="mv-satz">' + satzHtml + '</div>' +
             '<span class="mv-typ-reveal">' + escapeHtml(typLabel) + '</span>';
 
         container.appendChild(card);
