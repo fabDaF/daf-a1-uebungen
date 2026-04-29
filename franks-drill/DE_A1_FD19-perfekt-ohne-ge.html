@@ -479,6 +479,38 @@ input.blank.wrong {
     color: #e74c3c;
 }
 
+/* === Doppel-Lücke: visuelle Differenzierung der zwei Lücken (FD47-Pattern) === */
+/* Erste Lücke (Hilfsverb / konjugiertes Verb) — orange */
+input.blank.aux-input,
+input.blank.stem-input {
+    border-bottom-color: #ea580c;
+    color: #9a3412;
+}
+/* Zweite Lücke (Partizip / Präfix) — blau */
+input.blank.pp-input,
+input.blank.prefix-input {
+    border-bottom-color: #2563eb;
+    color: #1e3a8a;
+}
+/* Korrekt-Zustand: grün übersteuert */
+input.blank.aux-input.correct,
+input.blank.pp-input.correct,
+input.blank.stem-input.correct,
+input.blank.prefix-input.correct {
+    border-bottom-color: #27ae60;
+    color: #27ae60;
+}
+/* Falsch-Zustand: rot übersteuert */
+input.blank.aux-input.wrong,
+input.blank.pp-input.wrong,
+input.blank.stem-input.wrong,
+input.blank.prefix-input.wrong {
+    border-bottom-color: #e74c3c;
+    color: #e74c3c;
+}
+/* === /Doppel-Lücke === */
+
+
 /* Typ-Reveal (Kategorie) */
 .pf-typ-reveal {
     display: none;
