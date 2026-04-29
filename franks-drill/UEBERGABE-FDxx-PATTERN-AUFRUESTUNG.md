@@ -24,7 +24,7 @@ DaF-Lehrer, kein Software-Entwickler. Bevorzugt Prosa statt Bullet-Listen, will 
 
 **Keine Antwort verraten.** Hint-Texte zeigen Kategorien, nicht Lösungen. Wenn der Lerner die Antwort durch Hint, Placeholder oder Cat-Badge ablesen kann, ist das ein Fehler. Vor Auslieferung Self-Check: „Kann ich die Antwort ohne Wissen ablesen?" Wenn ja → fixen.
 
-**Strikt A1.** Das gesamte FDxx-Projekt ist auf A1-Vokabular beschränkt. Keine Eigennamen (Marcin, BMW, Bello, Shakira, etc. — keine). Keine B1-Kollokationen. Wenn ein Verb oder Nomen nicht im Bernd-A1 oder Lingoda-A1 vorkommt, gehört es nicht in einen FDxx.
+**Strikt A1.** Das gesamte FDxx-Projekt ist auf A1-Vokabular beschränkt. Keine Eigennamen (Marcin, BMW, Bello, Shakira, etc. — keine). Keine B1-Kollokationen. Wenn ein Verb oder Nomen nicht im Bernd-A1 oder A1-Quellmaterial vorkommt, gehört es nicht in einen FDxx.
 
 **Niemals auf Frank warten ohne Grund.** Bei Continue-/Autonomie-Direktiven: stumm weiterarbeiten, Cowork-Nachrichten poppen nicht auf seinem Bildschirm. Ping nur bei echten Blockaden (Permission-Dialog, Frage-Notwendigkeit, Approval). Sonst: Annahme im Chat markieren und weitermachen.
 
