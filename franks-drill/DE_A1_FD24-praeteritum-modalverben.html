@@ -74,7 +74,7 @@ body {
     body { padding: 8px; }
     .nav { flex-wrap: wrap; }
     .nav-btn {
-        flex: 1 1 25%;
+        flex: 1 1 20%;
         min-width: 0;
         font-size: 0.8em;
         padding: 10px 6px;
@@ -282,8 +282,87 @@ h2 {
 .tt-box.uw { color: #9a3412; border-color: #fed7aa; background: #fff7ed; }
 .tt-box.nm { color: #1e40af; border-color: #bfdbfe; background: #eff6ff; }
 .tt-box.st { color: #991b1b; border-color: #fecaca; background: #fef2f2; }
+.tt-box.ich   { color: #4a148c; border-color: #d8b4fe; background: #f5f3ff; }
+.tt-box.du    { color: #92400e; border-color: #fde68a; background: #fffbeb; }
+.tt-box.er    { color: #155e75; border-color: #a5f3fc; background: #ecfeff; }
+.tt-box.wir   { color: #1e3a8a; border-color: #bfdbfe; background: #eff6ff; }
+.tt-box.ihr   { color: #6b21a8; border-color: #e9d5ff; background: #faf5ff; }
+.tt-box.sie   { color: #14532d; border-color: #bbf7d0; background: #f0fdf4; }
 .tt-box .tally-num { font-size: 1.05em; }
 .tt-box .tally-max { color: #888; font-weight: 400; }
+
+/* Konjugationstabelle (Tab 1 — Welle 2) */
+.konj-block {
+    background: #f8f9ff;
+    border-radius: 12px;
+    border-left: 6px solid #16a34a;
+    padding: 14px 18px 18px;
+    margin-bottom: 18px;
+    transition: background 0.5s ease, border-color 0.3s ease;
+}
+.konj-block.complete { background: linear-gradient(90deg, #f0fdf4, #f8f9ff 70%); animation: cardPulse 0.5s ease; }
+.konj-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed #d8d8e0;
+}
+.konj-header .konj-emoji { font-size: 1.7em; }
+.konj-header .konj-verb {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 1.35em;
+    color: #4a148c;
+    font-weight: 700;
+    flex: 1;
+}
+.konj-header .konj-verb .stem   { color: #16a34a; }
+.konj-header .konj-verb .ending { color: #9ca3af; font-weight: 500; font-style: italic; }
+.konj-header .konj-progress {
+    background: #ede9fe;
+    color: #5b21b6;
+    padding: 3px 12px;
+    border-radius: 12px;
+    font-size: 0.85em;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+}
+.konj-block.complete .konj-progress { background: #16a34a; color: white; }
+
+.konj-rows {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px 22px;
+}
+@media (max-width: 600px) {
+    .konj-rows { grid-template-columns: 1fr; }
+}
+
+.konj-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 8px;
+    border-radius: 8px;
+    background: white;
+    border: 1px solid #e5e7eb;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 1.04em;
+}
+.konj-row .konj-pers {
+    min-width: 70px;
+    font-weight: 700;
+    color: #4a148c;
+    text-align: right;
+}
+.konj-row input.blank {
+    flex: 1;
+    text-align: left;
+    padding: 3px 8px;
+}
 
 @media (max-width: 600px) {
     .drill-progress { gap: 8px; padding: 10px 12px; }
@@ -555,14 +634,18 @@ input.blank.wrong {
         <span class="nav-label">Start</span>
     </div>
     <div class="nav-btn" onclick="showSection(1)">
+        <span class="nav-emoji">📖</span>
+        <span class="nav-label">Paradigma</span>
+    </div>
+    <div class="nav-btn" onclick="showSection(2)">
         <span class="nav-emoji">🟠</span>
         <span class="nav-label">Umlaut weg</span>
     </div>
-    <div class="nav-btn" onclick="showSection(2)">
+    <div class="nav-btn" onclick="showSection(3)">
         <span class="nav-emoji">🔵</span>
         <span class="nav-label">normal + mögen</span>
     </div>
-    <div class="nav-btn" onclick="showSection(3)">
+    <div class="nav-btn" onclick="showSection(4)">
         <span class="nav-emoji">👑</span>
         <span class="nav-label">Mix alle sechs</span>
     </div>
@@ -646,13 +729,13 @@ input.blank.wrong {
         </div>
     </div>
 
-    <button class="start-cta" onclick="showSection(1)">🟠 Runde 1 starten</button>
-    <p class="hinweis">Tipp: Runde 1 trainiert die drei Umlaut-Verlust-Verben (können, müssen, dürfen). Runde 2 bringt die Ausnahmen (wollen, sollen, mögen). Runde 3 mischt alle sechs.</p>
+    <button class="start-cta" onclick="showSection(1)">📖 Paradigma ausfüllen</button>
+    <p class="hinweis">Tipp: Runde 1 ist das volle Paradigma — alle sechs Modalverben in allen sechs Personen sichtbar. Runde 2 trainiert die drei Umlaut-Verlust-Verben (können, müssen, dürfen). Runde 3 bringt die Ausnahmen (wollen, sollen, mögen). Runde 4 mischt alle sechs.</p>
 </div>
 
-<!-- SECTION 1: RUNDE 1 — Umlaut weg (können, müssen, dürfen) -->
+<!-- SECTION 1: RUNDE 1 — Konjugationstabelle (Paradigma) -->
 <div class="section" id="sec-1">
-    <h2>🟠 Runde 1 — Umlaut weg · können · müssen · dürfen</h2>
+    <h2>📖 Runde 1 — Sechs Modalverben in allen Personen</h2>
 
     <div class="control-bar">
         <button class="btn" onclick="showLoesung(1)">Lösung</button>
@@ -661,33 +744,38 @@ input.blank.wrong {
 
     <div class="drill-progress">
         <span class="streak">🔥 Streak: <span id="streak-1">0</span></span>
-        <span class="count">✓ <span id="count-1">0</span>/16</span>
+        <span class="count">✓ <span id="count-1">0</span>/36</span>
         <div class="bar"><div class="bar-fill" id="bar-1"></div></div>
         <span class="time">⏱ <span id="timer-1">00:00</span></span>
         <span class="best">🏆 <span id="best-1">--:--</span></span>
     </div>
 
     <div class="typ-tally">
-        <span class="tt-box uw">Umlaut weg <span class="tally-num" id="tuw-1">0</span><span class="tally-max">/16</span></span>
+        <span class="tt-box ich">ich <span class="tally-num" id="tich-1">0</span><span class="tally-max">/6</span></span>
+        <span class="tt-box du">du <span class="tally-num" id="tdu-1">0</span><span class="tally-max">/6</span></span>
+        <span class="tt-box er">er/sie <span class="tally-num" id="ter-1">0</span><span class="tally-max">/6</span></span>
+        <span class="tt-box wir">wir <span class="tally-num" id="twir-1">0</span><span class="tally-max">/6</span></span>
+        <span class="tt-box ihr">ihr <span class="tally-num" id="tihr-1">0</span><span class="tally-max">/6</span></span>
+        <span class="tt-box sie">sie/Sie <span class="tally-num" id="tsie-1">0</span><span class="tally-max">/6</span></span>
     </div>
 
     <div id="cards-1"></div>
 
     <div class="runden-ende" id="ende-1">
-        <h3>🏆 Runde 1 geschafft!</h3>
-        <p>16 Sätze mit den drei Modalverben, die im Präteritum ihren Umlaut verlieren: <em>konnte, musste, durfte</em>. Das ist das häufigste Muster. Weiter zu den Sonderfällen.</p>
+        <h3>📖 Paradigmen sitzen!</h3>
+        <p>36 Formen — sechs Modalverben jeweils in allen sechs Personen. Achte auf die Symmetrie: die Endungen <em>-te, -test, -te, -ten, -tet, -ten</em> sind regelmäßig — nur der Stamm wechselt (mit oder ohne Umlaut, bei <em>mögen</em> sogar zu <em>moch-</em>). Jetzt im Satzkontext.</p>
         <div class="stats">
             <div class="stat-box"><span class="stat-num" id="ende-time-1">00:00</span><span class="stat-lbl">Zeit</span></div>
             <div class="stat-box"><span class="stat-num" id="ende-streak-1">0</span><span class="stat-lbl">Längste Streak</span></div>
             <div class="stat-box"><span class="stat-num" id="ende-best-1">--:--</span><span class="stat-lbl">Rekord</span></div>
         </div>
-        <button class="next-cta" onclick="showSection(2)">🔵 Weiter zu Runde 2 →</button>
+        <button class="next-cta" onclick="showSection(2)">🟠 Weiter zu Runde 2 →</button>
     </div>
 </div>
 
-<!-- SECTION 2: RUNDE 2 — kein Umlaut (wollen, sollen) + Stamm-Wechsel (mögen) -->
+<!-- SECTION 1: RUNDE 1 — Umlaut weg (können, müssen, dürfen) -->
 <div class="section" id="sec-2">
-    <h2>🔵 Runde 2 — kein Umlaut · wollen · sollen · 🔴 mögen (Stamm-Wechsel)</h2>
+    <h2>🟠 Runde 1 — Umlaut weg · können · müssen · dürfen</h2>
 
     <div class="control-bar">
         <button class="btn" onclick="showLoesung(2)">Lösung</button>
@@ -703,27 +791,26 @@ input.blank.wrong {
     </div>
 
     <div class="typ-tally">
-        <span class="tt-box nm">kein Umlaut <span class="tally-num" id="tnm-2">0</span><span class="tally-max">/12</span></span>
-        <span class="tt-box st">Stamm-Wechsel <span class="tally-num" id="tst-2">0</span><span class="tally-max">/4</span></span>
+        <span class="tt-box uw">Umlaut weg <span class="tally-num" id="tuw-2">0</span><span class="tally-max">/16</span></span>
     </div>
 
     <div id="cards-2"></div>
 
     <div class="runden-ende" id="ende-2">
-        <h3>🏆 Runde 2 geschafft!</h3>
-        <p>16 Sätze mit den drei Ausnahmen: <em>wollen</em> und <em>sollen</em> ohne Umlaut (<em>wollte, sollte</em>) sowie die Stamm-Mutation bei <em>mögen → mochte</em>. Jetzt der Mix aller sechs.</p>
+        <h3>🏆 Runde 1 geschafft!</h3>
+        <p>16 Sätze mit den drei Modalverben, die im Präteritum ihren Umlaut verlieren: <em>konnte, musste, durfte</em>. Das ist das häufigste Muster. Weiter zu den Sonderfällen.</p>
         <div class="stats">
             <div class="stat-box"><span class="stat-num" id="ende-time-2">00:00</span><span class="stat-lbl">Zeit</span></div>
             <div class="stat-box"><span class="stat-num" id="ende-streak-2">0</span><span class="stat-lbl">Längste Streak</span></div>
             <div class="stat-box"><span class="stat-num" id="ende-best-2">--:--</span><span class="stat-lbl">Rekord</span></div>
         </div>
-        <button class="next-cta" onclick="showSection(3)">👑 Weiter zum Boss-Level →</button>
+        <button class="next-cta" onclick="showSection(3)">🔵 Weiter zu Runde 2 →</button>
     </div>
 </div>
 
-<!-- SECTION 3: RUNDE 3 — Mix alle sechs -->
+<!-- SECTION 2: RUNDE 2 — kein Umlaut (wollen, sollen) + Stamm-Wechsel (mögen) -->
 <div class="section" id="sec-3">
-    <h2>👑 Runde 3 — Mix · alle sechs Modalverben</h2>
+    <h2>🔵 Runde 2 — kein Umlaut · wollen · sollen · 🔴 mögen (Stamm-Wechsel)</h2>
 
     <div class="control-bar">
         <button class="btn" onclick="showLoesung(3)">Lösung</button>
@@ -739,22 +826,58 @@ input.blank.wrong {
     </div>
 
     <div class="typ-tally">
-        <span class="tt-box uw">Umlaut weg <span class="tally-num" id="tuw-3">0</span><span class="tally-max">/8</span></span>
-        <span class="tt-box nm">kein Umlaut <span class="tally-num" id="tnm-3">0</span><span class="tally-max">/5</span></span>
-        <span class="tt-box st">Stamm-Wechsel <span class="tally-num" id="tst-3">0</span><span class="tally-max">/3</span></span>
+        <span class="tt-box nm">kein Umlaut <span class="tally-num" id="tnm-3">0</span><span class="tally-max">/12</span></span>
+        <span class="tt-box st">Stamm-Wechsel <span class="tally-num" id="tst-3">0</span><span class="tally-max">/4</span></span>
     </div>
 
     <div id="cards-3"></div>
 
     <div class="runden-ende" id="ende-3">
-        <h3>🎉 Boss besiegt!</h3>
-        <p>48 Sätze im Präteritum der Modalverben. Damit hast du die dritte Präteritum-Gruppe erobert. In FD25 kommt die große Integration: Vollverben (Perfekt) treffen auf <em>sein, haben</em> und Modalverben (Präteritum) — der Vergangenheits-Megamix.</p>
+        <h3>🏆 Runde 2 geschafft!</h3>
+        <p>16 Sätze mit den drei Ausnahmen: <em>wollen</em> und <em>sollen</em> ohne Umlaut (<em>wollte, sollte</em>) sowie die Stamm-Mutation bei <em>mögen → mochte</em>. Jetzt der Mix aller sechs.</p>
         <div class="stats">
             <div class="stat-box"><span class="stat-num" id="ende-time-3">00:00</span><span class="stat-lbl">Zeit</span></div>
             <div class="stat-box"><span class="stat-num" id="ende-streak-3">0</span><span class="stat-lbl">Längste Streak</span></div>
             <div class="stat-box"><span class="stat-num" id="ende-best-3">--:--</span><span class="stat-lbl">Rekord</span></div>
         </div>
-        <button class="next-cta" onclick="resetRunde(3)">🔄 Nochmal Boss-Level</button>
+        <button class="next-cta" onclick="showSection(4)">👑 Weiter zum Boss-Level →</button>
+    </div>
+</div>
+
+<!-- SECTION 3: RUNDE 3 — Mix alle sechs -->
+<div class="section" id="sec-4">
+    <h2>👑 Runde 3 — Mix · alle sechs Modalverben</h2>
+
+    <div class="control-bar">
+        <button class="btn" onclick="showLoesung(4)">Lösung</button>
+        <button class="btn" onclick="resetRunde(4)">Neu</button>
+    </div>
+
+    <div class="drill-progress">
+        <span class="streak">🔥 Streak: <span id="streak-4">0</span></span>
+        <span class="count">✓ <span id="count-4">0</span>/16</span>
+        <div class="bar"><div class="bar-fill" id="bar-4"></div></div>
+        <span class="time">⏱ <span id="timer-4">00:00</span></span>
+        <span class="best">🏆 <span id="best-4">--:--</span></span>
+    </div>
+
+    <div class="typ-tally">
+        <span class="tt-box uw">Umlaut weg <span class="tally-num" id="tuw-4">0</span><span class="tally-max">/8</span></span>
+        <span class="tt-box nm">kein Umlaut <span class="tally-num" id="tnm-4">0</span><span class="tally-max">/5</span></span>
+        <span class="tt-box st">Stamm-Wechsel <span class="tally-num" id="tst-4">0</span><span class="tally-max">/3</span></span>
+    </div>
+
+    <div id="cards-4"></div>
+
+    <div class="runden-ende" id="ende-4">
+        <h3>🎉 Boss besiegt!</h3>
+        <p>48 Sätze im Präteritum der Modalverben. Damit hast du die dritte Präteritum-Gruppe erobert. In FD25 kommt die große Integration: Vollverben (Perfekt) treffen auf <em>sein, haben</em> und Modalverben (Präteritum) — der Vergangenheits-Megamix.</p>
+        <div class="stats">
+            <div class="stat-box"><span class="stat-num" id="ende-time-4">00:00</span><span class="stat-lbl">Zeit</span></div>
+            <div class="stat-box"><span class="stat-num" id="ende-streak-4">0</span><span class="stat-lbl">Längste Streak</span></div>
+            <div class="stat-box"><span class="stat-num" id="ende-best-4">--:--</span><span class="stat-lbl">Rekord</span></div>
+        </div>
+        <button class="next-cta" onclick="resetRunde(4)">🔄 Nochmal Boss-Level</button>
     </div>
 </div>
 
@@ -777,9 +900,22 @@ input.blank.wrong {
 //   mid     = Satzmitte nach der Lücke (endet mit Vollverb im Infinitiv)
 //   e       = Emoji
 
+
+// KONJ_DATA: Verben für Runde 1 (vollständige Paradigmen)
+var KONJ_DATA = [
+    { "e":"💪", "inf":"können",  "stem":"konn",  "ending":"te (+ Endung)", "forms":["konnte","konntest","konnte","konnten","konntet","konnten"] },
+    { "e":"⚠️", "inf":"müssen",  "stem":"muss",  "ending":"te (+ Endung)", "forms":["musste","musstest","musste","mussten","musstet","mussten"] },
+    { "e":"🎯", "inf":"wollen",  "stem":"woll",  "ending":"te (+ Endung)", "forms":["wollte","wolltest","wollte","wollten","wolltet","wollten"] },
+    { "e":"🚪", "inf":"dürfen",  "stem":"durf",  "ending":"te (+ Endung)", "forms":["durfte","durftest","durfte","durften","durftet","durften"] },
+    { "e":"📋", "inf":"sollen",  "stem":"soll",  "ending":"te (+ Endung)", "forms":["sollte","solltest","sollte","sollten","solltet","sollten"] },
+    { "e":"☕", "inf":"mögen",   "stem":"moch",  "ending":"te (+ Endung)", "forms":["mochte","mochtest","mochte","mochten","mochtet","mochten"] }
+];
+var KONJ_PERS = ["ich", "du", "er/sie/es", "wir", "ihr", "sie/Sie"];
+var KONJ_PERS_KEY = ["ich", "du", "er", "wir", "ihr", "sie"];
+
 var DRILL = {
-    // Runde 1: Umlaut weg — können (6) + müssen (6) + dürfen (4) = 16
-    1: [
+    // Runde 2: Umlaut weg — können (6) + müssen (6) + dürfen (4) = 16
+    2: [
         // können (6)
         { v:"können", cat:"uw", subj:"Ich",              ans:"konnte",   mid:"gestern die ganze Nacht nicht schlafen",   e:"😴" },
         { v:"können", cat:"uw", subj:"Du",               ans:"konntest", mid:"schon als Kind richtig gut schwimmen",     e:"🏊" },
@@ -800,8 +936,8 @@ var DRILL = {
         { v:"dürfen", cat:"uw", subj:"Die Hunde",        ans:"durften",  mid:"bei uns nie auf das Sofa",                 e:"🐕" },
         { v:"dürfen", cat:"uw", subj:"Wir",              ans:"durften",  mid:"im Restaurant jeden Nachtisch aussuchen",  e:"🍰" }
     ],
-    // Runde 2: kein Umlaut — wollen (6) + sollen (6) + mögen (4, Stamm-Wechsel) = 16
-    2: [
+    // Runde 3: kein Umlaut — wollen (6) + sollen (6) + mögen (4, Stamm-Wechsel) = 16
+    3: [
         // wollen (6)
         { v:"wollen", cat:"nm", subj:"Ich",              ans:"wollte",   mid:"dich am Abend unbedingt anrufen",          e:"☎️" },
         { v:"wollen", cat:"nm", subj:"Du",               ans:"wolltest", mid:"uns am Wochenende endlich besuchen",       e:"🚪" },
@@ -822,8 +958,8 @@ var DRILL = {
         { v:"mögen",  cat:"st", subj:"Meine Oma",        ans:"mochte",   mid:"besonders den süßen Schokoladenkuchen",    e:"🍰" },
         { v:"mögen",  cat:"st", subj:"Wir",              ans:"mochten",  mid:"unseren neuen Kollegen sofort",            e:"👥" }
     ],
-    // Runde 3: Mix alle sechs — 3+3+2+2+3+3 = 16 (uw:8, nm:5, st:3)
-    3: [
+    // Runde 4: Mix alle sechs — 3+3+2+2+3+3 = 16 (uw:8, nm:5, st:3)
+    4: [
         // können (3)
         { v:"können", cat:"uw", subj:"Du",               ans:"konntest", mid:"als Kind schon gut Fahrrad fahren",        e:"🚲" },
         { v:"können", cat:"uw", subj:"Wir",              ans:"konnten",  mid:"den Film leider nicht zu Ende sehen",      e:"🎬" },
@@ -855,9 +991,10 @@ function tallyKeyOf(runde, item) {
     return item.cat;
 }
 var TALLY_KEYS = {
-    1: ["uw"],
-    2: ["nm", "st"],
-    3: ["uw", "nm", "st"]
+    1: ["ich", "du", "er", "wir", "ihr", "sie"],
+    2: ["uw"],
+    3: ["nm", "st"],
+    4: ["uw", "nm", "st"]
 };
 
 function emptyTally(runde) {
@@ -869,9 +1006,10 @@ function emptyTally(runde) {
 var state = {
     1: { timer:null, sec:0, started:false, stopped:false, maxStreak:0, curStreak:0, solved:0, tally:emptyTally(1) },
     2: { timer:null, sec:0, started:false, stopped:false, maxStreak:0, curStreak:0, solved:0, tally:emptyTally(2) },
-    3: { timer:null, sec:0, started:false, stopped:false, maxStreak:0, curStreak:0, solved:0, tally:emptyTally(3) }
+    3: { timer:null, sec:0, started:false, stopped:false, maxStreak:0, curStreak:0, solved:0, tally:emptyTally(3) },
+    4: { timer:null, sec:0, started:false, stopped:false, maxStreak:0, curStreak:0, solved:0, tally:emptyTally(4) }
 };
-var bestTime = { 1:null, 2:null, 3:null };
+var bestTime = { 1:null, 2:null, 3:null, 4:null };
 
 function showSection(idx) {
     document.querySelectorAll('.section').forEach(function(s,i){ s.classList.toggle('active', i===idx); });
@@ -890,6 +1028,52 @@ function shuffleArr(arr) {
 
 function catLabel(cat) {
     return { uw:"Umlaut weg", nm:"kein Umlaut", st:"Stamm-Wechsel" }[cat] || cat;
+}
+
+function totalItems(runde) {
+    if (runde === 1) return KONJ_DATA.length * 6;
+    return DRILL[runde].length;
+}
+
+// Renderer für Konjugationstabelle (Runde 1)
+function renderKonj(runde) {
+    var container = document.getElementById('cards-' + runde);
+    container.innerHTML = '';
+    KONJ_DATA.forEach(function(verb, vidx) {
+        var block = document.createElement('div');
+        block.className = 'konj-block';
+        block.setAttribute('data-vidx', vidx);
+        if (verb.cat) block.setAttribute('data-cat', verb.cat);
+
+        var headerHtml =
+            '<div class="konj-header">' +
+                '<span class="konj-emoji">' + (verb.e || '📝') + '</span>' +
+                '<span class="konj-verb"><span class="stem">' + escapeHtml(verb.stem) + '</span><span class="ending">' + escapeHtml(verb.ending) + '</span></span>' +
+                '<span class="konj-progress" id="kp-' + vidx + '">0/6</span>' +
+            '</div>';
+
+        var rowsHtml = '<div class="konj-rows">';
+        for (var pidx = 0; pidx < 6; pidx++) {
+            rowsHtml +=
+                '<div class="konj-row">' +
+                    '<span class="konj-pers">' + escapeHtml(KONJ_PERS[pidx]) + '</span>' +
+                    '<input class="blank konj-inp" type="text" ' +
+                        'data-ans="' + escapeAttr(verb.forms[pidx]) + '" ' +
+                        'data-runde="' + runde + '" ' +
+                        'data-vidx="' + vidx + '" ' +
+                        'data-pidx="' + pidx + '" ' +
+                        'data-pers="' + KONJ_PERS_KEY[pidx] + '" ' +
+                        'autocomplete="off" autocorrect="off" spellcheck="false" placeholder="">' +
+                '</div>';
+        }
+        rowsHtml += '</div>';
+
+        block.innerHTML = headerHtml + rowsHtml;
+        container.appendChild(block);
+    });
+    container.querySelectorAll('input.konj-inp').forEach(function(inp) {
+        inp.addEventListener('input', function() { liveCheck(inp); });
+    });
 }
 
 function renderCards(runde) {
@@ -955,34 +1139,73 @@ function liveCheck(inp) {
     var runde = parseInt(inp.dataset.runde, 10);
     var val = inp.value.trim().toLowerCase();
     var wasCorrect = inp.classList.contains('correct');
+    var isKonj = inp.classList.contains('konj-inp');
     inp.classList.remove('correct', 'wrong');
 
     if (!state[runde].started && val.length > 0) startTimer(runde);
 
     if (val.length === 0) {
-        if (wasCorrect) checkCardState(inp);
+        if (wasCorrect) {
+            if (isKonj) checkKonjInput(inp, false);
+            else checkCardState(inp);
+        }
         return;
     }
     if (isAnyAnswer(val, inp)) {
         inp.classList.add('correct');
-        checkCardState(inp);
+        if (isKonj) checkKonjInput(inp, !wasCorrect);
+        else checkCardState(inp);
         if (!wasCorrect) advanceFocus(inp);
         return;
     }
     if (isAnyPrefix(val, inp)) {
-        if (wasCorrect) checkCardState(inp);
+        if (wasCorrect) {
+            if (isKonj) checkKonjInput(inp, false);
+            else checkCardState(inp);
+        }
         return;
     }
     inp.classList.add('wrong');
-    if (wasCorrect) checkCardState(inp);
+    if (wasCorrect) {
+        if (isKonj) checkKonjInput(inp, false);
+        else checkCardState(inp);
+    }
     state[runde].curStreak = 0;
     updateStreak(runde);
 }
 
 function advanceFocus(inp) {
+    var runde = parseInt(inp.dataset.runde, 10);
+
+    // Konj-Tabelle (Runde 1): nächster Input im Block, sonst nächster Block
+    if (inp.classList.contains('konj-inp')) {
+        var block = inp.closest('.konj-block');
+        var withinBlock = block.querySelectorAll('input.konj-inp:not(.correct)');
+        if (withinBlock.length > 0) {
+            setTimeout((function(n){ return function(){ n.focus(); }; })(withinBlock[0]), 120);
+            return;
+        }
+        var allBlocks = Array.from(document.querySelectorAll('#cards-' + runde + ' .konj-block'));
+        var curBidx = allBlocks.indexOf(block);
+        for (var bi = curBidx + 1; bi < allBlocks.length; bi++) {
+            var ni = allBlocks[bi].querySelector('input.konj-inp:not(.correct)');
+            if (ni) {
+                setTimeout((function(n){ return function(){ n.focus(); n.scrollIntoView({ behavior:'smooth', block:'center' }); }; })(ni), 120);
+                return;
+            }
+        }
+        for (var bj = 0; bj < curBidx; bj++) {
+            var pi = allBlocks[bj].querySelector('input.konj-inp:not(.correct)');
+            if (pi) {
+                setTimeout((function(n){ return function(){ n.focus(); n.scrollIntoView({ behavior:'smooth', block:'center' }); }; })(pi), 120);
+                return;
+            }
+        }
+        return;
+    }
+
     var card = inp.closest('.pf-card');
     if (!card) return;
-    var runde = parseInt(card.dataset.runde, 10);
 
     var withinCard = card.querySelectorAll('input.blank:not(.correct)');
     if (withinCard.length > 0) {
@@ -1009,6 +1232,48 @@ function advanceFocus(inp) {
     }
 }
 
+function checkKonjInput(inp, becameCorrect) {
+    var runde = parseInt(inp.dataset.runde, 10);
+    var pers = inp.dataset.pers;
+    var vidx = parseInt(inp.dataset.vidx, 10);
+    var isCorrect = inp.classList.contains('correct');
+    var wasSolvedAttr = inp.dataset.solved === '1';
+
+    if (isCorrect && !wasSolvedAttr) {
+        inp.dataset.solved = '1';
+        state[runde].solved++;
+        state[runde].curStreak++;
+        if (state[runde].curStreak > state[runde].maxStreak) state[runde].maxStreak = state[runde].curStreak;
+        if (pers && state[runde].tally.hasOwnProperty(pers)) state[runde].tally[pers]++;
+        updateStreak(runde);
+        updateProgress(runde);
+        updateTally(runde);
+        updateKonjBlockProgress(runde, vidx);
+        if (state[runde].solved === totalItems(runde)) finishRunde(runde);
+    } else if (!isCorrect && wasSolvedAttr) {
+        inp.dataset.solved = '0';
+        state[runde].solved = Math.max(0, state[runde].solved - 1);
+        if (pers && state[runde].tally.hasOwnProperty(pers)) {
+            state[runde].tally[pers] = Math.max(0, state[runde].tally[pers] - 1);
+        }
+        updateProgress(runde);
+        updateTally(runde);
+        updateKonjBlockProgress(runde, vidx);
+        var ende = document.getElementById('ende-' + runde);
+        if (ende) ende.classList.remove('show');
+    }
+}
+
+function updateKonjBlockProgress(runde, vidx) {
+    var block = document.querySelector('#cards-' + runde + ' .konj-block[data-vidx="' + vidx + '"]');
+    if (!block) return;
+    var inputs = block.querySelectorAll('input.konj-inp');
+    var correct = Array.from(inputs).filter(function(i){ return i.classList.contains('correct'); }).length;
+    var prog = document.getElementById('kp-' + vidx);
+    if (prog) prog.textContent = correct + '/' + inputs.length;
+    block.classList.toggle('complete', correct === inputs.length);
+}
+
 function checkCardState(inp) {
     var card = inp.closest('.pf-card');
     if (!card) return;
@@ -1027,7 +1292,7 @@ function checkCardState(inp) {
         updateStreak(runde);
         updateProgress(runde);
         updateTally(runde);
-        if (state[runde].solved === DRILL[runde].length) finishRunde(runde);
+        if (state[runde].solved === totalItems(runde)) finishRunde(runde);
     } else if (!allCorrect && wasSolved) {
         card.setAttribute('data-solved', '0');
         state[runde].solved = Math.max(0, state[runde].solved - 1);
@@ -1043,7 +1308,7 @@ function checkCardState(inp) {
 
 function updateProgress(runde) {
     document.getElementById('count-' + runde).textContent = state[runde].solved;
-    var pct = (state[runde].solved / DRILL[runde].length) * 100;
+    var pct = (state[runde].solved / totalItems(runde)) * 100;
     document.getElementById('bar-' + runde).style.width = pct + '%';
 }
 function updateStreak(runde) {
@@ -1093,22 +1358,39 @@ function finishRunde(runde) {
 }
 
 function showLoesung(runde) {
-    document.querySelectorAll('#cards-' + runde + ' .pf-card').forEach(function(card) {
-        var inputs = card.querySelectorAll('input.blank');
-        inputs.forEach(function(inp) {
+    if (runde === 1) {
+        document.querySelectorAll('#cards-' + runde + ' input.konj-inp').forEach(function(inp) {
             inp.value = inp.dataset.ans;
             inp.classList.remove('wrong');
             inp.classList.add('correct');
+            inp.dataset.solved = '1';
         });
-        card.setAttribute('data-solved', '1');
-    });
-    state[runde].solved = DRILL[runde].length;
+        document.querySelectorAll('#cards-' + runde + ' .konj-block').forEach(function(b) {
+            b.classList.add('complete');
+            var prog = b.querySelector('.konj-progress');
+            if (prog) prog.textContent = '6/6';
+        });
+        state[runde].solved = totalItems(runde);
+        state[runde].tally = emptyTally(runde);
+        TALLY_KEYS[runde].forEach(function(k){ state[runde].tally[k] = KONJ_DATA.length; });
+    } else {
+        document.querySelectorAll('#cards-' + runde + ' .pf-card').forEach(function(card) {
+            var inputs = card.querySelectorAll('input.blank');
+            inputs.forEach(function(inp) {
+                inp.value = inp.dataset.ans;
+                inp.classList.remove('wrong');
+                inp.classList.add('correct');
+            });
+            card.setAttribute('data-solved', '1');
+        });
+        state[runde].solved = DRILL[runde].length;
+        state[runde].tally = emptyTally(runde);
+        DRILL[runde].forEach(function(item) {
+            var k = tallyKeyOf(runde, item);
+            if (k && state[runde].tally.hasOwnProperty(k)) state[runde].tally[k]++;
+        });
+    }
     state[runde].curStreak = 0;
-    state[runde].tally = emptyTally(runde);
-    DRILL[runde].forEach(function(item) {
-        var k = tallyKeyOf(runde, item);
-        if (k && state[runde].tally.hasOwnProperty(k)) state[runde].tally[k]++;
-    });
     updateProgress(runde);
     updateStreak(runde);
     updateTally(runde);
@@ -1123,11 +1405,13 @@ function resetRunde(runde) {
     document.getElementById('count-' + runde).textContent = '0';
     document.getElementById('bar-' + runde).style.width = '0%';
     updateTally(runde);
-    renderCards(runde);
+    if (runde === 1) renderKonj(runde);
+    else renderCards(runde);
     document.getElementById('ende-' + runde).classList.remove('show');
 }
 
-[1,2,3].forEach(function(r) { renderCards(r); });
+renderKonj(1);
+[2,3,4].forEach(function(r) { renderCards(r); });
 
 </script>
 </body>
