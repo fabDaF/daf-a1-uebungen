@@ -406,6 +406,24 @@ h2 {
 .pf-chip[data-cat="s"]   { background: #ffedd5; border-color: #ea580c; color: #9a3412; }
 .pf-chip[data-cat="nil"] { background: #dcfce7; border-color: #16a34a; color: #14532d; }
 
+.pf-arrow {
+    font-size: 1.2em;
+    color: #9ca3af;
+    margin: 0 0.2em;
+    font-weight: 700;
+    align-self: center;
+}
+.pf-chip.pf-chip-plural {
+    background: #f5f3ff;
+    border: 2px solid #c4b5fd;
+    color: #5b21b6;
+}
+.pf-chip.pf-chip-plural .pf-word strong {
+    color: #4a148c;
+    font-style: normal;
+    font-weight: 700;
+}
+
 .cat-badge {
     display: inline-flex;
     align-items: center;
@@ -956,7 +974,6 @@ function renderCards(runde) {
 
         var satzHtml =
             escapeHtml(item.pre) +
-            '<span class="plural-article">die</span> ' +
             '<input class="blank" type="text" ' +
                 'data-ans="' + escapeAttr(item.p) + '" ' +
                 'data-role="plural" ' +
@@ -972,6 +989,11 @@ function renderCards(runde) {
                     '<span class="pf-emoji">' + (item.e || '') + '</span>' +
                     '<span class="pf-label">Singular</span>' +
                     '<span class="pf-word">' + escapeHtml(item.sing) + '</span>' +
+                '</span>' +
+                '<span class="pf-arrow">→</span>' +
+                '<span class="pf-chip pf-chip-plural">' +
+                    '<span class="pf-label">Plural</span>' +
+                    '<span class="pf-word"><strong>die</strong> …</span>' +
                 '</span>' +
                 '<span class="cat-badge" data-cat="' + escapeAttr(item.k) + '">' + escapeHtml(catLabel(item)) + '</span>' +
             '</div>' +
