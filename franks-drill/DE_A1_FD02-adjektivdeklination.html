@@ -341,6 +341,37 @@ h2 {
 .dekl-chip.adj { color: #7c3aed; font-style: italic; }
 .dekl-arrow { color: #9ca3af; font-size: 1.1em; }
 
+/* Drei-Pill (Welle 3): Genus + Kasus + Bestimmtheit als Variablen-Mapping */
+.var-pills {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+    align-items: center;
+}
+.gen-pill, .kas-pill, .bst-pill {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 10px;
+    font-size: 0.78em;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    vertical-align: middle;
+    border: 1px solid;
+    text-transform: none;
+}
+.gen-pill[data-g="m"]  { background:#eff6ff; color:#1e3a8a; border-color:#bfdbfe; }
+.gen-pill[data-g="f"]  { background:#fdf2f8; color:#9d174d; border-color:#fbcfe8; }
+.gen-pill[data-g="n"]  { background:#f0fdf4; color:#14532d; border-color:#bbf7d0; }
+.gen-pill[data-g="pl"] { background:#fffbeb; color:#92400e; border-color:#fde68a; }
+.kas-pill[data-k="nom"] { background:#f5f3ff; color:#4a148c; border-color:#d8b4fe; }
+.kas-pill[data-k="akk"] { background:#fef3c7; color:#92400e; border-color:#fde68a; }
+.kas-pill[data-k="dat"] { background:#dbeafe; color:#1e3a8a; border-color:#bfdbfe; }
+.bst-pill[data-b="best"]   { background:#dcfce7; color:#14532d; border-color:#bbf7d0; }
+.bst-pill[data-b="unbest"] { background:#fee2e2; color:#991b1b; border-color:#fecaca; }
+.bst-pill[data-b="poss"]   { background:#ede9fe; color:#5b21b6; border-color:#c4b5fd; }
+.bst-pill[data-b="null"]   { background:#f3f4f6; color:#374151; border-color:#d1d5db; }
+
 .dekl-satz {
     font-size: 1.15em;
     line-height: 2.0;
@@ -516,7 +547,7 @@ input.blank.wrong {
 
     <div class="drill-explain">
         <h3>Wie funktioniert der Drill?</h3>
-        <p>Jede Karte zeigt dir alles, was du wissen musst: ein <strong>Emoji</strong> für die Bedeutung, den <strong>Artikel</strong> (der · die · das · die Pl.) und das <strong>Nomen</strong>. Daneben steht das Adjektiv in der Grundform. Du tippst dann nur noch <em>mein / meine</em> in die erste Lücke und das <em>Adjektiv mit der passenden Endung</em> in die zweite. Beispiel: 👨 <strong>der Vater</strong> + <em>alt</em> → „Das ist <strong>mein alter</strong> Vater."</p>
+        <p>Jede Karte zeigt dir alles, was du wissen musst: ein <strong>Emoji</strong> für die Bedeutung, den <strong>Artikel</strong> (der · die · das · die Pl.) und das <strong>Nomen</strong>. Daneben steht das Adjektiv in der Grundform. Du tippst dann nur noch <em>mein / meine</em> in die erste Lücke und das <em>Adjektiv mit der passenden Endung</em> in die zweite. Beispiel: 👨 <strong>der Vater</strong> + <em>alt</em> → „Das ist <strong>mein alter</strong> Vater.“</p>
         <p>Stimmt ein Wort, wird es grün und der Cursor springt automatisch ins nächste Feld — kein Prüfen-Knopf, kein Klicken. Der <strong>Kartenrand und der Hintergrund des Nomen-Chips</strong> sind von Anfang an in Genus-Farbe: <span style="color:#2563eb;font-weight:700">blau</span> = der, <span style="color:#db2777;font-weight:700">pink</span> = die, <span style="color:#059669;font-weight:700">grün</span> = das, <span style="color:#7c3aed;font-weight:700">lila</span> = die (Plural). So hast du Artikel, Farbe und Symbol zugleich im Blick — und kannst dich auf die Endung konzentrieren.</p>
 
         <div class="genus-legend">
@@ -765,6 +796,16 @@ function getGenusLabel(g) {
     if (g === "n") return "das";
     return "die (Pl.)";
 }
+function getGenusPillLabel(g) {
+    if (g === "m") return "m";
+    if (g === "f") return "f";
+    if (g === "n") return "n";
+    return "Pl.";
+}
+// FD02-konstante Variablen: alle Items im Nominativ (Subjektposition nach "Das ist/sind ..."),
+// Possessiv "mein-" mit unbestimmt-Endung. Variabel: nur das Genus.
+var KAS_FIXED = "nom";
+var BST_FIXED = "poss";
 
 // ----- Section-Switch -----
 function showSection(idx) {
@@ -803,6 +844,11 @@ function renderCards(runde) {
 
         card.innerHTML =
             '<div class="dekl-badge">#' + (idx+1) + '</div>' +
+            '<div class="var-pills">' +
+                '<span class="gen-pill" data-g="' + item.g + '">' + escapeHtml(getGenusPillLabel(item.g)) + '</span>' +
+                '<span class="kas-pill" data-k="' + KAS_FIXED + '">Nom</span>' +
+                '<span class="bst-pill" data-b="' + BST_FIXED + '">Possessiv (mein-)</span>' +
+            '</div>' +
             '<div class="dekl-inputs">' +
                 '<span class="dekl-chip noun" data-genus="' + item.g + '">' +
                     '<span class="noun-emoji">' + (item.e || '') + '</span>' +
