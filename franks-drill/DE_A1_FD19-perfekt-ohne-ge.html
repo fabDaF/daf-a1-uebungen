@@ -480,17 +480,17 @@ input.blank.wrong {
 }
 
 /* === Doppel-Lücke: visuelle Differenzierung der zwei Lücken (FD47-Pattern) === */
-/* Erste Lücke (Hilfsverb / konjugiertes Verb) — orange */
+/* Standardschrift in Inputs bleibt grau (color:#333 vom Basis-input.blank).
+   Nur die Unterstrich-Farbe differenziert Aux/Stem (orange) und PP/Prefix (blau).
+   Schriftfarben dürfen NICHT orange/blau sein — der Schreiber liest das sonst
+   als „falsch" (Rot-Assoziation). Grün/Rot bleibt für correct/wrong reserviert. */
 input.blank.aux-input,
 input.blank.stem-input {
     border-bottom-color: #ea580c;
-    color: #9a3412;
 }
-/* Zweite Lücke (Partizip / Präfix) — blau */
 input.blank.pp-input,
 input.blank.prefix-input {
     border-bottom-color: #2563eb;
-    color: #1e3a8a;
 }
 /* Korrekt-Zustand: grün übersteuert */
 input.blank.aux-input.correct,
@@ -644,8 +644,8 @@ input.blank.prefix-input.wrong {
 <div class="section active" id="sec-0">
     <div class="drill-hero">
         <span class="hero-emoji">⏮️</span>
-        <h2>Kein „ge-" — die drei Verb-Gruppen ohne Präfix-Perfekt.</h2>
-        <p>Drei Verb-Gruppen bilden das Partizip II <strong>ohne ge-</strong>: Verben auf <em>-ieren</em> (<em>telefoniert, studiert</em>), untrennbare Verben mit be-/ver-/er-/ent-/emp-/ge-/zer- (<em>besucht, verstanden</em>) und die gemischten Verben wie <em>denken → gedacht</em> (die ziehen ge- an, aber haben einen Vokalwechsel — die große Falle am Schluss). 48 Sätze in drei Runden.</p>
+        <h2>Kein „ge-" — die zwei Verb-Gruppen ohne Präfix-Perfekt.</h2>
+        <p>Zwei Verb-Gruppen bilden das Partizip II <strong>ohne ge-</strong>: Verben auf <em>-ieren</em> (<em>telefoniert, studiert</em>) und untrennbare Verben mit be-/ver-/er-/ent-/emp-/ge-/zer- (<em>besucht, verstanden</em>). Zum Abschluss kommt der Kontrast — die gemischten Verben (<em>denken → gedacht</em>): hier <strong>bleibt</strong> ge-, dazu wechselt der Vokal. Die große Falle. 48 Sätze in drei Runden.</p>
     </div>
 
     <div class="drill-explain">
