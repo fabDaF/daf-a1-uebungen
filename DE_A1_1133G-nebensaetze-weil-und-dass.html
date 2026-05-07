@@ -292,6 +292,7 @@ input.blank.wrong   { border-color: #e74c3c; background: #ffebee; }
     </p>
     <ul class="luecken-list" id="luecken-container"></ul>
     <div class="btn-row">
+      <button class="btn btn-show" onclick="showLoesung2()">Lösungen</button>
       <button class="btn btn-reset" onclick="resetLuecken()">&#8635; Neu starten</button>
     </div>
   </div>
@@ -306,6 +307,7 @@ input.blank.wrong   { border-color: #e74c3c; background: #ffebee; }
     </div>
     <div id="satzbau-container"></div>
     <div class="btn-row">
+      <button class="btn btn-show" onclick="showLoesungSatzbau()">Lösungen</button>
       <button class="btn btn-reset" onclick="resetSatzbau()">&#8635; Neu starten</button>
     </div>
   </div>
@@ -448,24 +450,32 @@ function renderLuecken(){
     })(i);
   });
 }
-function resetLuecken(){timerResetOne(2);(function(){var _el=document.getElementById('score2'); if(_el)_el.textContent='0';})()renderLuecken();}
+function showLoesung2(){
+  document.querySelectorAll('#luecken-container input.blank').forEach(function(inp){
+    inp.value=inp.dataset.answer;
+    inp.classList.remove('wrong');
+    inp.classList.add('correct');
+  });
+  updateScore2();
+}
+function resetLuecken(){timerResetOne(2);(function(){var _el=document.getElementById('score2'); if(_el)_el.textContent='0';})();renderLuecken();}
 /* SATZBAU */
 var SATZBAU=[
-  {hint:'Satz 1',parts:['Er','bleibt','zu','Hause',',','weil','er','m\u00fcde','ist'],valid:[['Er','bleibt','zu','Hause',',','weil','er','m\u00fcde','ist']]},
-  {hint:'Satz 2',parts:['Ich','finde',',','dass','die','Oper','fantastisch','ist'],valid:[['Ich','finde',',','dass','die','Oper','fantastisch','ist']]},
-  {hint:'Satz 3',parts:['Sie','ruft','an',',','weil','sie','die','Adresse','nicht','kennt'],valid:[['Sie','ruft','an',',','weil','sie','die','Adresse','nicht','kennt']]},
-  {hint:'Satz 4',parts:['Er','ist','sicher',',','dass','er','die','Pr\u00fcfung','besteht'],valid:[['Er','ist','sicher',',','dass','er','die','Pr\u00fcfung','besteht']]},
-  {hint:'Satz 5',parts:['Weil','er','m\u00fcde','ist',',','bleibt','er','zu','Hause'],valid:[['Weil','er','m\u00fcde','ist',',','bleibt','er','zu','Hause']]},
-  {hint:'Satz 6',parts:['Wir','gehen','nicht',',','weil','es','regnet'],valid:[['Wir','gehen','nicht',',','weil','es','regnet']]},
-  {hint:'Satz 7',parts:['Dass','sie','kommt',',','freut','mich','sehr'],valid:[['Dass','sie','kommt',',','freut','mich','sehr']]},
-  {hint:'Satz 8',parts:['Er','l\u00e4uft','schnell',',','weil','der','Zug','bald','abf\u00e4hrt'],valid:[['Er','l\u00e4uft','schnell',',','weil','der','Zug','bald','abf\u00e4hrt']]}
+  {hint:'Hauptsatz + weil',parts:['er','bleibt','zu','Hause',',','weil','er','m\u00fcde','ist'],valid:[['er','bleibt','zu','Hause',',','weil','er','m\u00fcde','ist']]},
+  {hint:'Hauptsatz + dass',parts:['ich','finde',',','dass','die','Oper','fantastisch','ist'],valid:[['ich','finde',',','dass','die','Oper','fantastisch','ist']]},
+  {hint:'Hauptsatz + weil',parts:['sie','ruft','an',',','weil','sie','die','Adresse','nicht','kennt'],valid:[['sie','ruft','an',',','weil','sie','die','Adresse','nicht','kennt']]},
+  {hint:'Hauptsatz + dass',parts:['er','ist','sicher',',','dass','er','die','Pr\u00fcfung','besteht'],valid:[['er','ist','sicher',',','dass','er','die','Pr\u00fcfung','besteht']]},
+  {hint:'weil + Hauptsatz',parts:['weil','er','m\u00fcde','ist',',','bleibt','er','zu','Hause'],valid:[['weil','er','m\u00fcde','ist',',','bleibt','er','zu','Hause']]},
+  {hint:'Hauptsatz + weil',parts:['wir','gehen','nicht',',','weil','es','regnet'],valid:[['wir','gehen','nicht',',','weil','es','regnet']]},
+  {hint:'dass + Hauptsatz',parts:['dass','sie','kommt',',','freut','mich','sehr'],valid:[['dass','sie','kommt',',','freut','mich','sehr']]},
+  {hint:'Hauptsatz + weil',parts:['er','l\u00e4uft','schnell',',','weil','der','Zug','bald','abf\u00e4hrt'],valid:[['er','l\u00e4uft','schnell',',','weil','der','Zug','bald','abf\u00e4hrt']]}
 ];
 var draggedChip=null;
 function shuffle(arr){var a=arr.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
 function makeChip(word){
   var chip=document.createElement('div');
   chip.className='chip';chip.textContent=word;chip.dataset.orig=word;chip.draggable=true;
-  chip.addEventListener('dragstart',function(e){ timerAutoStart(2); draggedChip=chip;e.dataTransfer.setData('text/plain','');setTimeout(function(){ timerAutoStart(2); chip.style.opacity='0.4';},0);});
+  chip.addEventListener('dragstart',function(e){ timerAutoStart(3); draggedChip=chip;e.dataTransfer.setData('text/plain','');setTimeout(function(){ timerAutoStart(3); chip.style.opacity='0.4';},0);});
   chip.addEventListener('dragend',function(){chip.style.opacity='';draggedChip=null;});
   return chip;
 }
@@ -536,7 +546,17 @@ function initSatzbau(){
     registerZone(bank,idx);registerZone(row,idx);
   });
 }
-function resetSatzbau(){timerResetOne(3);(function(){var _el=document.getElementById('score3'); if(_el)_el.textContent='0';})()initSatzbau();}
+function showLoesungSatzbau(){
+  SATZBAU.forEach(function(ex,idx){
+    var bank=document.getElementById('sb-bank-'+idx);
+    var row=document.getElementById('sb-row-'+idx);
+    if(!bank||!row)return;
+    bank.innerHTML='';row.innerHTML='';
+    ex.valid[0].forEach(function(word){row.appendChild(makeChip(word));});
+    updateCaps(idx);checkSb(idx);
+  });
+}
+function resetSatzbau(){timerResetOne(3);(function(){var _el=document.getElementById('score3'); if(_el)_el.textContent='0';})();initSatzbau();}
 /* Tap-to-Select (Mobile) */
 (function(){
   var sel=null;
