@@ -106,6 +106,28 @@ input.blank.wrong { border-bottom-color: #e74c3c; background: #fdeaea; }
 }
 .tab-banner { width: 100%; max-height: 180px; object-fit: cover; border-radius: 10px; margin-bottom: 18px; box-shadow: 0 2px 8px rgba(0,0,0,0.12); }
 @media (max-width: 600px) { .tab-banner { max-height: 120px; } }
+
+/* ---- SEC-0: ENTDECKEN-TAB ---- */
+.entdeck-intro { background: #f0f4ff; border-left: 4px solid #667eea; border-radius: 0 8px 8px 0; padding: 14px 18px; margin-bottom: 20px; }
+.entdeck-intro p { margin: 3px 0; font-size: 1.0em; line-height: 1.8; }
+span.hl { background: #fff3cd; color: #764ba2; font-weight: 700; padding: 1px 5px; border-radius: 4px; }
+.progress-dots { display: flex; gap: 8px; margin-bottom: 18px; align-items: center; }
+.pdot { width: 13px; height: 13px; border-radius: 50%; background: #ddd; transition: background 0.3s; }
+.pdot.done { background: #27ae60; }
+.mc-step { display: none; margin-bottom: 20px; animation: fadeIn 0.3s; }
+.mc-step.active { display: block; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+.mc-step h4 { font-size: 1.0em; font-weight: 600; color: #333; margin-bottom: 12px; line-height: 1.5; }
+.mc-feedback { font-size: 0.88em; font-weight: 600; margin-top: 8px; min-height: 1.4em; padding: 4px 0; }
+.mc-feedback.ok  { color: #27ae60; }
+.mc-feedback.err { color: #e74c3c; }
+.regel-karte { display: none; background: #f0f4ff; border: 2px solid #667eea; border-radius: 12px; padding: 18px 22px; margin-top: 22px; animation: fadeIn 0.4s; }
+.regel-karte h3 { color: #667eea; font-family: Georgia, serif; font-size: 1.05em; margin-bottom: 14px; }
+.regel-karte table { width: 100%; border-collapse: collapse; margin-bottom: 14px; font-size: 0.9em; }
+.regel-karte th { background: #667eea; color: white; padding: 7px 12px; text-align: left; font-weight: 600; }
+.regel-karte td { padding: 7px 12px; border-bottom: 1px solid #dde; vertical-align: top; }
+.regel-karte tr:last-child td { border-bottom: none; }
+.rk-example { font-size: 0.88em; color: #555; line-height: 1.9; background: white; border-radius: 8px; padding: 10px 14px; margin-top: 4px; }
 </style>
 </head>
 <body>
