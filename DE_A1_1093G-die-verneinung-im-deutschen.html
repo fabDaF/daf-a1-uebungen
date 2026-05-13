@@ -1150,7 +1150,6 @@ buildLuecken('kein-container', KEIN_DATA, 3, 'kein-score');
 buildLuecken('mix-container', MIX_DATA, 4, 'mix-score');
 initSatzbau();
 initWortschatz();
-initSchreibwerkstatt();
 /* ═══════════════════════════════════════════════════════════════════
    SCHREIBWERKSTATT  A1 · 1093G
    ═══════════════════════════════════════════════════════════════════ */
@@ -1314,6 +1313,7 @@ function schreibSendenAlle() {
   ungesandt.forEach(function(nr){ schreibSendenEinzeln(nr); });
 }
 
+initSchreibwerkstatt();
 loadBestTimes();
 
 /* ── Tap-to-Select / Tap-to-Place (Mobile Satzbau) ─────────────────── */
