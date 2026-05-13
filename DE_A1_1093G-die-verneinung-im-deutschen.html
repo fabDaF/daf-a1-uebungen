@@ -434,7 +434,73 @@ span.hl { background: #fff3cd; color: #764ba2; font-weight: 700; padding: 1px 5p
     <input type="text" id="sw-name" placeholder="Vorname Nachname" oninput="schreibNameGeaendert()">
   </div>
 
-  <div id="sw-container"></div>
+  <div id="sw-container">
+
+    <div class="schreib-karte" id="skarte-1">
+      <h3>Aufgabe 1: Ich nicht</h3>
+      <p class="schreib-frage">Schreib einen Satz &uuml;ber dich mit &bdquo;nicht&ldquo;. Was machst du nicht? (1&ndash;15 W&ouml;rter)</p>
+      <p class="schreib-beispiel">Beispiel: &bdquo;Ich singe nicht gut.&ldquo;</p>
+      <textarea class="schreib-mini-textarea" id="sw-text-1" data-aufgabe="1" oninput="schreibSpeichern(1)"></textarea>
+      <div class="schreib-btn-row">
+        <button class="schreib-btn" onclick="schreibSendenEinzeln(1)">&#128424; An Frank senden</button>
+        <span id="sw-status-1" class="schreib-gesendet"></span>
+      </div>
+      <div id="sw-fb-1"></div>
+    </div>
+
+    <div class="schreib-karte" id="skarte-2">
+      <h3>Aufgabe 2: Kein, keine, kein</h3>
+      <p class="schreib-frage">Schreib einen Satz mit &bdquo;kein&ldquo;, &bdquo;keine&ldquo; oder &bdquo;kein&ldquo;. Was hast du nicht? (1&ndash;15 W&ouml;rter)</p>
+      <p class="schreib-beispiel">Beispiel: &bdquo;Ich habe keine Zeit.&ldquo;</p>
+      <textarea class="schreib-mini-textarea" id="sw-text-2" data-aufgabe="2" oninput="schreibSpeichern(2)"></textarea>
+      <div class="schreib-btn-row">
+        <button class="schreib-btn" onclick="schreibSendenEinzeln(2)">&#128424; An Frank senden</button>
+        <span id="sw-status-2" class="schreib-gesendet"></span>
+      </div>
+      <div id="sw-fb-2"></div>
+    </div>
+
+    <div class="schreib-karte" id="skarte-3">
+      <h3>Aufgabe 3: Nein!</h3>
+      <p class="schreib-frage">Antworte mit &bdquo;Nein&ldquo; auf diese Frage: Hast du ein Auto? Schreib einen ganzen Satz. (1&ndash;15 W&ouml;rter)</p>
+      <p class="schreib-beispiel">Beispiel: &bdquo;Nein, ich habe kein Auto.&ldquo;</p>
+      <textarea class="schreib-mini-textarea" id="sw-text-3" data-aufgabe="3" oninput="schreibSpeichern(3)"></textarea>
+      <div class="schreib-btn-row">
+        <button class="schreib-btn" onclick="schreibSendenEinzeln(3)">&#128424; An Frank senden</button>
+        <span id="sw-status-3" class="schreib-gesendet"></span>
+      </div>
+      <div id="sw-fb-3"></div>
+    </div>
+
+    <div class="schreib-karte" id="skarte-4">
+      <h3>Aufgabe 4: Drei Verneinungen</h3>
+      <p class="schreib-frage">Schreib drei kurze S&auml;tze: Verneine drei Dinge aus deinem Alltag. Benutze &bdquo;nicht&ldquo; oder &bdquo;kein(e)&ldquo;. (3&ndash;10 W&ouml;rter pro Satz)</p>
+      <p class="schreib-beispiel">Beispiel: &bdquo;Ich schlafe nicht viel. Ich habe keine Katze. Ich spreche nicht Franz&ouml;sisch.&ldquo;</p>
+      <textarea class="schreib-mini-textarea" id="sw-text-4" data-aufgabe="4" oninput="schreibSpeichern(4)"></textarea>
+      <div class="schreib-btn-row">
+        <button class="schreib-btn" onclick="schreibSendenEinzeln(4)">&#128424; An Frank senden</button>
+        <span id="sw-status-4" class="schreib-gesendet"></span>
+      </div>
+      <div id="sw-fb-4"></div>
+    </div>
+
+    <div class="schreib-karte" id="skarte-5">
+      <h3>Aufgabe 5: Mini-Dialog</h3>
+      <p class="schreib-frage">Schreib einen Mini-Dialog: eine Frage und eine negative Antwort mit &bdquo;nicht&ldquo; oder &bdquo;kein(e)&ldquo;. (1&ndash;15 W&ouml;rter pro Satz)</p>
+      <p class="schreib-beispiel">Beispiel: &bdquo;&ndash; Trinkst du Kaffee? &ndash; Nein, ich trinke keinen Kaffee.&ldquo;</p>
+      <textarea class="schreib-mini-textarea" id="sw-text-5" data-aufgabe="5" oninput="schreibSpeichern(5)"></textarea>
+      <div class="schreib-btn-row">
+        <button class="schreib-btn" onclick="schreibSendenEinzeln(5)">&#128424; An Frank senden</button>
+        <span id="sw-status-5" class="schreib-gesendet"></span>
+      </div>
+      <div id="sw-fb-5"></div>
+    </div>
+
+    <div class="schreib-sammel">
+      <button class="schreib-sammel-btn" onclick="schreibSendenAlle()">&#128424; Alle noch nicht gesendeten Antworten schicken</button>
+    </div>
+
+  </div><!-- /sw-container -->
   </div>
 
   <!-- ===== TAB 7: WORTSCHATZ ===== -->
@@ -1169,33 +1235,18 @@ var SCHREIB_AUFGABEN = [
 ];
 
 function initSchreibwerkstatt() {
+  /* Karten sind statisch im HTML — nur localStorage-Restore */
   var savedName = localStorage.getItem('schreibwerkstatt_' + SW_NIVEAU + '_' + SW_CODE + '_name') || '';
   var nameEl = document.getElementById('sw-name');
   if (nameEl && savedName) nameEl.value = savedName;
-  var container = document.getElementById('sw-container');
-  if (!container) return;
-  var html = '';
-  SCHREIB_AUFGABEN.forEach(function(a) {
-    var savedText = localStorage.getItem('schreibwerkstatt_' + SW_NIVEAU + '_' + SW_CODE + '_' + a.nr) || '';
-    var wasSent   = localStorage.getItem('schreibwerkstatt_' + SW_NIVEAU + '_' + SW_CODE + '_sent_' + a.nr) === '1';
-    var escaped   = savedText.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-    html += '<div class="schreib-karte" id="skarte-' + a.nr + '">' +
-      '<h3>Aufgabe ' + a.nr + ': ' + a.titel + '</h3>' +
-      '<p class="schreib-frage">' + a.frage + '</p>' +
-      '<p class="schreib-beispiel">' + a.beispiel + '</p>' +
-      '<textarea class="schreib-mini-textarea" id="sw-text-' + a.nr + '" data-aufgabe="' + a.nr + '" ' +
-        'oninput="schreibSpeichern(' + a.nr + ')">' + escaped + '</textarea>' +
-      '<div class="schreib-btn-row">' +
-        '<button class="schreib-btn" onclick="schreibSendenEinzeln(' + a.nr + ')">&#128424; An Frank senden</button>' +
-        '<span id="sw-status-' + a.nr + '" class="schreib-gesendet">' + (wasSent ? '&#10003; Gesendet' : '') + '</span>' +
-      '</div>' +
-      '<div id="sw-fb-' + a.nr + '"></div>' +
-    '</div>';
-  });
-  html += '<div class="schreib-sammel">' +
-    '<button class="schreib-sammel-btn" onclick="schreibSendenAlle()">&#128424; Alle noch nicht gesendeten Antworten schicken</button>' +
-  '</div>';
-  container.innerHTML = html;
+  for (var i = 1; i <= 5; i++) {
+    var saved = localStorage.getItem('schreibwerkstatt_' + SW_NIVEAU + '_' + SW_CODE + '_' + i) || '';
+    var ta = document.getElementById('sw-text-' + i);
+    if (ta && saved) ta.value = saved;
+    var sent = localStorage.getItem('schreibwerkstatt_' + SW_NIVEAU + '_' + SW_CODE + '_sent_' + i) === '1';
+    var stEl = document.getElementById('sw-status-' + i);
+    if (stEl && sent) stEl.innerHTML = '&#10003; Gesendet';
+  }
 }
 
 function schreibNameGeaendert() {
