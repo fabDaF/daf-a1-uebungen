@@ -552,10 +552,11 @@ var TRAIN=[
   {w:'Station',a:'die'},{w:'Aquarium',a:'das'},{w:'Optimismus',a:'der'},{w:'Mannschaft',a:'die'}
 ];
 
-function show(i){
-  document.querySelectorAll('.sec').forEach(function(s,j){s.classList.toggle('active',i===j);});
-  document.querySelectorAll('.nb').forEach(function(b,j){b.classList.toggle('active',i===j);});
+function showSection(i){
+  document.querySelectorAll('.section').forEach(function(s,j){s.classList.toggle('active',i===j);});
+  document.querySelectorAll('.nav-btn').forEach(function(b,j){b.classList.toggle('active',i===j);});
 }
+function show(i){showSection(i);}
 function lc(inp,ans){
   var v=inp.value.trim().toLowerCase();
   inp.classList.remove('ok','no');
