@@ -412,7 +412,7 @@ var LUECKEN=[
   {vorsatz:'Er besteht die Pr\u00fcfung.',intro:'Er ist sicher,',b1:'dass',middle:'er die Pr\u00fcfung',b2:'besteht',after:'.'}
 ];
 function liveCheck(inp){
-  var val=inp.value.trim().toLowerCase();
+  var val=inp.value.trim();
   var ans=(inp.dataset.answer||'').toLowerCase();
   inp.classList.remove('correct','wrong');
   if(val.length===0)return;

@@ -358,13 +358,13 @@ function buildTzLuecken(){
     var nr=document.createElement('span');nr.className='nr';nr.textContent=d.id+'. ';row.appendChild(nr);
     d.segs.forEach(function(seg){
       if(seg.t!==undefined){row.appendChild(document.createTextNode(seg.t));}
-      else{var inp=document.createElement('input');inp.type='text';inp.className='luecke '+seg.sz;inp.dataset.ans=seg.b.toLowerCase();inp.addEventListener('input',function(){liveCheckTz(inp);timerAutoStart(1);});row.appendChild(inp);}
+      else{var inp=document.createElement('input');inp.type='text';inp.className='luecke '+seg.sz;inp.dataset.ans=seg.b;inp.addEventListener('input',function(){liveCheckTz(inp);timerAutoStart(1);});row.appendChild(inp);}
     });
     cont.appendChild(row);
   });
 }
 function liveCheckTz(inp){
-  var val=inp.value.trim().toLowerCase();
+  var val=inp.value.trim();
   if(val===inp.dataset.ans){inp.classList.add('ok');inp.classList.remove('err');}else inp.classList.remove('ok','err');
   var all=document.querySelectorAll('#tz-container input');var ok=true;
   all.forEach(function(i){if(!i.classList.contains('ok'))ok=false;});
@@ -482,13 +482,13 @@ function buildAmsLuecken(){
     var nr=document.createElement('span');nr.className='nr';nr.textContent=d.id+'. ';row.appendChild(nr);
     d.segs.forEach(function(seg){
       if(seg.t!==undefined){row.appendChild(document.createTextNode(seg.t));}
-      else{var inp=document.createElement('input');inp.type='text';inp.className='luecke '+seg.sz;inp.dataset.ans=seg.b.toLowerCase();inp.addEventListener('input',function(){liveCheckAms(inp);timerAutoStart(4);});row.appendChild(inp);}
+      else{var inp=document.createElement('input');inp.type='text';inp.className='luecke '+seg.sz;inp.dataset.ans=seg.b;inp.addEventListener('input',function(){liveCheckAms(inp);timerAutoStart(4);});row.appendChild(inp);}
     });
     cont.appendChild(row);
   });
 }
 function liveCheckAms(inp){
-  var val=inp.value.trim().toLowerCase();
+  var val=inp.value.trim();
   if(val===inp.dataset.ans){inp.classList.add('ok');inp.classList.remove('err');}else inp.classList.remove('ok','err');
   var all=document.querySelectorAll('#ams-container input');var ok=true;
   all.forEach(function(i){if(!i.classList.contains('ok'))ok=false;});
@@ -596,13 +596,13 @@ function wortInit(){
     var row=document.createElement('div');row.className='wort-row';
     var badge=document.createElement('span');badge.className='wort-badge';badge.textContent='#'+w.id;
     var en=document.createElement('span');en.className='wort-en';en.textContent=w.en;
-    var inp=document.createElement('input');inp.type='text';inp.className='wort-input';inp.placeholder='Deutsch …';inp.dataset.ans=w.de.toLowerCase();inp.dataset.display=w.de;
+    var inp=document.createElement('input');inp.type='text';inp.className='wort-input';inp.placeholder='Deutsch …';inp.dataset.ans=w.de;inp.dataset.display=w.de;
     inp.addEventListener('input',function(){liveCheckWort(inp);timerAutoStart(6);});
     row.appendChild(badge);row.appendChild(en);row.appendChild(inp);cont.appendChild(row);
   });
 }
 function liveCheckWort(inp){
-  var val=inp.value.trim().toLowerCase();
+  var val=inp.value.trim();
   if(val===inp.dataset.ans){inp.classList.add('ok');inp.classList.remove('err');}else inp.classList.remove('ok','err');
   var all=document.querySelectorAll('#wort-container input');var ok=0;all.forEach(function(i){if(i.classList.contains('ok'))ok++;});
   document.getElementById('wort-score').innerHTML=ok+' / '+all.length+' richtig';

@@ -549,7 +549,7 @@ function showZahlenLoesung() {
     var total = 0;
     document.querySelectorAll('.zahlen-inp').forEach(function(inp) {
         total++;
-        var user = inp.value.trim().toLowerCase();
+        var user = inp.value.trim();
         var answer = inp.dataset.answer.toLowerCase();
         inp.classList.remove('correct', 'wrong');
         if (user === answer) {

@@ -462,7 +462,7 @@ function showWSLoesung() {
         total++;
         const next = inp.nextElementSibling;
         if (next && next.classList.contains('correction-hint')) next.remove();
-        const user = inp.value.trim().toLowerCase();
+        const user = inp.value.trim();
         const answer = inp.dataset.answer.toLowerCase();
         if (user === answer) {
             inp.classList.remove('wrong');
@@ -1445,7 +1445,7 @@ function showLueckenLoesung() {
     document.querySelectorAll('.letter-input').forEach(inp => {
         total++;
         inp.classList.remove('correct', 'wrong');
-        const user = inp.value.trim().toLowerCase();
+        const user = inp.value.trim();
         const answer = inp.dataset.answer.toLowerCase();
         if (user === answer) {
             inp.classList.add('correct');

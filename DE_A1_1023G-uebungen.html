@@ -910,7 +910,7 @@ function showKonjLoesung() {
     var total = 0;
     document.querySelectorAll('#sec-3 .konj-blank').forEach(function(inp) {
         total++;
-        var user = inp.value.trim().toLowerCase();
+        var user = inp.value.trim();
         var answer = inp.dataset.answer.toLowerCase();
         if (user === answer) {
             inp.classList.remove('wrong'); inp.classList.add('correct');

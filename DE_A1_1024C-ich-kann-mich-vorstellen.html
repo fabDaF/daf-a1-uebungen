@@ -820,7 +820,7 @@ function showVerbenLoesung() {
     var total = 0;
     document.querySelectorAll('#sec-1 .verb-blank').forEach(function(inp) {
         total++;
-        var user = inp.value.trim().toLowerCase();
+        var user = inp.value.trim();
         var answer = inp.dataset.answer.toLowerCase();
         var next = inp.nextElementSibling;
         if (next && next.classList.contains('correction-hint')) next.remove();
@@ -918,7 +918,7 @@ function showVorstellenLoesung() {
     var total = 0;
     document.querySelectorAll('#sec-2 .vorst-blank').forEach(function(inp) {
         total++;
-        var user = inp.value.trim().toLowerCase();
+        var user = inp.value.trim();
         var answer = inp.dataset.answer.toLowerCase();
         var next = inp.nextElementSibling;
         if (next && next.classList.contains('correction-hint')) next.remove();
@@ -1016,7 +1016,7 @@ function showPersonenLoesung() {
     var total = 0;
     document.querySelectorAll('#sec-3 .pers-blank').forEach(function(inp) {
         total++;
-        var user = inp.value.trim().toLowerCase();
+        var user = inp.value.trim();
         var answer = inp.dataset.answer.toLowerCase();
         var next = inp.nextElementSibling;
         if (next && next.classList.contains('correction-hint')) next.remove();

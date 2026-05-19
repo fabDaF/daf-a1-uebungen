@@ -558,7 +558,7 @@ function showSection(i){
 }
 function show(i){showSection(i);}
 function lc(inp,ans){
-  var v=inp.value.trim().toLowerCase();
+  var v=inp.value.trim();
   inp.classList.remove('ok','no');
   if(!v)return;
   if(ans.startsWith(v)){if(v===ans)inp.classList.add('ok');}
@@ -566,7 +566,7 @@ function lc(inp,ans){
 }
 function lcEnd(inp,ans){
   // ans is like '-ig', '-ling', '-ismus' — accept with or without leading dash
-  var v=inp.value.trim().toLowerCase();
+  var v=inp.value.trim();
   inp.classList.remove('ok','no');
   if(!v)return;
   var norm=ans.toLowerCase();
@@ -604,7 +604,7 @@ function buildArtLive(id,words){
   });
 }
 function lcLive(inp){
-  var v=inp.value.trim().toLowerCase();
+  var v=inp.value.trim();
   var ans=inp.dataset.a;
   inp.classList.remove('ok','no');
   if(v.length===0) return;
@@ -615,7 +615,7 @@ function lcLive(inp){
 function pruef(gridId,bannerId){
   var ok=0,total=0;
   document.querySelectorAll('#'+gridId+' .ai').forEach(function(inp){
-    var v=inp.value.trim().toLowerCase();
+    var v=inp.value.trim();
     inp.classList.remove('ok','no');
     total++;
     if(v===inp.dataset.a){inp.classList.add('ok');ok++;}
@@ -674,7 +674,7 @@ function pmpPruef(){
   document.querySelectorAll('#pmp_grid .pmp-inp').forEach(function(inp){
     total++;
     inp.classList.remove('ok','no');
-    if(inp.value.trim().toLowerCase()===inp.dataset.a){ok++;inp.classList.add('ok');}
+    if(inp.value.trim()===inp.dataset.a){ok++;inp.classList.add('ok');}
     else inp.classList.add('no');
   });
   var b=document.getElementById('pmp_banner');

@@ -743,7 +743,7 @@ function showLueckenLoesung() {
     document.querySelectorAll('.luecken-list input.blank').forEach(function(inp) {
         var next = inp.nextElementSibling;
         if (next && next.classList.contains('correction-hint')) next.remove();
-        var user = inp.value.trim().toLowerCase();
+        var user = inp.value.trim();
         var answer = inp.dataset.answer.toLowerCase();
         if (user === answer) {
             inp.classList.remove('wrong');

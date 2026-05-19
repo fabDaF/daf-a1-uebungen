@@ -1243,7 +1243,7 @@ function makeVocabInput(cls, answer, tabIdx, lc) {
 }
 
 function liveCheckVocab(inp) {
-  var val = inp.dataset.lc ? inp.value.trim().toLowerCase() : inp.value.trim();
+  var val = inp.dataset.lc ? inp.value.trim() : inp.value.trim();
   var ans = inp.dataset.lc ? inp.dataset.answer.toLowerCase() : inp.dataset.answer;
   inp.classList.remove('correct','wrong');
   if (val.length === 0) return;

@@ -579,7 +579,7 @@ function initGapfillTab() {
 
 function liveCheck(inp) {
     const answer = inp.getAttribute('data-answer').toLowerCase();
-    const val    = inp.value.trim().toLowerCase();
+    const val    = inp.value.trim();
     inp.classList.remove('correct','incorrect','partial');
     if (val === '') return;
     if (val === answer) {
@@ -593,7 +593,7 @@ function liveCheck(inp) {
 
 function liveCheckBlur(inp) {
     const answer = inp.getAttribute('data-answer').toLowerCase();
-    const val    = inp.value.trim().toLowerCase();
+    const val    = inp.value.trim();
     inp.classList.remove('correct','incorrect','partial');
     if (val === '') return;
     inp.classList.add(val === answer ? 'correct' : 'incorrect');

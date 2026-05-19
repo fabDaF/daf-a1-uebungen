@@ -721,7 +721,7 @@ function showZahlen20Loesung() {
     var total = 0;
     document.querySelectorAll('#sec-0 .z20-inp').forEach(function(inp) {
         total++;
-        var user = inp.value.trim().toLowerCase();
+        var user = inp.value.trim();
         var answer = inp.dataset.answer.toLowerCase();
         var next = inp.nextElementSibling;
         if (next && next.classList.contains('zahl-hint')) next.remove();
@@ -783,7 +783,7 @@ function showZehnerLoesung() {
     var total = 0;
     document.querySelectorAll('#sec-1 .zehn-inp').forEach(function(inp) {
         total++;
-        var user = inp.value.trim().toLowerCase();
+        var user = inp.value.trim();
         var answer = inp.dataset.answer.toLowerCase();
         var next = inp.nextElementSibling;
         if (next && next.classList.contains('zahl-hint')) next.remove();
@@ -846,7 +846,7 @@ function showKombiLoesung() {
     var total = 0;
     document.querySelectorAll('#sec-2 .kombi-inp').forEach(function(inp) {
         total++;
-        var user = inp.value.trim().toLowerCase();
+        var user = inp.value.trim();
         var answer = inp.dataset.answer.toLowerCase();
         var next = inp.nextElementSibling;
         if (next && next.classList.contains('zahl-hint')) next.remove();

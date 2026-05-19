@@ -675,7 +675,7 @@ function initVocab() {
 function showVocabLoesung() {
     document.querySelectorAll('#vocabContainer input').forEach(function(inp) {
         var answer = inp.dataset.answer;
-        if (inp.value.trim().toLowerCase() === answer.toLowerCase()) {
+        if (inp.value.trim() === answer.toLowerCase()) {
             inp.classList.remove('wrong');
             inp.classList.add('correct');
         } else {

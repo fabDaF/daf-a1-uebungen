@@ -683,7 +683,7 @@ function mcCheck(step, btn, correct) {
 /* ========== LIVE CHECK ========== */
 
 function liveCheck(inp) {
-    var val = inp.value.trim().toLowerCase();
+    var val = inp.value.trim();
     var ans = (inp.dataset.answer || '').toLowerCase();
     inp.classList.remove('correct', 'wrong');
     if (val.length === 0) return;
@@ -853,7 +853,7 @@ function showLueckenLoesung(blankClass, tabN) {
         var answer = inp.dataset.answer;
         var next = inp.nextElementSibling;
         if (next && next.classList.contains('correction-hint')) next.remove();
-        if (inp.value.trim().toLowerCase() === answer.toLowerCase()) {
+        if (inp.value.trim() === answer.toLowerCase()) {
             inp.classList.remove('wrong'); inp.classList.add('correct');
         } else {
             inp.classList.add('wrong');

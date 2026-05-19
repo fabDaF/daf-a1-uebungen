@@ -563,7 +563,7 @@ function loadBestTimes(){for(var i=1;i<=6;i++){var v=localStorage.getItem(TIMER_
 
 /* ============================================================ LIVE CHECK ============================================================ */
 function liveCheck(inp){
-    var val=inp.value.trim().toLowerCase();
+    var val=inp.value.trim();
     var ans=(inp.dataset.answer||'').toLowerCase();
     inp.classList.remove('correct','wrong');
     if(!val.length)return;

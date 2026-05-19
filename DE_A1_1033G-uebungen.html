@@ -490,7 +490,7 @@ function showConjLoesung() {
     var total = 0;
     document.querySelectorAll('.conj-input').forEach(function(inp) {
         total++;
-        var user = inp.value.trim().toLowerCase();
+        var user = inp.value.trim();
         var answer = inp.dataset.answer.toLowerCase();
         var existing = inp.parentElement.querySelector('.conj-hint');
         if (existing) existing.remove();
@@ -586,7 +586,7 @@ function showLueckenLoesung() {
     var total = 0;
     document.querySelectorAll('input.blank').forEach(function(inp) {
         total++;
-        var user = inp.value.trim().toLowerCase();
+        var user = inp.value.trim();
         var answer = inp.dataset.answer.toLowerCase();
         var next = inp.nextElementSibling;
         if (next && next.classList.contains('correction-hint')) next.remove();

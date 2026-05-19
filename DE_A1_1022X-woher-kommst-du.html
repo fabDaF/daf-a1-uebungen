@@ -899,7 +899,7 @@ function showKonjLoesung() {
     var total = 0;
     document.querySelectorAll('.konj-blank').forEach(function(inp) {
         total++;
-        var user = inp.value.trim().toLowerCase();
+        var user = inp.value.trim();
         var answer = inp.dataset.answer.toLowerCase();
         var next = inp.nextElementSibling;
         if (next && next.classList.contains('correction-hint')) next.remove();
@@ -1107,7 +1107,7 @@ function showDialogLoesung() {
     var total = 0;
     document.querySelectorAll('.dialog-blank').forEach(function(inp) {
         total++;
-        var user = inp.value.trim().toLowerCase();
+        var user = inp.value.trim();
         var answer = inp.dataset.answer.toLowerCase();
         var next = inp.nextElementSibling;
         if (next && next.classList.contains('correction-hint')) next.remove();
@@ -1228,7 +1228,7 @@ function showKontinentLoesung() {
     var total = 0;
     document.querySelectorAll('#sec-4 .kont-blank').forEach(function(inp) {
         total++;
-        var user = inp.value.trim().toLowerCase();
+        var user = inp.value.trim();
         var answer = inp.dataset.answer.toLowerCase();
         var next = inp.nextElementSibling;
         if (next && next.classList.contains('correction-hint')) next.remove();

@@ -390,7 +390,7 @@ function checkLuecken(){
     let correct=0,total=0;
     document.querySelectorAll('#sec-2 input.blank').forEach(inp=>{
         inp.classList.remove('correct','wrong');
-        const user=inp.value.trim().toLowerCase();
+        const user=inp.value.trim();
         const answer=inp.dataset.answer.toLowerCase();
         total++;
         if(user===answer){inp.classList.add('correct');correct++;}
@@ -404,7 +404,7 @@ function showLueckenLoesung(){
     let total=0;
     document.querySelectorAll('#sec-2 input.blank').forEach(inp=>{
         total++;
-        const user=inp.value.trim().toLowerCase();
+        const user=inp.value.trim();
         const answer=inp.dataset.answer.toLowerCase();
         const next=inp.nextElementSibling;
         if(next&&next.classList.contains('correction-hint'))next.remove();

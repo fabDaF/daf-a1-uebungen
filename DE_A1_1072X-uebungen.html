@@ -601,7 +601,7 @@ function buildDialogLine(d, containerId){
     var inp=document.createElement('input');
     inp.type='text';
     inp.className='luecke '+b.sz;
-    inp.dataset.ans=b.ans.toLowerCase();
+    inp.dataset.ans=b.ans;
     inp.addEventListener('input',function(){ liveCheckDialog(inp); timerAutoStart(2); });
     w.appendChild(inp);
     txt.appendChild(w);
@@ -618,7 +618,7 @@ function buildDialogLine(d, containerId){
 }
 
 function liveCheckDialog(inp){
-  var val=inp.value.trim().toLowerCase();
+  var val=inp.value.trim();
   var ans=inp.dataset.ans;
   if(val===ans){ inp.classList.add('ok'); inp.classList.remove('err'); }
   else { inp.classList.remove('ok'); inp.classList.remove('err'); }
@@ -695,7 +695,7 @@ function buildLueckenTermin(){
         var inp=document.createElement('input');
         inp.type='text';
         inp.className='luecke '+seg.sz;
-        inp.dataset.ans=seg.b.toLowerCase();
+        inp.dataset.ans=seg.b;
         inp.addEventListener('input',function(){ liveCheckTermin(inp); timerAutoStart(3); });
         row.appendChild(inp);
       }
@@ -705,7 +705,7 @@ function buildLueckenTermin(){
 }
 
 function liveCheckTermin(inp){
-  var val=inp.value.trim().toLowerCase();
+  var val=inp.value.trim();
   if(val===inp.dataset.ans){ inp.classList.add('ok'); inp.classList.remove('err'); }
   else { inp.classList.remove('ok','err'); }
   var all=document.querySelectorAll('#termin-container input');
@@ -1043,7 +1043,7 @@ function wortInit(){
     inp.type='text';
     inp.className='wort-input';
     inp.placeholder='Deutsch …';
-    inp.dataset.ans=w.de.toLowerCase();
+    inp.dataset.ans=w.de;
     inp.dataset.display=w.de;
     inp.addEventListener('input',function(){ liveCheckWort(inp); timerAutoStart(6); });
     row.appendChild(badge);
@@ -1054,7 +1054,7 @@ function wortInit(){
 }
 
 function liveCheckWort(inp){
-  var val=inp.value.trim().toLowerCase();
+  var val=inp.value.trim();
   var ans=inp.dataset.ans;
   if(val===ans){ inp.classList.add('ok'); inp.classList.remove('err'); }
   else { inp.classList.remove('ok','err'); }
