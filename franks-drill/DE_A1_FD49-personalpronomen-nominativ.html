@@ -447,16 +447,21 @@ input.blank.wrong {
     color: #e74c3c;
 }
 
-/* Doppel-Lücke (FD49): Pronomen orange + Verb-Endung blau (Welle-1-Pattern) */
-input.blank.pron-input { min-width: 5ch; border-bottom-color: #ea580c; color: #9a3412; }
-input.blank.vend-input { min-width: 4ch; border-bottom-color: #2563eb; color: #1e3a8a; }
+/* Doppel-Lücke FD49 — Frank-Regel: solange kein Fehler grau, bei Fehler rot */
+input.blank.pron-input { min-width: 5ch; }
+input.blank.vend-input { min-width: 4ch; }
 input.blank.pron-input.correct,
 input.blank.vend-input.correct {
-    border-bottom-color: #27ae60; color: #27ae60;
+    border-bottom-color: #667eea;
+    background: transparent;
+    color: #333;
+    font-weight: normal;
 }
 input.blank.pron-input.wrong,
 input.blank.vend-input.wrong {
-    border-bottom-color: #e74c3c; color: #e74c3c;
+    border-bottom-color: #e74c3c;
+    background: #fdeaea;
+    color: #e74c3c;
 }
 
 .pf-typ-reveal {
@@ -963,7 +968,7 @@ var DRILL = {
         { k:"es",   subj:"Das Kind",            pron:"Es",  vstem:"spiel", vend:"t",  post:" im Garten.",           e:"🧒" },
         { k:"es",   subj:"Das Auto",            pron:"Es",  vstem:"steh",  vend:"t",  post:" vor dem Haus.",        e:"🚗" },
         { k:"es",   subj:"Das Buch",            pron:"Es",  vstem:"kost",  vend:"et", post:" zwanzig Euro.",        e:"📕" },
-        { k:"es",   subj:"Das Baby",            pron:"Es",  vstem:"schlaf",vend:"t",  post:" im Wagen.",            e:"👶" }
+        { k:"es",   subj:"Das Baby",            pron:"Es",  vstem:"schläf",vend:"t",  post:" im Wagen.",            e:"👶" }
     ],
     // Runde 2: Plural — 5 wir + 5 ihr2 + 6 sie3p = 16 Items
     2: [
@@ -996,7 +1001,7 @@ var DRILL = {
         { k:"er",    subj:"Der Hund",            pron:"Er",  vstem:"bell",   vend:"t",  post:" laut.",                e:"🐕" },
         { k:"sie3",  subj:"Meine Oma",           pron:"Sie", vstem:"back",   vend:"t",  post:" einen Kuchen.",        e:"🎂" },
         { k:"er",    subj:"Mein Sohn",           pron:"Er",  vstem:"mach",   vend:"t",  post:" Hausaufgaben.",        e:"📝" },
-        { k:"sie3",  subj:"Die Katze",           pron:"Sie", vstem:"schlaf", vend:"t",  post:" auf dem Sofa.",        e:"🐱" },
+        { k:"sie3",  subj:"Die Katze",           pron:"Sie", vstem:"schläf", vend:"t",  post:" auf dem Sofa.",        e:"🐱" },
         { k:"es",    subj:"Das Wetter",          pron:"Es",  vstem:"reg",    vend:"net", post:" heute leider.",       e:"🌧️" },
         // Plural (5) — gemischte Plural-Pronomen
         { k:"wir",   subj:"Du und ich",          pron:"Wir", vstem:"trink",  vend:"en", post:" einen Kaffee.",        e:"☕" },
