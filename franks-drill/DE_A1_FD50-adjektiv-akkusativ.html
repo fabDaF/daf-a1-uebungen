@@ -447,16 +447,21 @@ input.blank.wrong {
     color: #e74c3c;
 }
 
-/* Doppel-Lücke (FD50): Artikel orange + Adjektiv-Endung blau (Welle-1-Pattern) */
-input.blank.pron-input { min-width: 5ch; border-bottom-color: #ea580c; color: #9a3412; }
-input.blank.vend-input { min-width: 4ch; border-bottom-color: #2563eb; color: #1e3a8a; }
+/* Doppel-Lücke FD50 — Frank-Regel: solange kein Fehler grau, bei Fehler rot */
+input.blank.pron-input { min-width: 5ch; }
+input.blank.vend-input { min-width: 4ch; }
 input.blank.pron-input.correct,
 input.blank.vend-input.correct {
-    border-bottom-color: #27ae60; color: #27ae60;
+    border-bottom-color: #667eea;
+    background: transparent;
+    color: #333;
+    font-weight: normal;
 }
 input.blank.pron-input.wrong,
 input.blank.vend-input.wrong {
-    border-bottom-color: #e74c3c; color: #e74c3c;
+    border-bottom-color: #e74c3c;
+    background: #fdeaea;
+    color: #e74c3c;
 }
 
 /* Drei-Pill (Welle 3): Genus + Kasus + Bestimmtheit */
