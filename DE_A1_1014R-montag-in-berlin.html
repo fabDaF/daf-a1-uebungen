@@ -616,7 +616,7 @@ Bringe die Wörter in die richtige Reihenfolge.</div>
       <div class="schreib-aufgabe-karte">
         <span class="schreib-aufgabe-nr">1</span><span class="schreib-aufgabe-titel">Stell dich vor</span>
         <div class="schreib-aufgabe-frage">Schreib drei kurze Sätze: Wie heißt du, woher kommst du, was machst du?</div>
-        <div class="schreib-beispiel">Beispiel: „Ich heiße Maria. Ich komme aus Spanien. Ich bin Lehrerin."</div>
+        <div class="schreib-beispiel">Beispiel: „Ich heiße Maria. Ich komme aus Spanien. Ich bin Lehrerin.“</div>
         <textarea class="schreib-mini-textarea" data-aufgabe="1" data-titel="Stell dich vor"></textarea>
         <div class="schreib-mini-footer">
           <span class="schreib-mini-meta">Wörter: <strong class="wc-1">0</strong> <span class="schreib-mini-status" id="sw-status-1"></span></span>
@@ -627,7 +627,7 @@ Bringe die Wörter in die richtige Reihenfolge.</div>
       <div class="schreib-aufgabe-karte">
         <span class="schreib-aufgabe-nr">2</span><span class="schreib-aufgabe-titel">Dein Tier</span>
         <div class="schreib-aufgabe-frage">Hast du ein Tier? Schreib einen Satz: Wie heißt es und was ist es? Wenn du kein Tier hast, beschreib dein Lieblingstier.</div>
-        <div class="schreib-beispiel">Beispiel: „Mein Hund heißt Rex. Er ist ein Labrador." oder „Ich mag Katzen."</div>
+        <div class="schreib-beispiel">Beispiel: „Mein Hund heißt Rex. Er ist ein Labrador.“ oder „Ich mag Katzen.“</div>
         <textarea class="schreib-mini-textarea" data-aufgabe="2" data-titel="Dein Tier"></textarea>
         <div class="schreib-mini-footer">
           <span class="schreib-mini-meta">Wörter: <strong class="wc-2">0</strong> <span class="schreib-mini-status" id="sw-status-2"></span></span>
@@ -638,7 +638,7 @@ Bringe die Wörter in die richtige Reihenfolge.</div>
       <div class="schreib-aufgabe-karte">
         <span class="schreib-aufgabe-nr">3</span><span class="schreib-aufgabe-titel">Wetter heute</span>
         <div class="schreib-aufgabe-frage">In der Geschichte ist das Wetter schlecht. Wie ist das Wetter heute bei dir? Schreib zwei Sätze.</div>
-        <div class="schreib-beispiel">Beispiel: „Das Wetter ist gut. Es ist warm und sonnig."</div>
+        <div class="schreib-beispiel">Beispiel: „Das Wetter ist gut. Es ist warm und sonnig.“</div>
         <textarea class="schreib-mini-textarea" data-aufgabe="3" data-titel="Wetter heute"></textarea>
         <div class="schreib-mini-footer">
           <span class="schreib-mini-meta">Wörter: <strong class="wc-3">0</strong> <span class="schreib-mini-status" id="sw-status-3"></span></span>
@@ -649,7 +649,7 @@ Bringe die Wörter in die richtige Reihenfolge.</div>
       <div class="schreib-aufgabe-karte">
         <span class="schreib-aufgabe-nr">4</span><span class="schreib-aufgabe-titel">Eine Frage an Alex oder Louise</span>
         <div class="schreib-aufgabe-frage">Schreib eine Frage an Alex oder Louise. Du kannst W-Wörter aus der Geschichte verwenden: <em>Wie? Was? Woher?</em></div>
-        <div class="schreib-beispiel">Beispiel: „Louise, was machst du am Wochenende?"</div>
+        <div class="schreib-beispiel">Beispiel: „Louise, was machst du am Wochenende?“</div>
         <textarea class="schreib-mini-textarea" data-aufgabe="4" data-titel="Frage an Alex oder Louise"></textarea>
         <div class="schreib-mini-footer">
           <span class="schreib-mini-meta">Wörter: <strong class="wc-4">0</strong> <span class="schreib-mini-status" id="sw-status-4"></span></span>
@@ -660,7 +660,7 @@ Bringe die Wörter in die richtige Reihenfolge.</div>
       <div class="schreib-aufgabe-karte">
         <span class="schreib-aufgabe-nr">5</span><span class="schreib-aufgabe-titel">Mini-Dialog</span>
         <div class="schreib-aufgabe-frage">Du triffst Louise im Café. Schreib einen kleinen Dialog: zwei Fragen und zwei Antworten.</div>
-        <div class="schreib-beispiel">Beispiel: „— Hallo Louise! Wie geht's? — Sehr gut, danke. Und dir? — Auch gut!"</div>
+        <div class="schreib-beispiel">Beispiel: „— Hallo Louise! Wie geht's? — Sehr gut, danke. Und dir? — Auch gut!“</div>
         <textarea class="schreib-mini-textarea" data-aufgabe="5" data-titel="Mini-Dialog mit Louise"></textarea>
         <div class="schreib-mini-footer">
           <span class="schreib-mini-meta">Wörter: <strong class="wc-5">0</strong> <span class="schreib-mini-status" id="sw-status-5"></span></span>
@@ -1772,10 +1772,10 @@ function schreibFehlerErklaerung(err) {
     return 'Der Versand-Endpunkt ist gerade nicht freigeschaltet (das passiert manchmal bei Adress-Wechsel auf Franks Seite).';
   }
   if (code.indexOf('HTTP_') === 0) {
-    return 'Der Server hat eine technische Antwort gegeben (' + code.replace('HTTP_', 'HTTP ') + '), die nicht „erfolgreich" bedeutet.';
+    return 'Der Server hat eine technische Antwort gegeben (' + code.replace('HTTP_', 'HTTP ') + '), die nicht „erfolgreich“ bedeutet.';
   }
   if (code === 'API_ERROR') {
-    return 'Der Versand-Dienst hat „nicht erfolgreich" zurückgemeldet' + (err && err.apiMessage ? ' („' + err.apiMessage + '")' : '') + '.';
+    return 'Der Versand-Dienst hat „nicht erfolgreich“ zurückgemeldet' + (err && err.apiMessage ? ' („' + err.apiMessage + '“)' : '') + '.';
   }
   return 'Es gab ein Netz- oder Browser-Problem beim Senden — keine Server-Antwort.';
 }
@@ -1790,7 +1790,7 @@ function schreibKopierenEinzeln(nr) {
   function fertig(ok) {
     if (!st) return;
     if (ok) { st.classList.remove('error'); st.classList.add('success'); st.innerHTML = '✓ In die Zwischenablage kopiert. Jetzt in deine Mail oder deinen Chat einfügen und an Frank schicken.'; }
-    else { st.classList.add('error'); st.innerHTML = '✗ Kopieren ging nicht — markier den Text in der Box selbst und nutz „kopieren" deines Browsers.'; }
+    else { st.classList.add('error'); st.innerHTML = '✗ Kopieren ging nicht — markier den Text in der Box selbst und nutz „kopieren“ deines Browsers.'; }
   }
   if (navigator.clipboard && navigator.clipboard.writeText) {
     navigator.clipboard.writeText(text).then(function () { fertig(true); }, function () { fertig(false); });

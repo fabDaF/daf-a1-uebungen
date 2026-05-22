@@ -309,7 +309,7 @@ input.blank.wrong { border-color: #e74c3c; background: #ffebee; }
       <div class="schreib-aufgabe-karte">
         <span class="schreib-aufgabe-nr">1</span><span class="schreib-aufgabe-titel">Möbel in deinem Wohnzimmer</span>
         <div class="schreib-aufgabe-frage">Welche Möbel hast du im Wohnzimmer? Schreib zwei oder drei Sätze.</div>
-        <div class="schreib-beispiel">Beispiel: „Ich habe ein Sofa, einen Tisch und zwei Stühle. Es gibt auch eine Lampe."</div>
+        <div class="schreib-beispiel">Beispiel: „Ich habe ein Sofa, einen Tisch und zwei Stühle. Es gibt auch eine Lampe.“</div>
         <textarea class="schreib-mini-textarea" data-aufgabe="1" data-titel="Möbel in deinem Wohnzimmer"></textarea>
         <div class="schreib-mini-footer">
           <span class="schreib-mini-meta">Wörter: <strong class="wc-1">0</strong> <span class="schreib-mini-status" id="sw-status-1"></span></span>
@@ -319,7 +319,7 @@ input.blank.wrong { border-color: #e74c3c; background: #ffebee; }
       <div class="schreib-aufgabe-karte">
         <span class="schreib-aufgabe-nr">2</span><span class="schreib-aufgabe-titel">Was möchtest du noch kaufen?</span>
         <div class="schreib-aufgabe-frage">Welches Möbelstück möchtest du noch kaufen? Schreib zwei Sätze.</div>
-        <div class="schreib-beispiel">Beispiel: „Ich möchte ein neues Bett kaufen. Mein altes Bett ist nicht bequem."</div>
+        <div class="schreib-beispiel">Beispiel: „Ich möchte ein neues Bett kaufen. Mein altes Bett ist nicht bequem.“</div>
         <textarea class="schreib-mini-textarea" data-aufgabe="2" data-titel="Was möchtest du noch kaufen?"></textarea>
         <div class="schreib-mini-footer">
           <span class="schreib-mini-meta">Wörter: <strong class="wc-2">0</strong> <span class="schreib-mini-status" id="sw-status-2"></span></span>
@@ -329,7 +329,7 @@ input.blank.wrong { border-color: #e74c3c; background: #ffebee; }
       <div class="schreib-aufgabe-karte">
         <span class="schreib-aufgabe-nr">3</span><span class="schreib-aufgabe-titel">Dein Lieblingsmöbel</span>
         <div class="schreib-aufgabe-frage">Welches Möbelstück magst du am liebsten? Warum? Schreib zwei Sätze.</div>
-        <div class="schreib-beispiel">Beispiel: „Ich mag mein Sofa am liebsten. Es ist sehr bequem zum Lesen."</div>
+        <div class="schreib-beispiel">Beispiel: „Ich mag mein Sofa am liebsten. Es ist sehr bequem zum Lesen.“</div>
         <textarea class="schreib-mini-textarea" data-aufgabe="3" data-titel="Dein Lieblingsmöbel"></textarea>
         <div class="schreib-mini-footer">
           <span class="schreib-mini-meta">Wörter: <strong class="wc-3">0</strong> <span class="schreib-mini-status" id="sw-status-3"></span></span>
@@ -339,7 +339,7 @@ input.blank.wrong { border-color: #e74c3c; background: #ffebee; }
       <div class="schreib-aufgabe-karte">
         <span class="schreib-aufgabe-nr">4</span><span class="schreib-aufgabe-titel">Eine Frage im Möbelgeschäft</span>
         <div class="schreib-aufgabe-frage">Du suchst etwas im Möbelgeschäft. Schreib eine Frage.</div>
-        <div class="schreib-beispiel">Beispiel: „Entschuldigung, wo finde ich die Küchenstühle?"</div>
+        <div class="schreib-beispiel">Beispiel: „Entschuldigung, wo finde ich die Küchenstühle?“</div>
         <textarea class="schreib-mini-textarea" data-aufgabe="4" data-titel="Eine Frage im Möbelgeschäft"></textarea>
         <div class="schreib-mini-footer">
           <span class="schreib-mini-meta">Wörter: <strong class="wc-4">0</strong> <span class="schreib-mini-status" id="sw-status-4"></span></span>
@@ -1155,10 +1155,10 @@ function schreibFehlerErklaerung(err) {
     return 'Der Versand-Endpunkt ist gerade nicht freigeschaltet (das passiert manchmal bei Adress-Wechsel auf Franks Seite).';
   }
   if (code.indexOf('HTTP_') === 0) {
-    return 'Der Server hat eine technische Antwort gegeben (' + code.replace('HTTP_', 'HTTP ') + '), die nicht „erfolgreich" bedeutet.';
+    return 'Der Server hat eine technische Antwort gegeben (' + code.replace('HTTP_', 'HTTP ') + '), die nicht „erfolgreich“ bedeutet.';
   }
   if (code === 'API_ERROR') {
-    return 'Der Versand-Dienst hat „nicht erfolgreich" zurückgemeldet' + (err && err.apiMessage ? ' („' + err.apiMessage + '")' : '') + '.';
+    return 'Der Versand-Dienst hat „nicht erfolgreich“ zurückgemeldet' + (err && err.apiMessage ? ' („' + err.apiMessage + '“)' : '') + '.';
   }
   return 'Es gab ein Netz- oder Browser-Problem beim Senden — keine Server-Antwort.';
 }
@@ -1173,7 +1173,7 @@ function schreibKopierenEinzeln(nr) {
   function fertig(ok) {
     if (!st) return;
     if (ok) { st.classList.remove('error'); st.classList.add('success'); st.innerHTML = '✓ In die Zwischenablage kopiert. Jetzt in deine Mail oder deinen Chat einfügen und an Frank schicken.'; }
-    else { st.classList.add('error'); st.innerHTML = '✗ Kopieren ging nicht — markier den Text in der Box selbst und nutz „kopieren" deines Browsers.'; }
+    else { st.classList.add('error'); st.innerHTML = '✗ Kopieren ging nicht — markier den Text in der Box selbst und nutz „kopieren“ deines Browsers.'; }
   }
   if (navigator.clipboard && navigator.clipboard.writeText) {
     navigator.clipboard.writeText(text).then(function () { fertig(true); }, function () { fertig(false); });

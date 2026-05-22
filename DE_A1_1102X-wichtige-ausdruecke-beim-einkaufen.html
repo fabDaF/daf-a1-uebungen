@@ -357,7 +357,7 @@ input.blank.wrong { border-bottom-color: #e74c3c; background: #fdeaea; }
       <div class="schreib-aufgabe-karte">
         <span class="schreib-aufgabe-nr">1</span><span class="schreib-aufgabe-titel">Was kaufst du oft?</span>
         <div class="schreib-aufgabe-frage">Was kaufst du oft im Supermarkt? Schreib drei oder vier Sachen.</div>
-        <div class="schreib-beispiel">Beispiel: „Ich kaufe oft Brot, Milch, Käse und Obst."</div>
+        <div class="schreib-beispiel">Beispiel: „Ich kaufe oft Brot, Milch, Käse und Obst.“</div>
         <textarea class="schreib-mini-textarea" data-aufgabe="1" data-titel="Was kaufst du oft?"></textarea>
         <div class="schreib-mini-footer">
           <span class="schreib-mini-meta">Wörter: <strong class="wc-1">0</strong> <span class="schreib-mini-status" id="sw-status-1"></span></span>
@@ -367,7 +367,7 @@ input.blank.wrong { border-bottom-color: #e74c3c; background: #fdeaea; }
       <div class="schreib-aufgabe-karte">
         <span class="schreib-aufgabe-nr">2</span><span class="schreib-aufgabe-titel">Wo kaufst du ein?</span>
         <div class="schreib-aufgabe-frage">Wo kaufst du ein — Supermarkt, Markt, Bioladen? Schreib zwei Sätze.</div>
-        <div class="schreib-beispiel">Beispiel: „Ich gehe meistens in den Supermarkt. Manchmal kaufe ich auf dem Markt."</div>
+        <div class="schreib-beispiel">Beispiel: „Ich gehe meistens in den Supermarkt. Manchmal kaufe ich auf dem Markt.“</div>
         <textarea class="schreib-mini-textarea" data-aufgabe="2" data-titel="Wo kaufst du ein?"></textarea>
         <div class="schreib-mini-footer">
           <span class="schreib-mini-meta">Wörter: <strong class="wc-2">0</strong> <span class="schreib-mini-status" id="sw-status-2"></span></span>
@@ -377,7 +377,7 @@ input.blank.wrong { border-bottom-color: #e74c3c; background: #fdeaea; }
       <div class="schreib-aufgabe-karte">
         <span class="schreib-aufgabe-nr">3</span><span class="schreib-aufgabe-titel">Höflich um etwas bitten</span>
         <div class="schreib-aufgabe-frage">Du suchst Brot im Supermarkt und findest es nicht. Schreib eine höfliche Frage.</div>
-        <div class="schreib-beispiel">Beispiel: „Entschuldigung, wo finde ich das Brot, bitte?"</div>
+        <div class="schreib-beispiel">Beispiel: „Entschuldigung, wo finde ich das Brot, bitte?“</div>
         <textarea class="schreib-mini-textarea" data-aufgabe="3" data-titel="Höflich um etwas bitten"></textarea>
         <div class="schreib-mini-footer">
           <span class="schreib-mini-meta">Wörter: <strong class="wc-3">0</strong> <span class="schreib-mini-status" id="sw-status-3"></span></span>
@@ -387,7 +387,7 @@ input.blank.wrong { border-bottom-color: #e74c3c; background: #fdeaea; }
       <div class="schreib-aufgabe-karte">
         <span class="schreib-aufgabe-nr">4</span><span class="schreib-aufgabe-titel">Eine Frage an die Verkäuferin</span>
         <div class="schreib-aufgabe-frage">Du möchtest etwas kaufen. Schreib eine Frage an die Verkäuferin.</div>
-        <div class="schreib-beispiel">Beispiel: „Haben Sie diese Hose auch in Größe 38?"</div>
+        <div class="schreib-beispiel">Beispiel: „Haben Sie diese Hose auch in Größe 38?“</div>
         <textarea class="schreib-mini-textarea" data-aufgabe="4" data-titel="Eine Frage an die Verkäuferin"></textarea>
         <div class="schreib-mini-footer">
           <span class="schreib-mini-meta">Wörter: <strong class="wc-4">0</strong> <span class="schreib-mini-status" id="sw-status-4"></span></span>
@@ -1269,10 +1269,10 @@ function schreibFehlerErklaerung(err) {
     return 'Der Versand-Endpunkt ist gerade nicht freigeschaltet (das passiert manchmal bei Adress-Wechsel auf Franks Seite).';
   }
   if (code.indexOf('HTTP_') === 0) {
-    return 'Der Server hat eine technische Antwort gegeben (' + code.replace('HTTP_', 'HTTP ') + '), die nicht „erfolgreich" bedeutet.';
+    return 'Der Server hat eine technische Antwort gegeben (' + code.replace('HTTP_', 'HTTP ') + '), die nicht „erfolgreich“ bedeutet.';
   }
   if (code === 'API_ERROR') {
-    return 'Der Versand-Dienst hat „nicht erfolgreich" zurückgemeldet' + (err && err.apiMessage ? ' („' + err.apiMessage + '")' : '') + '.';
+    return 'Der Versand-Dienst hat „nicht erfolgreich“ zurückgemeldet' + (err && err.apiMessage ? ' („' + err.apiMessage + '“)' : '') + '.';
   }
   return 'Es gab ein Netz- oder Browser-Problem beim Senden — keine Server-Antwort.';
 }
@@ -1287,7 +1287,7 @@ function schreibKopierenEinzeln(nr) {
   function fertig(ok) {
     if (!st) return;
     if (ok) { st.classList.remove('error'); st.classList.add('success'); st.innerHTML = '✓ In die Zwischenablage kopiert. Jetzt in deine Mail oder deinen Chat einfügen und an Frank schicken.'; }
-    else { st.classList.add('error'); st.innerHTML = '✗ Kopieren ging nicht — markier den Text in der Box selbst und nutz „kopieren" deines Browsers.'; }
+    else { st.classList.add('error'); st.innerHTML = '✗ Kopieren ging nicht — markier den Text in der Box selbst und nutz „kopieren“ deines Browsers.'; }
   }
   if (navigator.clipboard && navigator.clipboard.writeText) {
     navigator.clipboard.writeText(text).then(function () { fertig(true); }, function () { fertig(false); });
