@@ -1084,7 +1084,7 @@ function vocabInit() {
   var shuffled = WORTSCHATZ.slice().sort(function() { return Math.random() - 0.5; });
   shuffled.forEach(function(item) {
     var div = document.createElement('div');
-    div.className = 'vocab-item';
+    div.className = 'luecken-item';
     var en = document.createElement('span');
     en.className = 'vocab-en'; en.textContent = item.en;
     var arr = document.createElement('span');
