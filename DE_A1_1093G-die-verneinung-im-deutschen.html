@@ -223,9 +223,8 @@ span.hl { background: #fff3cd; color: #764ba2; font-weight: 700; padding: 1px 5p
     <div class="nav-btn" onclick="showSection(3)"><span class="nav-emoji">&#128683;</span><span class="nav-label">kein(e)</span></div>
     <div class="nav-btn" onclick="showSection(4)"><span class="nav-emoji">&#129300;</span><span class="nav-label">Mix</span></div>
     <div class="nav-btn" onclick="showSection(5)"><span class="nav-emoji">&#129513;</span><span class="nav-label">Satzbau</span></div>
-    <div class="nav-btn" onclick="showSection(6)"><span class="nav-emoji">&#128395;</span><span class="nav-label">Schreibwerkstatt</span></div>
-    <div class="nav-btn" onclick="showSection(7)"><span class="nav-emoji">📨</span><span class="nav-label">Schreibwerkstatt</span></div>
-        <div class="nav-btn" onclick="showSection(8)"><span class="nav-emoji">&#128218;</span><span class="nav-label">Wortschatz</span></div>
+    <div class="nav-btn" onclick="showSection(6)"><span class="nav-emoji">📨</span><span class="nav-label">Schreibwerkstatt</span></div>
+        <div class="nav-btn" onclick="showSection(7)"><span class="nav-emoji">&#128218;</span><span class="nav-label">Wortschatz</span></div>
   </div>
     <div class="content-area">
 
@@ -477,86 +476,8 @@ span.hl { background: #fff3cd; color: #764ba2; font-weight: 700; padding: 1px 5p
     <div id="satzbauContainer"></div>
   </div>
 
+
   <!-- ===== TAB 6: SCHREIBWERKSTATT ===== -->
-  <div class="section" id="sec-6">
-  <img class="tab-banner" src="https://images.pexels.com/photos/1325540/pexels-photo-1325540.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Schreibwerkstatt">
-  <h2>&#128395; Schreibwerkstatt</h2>
-
-  <div class="schreib-name-box">
-    <label for="sw-name">Dein Name <span style="color:#e74c3c">*</span></label>
-    <input type="text" id="sw-name" placeholder="Vorname Nachname" oninput="schreibNameGeaendert()">
-  </div>
-
-  <div id="sw-container">
-
-    <div class="schreib-karte" id="skarte-1">
-      <h3>Aufgabe 1: Ich nicht</h3>
-      <p class="schreib-frage">Schreib einen Satz &uuml;ber dich mit &bdquo;nicht&ldquo;. Was machst du nicht? (1&ndash;15 W&ouml;rter)</p>
-      <p class="schreib-beispiel">Beispiel: &bdquo;Ich singe nicht gut.&ldquo;</p>
-      <textarea class="schreib-mini-textarea" id="sw-text-1" data-aufgabe="1" oninput="schreibSpeichern(1)"></textarea>
-      <div class="schreib-btn-row">
-        <button class="schreib-btn" onclick="schreibSendenEinzeln(1)">&#128424; An Frank senden</button>
-        <span id="sw-status-1" class="schreib-gesendet"></span>
-      </div>
-      <div id="sw-fb-1"></div>
-    </div>
-
-    <div class="schreib-karte" id="skarte-2">
-      <h3>Aufgabe 2: Kein, keine, kein</h3>
-      <p class="schreib-frage">Schreib einen Satz mit &bdquo;kein&ldquo;, &bdquo;keine&ldquo; oder &bdquo;kein&ldquo;. Was hast du nicht? (1&ndash;15 W&ouml;rter)</p>
-      <p class="schreib-beispiel">Beispiel: &bdquo;Ich habe keine Zeit.&ldquo;</p>
-      <textarea class="schreib-mini-textarea" id="sw-text-2" data-aufgabe="2" oninput="schreibSpeichern(2)"></textarea>
-      <div class="schreib-btn-row">
-        <button class="schreib-btn" onclick="schreibSendenEinzeln(2)">&#128424; An Frank senden</button>
-        <span id="sw-status-2" class="schreib-gesendet"></span>
-      </div>
-      <div id="sw-fb-2"></div>
-    </div>
-
-    <div class="schreib-karte" id="skarte-3">
-      <h3>Aufgabe 3: Nein!</h3>
-      <p class="schreib-frage">Antworte mit &bdquo;Nein&ldquo; auf diese Frage: Hast du ein Auto? Schreib einen ganzen Satz. (1&ndash;15 W&ouml;rter)</p>
-      <p class="schreib-beispiel">Beispiel: &bdquo;Nein, ich habe kein Auto.&ldquo;</p>
-      <textarea class="schreib-mini-textarea" id="sw-text-3" data-aufgabe="3" oninput="schreibSpeichern(3)"></textarea>
-      <div class="schreib-btn-row">
-        <button class="schreib-btn" onclick="schreibSendenEinzeln(3)">&#128424; An Frank senden</button>
-        <span id="sw-status-3" class="schreib-gesendet"></span>
-      </div>
-      <div id="sw-fb-3"></div>
-    </div>
-
-    <div class="schreib-karte" id="skarte-4">
-      <h3>Aufgabe 4: Drei Verneinungen</h3>
-      <p class="schreib-frage">Schreib drei kurze S&auml;tze: Verneine drei Dinge aus deinem Alltag. Benutze &bdquo;nicht&ldquo; oder &bdquo;kein(e)&ldquo;. (3&ndash;10 W&ouml;rter pro Satz)</p>
-      <p class="schreib-beispiel">Beispiel: &bdquo;Ich schlafe nicht viel. Ich habe keine Katze. Ich spreche nicht Franz&ouml;sisch.&ldquo;</p>
-      <textarea class="schreib-mini-textarea" id="sw-text-4" data-aufgabe="4" oninput="schreibSpeichern(4)"></textarea>
-      <div class="schreib-btn-row">
-        <button class="schreib-btn" onclick="schreibSendenEinzeln(4)">&#128424; An Frank senden</button>
-        <span id="sw-status-4" class="schreib-gesendet"></span>
-      </div>
-      <div id="sw-fb-4"></div>
-    </div>
-
-    <div class="schreib-karte" id="skarte-5">
-      <h3>Aufgabe 5: Mini-Dialog</h3>
-      <p class="schreib-frage">Schreib einen Mini-Dialog: eine Frage und eine negative Antwort mit &bdquo;nicht&ldquo; oder &bdquo;kein(e)&ldquo;. (1&ndash;15 W&ouml;rter pro Satz)</p>
-      <p class="schreib-beispiel">Beispiel: &bdquo;&ndash; Trinkst du Kaffee? &ndash; Nein, ich trinke keinen Kaffee.&ldquo;</p>
-      <textarea class="schreib-mini-textarea" id="sw-text-5" data-aufgabe="5" oninput="schreibSpeichern(5)"></textarea>
-      <div class="schreib-btn-row">
-        <button class="schreib-btn" onclick="schreibSendenEinzeln(5)">&#128424; An Frank senden</button>
-        <span id="sw-status-5" class="schreib-gesendet"></span>
-      </div>
-      <div id="sw-fb-5"></div>
-    </div>
-
-    <div class="schreib-sammel">
-      <button class="schreib-sammel-btn" onclick="schreibSendenAlle()">&#128424; Alle noch nicht gesendeten Antworten schicken</button>
-    </div>
-
-  </div><!-- /sw-container -->
-  </div>
-
-  <!-- ===== TAB 7: WORTSCHATZ ===== -->
   <div class="section" id="sec-schreib">
       <img class="tab-banner" src="https://images.pexels.com/photos/733856/pexels-photo-733856.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Notizbuch und Stift, bereit zum Schreiben">
       <div class="section-title">📨 Schreibwerkstatt</div>
@@ -574,7 +495,6 @@ span.hl { background: #fff3cd; color: #764ba2; font-weight: 700; padding: 1px 5p
       <div class="schreib-aufgabe-karte">
         <span class="schreib-aufgabe-nr">1</span><span class="schreib-aufgabe-titel">„Nicht"-Sätze</span>
         <div class="schreib-aufgabe-frage">Drei Sätze mit „nicht".</div>
-        <div class="schreib-beispiel">Beispiel: „Ich arbeite nicht. Das ist nicht schön. Wir kommen nicht.“</div>
         <textarea class="schreib-mini-textarea" data-aufgabe="1" data-titel="„Nicht"-Sätze"></textarea>
         <div class="schreib-mini-footer">
           <span class="schreib-mini-meta">Wörter: <strong class="wc-1">0</strong> <span class="schreib-mini-status" id="sw-status-1"></span></span>
@@ -584,7 +504,6 @@ span.hl { background: #fff3cd; color: #764ba2; font-weight: 700; padding: 1px 5p
       <div class="schreib-aufgabe-karte">
         <span class="schreib-aufgabe-nr">2</span><span class="schreib-aufgabe-titel">„Kein"-Sätze</span>
         <div class="schreib-aufgabe-frage">Drei Sätze mit „kein/keine".</div>
-        <div class="schreib-beispiel">Beispiel: „Ich habe kein Auto. Sie hat keine Zeit. Wir haben kein Brot.“</div>
         <textarea class="schreib-mini-textarea" data-aufgabe="2" data-titel="„Kein"-Sätze"></textarea>
         <div class="schreib-mini-footer">
           <span class="schreib-mini-meta">Wörter: <strong class="wc-2">0</strong> <span class="schreib-mini-status" id="sw-status-2"></span></span>
@@ -594,7 +513,6 @@ span.hl { background: #fff3cd; color: #764ba2; font-weight: 700; padding: 1px 5p
       <div class="schreib-aufgabe-karte">
         <span class="schreib-aufgabe-nr">3</span><span class="schreib-aufgabe-titel">Negative Antworten</span>
         <div class="schreib-aufgabe-frage">Drei Nein-Antworten auf Fragen.</div>
-        <div class="schreib-beispiel">Beispiel: „Nein, ich lerne kein Französisch. Nein, ich gehe nicht. Nein, ich habe keinen Hund.“</div>
         <textarea class="schreib-mini-textarea" data-aufgabe="3" data-titel="Negative Antworten"></textarea>
         <div class="schreib-mini-footer">
           <span class="schreib-mini-meta">Wörter: <strong class="wc-3">0</strong> <span class="schreib-mini-status" id="sw-status-3"></span></span>
@@ -604,7 +522,6 @@ span.hl { background: #fff3cd; color: #764ba2; font-weight: 700; padding: 1px 5p
       <div class="schreib-aufgabe-karte">
         <span class="schreib-aufgabe-nr">4</span><span class="schreib-aufgabe-titel">Was magst du nicht?</span>
         <div class="schreib-aufgabe-frage">Drei Sätze über Dinge, die du nicht magst.</div>
-        <div class="schreib-beispiel">Beispiel: „Ich mag keinen Käse. Ich tanze nicht gern. Ich fahre nicht Auto.“</div>
         <textarea class="schreib-mini-textarea" data-aufgabe="4" data-titel="Was magst du nicht?"></textarea>
         <div class="schreib-mini-footer">
           <span class="schreib-mini-meta">Wörter: <strong class="wc-4">0</strong> <span class="schreib-mini-status" id="sw-status-4"></span></span>
@@ -614,7 +531,6 @@ span.hl { background: #fff3cd; color: #764ba2; font-weight: 700; padding: 1px 5p
       <div class="schreib-aufgabe-karte">
         <span class="schreib-aufgabe-nr">5</span><span class="schreib-aufgabe-titel">Mini-Dialog</span>
         <div class="schreib-aufgabe-frage">Eine Frage und Nein-Antwort.</div>
-        <div class="schreib-beispiel">Beispiel: „— Hast du Zeit? — Nein, ich habe keine Zeit.“</div>
         <textarea class="schreib-mini-textarea" data-aufgabe="5" data-titel="Mini-Dialog"></textarea>
         <div class="schreib-mini-footer">
           <span class="schreib-mini-meta">Wörter: <strong class="wc-5">0</strong> <span class="schreib-mini-status" id="sw-status-5"></span></span>
