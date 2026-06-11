@@ -775,36 +775,106 @@ function resetLuecken() {
 
 // ===== TAB 4: MULTIPLE CHOICE =====
 var MC_DATA = [
-    { q: "Was isst Alex am Montagmorgen?",
-      opts: ["Brot und Butter", "Eier mit Speck", "Müsli mit Milch", "Joghurt und Obst"],
-      correct: 1 },
-    { q: "Was möchte Alex jetzt machen?",
-      opts: ["Eine Reise", "Eine Diät", "Eine Party", "Einen Ausflug"],
-      correct: 1 },
-    { q: "Was macht Alex normalerweise vormittags?",
-      opts: ["Er geht ins Theater", "Er macht Sport", "Er schreibt", "Er kocht"],
-      correct: 2 },
-    { q: "Wohin geht Alex am Wochenende manchmal?",
-      opts: ["Ins Fitnessstudio", "Ins Restaurant", "Ins Kino", "Auf Ausflüge mit Frodo"],
-      correct: 3 },
-    { q: "Warum kann Alex momentan nicht schreiben?",
-      opts: ["Er ist krank", "Er hat keine Zeit", "Er hat keine Ideen", "Er ist müde"],
-      correct: 2 },
-    { q: "Wie heißt das Fitnessstudio?",
-      opts: ["SportWorld", "FitForever", "GymPlus", "ActiveLife"],
-      correct: 1 },
-    { q: "Wie heißt die Frau an der Rezeption?",
-      opts: ["Lisa", "Laura", "Lena", "Lucy"],
-      correct: 3 },
-    { q: "Wie groß ist Alex?",
-      opts: ["1,70 Meter", "1,75 Meter", "1,80 Meter", "1,85 Meter"],
-      correct: 2 },
-    { q: "Was hat Lucy an der Schulter?",
-      opts: ["Eine Narbe", "Ein Tattoo", "Eine Karte", "Ein Armband"],
-      correct: 1 },
-    { q: "Was denkt Alex am Ende?",
-      opts: ["\"Frodo, gehen wir!\"", "\"Ich brauche keine Diät!\"", "\"Montag, 1. November – Neuanfang!\"", "\"Lucy ist sehr nett!\""],
-      correct: 2 }
+  {
+    "q": "Was isst Alex am Montagmorgen?",
+    "opts": [
+      "Müsli mit Milch",
+      "Brot und Butter",
+      "Eier mit Speck",
+      "Joghurt und Obst"
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Was möchte Alex jetzt machen?",
+    "opts": [
+      "Eine Party",
+      "Eine Reise",
+      "Einen Ausflug",
+      "Eine Diät"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Was macht Alex normalerweise vormittags?",
+    "opts": [
+      "Er geht ins Theater",
+      "Er schreibt",
+      "Er kocht",
+      "Er macht Sport"
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Wohin geht Alex am Wochenende manchmal?",
+    "opts": [
+      "Ins Kino",
+      "Ins Restaurant",
+      "Ins Fitnessstudio",
+      "Auf Ausflüge mit Frodo"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Warum kann Alex momentan nicht schreiben?",
+    "opts": [
+      "Er hat keine Zeit",
+      "Er ist müde",
+      "Er hat keine Ideen",
+      "Er ist krank"
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Wie heißt das Fitnessstudio?",
+    "opts": [
+      "GymPlus",
+      "SportWorld",
+      "FitForever",
+      "ActiveLife"
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Wie heißt die Frau an der Rezeption?",
+    "opts": [
+      "Lucy",
+      "Lena",
+      "Lisa",
+      "Laura"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Wie groß ist Alex?",
+    "opts": [
+      "1,70 Meter",
+      "1,85 Meter",
+      "1,75 Meter",
+      "1,80 Meter"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Was hat Lucy an der Schulter?",
+    "opts": [
+      "Ein Tattoo",
+      "Ein Armband",
+      "Eine Narbe",
+      "Eine Karte"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Was denkt Alex am Ende?",
+    "opts": [
+      "\"Lucy ist sehr nett!\"",
+      "\"Frodo, gehen wir!\"",
+      "\"Ich brauche keine Diät!\"",
+      "\"Montag, 1. November – Neuanfang!\""
+    ],
+    "correct": 3
+  }
 ];
 
 function initMC() {

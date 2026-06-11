@@ -756,36 +756,106 @@ function resetLuecken() {
 
 // ===== TAB 4: MULTIPLE CHOICE =====
 var MC_DATA = [
-    { q: "An welchem Tag ruft Louise an?",
-      opts: ["Freitag", "Sonntag", "Samstag", "Montag"],
-      correct: 2 },
-    { q: "Was schlägt Louise vor?",
-      opts: ["Spazieren gehen", "Einen Kaffee trinken", "Einkaufen", "Kochen"],
-      correct: 1 },
-    { q: "Hat Louise Alex' Wohnung schon gesehen?",
-      opts: ["Ja, oft", "Ja, einmal", "Nein, noch nie", "Das steht nicht im Text"],
-      correct: 2 },
-    { q: "Was hat Alex gestern schon aufgeräumt?",
-      opts: ["Die Küche", "Das Badezimmer", "Das Wohnzimmer", "Die Toilette"],
-      correct: 2 },
-    { q: "Warum ist Frau Schneider sauer?",
-      opts: ["Der Hund hat gebellt", "Die Musik war zu laut", "Alex hat geklopft", "Frodo hat sie gebissen"],
-      correct: 1 },
-    { q: "Was macht Frodo, als Louise kommt?",
-      opts: ["Er schläft", "Er knurrt", "Er springt an ihr hoch", "Er versteckt sich"],
-      correct: 2 },
-    { q: "Wie findet Louise Frodo?",
-      opts: ["Sie mag ihn nicht", "Sie hat Angst", "Sie mag ihn", "Das steht nicht im Text"],
-      correct: 2 },
-    { q: "Was denkt Alex am Ende?",
-      opts: ["Er bereut den Besuch", "Er ist froh, dass er aufgeräumt hat", "Er ist immer noch nervös", "Er macht die Musik wieder an"],
-      correct: 1 },
-    { q: "Was wollte Alex mit dem Aufräumen erreichen?",
-      opts: ["Die Wohnung verkaufen", "Louise beeindrucken", "Für die Nachbarin putzen", "Frodo erziehen"],
-      correct: 1 },
-    { q: "Wer ist Frau Schneider?",
-      opts: ["Louises Freundin", "Alex' Schwester", "Alex' Nachbarin", "Die Vermieterin"],
-      correct: 2 }
+  {
+    "q": "An welchem Tag ruft Louise an?",
+    "opts": [
+      "Samstag",
+      "Sonntag",
+      "Freitag",
+      "Montag"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Was schlägt Louise vor?",
+    "opts": [
+      "Spazieren gehen",
+      "Kochen",
+      "Einen Kaffee trinken",
+      "Einkaufen"
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Hat Louise Alex' Wohnung schon gesehen?",
+    "opts": [
+      "Ja, oft",
+      "Das steht nicht im Text",
+      "Nein, noch nie",
+      "Ja, einmal"
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Was hat Alex gestern schon aufgeräumt?",
+    "opts": [
+      "Das Wohnzimmer",
+      "Die Küche",
+      "Das Badezimmer",
+      "Die Toilette"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Warum ist Frau Schneider sauer?",
+    "opts": [
+      "Frodo hat sie gebissen",
+      "Der Hund hat gebellt",
+      "Die Musik war zu laut",
+      "Alex hat geklopft"
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Was macht Frodo, als Louise kommt?",
+    "opts": [
+      "Er springt an ihr hoch",
+      "Er schläft",
+      "Er knurrt",
+      "Er versteckt sich"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Wie findet Louise Frodo?",
+    "opts": [
+      "Sie mag ihn nicht",
+      "Sie hat Angst",
+      "Sie mag ihn",
+      "Das steht nicht im Text"
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Was denkt Alex am Ende?",
+    "opts": [
+      "Er macht die Musik wieder an",
+      "Er ist froh, dass er aufgeräumt hat",
+      "Er ist immer noch nervös",
+      "Er bereut den Besuch"
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Was wollte Alex mit dem Aufräumen erreichen?",
+    "opts": [
+      "Frodo erziehen",
+      "Louise beeindrucken",
+      "Für die Nachbarin putzen",
+      "Die Wohnung verkaufen"
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Wer ist Frau Schneider?",
+    "opts": [
+      "Louises Freundin",
+      "Die Vermieterin",
+      "Alex' Nachbarin",
+      "Alex' Schwester"
+    ],
+    "correct": 2
+  }
 ];
 
 function initMC() {

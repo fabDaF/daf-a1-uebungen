@@ -750,36 +750,106 @@ function resetLuecken() {
 
 // ===== TAB 4: MULTIPLE CHOICE =====
 var MC_DATA = [
-    { q: "Warum hat Alex keine Lust zu arbeiten?",
-      opts: ["Er ist krank", "Er denkt an seinen Urlaub", "Er hat Besucher", "Er schreibt einen Roman"],
-      correct: 1 },
-    { q: "Wohin sind Alex und Nils letztes Jahr gefahren?",
-      opts: ["Nach Paris", "Nach London", "Nach New York", "Nach Prag"],
-      correct: 2 },
-    { q: "Was hat Nils vergessen?",
-      opts: ["Seinen Koffer", "Seinen Reisepass", "Sein Flugticket", "Sein Handy"],
-      correct: 1 },
-    { q: "Was hat Alex am Flughafen bekommen?",
-      opts: ["Einen neuen Reisepass", "Eine Bordkarte", "Ein neues Ticket", "Sein Gepäck"],
-      correct: 1 },
-    { q: "Wie war der Flug?",
-      opts: ["Spannend", "Kurz", "Langweilig", "Chaotisch"],
-      correct: 2 },
-    { q: "Wie war das Hotelzimmer?",
-      opts: ["Groß und teuer", "Klein aber gemütlich", "Laut und schmutzig", "Sehr luxuriös"],
-      correct: 1 },
-    { q: "Was wollte Alex als Erstes sehen?",
-      opts: ["Das Empire State Building", "Den Central Park", "Die Freiheitsstatue", "Broadway"],
-      correct: 2 },
-    { q: "Wie sind sie zur Freiheitsstatue gefahren?",
-      opts: ["Mit dem Zug", "Mit dem Bus", "Mit dem Taxi", "Mit dem Schiff"],
-      correct: 3 },
-    { q: "Was haben die Männer abends gemacht?",
-      opts: ["Ein Musical gesehen", "In Bars Bier getrunken", "Geschlafen", "Shoppen gegangen"],
-      correct: 1 },
-    { q: "Wo hatten Alex und Nils laut Text eine tolle Aussicht?",
-      opts: ["Auf dem Empire State Building", "Auf dem Schiff", "Im Hotel", "Im Theater"],
-      correct: 0 }
+  {
+    "q": "Warum hat Alex keine Lust zu arbeiten?",
+    "opts": [
+      "Er denkt an seinen Urlaub",
+      "Er hat Besucher",
+      "Er ist krank",
+      "Er schreibt einen Roman"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Wohin sind Alex und Nils letztes Jahr gefahren?",
+    "opts": [
+      "Nach Prag",
+      "Nach Paris",
+      "Nach London",
+      "Nach New York"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Was hat Nils vergessen?",
+    "opts": [
+      "Sein Flugticket",
+      "Seinen Koffer",
+      "Seinen Reisepass",
+      "Sein Handy"
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Was hat Alex am Flughafen bekommen?",
+    "opts": [
+      "Eine Bordkarte",
+      "Einen neuen Reisepass",
+      "Sein Gepäck",
+      "Ein neues Ticket"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Wie war der Flug?",
+    "opts": [
+      "Spannend",
+      "Langweilig",
+      "Kurz",
+      "Chaotisch"
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Wie war das Hotelzimmer?",
+    "opts": [
+      "Groß und teuer",
+      "Laut und schmutzig",
+      "Klein aber gemütlich",
+      "Sehr luxuriös"
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Was wollte Alex als Erstes sehen?",
+    "opts": [
+      "Die Freiheitsstatue",
+      "Das Empire State Building",
+      "Den Central Park",
+      "Broadway"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Wie sind sie zur Freiheitsstatue gefahren?",
+    "opts": [
+      "Mit dem Zug",
+      "Mit dem Schiff",
+      "Mit dem Bus",
+      "Mit dem Taxi"
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Was haben die Männer abends gemacht?",
+    "opts": [
+      "Ein Musical gesehen",
+      "Geschlafen",
+      "In Bars Bier getrunken",
+      "Shoppen gegangen"
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Wo hatten Alex und Nils laut Text eine tolle Aussicht?",
+    "opts": [
+      "Auf dem Empire State Building",
+      "Auf dem Schiff",
+      "Im Hotel",
+      "Im Theater"
+    ],
+    "correct": 0
+  }
 ];
 
 function initMC() {

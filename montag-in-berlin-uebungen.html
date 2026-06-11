@@ -742,36 +742,106 @@ function resetLuecken() {
 
 // ===== TAB 4: MULTIPLE CHOICE =====
 var MC_DATA = [
-    { q: "Wo sind Alex und Frodo?",
-      opts: ["In München", "In Berlin-Pankow", "In Berlin-Charlottenburg", "In Hamburg"],
-      correct: 2 },
-    { q: "Was ist das Wetter in Berlin?",
-      opts: ["Sonnig", "Warm", "Windig", "Schlecht"],
-      correct: 3 },
-    { q: "Was ist Alex von Beruf?",
-      opts: ["Architekt", "Schriftsteller", "Lehrer", "Arzt"],
-      correct: 1 },
-    { q: "Wie alt ist Alex?",
-      opts: ["32 Jahre", "52 Jahre", "28 Jahre", "42 Jahre"],
-      correct: 3 },
-    { q: "Was ist Frodo?",
-      opts: ["Ein Pudel", "Eine Katze", "Ein Beagle", "Ein Labrador"],
-      correct: 2 },
-    { q: "Wo wohnt Louise?",
-      opts: ["In Frankreich", "In Berlin-Charlottenburg", "In München", "In Berlin-Pankow"],
-      correct: 3 },
-    { q: "Was ist Louise von Beruf?",
-      opts: ["Ärztin", "Lehrerin", "Architektin", "Mode-Designerin"],
-      correct: 3 },
-    { q: "Woher kommt Louise?",
-      opts: ["Aus Deutschland", "Aus Österreich", "Aus Frankreich", "Aus der Schweiz"],
-      correct: 2 },
-    { q: "Was mag Louise?",
-      opts: ["Kaffee", "Wein", "Cocktails", "Tee"],
-      correct: 2 },
-    { q: "Was wollen Alex und Louise morgen machen?",
-      opts: ["Kaffee trinken", "Ins Kino gehen", "Spazieren gehen", "Kochen"],
-      correct: 2 }
+  {
+    "q": "Wo sind Alex und Frodo?",
+    "opts": [
+      "In Hamburg",
+      "In Berlin-Charlottenburg",
+      "In München",
+      "In Berlin-Pankow"
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Was ist das Wetter in Berlin?",
+    "opts": [
+      "Warm",
+      "Schlecht",
+      "Sonnig",
+      "Windig"
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Was ist Alex von Beruf?",
+    "opts": [
+      "Arzt",
+      "Lehrer",
+      "Architekt",
+      "Schriftsteller"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Wie alt ist Alex?",
+    "opts": [
+      "52 Jahre",
+      "42 Jahre",
+      "32 Jahre",
+      "28 Jahre"
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Was ist Frodo?",
+    "opts": [
+      "Ein Labrador",
+      "Ein Pudel",
+      "Eine Katze",
+      "Ein Beagle"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Wo wohnt Louise?",
+    "opts": [
+      "In Berlin-Charlottenburg",
+      "In Berlin-Pankow",
+      "In Frankreich",
+      "In München"
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Was ist Louise von Beruf?",
+    "opts": [
+      "Mode-Designerin",
+      "Ärztin",
+      "Architektin",
+      "Lehrerin"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Woher kommt Louise?",
+    "opts": [
+      "Aus der Schweiz",
+      "Aus Österreich",
+      "Aus Deutschland",
+      "Aus Frankreich"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Was mag Louise?",
+    "opts": [
+      "Kaffee",
+      "Tee",
+      "Wein",
+      "Cocktails"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Was wollen Alex und Louise morgen machen?",
+    "opts": [
+      "Spazieren gehen",
+      "Ins Kino gehen",
+      "Kaffee trinken",
+      "Kochen"
+    ],
+    "correct": 0
+  }
 ];
 
 function initMC() {

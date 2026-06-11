@@ -750,36 +750,106 @@ function resetLuecken() {
 
 // ===== TAB 4: MULTIPLE CHOICE =====
 var MC_DATA = [
-    { q: "Warum kann Alex nicht arbeiten?",
-      opts: ["Er ist krank", "Er hat keine Ideen", "Er hat keine Zeit", "Er hat keine Kollegen"],
-      correct: 1 },
-    { q: "Wie lange sitzt Alex schon am Schreibtisch?",
-      opts: ["Eine Stunde", "Drei Stunden", "Zwei Stunden", "Vier Stunden"],
-      correct: 2 },
-    { q: "Wer ruft Alex an?",
-      opts: ["Lukas", "Noah", "Tim", "Hermine"],
-      correct: 2 },
-    { q: "Was ist Tim von Beruf?",
-      opts: ["Elektriker", "Arzt", "Lehrer", "Anwalt"],
-      correct: 3 },
-    { q: "Was ist Lukas von Beruf?",
-      opts: ["Anwalt", "Elektriker", "Pilot", "Polizist"],
-      correct: 1 },
-    { q: "Was möchte Noah werden?",
-      opts: ["Lehrer", "Arzt", "König", "Anwalt"],
-      correct: 2 },
-    { q: "Was möchte Hermine vielleicht werden?",
-      opts: ["Ärztin", "Lehrerin", "Zahnärztin", "Krankenschwester"],
-      correct: 3 },
-    { q: "Was sagt Alex am Ende?",
-      opts: ["Er sucht einen neuen Job", "Er schreibt einen Krimi", "Er wird Elektriker", "Er hört auf zu schreiben"],
-      correct: 1 },
-    { q: "Wie fühlt sich Alex am Anfang?",
-      opts: ["Glücklich", "Aufgeregt", "Deprimiert", "Müde"],
-      correct: 2 },
-    { q: "Wer ist Hermine?",
-      opts: ["Lukas' Tochter", "Tims Sohn", "Tims Tochter", "Alex' Schwester"],
-      correct: 2 }
+  {
+    "q": "Warum kann Alex nicht arbeiten?",
+    "opts": [
+      "Er hat keine Ideen",
+      "Er hat keine Zeit",
+      "Er ist krank",
+      "Er hat keine Kollegen"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Wie lange sitzt Alex schon am Schreibtisch?",
+    "opts": [
+      "Zwei Stunden",
+      "Drei Stunden",
+      "Eine Stunde",
+      "Vier Stunden"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Wer ruft Alex an?",
+    "opts": [
+      "Hermine",
+      "Noah",
+      "Lukas",
+      "Tim"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Was ist Tim von Beruf?",
+    "opts": [
+      "Lehrer",
+      "Arzt",
+      "Anwalt",
+      "Elektriker"
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Was ist Lukas von Beruf?",
+    "opts": [
+      "Elektriker",
+      "Polizist",
+      "Pilot",
+      "Anwalt"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Was möchte Noah werden?",
+    "opts": [
+      "Lehrer",
+      "König",
+      "Anwalt",
+      "Arzt"
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Was möchte Hermine vielleicht werden?",
+    "opts": [
+      "Lehrerin",
+      "Zahnärztin",
+      "Krankenschwester",
+      "Ärztin"
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Was sagt Alex am Ende?",
+    "opts": [
+      "Er sucht einen neuen Job",
+      "Er schreibt einen Krimi",
+      "Er hört auf zu schreiben",
+      "Er wird Elektriker"
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Wie fühlt sich Alex am Anfang?",
+    "opts": [
+      "Deprimiert",
+      "Aufgeregt",
+      "Müde",
+      "Glücklich"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Wer ist Hermine?",
+    "opts": [
+      "Lukas' Tochter",
+      "Tims Sohn",
+      "Alex' Schwester",
+      "Tims Tochter"
+    ],
+    "correct": 3
+  }
 ];
 
 function initMC() {

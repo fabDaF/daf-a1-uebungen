@@ -749,36 +749,106 @@ function resetLuecken() {
 
 // ===== TAB 4: MULTIPLE CHOICE =====
 var MC_DATA = [
-    { q: "An welchem Wochentag ist Alex beim Arzt?",
-      opts: ["Montag", "Mittwoch", "Dienstag", "Donnerstag"],
-      correct: 2 },
-    { q: "Um wie viel Uhr ist Alex' Arzttermin?",
-      opts: ["9 Uhr", "10 Uhr", "12 Uhr", "11 Uhr"],
-      correct: 3 },
-    { q: "Was ist das Wetter?",
-      opts: ["Sonnig und warm", "Kalt und regnerisch", "Windig und bewölkt", "Heiß"],
-      correct: 1 },
-    { q: "Wo meldet sich Alex zuerst an?",
-      opts: ["Im Wartezimmer", "Im Sprechzimmer", "An der Rezeption", "In der Apotheke"],
-      correct: 2 },
-    { q: "Warum trägt das Kind einen Gips?",
-      opts: ["Es ist gefallen", "Es war krank", "Es ist vom Baum gefallen", "Es ist mit dem Fahrrad gefallen"],
-      correct: 3 },
-    { q: "Was macht das zweite Kind im Wartezimmer?",
-      opts: ["Es schläft", "Es liest ein Buch", "Es spielt", "Es weint"],
-      correct: 1 },
-    { q: "Wie klingt Alex' Stimme?",
-      opts: ["Normal", "Laut", "Heiser", "Sehr stark"],
-      correct: 2 },
-    { q: "Was hat Alex NICHT?",
-      opts: ["Kopfschmerzen", "Fieber", "Einen Gips", "Halsschmerzen"],
-      correct: 2 },
-    { q: "Was denkt Alex über seine Krankheit?",
-      opts: ["Er hat eine Erkältung", "Er hat eine Grippe", "Er hat Bauchschmerzen", "Er hat einen Unfall gehabt"],
-      correct: 1 },
-    { q: "Was macht der Arzt am Ende?",
-      opts: ["Er schreibt ein Rezept", "Er gibt Alex Medikamente", "Er untersucht Alex", "Er macht einen neuen Termin"],
-      correct: 2 }
+  {
+    "q": "An welchem Wochentag ist Alex beim Arzt?",
+    "opts": [
+      "Donnerstag",
+      "Mittwoch",
+      "Dienstag",
+      "Montag"
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Um wie viel Uhr ist Alex' Arzttermin?",
+    "opts": [
+      "10 Uhr",
+      "12 Uhr",
+      "9 Uhr",
+      "11 Uhr"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Was ist das Wetter?",
+    "opts": [
+      "Sonnig und warm",
+      "Kalt und regnerisch",
+      "Heiß",
+      "Windig und bewölkt"
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Wo meldet sich Alex zuerst an?",
+    "opts": [
+      "Im Wartezimmer",
+      "An der Rezeption",
+      "In der Apotheke",
+      "Im Sprechzimmer"
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Warum trägt das Kind einen Gips?",
+    "opts": [
+      "Es ist gefallen",
+      "Es ist vom Baum gefallen",
+      "Es war krank",
+      "Es ist mit dem Fahrrad gefallen"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Was macht das zweite Kind im Wartezimmer?",
+    "opts": [
+      "Es liest ein Buch",
+      "Es schläft",
+      "Es spielt",
+      "Es weint"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Wie klingt Alex' Stimme?",
+    "opts": [
+      "Heiser",
+      "Laut",
+      "Normal",
+      "Sehr stark"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Was hat Alex NICHT?",
+    "opts": [
+      "Einen Gips",
+      "Kopfschmerzen",
+      "Halsschmerzen",
+      "Fieber"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Was denkt Alex über seine Krankheit?",
+    "opts": [
+      "Er hat eine Erkältung",
+      "Er hat Bauchschmerzen",
+      "Er hat einen Unfall gehabt",
+      "Er hat eine Grippe"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Was macht der Arzt am Ende?",
+    "opts": [
+      "Er gibt Alex Medikamente",
+      "Er untersucht Alex",
+      "Er schreibt ein Rezept",
+      "Er macht einen neuen Termin"
+    ],
+    "correct": 1
+  }
 ];
 
 function initMC() {

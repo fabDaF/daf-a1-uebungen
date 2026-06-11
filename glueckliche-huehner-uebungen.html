@@ -779,36 +779,106 @@ function resetLuecken() {
 
 // ===== TAB 4: MULTIPLE CHOICE =====
 var MC_DATA = [
-    { q: "Wo ist Alex am Anfang der Geschichte?",
-      opts: ["Im Bioladen", "Im Supermarkt", "Im Café", "Im Fitnessstudio"],
-      correct: 1 },
-    { q: "Was möchte Alex heute kochen?",
-      opts: ["Suppe", "Risotto", "Pasta", "Pizza"],
-      correct: 2 },
-    { q: "Warum geht Alex nicht zum Bioladen?",
-      opts: ["Er hat kein Geld", "Der Bioladen ist zu weit", "Der Bioladen ist heute geschlossen", "Der Bioladen hat keine Bio-Eier"],
-      correct: 2 },
-    { q: "Woran erkennt Alex Louise im Supermarkt?",
-      opts: ["An ihrem Gesicht", "An ihrer Stimme", "An ihrer Jacke", "An ihrem Wagen"],
-      correct: 1 },
-    { q: "Wen besucht Louise in Charlottenburg?",
-      opts: ["Philippe", "Alex", "Petra", "Eine Kollegin"],
-      correct: 2 },
-    { q: "Was kocht Louise für die Party?",
-      opts: ["Pasta", "Quiche", "Pizza", "Salat"],
-      correct: 1 },
-    { q: "Wohin gehen Alex und Louise nach dem Einkaufen?",
-      opts: ["Zu Petra", "In ein Restaurant", "In Alex' Lieblingscafé", "In den Park"],
-      correct: 2 },
-    { q: "Was ist Louises Hobby?",
-      opts: ["Schreiben", "Reisen", "Tanzen", "Kochen"],
-      correct: 2 },
-    { q: "Wo ist Philippe?",
-      opts: ["In Berlin", "In London", "In Charlottenburg", "In Paris"],
-      correct: 3 },
-    { q: "Was ist Philippe für Louise?",
-      opts: ["Ihr Freund", "Ihr Kollege", "Ihr Cousin", "Ihr Bruder"],
-      correct: 3 }
+  {
+    "q": "Wo ist Alex am Anfang der Geschichte?",
+    "opts": [
+      "Im Fitnessstudio",
+      "Im Supermarkt",
+      "Im Café",
+      "Im Bioladen"
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Was möchte Alex heute kochen?",
+    "opts": [
+      "Risotto",
+      "Pasta",
+      "Pizza",
+      "Suppe"
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Warum geht Alex nicht zum Bioladen?",
+    "opts": [
+      "Er hat kein Geld",
+      "Der Bioladen ist heute geschlossen",
+      "Der Bioladen ist zu weit",
+      "Der Bioladen hat keine Bio-Eier"
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Woran erkennt Alex Louise im Supermarkt?",
+    "opts": [
+      "An ihrem Gesicht",
+      "An ihrer Jacke",
+      "An ihrem Wagen",
+      "An ihrer Stimme"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Wen besucht Louise in Charlottenburg?",
+    "opts": [
+      "Petra",
+      "Philippe",
+      "Alex",
+      "Eine Kollegin"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Was kocht Louise für die Party?",
+    "opts": [
+      "Pizza",
+      "Salat",
+      "Pasta",
+      "Quiche"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Wohin gehen Alex und Louise nach dem Einkaufen?",
+    "opts": [
+      "In ein Restaurant",
+      "In Alex' Lieblingscafé",
+      "In den Park",
+      "Zu Petra"
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Was ist Louises Hobby?",
+    "opts": [
+      "Tanzen",
+      "Kochen",
+      "Schreiben",
+      "Reisen"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Wo ist Philippe?",
+    "opts": [
+      "In Charlottenburg",
+      "In Berlin",
+      "In London",
+      "In Paris"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Was ist Philippe für Louise?",
+    "opts": [
+      "Ihr Cousin",
+      "Ihr Kollege",
+      "Ihr Freund",
+      "Ihr Bruder"
+    ],
+    "correct": 3
+  }
 ];
 
 function initMC() {

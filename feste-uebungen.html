@@ -749,36 +749,106 @@ function resetLuecken() {
 
 // ===== TAB 4: MULTIPLE CHOICE =====
 var MC_DATA = [
-    { q: "An welchem Datum ist Heiligabend?",
-      opts: ["23. Dezember", "25. Dezember", "26. Dezember", "24. Dezember"],
-      correct: 3 },
-    { q: "Wohin geht die Familie zuerst an Heiligabend?",
-      opts: ["Ins Restaurant", "Zum Fest", "In die Weihnachtsmesse", "Zu den Nachbarn"],
-      correct: 2 },
-    { q: "Was ist die Bescherung?",
-      opts: ["Das Weihnachtsessen", "Das Auspacken der Geschenke", "Der Gang in die Kirche", "Das Singen von Liedern"],
-      correct: 1 },
-    { q: "Wie war Ostern früher, ohne die Kinder?",
-      opts: ["Sehr aufregend", "Chaotisch", "Ziemlich langweilig", "Sehr schön"],
-      correct: 2 },
-    { q: "Was machen die Kinder jetzt zu Ostern?",
-      opts: ["Sie singen Lieder", "Sie suchen Ostereier", "Sie backen Kuchen", "Sie spielen im Garten"],
-      correct: 1 },
-    { q: "Wohin ist Alex früher zum Karneval gefahren?",
-      opts: ["Nach München", "Nach Hamburg", "Nach Berlin", "Nach Köln"],
-      correct: 3 },
-    { q: "Wo findet das Oktoberfest statt?",
-      opts: ["In Hamburg", "In München", "In Berlin", "In Köln"],
-      correct: 1 },
-    { q: "Was schreibt Louise in ihrer SMS?",
-      opts: ["Frohe Weihnachten und Einladung zur Party", "Sie kann nicht kommen", "Sie hat Geburtstag am 25. Dezember", "Sie fragt nach Alex' Plänen"],
-      correct: 0 },
-    { q: "Wann hat Louise Geburtstag?",
-      opts: ["Am 24. Dezember", "Am 1. Januar", "An Silvester", "An Ostern"],
-      correct: 2 },
-    { q: "Was hofft Alex?",
-      opts: ["Dass er ein Geschenk bekommt", "Dass er einen Neujahrskuss bekommt", "Dass er eingeladen wird", "Dass Louise anruft"],
-      correct: 1 }
+  {
+    "q": "An welchem Datum ist Heiligabend?",
+    "opts": [
+      "26. Dezember",
+      "25. Dezember",
+      "23. Dezember",
+      "24. Dezember"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Wohin geht die Familie zuerst an Heiligabend?",
+    "opts": [
+      "Ins Restaurant",
+      "In die Weihnachtsmesse",
+      "Zum Fest",
+      "Zu den Nachbarn"
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Was ist die Bescherung?",
+    "opts": [
+      "Das Auspacken der Geschenke",
+      "Der Gang in die Kirche",
+      "Das Weihnachtsessen",
+      "Das Singen von Liedern"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Wie war Ostern früher, ohne die Kinder?",
+    "opts": [
+      "Sehr aufregend",
+      "Ziemlich langweilig",
+      "Chaotisch",
+      "Sehr schön"
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Was machen die Kinder jetzt zu Ostern?",
+    "opts": [
+      "Sie spielen im Garten",
+      "Sie singen Lieder",
+      "Sie backen Kuchen",
+      "Sie suchen Ostereier"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Wohin ist Alex früher zum Karneval gefahren?",
+    "opts": [
+      "Nach Köln",
+      "Nach Berlin",
+      "Nach München",
+      "Nach Hamburg"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Wo findet das Oktoberfest statt?",
+    "opts": [
+      "In Berlin",
+      "In München",
+      "In Hamburg",
+      "In Köln"
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Was schreibt Louise in ihrer SMS?",
+    "opts": [
+      "Sie fragt nach Alex' Plänen",
+      "Sie kann nicht kommen",
+      "Sie hat Geburtstag am 25. Dezember",
+      "Frohe Weihnachten und Einladung zur Party"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Wann hat Louise Geburtstag?",
+    "opts": [
+      "An Ostern",
+      "Am 24. Dezember",
+      "An Silvester",
+      "Am 1. Januar"
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Was hofft Alex?",
+    "opts": [
+      "Dass er eingeladen wird",
+      "Dass Louise anruft",
+      "Dass er einen Neujahrskuss bekommt",
+      "Dass er ein Geschenk bekommt"
+    ],
+    "correct": 2
+  }
 ];
 
 function initMC() {

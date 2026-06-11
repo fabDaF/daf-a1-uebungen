@@ -787,36 +787,106 @@ function resetLuecken() {
 
 // ===== TAB 4: MULTIPLE CHOICE =====
 var MC_DATA = [
-    { q: "Wie ist das Wetter am Wochenende in Berlin?",
-      opts: ["Heiß und sonnig", "Kalt und neblig", "Windig und warm", "Bewölkt und kühl"],
-      correct: 1 },
-    { q: "Wo wohnen Alex' Eltern im Winter?",
-      opts: ["In Berlin", "In Österreich", "In Spanien", "In Italien"],
-      correct: 2 },
-    { q: "Wer ruft Alex an?",
-      opts: ["Seine Schwester Lisa", "Sein Bruder Tim", "Seine Mutter", "Sein Freund Lukas"],
-      correct: 1 },
-    { q: "Um wie viel Uhr kommt Tim zu Besuch?",
-      opts: ["Um 10 Uhr", "Um 11 Uhr", "Um 12 Uhr", "Um 13 Uhr"],
-      correct: 2 },
-    { q: "Warum ist Frodo traurig?",
-      opts: ["Er hat keinen Knochen", "Es gibt keinen Spaziergang heute", "Er muss aufräumen", "Er ist krank"],
-      correct: 1 },
-    { q: "Was bringt Tim für Frodo mit?",
-      opts: ["Ein Spielzeug", "Futter", "Einen großen Knochen", "Ein Ball"],
-      correct: 2 },
-    { q: "Wie alt ist Hermine?",
-      opts: ["12 Jahre", "14 Jahre", "16 Jahre", "18 Jahre"],
-      correct: 1 },
-    { q: "Wohin fahren Tim, Clara und Hermine zum Einkaufen?",
-      opts: ["Zum Alexanderplatz", "Zum Ku'damm und ins KaDeWe", "In den Tiergarten", "Zum Potsdamer Platz"],
-      correct: 1 },
-    { q: "Warum sind Hermines Fotos schlecht?",
-      opts: ["Ihre Kamera ist kaputt", "Sie sind alle zu dunkel", "Der Fernsehturm ist zu weit", "Es regnet auf ihr Handy"],
-      correct: 1 },
-    { q: "Wovon träumt Frodo am Ende?",
-      opts: ["Von einem Spaziergang", "Vom Knochen", "Vom Meer", "Von der Party"],
-      correct: 2 }
+  {
+    "q": "Wie ist das Wetter am Wochenende in Berlin?",
+    "opts": [
+      "Windig und warm",
+      "Kalt und neblig",
+      "Bewölkt und kühl",
+      "Heiß und sonnig"
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Wo wohnen Alex' Eltern im Winter?",
+    "opts": [
+      "In Berlin",
+      "In Österreich",
+      "In Italien",
+      "In Spanien"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Wer ruft Alex an?",
+    "opts": [
+      "Sein Bruder Tim",
+      "Seine Mutter",
+      "Seine Schwester Lisa",
+      "Sein Freund Lukas"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Um wie viel Uhr kommt Tim zu Besuch?",
+    "opts": [
+      "Um 12 Uhr",
+      "Um 13 Uhr",
+      "Um 11 Uhr",
+      "Um 10 Uhr"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Warum ist Frodo traurig?",
+    "opts": [
+      "Er hat keinen Knochen",
+      "Er muss aufräumen",
+      "Es gibt keinen Spaziergang heute",
+      "Er ist krank"
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Was bringt Tim für Frodo mit?",
+    "opts": [
+      "Einen großen Knochen",
+      "Ein Spielzeug",
+      "Ein Ball",
+      "Futter"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Wie alt ist Hermine?",
+    "opts": [
+      "16 Jahre",
+      "12 Jahre",
+      "14 Jahre",
+      "18 Jahre"
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Wohin fahren Tim, Clara und Hermine zum Einkaufen?",
+    "opts": [
+      "Zum Alexanderplatz",
+      "In den Tiergarten",
+      "Zum Potsdamer Platz",
+      "Zum Ku'damm und ins KaDeWe"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Warum sind Hermines Fotos schlecht?",
+    "opts": [
+      "Ihre Kamera ist kaputt",
+      "Es regnet auf ihr Handy",
+      "Der Fernsehturm ist zu weit",
+      "Sie sind alle zu dunkel"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Wovon träumt Frodo am Ende?",
+    "opts": [
+      "Vom Meer",
+      "Von der Party",
+      "Von einem Spaziergang",
+      "Vom Knochen"
+    ],
+    "correct": 0
+  }
 ];
 
 function initMC() {

@@ -960,57 +960,107 @@
 
         // ============ TAB 4: MULTIPLE CHOICE ============
         const mcData = [
-            {
-                question: '„Ich ___ Deutsch sprechen.“ (Fähigkeit)',
-                options: ['kann', 'will', 'darf', 'soll'],
-                correct: 0
-            },
-            {
-                question: '„Sie ___ zum Arzt gehen.“ (Notwendigkeit)',
-                options: ['muss', 'kann', 'will', 'darf'],
-                correct: 0
-            },
-            {
-                question: '„Er ___ ein neues Auto kaufen.“ (Wunsch)',
-                options: ['will', 'soll', 'darf', 'muss'],
-                correct: 0
-            },
-            {
-                question: '„Kinder ___ hier nicht spielen.“ (Verbot)',
-                options: ['dürfen', 'können', 'wollen', 'sollen'],
-                correct: 0
-            },
-            {
-                question: '„Du ___ um 9 Uhr da sein.“ (Auftrag)',
-                options: ['sollst', 'willst', 'darfst', 'kannst'],
-                correct: 0
-            },
-            {
-                question: '„Ich ___ bitte einen Tee.“ (höflicher Wunsch)',
-                options: ['möchte', 'will', 'kann', 'muss'],
-                correct: 0
-            },
-            {
-                question: 'Wo steht der Infinitiv im Satz?',
-                options: ['Am Ende', 'An Position 2', 'An Position 1', 'Irgendwo'],
-                correct: 0
-            },
-            {
-                question: '„Wir ___ heute früh aufstehen.“ (Notwendigkeit)',
-                options: ['müssen', 'möchten', 'dürfen', 'sollen'],
-                correct: 0
-            },
-            {
-                question: 'Welche Form ist richtig: „er wollen“?',
-                options: ['er will', 'er wollt', 'er wollst', 'er wölle'],
-                correct: 0
-            },
-            {
-                question: '„Ihr ___ das Zimmer aufräumen!“ (Auftrag)',
-                options: ['sollt', 'wollt', 'dürft', 'könnt'],
-                correct: 0
-            }
-        ];
+  {
+    "question": "„Ich ___ Deutsch sprechen.“ (Fähigkeit)",
+    "options": [
+      "kann",
+      "darf",
+      "soll",
+      "will"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "„Sie ___ zum Arzt gehen.“ (Notwendigkeit)",
+    "options": [
+      "muss",
+      "darf",
+      "kann",
+      "will"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "„Er ___ ein neues Auto kaufen.“ (Wunsch)",
+    "options": [
+      "soll",
+      "will",
+      "darf",
+      "muss"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "„Kinder ___ hier nicht spielen.“ (Verbot)",
+    "options": [
+      "dürfen",
+      "sollen",
+      "können",
+      "wollen"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "„Du ___ um 9 Uhr da sein.“ (Auftrag)",
+    "options": [
+      "willst",
+      "kannst",
+      "darfst",
+      "sollst"
+    ],
+    "correct": 3
+  },
+  {
+    "question": "„Ich ___ bitte einen Tee.“ (höflicher Wunsch)",
+    "options": [
+      "möchte",
+      "muss",
+      "will",
+      "kann"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Wo steht der Infinitiv im Satz?",
+    "options": [
+      "Irgendwo",
+      "An Position 1",
+      "Am Ende",
+      "An Position 2"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "„Wir ___ heute früh aufstehen.“ (Notwendigkeit)",
+    "options": [
+      "müssen",
+      "möchten",
+      "dürfen",
+      "sollen"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Welche Form ist richtig: „er wollen“?",
+    "options": [
+      "er will",
+      "er wölle",
+      "er wollt",
+      "er wollst"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "„Ihr ___ das Zimmer aufräumen!“ (Auftrag)",
+    "options": [
+      "könnt",
+      "dürft",
+      "wollt",
+      "sollt"
+    ],
+    "correct": 3
+  }
+];
 
         function initMC() {
             const container = document.getElementById('mc-container');

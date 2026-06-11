@@ -601,56 +601,106 @@ function liveCheckBlur(inp) {
 
 // ===== TAB 4: MULTIPLE CHOICE =====
 const mcQuestions = [
-    {
-        question: 'Das Perfekt von \u201Eich esse\u201C ist:',
-        options: ['Ich habe gegessen', 'Ich bin gegessen', 'Ich hatte gegessen', 'Ich esse'],
-        correct: 0
-    },
-    {
-        question: 'Welches Verb braucht \u201Esein\u201C im Perfekt?',
-        options: ['gehen', 'machen', 'kaufen', 'spielen'],
-        correct: 0
-    },
-    {
-        question: 'Das Partizip II von \u201Ekaufen\u201C ist:',
-        options: ['gekauft', 'kauft', 'gekauen', 'kaufen'],
-        correct: 0
-    },
-    {
-        question: '\u201ELouise ___ nach Frankreich gefahren.\u201C',
-        options: ['ist', 'hat', 'wird', 'war'],
-        correct: 0
-    },
-    {
-        question: 'Das Partizip II von \u201Eschreiben\u201C ist:',
-        options: ['geschrieben', 'geschreibt', 'schreibt', 'geschrebien'],
-        correct: 0
-    },
-    {
-        question: 'Welches Verb hat kein \u201Ege-\u201C im Partizip II?',
-        options: ['telefonieren', 'machen', 'spielen', 'kaufen'],
-        correct: 0
-    },
-    {
-        question: '\u201EWir ___ lange geschlafen.\u201C',
-        options: ['haben', 'sind', 'werden', 'hatten'],
-        correct: 0
-    },
-    {
-        question: 'Das Partizip II von \u201Eaufstehen\u201C ist:',
-        options: ['aufgestanden', 'aufstehen', 'geaufstanden', 'gestanden'],
-        correct: 0
-    },
-    {
-        question: '\u201EAlex ___ nach Berlin gegangen.\u201C',
-        options: ['ist', 'hat', 'wird', 'sein'],
-        correct: 0
-    },
-    {
-        question: 'Das Partizip II von \u201Eessen\u201C ist:',
-        options: ['gegessen', 'geessen', 'isst', 'geisst'],
-        correct: 0
-    }
+  {
+    "question": "Das Perfekt von „ich esse“ ist:",
+    "options": [
+      "Ich habe gegessen",
+      "Ich esse",
+      "Ich bin gegessen",
+      "Ich hatte gegessen"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Welches Verb braucht „sein“ im Perfekt?",
+    "options": [
+      "gehen",
+      "spielen",
+      "kaufen",
+      "machen"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Das Partizip II von „kaufen“ ist:",
+    "options": [
+      "gekauen",
+      "kauft",
+      "gekauft",
+      "kaufen"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "„Louise ___ nach Frankreich gefahren.“",
+    "options": [
+      "hat",
+      "wird",
+      "ist",
+      "war"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Das Partizip II von „schreiben“ ist:",
+    "options": [
+      "schreibt",
+      "geschrebien",
+      "geschreibt",
+      "geschrieben"
+    ],
+    "correct": 3
+  },
+  {
+    "question": "Welches Verb hat kein „ge-“ im Partizip II?",
+    "options": [
+      "kaufen",
+      "spielen",
+      "telefonieren",
+      "machen"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "„Wir ___ lange geschlafen.“",
+    "options": [
+      "hatten",
+      "werden",
+      "haben",
+      "sind"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "Das Partizip II von „aufstehen“ ist:",
+    "options": [
+      "gestanden",
+      "aufgestanden",
+      "aufstehen",
+      "geaufstanden"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "„Alex ___ nach Berlin gegangen.“",
+    "options": [
+      "wird",
+      "hat",
+      "sein",
+      "ist"
+    ],
+    "correct": 3
+  },
+  {
+    "question": "Das Partizip II von „essen“ ist:",
+    "options": [
+      "geessen",
+      "gegessen",
+      "isst",
+      "geisst"
+    ],
+    "correct": 1
+  }
 ];
 
 function initMCTab() {

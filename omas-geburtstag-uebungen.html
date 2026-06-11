@@ -773,36 +773,106 @@ function resetLuecken() {
 
 // ===== TAB 4: MULTIPLE CHOICE =====
 var MC_DATA = [
-    { q: "Wessen Geburtstag feiern alle?",
-      opts: ["Alex' Geburtstag", "Oma Emmas Geburtstag", "Lukas' Geburtstag", "Tims Geburtstag"],
-      correct: 1 },
-    { q: "Wie alt wird Oma Emma?",
-      opts: ["80 Jahre alt", "85 Jahre alt", "90 Jahre alt", "95 Jahre alt"],
-      correct: 2 },
-    { q: "Wo wohnt Oma Emma?",
-      opts: ["In Berlin", "In München", "In Hamburg", "In Neuruppin"],
-      correct: 3 },
-    { q: "Wie fahren Alex und Frodo zum Fest?",
-      opts: ["Mit dem Zug", "Mit dem Bus", "Mit dem Auto", "Mit dem Fahrrad"],
-      correct: 2 },
-    { q: "Wie viele Geschwister hat Alex?",
-      opts: ["Zwei Geschwister", "Drei Geschwister", "Vier Geschwister", "Keine Geschwister"],
-      correct: 1 },
-    { q: "Wer ist Tim?",
-      opts: ["Der Neffe von Alex", "Der Bruder von Alex", "Der Freund von Alex", "Der Cousin von Alex"],
-      correct: 1 },
-    { q: "Wessen Frau ist schwanger?",
-      opts: ["Tims Frau", "Lukas' Frau", "Alex' Schwester", "Alex' Mutter"],
-      correct: 1 },
-    { q: "Woher kommen Alex' Eltern zum Fest?",
-      opts: ["Aus Hamburg", "Aus Wien", "Aus München", "Aus Andalusien"],
-      correct: 2 },
-    { q: "Was sagt Oma Emma in ihrer Rede?",
-      opts: ["\"Danke für die Geschenke!\"", "\"Lasst uns feiern, so lange wir noch jung sind!\"", "\"Ich bin so müde!\"", "\"Wann gibt es Essen?\""],
-      correct: 1 },
-    { q: "Wie ist Alex' Laune am Ende?",
-      opts: ["Er ist noch müde", "Er ist traurig", "Er hat jetzt gute Laune", "Er geht nach Hause"],
-      correct: 2 }
+  {
+    "q": "Wessen Geburtstag feiern alle?",
+    "opts": [
+      "Lukas' Geburtstag",
+      "Alex' Geburtstag",
+      "Oma Emmas Geburtstag",
+      "Tims Geburtstag"
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Wie alt wird Oma Emma?",
+    "opts": [
+      "85 Jahre alt",
+      "95 Jahre alt",
+      "90 Jahre alt",
+      "80 Jahre alt"
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Wo wohnt Oma Emma?",
+    "opts": [
+      "In Berlin",
+      "In Hamburg",
+      "In München",
+      "In Neuruppin"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Wie fahren Alex und Frodo zum Fest?",
+    "opts": [
+      "Mit dem Auto",
+      "Mit dem Fahrrad",
+      "Mit dem Bus",
+      "Mit dem Zug"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Wie viele Geschwister hat Alex?",
+    "opts": [
+      "Keine Geschwister",
+      "Zwei Geschwister",
+      "Drei Geschwister",
+      "Vier Geschwister"
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Wer ist Tim?",
+    "opts": [
+      "Der Cousin von Alex",
+      "Der Neffe von Alex",
+      "Der Bruder von Alex",
+      "Der Freund von Alex"
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Wessen Frau ist schwanger?",
+    "opts": [
+      "Alex' Mutter",
+      "Tims Frau",
+      "Alex' Schwester",
+      "Lukas' Frau"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Woher kommen Alex' Eltern zum Fest?",
+    "opts": [
+      "Aus München",
+      "Aus Hamburg",
+      "Aus Andalusien",
+      "Aus Wien"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Was sagt Oma Emma in ihrer Rede?",
+    "opts": [
+      "\"Danke für die Geschenke!\"",
+      "\"Wann gibt es Essen?\"",
+      "\"Ich bin so müde!\"",
+      "\"Lasst uns feiern, so lange wir noch jung sind!\""
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Wie ist Alex' Laune am Ende?",
+    "opts": [
+      "Er ist noch müde",
+      "Er geht nach Hause",
+      "Er ist traurig",
+      "Er hat jetzt gute Laune"
+    ],
+    "correct": 3
+  }
 ];
 
 function initMC() {

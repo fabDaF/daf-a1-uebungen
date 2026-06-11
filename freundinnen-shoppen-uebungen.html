@@ -756,36 +756,106 @@ function resetLuecken() {
 
 // ===== TAB 4: MULTIPLE CHOICE =====
 var MC_DATA = [
-    { q: "An welchem Tag gehen Louise und Petra shoppen?",
-      opts: ["Freitag", "Sonntag", "Montag", "Samstag"],
-      correct: 3 },
-    { q: "Was ist Louise von Beruf?",
-      opts: ["Ärztin", "Lehrerin", "Mode-Designerin", "Architektin"],
-      correct: 2 },
-    { q: "Wen ruft Louise an?",
-      opts: ["Alex", "Petra", "Hermine", "Tim"],
-      correct: 1 },
-    { q: "Was findet Louise im Schaufenster wunderschön?",
-      opts: ["Eine Bluse", "Ein Kleid", "Eine Jacke", "Einen Pullover"],
-      correct: 1 },
-    { q: "Was braucht Petra für den Winter?",
-      opts: ["Kleid und Rock", "Pullover und Jeans", "Jacke, Mütze und Handschuhe", "Bluse und Stiefel"],
-      correct: 2 },
-    { q: "Welches Kleidungsstück gefällt Louise nicht?",
-      opts: ["Das Kleid", "Der Pullover", "Die Bluse", "Der Rock"],
-      correct: 2 },
-    { q: "Was nimmt Louise am Ende mit?",
-      opts: ["Das Kleid und die Jeans", "Den Rock und die Bluse", "Das Kleid und den Pullover", "Den Pullover und den Rock"],
-      correct: 2 },
-    { q: "Wohin gehen die Frauen nach dem Shoppen zuerst?",
-      opts: ["In ein Restaurant", "In ein Café", "Ins Kino", "Nach Hause"],
-      correct: 1 },
-    { q: "Was möchte Louise noch kaufen?",
-      opts: ["Handschuhe", "Eine Mütze", "Winterschuhe oder Stiefel", "Eine Jacke"],
-      correct: 2 },
-    { q: "Warum kann Louise nicht alles kaufen?",
-      opts: ["Die Sachen passen nicht", "Es ist zu teuer", "Das Geschäft ist geschlossen", "Petra mag die Sachen nicht"],
-      correct: 1 }
+  {
+    "q": "An welchem Tag gehen Louise und Petra shoppen?",
+    "opts": [
+      "Samstag",
+      "Montag",
+      "Freitag",
+      "Sonntag"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Was ist Louise von Beruf?",
+    "opts": [
+      "Mode-Designerin",
+      "Ärztin",
+      "Architektin",
+      "Lehrerin"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Wen ruft Louise an?",
+    "opts": [
+      "Hermine",
+      "Tim",
+      "Petra",
+      "Alex"
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Was findet Louise im Schaufenster wunderschön?",
+    "opts": [
+      "Ein Kleid",
+      "Einen Pullover",
+      "Eine Bluse",
+      "Eine Jacke"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Was braucht Petra für den Winter?",
+    "opts": [
+      "Pullover und Jeans",
+      "Jacke, Mütze und Handschuhe",
+      "Bluse und Stiefel",
+      "Kleid und Rock"
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Welches Kleidungsstück gefällt Louise nicht?",
+    "opts": [
+      "Der Pullover",
+      "Das Kleid",
+      "Die Bluse",
+      "Der Rock"
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Was nimmt Louise am Ende mit?",
+    "opts": [
+      "Den Pullover und den Rock",
+      "Das Kleid und die Jeans",
+      "Den Rock und die Bluse",
+      "Das Kleid und den Pullover"
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Wohin gehen die Frauen nach dem Shoppen zuerst?",
+    "opts": [
+      "In ein Restaurant",
+      "In ein Café",
+      "Nach Hause",
+      "Ins Kino"
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Was möchte Louise noch kaufen?",
+    "opts": [
+      "Winterschuhe oder Stiefel",
+      "Eine Mütze",
+      "Eine Jacke",
+      "Handschuhe"
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Warum kann Louise nicht alles kaufen?",
+    "opts": [
+      "Petra mag die Sachen nicht",
+      "Das Geschäft ist geschlossen",
+      "Es ist zu teuer",
+      "Die Sachen passen nicht"
+    ],
+    "correct": 2
+  }
 ];
 
 function initMC() {
