@@ -528,9 +528,8 @@ function liveCheck(inp) {
     var field = inp.dataset.field;
     inp.classList.remove('correct', 'wrong');
     if (user.length === 0) return;
-    var cmpUser = user;
-    var cmpAnswer = answer;
-    if (field === 'art') { cmpUser = user.toLowerCase(); cmpAnswer = answer.toLowerCase(); }
+    var cmpUser = user.trim().toLowerCase();
+    var cmpAnswer = (answer || '').toLowerCase();
     if (cmpUser === cmpAnswer) { inp.classList.add('correct'); }
     else if (cmpAnswer.indexOf(cmpUser) === 0) { /* prefix ok */ }
     else { inp.classList.add('wrong'); }

@@ -148,6 +148,11 @@ input.blank.wrong { border-color: #e74c3c; background: #ffebee; }
     }
 .tab-banner { width: 100%; max-height: 180px; object-fit: cover; border-radius: 10px; margin-bottom: 18px; box-shadow: 0 2px 8px rgba(0,0,0,0.12); }
 @media (max-width: 600px) { .tab-banner { max-height: 120px; } }
+
+/* FB-FLIESSTEXT-SERIF */
+.section-sub, .hilfe-box, .schreib-aufgabe-frage, .lese-text, .story-text { font-family: Georgia, 'Times New Roman', serif; }
+.section-sub { line-height: 1.6; margin: 8px 0 18px; }
+.hilfe-box { line-height: 1.7; padding: 16px 20px; margin: 16px 0; }
 </style>
 </head>
 <body>
@@ -541,9 +546,8 @@ function liveCheck(inp) {
     var field = inp.dataset.field;
     inp.classList.remove('correct', 'wrong');
     if (user.length === 0) return;
-    var cmpUser = user;
-    var cmpAnswer = answer;
-    if (field === 'art') { cmpUser = user.toLowerCase(); cmpAnswer = answer.toLowerCase(); }
+    var cmpUser = user.trim().toLowerCase();
+    var cmpAnswer = (answer || '').toLowerCase();
     if (cmpUser === cmpAnswer) { inp.classList.add('correct'); }
     else if (cmpAnswer.indexOf(cmpUser) === 0) { /* prefix ok */ }
     else { inp.classList.add('wrong'); }

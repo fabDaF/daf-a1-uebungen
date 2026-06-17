@@ -181,6 +181,11 @@ body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background
 .solution-btn:hover { background: #e0d6ff; }
 .satzbau-item { margin-bottom: 20px; }
 .satzbau-prompt { font-size: 0.88em; color: #888; margin-bottom: 6px; }
+
+/* FB-FLIESSTEXT-SERIF */
+.section-sub, .hilfe-box, .schreib-aufgabe-frage, .lese-text, .story-text { font-family: Georgia, 'Times New Roman', serif; }
+.section-sub { line-height: 1.6; margin: 8px 0 18px; }
+.hilfe-box { line-height: 1.7; padding: 16px 20px; margin: 16px 0; }
 </style>
 </head>
 <body>
@@ -582,7 +587,7 @@ function liveCheck(inp) {
     const val    = inp.value.trim();
     inp.classList.remove('correct','incorrect','partial');
     if (val === '') return;
-    if (val === answer) {
+    if (val.toLowerCase() === answer) {
         inp.classList.add('correct');
     } else if (answer.startsWith(val) || (val.length >= 3 && answer.includes(val))) {
         inp.classList.add('partial');

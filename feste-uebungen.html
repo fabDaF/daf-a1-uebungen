@@ -273,6 +273,11 @@
 .satzbau-feedback { font-size: 0.9em; font-weight: 600; margin-top: 6px; min-height: 1.2em; }
 .satzbau-feedback.correct { color: #27ae60; }
 .satzbau-feedback.incorrect { color: #e74c3c; }
+
+/* FB-FLIESSTEXT-SERIF */
+.section-sub, .hilfe-box, .schreib-aufgabe-frage, .lese-text, .story-text { font-family: Georgia, 'Times New Roman', serif; }
+.section-sub { line-height: 1.6; margin: 8px 0 18px; }
+.hilfe-box { line-height: 1.7; padding: 16px 20px; margin: 16px 0; }
 </style>
 </head>
 <body>
@@ -700,9 +705,8 @@ function liveCheck(inp) {
     var field = inp.dataset.field;
     inp.classList.remove('correct', 'wrong');
     if (user.length === 0) return;
-    var cmpUser = user;
-    var cmpAnswer = answer;
-    if (field === 'art') { cmpUser = user; cmpAnswer = answer; }
+    var cmpUser = user.trim().toLowerCase();
+    var cmpAnswer = (answer || '').toLowerCase();
     if (cmpUser === cmpAnswer) { inp.classList.add('correct'); }
     else if (cmpAnswer.indexOf(cmpUser) === 0) { /* prefix ok */ }
     else { inp.classList.add('wrong'); }

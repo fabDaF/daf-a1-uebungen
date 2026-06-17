@@ -199,6 +199,11 @@ input.blank.wrong { border-bottom-color: #e74c3c; background: #fdeaea; }
   .schreib-name-box { padding: 12px 14px; }
 }
 /* /Schreibwerkstatt-Innenraum-Fix */
+
+/* FB-FLIESSTEXT-SERIF */
+.section-sub, .hilfe-box, .schreib-aufgabe-frage, .lese-text, .story-text { font-family: Georgia, 'Times New Roman', serif; }
+.section-sub { line-height: 1.6; margin: 8px 0 18px; }
+.hilfe-box { line-height: 1.7; padding: 16px 20px; margin: 16px 0; }
 </style>
 </head>
 <body>
@@ -373,62 +378,52 @@ input.blank.wrong { border-bottom-color: #e74c3c; background: #fdeaea; }
       <div class="section-sub">Fünf kleine Schreibaufgaben rund um Zahlen, Preise und Bezahlen.</div>
 
       <div class="hilfe-box">
-        Schreiben ist das beste Training. Nimm dir Zeit für eine, zwei oder alle fünf Aufgaben. <strong>Jede Antwort kannst du einzeln an Frank schicken</strong> — du musst nicht alle bearbeiten. Wenn du den Sammelbutton am Ende benutzt, gehen alle noch nicht gesendeten Antworten in einer Mail.
+        Schreiben ist das beste Training. Nimm dir Zeit für eine, zwei oder alle fünf Aufgaben. <strong>Jede Antwort kannst du einzeln an mich schicken</strong> — du musst nicht alle bearbeiten. Wenn du den Sammelbutton am Ende benutzt, gehen alle noch nicht gesendeten Antworten in einer Mail.
       </div>
 
       <div class="schreib-name-box">
-        <label class="schreib-label" for="sw-name">Dein Name (Pflicht — damit Frank weiß, wer geschrieben hat):</label>
+        <label class="schreib-label" for="sw-name">Dein Name (Pflicht — damit ich weiß, wer geschrieben hat):</label>
         <input type="text" id="sw-name" class="schreib-name" placeholder="z. B. Maria Lopez" required>
       </div>
 
       <div class="schreib-aufgabe-karte">
         <span class="schreib-aufgabe-nr">1</span><span class="schreib-aufgabe-titel">Drei Lieblingszahlen</span>
-        <div class="schreib-aufgabe-frage">Welche drei Zahlen sind für dich wichtig (Geburtstag, Glückszahl, Hausnummer …)? Schreib zwei Sätze.</div>
-        <div class="schreib-beispiel">Beispiel: „Meine Glückszahl ist 7. Mein Geburtstag ist am 22.“</div>
-        <textarea class="schreib-mini-textarea" data-aufgabe="1" data-titel="Drei Lieblingszahlen"></textarea>
+        <div class="schreib-aufgabe-frage">Welche drei Zahlen sind für dich wichtig (Geburtstag, Glückszahl, Hausnummer …)? Schreib zwei Sätze.</div>        <textarea class="schreib-mini-textarea" data-aufgabe="1" data-titel="Drei Lieblingszahlen"></textarea>
         <div class="schreib-mini-footer">
           <span class="schreib-mini-meta">Wörter: <strong class="wc-1">0</strong> <span class="schreib-mini-status" id="sw-status-1"></span></span>
-          <button class="schreib-mini-btn" id="sw-send-1" onclick="schreibSendenEinzeln(1)">📨 An Frank senden</button>
+          <button class="schreib-mini-btn" id="sw-send-1" onclick="schreibSendenEinzeln(1)">📨 An mich senden</button>
         </div>
       </div>
       <div class="schreib-aufgabe-karte">
         <span class="schreib-aufgabe-nr">2</span><span class="schreib-aufgabe-titel">Was kostet das?</span>
-        <div class="schreib-aufgabe-frage">Schreib zwei Beispiele: Was kostet bei dir Brot? Was kostet ein Kaffee?</div>
-        <div class="schreib-beispiel">Beispiel: „Ein Brot kostet bei mir 2,50 Euro. Ein Kaffee kostet 1,80 Euro.“</div>
-        <textarea class="schreib-mini-textarea" data-aufgabe="2" data-titel="Was kostet das?"></textarea>
+        <div class="schreib-aufgabe-frage">Schreib zwei Beispiele: Was kostet bei dir Brot? Was kostet ein Kaffee?</div>        <textarea class="schreib-mini-textarea" data-aufgabe="2" data-titel="Was kostet das?"></textarea>
         <div class="schreib-mini-footer">
           <span class="schreib-mini-meta">Wörter: <strong class="wc-2">0</strong> <span class="schreib-mini-status" id="sw-status-2"></span></span>
-          <button class="schreib-mini-btn" id="sw-send-2" onclick="schreibSendenEinzeln(2)">📨 An Frank senden</button>
+          <button class="schreib-mini-btn" id="sw-send-2" onclick="schreibSendenEinzeln(2)">📨 An mich senden</button>
         </div>
       </div>
       <div class="schreib-aufgabe-karte">
         <span class="schreib-aufgabe-nr">3</span><span class="schreib-aufgabe-titel">Geld in deinem Land</span>
-        <div class="schreib-aufgabe-frage">Welche Währung gibt es in deinem Land? Schreib einen Satz.</div>
-        <div class="schreib-beispiel">Beispiel: „In Mexiko bezahlt man mit Pesos.“</div>
-        <textarea class="schreib-mini-textarea" data-aufgabe="3" data-titel="Geld in deinem Land"></textarea>
+        <div class="schreib-aufgabe-frage">Welche Währung gibt es in deinem Land? Schreib einen Satz.</div>        <textarea class="schreib-mini-textarea" data-aufgabe="3" data-titel="Geld in deinem Land"></textarea>
         <div class="schreib-mini-footer">
           <span class="schreib-mini-meta">Wörter: <strong class="wc-3">0</strong> <span class="schreib-mini-status" id="sw-status-3"></span></span>
-          <button class="schreib-mini-btn" id="sw-send-3" onclick="schreibSendenEinzeln(3)">📨 An Frank senden</button>
+          <button class="schreib-mini-btn" id="sw-send-3" onclick="schreibSendenEinzeln(3)">📨 An mich senden</button>
         </div>
       </div>
       <div class="schreib-aufgabe-karte">
         <span class="schreib-aufgabe-nr">4</span><span class="schreib-aufgabe-titel">Eine Frage zum Preis</span>
-        <div class="schreib-aufgabe-frage">Du bist in einem Geschäft. Schreib eine Frage zum Preis.</div>
-        <div class="schreib-beispiel">Beispiel: „Entschuldigung, was kostet diese Tasche?“</div>
-        <textarea class="schreib-mini-textarea" data-aufgabe="4" data-titel="Eine Frage zum Preis"></textarea>
+        <div class="schreib-aufgabe-frage">Du bist in einem Geschäft. Schreib eine Frage zum Preis.</div>        <textarea class="schreib-mini-textarea" data-aufgabe="4" data-titel="Eine Frage zum Preis"></textarea>
         <div class="schreib-mini-footer">
           <span class="schreib-mini-meta">Wörter: <strong class="wc-4">0</strong> <span class="schreib-mini-status" id="sw-status-4"></span></span>
-          <button class="schreib-mini-btn" id="sw-send-4" onclick="schreibSendenEinzeln(4)">📨 An Frank senden</button>
+          <button class="schreib-mini-btn" id="sw-send-4" onclick="schreibSendenEinzeln(4)">📨 An mich senden</button>
         </div>
       </div>
       <div class="schreib-aufgabe-karte">
         <span class="schreib-aufgabe-nr">5</span><span class="schreib-aufgabe-titel">Mini-Dialog: An der Kasse</span>
-        <div class="schreib-aufgabe-frage">Du bezahlst an der Kasse. Schreib einen Mini-Dialog: zwei Fragen und zwei Antworten.</div>
-        <div class="schreib-beispiel">Beispiel: „— Das macht 12 Euro 50. — Hier sind 15 Euro. — Danke, hier ist Ihr Wechselgeld. — Auf Wiedersehen!“</div>
-        <textarea class="schreib-mini-textarea" data-aufgabe="5" data-titel="Mini-Dialog: An der Kasse"></textarea>
+        <div class="schreib-aufgabe-frage">Du bezahlst an der Kasse. Schreib einen Mini-Dialog: zwei Fragen und zwei Antworten.</div>        <textarea class="schreib-mini-textarea" data-aufgabe="5" data-titel="Mini-Dialog: An der Kasse"></textarea>
         <div class="schreib-mini-footer">
           <span class="schreib-mini-meta">Wörter: <strong class="wc-5">0</strong> <span class="schreib-mini-status" id="sw-status-5"></span></span>
-          <button class="schreib-mini-btn" id="sw-send-5" onclick="schreibSendenEinzeln(5)">📨 An Frank senden</button>
+          <button class="schreib-mini-btn" id="sw-send-5" onclick="schreibSendenEinzeln(5)">📨 An mich senden</button>
         </div>
       </div>
 
@@ -598,9 +593,8 @@ function liveCheck(inp) {
     var field = inp.dataset.field;
     inp.classList.remove('correct', 'wrong');
     if (user.length === 0) return;
-    var cmpUser = user;
-    var cmpAnswer = answer;
-    if (field === 'art') { cmpUser = user.toLowerCase(); cmpAnswer = answer.toLowerCase(); }
+    var cmpUser = user.trim().toLowerCase();
+    var cmpAnswer = (answer || '').toLowerCase();
     if (cmpUser === cmpAnswer) { inp.classList.add('correct'); }
     else if (cmpAnswer.indexOf(cmpUser) === 0) { /* prefix ok, keep typing */ }
     else { inp.classList.add('wrong'); }
@@ -722,7 +716,7 @@ function showZahlen20Loesung() {
     document.querySelectorAll('#sec-0 .z20-inp').forEach(function(inp) {
         total++;
         var user = inp.value.trim();
-        var answer = inp.dataset.answer.toLowerCase();
+        var answer = inp.dataset.answer;
         var next = inp.nextElementSibling;
         if (next && next.classList.contains('zahl-hint')) next.remove();
         if (user === answer) {
@@ -784,7 +778,7 @@ function showZehnerLoesung() {
     document.querySelectorAll('#sec-1 .zehn-inp').forEach(function(inp) {
         total++;
         var user = inp.value.trim();
-        var answer = inp.dataset.answer.toLowerCase();
+        var answer = inp.dataset.answer;
         var next = inp.nextElementSibling;
         if (next && next.classList.contains('zahl-hint')) next.remove();
         if (user === answer) {
@@ -847,7 +841,7 @@ function showKombiLoesung() {
     document.querySelectorAll('#sec-2 .kombi-inp').forEach(function(inp) {
         total++;
         var user = inp.value.trim();
-        var answer = inp.dataset.answer.toLowerCase();
+        var answer = inp.dataset.answer;
         var next = inp.nextElementSibling;
         if (next && next.classList.contains('zahl-hint')) next.remove();
         if (user === answer) {
@@ -1513,7 +1507,7 @@ function schreibPostFormsubmit(subject, message, onOk, onErr) {
 function schreibFehlerErklaerung(err) {
   var code = (err && err.message) || '';
   if (code === 'NOT_ACTIVATED') {
-    return 'Der Versand-Endpunkt ist gerade nicht freigeschaltet (das passiert manchmal bei Adress-Wechsel auf Franks Seite).';
+    return 'Der Versand-Endpunkt ist gerade nicht freigeschaltet (das passiert manchmal bei Adress-Wechsel auf meiner Seite).';
   }
   if (code.indexOf('HTTP_') === 0) {
     return 'Der Server hat eine technische Antwort gegeben (' + code.replace('HTTP_', 'HTTP ') + '), die nicht „erfolgreich“ bedeutet.';
@@ -1533,7 +1527,7 @@ function schreibKopierenEinzeln(nr) {
   var st = document.getElementById('sw-status-' + nr) || document.getElementById('status-' + nr);
   function fertig(ok) {
     if (!st) return;
-    if (ok) { st.classList.remove('error'); st.classList.add('success'); st.innerHTML = '✓ In die Zwischenablage kopiert. Jetzt in deine Mail oder deinen Chat einfügen und an Frank schicken.'; }
+    if (ok) { st.classList.remove('error'); st.classList.add('success'); st.innerHTML = '✓ In die Zwischenablage kopiert. Jetzt in deine Mail oder deinen Chat einfügen und an mich schicken.'; }
     else { st.classList.add('error'); st.innerHTML = '✗ Kopieren ging nicht — markier den Text in der Box selbst und nutz „kopieren“ deines Browsers.'; }
   }
   if (navigator.clipboard && navigator.clipboard.writeText) {
@@ -1557,13 +1551,13 @@ function schreibZeigeFehler(nr, err, subject, message) {
   st.innerHTML =
     '<div class="schreib-fb">' +
       '<div class="schreib-fb-titel">⚠ Online-Versand hat nicht geklappt — dein Text ist sicher im Browser gespeichert.</div>' +
-      '<div class="schreib-fb-text"><strong>Was passiert ist:</strong> ' + erklaerung + ' Du verlierst nichts — wähle einen der drei Wege, damit Frank deine Antwort trotzdem bekommt:</div>' +
+      '<div class="schreib-fb-text"><strong>Was passiert ist:</strong> ' + erklaerung + ' Du verlierst nichts — wähle einen der drei Wege, damit ich deine Antwort trotzdem bekomme:</div>' +
       '<div class="schreib-fb-actions">' +
         '<a class="schreib-fb-btn schreib-fb-btn-prim" href="' + mailto + '">📧 In Mail-Programm öffnen</a>' +
         '<button type="button" class="schreib-fb-btn" onclick="schreibKopierenEinzeln(\'' + nr + '\')">📋 In Zwischenablage</button>' +
         '<button type="button" class="schreib-fb-btn" onclick="schreibSendenEinzeln(\'' + nr + '\')">🔄 Nochmal versuchen</button>' +
       '</div>' +
-      '<div class="schreib-fb-hilfe">Wenn nichts klappt: sag Frank im Unterricht Bescheid — er muss den Versand auf seiner Seite einmal aktivieren.</div>' +
+      '<div class="schreib-fb-hilfe">Wenn nichts klappt: sag mir im Unterricht Bescheid — ich muss den Versand auf seiner Seite einmal aktivieren.</div>' +
     '</div>';
 }
 
@@ -1655,7 +1649,7 @@ function schreibSendenAlleNochOffenen() {
         localStorage.setItem(SCHREIB_SENT_PREFIX + o.nr, info);
         schreibKarteAlsGesendetMarkieren(o.nr, info, false);
       });
-      schreibStatusZeigen('success', '✓ <strong>' + offene.length + ' Antworten übermittelt.</strong> Frank meldet sich.');
+      schreibStatusZeigen('success', '✓ <strong>' + offene.length + ' Antworten übermittelt.</strong> Ich melde mich.');
     },
     function (err) { btn.disabled = false; btn.innerHTML = '📨 Alle noch nicht gesendeten Antworten schicken'; schreibZeigeFehlerSammel(err, subject, message); });
 }
@@ -1701,7 +1695,7 @@ function schreibLeeren() {
     var karte = ta.closest('.schreib-aufgabe-karte');
     if (karte) karte.classList.remove('gesendet');
     var btn = document.getElementById('sw-send-' + nr);
-    if (btn) { btn.classList.remove('gesendet'); btn.innerHTML = '📨 An Frank senden'; }
+    if (btn) { btn.classList.remove('gesendet'); btn.innerHTML = '📨 An mich senden'; }
     var st = document.getElementById('sw-status-' + nr);
     if (st) { st.className = 'schreib-mini-status'; st.textContent = ''; }
   });

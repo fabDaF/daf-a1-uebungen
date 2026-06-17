@@ -295,8 +295,8 @@ function liveCheck(inp) {
     var user = inp.value, answer = inp.dataset.answer, field = inp.dataset.field;
     inp.classList.remove('correct','wrong');
     if (!user) return;
-    var cu = field === 'artikel' ? user.toLowerCase() : user;
-    var ca = field === 'artikel' ? answer.toLowerCase() : answer;
+    var cu = user.trim().toLowerCase();
+    var ca = (answer || '').toLowerCase();
     if (cu === ca) inp.classList.add('correct');
     else if (!ca.startsWith(cu)) inp.classList.add('wrong');
 }

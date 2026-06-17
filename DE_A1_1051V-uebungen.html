@@ -255,8 +255,10 @@ function liveCheck(inp) {
     var answer = inp.dataset.answer;
     inp.classList.remove('correct', 'wrong');
     if (user.length === 0) return;
-    if (user === answer) { inp.classList.add('correct'); }
-    else if (answer.indexOf(user) === 0) { }
+    var cmpUser = user.trim().toLowerCase();
+    var cmpAnswer = (answer || '').toLowerCase();
+    if (cmpUser === cmpAnswer) { inp.classList.add('correct'); }
+    else if (cmpAnswer.indexOf(cmpUser) === 0) { }
     else { inp.classList.add('wrong'); }
 }
 

@@ -147,6 +147,11 @@ input.blank.xl { width: 220px; }
   .nav-btn { flex: 1 1 33%; font-size: 0.75em; padding: 10px 4px; }
   .genus-categories { grid-template-columns: repeat(2,1fr); }
 }
+
+/* FB-FLIESSTEXT-SERIF */
+.section-sub, .hilfe-box, .schreib-aufgabe-frage, .lese-text, .story-text { font-family: Georgia, 'Times New Roman', serif; }
+.section-sub { line-height: 1.6; margin: 8px 0 18px; }
+.hilfe-box { line-height: 1.7; padding: 16px 20px; margin: 16px 0; }
 </style>
 </head>
 <body>
@@ -675,11 +680,13 @@ function renderLuecken() {
 
 function liveCheck(inp) {
   var val = inp.value.trim();
-  var ans = (inp.dataset.answer || '').toLowerCase();
+  var ans = (inp.dataset.answer || '');
   inp.classList.remove('correct','wrong');
   if (val.length === 0) return;
-  if (val === ans) { inp.classList.add('correct'); }
-  else if (ans.indexOf(val) === 0) { /* valid prefix */ }
+  var cmpUser = val.toLowerCase();
+  var cmpAnswer = (ans || '').toLowerCase();
+  if (cmpUser === cmpAnswer) { inp.classList.add('correct'); }
+  else if (cmpAnswer.indexOf(cmpUser) === 0) { /* valid prefix */ }
   else { inp.classList.add('wrong'); }
 }
 
@@ -770,7 +777,7 @@ function renderUmformung() {
 
 function liveCheckUmf(inp) {
   var val = inp.value.trim();
-  var ans = (inp.dataset.answer || '').toLowerCase();
+  var ans = (inp.dataset.answer || '');
   inp.classList.remove('correct','wrong');
   if (val.length === 0) return;
   if (val === ans) { inp.classList.add('correct'); }

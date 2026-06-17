@@ -457,7 +457,7 @@ loadBestTimes();
 function showSection(n){
   document.querySelectorAll('.section').forEach(function(s){s.classList.remove('active');});
   document.querySelectorAll('.nav-btn').forEach(function(b){b.classList.remove('active');});
-  document.getElementById('sec-'+n).classList.add('active');
+  (function(){var __s=document.querySelectorAll('.section');if(__s[n])__s[n].classList.add('active');})();
   document.querySelectorAll('.nav-btn')[n].classList.add('active');
 }
 
@@ -729,65 +729,119 @@ function resetTermin(){
 ══════════════════════════════════════ */
 var SIT_DATA = [
   {
-    id:1,
-    situation:'Du bist Projektmanager bei E.ON. Du willst ein Meeting mit deiner Kollegin Frau Becker vereinbaren. Was sagst du?',
-    opts:[
-      {text:'Wann haben Sie Zeit?', correct:true},
-      {text:'Wann hast du Zeit?', correct:false},
-      {text:'Bis dann!', correct:false},
+    "id": 1,
+    "situation": "Du bist Projektmanager bei E.ON. Du willst ein Meeting mit deiner Kollegin Frau Becker vereinbaren. Was sagst du?",
+    "opts": [
+      {
+        "text": "Bis dann!",
+        "correct": false
+      },
+      {
+        "text": "Wann hast du Zeit?",
+        "correct": false
+      },
+      {
+        "text": "Wann haben Sie Zeit?",
+        "correct": true
+      }
     ],
-    feedback:'✅ Richtig! Mit Kollegen (Sie) fragst du: „Wann haben Sie Zeit?“ oder „Können Sie am ...?“'
+    "feedback": "✅ Richtig! Mit Kollegen (Sie) fragst du: „Wann haben Sie Zeit?“ oder „Können Sie am ...?“"
   },
   {
-    id:2,
-    situation:'Dein Freund fragt: „Kannst du am Freitag?“ — Du hast leider keine Zeit. Was antwortest du und machst einen Gegenvorschlag?',
-    opts:[
-      {text:'Ja, das passt!', correct:false},
-      {text:'Das geht leider nicht. Wie wäre es mit Samstag?', correct:true},
-      {text:'Auf Wiederhören!', correct:false},
+    "id": 2,
+    "situation": "Dein Freund fragt: „Kannst du am Freitag?“ — Du hast leider keine Zeit. Was antwortest du und machst einen Gegenvorschlag?",
+    "opts": [
+      {
+        "text": "Das geht leider nicht. Wie wäre es mit Samstag?",
+        "correct": true
+      },
+      {
+        "text": "Ja, das passt!",
+        "correct": false
+      },
+      {
+        "text": "Auf Wiederhören!",
+        "correct": false
+      }
     ],
-    feedback:'✅ Richtig! Nach einer Absage kommt oft ein Gegenvorschlag: „Wie wäre es mit ...?“'
+    "feedback": "✅ Richtig! Nach einer Absage kommt oft ein Gegenvorschlag: „Wie wäre es mit ...?“"
   },
   {
-    id:3,
-    situation:'Dein Chef sagt: „Können Sie am Mittwoch um 14 Uhr?“ — Du stimmst zu. Was sagst du?',
-    opts:[
-      {text:'Klingt gut!', correct:false},
-      {text:'Tschüss!', correct:false},
-      {text:'Ja, das passt.', correct:true},
+    "id": 3,
+    "situation": "Dein Chef sagt: „Können Sie am Mittwoch um 14 Uhr?“ — Du stimmst zu. Was sagst du?",
+    "opts": [
+      {
+        "text": "Tschüss!",
+        "correct": false
+      },
+      {
+        "text": "Klingt gut!",
+        "correct": false
+      },
+      {
+        "text": "Ja, das passt.",
+        "correct": true
+      }
     ],
-    feedback:'✅ Richtig! Formelle Zusage: „Ja, das passt.“ oder „Sehr gut!“'
+    "feedback": "✅ Richtig! Formelle Zusage: „Ja, das passt.“ oder „Sehr gut!“"
   },
   {
-    id:4,
-    situation:'Du vereinbarst ein Meeting für nächste Woche. Wie sagst du das?',
-    opts:[
-      {text:'Treffen wir uns diese Woche Dienstag?', correct:false},
-      {text:'Treffen wir uns nächste Woche Dienstag?', correct:true},
-      {text:'Treffen wir uns am Dienstag um nächste?', correct:false},
+    "id": 4,
+    "situation": "Du vereinbarst ein Meeting für nächste Woche. Wie sagst du das?",
+    "opts": [
+      {
+        "text": "Treffen wir uns am Dienstag um nächste?",
+        "correct": false
+      },
+      {
+        "text": "Treffen wir uns diese Woche Dienstag?",
+        "correct": false
+      },
+      {
+        "text": "Treffen wir uns nächste Woche Dienstag?",
+        "correct": true
+      }
     ],
-    feedback:'✅ Richtig! „nächste Woche + Wochentag“ — kein Artikel, kein „am“!'
+    "feedback": "✅ Richtig! „nächste Woche + Wochentag“ — kein Artikel, kein „am“!"
   },
   {
-    id:5,
-    situation:'Das Telefonat mit deiner Kollegin ist fertig. Ihr trefft euch am Donnerstag. Wie verabschiedest du dich formell?',
-    opts:[
-      {text:'Tschüss!', correct:false},
-      {text:'Bis Donnerstag! Auf Wiederhören!', correct:true},
-      {text:'Klingt gut!', correct:false},
+    "id": 5,
+    "situation": "Das Telefonat mit deiner Kollegin ist fertig. Ihr trefft euch am Donnerstag. Wie verabschiedest du dich formell?",
+    "opts": [
+      {
+        "text": "Klingt gut!",
+        "correct": false
+      },
+      {
+        "text": "Tschüss!",
+        "correct": false
+      },
+      {
+        "text": "Bis Donnerstag! Auf Wiederhören!",
+        "correct": true
+      }
     ],
-    feedback:'✅ Richtig! Am Telefon: „Auf Wiederhören!“ — und „Bis [Tag]!“ ist immer passend.'
+    "feedback": "✅ Richtig! Am Telefon: „Auf Wiederhören!“ — und „Bis [Tag]!“ ist immer passend."
   },
   {
-    id:6,
-    situation:'Dein Kollege fragt: „Wie lange brauchen wir für das Meeting?“ — Das Meeting dauert 30 Minuten. Was antwortest du?',
-    opts:[
-      {text:'Eine Viertelstunde.', correct:false},
-      {text:'Eine halbe Stunde.', correct:true},
-      {text:'Eine Dreiviertelstunde.', correct:false},
+    "id": 6,
+    "situation": "Dein Kollege fragt: „Wie lange brauchen wir für das Meeting?“ — Das Meeting dauert 30 Minuten. Was antwortest du?",
+    "opts": [
+      {
+        "text": "Eine Viertelstunde.",
+        "correct": false
+      },
+      {
+        "text": "Eine halbe Stunde.",
+        "correct": true
+      },
+      {
+        "text": "Eine Dreiviertelstunde.",
+        "correct": false
+      }
     ],
-    feedback:'✅ Richtig! 30 Minuten = eine halbe Stunde.'
-  },
+    "feedback": "✅ Richtig! 30 Minuten = eine halbe Stunde."
+  }
 ];
 
 var sitAnswered = [];
