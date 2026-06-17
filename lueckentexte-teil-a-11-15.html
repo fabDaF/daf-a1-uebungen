@@ -541,7 +541,7 @@ function showSatzbauLoesung() {
 function resetSatzbau() { initSatzbau(); resetTimer(3); }
 
 // ── INIT ──────────────────────────────────────────────
-window.addEventListener('load', () => {
+document.addEventListener('DOMContentLoaded', () => {
     loadBestTimes();
     initWS();
     initGenus();
