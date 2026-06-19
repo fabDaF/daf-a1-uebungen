@@ -898,7 +898,7 @@ function initVocab() {
         if (item.type === 'n') {
             var artInp = document.createElement('input');
             artInp.className = 'art';
-            artInp.placeholder = 'der/die/das';
+            artInp.placeholder = 'Artikel';
             artInp.dataset.answer = item.artikel;
             artInp.dataset.field = 'art';
             artInp.onfocus = function() { startTimer(5); };

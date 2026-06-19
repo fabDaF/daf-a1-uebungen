@@ -867,7 +867,7 @@ function buildWortschatz() {
 
       var artInp = document.createElement('input'); artInp.type = 'text'; artInp.className = 'ws-art';
       artInp.dataset.answer = item.artikel; artInp.dataset.field = 'art';
-      artInp.placeholder = 'der/die/das'; artInp.autocomplete = 'off';
+      artInp.placeholder = 'Artikel'; artInp.autocomplete = 'off';
       artInp.oninput = function() { wsLiveCheckEl(artInp); };
 
       var inp = document.createElement('input'); inp.type = 'text'; inp.className = 'ws-inp';
