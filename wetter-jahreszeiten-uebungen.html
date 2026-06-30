@@ -154,8 +154,8 @@ input.blank.wrong { border-color: #e74c3c; background: #ffebee; }
         </div>
         <div class="chip-bank" id="jahreszeiterBank" ondrop="dropJahreszeit(event)" ondragover="allowDrop(event)"></div>
         <div class="control-bar"><div class="btn-row">
-            <button class="btn btn-show" onclick="showJahreszeitenLoesung()">L&ouml;sungen</button>
-            <button class="btn btn-reset" onclick="resetJahreszeiten(); timerResetOne(0);">Neu starten</button>
+            <button onclick="showJahreszeitenLoesung()" style="background:#f5f7ff;border:1px solid #c5cff5;border-radius:8px;padding:6px 16px;font-size:0.85em;color:#667eea;cursor:pointer;font-weight:600;">💡 Lösungen</button>
+            <button onclick="resetJahreszeiten(); timerResetOne(0);" style="background:#f5f7ff;border:1px solid #c5cff5;border-radius:8px;padding:6px 16px;font-size:0.85em;color:#667eea;cursor:pointer;font-weight:600;">↺ Neustart</button>
         </div><div class="timer-display">
             <span class="current-time">&#9201; <span id="timer-0">00:00</span></span>
             <span class="best-time">&#127942; Best: <span id="best-0">--:--</span></span>
@@ -182,8 +182,8 @@ input.blank.wrong { border-color: #e74c3c; background: #ffebee; }
         </div>
         <div class="chip-bank" id="genusBank" ondrop="dropGenus(event)" ondragover="allowDrop(event)"></div>
         <div class="control-bar"><div class="btn-row">
-            <button class="btn btn-show" onclick="showGenusLoesung()">L&ouml;sungen</button>
-            <button class="btn btn-reset" onclick="resetGenus(); timerResetOne(1);">Neu starten</button>
+            <button onclick="showGenusLoesung()" style="background:#f5f7ff;border:1px solid #c5cff5;border-radius:8px;padding:6px 16px;font-size:0.85em;color:#667eea;cursor:pointer;font-weight:600;">💡 Lösungen</button>
+            <button onclick="resetGenus(); timerResetOne(1);" style="background:#f5f7ff;border:1px solid #c5cff5;border-radius:8px;padding:6px 16px;font-size:0.85em;color:#667eea;cursor:pointer;font-weight:600;">↺ Neustart</button>
         </div><div class="timer-display">
             <span class="current-time">&#9201; <span id="timer-1">00:00</span></span>
             <span class="best-time">&#127942; Best: <span id="best-1">--:--</span></span>
@@ -199,8 +199,8 @@ input.blank.wrong { border-color: #e74c3c; background: #ffebee; }
         </div>
         <div id="wetterContainer"></div>
         <div class="control-bar"><div class="btn-row">
-            <button class="btn btn-show" onclick="showWetterLoesung()">L&ouml;sungen</button>
-            <button class="btn btn-reset" onclick="resetWetter(); timerResetOne(2);">Neu starten</button>
+            <button onclick="showWetterLoesung()" style="background:#f5f7ff;border:1px solid #c5cff5;border-radius:8px;padding:6px 16px;font-size:0.85em;color:#667eea;cursor:pointer;font-weight:600;">💡 Lösungen</button>
+            <button onclick="resetWetter(); timerResetOne(2);" style="background:#f5f7ff;border:1px solid #c5cff5;border-radius:8px;padding:6px 16px;font-size:0.85em;color:#667eea;cursor:pointer;font-weight:600;">↺ Neustart</button>
         </div><div class="timer-display">
             <span class="current-time">&#9201; <span id="timer-2">00:00</span></span>
             <span class="best-time">&#127942; Best: <span id="best-2">--:--</span></span>
@@ -216,8 +216,8 @@ input.blank.wrong { border-color: #e74c3c; background: #ffebee; }
         </div>
         <div id="satzbauContainer"></div>
         <div class="control-bar"><div class="btn-row">
-            <button class="btn btn-show" onclick="satzbauData.forEach(function(_,i){sbShowSolution(i);})">L&ouml;sungen</button>
-            <button class="btn btn-reset" onclick="resetSatzbau(); timerResetOne(3);">Neu starten</button>
+            <button onclick="satzbauData.forEach(function(_,i){sbShowSolution(i);})" style="background:#f5f7ff;border:1px solid #c5cff5;border-radius:8px;padding:6px 16px;font-size:0.85em;color:#667eea;cursor:pointer;font-weight:600;">💡 Lösungen</button>
+            <button onclick="resetSatzbau(); timerResetOne(3);" style="background:#f5f7ff;border:1px solid #c5cff5;border-radius:8px;padding:6px 16px;font-size:0.85em;color:#667eea;cursor:pointer;font-weight:600;">↺ Neustart</button>
         </div><div class="timer-display">
             <span class="current-time">&#9201; <span id="timer-3">00:00</span></span>
             <span class="best-time">&#127942; Best: <span id="best-3">--:--</span></span>
@@ -232,8 +232,8 @@ input.blank.wrong { border-color: #e74c3c; background: #ffebee; }
         </div>
         <div id="wortschatzContainer" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;"></div>
         <div class="control-bar"><div class="btn-row">
-            <button class="btn btn-show" onclick="showVocabLoesung()">L&ouml;sungen</button>
-            <button class="btn btn-reset" onclick="resetVocab(); timerResetOne(4);">Neu starten</button>
+            <button onclick="showVocabLoesung()" style="background:#f5f7ff;border:1px solid #c5cff5;border-radius:8px;padding:6px 16px;font-size:0.85em;color:#667eea;cursor:pointer;font-weight:600;">💡 Lösungen</button>
+            <button onclick="resetVocab(); timerResetOne(4);" style="background:#f5f7ff;border:1px solid #c5cff5;border-radius:8px;padding:6px 16px;font-size:0.85em;color:#667eea;cursor:pointer;font-weight:600;">↺ Neustart</button>
         </div><div class="timer-display">
             <span class="current-time">&#9201; <span id="timer-4">00:00</span></span>
             <span class="best-time">&#127942; Best: <span id="best-4">--:--</span></span>
