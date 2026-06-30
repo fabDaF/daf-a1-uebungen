@@ -13,35 +13,25 @@ body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background
 .header .big-emoji { font-size: 2.6em; display: block; margin-top: 8px; }
 .header .subtitle, .header p { font-size: 1.0em; opacity: 0.95; color: rgba(255,255,255,0.9); margin: 0; font-family: Georgia, 'Times New Roman', serif; }
 .content-area { padding: 28px 30px 30px 30px; }
+/* ===== NAV (Variante C: Aktiv-Pille) ===== */
 .nav {
-            display: flex;
-            flex-wrap: nowrap;
-            background: #f8f9fa;
-            border-top: 1px solid #ddd;
-            border-left: 1px solid #ddd;
-            border-right: 1px solid #ddd;
-        }
+  display: flex; flex-wrap: wrap; gap: 4px;
+  background: #eef0fb; padding: 6px;
+  border-bottom: 2px solid #e9ecef;
+}
 .nav-btn {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 14px 10px;
-            text-align: center;
-            cursor: pointer;
-            border-right: 1px solid #ddd;
-            border-bottom: 1px solid #ddd;
-            transition: all 0.3s;
-            font-size: 0.92em;
-            font-weight: 500;
-            color: #666;
-        }
-.nav-btn:hover { background: #e9ecef; color: #495057; }
-.nav-btn:last-child { border-right: none; }
-        .nav-btn.active { background: white; color: #667eea; border-bottom: 3px solid #667eea; font-weight: 600; }
+  flex: 1 1 auto; min-width: 64px; padding: 12px 8px;
+  border: none; background: none; cursor: pointer;
+  font-weight: 500; color: #666; transition: all 0.2s; border-radius: 10px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+}
+.nav-btn:hover { background: #e1e5fb; color: #667eea; }
+.nav-btn.active { background: #fff; color: #667eea; font-weight: 700; box-shadow: 0 1px 4px rgba(102,126,234,.25); }
 .nav-emoji { font-size: 1.3em; line-height: 1.2; }
 .nav-label { font-size: 0.78em; margin-top: 2px; line-height: 1.2; }
+
+        
+
 .section { display: none; }
 .section.active { display: block; }
 h2 { color: #333; font-size: 1.15em; margin-bottom: 16px; padding-bottom: 8px; border-bottom: 2px solid #f0f0f0; }
@@ -92,9 +82,8 @@ input.blank.wrong { border-bottom-color: #e74c3c; background: #fdeaea; }
 .vocab-hint { color: #27ae60; font-weight: 600; font-size: 0.8em; margin-left: 6px; }
 @media (max-width: 600px) {
     body { padding: 8px; }
-    .nav { flex-wrap: wrap; }
-    .nav-btn { flex: 1 1 33%; min-width: 0; font-size: 0.8em; padding: 10px 6px; border-right: 1px solid #ddd; }
-    .nav-btn:last-child { border-right: 1px solid #ddd; }
+
+    
     .luecken-item { background: #f8f9ff; padding: 14px 18px; border-radius: 10px; border-left: 4px solid #667eea; }
 }
 .author-footer { text-align: center; margin-top: 12px; border-top: 1px solid #f0f0f0; max-width: 1000px; margin-left: auto; margin-right: auto; padding: 16px; font-size: 0.8rem; color: #aaa; }
@@ -153,7 +142,6 @@ input.blank.wrong { border-bottom-color: #e74c3c; background: #fdeaea; }
 .schreib-name-box .schreib-label { color: #b15c00; }
 .schreib-name.schreib-name-error { border-color: #c62828; box-shadow: 0 0 0 2px rgba(198,40,40,0.15); animation: schreib-name-shake 0.4s; }
 @keyframes schreib-name-shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-4px)} 75%{transform:translateX(4px)} }
-
 
 /* Customer-Success-Fallback-Block bei Versand-Fehler (gepatcht) */
 .schreib-fb { display: flex; flex-direction: column; gap: 8px; }
@@ -501,7 +489,6 @@ input.blank.wrong { border-bottom-color: #e74c3c; background: #fdeaea; }
 
 </div><!-- /container -->
 
-
 <script>
 /* ========== DATEN ========== */
 
@@ -724,7 +711,6 @@ function checkAllInputs(secSelector, timerIdx) {
     inputs.forEach(function(inp) { if (!inp.classList.contains('correct')) allCorrect = false; });
     if (allCorrect) stopTimer(timerIdx);
 }
-
 
 /* ========== UNIVERSAL DRAG & DROP ========== */
 
@@ -1614,9 +1600,6 @@ function schreibLeeren() {
 /* ===== Ende Schreibwerkstatt =================================== */
 
 </script>
-
-
-
 
 <!-- FB-JUMPTOP -->
 <button class="fb-jumptop" id="fbJumpTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Nach oben springen" aria-label="Nach oben springen">↑ Nach oben</button>

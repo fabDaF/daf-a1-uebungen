@@ -16,11 +16,22 @@ body { font-family: 'Segoe UI', sans-serif; font-size: 18px; background: #f0f2f5
 .level-badge { display: inline-block; background: rgba(255,255,255,0.25); border: 1px solid rgba(255,255,255,0.5); border-radius: 20px; padding: 3px 12px; font-size: 0.8em; margin-bottom: 10px; letter-spacing: 1px; font-weight: 700; }
 
 /* NAV */
-.nav { display: flex; flex-wrap: nowrap; background: #f8f9fa; border-top: 1px solid #ddd; border-left: 1px solid #ddd; border-right: 1px solid #ddd; }
-.nav-btn { flex: 1; padding: 14px 8px; text-align: center; cursor: pointer; border-right: 1px solid #ddd; border-bottom: 2px solid transparent; transition: all 0.2s; font-size: 0.88em; font-weight: 500; color: #666; }
-.nav-btn:last-child { border-right: none; }
-.nav-btn:hover { background: #e8ebff; color: #667eea; }
-.nav-btn.active { background: white; color: #667eea; border-bottom: 3px solid #667eea; font-weight: 700; }
+/* ===== NAV (Variante C: Aktiv-Pille) ===== */
+.nav {
+  display: flex; flex-wrap: wrap; gap: 4px;
+  background: #eef0fb; padding: 6px;
+  border-bottom: 2px solid #e9ecef;
+}
+.nav-btn {
+  flex: 1 1 auto; min-width: 64px; padding: 12px 8px;
+  border: none; background: none; cursor: pointer;
+  font-weight: 500; color: #666; transition: all 0.2s; border-radius: 10px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+}
+.nav-btn:hover { background: #e1e5fb; color: #667eea; }
+.nav-btn.active { background: #fff; color: #667eea; font-weight: 700; box-shadow: 0 1px 4px rgba(102,126,234,.25); }
+.nav-emoji { font-size: 1.3em; line-height: 1.2; }
+.nav-label { font-size: 0.78em; margin-top: 2px; line-height: 1.2; }
 
 .section { display: none; padding: 28px 24px; }
 .section.active { display: block; }
@@ -143,8 +154,7 @@ input.blank.xl { width: 220px; }
 @media (max-width: 600px) {
   body { padding: 10px; }
   .header h1 { font-size: 1.2rem; }
-  .nav { flex-wrap: wrap; }
-  .nav-btn { flex: 1 1 33%; font-size: 0.75em; padding: 10px 4px; }
+
   .genus-categories { grid-template-columns: repeat(2,1fr); }
 }
 
@@ -404,7 +414,6 @@ input.blank.xl { width: 220px; }
   </div>
 </div>
 
-    
     <!-- ===== TAB: GENUS ===== -->
     <div class="section" id="sec-genus">
         <img class="tab-banner" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAwIDIyMCIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsPSJHZW51cyDigJQgZGVyLCBkaWUsIGRhcyI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImJnIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iIzVkNmZjMiIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiM2YTRhOTIiLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgPC9kZWZzPgoKICA8cmVjdCB3aWR0aD0iMTAwMCIgaGVpZ2h0PSIyMjAiIGZpbGw9InVybCgjYmcpIi8+CgoKICA8IS0tIEtpY2tlcjoga2xlaW5lLCBnZXNwZXJydGUgVmVyc2FsaWVuIC0tPgogIDx0ZXh0IHg9IjUwMCIgeT0iNzIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSInU2Vnb2UgVUknLCBzeXN0ZW0tdWksIHNhbnMtc2VyaWYiCiAgICAgICAgZm9udC1zaXplPSIxNSIgZm9udC13ZWlnaHQ9IjYwMCIgbGV0dGVyLXNwYWNpbmc9IjciIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC43OCI+R0VOVVMmIzE2MDsmIzE2MDsmIzE4MzsmIzE2MDsmIzE2MDtBUlRJS0VMIEJFU1RJTU1FTjwvdGV4dD4KCiAgPCEtLSBIYXVwdHplaWxlOiBydWhpZ2UgU2VyaWYgLS0+CiAgPHRleHQgeD0iMzIwIiB5PSIxNDgiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJHZW9yZ2lhLCAnVGltZXMgTmV3IFJvbWFuJywgc2VyaWYiIGZvbnQtc2l6ZT0iNjYiIGZpbGw9IiNmZmZmZmYiPmRlcjwvdGV4dD4KICA8dGV4dCB4PSI1MDAiIHk9IjE0OCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9Ikdlb3JnaWEsICdUaW1lcyBOZXcgUm9tYW4nLCBzZXJpZiIgZm9udC1zaXplPSI2NiIgZmlsbD0iI2ZmZmZmZiI+ZGllPC90ZXh0PgogIDx0ZXh0IHg9IjY4MCIgeT0iMTQ4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iR2VvcmdpYSwgJ1RpbWVzIE5ldyBSb21hbicsIHNlcmlmIiBmb250LXNpemU9IjY2IiBmaWxsPSIjZmZmZmZmIj5kYXM8L3RleHQ+CgogIDwhLS0gZGV6ZW50ZSBGYXJiYWt6ZW50ZSB1bnRlciBqZWRlbSBBcnRpa2VsIC0tPgogIDxyZWN0IHg9IjI4OSIgeT0iMTY2IiB3aWR0aD0iNjIiIGhlaWdodD0iMyIgcng9IjEuNSIgZmlsbD0iIzdlYTJlNiIvPgogIDxyZWN0IHg9IjQ2OSIgeT0iMTY2IiB3aWR0aD0iNjIiIGhlaWdodD0iMyIgcng9IjEuNSIgZmlsbD0iI2Q5OGNhZSIvPgogIDxyZWN0IHg9IjY0OSIgeT0iMTY2IiB3aWR0aD0iNjIiIGhlaWdodD0iMyIgcng9IjEuNSIgZmlsbD0iIzg2Y2JhYiIvPgo8L3N2Zz4K" alt="Genus üben — der, die, das">
@@ -419,7 +428,6 @@ input.blank.xl { width: 220px; }
   <a href="mailto:unterricht@frankburkert-daf.de">unterricht@frankburkert-daf.de</a><br>📅 Termin vereinbaren &middot; <a href="https://termin.frankburkert-daf.de">https://termin.frankburkert-daf.de</a>
 </div>
 </div><!-- /container -->
-
 
 <script>
 // ══════════════════════════════════════════════════════════
@@ -1262,7 +1270,6 @@ function showGenusLoesung(){
 function resetGenus(){ initGenus(); genusTimerReset(); }
 (function(){ initGenus(); })();
 </script>
-
 
 <!-- FB-JUMPTOP -->
 <button class="fb-jumptop" id="fbJumpTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Nach oben springen" aria-label="Nach oben springen">↑ Nach oben</button>

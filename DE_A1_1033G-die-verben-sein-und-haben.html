@@ -13,17 +13,23 @@ body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background
 .header .big-emoji { font-size: 2.6em; display: block; margin-top: 8px; }
 .header .subtitle, .header p { font-size: 1.0em; opacity: 0.95; color: rgba(255,255,255,0.9); margin: 0; font-family: Georgia, 'Times New Roman', serif; }
 .content-area { padding: 28px 30px 30px 30px; }
-.nav { display: flex; flex-wrap: nowrap; background: #f8f9fa; border-top: 1px solid #ddd; border-left: 1px solid #ddd; border-right: 1px solid #ddd; }
-.nav-btn { flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center; padding: 14px 10px; text-align: center; cursor: pointer; border-right: 1px solid #ddd; border-bottom: 1px solid #ddd; transition: all 0.3s; font-size: 0.92em; font-weight: 500; color: #666; }
-.nav-btn:last-child { border-right: none; }
-.nav-btn:hover { background: #e8ecff; color: #667eea; }
-.nav-btn.active { background: white; color: #667eea; font-weight: 700; border-bottom: 3px solid #667eea; }
+/* ===== NAV (Variante C: Aktiv-Pille) ===== */
+.nav {
+  display: flex; flex-wrap: wrap; gap: 4px;
+  background: #eef0fb; padding: 6px;
+  border-bottom: 2px solid #e9ecef;
+}
+.nav-btn {
+  flex: 1 1 auto; min-width: 64px; padding: 12px 8px;
+  border: none; background: none; cursor: pointer;
+  font-weight: 500; color: #666; transition: all 0.2s; border-radius: 10px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+}
+.nav-btn:hover { background: #e1e5fb; color: #667eea; }
+.nav-btn.active { background: #fff; color: #667eea; font-weight: 700; box-shadow: 0 1px 4px rgba(102,126,234,.25); }
 .nav-emoji { font-size: 1.3em; line-height: 1.2; }
 .nav-label { font-size: 0.78em; margin-top: 2px; line-height: 1.2; }
+
 .section { display: none; }
 .section.active { display: block; }
 h2 { color: #333; font-size: 1.15em; margin-bottom: 16px; padding-bottom: 8px; border-bottom: 2px solid #f0f0f0; }
@@ -61,7 +67,6 @@ h2 { color: #333; font-size: 1.15em; margin-bottom: 16px; padding-bottom: 8px; b
 .btn { background: #f5f7ff; border: 1px solid #c5cff5; border-radius: 8px; padding: 6px 16px; font-size: 0.85em; color: #667eea; cursor: pointer; transition: all 0.15s; font-weight: 500; }
 .btn:hover { background: #eee; color: #444; }
 .timer-display { display: flex; gap: 14px; font-size: 0.82em; color: #bbb; font-variant-numeric: tabular-nums; }
-
 
 /* ===== HILFE-BOX ===== */
 .help-box { background: #f8f9ff; border-left: 4px solid #667eea; border-radius: 0 10px 10px 0; padding: 14px 18px; margin-bottom: 20px; font-size: 0.9em; line-height: 1.7; color: #444; }
@@ -147,9 +152,8 @@ input.blank.wrong { border-color: #e74c3c; background: #ffebee; }
 
 @media (max-width: 600px) {
   body { padding: 8px; }
-  .nav { flex-wrap: wrap; }
-  .nav-btn { flex: 1 1 33%; min-width: 0; font-size: 0.8em; padding: 10px 6px; border-right: 1px solid #ddd; }
-  .nav-btn:last-child { border-right: 1px solid #ddd; }
+
+  
   .genus-categories { grid-template-columns: 1fr; }
   .vocab-en { min-width: 120px; }
 }
@@ -167,7 +171,6 @@ input.blank.wrong { border-color: #e74c3c; background: #ffebee; }
   padding:5px 12px; border-radius:14px; cursor:default;
   font-weight:500; font-size:0.9em; transition:all 0.2s; user-select:none;
 }
-
 
 /* ===== Schreibwerkstatt — Niveau-flexibel ===== */
 .schreib-aufgabe-karte { background: #f8f9ff; padding: 16px 18px; margin-bottom: 16px; border-radius: 10px; border-left: 4px solid #667eea; transition: all 0.25s; }
@@ -208,7 +211,6 @@ input.blank.wrong { border-color: #e74c3c; background: #ffebee; }
 .schreib-name-box .schreib-label { color: #b15c00; }
 .schreib-name.schreib-name-error { border-color: #c62828; box-shadow: 0 0 0 2px rgba(198,40,40,0.15); animation: schreib-name-shake 0.4s; }
 @keyframes schreib-name-shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-4px)} 75%{transform:translateX(4px)} }
-
 
 /* Customer-Success-Fallback-Block bei Versand-Fehler (gepatcht) */
 .schreib-fb { display: flex; flex-direction: column; gap: 8px; }
@@ -395,7 +397,6 @@ input.blank.wrong { border-color: #e74c3c; background: #ffebee; }
         <div class="help-box">
             <strong>Aufgabe:</strong> Tipp die fehlenden Verbformen ein. Beide Verben sind <strong>unregelm&auml;&szlig;ig</strong> &mdash; jede Form muss auswendig gelernt werden!
         </div>
-
 
         <div class="verb-header" style="margin-top:16px;">sein</div>
         <table class="conj-table" id="conjTableSein">
@@ -603,8 +604,6 @@ input.blank.wrong { border-color: #e74c3c; background: #ffebee; }
     </div>
 
 </div><!-- /container -->
-
-
 
 <script>
 /* ============================================================

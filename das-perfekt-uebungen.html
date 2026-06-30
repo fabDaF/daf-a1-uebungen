@@ -12,13 +12,23 @@ body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background
 .header h1 { font-size: 2.2em; font-family: Georgia, 'Times New Roman', serif; color: white; margin-bottom: 8px; border: none; padding: 0; }
 .header p { font-size: 1.0em; font-family: Georgia, 'Times New Roman', serif; opacity: 0.95; color: rgba(255,255,255,0.9); margin: 0; }
 .header .big-emoji { font-size: 2.6em; display: block; margin-top: 8px; }
-.nav { display: flex; flex-wrap: nowrap; background: #f8f9fa; border-top: 1px solid #ddd; border-left: 1px solid #ddd; border-right: 1px solid #ddd; }
-.nav-btn { flex: 1; padding: 14px 10px; text-align: center; cursor: pointer; border-right: 1px solid #ddd; border-bottom: 1px solid #ddd; transition: all 0.3s; font-size: 0.92em; font-weight: 500; color: #666; display: flex; flex-direction: column; align-items: center; justify-content: center; background: none; border-top: none; border-left: none; font-family: inherit; }
-.nav-btn:last-child { border-right: none; }
-.nav-btn:hover { background: #e8ecff; color: #667eea; }
-.nav-btn.active { background: white; color: #667eea; font-weight: 700; border-bottom: 3px solid #667eea; }
+/* ===== NAV (Variante C: Aktiv-Pille) ===== */
+.nav {
+  display: flex; flex-wrap: wrap; gap: 4px;
+  background: #eef0fb; padding: 6px;
+  border-bottom: 2px solid #e9ecef;
+}
+.nav-btn {
+  flex: 1 1 auto; min-width: 64px; padding: 12px 8px;
+  border: none; background: none; cursor: pointer;
+  font-weight: 500; color: #666; transition: all 0.2s; border-radius: 10px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+}
+.nav-btn:hover { background: #e1e5fb; color: #667eea; }
+.nav-btn.active { background: #fff; color: #667eea; font-weight: 700; box-shadow: 0 1px 4px rgba(102,126,234,.25); }
 .nav-emoji { font-size: 1.3em; line-height: 1.2; }
 .nav-label { font-size: 0.78em; margin-top: 2px; line-height: 1.2; }
+
 .section { display: none; }
 .section.active { display: block; }
 .pad { padding: 28px 30px; }
@@ -29,9 +39,8 @@ body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background
 @media (max-width: 600px) {
     body { padding: 8px; }
     .pad { padding: 16px; }
-    .nav { flex-wrap: wrap; }
-    .nav-btn { flex: 1 1 33%; min-width: 0; font-size: 0.8em; padding: 10px 6px; border-right: 1px solid #ddd; }
-    .nav-btn:last-child { border-right: 1px solid #ddd; }
+
+    
     .gap-hilfsverb { width: 80px; }
     .gap-partizip  { width: 120px; }
 }
@@ -86,7 +95,6 @@ body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background
 .gap-inp.incorrect { border-color: #e74c3c; background: #fff5f5; }
 .gap-inp.partial   { border-color: #f39c12; background: #fffbf0; }
 .gap-hint { color: #888; font-size: 0.8em; margin-left: 12px; font-style: italic; }
-
 
 /* ===== Multiple Choice ===== */
 .mc-question { background: #f9f9ff; border-radius: 10px; padding: 16px 20px; margin-bottom: 14px; border-left: 4px solid #667eea; }
@@ -396,7 +404,6 @@ body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background
         <div id="genusFeedback" style="margin-top:14px;font-weight:600;"></div>
     </div>
 
-
     <div class="author-footer">
         <span class="author-name">&copy; Frank Burkert</span> &middot; DaF-Materialien &middot;
         <a href="mailto:unterricht@frankburkert-daf.de">unterricht@frankburkert-daf.de</a><br>📅 Termin vereinbaren &middot; <a href="https://termin.frankburkert-daf.de">https://termin.frankburkert-daf.de</a>
@@ -561,8 +568,6 @@ function selectMatchItem(item) {
 }
 
 // ===== TAB 3: LÜCKENTEXT =====
-
-
 
 // ===== TAB 3: LÜCKENTEXT (Hilfsverb + Partizip II) =====
 const gapfillSentences = [
@@ -1136,7 +1141,6 @@ document.addEventListener('DOMContentLoaded', () => {
     loadBestTimes();
 });
 
-
 /* ── Tap-to-Select / Tap-to-Place (Mobile Satzbau) ─────────────────── */
 (function(){
   var sbSelected = null;
@@ -1286,7 +1290,6 @@ function showGenusLoesung(){
 function resetGenus(){ initGenus(); genusTimerReset(); }
 (function(){ initGenus(); })();
 </script>
-
 
 <!-- FB-JUMPTOP -->
 <button class="fb-jumptop" id="fbJumpTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Nach oben springen" aria-label="Nach oben springen">↑ Nach oben</button>

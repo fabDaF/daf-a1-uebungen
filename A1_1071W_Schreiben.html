@@ -20,18 +20,22 @@ body { font-family: 'Segoe UI', sans-serif; background: #f0f2f5; color: #333; mi
   margin-bottom: 6px; letter-spacing: 0.5px;
 }
 
+/* ===== NAV (Variante C: Aktiv-Pille) ===== */
 .nav {
-  display: flex; flex-wrap: wrap; gap: 6px;
-  padding: 12px 16px; background: #fff;
-  border-bottom: 2px solid #e0e0e0; position: sticky; top: 0; z-index: 10;
+  display: flex; flex-wrap: wrap; gap: 4px;
+  background: #eef0fb; padding: 6px;
+  border-bottom: 2px solid #e9ecef;
 }
 .nav-btn {
-  padding: 7px 14px; border: 2px solid #2e7d32; border-radius: 20px;
-  background: #fff; color: #2e7d32; font-size: 0.85rem; font-weight: 600;
-  cursor: pointer; transition: all .2s; white-space: nowrap;
+  flex: 1 1 auto; min-width: 64px; padding: 12px 8px;
+  border: none; background: none; cursor: pointer;
+  font-weight: 500; color: #666; transition: all 0.2s; border-radius: 10px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
 }
-.nav-btn:hover { background: #e8f5e9; }
-.nav-btn.active { background: #2e7d32; color: #fff; }
+.nav-btn:hover { background: #e1e5fb; color: #667eea; }
+.nav-btn.active { background: #fff; color: #667eea; font-weight: 700; box-shadow: 0 1px 4px rgba(102,126,234,.25); }
+.nav-emoji { font-size: 1.3em; line-height: 1.2; }
+.nav-label { font-size: 0.78em; margin-top: 2px; line-height: 1.2; }
 
 .section { display: none; padding: 20px 16px; max-width: 860px; margin: 0 auto; }
 .section.active { display: block; }
@@ -468,7 +472,6 @@ footer {
         <div class="genus-kategorien"><div class="genus-kat kat-der"><div class="kat-title">der</div><div class="genus-drop" id="drop-der" data-cat="der"></div></div><div class="genus-kat kat-die"><div class="kat-title">die</div><div class="genus-drop" id="drop-die" data-cat="die"></div></div><div class="genus-kat kat-das"><div class="kat-title">das</div><div class="genus-drop" id="drop-das" data-cat="das"></div></div><div class="genus-kat kat-pl"><div class="kat-title">Plural</div><div class="genus-drop" id="drop-pl" data-cat="pl"></div></div></div>
         <div id="genusFeedback" style="margin-top:14px;font-weight:600;"></div>
     </div>
-
 
 <footer>
   © Frank Burkert · DaF-Materialien · unterricht@frankburkert-daf.de
@@ -1085,7 +1088,6 @@ function showGenusLoesung(){
 function resetGenus(){ initGenus(); genusTimerReset(); }
 (function(){ initGenus(); })();
 </script>
-
 
 <!-- FB-JUMPTOP -->
 <button class="fb-jumptop" id="fbJumpTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Nach oben springen" aria-label="Nach oben springen">↑ Nach oben</button>
