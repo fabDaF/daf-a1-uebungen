@@ -147,11 +147,11 @@ input.blank.wrong { border-bottom-color: #e74c3c; background: #fdeaea; }
     <div class="nav">
         <div class="nav-btn active" onclick="showSection(0)">&#127800; Monate &amp; Jahreszeiten</div>
         <div class="nav-btn" onclick="showSection(1)">&#128290; Ordnungszahlen</div>
-        <div class="nav-btn" onclick="showSection(2)">&#128198; Datum schreiben</div>
-        <div class="nav-btn" onclick="showSection(3)">&#128197; am + Datum</div>
-        <div class="nav-btn" onclick="showSection(4)">&#129513; Satzbau</div>
-        <div class="nav-btn" onclick="showSection(5)">🏷️ Genus</div>
-        <div class="nav-btn" onclick="showSection(6)">&#128218; Wortschatz</div>
+        <div class="nav-btn" onclick="showSection(2)">&#128197; am + Datum</div>
+        <div class="nav-btn" onclick="showSection(3)">&#129513; Satzbau</div>
+        <div class="nav-btn" onclick="showSection(4)">🏷️ Genus</div>
+        <div class="nav-btn" onclick="showSection(5)">&#128218; Wortschatz</div>
+        <div class="nav-btn" onclick="showSection(6)">&#128198; Datum schreiben</div>
     </div>
 
     <!-- ===== TAB 0: MONATE ZUORDNUNG ===== -->
@@ -202,25 +202,6 @@ input.blank.wrong { border-bottom-color: #e74c3c; background: #fdeaea; }
         <div class="timer-display">
             <span class="current-time">&#9201; <span id="timer-1">00:00</span></span>
             <span class="best-time">&#127942; Best: <span id="best-1">--:--</span></span>
-        </div>
-    </div>
-
-    <!-- ===== TAB 2: DATUM SCHREIBEN ===== -->
-    <div class="section" id="sec-2">
-        <h2>&#128198; Datum schreiben</h2>
-        <div class="help-box">
-            <strong>Aufgabe:</strong> Schreibe das Datum in W&ouml;rtern!<br>
-            &#128313; der 06.12. = der <strong>sechste Dezember</strong><br>
-            &#128313; Nach <em>der</em>: Ordnungszahl + <strong>-te</strong> / <strong>-ste</strong>
-        </div>
-        <div id="datumContainer"></div>
-        <div class="btn-row">
-            <button onclick="showDatumLoesung()" style="background:#f5f7ff;border:1px solid #c5cff5;border-radius:8px;padding:6px 16px;font-size:0.85em;color:#667eea;cursor:pointer;font-weight:600;">💡 Lösungen</button>
-            <button onclick="resetDatum(); resetTimer(2);" style="background:#f5f7ff;border:1px solid #c5cff5;border-radius:8px;padding:6px 16px;font-size:0.85em;color:#667eea;cursor:pointer;font-weight:600;">↺ Neustart</button>
-        </div>
-        <div class="timer-display">
-            <span class="current-time">&#9201; <span id="timer-2">00:00</span></span>
-            <span class="best-time">&#127942; Best: <span id="best-2">--:--</span></span>
         </div>
     </div>
 
@@ -280,6 +261,25 @@ input.blank.wrong { border-bottom-color: #e74c3c; background: #fdeaea; }
         <div class="timer-display">
             <span class="current-time">&#9201; <span id="timer-5">00:00</span></span>
             <span class="best-time">&#127942; Best: <span id="best-5">--:--</span></span>
+        </div>
+    </div>
+
+    <!-- ===== TAB 2: DATUM SCHREIBEN ===== -->
+    <div class="section" id="sec-2">
+        <h2>&#128198; Datum schreiben</h2>
+        <div class="help-box">
+            <strong>Aufgabe:</strong> Schreibe das Datum in W&ouml;rtern!<br>
+            &#128313; der 06.12. = der <strong>sechste Dezember</strong><br>
+            &#128313; Nach <em>der</em>: Ordnungszahl + <strong>-te</strong> / <strong>-ste</strong>
+        </div>
+        <div id="datumContainer"></div>
+        <div class="btn-row">
+            <button onclick="showDatumLoesung()" style="background:#f5f7ff;border:1px solid #c5cff5;border-radius:8px;padding:6px 16px;font-size:0.85em;color:#667eea;cursor:pointer;font-weight:600;">💡 Lösungen</button>
+            <button onclick="resetDatum(); resetTimer(2);" style="background:#f5f7ff;border:1px solid #c5cff5;border-radius:8px;padding:6px 16px;font-size:0.85em;color:#667eea;cursor:pointer;font-weight:600;">↺ Neustart</button>
+        </div>
+        <div class="timer-display">
+            <span class="current-time">&#9201; <span id="timer-2">00:00</span></span>
+            <span class="best-time">&#127942; Best: <span id="best-2">--:--</span></span>
         </div>
     </div>
 
