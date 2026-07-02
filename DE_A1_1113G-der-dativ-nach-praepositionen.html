@@ -507,7 +507,7 @@ input.blank.wrong   { border-bottom-color: #e74c3c; }
       </div>
       <div class="schreib-aufgabe-karte">
         <span class="schreib-aufgabe-nr">2</span><span class="schreib-aufgabe-titel">Bei der Arbeit</span>
-        <div class="schreib-aufgabe-frage">Drei Sätze mit „bei".</div>
+        <div class="schreib-aufgabe-frage">Drei Sätze mit „bei“.</div>
         <div class="schreib-beispiel">Beispiel: „Ich bin bei meiner Mutter. Wir wohnen bei den Großeltern. Sie arbeitet bei der Bank.“</div>
         <textarea class="schreib-mini-textarea" data-aufgabe="2" data-titel="Bei der Arbeit"></textarea>
         <div class="schreib-mini-footer">
@@ -517,7 +517,7 @@ input.blank.wrong   { border-bottom-color: #e74c3c; }
       </div>
       <div class="schreib-aufgabe-karte">
         <span class="schreib-aufgabe-nr">3</span><span class="schreib-aufgabe-titel">Von wem?</span>
-        <div class="schreib-aufgabe-frage">Drei Sätze mit „von".</div>
+        <div class="schreib-aufgabe-frage">Drei Sätze mit „von“.</div>
         <div class="schreib-beispiel">Beispiel: „Das Geschenk ist von meiner Schwester. Der Brief ist von Tom. Die Idee ist von uns.“</div>
         <textarea class="schreib-mini-textarea" data-aufgabe="3" data-titel="Von wem?"></textarea>
         <div class="schreib-mini-footer">
@@ -527,7 +527,7 @@ input.blank.wrong   { border-bottom-color: #e74c3c; }
       </div>
       <div class="schreib-aufgabe-karte">
         <span class="schreib-aufgabe-nr">4</span><span class="schreib-aufgabe-titel">Zu wem gehst du?</span>
-        <div class="schreib-aufgabe-frage">Drei Sätze mit „zu".</div>
+        <div class="schreib-aufgabe-frage">Drei Sätze mit „zu“.</div>
         <div class="schreib-beispiel">Beispiel: „Ich gehe zu meinem Arzt. Wir fahren zu unserer Tante. Du gehst zur Schule.“</div>
         <textarea class="schreib-mini-textarea" data-aufgabe="4" data-titel="Zu wem gehst du?"></textarea>
         <div class="schreib-mini-footer">
@@ -1447,10 +1447,10 @@ function schreibFehlerErklaerung(err) {
     return 'Der Versand-Endpunkt ist gerade nicht freigeschaltet (das passiert manchmal bei Adress-Wechsel auf meiner Seite).';
   }
   if (code.indexOf('HTTP_') === 0) {
-    return 'Der Server hat eine technische Antwort gegeben (' + code.replace('HTTP_', 'HTTP ') + '), die nicht „erfolgreich" bedeutet.';
+    return 'Der Server hat eine technische Antwort gegeben (' + code.replace('HTTP_', 'HTTP ') + '), die nicht „erfolgreich“ bedeutet.';
   }
   if (code === 'API_ERROR') {
-    return 'Der Versand-Dienst hat „nicht erfolgreich" zurückgemeldet' + (err && err.apiMessage ? ' („' + err.apiMessage + '")' : '') + '.';
+    return 'Der Versand-Dienst hat „nicht erfolgreich“ zurückgemeldet' + (err && err.apiMessage ? ' („' + err.apiMessage + '“)' : '') + '.';
   }
   return 'Es gab ein Netz- oder Browser-Problem beim Senden — keine Server-Antwort.';
 }
@@ -1465,7 +1465,7 @@ function schreibKopierenEinzeln(nr) {
   function fertig(ok) {
     if (!st) return;
     if (ok) { st.classList.remove('error'); st.classList.add('success'); st.innerHTML = '✓ In die Zwischenablage kopiert. Jetzt in deine Mail oder deinen Chat einfügen und an mich schicken.'; }
-    else { st.classList.add('error'); st.innerHTML = '✗ Kopieren ging nicht — markier den Text in der Box selbst und nutz „kopieren" deines Browsers.'; }
+    else { st.classList.add('error'); st.innerHTML = '✗ Kopieren ging nicht — markier den Text in der Box selbst und nutz „kopieren“ deines Browsers.'; }
   }
   if (navigator.clipboard && navigator.clipboard.writeText) {
     navigator.clipboard.writeText(text).then(function () { fertig(true); }, function () { fertig(false); });
