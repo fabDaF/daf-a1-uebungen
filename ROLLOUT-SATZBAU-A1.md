@@ -169,6 +169,16 @@ Solche Sonderfälle einzeln behandeln, nie per Blind-Regex.
 - ⛔ Nichts außerhalb des Satzbau-Tabs ändern.
 - ⛔ ASCII-Anführungszeichen als schließendes Zeichen (immer „…“).
 
+## §7a Dokumentierte Ausnahme
+
+**`DE_A1_1133G-nebensaetze-weil-und-dass.html`** bleibt unangetastet. Die Lektion
+lehrt genau die Nebensatz-Konnektoren weil/dass mit Komma — die Kommafrei-Regel
+(§1.3/§7) würde hier den einzigen Lektionsinhalt zerstören. Frank hat diese
+Ausnahme am 2026-07-02 bestätigt (keine Präferenz zwischen Optionen → Default
+„auslassen" gewählt). `check_satzbau_laenge.py` wird bei dieser Datei weiterhin
+Kommasatz-Fehler melden — das ist erwartet und kein Blocker für den
+Rollout-Abschluss.
+
 ## §8 Abschluss-Verifikation des Rollouts
 
 Nach der letzten Datei, vom B2-Root:
