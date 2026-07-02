@@ -246,6 +246,13 @@ input.blank.wrong { border-bottom-color: #e74c3c; background: #fdeaea; }
 @media (max-width: 600px) { .fb-jumptop { bottom: 18px; right: 16px; padding: 12px 18px; font-size: 0.95em; } }
 /* FB-SCHREIB-LAST */
 .nav-btn.schreib-last{order:99;}
+
+/* ── Gerüst-Modus (B1+): sichtbare Lücken + feste Anker ── */
+.sb-gap { display:inline-flex; align-items:center; justify-content:center; min-width:66px; min-height:38px; padding:2px 6px; border:2px dashed #b9a7f0; border-radius:20px; background:#faf8ff; }
+.sb-gap.drag-over { border-color:#e67e22; background:#fff5ec; }
+.sb-gap .chip { margin:0; }
+.chip.sb-locked { background:#eef0ff; border-style:solid; border-color:#c3c9f5; color:#555; cursor:default; }
+.chip.sb-locked.correct { background:#27ae60; border-color:#27ae60; color:#fff; }
 </style>
 </head>
 <body>
@@ -505,11 +512,6 @@ input.blank.wrong { border-bottom-color: #e74c3c; background: #fdeaea; }
             <button onclick="resetSatzbau(); timerResetOne(5);" style="background:#f5f7ff;border:1px solid #c5cff5;border-radius:8px;padding:6px 16px;font-size:0.85em;color:#667eea;cursor:pointer;font-weight:600;">↺ Neustart</button></div>
             <div class="timer-display"><span class="current-time">&#9201; <span id="timer-5">00:00</span></span> <span class="best-time">&#127942; <span id="best-5">--:--</span></span></div>
         </div>
-        <div class="help-box">
-            <strong>Tipp:</strong> Bringe die Satzteile in die richtige Reihenfolge!<br>
-            &#128313; Das Verb steht immer auf Position 2.<br>
-            &#128313; Temporal-Angaben k&ouml;nnen auf Position 1 oder am Ende stehen.
-        </div>
         <div style="display:grid;grid-template-columns:1fr 1fr 1fr ;gap:14px;margin-bottom:22px;">
           <figure style="margin:0;text-align:center;">
             <img src="data:image/jpeg;base64,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" alt="Frau malt" style="width:100%;border-radius:8px;">
@@ -547,10 +549,10 @@ input.blank.wrong { border-bottom-color: #e74c3c; background: #fdeaea; }
         </div>
       </div>
       <div class="schreib-aufgabe-karte">
-        <span class="schreib-aufgabe-nr">2</span><span class="schreib-aufgabe-titel">Drei „wann"-Fragen</span>
-        <div class="schreib-aufgabe-frage">Schreib drei Fragen mit „wann".</div>
+        <span class="schreib-aufgabe-nr">2</span><span class="schreib-aufgabe-titel">Drei „wann“-Fragen</span>
+        <div class="schreib-aufgabe-frage">Schreib drei Fragen mit „wann“.</div>
         <div class="schreib-beispiel">Beispiel: „Wann frühstückst du? Wann arbeitest du? Wann schläfst du?“</div>
-        <textarea class="schreib-mini-textarea" data-aufgabe="2" data-titel="Drei „wann"-Fragen"></textarea>
+        <textarea class="schreib-mini-textarea" data-aufgabe="2" data-titel="Drei „wann“"-Fragen"></textarea>
         <div class="schreib-mini-footer">
           <span class="schreib-mini-meta">Wörter: <strong class="wc-2">0</strong> <span class="schreib-mini-status" id="sw-status-2"></span></span>
           <button class="schreib-mini-btn" id="sw-send-2" onclick="schreibSendenEinzeln(2)">📨 An mich senden</button>
@@ -578,7 +580,7 @@ input.blank.wrong { border-bottom-color: #e74c3c; background: #fdeaea; }
       </div>
       <div class="schreib-aufgabe-karte">
         <span class="schreib-aufgabe-nr">5</span><span class="schreib-aufgabe-titel">Mini-Dialog</span>
-        <div class="schreib-aufgabe-frage">Verabredung mit „wann".</div>
+        <div class="schreib-aufgabe-frage">Verabredung mit „wann“.</div>
         <div class="schreib-beispiel">Beispiel: „— Wann treffen wir uns? — Um sechs Uhr abends.“</div>
         <textarea class="schreib-mini-textarea" data-aufgabe="5" data-titel="Mini-Dialog"></textarea>
         <div class="schreib-mini-footer">
@@ -698,33 +700,29 @@ var TEMP_LUECKEN = [
 ];
 
 var satzbauData = [
-    { parts:["ich","fr\u00FChst\u00FCcke","am Morgen","um 7 Uhr"], valid:[
-        ["ich","fr\u00FChst\u00FCcke","am Morgen","um 7 Uhr"],
-        ["am Morgen","fr\u00FChst\u00FCcke","ich","um 7 Uhr"]
+    { parts:["ich","fr\u00FChst\u00FCcke","am","Morgen","um","7","Uhr"], valid:[
+        ["ich","fr\u00FChst\u00FCcke","am","Morgen","um","7","Uhr"]
     ], punct:"."},
-    { parts:["der Kurs","beginnt","um 18 Uhr"], valid:[
-        ["der Kurs","beginnt","um 18 Uhr"],
-        ["um 18 Uhr","beginnt","der Kurs"]
+    { parts:["der","Kurs","beginnt","heute","um","18","Uhr"], valid:[
+        ["der","Kurs","beginnt","heute","um","18","Uhr"]
     ], punct:"."},
-    { parts:["wann","fr\u00FChst\u00FCckst","du"], valid:[
-        ["wann","fr\u00FChst\u00FCckst","du"]
+    { parts:["wann","fr\u00FChst\u00FCckst","du","denn","heute"], valid:[
+        ["wann","fr\u00FChst\u00FCckst","du","denn","heute"]
     ], punct:"?"},
-    { parts:["ich","arbeite","von 9 Uhr","bis 17 Uhr"], valid:[
-        ["ich","arbeite","von 9 Uhr","bis 17 Uhr"]
+    { parts:["ich","arbeite","heute","von","9","bis","17","Uhr"], valid:[
+        ["ich","arbeite","heute","von","9","bis","17","Uhr"]
     ], punct:"."},
-    { parts:["abends","lese","ich","ein Buch"], valid:[
-        ["abends","lese","ich","ein Buch"]
+    { parts:["abends","lese","ich","heute","ein","Buch"], valid:[
+        ["abends","lese","ich","heute","ein","Buch"]
     ], punct:"."},
-    { parts:["am Nachmittag","gehe","ich","zum Arzt"], valid:[
-        ["am Nachmittag","gehe","ich","zum Arzt"],
-        ["ich","gehe","am Nachmittag","zum Arzt"]
+    { parts:["am","Nachmittag","gehe","ich","heute","zum","Arzt"], valid:[
+        ["am","Nachmittag","gehe","ich","heute","zum","Arzt"]
     ], punct:"."},
-    { parts:["die Party","ist","ab 20 Uhr"], valid:[
-        ["die Party","ist","ab 20 Uhr"]
+    { parts:["die","Party","ist","heute","ab","20","Uhr"], valid:[
+        ["die","Party","ist","heute","ab","20","Uhr"]
     ], punct:"."},
-    { parts:["er","arbeitet","in der Nacht"], valid:[
-        ["er","arbeitet","in der Nacht"],
-        ["in der Nacht","arbeitet","er"]
+    { parts:["er","arbeitet","heute","auch","in","der","Nacht"], valid:[
+        ["er","arbeitet","heute","auch","in","der","Nacht"]
     ], punct:"."}
 ];
 
@@ -1542,10 +1540,10 @@ function schreibFehlerErklaerung(err) {
     return 'Der Versand-Endpunkt ist gerade nicht freigeschaltet (das passiert manchmal bei Adress-Wechsel auf meiner Seite).';
   }
   if (code.indexOf('HTTP_') === 0) {
-    return 'Der Server hat eine technische Antwort gegeben (' + code.replace('HTTP_', 'HTTP ') + '), die nicht „erfolgreich" bedeutet.';
+    return 'Der Server hat eine technische Antwort gegeben (' + code.replace('HTTP_', 'HTTP ') + '), die nicht „erfolgreich“ bedeutet.';
   }
   if (code === 'API_ERROR') {
-    return 'Der Versand-Dienst hat „nicht erfolgreich" zurückgemeldet' + (err && err.apiMessage ? ' („' + err.apiMessage + '")' : '') + '.';
+    return 'Der Versand-Dienst hat „nicht erfolgreich“ zurückgemeldet' + (err && err.apiMessage ? ' („' + err.apiMessage + '“)' : '') + '.';
   }
   return 'Es gab ein Netz- oder Browser-Problem beim Senden — keine Server-Antwort.';
 }
@@ -1560,7 +1558,7 @@ function schreibKopierenEinzeln(nr) {
   function fertig(ok) {
     if (!st) return;
     if (ok) { st.classList.remove('error'); st.classList.add('success'); st.innerHTML = '✓ In die Zwischenablage kopiert. Jetzt in deine Mail oder deinen Chat einfügen und an mich schicken.'; }
-    else { st.classList.add('error'); st.innerHTML = '✗ Kopieren ging nicht — markier den Text in der Box selbst und nutz „kopieren" deines Browsers.'; }
+    else { st.classList.add('error'); st.innerHTML = '✗ Kopieren ging nicht — markier den Text in der Box selbst und nutz „kopieren“ deines Browsers.'; }
   }
   if (navigator.clipboard && navigator.clipboard.writeText) {
     navigator.clipboard.writeText(text).then(function () { fertig(true); }, function () { fertig(false); });
@@ -1841,5 +1839,211 @@ function resetGenus(){ initGenus(); genusTimerReset(); }
 })();
 </script>
 
+
+<script>
+/* ── Gerüst-Modus Add-on (B1+) — additiv generiert. Mischt row/parts zur Laufzeit in satzbauData,
+   hüllt Init/Lösung/Reset. Original-Logik für Sätze ohne row bleibt unberührt. */
+(function(){
+  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":false,"tab":5};
+  var SBGAP = [{"i":0,"row":["_","_","_","Morgen","_","_","Uhr"],"parts":["ich","frühstücke","am","um","7"]},{"i":1,"row":["_","_","_","heute","_","_","Uhr"],"parts":["der","Kurs","beginnt","um","18"]},{"i":2,"row":["_","_","_","denn","heute"],"parts":["wann","frühstückst","du"]},{"i":3,"row":["_","_","_","von","_","bis","_","Uhr"],"parts":["ich","arbeite","heute","9","17"]},{"i":4,"row":["_","_","_","heute","_","Buch"],"parts":["abends","lese","ich","ein"]},{"i":5,"row":["_","_","_","ich","_","_","Arzt"],"parts":["am","Nachmittag","gehe","heute","zum"]},{"i":6,"row":["_","_","_","heute","_","_","Uhr"],"parts":["die","Party","ist","ab","20"]},{"i":7,"row":["_","_","_","auch","_","_","Nacht"],"parts":["er","arbeitet","heute","in","der"]}];
+  SBGAP.forEach(function(g){ var ex = satzbauData[g.i]; if (!ex) return;
+    ex.row = g.row; ex.parts = g.parts;
+    if (typeof ex.valid[0] === "string") ex.valid = [ex.valid];
+  });
+  if (typeof window.sbDragged === "undefined") window.sbDragged = null;
+  function bankEl(i){ return document.getElementById(CFG.bank + i); }
+  function rowEl(i){ return document.getElementById(CFG.row + i); }
+  function fbEl(i){ return document.getElementById(CFG.fb + i); }
+  function cap(w){ return w.charAt(0).toUpperCase() + w.slice(1); }
+  function positions(row){ return Array.from(row.children).filter(function(n){ return n.classList.contains("sb-gap") || n.classList.contains("chip"); }); }
+  function chipOf(pos){ return pos.classList.contains("sb-gap") ? pos.querySelector(".chip") : pos; }
+  function updateCaps(row){ if (!CFG.caps) return;
+    positions(row).forEach(function(pos,i){ var c = chipOf(pos); if (!c) return;
+      var o = c.dataset.orig;
+      var proper = o.charAt(0) === o.charAt(0).toUpperCase() && o.charAt(0) !== o.charAt(0).toLowerCase();
+      c.textContent = proper ? o : (i === 0 ? cap(o) : o); });
+  }
+  function sequence(i){ var row = rowEl(i), seq = [], complete = true;
+    positions(row).forEach(function(pos){ var c = chipOf(pos); if (c) seq.push(c.dataset.orig); else complete = false; });
+    return { seq: seq, complete: complete }; }
+  function clearMarks(i){ var row = rowEl(i);
+    row.querySelectorAll(".chip").forEach(function(c){ c.classList.remove("correct","incorrect"); });
+    row.classList.remove("correct","incorrect");
+    var p = row.querySelector(".sb-punkt"); if (p) p.parentNode.removeChild(p); }
+  function afterChange(i){
+    var row = rowEl(i); updateCaps(row);
+    var fb = fbEl(i), info = sequence(i);
+    if (!info.complete){ clearMarks(i); if (fb){ fb.textContent=""; fb.className="satzbau-feedback"; } return; }
+    setTimeout(function(){
+      if (typeof timerAutoStart === "function") timerAutoStart(CFG.tab);
+      var fresh = sequence(i);
+      var ok = satzbauData[i].valid.some(function(v){ return JSON.stringify(v) === JSON.stringify(fresh.seq); });
+      var p = row.querySelector(".sb-punkt"); if (p) p.parentNode.removeChild(p);
+      if (ok){
+        row.querySelectorAll(".chip").forEach(function(c){ c.classList.remove("incorrect"); c.classList.add("correct"); });
+        var punkt = document.createElement("span"); punkt.className = "sb-punkt";
+        punkt.textContent = satzbauData[i].punct || "."; row.appendChild(punkt);
+        row.classList.add("correct"); row.classList.remove("incorrect");
+        if (fb){ fb.className = "satzbau-feedback correct"; fb.textContent = "✓ Korrekt!"; }
+        if (typeof sbCheckAllDone === "function") sbCheckAllDone();
+      } else {
+        row.querySelectorAll(".chip").forEach(function(c){ c.classList.remove("correct","incorrect"); });
+        row.querySelectorAll(".sb-gap .chip").forEach(function(c){ c.classList.add("incorrect"); });
+        row.classList.add("incorrect"); row.classList.remove("correct");
+        if (fb){ fb.className = "satzbau-feedback incorrect"; fb.textContent = "✗ Noch nicht richtig – verschiebe die Wörter!"; }
+      }
+    }, 450);
+  }
+  /* Geführter Modus (B1, 2026-06-10): Sofort-Feedback pro Chip-Platzierung.
+     Richtig (konsistent mit mind. einer valid-Reihenfolge) -> grün + fixiert.
+     Falsch -> rot + Rücksprung in die Bank nach 800 ms. */
+  function toBank(i, chip){
+    chip.textContent = chip.dataset.orig;  // Kleinschreibung wiederherstellen — Bank darf den Satzanfang nicht verraten
+    bankEl(i).appendChild(chip);
+  }
+  function consistent(i){
+    var pos = positions(rowEl(i));
+    var v = satzbauData[i].valid;
+    return v.some(function(o){
+      for (var k = 0; k < pos.length; k++){ var c = chipOf(pos[k]); if (c && c.dataset.orig !== o[k]) return false; }
+      return true; });
+  }
+  function finishRow(i){
+    var row = rowEl(i), fb = fbEl(i);
+    var p = row.querySelector(".sb-punkt"); if (p) p.parentNode.removeChild(p);
+    var punkt = document.createElement("span"); punkt.className = "sb-punkt";
+    punkt.textContent = satzbauData[i].punct || "."; row.appendChild(punkt);
+    row.classList.add("correct"); row.classList.remove("incorrect");
+    if (fb){ fb.className = "satzbau-feedback correct"; fb.textContent = "✓ Korrekt!"; }
+    if (typeof sbCheckAllDone === "function") sbCheckAllDone();
+  }
+  function placeJudge(i, chip){
+    if (typeof timerAutoStart === "function") timerAutoStart(CFG.tab);
+    var row = rowEl(i); updateCaps(row);
+    var fb = fbEl(i);
+    if (consistent(i)){
+      chip.classList.remove("incorrect"); chip.classList.add("correct");
+      chip.dataset.fixed = "1"; chip.draggable = false;
+      if (sequence(i).complete){ finishRow(i); }
+      else if (fb){ fb.className = "satzbau-feedback"; fb.textContent = ""; }
+    } else {
+      chip.classList.add("incorrect");
+      if (fb){ fb.className = "satzbau-feedback incorrect"; fb.textContent = "✗ Das passt hier nicht!"; }
+      setTimeout(function(){
+        chip.classList.remove("incorrect");
+        if (!chip.dataset.fixed && chip.closest(".sb-gap")) toBank(i, chip);
+        updateCaps(rowEl(i));
+        if (fb && /incorrect/.test(fb.className)){ fb.className = "satzbau-feedback"; fb.textContent = ""; }
+      }, 800);
+    }
+  }
+  function makeChip(word, i){
+    var chip = document.createElement("div");
+    var isPunct = [",",".","!","?",";",":"].indexOf(word) !== -1;
+    chip.className = "chip" + (isPunct ? " punct-chip" : ""); chip.textContent = word; chip.draggable = true;
+    chip.dataset.orig = word; chip.dataset.word = word; chip.dataset.sbIdx = String(i);
+    chip.addEventListener("dragstart", function(e){ if (chip.dataset.fixed){ e.preventDefault(); return; } window.sbDragged = chip; if (typeof timerAutoStart === "function") timerAutoStart(CFG.tab); e.dataTransfer.effectAllowed = "move"; });
+    if (CFG.click) chip.addEventListener("click", function(){
+      if (chip.dataset.fixed) return;
+      if (typeof timerAutoStart === "function") timerAutoStart(CFG.tab);
+      var inSlot = chip.closest(".sb-gap");
+      if (inSlot){ toBank(i, chip); updateCaps(rowEl(i)); return; }
+      var free = Array.from(rowEl(i).querySelectorAll(".sb-gap")).find(function(s){ return !s.querySelector(".chip"); });
+      if (free){ free.appendChild(chip); placeJudge(i, chip); }
+    });
+    return chip;
+  }
+  function makeLocked(word){
+    var chip = document.createElement("div");
+    chip.className = "chip sb-locked"; chip.textContent = word;
+    chip.dataset.orig = word; chip.dataset.word = word; chip.dataset.locked = "1";
+    return chip;
+  }
+  function makeSlot(i){
+    var slot = document.createElement("div"); slot.className = "sb-gap";
+    slot.addEventListener("dragover", function(e){ e.preventDefault(); if (window.sbDragged) slot.classList.add("drag-over"); });
+    slot.addEventListener("dragleave", function(){ slot.classList.remove("drag-over"); });
+    slot.addEventListener("drop", function(e){
+      e.preventDefault(); slot.classList.remove("drag-over");
+      var d = window.sbDragged; if (!d || d.dataset.sbIdx !== String(i) || d.dataset.locked || d.dataset.fixed) return;
+      if (slot.querySelector(".chip")) return;  // Lücke schon belegt
+      slot.appendChild(d); window.sbDragged = null; placeJudge(i, d);
+    });
+    return slot;
+  }
+  function registerBank(bank, i){
+    bank.addEventListener("dragover", function(e){ e.preventDefault(); });
+    bank.addEventListener("drop", function(e){
+      e.preventDefault(); var d = window.sbDragged;
+      if (!d || d.dataset.sbIdx !== String(i) || d.dataset.locked || d.dataset.fixed) return;
+      toBank(i, d); window.sbDragged = null; updateCaps(rowEl(i));
+    });
+  }
+  function freshEl(id){ var el = document.getElementById(id); if (!el) return null;
+    var c = el.cloneNode(false); el.parentNode.replaceChild(c, el); return c; }
+  function rebuild(i){
+    var ex = satzbauData[i]; if (!ex || !ex.row) return;
+    var bank = freshEl(CFG.bank + i), row = freshEl(CFG.row + i);
+    if (!bank || !row) return;
+    var fb = fbEl(i); if (fb){ fb.textContent = ""; fb.className = "satzbau-feedback"; }
+    var mov = ex.parts.slice();
+    for (var k = mov.length - 1; k > 0; k--){ var j = Math.floor(Math.random()*(k+1)); var t = mov[k]; mov[k] = mov[j]; mov[j] = t; }
+    mov.forEach(function(w){ bank.appendChild(makeChip(w, i)); });
+    ex.row.forEach(function(tok){ row.appendChild(tok === "_" ? makeSlot(i) : makeLocked(tok)); });
+    registerBank(bank, i);
+    ensureButtons(i);
+  }
+  function rebuildAll(){ satzbauData.forEach(function(ex,i){ if (ex.row) rebuild(i); }); }
+  function showSol(i){
+    rebuild(i);
+    var row = rowEl(i), bank = bankEl(i), sol = satzbauData[i].valid[0];
+    var pool = Array.from(bank.querySelectorAll(".chip"));
+    positions(row).forEach(function(pos,k){
+      if (!pos.classList.contains("sb-gap")) return;
+      var ix = pool.findIndex(function(c){ return c.dataset.orig === sol[k]; });
+      if (ix >= 0){ while (pos.firstChild) pos.removeChild(pos.firstChild); pos.appendChild(pool[ix]); pool.splice(ix,1); }
+    });
+    row.querySelectorAll(".sb-gap .chip").forEach(function(c){ c.classList.add("correct"); c.dataset.fixed = "1"; c.draggable = false; });
+    updateCaps(row);
+    finishRow(i);
+  }
+  function ensureButtons(i){
+    if (document.getElementById("sb-btns-" + i)) return;
+    var anchor = fbEl(i) || rowEl(i); if (!anchor) return;
+    var item = (anchor.closest ? anchor.closest(".satzbau-item") : null) || anchor.parentNode;
+    if (item && [].some.call(item.querySelectorAll("button"), function(b){
+      return /(Lösen|Lösung|Neustart)/.test(b.textContent); })) return;  // native Buttons vorhanden
+    var box = document.createElement("div");
+    box.id = "sb-btns-" + i;
+    box.style.cssText = "display:flex;gap:8px;margin:6px 0 14px 0;";
+    var b1 = document.createElement("button"); b1.type = "button"; b1.className = "btn"; b1.textContent = "Lösen";
+    b1.addEventListener("click", function(){ showSol(i); });
+    var b2 = document.createElement("button"); b2.type = "button"; b2.className = "btn"; b2.textContent = "↺ Neustart";
+    b2.addEventListener("click", function(){ rebuild(i); });
+    box.appendChild(b1); box.appendChild(b2);
+    anchor.parentNode.insertBefore(box, anchor.nextSibling);
+  }
+  ["initSatzbau","buildSatzbau"].forEach(function(fn){
+    if (typeof window[fn] === "function"){ var o = window[fn];
+      window[fn] = function(){ o.apply(this, arguments); rebuildAll(); }; }
+  });
+  if (typeof window.sbReset === "function" && window.sbReset.length === 0){
+    var orall = window.sbReset;
+    window.sbReset = function(){ orall.apply(this, arguments); rebuildAll(); };
+  }
+  if (typeof window.sbResetOne === "function"){
+    var orst = window.sbResetOne;
+    window.sbResetOne = function(i){ if (satzbauData[i] && satzbauData[i].row){ rebuild(i); return; } orst.apply(this, arguments); };
+  }
+  if (typeof window.sbShowSolution === "function"){
+    var osol = window.sbShowSolution;
+    window.sbShowSolution = function(i){ if (satzbauData[i] && satzbauData[i].row){ showSol(i); return; } osol.apply(this, arguments); };
+  }
+  /* Bugfix 2026-06-10: bei leerer Row (Free-Build) zusätzlich die Bank prüfen,
+     sonst baut sich das Gerüst beim Erstladen nie auf (nur nach Neustart). */
+  var pRow = rowEl(0), pBank = bankEl(0);
+  if ((pRow && pRow.children.length) || (pBank && pBank.children.length)) rebuildAll();
+})();
+</script>
 </body>
 </html>
