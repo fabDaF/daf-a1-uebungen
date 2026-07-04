@@ -1010,7 +1010,7 @@ function colorAllQaChips(){
 }
 function showQaLoesung(){
     QA_DATA.forEach(function(q){
-        var zone=document.querySelector('#sec-4 [data-ans="'+q.antwort+'"]');
+        var zone=document.querySelector('#sec-4 .drop-zone[data-ans="'+q.antwort+'"]');
         var chip=Array.from(document.querySelectorAll('#sec-4 .chip')).find(function(c){return c.dataset.ans===q.antwort;});
         if(chip&&zone){zone.appendChild(chip);chip.classList.remove('wrong');chip.classList.add('correct');}
     });

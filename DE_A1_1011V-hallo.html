@@ -1381,13 +1381,13 @@ function initWortschatz() {
             artInp.className = 'blank'; artInp.type = 'text';
             artInp.placeholder = 'Artikel'; artInp.style.width = '70px';
             artInp.dataset.answer = item.artikel; artInp.dataset.field = 'art';
-            artInp.oninput = function() { wortschatzCheck(this); timerAutoStart(5); checkWortschatzAllOk(); };
+            artInp.oninput = function() { wortschatzCheck(this); startTimer(5); checkWortschatzAllOk(); };
             fields.appendChild(artInp);
             var wordInp = document.createElement('input');
             wordInp.className = 'blank'; wordInp.type = 'text';
             wordInp.placeholder = 'Wort'; wordInp.style.width = '160px';
             wordInp.dataset.answer = item.de; wordInp.dataset.field = 'word';
-            wordInp.oninput = function() { wortschatzCheck(this); timerAutoStart(5); checkWortschatzAllOk(); };
+            wordInp.oninput = function() { wortschatzCheck(this); startTimer(5); checkWortschatzAllOk(); };
             fields.appendChild(wordInp);
             var plInp = document.createElement('input');
             plInp.className = 'blank'; plInp.type = 'text';
@@ -1397,7 +1397,7 @@ function initWortschatz() {
                 plInp.value = '\u2013'; plInp.disabled = true;
                 plInp.classList.add('correct'); plInp.style.opacity = '0.6';
             } else {
-                plInp.oninput = function() { wortschatzCheck(this); timerAutoStart(5); checkWortschatzAllOk(); };
+                plInp.oninput = function() { wortschatzCheck(this); startTimer(5); checkWortschatzAllOk(); };
             }
             fields.appendChild(plInp);
         } else {
@@ -1405,7 +1405,7 @@ function initWortschatz() {
             inp.className = 'blank'; inp.type = 'text';
             inp.placeholder = 'Deutsch'; inp.style.width = '220px';
             inp.dataset.answer = item.de; inp.dataset.field = 'word';
-            inp.oninput = function() { wortschatzCheck(this); timerAutoStart(5); checkWortschatzAllOk(); };
+            inp.oninput = function() { wortschatzCheck(this); startTimer(5); checkWortschatzAllOk(); };
             fields.appendChild(inp);
         }
         row.appendChild(fields);
@@ -2020,7 +2020,7 @@ function resetGenus(){ initGenus(); genusTimerReset(); }
     var fb = fbEl(i), info = sequence(i);
     if (!info.complete){ clearMarks(i); if (fb){ fb.textContent=""; fb.className="satzbau-feedback"; } return; }
     setTimeout(function(){
-      if (typeof timerAutoStart === "function") timerAutoStart(CFG.tab);
+      if (typeof startTimer === "function") startTimer(CFG.tab);
       var fresh = sequence(i);
       var ok = satzbauData[i].valid.some(function(v){ return JSON.stringify(v) === JSON.stringify(fresh.seq); });
       var p = row.querySelector(".sb-punkt"); if (p) p.parentNode.removeChild(p);
@@ -2063,7 +2063,7 @@ function resetGenus(){ initGenus(); genusTimerReset(); }
     if (typeof sbCheckAllDone === "function") sbCheckAllDone();
   }
   function placeJudge(i, chip){
-    if (typeof timerAutoStart === "function") timerAutoStart(CFG.tab);
+    if (typeof startTimer === "function") startTimer(CFG.tab);
     var row = rowEl(i); updateCaps(row);
     var fb = fbEl(i);
     if (consistent(i)){
@@ -2087,10 +2087,10 @@ function resetGenus(){ initGenus(); genusTimerReset(); }
     var isPunct = [",",".","!","?",";",":"].indexOf(word) !== -1;
     chip.className = "chip" + (isPunct ? " punct-chip" : ""); chip.textContent = word; chip.draggable = true;
     chip.dataset.orig = word; chip.dataset.word = word; chip.dataset.sbIdx = String(i);
-    chip.addEventListener("dragstart", function(e){ if (chip.dataset.fixed){ e.preventDefault(); return; } window.sbDragged = chip; if (typeof timerAutoStart === "function") timerAutoStart(CFG.tab); e.dataTransfer.effectAllowed = "move"; });
+    chip.addEventListener("dragstart", function(e){ if (chip.dataset.fixed){ e.preventDefault(); return; } window.sbDragged = chip; if (typeof startTimer === "function") startTimer(CFG.tab); e.dataTransfer.effectAllowed = "move"; });
     if (CFG.click) chip.addEventListener("click", function(){
       if (chip.dataset.fixed) return;
-      if (typeof timerAutoStart === "function") timerAutoStart(CFG.tab);
+      if (typeof startTimer === "function") startTimer(CFG.tab);
       var inSlot = chip.closest(".sb-gap");
       if (inSlot){ toBank(i, chip); updateCaps(rowEl(i)); return; }
       var free = Array.from(rowEl(i).querySelectorAll(".sb-gap")).find(function(s){ return !s.querySelector(".chip"); });

@@ -512,7 +512,7 @@ function initWortschatz(){
     var row=document.createElement("div"); row.className="luecken-item"; row.style.marginBottom="0";
     var p=document.createElement("div"); p.style.cssText="font-weight:600;color:#667eea;margin-bottom:6px;font-size:1.05em;"; p.textContent=en; row.appendChild(p);
     var fl=document.createElement("div"); fl.style.cssText="display:flex;gap:8px;flex-wrap:wrap;align-items:center;";
-    function mk(ph,w,ans,fld){var i=document.createElement("input");i.className="blank";i.type="text";i.placeholder=ph;i.style.width=w;i.dataset.answer=ans;i.dataset.field=fld;i.oninput=function(){wortschatzCheck(this);if(typeof timerAutoStart==="function")timerAutoStart(0);checkWortschatzAllOk();};return i;}
+    function mk(ph,w,ans,fld){var i=document.createElement("input");i.className="blank";i.type="text";i.placeholder=ph;i.style.width=w;i.dataset.answer=ans;i.dataset.field=fld;i.oninput=function(){wortschatzCheck(this);if(typeof startTimer==="function")startTimer(0);checkWortschatzAllOk();};return i;}
     if(type==="n"){
       fl.appendChild(mk("Artikel","70px",artikel,"art"));
       fl.appendChild(mk("Wort","160px",de,"word"));
@@ -1360,7 +1360,7 @@ try{window.initWortschatz=initWortschatz;window.wortschatzCheck=wortschatzCheck;
     var fb = fbEl(i), info = sequence(i);
     if (!info.complete){ clearMarks(i); if (fb){ fb.textContent=""; fb.className="satzbau-feedback"; } return; }
     setTimeout(function(){
-      if (typeof timerAutoStart === "function") timerAutoStart(CFG.tab);
+      if (typeof startTimer === "function") startTimer(CFG.tab);
       var fresh = sequence(i);
       var ok = satzbauData[i].valid.some(function(v){ return JSON.stringify(v) === JSON.stringify(fresh.seq); });
       var p = row.querySelector(".sb-punkt"); if (p) p.parentNode.removeChild(p);
@@ -1403,7 +1403,7 @@ try{window.initWortschatz=initWortschatz;window.wortschatzCheck=wortschatzCheck;
     if (typeof sbCheckAllDone === "function") sbCheckAllDone();
   }
   function placeJudge(i, chip){
-    if (typeof timerAutoStart === "function") timerAutoStart(CFG.tab);
+    if (typeof startTimer === "function") startTimer(CFG.tab);
     var row = rowEl(i); updateCaps(row);
     var fb = fbEl(i);
     if (consistent(i)){
@@ -1427,10 +1427,10 @@ try{window.initWortschatz=initWortschatz;window.wortschatzCheck=wortschatzCheck;
     var isPunct = [",",".","!","?",";",":"].indexOf(word) !== -1;
     chip.className = "chip" + (isPunct ? " punct-chip" : ""); chip.textContent = word; chip.draggable = true;
     chip.dataset.orig = word; chip.dataset.word = word; chip.dataset.sbIdx = String(i);
-    chip.addEventListener("dragstart", function(e){ if (chip.dataset.fixed){ e.preventDefault(); return; } window.sbDragged = chip; if (typeof timerAutoStart === "function") timerAutoStart(CFG.tab); e.dataTransfer.effectAllowed = "move"; });
+    chip.addEventListener("dragstart", function(e){ if (chip.dataset.fixed){ e.preventDefault(); return; } window.sbDragged = chip; if (typeof startTimer === "function") startTimer(CFG.tab); e.dataTransfer.effectAllowed = "move"; });
     if (CFG.click) chip.addEventListener("click", function(){
       if (chip.dataset.fixed) return;
-      if (typeof timerAutoStart === "function") timerAutoStart(CFG.tab);
+      if (typeof startTimer === "function") startTimer(CFG.tab);
       var inSlot = chip.closest(".sb-gap");
       if (inSlot){ toBank(i, chip); updateCaps(rowEl(i)); return; }
       var free = Array.from(rowEl(i).querySelectorAll(".sb-gap")).find(function(s){ return !s.querySelector(".chip"); });

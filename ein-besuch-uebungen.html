@@ -1169,6 +1169,9 @@ function initSatzbau() {
         sbRegisterZone(row, idx);
     });
 }
+function showSatzbauLoesung() {
+    SATZBAU.forEach(function(_, idx) { sbShowSolution(idx); });
+}
 function resetSatzbau() {
     SATZBAU.forEach(function(_, idx) {
         var bank = document.getElementById('sb-bank-' + idx);
@@ -1239,7 +1242,7 @@ loadBestTimes();
 
    Timer-Anbindung: die Engine ruft generische Hooks window.fbLtTimerStart()/
    fbLtTimerStop(); der Produzent verdrahtet sie pro Datei auf den richtigen
-   Tab-Index (timerAutoStart(N)/timerStop(N)). Fehlen die Hooks, läuft die Engine
+   Tab-Index (startTimer(N)/timerStop(N)). Fehlen die Hooks, läuft die Engine
    ohne Timer weiter.
    ============================================================================ */
 
@@ -1359,6 +1362,6 @@ loadBestTimes();
 
 </script>
 
-<!-- FB-LT-STORY-HOOKS --><script>window.fbLtTimerStart=function(){if(typeof timerAutoStart==='function')timerAutoStart(3);};window.fbLtTimerStop=function(){if(typeof timerStop==='function')timerStop(3);};</script>
+<!-- FB-LT-STORY-HOOKS --><script>window.fbLtTimerStart=function(){if(typeof startTimer==='function')startTimer(3);};window.fbLtTimerStop=function(){if(typeof timerStop==='function')timerStop(3);};</script>
 </body>
 </html>

@@ -45,13 +45,6 @@ h1 { text-align: center; font-size: 1.4rem; background: linear-gradient(135deg, 
 .btn-reset:hover { background: #f8f8f8; }
 .score { text-align: center; margin-top: 12px; font-weight: 600; color: #667eea; font-size: 1rem; }
 
-.help-toggle { background: none; border: 1px solid #667eea; color: #667eea; border-radius: 6px;
-               padding: 4px 12px; font-size: 0.8rem; cursor: pointer; margin-bottom: 12px; }
-.help-toggle:hover { background: #667eea; color: #fff; }
-.help-box { display: none; background: #f8f7ff; border-left: 3px solid #667eea; padding: 12px 16px;
-            margin-bottom: 16px; border-radius: 0 8px 8px 0; font-size: 0.85rem; line-height: 1.6; }
-.help-box.open { display: block; }
-.help-box p { margin-bottom: 6px; }
 
 /* === WORTSCHATZ === */
 .ws-item { display: flex; align-items: baseline; flex-wrap: wrap; gap: 6px; padding: 10px 14px;
@@ -183,8 +176,6 @@ input.blank.wrong { border-bottom-color: #e74c3c; background: #fdeaea; }
 
 <!-- ============ TAB 0: WORTSCHATZ ============ -->
 <div class="section active" id="sec-0">
-    <button class="help-toggle" onclick="toggleHelp(0)">💡 Hilfe</button>
-
     <div id="ws-container"></div>
     <div class="btn-row">
         <button class="btn btn-check" onclick="startTimer(0);checkWS()">✔ Prüfen</button>
@@ -200,8 +191,6 @@ input.blank.wrong { border-bottom-color: #e74c3c; background: #fdeaea; }
 
 <!-- ============ TAB 1: ZUORDNUNG (Wie geht's?) ============ -->
 <div class="section" id="sec-1">
-    <button class="help-toggle" onclick="toggleHelp(1)">💡 Hilfe</button>
-
     <div class="chip-bank" id="zu-bank"></div>
     <div class="categories">
         <div class="category" data-cat="gut"><h3>😊 Gut</h3><div class="drop-zone"></div></div>
@@ -222,8 +211,6 @@ input.blank.wrong { border-bottom-color: #e74c3c; background: #fdeaea; }
 
 <!-- ============ TAB 2: KONJUGATION (Lückentext) ============ -->
 <div class="section" id="sec-2">
-    <button class="help-toggle" onclick="toggleHelp(2)">💡 Hilfe</button>
-
     <div id="luecken-container"></div>
     <div class="btn-row">
         <button class="btn btn-check" onclick="startTimer(2);checkLuecken()">✔ Prüfen</button>
@@ -238,9 +225,7 @@ input.blank.wrong { border-bottom-color: #e74c3c; background: #fdeaea; }
 </div>
 
 <!-- ============ TAB 3: SATZBAU ============ -->
-<div class="section" id="sec-3">
-    <button class="help-toggle" onclick="toggleHelp(3)">💡 Hilfe</button>
-        <div id="sb-container"></div>
+<div class="section" id="sec-3">        <div id="sb-container"></div>
     <div class="btn-row">
         <button class="btn btn-check" onclick="startTimer(3);checkSB()">✔ Prüfen</button>
         <button onclick="showSB()" style="background:#f5f7ff;border:1px solid #c5cff5;border-radius:8px;padding:6px 16px;font-size:0.85em;color:#667eea;cursor:pointer;font-weight:600;">💡 Lösungen</button>
@@ -271,7 +256,6 @@ input.blank.wrong { border-bottom-color: #e74c3c; background: #fdeaea; }
 <script>
 // ============ NAV & UTILS ============
 function showSection(i){document.querySelectorAll('.section').forEach((s,j)=>s.classList.toggle('active',j===i));document.querySelectorAll('.nav-btn').forEach((b,j)=>b.classList.toggle('active',j===i));}
-function toggleHelp(i){document.getElementById('help-'+i).classList.toggle('open');}
 function shuffle(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]];}return b;}
 
 // ============ TIMER ============

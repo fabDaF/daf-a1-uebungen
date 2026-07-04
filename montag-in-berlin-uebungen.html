@@ -1009,7 +1009,7 @@ function sbColorRow(idx) {
     var row = document.getElementById('sb-row-' + idx);
     var chips = Array.from(row.querySelectorAll('.chip'));
     var order = chips.map(function(c) { return c.dataset.orig; });
-    var ok = SATZBAU[idx].valid.some(function(v) {
+    var ok = satzbauData[idx].valid.some(function(v) {
         return JSON.stringify(v) === JSON.stringify(order);
     });
     chips.forEach(function(c) {
@@ -1056,7 +1056,7 @@ function sbCheckAuto(idx) {
 }
 
 function sbCheckAllDone() {
-    var allOk = SATZBAU.every(function(_, i) {
+    var allOk = satzbauData.every(function(_, i) {
         var row = document.getElementById('sb-row-' + i);
         return row && row.classList.contains('correct');
     });
@@ -1067,7 +1067,7 @@ function sbShowSolution(idx) {
     var bank = document.getElementById('sb-bank-' + idx);
     var row  = document.getElementById('sb-row-' + idx);
     var fb   = document.getElementById('sb-fb-' + idx);
-    var solution = SATZBAU[idx].valid[0];
+    var solution = satzbauData[idx].valid[0];
     var allChips = {};
     Array.from(bank.querySelectorAll('.chip')).forEach(function(c) { allChips[c.dataset.orig] = c; });
     Array.from(row.querySelectorAll('.chip')).forEach(function(c)  { allChips[c.dataset.orig] = c; });
@@ -1209,7 +1209,7 @@ loadBestTimes();
 
    Timer-Anbindung: die Engine ruft generische Hooks window.fbLtTimerStart()/
    fbLtTimerStop(); der Produzent verdrahtet sie pro Datei auf den richtigen
-   Tab-Index (timerAutoStart(N)/timerStop(N)). Fehlen die Hooks, läuft die Engine
+   Tab-Index (startTimer(N)/timerStop(N)). Fehlen die Hooks, läuft die Engine
    ohne Timer weiter.
    ============================================================================ */
 
@@ -1329,7 +1329,7 @@ loadBestTimes();
 
 </script>
 
-<!-- FB-LT-STORY-HOOKS --><script>window.fbLtTimerStart=function(){if(typeof timerAutoStart==='function')timerAutoStart(3);};window.fbLtTimerStop=function(){if(typeof timerStop==='function')timerStop(3);};</script>
+<!-- FB-LT-STORY-HOOKS --><script>window.fbLtTimerStart=function(){if(typeof startTimer==='function')startTimer(3);};window.fbLtTimerStop=function(){if(typeof timerStop==='function')timerStop(3);};</script>
 
 <script>
 /* ── Gerüst-Modus Add-on (B1+) — additiv generiert. Mischt row/parts zur Laufzeit in satzbauData,
@@ -1366,7 +1366,7 @@ loadBestTimes();
     var fb = fbEl(i), info = sequence(i);
     if (!info.complete){ clearMarks(i); if (fb){ fb.textContent=""; fb.className="satzbau-feedback"; } return; }
     setTimeout(function(){
-      if (typeof timerAutoStart === "function") timerAutoStart(CFG.tab);
+      if (typeof startTimer === "function") startTimer(CFG.tab);
       var fresh = sequence(i);
       var ok = satzbauData[i].valid.some(function(v){ return JSON.stringify(v) === JSON.stringify(fresh.seq); });
       var p = row.querySelector(".sb-punkt"); if (p) p.parentNode.removeChild(p);
@@ -1409,7 +1409,7 @@ loadBestTimes();
     if (typeof sbCheckAllDone === "function") sbCheckAllDone();
   }
   function placeJudge(i, chip){
-    if (typeof timerAutoStart === "function") timerAutoStart(CFG.tab);
+    if (typeof startTimer === "function") startTimer(CFG.tab);
     var row = rowEl(i); updateCaps(row);
     var fb = fbEl(i);
     if (consistent(i)){
@@ -1433,10 +1433,10 @@ loadBestTimes();
     var isPunct = [",",".","!","?",";",":"].indexOf(word) !== -1;
     chip.className = "chip" + (isPunct ? " punct-chip" : ""); chip.textContent = word; chip.draggable = true;
     chip.dataset.orig = word; chip.dataset.word = word; chip.dataset.sbIdx = String(i);
-    chip.addEventListener("dragstart", function(e){ if (chip.dataset.fixed){ e.preventDefault(); return; } window.sbDragged = chip; if (typeof timerAutoStart === "function") timerAutoStart(CFG.tab); e.dataTransfer.effectAllowed = "move"; });
+    chip.addEventListener("dragstart", function(e){ if (chip.dataset.fixed){ e.preventDefault(); return; } window.sbDragged = chip; if (typeof startTimer === "function") startTimer(CFG.tab); e.dataTransfer.effectAllowed = "move"; });
     if (CFG.click) chip.addEventListener("click", function(){
       if (chip.dataset.fixed) return;
-      if (typeof timerAutoStart === "function") timerAutoStart(CFG.tab);
+      if (typeof startTimer === "function") startTimer(CFG.tab);
       var inSlot = chip.closest(".sb-gap");
       if (inSlot){ toBank(i, chip); updateCaps(rowEl(i)); return; }
       var free = Array.from(rowEl(i).querySelectorAll(".sb-gap")).find(function(s){ return !s.querySelector(".chip"); });

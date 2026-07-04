@@ -734,6 +734,17 @@ function checkKonjAllOk() {
   if (allOk) timerStop(1);
 }
 
+function showKonjLoesung() {
+  document.querySelectorAll('#sec-1 input.blank').forEach(function(inp) {
+    var next = inp.nextElementSibling;
+    if (next && next.classList.contains('correction-hint')) next.remove();
+    inp.value = inp.dataset.answer;
+    inp.classList.add('correct');
+    inp.classList.remove('wrong');
+  });
+  updateKonjScore();
+}
+
 function resetTab(n) {
   timerResetOne(n);
   if (n === 1) {
@@ -888,6 +899,14 @@ function zuoReset() {
     pool.appendChild(chip);
   });
   var _el_score2 = document.getElementById('score2'); if (_el_score2) _el_score2.textContent = '0';
+}
+
+function showZuoLoesung() {
+  document.querySelectorAll('#sec-2 .chip').forEach(function(chip) {
+    var zone = document.getElementById('zone-' + chip.dataset.cat);
+    if (zone) zone.appendChild(chip);
+  });
+  colorAllZuoChips();
 }
 
 // ══════════════════════════════════════════

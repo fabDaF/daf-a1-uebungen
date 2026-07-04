@@ -1039,7 +1039,7 @@ loadBestTimes();
 
    Timer-Anbindung: die Engine ruft generische Hooks window.fbLtTimerStart()/
    fbLtTimerStop(); der Produzent verdrahtet sie pro Datei auf den richtigen
-   Tab-Index (timerAutoStart(N)/timerStop(N)). Fehlen die Hooks, läuft die Engine
+   Tab-Index (startTimer(N)/timerStop(N)). Fehlen die Hooks, läuft die Engine
    ohne Timer weiter.
    ============================================================================ */
 
@@ -1159,6 +1159,6 @@ loadBestTimes();
 
 </script>
 
-<!-- FB-LT-STORY-HOOKS --><script>window.fbLtTimerStart=function(){if(typeof timerAutoStart==='function')timerAutoStart(1);};window.fbLtTimerStop=function(){if(typeof timerStop==='function')timerStop(1);};</script>
+<!-- FB-LT-STORY-HOOKS --><script>window.fbLtTimerStart=function(){if(typeof startTimer==='function')startTimer(1);};window.fbLtTimerStop=function(){if(typeof timerStop==='function')timerStop(1);};</script>
 </body>
 </html>

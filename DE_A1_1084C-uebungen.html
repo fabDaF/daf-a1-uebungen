@@ -911,6 +911,10 @@ function initSatzbau() {
         sbRegisterZone(row, idx);
     });
 }
+function showSatzbauLoesung() {
+    SATZBAU.forEach(function(_, idx) { sbShowSolution(idx); });
+}
+
 function resetSatzbau() {
     SATZBAU.forEach(function(_, idx) {
         var bank = document.getElementById('sb-bank-' + idx);

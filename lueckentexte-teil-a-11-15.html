@@ -61,10 +61,6 @@ h1 { text-align: center; font-size: 1.6em; margin-bottom: 4px; background: linea
 .satzbau-item { background: #f8f9ff; padding: 16px 20px; margin-bottom: 20px; border-radius: 10px; border-left: 4px solid #667eea; }
 .drop-row { background: white; border: 2px dashed #ccc; border-radius: 10px; padding: 14px; min-height: 60px; margin-bottom: 12px; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
 .chip.punct { min-width: 32px; padding: 8px 10px; font-size: 1.2em; font-weight: 700; text-align: center; }
-.help-toggle { background: none; border: 2px solid #667eea; color: #667eea; padding: 6px 14px; border-radius: 20px; cursor: pointer; font-size: 0.85em; font-weight: 600; margin-bottom: 12px; }
-.help-toggle:hover { background: #667eea; color: white; }
-.help-box { display: none; background: #f8f9ff; border-radius: 10px; padding: 14px 18px; margin-bottom: 16px; font-size: 0.9em; line-height: 1.7; border-left: 4px solid #667eea; }
-.help-box.show { display: block; }
 .author-footer { margin-top: 40px; padding: 16px 20px; text-align: center; font-size: 0.8em; color: #888; border-top: 1px solid #e0e0e0; }
 .author-footer a { color: #667eea; text-decoration: none; font-weight: 500; }
 .author-footer .author-name { font-weight: 600; color: #555; }
@@ -128,8 +124,6 @@ h1 { text-align: center; font-size: 1.6em; margin-bottom: 4px; background: linea
     <div class="section active" id="sec-0">
         <div class="card">
             <h2>📝 Wortschatz: Englisch → Deutsch</h2>
-            <button class="help-toggle" onclick="toggleHelp('wsHelp')">💡 Hilfe</button>
-
             <div id="wsContainer"></div>
             <div class="btn-row">
                 <button onclick="showWSLoesung()" style="background:#f5f7ff;border:1px solid #c5cff5;border-radius:8px;padding:6px 16px;font-size:0.85em;color:#667eea;cursor:pointer;font-weight:600;">💡 Lösungen</button>
@@ -146,8 +140,6 @@ h1 { text-align: center; font-size: 1.6em; margin-bottom: 4px; background: linea
     <div class="section" id="sec-1">
         <div class="card">
             <h2>🔀 Genus: der, die oder das?</h2>
-            <button class="help-toggle" onclick="toggleHelp('genusHelp')">💡 Hilfe</button>
-
             <div class="genus-categories">
                 <div class="genus-cat" data-cat="der" ondrop="dropGenus(event)" ondragover="allowDrop(event)">
                     <div class="genus-cat-title">der</div>
@@ -195,9 +187,7 @@ h1 { text-align: center; font-size: 1.6em; margin-bottom: 4px; background: linea
     <!-- TAB 3: SATZBAU -->
     <div class="section" id="sec-3">
         <div class="card">
-            <h2>🧩 Satzbau: Sätze ordnen</h2>
-            <button class="help-toggle" onclick="toggleHelp('sbHelp')">💡 Hilfe</button>
-                        <div id="satzbauContainer"></div>
+            <h2>🧩 Satzbau: Sätze ordnen</h2>                        <div id="satzbauContainer"></div>
             <div class="btn-row">
                 <button onclick="showSatzbauLoesung()" style="background:#f5f7ff;border:1px solid #c5cff5;border-radius:8px;padding:6px 16px;font-size:0.85em;color:#667eea;cursor:pointer;font-weight:600;">💡 Lösungen</button>
                 <button onclick="resetSatzbau()" style="background:#f5f7ff;border:1px solid #c5cff5;border-radius:8px;padding:6px 16px;font-size:0.85em;color:#667eea;cursor:pointer;font-weight:600;">↺ Neustart</button>
@@ -226,7 +216,6 @@ function showSection(idx) {
     document.querySelectorAll('.section').forEach((s, i) => s.classList.toggle('active', i === idx));
     document.querySelectorAll('.nav-btn').forEach((b, i) => b.classList.toggle('active', i === idx));
 }
-function toggleHelp(id) { document.getElementById(id).classList.toggle('show'); }
 
 // ── TIMER ─────────────────────────────────────────────
 const timerState = {};
@@ -504,7 +493,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
    Timer-Anbindung: die Engine ruft generische Hooks window.fbLtTimerStart()/
    fbLtTimerStop(); der Produzent verdrahtet sie pro Datei auf den richtigen
-   Tab-Index (timerAutoStart(N)/timerStop(N)). Fehlen die Hooks, läuft die Engine
+   Tab-Index (startTimer(N)/timerStop(N)). Fehlen die Hooks, läuft die Engine
    ohne Timer weiter.
    ============================================================================ */
 
@@ -624,6 +613,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 </script>
 
-<!-- FB-LT-STORY-HOOKS --><script>window.fbLtTimerStart=function(){if(typeof timerAutoStart==='function')timerAutoStart(2);};window.fbLtTimerStop=function(){if(typeof timerStop==='function')timerStop(2);};</script>
+<!-- FB-LT-STORY-HOOKS --><script>window.fbLtTimerStart=function(){if(typeof startTimer==='function')startTimer(2);};window.fbLtTimerStop=function(){if(typeof timerStop==='function')timerStop(2);};</script>
 </body>
 </html>

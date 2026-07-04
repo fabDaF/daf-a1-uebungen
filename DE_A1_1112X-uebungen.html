@@ -208,7 +208,7 @@ input.blank.wrong { border-bottom-color: #e74c3c; background: #fdeaea; }
         <div class="chip-bank" id="bhfBank" ondrop="dropBhf(event)" ondragover="allowDrop(event)"></div>
         <div class="btn-row">
             <button onclick="showBhfLoesung()" style="background:#f5f7ff;border:1px solid #c5cff5;border-radius:8px;padding:6px 16px;font-size:0.85em;color:#667eea;cursor:pointer;font-weight:600;">💡 Lösungen</button>
-            <button onclick="resetBhf(); resetTimer(0);" style="background:#f5f7ff;border:1px solid #c5cff5;border-radius:8px;padding:6px 16px;font-size:0.85em;color:#667eea;cursor:pointer;font-weight:600;">↺ Neustart</button>
+            <button onclick="resetBhf(); resetTimer(1);" style="background:#f5f7ff;border:1px solid #c5cff5;border-radius:8px;padding:6px 16px;font-size:0.85em;color:#667eea;cursor:pointer;font-weight:600;">↺ Neustart</button>
         </div>
         <div class="timer-display">
             <span class="current-time">&#9201; <span id="timer-1">00:00</span></span>
@@ -600,7 +600,7 @@ function initBhf() {
         var chip = document.createElement('div');
         chip.className = 'chip'; chip.textContent = item.word; chip.draggable = true;
         chip.dataset.word = item.word; chip.dataset.cat = item.cat; chip.id = 'bhf-chip-' + idx;
-        chip.ondragstart = function(e) { e.dataTransfer.setData('text', e.target.id); startTimer(0); };
+        chip.ondragstart = function(e) { e.dataTransfer.setData('text', e.target.id); startTimer(1); };
         chip.onclick = function() { selectBhfChip(chip); };
         bank.appendChild(chip);
     });
@@ -608,26 +608,26 @@ function initBhf() {
 
 function selectBhfChip(chip) {
     if (selectedBhfChip) selectedBhfChip.style.outline = '';
-    selectedBhfChip = chip; chip.style.outline = '3px solid #f39c12'; startTimer(0);
-    document.querySelectorAll('#sec-0 .genus-cat').forEach(function(cat) {
-        cat.onclick = function() { if (selectedBhfChip) { cat.appendChild(selectedBhfChip); selectedBhfChip.style.outline = ''; selectedBhfChip.classList.add('placed'); selectedBhfChip.classList.remove('correct', 'wrong'); if (selectedBhfChip.dataset.cat === cat.dataset.cat) { selectedBhfChip.classList.add('correct'); } else { selectedBhfChip.classList.add('wrong'); } selectedBhfChip = null; checkAllDragDrop(0, BHF_DATA.length, 0); } };
+    selectedBhfChip = chip; chip.style.outline = '3px solid #f39c12'; startTimer(1);
+    document.querySelectorAll('#sec-1 .genus-cat').forEach(function(cat) {
+        cat.onclick = function() { if (selectedBhfChip) { cat.appendChild(selectedBhfChip); selectedBhfChip.style.outline = ''; selectedBhfChip.classList.add('placed'); selectedBhfChip.classList.remove('correct', 'wrong'); if (selectedBhfChip.dataset.cat === cat.dataset.cat) { selectedBhfChip.classList.add('correct'); } else { selectedBhfChip.classList.add('wrong'); } selectedBhfChip = null; checkAllDragDrop(1, BHF_DATA.length, 1); } };
     });
     document.getElementById('bhfBank').onclick = function() {
         if (selectedBhfChip && selectedBhfChip.classList.contains('placed')) { document.getElementById('bhfBank').appendChild(selectedBhfChip); selectedBhfChip.classList.remove('placed', 'correct', 'wrong'); selectedBhfChip.style.outline = ''; selectedBhfChip = null; }
     };
 }
 
-function dropBhf(e) { e.preventDefault(); var chipId = e.dataTransfer.getData('text'); var chip = document.getElementById(chipId); if (!chip) return; var dt = e.currentTarget; dt.appendChild(chip); if (dt.id === 'bhfBank') { chip.classList.remove('placed', 'correct', 'wrong'); } else { chip.classList.add('placed'); chip.classList.remove('correct', 'wrong'); if (chip.dataset.cat === dt.dataset.cat) { chip.classList.add('correct'); } else { chip.classList.add('wrong'); } checkAllDragDrop(0, BHF_DATA.length, 0); } }
+function dropBhf(e) { e.preventDefault(); var chipId = e.dataTransfer.getData('text'); var chip = document.getElementById(chipId); if (!chip) return; var dt = e.currentTarget; dt.appendChild(chip); if (dt.id === 'bhfBank') { chip.classList.remove('placed', 'correct', 'wrong'); } else { chip.classList.add('placed'); chip.classList.remove('correct', 'wrong'); if (chip.dataset.cat === dt.dataset.cat) { chip.classList.add('correct'); } else { chip.classList.add('wrong'); } checkAllDragDrop(1, BHF_DATA.length, 1); } }
 
 function showBhfLoesung() {
-    document.querySelectorAll('#sec-0 .genus-cat').forEach(function(cat) { var t = cat.querySelector('.genus-cat-title').textContent; cat.innerHTML = '<div class="genus-cat-title">' + t + '</div>'; });
-    BHF_DATA.forEach(function(item, idx) { var chip = document.getElementById('bhf-chip-' + idx); var tc = document.querySelector('#sec-0 .genus-cat[data-cat="' + item.cat + '"]'); if (chip && tc) { tc.appendChild(chip); chip.classList.add('placed', 'correct'); chip.classList.remove('wrong'); } });
-    stopTimer(0);
+    document.querySelectorAll('#sec-1 .genus-cat').forEach(function(cat) { var t = cat.querySelector('.genus-cat-title').textContent; cat.innerHTML = '<div class="genus-cat-title">' + t + '</div>'; });
+    BHF_DATA.forEach(function(item, idx) { var chip = document.getElementById('bhf-chip-' + idx); var tc = document.querySelector('#sec-1 .genus-cat[data-cat="' + item.cat + '"]'); if (chip && tc) { tc.appendChild(chip); chip.classList.add('placed', 'correct'); chip.classList.remove('wrong'); } });
+    stopTimer(1);
 }
 
 function resetBhf() {
-    document.querySelectorAll('#sec-0 .chip').forEach(function(c) { c.classList.remove('placed', 'correct', 'wrong'); c.style.outline = ''; });
-    document.querySelectorAll('#sec-0 .genus-cat').forEach(function(cat) { var t = cat.querySelector('.genus-cat-title').textContent; cat.innerHTML = '<div class="genus-cat-title">' + t + '</div>'; });
+    document.querySelectorAll('#sec-1 .chip').forEach(function(c) { c.classList.remove('placed', 'correct', 'wrong'); c.style.outline = ''; });
+    document.querySelectorAll('#sec-1 .genus-cat').forEach(function(cat) { var t = cat.querySelector('.genus-cat-title').textContent; cat.innerHTML = '<div class="genus-cat-title">' + t + '</div>'; });
     initBhf(); selectedBhfChip = null;
 }
 
@@ -900,6 +900,10 @@ function initSatzbau() {
         sbRegisterZone(row, idx);
     });
 }
+function showSatzbauLoesung() {
+    SATZBAU.forEach(function(_, idx) { sbShowSolution(idx); });
+}
+
 function resetSatzbau() {
     SATZBAU.forEach(function(_, idx) {
         var bank = document.getElementById('sb-bank-' + idx);

@@ -572,7 +572,7 @@ function sbCheckAuto(idx) {
             if (b && b.querySelectorAll('.chip').length > 0) { allDone = false; break; }
             if (!sbColorRow(i)) { allDone = false; break; }
         }
-        if (allDone) stopTimer(4);
+        if (allDone) stopTimer(1);
     }
 }
 
@@ -611,7 +611,7 @@ function showSatzbauLoesung() {
         sbUpdateCapitalization(row);
         sbColorRow(idx);
     });
-    stopTimer(4);
+    stopTimer(1);
 }
 
 function resetSatzbau() {
@@ -643,24 +643,24 @@ function initVocab() {
             artInput.placeholder = 'Art';
             artInput.dataset.answer = item.artikel;
             artInput.dataset.field = 'art';
-            artInput.oninput = function() { liveCheck(this); checkAllInputs('#vocabContainer input', 5); };
-            artInput.onfocus = function() { startTimer(5); };
+            artInput.oninput = function() { liveCheck(this); checkAllInputs('#vocabContainer input', 2); };
+            artInput.onfocus = function() { startTimer(2); };
             inputs.appendChild(artInput);
             var wortInput = document.createElement('input');
             wortInput.className = 'wort';
             wortInput.placeholder = 'Wort';
             wortInput.dataset.answer = item.de;
             wortInput.dataset.field = 'wort';
-            wortInput.oninput = function() { liveCheck(this); checkAllInputs('#vocabContainer input', 5); };
-            wortInput.onfocus = function() { startTimer(5); };
+            wortInput.oninput = function() { liveCheck(this); checkAllInputs('#vocabContainer input', 2); };
+            wortInput.onfocus = function() { startTimer(2); };
             inputs.appendChild(wortInput);
             var pluralInput = document.createElement('input');
             pluralInput.className = 'plural';
             pluralInput.placeholder = 'Plural';
             pluralInput.dataset.answer = item.plural;
             pluralInput.dataset.field = 'plural';
-            pluralInput.oninput = function() { liveCheck(this); checkAllInputs('#vocabContainer input', 5); };
-            pluralInput.onfocus = function() { startTimer(5); };
+            pluralInput.oninput = function() { liveCheck(this); checkAllInputs('#vocabContainer input', 2); };
+            pluralInput.onfocus = function() { startTimer(2); };
             inputs.appendChild(pluralInput);
         } else if (item.type === 'v' || item.type === 'adv') {
             var input = document.createElement('input');
@@ -668,8 +668,8 @@ function initVocab() {
             input.placeholder = 'Wort';
             input.dataset.answer = item.de;
             input.dataset.field = 'wort';
-            input.oninput = function() { liveCheck(this); checkAllInputs('#vocabContainer input', 5); };
-            input.onfocus = function() { startTimer(5); };
+            input.oninput = function() { liveCheck(this); checkAllInputs('#vocabContainer input', 2); };
+            input.onfocus = function() { startTimer(2); };
             inputs.appendChild(input);
         }
         vocabItem.appendChild(inputs);
@@ -691,7 +691,7 @@ function showVocabLoesung() {
             inp.insertAdjacentElement('afterend', hint);
         }
     });
-    stopTimer(5);
+    stopTimer(2);
 }
 
 function resetVocab() {

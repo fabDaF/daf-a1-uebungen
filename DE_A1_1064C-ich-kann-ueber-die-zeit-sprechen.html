@@ -1109,25 +1109,25 @@ function initWortschatz() {
             var artInp = document.createElement('input');
             artInp.className = 'blank art'; artInp.placeholder = 'Artikel'; artInp.style.width = '80px';
             artInp.dataset.answer = item.artikel; artInp.dataset.field = 'art';
-            artInp.oninput = function() { wortschatzCheck(this); timerAutoStart(5); checkWortschatzAllOk(); };
+            artInp.oninput = function() { wortschatzCheck(this); startTimer(5); checkWortschatzAllOk(); };
             inputs.appendChild(artInp);
             var wordInp = document.createElement('input');
             wordInp.className = 'blank wort'; wordInp.placeholder = 'Deutsch'; wordInp.style.width = '140px';
             wordInp.dataset.answer = item.de; wordInp.dataset.field = 'wort';
-            wordInp.oninput = function() { wortschatzCheck(this); timerAutoStart(5); checkWortschatzAllOk(); };
+            wordInp.oninput = function() { wortschatzCheck(this); startTimer(5); checkWortschatzAllOk(); };
             inputs.appendChild(wordInp);
             if (item.plural && item.plural !== '—') {
                 var plInp = document.createElement('input');
                 plInp.className = 'blank plural'; plInp.placeholder = 'Plural'; plInp.style.width = '120px';
                 plInp.dataset.answer = item.plural; plInp.dataset.field = 'plural';
-                plInp.oninput = function() { wortschatzCheck(this); timerAutoStart(5); checkWortschatzAllOk(); };
+                plInp.oninput = function() { wortschatzCheck(this); startTimer(5); checkWortschatzAllOk(); };
                 inputs.appendChild(plInp);
             }
         } else {
             var deInp = document.createElement('input');
             deInp.className = 'blank wort'; deInp.placeholder = 'Deutsch'; deInp.style.width = '200px';
             deInp.dataset.answer = item.de; deInp.dataset.field = 'wort';
-            deInp.oninput = function() { wortschatzCheck(this); timerAutoStart(5); checkWortschatzAllOk(); };
+            deInp.oninput = function() { wortschatzCheck(this); startTimer(5); checkWortschatzAllOk(); };
             inputs.appendChild(deInp);
         }
         row.appendChild(inputs);
@@ -1716,7 +1716,7 @@ function resetGenus(){ initGenus(); genusTimerReset(); }
     var fb = fbEl(i), info = sequence(i);
     if (!info.complete){ clearMarks(i); if (fb){ fb.textContent=""; fb.className="satzbau-feedback"; } return; }
     setTimeout(function(){
-      if (typeof timerAutoStart === "function") timerAutoStart(CFG.tab);
+      if (typeof startTimer === "function") startTimer(CFG.tab);
       var fresh = sequence(i);
       var ok = satzbauData[i].valid.some(function(v){ return JSON.stringify(v) === JSON.stringify(fresh.seq); });
       var p = row.querySelector(".sb-punkt"); if (p) p.parentNode.removeChild(p);
@@ -1759,7 +1759,7 @@ function resetGenus(){ initGenus(); genusTimerReset(); }
     if (typeof sbCheckAllDone === "function") sbCheckAllDone();
   }
   function placeJudge(i, chip){
-    if (typeof timerAutoStart === "function") timerAutoStart(CFG.tab);
+    if (typeof startTimer === "function") startTimer(CFG.tab);
     var row = rowEl(i); updateCaps(row);
     var fb = fbEl(i);
     if (consistent(i)){
@@ -1783,10 +1783,10 @@ function resetGenus(){ initGenus(); genusTimerReset(); }
     var isPunct = [",",".","!","?",";",":"].indexOf(word) !== -1;
     chip.className = "chip" + (isPunct ? " punct-chip" : ""); chip.textContent = word; chip.draggable = true;
     chip.dataset.orig = word; chip.dataset.word = word; chip.dataset.sbIdx = String(i);
-    chip.addEventListener("dragstart", function(e){ if (chip.dataset.fixed){ e.preventDefault(); return; } window.sbDragged = chip; if (typeof timerAutoStart === "function") timerAutoStart(CFG.tab); e.dataTransfer.effectAllowed = "move"; });
+    chip.addEventListener("dragstart", function(e){ if (chip.dataset.fixed){ e.preventDefault(); return; } window.sbDragged = chip; if (typeof startTimer === "function") startTimer(CFG.tab); e.dataTransfer.effectAllowed = "move"; });
     if (CFG.click) chip.addEventListener("click", function(){
       if (chip.dataset.fixed) return;
-      if (typeof timerAutoStart === "function") timerAutoStart(CFG.tab);
+      if (typeof startTimer === "function") startTimer(CFG.tab);
       var inSlot = chip.closest(".sb-gap");
       if (inSlot){ toBank(i, chip); updateCaps(rowEl(i)); return; }
       var free = Array.from(rowEl(i).querySelectorAll(".sb-gap")).find(function(s){ return !s.querySelector(".chip"); });

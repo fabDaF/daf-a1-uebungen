@@ -436,7 +436,7 @@ input.blank.wrong   { border-bottom-color: #e74c3c; }
     <div class="btn-row">
       <button onclick="resetMit()" style="background:#f5f7ff;border:1px solid #c5cff5;border-radius:8px;padding:6px 16px;font-size:0.85em;color:#667eea;cursor:pointer;font-weight:600;">↺ Neustart</button>
     
-      <button class="btn" onclick="showMitLoesung()">💡 Lösungen</button>
+      <button class="btn" onclick="showLueckenLoesung('mit-container', 2)">💡 Lösungen</button>
     </div>
   </div>
 
@@ -453,7 +453,7 @@ input.blank.wrong   { border-bottom-color: #e74c3c; }
     <div class="btn-row">
       <button onclick="resetPraep()" style="background:#f5f7ff;border:1px solid #c5cff5;border-radius:8px;padding:6px 16px;font-size:0.85em;color:#667eea;cursor:pointer;font-weight:600;">↺ Neustart</button>
     
-      <button class="btn" onclick="showPraepLoesung()">💡 Lösungen</button>
+      <button class="btn" onclick="showLueckenLoesung('praep-container', 3)">💡 Lösungen</button>
     </div>
   </div>
 
@@ -469,7 +469,7 @@ input.blank.wrong   { border-bottom-color: #e74c3c; }
     <div class="btn-row">
       <button onclick="resetVersch()" style="background:#f5f7ff;border:1px solid #c5cff5;border-radius:8px;padding:6px 16px;font-size:0.85em;color:#667eea;cursor:pointer;font-weight:600;">↺ Neustart</button>
     
-      <button class="btn" onclick="showVerschLoesung()">💡 Lösungen</button>
+      <button class="btn" onclick="showLueckenLoesung('versch-container', 4)">💡 Lösungen</button>
     </div>
   </div>
 
@@ -893,6 +893,15 @@ function resetLuecken(containerId, data, cssClass, tabN) {
   buildLuecken(containerId, data, cssClass, tabN);
 }
 
+function showLueckenLoesung(containerId, tabN) {
+  document.querySelectorAll('#' + containerId + ' input.blank').forEach(function(inp) {
+    inp.value = inp.dataset.answer;
+    inp.classList.add('correct');
+    inp.classList.remove('wrong');
+  });
+  timerStop(tabN);
+}
+
 /* ============================
    TAB 1: ZUORDNUNG (DnD + Klick)
    ============================ */
@@ -986,6 +995,14 @@ function colorAllZuoChips() {
   var sc = document.getElementById('zuo-score');
   if (sc) sc.textContent = correct;
   if (correct === ZUO_DATA.length) timerStop(1);
+}
+
+function showZuoLoesung() {
+  document.querySelectorAll('#sec-1 .chip').forEach(function(chip) {
+    var zone = document.getElementById('zone-' + chip.dataset.cat);
+    if (zone) zone.appendChild(chip);
+  });
+  colorAllZuoChips();
 }
 
 function resetZuo() {

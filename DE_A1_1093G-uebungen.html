@@ -279,7 +279,7 @@ input.blank.wrong { border-bottom-color: #e74c3c; background: #fdeaea; }
         <div class="chip-bank" id="negBank" ondrop="dropNeg(event)" ondragover="allowDrop(event)"></div>
         <div class="btn-row">
             <button onclick="showNegLoesung()" style="background:#f5f7ff;border:1px solid #c5cff5;border-radius:8px;padding:6px 16px;font-size:0.85em;color:#667eea;cursor:pointer;font-weight:600;">💡 Lösungen</button>
-            <button onclick="resetNeg(); resetTimer(0);" style="background:#f5f7ff;border:1px solid #c5cff5;border-radius:8px;padding:6px 16px;font-size:0.85em;color:#667eea;cursor:pointer;font-weight:600;">↺ Neustart</button>
+            <button onclick="resetNeg(); resetTimer(1);" style="background:#f5f7ff;border:1px solid #c5cff5;border-radius:8px;padding:6px 16px;font-size:0.85em;color:#667eea;cursor:pointer;font-weight:600;">↺ Neustart</button>
         </div>
         <div class="timer-display">
             <span class="current-time">&#9201; <span id="timer-1">00:00</span></span>
@@ -294,7 +294,7 @@ input.blank.wrong { border-bottom-color: #e74c3c; background: #fdeaea; }
         <div id="nichtContainer"></div>
         <div class="btn-row">
             <button onclick="showNichtLoesung()" style="background:#f5f7ff;border:1px solid #c5cff5;border-radius:8px;padding:6px 16px;font-size:0.85em;color:#667eea;cursor:pointer;font-weight:600;">💡 Lösungen</button>
-            <button onclick="resetNicht(); resetTimer(1);" style="background:#f5f7ff;border:1px solid #c5cff5;border-radius:8px;padding:6px 16px;font-size:0.85em;color:#667eea;cursor:pointer;font-weight:600;">↺ Neustart</button>
+            <button onclick="resetNicht(); resetTimer(2);" style="background:#f5f7ff;border:1px solid #c5cff5;border-radius:8px;padding:6px 16px;font-size:0.85em;color:#667eea;cursor:pointer;font-weight:600;">↺ Neustart</button>
         </div>
         <div class="timer-display">
             <span class="current-time">&#9201; <span id="timer-2">00:00</span></span>
@@ -309,7 +309,7 @@ input.blank.wrong { border-bottom-color: #e74c3c; background: #fdeaea; }
         <div id="keinContainer"></div>
         <div class="btn-row">
             <button onclick="showKeinLoesung()" style="background:#f5f7ff;border:1px solid #c5cff5;border-radius:8px;padding:6px 16px;font-size:0.85em;color:#667eea;cursor:pointer;font-weight:600;">💡 Lösungen</button>
-            <button onclick="resetKein(); resetTimer(2);" style="background:#f5f7ff;border:1px solid #c5cff5;border-radius:8px;padding:6px 16px;font-size:0.85em;color:#667eea;cursor:pointer;font-weight:600;">↺ Neustart</button>
+            <button onclick="resetKein(); resetTimer(3);" style="background:#f5f7ff;border:1px solid #c5cff5;border-radius:8px;padding:6px 16px;font-size:0.85em;color:#667eea;cursor:pointer;font-weight:600;">↺ Neustart</button>
         </div>
         <div class="timer-display">
             <span class="current-time">&#9201; <span id="timer-3">00:00</span></span>
@@ -324,7 +324,7 @@ input.blank.wrong { border-bottom-color: #e74c3c; background: #fdeaea; }
         <div id="mixContainer"></div>
         <div class="btn-row">
             <button onclick="showMixLoesung()" style="background:#f5f7ff;border:1px solid #c5cff5;border-radius:8px;padding:6px 16px;font-size:0.85em;color:#667eea;cursor:pointer;font-weight:600;">💡 Lösungen</button>
-            <button onclick="resetMix(); resetTimer(3);" style="background:#f5f7ff;border:1px solid #c5cff5;border-radius:8px;padding:6px 16px;font-size:0.85em;color:#667eea;cursor:pointer;font-weight:600;">↺ Neustart</button>
+            <button onclick="resetMix(); resetTimer(4);" style="background:#f5f7ff;border:1px solid #c5cff5;border-radius:8px;padding:6px 16px;font-size:0.85em;color:#667eea;cursor:pointer;font-weight:600;">↺ Neustart</button>
         </div>
         <div class="timer-display">
             <span class="current-time">&#9201; <span id="timer-4">00:00</span></span>
@@ -338,8 +338,8 @@ input.blank.wrong { border-bottom-color: #e74c3c; background: #fdeaea; }
 
         <div id="satzbauContainer"></div>
         <div class="btn-row">
-            <button onclick="showWortschatzLoesung()" style="background:#f5f7ff;border:1px solid #c5cff5;border-radius:8px;padding:6px 16px;font-size:0.85em;color:#667eea;cursor:pointer;font-weight:600;">💡 Lösungen</button>
-            <button onclick="resetSatzbau(); resetTimer(4);" style="background:#f5f7ff;border:1px solid #c5cff5;border-radius:8px;padding:6px 16px;font-size:0.85em;color:#667eea;cursor:pointer;font-weight:600;">↺ Neustart</button>
+            <button onclick="showSatzbauLoesung()" style="background:#f5f7ff;border:1px solid #c5cff5;border-radius:8px;padding:6px 16px;font-size:0.85em;color:#667eea;cursor:pointer;font-weight:600;">💡 Lösungen</button>
+            <button onclick="resetSatzbau(); resetTimer(5);" style="background:#f5f7ff;border:1px solid #c5cff5;border-radius:8px;padding:6px 16px;font-size:0.85em;color:#667eea;cursor:pointer;font-weight:600;">↺ Neustart</button>
         </div>
         <div class="timer-display">
             <span class="current-time">&#9201; <span id="timer-5">00:00</span></span>
@@ -549,7 +549,7 @@ function initWortschatz(){
     var row=document.createElement("div"); row.className="luecken-item"; row.style.marginBottom="0";
     var p=document.createElement("div"); p.style.cssText="font-weight:600;color:#667eea;margin-bottom:6px;font-size:1.05em;"; p.textContent=en; row.appendChild(p);
     var fl=document.createElement("div"); fl.style.cssText="display:flex;gap:8px;flex-wrap:wrap;align-items:center;";
-    function mk(ph,w,ans,fld){var i=document.createElement("input");i.className="blank";i.type="text";i.placeholder=ph;i.style.width=w;i.dataset.answer=ans;i.dataset.field=fld;i.oninput=function(){wortschatzCheck(this);if(typeof timerAutoStart==="function")timerAutoStart(5);checkWortschatzAllOk();};return i;}
+    function mk(ph,w,ans,fld){var i=document.createElement("input");i.className="blank";i.type="text";i.placeholder=ph;i.style.width=w;i.dataset.answer=ans;i.dataset.field=fld;i.oninput=function(){wortschatzCheck(this);if(typeof startTimer==="function")startTimer(5);checkWortschatzAllOk();};return i;}
     if(type==="n"){
       fl.appendChild(mk("Artikel","70px",artikel,"art"));
       fl.appendChild(mk("Wort","160px",de,"word"));
@@ -693,7 +693,7 @@ function initNeg() {
         var chip = document.createElement('div');
         chip.className = 'chip'; chip.textContent = item.word; chip.draggable = true;
         chip.dataset.word = item.word; chip.dataset.cat = item.cat; chip.id = 'neg-chip-' + idx;
-        chip.ondragstart = function(e) { e.dataTransfer.setData('text', e.target.id); startTimer(0); };
+        chip.ondragstart = function(e) { e.dataTransfer.setData('text', e.target.id); startTimer(1); };
         chip.onclick = function() { selectNegChip(chip); };
         bank.appendChild(chip);
     });
@@ -701,7 +701,7 @@ function initNeg() {
 
 function selectNegChip(chip) {
     if (selectedNegChip) selectedNegChip.style.outline = '';
-    selectedNegChip = chip; chip.style.outline = '3px solid #f39c12'; startTimer(0);
+    selectedNegChip = chip; chip.style.outline = '3px solid #f39c12'; startTimer(1);
     document.querySelectorAll('#sec-0 .genus-cat').forEach(function(cat) {
         cat.onclick = function() { if (selectedNegChip) { cat.appendChild(selectedNegChip); selectedNegChip.style.outline = ''; selectedNegChip.classList.add('placed'); selectedNegChip.classList.remove('correct', 'wrong'); if (selectedNegChip.dataset.cat === cat.dataset.cat) { selectedNegChip.classList.add('correct'); } else { selectedNegChip.classList.add('wrong'); } selectedNegChip = null; checkAllDragDrop(0, NEG_DATA.length, 0); } };
     });
@@ -715,7 +715,7 @@ function dropNeg(e) { e.preventDefault(); var chipId = e.dataTransfer.getData('t
 function showNegLoesung() {
     document.querySelectorAll('#sec-0 .genus-cat').forEach(function(cat) { var t = cat.querySelector('.genus-cat-title').textContent; cat.innerHTML = '<div class="genus-cat-title">' + t + '</div>'; });
     NEG_DATA.forEach(function(item, idx) { var chip = document.getElementById('neg-chip-' + idx); var tc = document.querySelector('#sec-0 .genus-cat[data-cat="' + item.cat + '"]'); if (chip && tc) { tc.appendChild(chip); chip.classList.add('placed', 'correct'); chip.classList.remove('wrong'); } });
-    stopTimer(0);
+    stopTimer(1);
 }
 
 function resetNeg() {
@@ -726,17 +726,17 @@ function resetNeg() {
 
 /* ========== TAB 1: NICHT ========== */
 
-function showNichtLoesung() { showLueckenLoesung('nicht-blank', 1); }
+function showNichtLoesung() { showLueckenLoesung('nicht-blank', 2); }
 function resetNicht() { resetLuecken('nicht-blank'); }
 
 /* ========== TAB 2: KEIN ========== */
 
-function showKeinLoesung() { showLueckenLoesung('kein-blank', 2); }
+function showKeinLoesung() { showLueckenLoesung('kein-blank', 3); }
 function resetKein() { resetLuecken('kein-blank'); }
 
 /* ========== TAB 3: MIX ========== */
 
-function showMixLoesung() { showLueckenLoesung('mix-blank', 3); }
+function showMixLoesung() { showLueckenLoesung('mix-blank', 4); }
 function resetMix() { resetLuecken('mix-blank'); }
 
 var satzbauData = [
@@ -894,7 +894,7 @@ function sbCheckAuto(idx) {
         return;
     }
     setTimeout(function() {
-        startTimer(4);
+        startTimer(5);
         var ok = sbColorRow(idx);
         if (ok) {
             row.classList.add('correct'); row.classList.remove('incorrect');
@@ -914,7 +914,11 @@ function sbCheckAllDone() {
         var row = document.getElementById('sb-row-' + i);
         return row && row.classList.contains('correct');
     });
-    if (allOk) stopTimer(4);
+    if (allOk) stopTimer(5);
+}
+
+function showSatzbauLoesung() {
+    satzbauData.forEach(function(_, idx) { sbShowSolution(idx); });
 }
 
 function sbShowSolution(idx) {
@@ -1014,9 +1018,9 @@ function resetSatzbau() {
 
 for (var i = 0; i < 6; i++) initTimer(i);
 initNeg();
-renderLuecken('nichtContainer', NICHT_LUECKEN, 'nicht-blank', 1);
-renderLuecken('keinContainer', KEIN_LUECKEN, 'kein-blank', 2);
-renderLuecken('mixContainer', MIX_LUECKEN, 'mix-blank', 3);
+renderLuecken('nichtContainer', NICHT_LUECKEN, 'nicht-blank', 2);
+renderLuecken('keinContainer', KEIN_LUECKEN, 'kein-blank', 3);
+renderLuecken('mixContainer', MIX_LUECKEN, 'mix-blank', 4);
 initSatzbau();
 initWortschatz();
 loadBestTimes();
@@ -1163,7 +1167,7 @@ function resetGenus(){ initGenus(); genusTimerReset(); }
     var fb = fbEl(i), info = sequence(i);
     if (!info.complete){ clearMarks(i); if (fb){ fb.textContent=""; fb.className="satzbau-feedback"; } return; }
     setTimeout(function(){
-      if (typeof timerAutoStart === "function") timerAutoStart(CFG.tab);
+      if (typeof startTimer === "function") startTimer(CFG.tab);
       var fresh = sequence(i);
       var ok = satzbauData[i].valid.some(function(v){ return JSON.stringify(v) === JSON.stringify(fresh.seq); });
       var p = row.querySelector(".sb-punkt"); if (p) p.parentNode.removeChild(p);
@@ -1206,7 +1210,7 @@ function resetGenus(){ initGenus(); genusTimerReset(); }
     if (typeof sbCheckAllDone === "function") sbCheckAllDone();
   }
   function placeJudge(i, chip){
-    if (typeof timerAutoStart === "function") timerAutoStart(CFG.tab);
+    if (typeof startTimer === "function") startTimer(CFG.tab);
     var row = rowEl(i); updateCaps(row);
     var fb = fbEl(i);
     if (consistent(i)){
@@ -1230,10 +1234,10 @@ function resetGenus(){ initGenus(); genusTimerReset(); }
     var isPunct = [",",".","!","?",";",":"].indexOf(word) !== -1;
     chip.className = "chip" + (isPunct ? " punct-chip" : ""); chip.textContent = word; chip.draggable = true;
     chip.dataset.orig = word; chip.dataset.word = word; chip.dataset.sbIdx = String(i);
-    chip.addEventListener("dragstart", function(e){ if (chip.dataset.fixed){ e.preventDefault(); return; } window.sbDragged = chip; if (typeof timerAutoStart === "function") timerAutoStart(CFG.tab); e.dataTransfer.effectAllowed = "move"; });
+    chip.addEventListener("dragstart", function(e){ if (chip.dataset.fixed){ e.preventDefault(); return; } window.sbDragged = chip; if (typeof startTimer === "function") startTimer(CFG.tab); e.dataTransfer.effectAllowed = "move"; });
     if (CFG.click) chip.addEventListener("click", function(){
       if (chip.dataset.fixed) return;
-      if (typeof timerAutoStart === "function") timerAutoStart(CFG.tab);
+      if (typeof startTimer === "function") startTimer(CFG.tab);
       var inSlot = chip.closest(".sb-gap");
       if (inSlot){ toBank(i, chip); updateCaps(rowEl(i)); return; }
       var free = Array.from(rowEl(i).querySelectorAll(".sb-gap")).find(function(s){ return !s.querySelector(".chip"); });
