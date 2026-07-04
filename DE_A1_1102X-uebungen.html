@@ -172,10 +172,7 @@ input.blank.wrong { border-bottom-color: #e74c3c; background: #fdeaea; }
     <!-- ===== TAB 0: REDEMITTEL ===== -->
     <section class="section active" id="sec-0">
         <h2>💬 Redemittel – Im Supermarkt</h2>
-        <div class="help-box">
-            <strong>Lernziel:</strong> Diese Phrasen brauchst du, wenn du im Supermarkt einkaufst oder nach Produkten fragst.<br>
-            🔵 = informell &nbsp;|&nbsp; 🩷 = formell &nbsp;|&nbsp; ⚪ = beides
-        </div>
+
         <div class="rm-card">
             <div class="rm-cat-title">Nach Produkten fragen</div>
             <table class="rm-table">
@@ -199,11 +196,7 @@ input.blank.wrong { border-bottom-color: #e74c3c; background: #fdeaea; }
     <!-- ===== TAB 1: MILCHPRODUKTE / OBST & GEMÜSE ZUORDNUNG ===== -->
     <div class="section" id="sec-1">
         <h2>&#128722; Milchprodukte oder Obst &amp; Gem&uuml;se?</h2>
-        <div class="help-box">
-            <strong>Aufgabe:</strong> Ordne die Lebensmittel richtig zu!<br>
-            &#128313; Milchprodukte = K&auml;se, Joghurt, Sahne, Quark, ...<br>
-            &#128313; Obst &amp; Gem&uuml;se = Tomate, Zitrone, Banane, ...
-        </div>
+
         <div class="genus-categories">
             <div class="genus-cat" data-cat="mi" ondrop="dropMarkt(event)" ondragover="allowDrop(event)">
                 <div class="genus-cat-title">&#129472; Milchprodukte</div>
@@ -226,11 +219,7 @@ input.blank.wrong { border-bottom-color: #e74c3c; background: #fdeaea; }
     <!-- ===== TAB 2: ORTSANGABEN ===== -->
     <div class="section" id="sec-2">
         <h2>&#128073; Wo ist das?</h2>
-        <div class="help-box">
-            <strong>Aufgabe:</strong> Erg&auml;nze die Ortsangabe!<br>
-            &#128313; <strong>da vorne</strong> = nah, vor dir &middot; <strong>da hinten</strong> = weit, hinter dir<br>
-            &#128313; <strong>links</strong> = linke Seite &middot; <strong>rechts</strong> = rechte Seite
-        </div>
+
         <div id="ortContainer"></div>
         <div class="btn-row">
             <button onclick="showOrtLoesung()" style="background:#f5f7ff;border:1px solid #c5cff5;border-radius:8px;padding:6px 16px;font-size:0.85em;color:#667eea;cursor:pointer;font-weight:600;">💡 Lösungen</button>
@@ -245,11 +234,7 @@ input.blank.wrong { border-bottom-color: #e74c3c; background: #fdeaea; }
     <!-- ===== TAB 3: MENGEN & VERPACKUNGEN ===== -->
     <div class="section" id="sec-3">
         <h2>&#9878;&#65039; Mengen &amp; Verpackungen</h2>
-        <div class="help-box">
-            <strong>Aufgabe:</strong> Erg&auml;nze die richtige Mengenangabe oder Verpackung!<br>
-            &#128313; <strong>das Gramm</strong> (g) &middot; <strong>das Kilogramm</strong> (kg) &middot; <strong>das Pfund</strong> (= 500 g)<br>
-            &#128313; <strong>das St&uuml;ck</strong> &middot; <strong>die Packung</strong> &middot; <strong>die Dose</strong>
-        </div>
+
         <div id="mengenContainer"></div>
         <div class="btn-row">
             <button onclick="showMengenLoesung()" style="background:#f5f7ff;border:1px solid #c5cff5;border-radius:8px;padding:6px 16px;font-size:0.85em;color:#667eea;cursor:pointer;font-weight:600;">💡 Lösungen</button>
@@ -264,12 +249,7 @@ input.blank.wrong { border-bottom-color: #e74c3c; background: #fdeaea; }
     <!-- ===== TAB 4: IM SUPERMARKT FRAGEN ===== -->
     <div class="section" id="sec-4">
         <h2>&#128172; Im Supermarkt fragen</h2>
-        <div class="help-box">
-            <strong>Aufgabe:</strong> Erg&auml;nze die fehlenden W&ouml;rter!<br>
-            &#128313; <strong>Entschuldigung, wo finde ich ...?</strong><br>
-            &#128313; <strong>Entschuldigung, wo ist/sind ...?</strong><br>
-            &#128313; <strong>Entschuldigung, haben Sie ...?</strong>
-        </div>
+
         <div id="fragenContainer"></div>
         <div class="btn-row">
             <button onclick="showFragenLoesung()" style="background:#f5f7ff;border:1px solid #c5cff5;border-radius:8px;padding:6px 16px;font-size:0.85em;color:#667eea;cursor:pointer;font-weight:600;">💡 Lösungen</button>
@@ -307,9 +287,7 @@ input.blank.wrong { border-bottom-color: #e74c3c; background: #fdeaea; }
     <!-- ===== TAB 6: WORTSCHATZ ===== -->
     <div class="section" id="sec-6">
         <h2>&#128218; Wortschatz</h2>
-        <div class="help-box">
-            <strong>Aufgabe:</strong> &Uuml;bersetze die W&ouml;rter ins Deutsche. Bei Nomen: Artikel + Wort + Plural!
-        </div>
+
         <div id="vocabContainer"></div>
         <div class="btn-row">
             <button onclick="showVocabLoesung()" style="background:#f5f7ff;border:1px solid #c5cff5;border-radius:8px;padding:6px 16px;font-size:0.85em;color:#667eea;cursor:pointer;font-weight:600;">💡 Lösungen</button>

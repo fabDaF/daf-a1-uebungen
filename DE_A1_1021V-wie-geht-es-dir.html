@@ -310,11 +310,7 @@ input.blank.wrong { border-bottom-color: #e74c3c; background: #fdeaea; }
             <button onclick="resetForm(); resetTimer(0);" style="background:#f5f7ff;border:1px solid #c5cff5;border-radius:8px;padding:6px 16px;font-size:0.85em;color:#667eea;cursor:pointer;font-weight:600;">↺ Neustart</button></div>
             <div class="timer-display"><span class="current-time">&#9201; <span id="timer-0">00:00</span></span> <span class="best-time">&#127942; <span id="best-0">--:--</span></span></div>
         </div>
-        <div class="help-box">
-            <strong>Aufgabe:</strong> Ordne die Ausdr&uuml;cke: Ist das <em>informell</em> (du) oder <em>formell</em> (Sie)?<br>
-            &#128313; <strong>du</strong> = Freunde, Familie, Kinder, Kommilitonen<br>
-            &#128313; <strong>Sie</strong> = Fremde, Chef, &auml;ltere Menschen, im Gesch&auml;ft
-        </div>
+
         
         <div class="foto-grid">
             <div class="foto-block">
@@ -347,12 +343,7 @@ input.blank.wrong { border-bottom-color: #e74c3c; background: #fdeaea; }
             <button onclick="resetBef(); resetTimer(1);" style="background:#f5f7ff;border:1px solid #c5cff5;border-radius:8px;padding:6px 16px;font-size:0.85em;color:#667eea;cursor:pointer;font-weight:600;">↺ Neustart</button></div>
             <div class="timer-display"><span class="current-time">&#9201; <span id="timer-1">00:00</span></span> <span class="best-time">&#127942; <span id="best-1">--:--</span></span></div>
         </div>
-        <div class="help-box">
-            <strong>Aufgabe:</strong> Ordne die Ausdr&uuml;cke in die richtige Kategorie.<br>
-            &#128313; <strong>Positiv</strong> = Mir geht es gut!<br>
-            &#128313; <strong>Neutral</strong> = Es geht. / So lala.<br>
-            &#128313; <strong>Negativ</strong> = Mir geht es schlecht.
-        </div>
+
         
         <div class="foto-trio">
             <div class="foto-block">
@@ -392,11 +383,7 @@ input.blank.wrong { border-bottom-color: #e74c3c; background: #fdeaea; }
             <button onclick="resetDialog(); resetTimer(2);" style="background:#f5f7ff;border:1px solid #c5cff5;border-radius:8px;padding:6px 16px;font-size:0.85em;color:#667eea;cursor:pointer;font-weight:600;">↺ Neustart</button></div>
             <div class="timer-display"><span class="current-time">&#9201; <span id="timer-2">00:00</span></span> <span class="best-time">&#127942; <span id="best-2">--:--</span></span></div>
         </div>
-        <div class="help-box">
-            <strong>Aufgabe:</strong> Erg&auml;nze die Dialoge mit den richtigen W&ouml;rtern.<br>
-            &#128313; <strong>du</strong>: Wie geht es <em>dir</em>? &ndash; Und <em>dir</em>?<br>
-            &#128313; <strong>Sie</strong>: Wie geht es <em>Ihnen</em>? &ndash; Und <em>Ihnen</em>?
-        </div>
+
         
         <div id="dialogContainer"></div>
     </div>
@@ -416,16 +403,12 @@ input.blank.wrong { border-bottom-color: #e74c3c; background: #fdeaea; }
 
         <!-- SCHRITT 1: Zuordnung Singular → Plural -->
         <div class="plural-section-title">&#9312; Ordne zu: Singular &#8594; Plural</div>
-        <div class="help-box">
-            Verbinde jeden Singular mit dem richtigen Plural.
-        </div>
+
         <div id="zuordnungContainer"></div>
 
         <!-- SCHRITT 2: Pluralendungen-Tabelle -->
         <div class="plural-section-title">&#9313; Pluralendungen: Erg&auml;nze die Tabelle</div>
-        <div class="help-box">
-            Schreibe den Plural und die Endung. Das erste Beispiel ist gegeben.
-        </div>
+
         <table class="plural-table">
             <thead><tr><th>Singular</th><th>Plural</th><th>Endung</th></tr></thead>
             <tbody id="endungTableBody"></tbody>
@@ -433,9 +416,7 @@ input.blank.wrong { border-bottom-color: #e74c3c; background: #fdeaea; }
 
         <!-- SCHRITT 3: Plural schreiben mit Hinweis -->
         <div class="plural-section-title">&#9314; Schreibe den Plural</div>
-        <div class="help-box">
-            Der Hinweis zeigt die Pluralendung. Schreibe den vollst&auml;ndigen Plural mit Artikel <em>die</em>.
-        </div>
+
         <div id="pluralSchreibenContainer"></div>
 
         <!-- SCHRITT 4: Internationale Wörter -->
@@ -531,9 +512,7 @@ input.blank.wrong { border-bottom-color: #e74c3c; background: #fdeaea; }
             <button onclick="resetVocab(); resetTimer(5);" style="background:#f5f7ff;border:1px solid #c5cff5;border-radius:8px;padding:6px 16px;font-size:0.85em;color:#667eea;cursor:pointer;font-weight:600;">↺ Neustart</button></div>
             <div class="timer-display"><span class="current-time">&#9201; <span id="timer-5">00:00</span></span> <span class="best-time">&#127942; <span id="best-5">--:--</span></span></div>
         </div>
-        <div class="help-box">
-            <strong>Aufgabe:</strong> &Uuml;bersetze die W&ouml;rter ins Deutsche. Bei Nomen: Artikel + Wort + Plural!
-        </div>
+
         <div id="wortschatzContainer" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;"></div>
     </div><div class="section" id="sec-schreib">
       <img class="tab-banner" style="object-position:top" src="https://images.pexels.com/photos/733856/pexels-photo-733856.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Notizbuch und Stift, bereit zum Schreiben">

@@ -264,11 +264,7 @@ input.blank.wrong { border-bottom-color: #e74c3c; background: #fdeaea; }
             <button onclick="resetZahlen(); resetTimer(0);" style="background:#f5f7ff;border:1px solid #c5cff5;border-radius:8px;padding:6px 16px;font-size:0.85em;color:#667eea;cursor:pointer;font-weight:600;">↺ Neustart</button></div>
             <div class="timer-display"><span class="current-time">&#9201; <span id="timer-0">00:00</span></span> <span class="best-time">&#127942; <span id="best-0">--:--</span></span></div>
         </div>
-        <div class="help-box">
-            <strong>Aufgabe:</strong> Schreibe die Zahl als deutsches Wort.<br>
-            &#128313; <strong>Tipp:</strong> Ab 13 werden die Zahlen zusammengesetzt: drei + zehn = <em>dreizehn</em>.<br>
-            &#128313; Ausnahmen: <em>elf</em> (11) und <em>zw&ouml;lf</em> (12).
-        </div>
+
         <div class="zahlen-grid" id="zahlenGrid"></div>
     </div>
 
@@ -282,10 +278,7 @@ input.blank.wrong { border-bottom-color: #e74c3c; background: #fdeaea; }
             <button onclick="resetZiffer(); resetTimer(1);" style="background:#f5f7ff;border:1px solid #c5cff5;border-radius:8px;padding:6px 16px;font-size:0.85em;color:#667eea;cursor:pointer;font-weight:600;">↺ Neustart</button></div>
             <div class="timer-display"><span class="current-time">&#9201; <span id="timer-1">00:00</span></span> <span class="best-time">&#127942; <span id="best-1">--:--</span></span></div>
         </div>
-        <div class="help-box">
-            <strong>Aufgabe:</strong> Lies das Zahlwort und schreibe die passende Ziffer.<br>
-            &#128313; Beispiel: <em>sieben</em> = <strong>7</strong>
-        </div>
+
         <div id="zifferContainer"></div>
     </div>
 
@@ -299,10 +292,7 @@ input.blank.wrong { border-bottom-color: #e74c3c; background: #fdeaea; }
             <button onclick="resetHandy(); resetTimer(2);" style="background:#f5f7ff;border:1px solid #c5cff5;border-radius:8px;padding:6px 16px;font-size:0.85em;color:#667eea;cursor:pointer;font-weight:600;">↺ Neustart</button></div>
             <div class="timer-display"><span class="current-time">&#9201; <span id="timer-2">00:00</span></span> <span class="best-time">&#127942; <span id="best-2">--:--</span></span></div>
         </div>
-        <div class="help-box">
-            <strong>Aufgabe:</strong> Lies die gesprochene Nummer und schreibe sie als <em>Ziffern</em> in das Feld.<br>
-            &#128313; Nur die Ziffern z&auml;hlen &ndash; Leerzeichen und Striche sind egal.
-        </div>
+
         <div id="handyContainer"></div>
     </div>
 
@@ -316,11 +306,7 @@ input.blank.wrong { border-bottom-color: #e74c3c; background: #fdeaea; }
             <button onclick="resetLaut(); resetTimer(3);" style="background:#f5f7ff;border:1px solid #c5cff5;border-radius:8px;padding:6px 16px;font-size:0.85em;color:#667eea;cursor:pointer;font-weight:600;">↺ Neustart</button></div>
             <div class="timer-display"><span class="current-time">&#9201; <span id="timer-3">00:00</span></span> <span class="best-time">&#127942; <span id="best-3">--:--</span></span></div>
         </div>
-        <div class="help-box">
-            <strong>Aufgabe:</strong> Ordne die W&ouml;rter: Beginnen sie mit dem Laut <strong>Z</strong> [ts] oder <strong>ZW</strong> [tsv]?<br>
-            &#128313; <strong>Z</strong> wie in <em>zehn</em>, <em>Zug</em><br>
-            &#128313; <strong>ZW</strong> wie in <em>zwei</em>, <em>zw&ouml;lf</em>
-        </div>
+
         <div class="genus-categories">
             <div class="genus-cat" data-cat="z" ondrop="dropLaut(event)" ondragover="allowDrop(event)">
                 <div class="genus-cat-title">Z [ts]</div>
@@ -366,9 +352,7 @@ input.blank.wrong { border-bottom-color: #e74c3c; background: #fdeaea; }
             <button onclick="resetVocab(); resetTimer(5);" style="background:#f5f7ff;border:1px solid #c5cff5;border-radius:8px;padding:6px 16px;font-size:0.85em;color:#667eea;cursor:pointer;font-weight:600;">↺ Neustart</button></div>
             <div class="timer-display"><span class="current-time">&#9201; <span id="timer-5">00:00</span></span> <span class="best-time">&#127942; <span id="best-5">--:--</span></span></div>
         </div>
-        <div class="help-box">
-            <strong>Aufgabe:</strong> &Uuml;bersetze die W&ouml;rter ins Deutsche. Bei Nomen: Artikel + Wort + Plural!
-        </div>
+
         <div id="wortschatzContainer" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;"></div>
     </div><div class="section" id="sec-schreib">
       <img class="tab-banner" style="object-position:top" src="https://images.pexels.com/photos/733856/pexels-photo-733856.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Notizbuch und Stift, bereit zum Schreiben">

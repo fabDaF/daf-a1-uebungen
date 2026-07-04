@@ -179,10 +179,7 @@ input.blank.wrong { border-color: #e74c3c; background: #ffebee; }
     <!-- ===== TAB 0: TERMIN-ZUORDNUNG ===== -->
     <div class="section active" id="sec-0">
         <h2>&#128242; Termin-Zuordnung</h2>
-        <div class="help-box">
-            <strong>Aufgabe:</strong> Ordne die Terminw&ouml;rter der richtigen Kategorie zu!<br>
-            &#128313; <strong>Personen</strong> = Doktoren &amp; Handwerker &middot; <strong>Orte</strong> = Pl&auml;tze &middot; <strong>Aktionen</strong> = Verben &amp; Ausdr&uuml;cke
-        </div>
+
         <div class="genus-categories" style="grid-template-columns: repeat(3, 1fr);">
             <div class="genus-cat" data-cat="per" ondrop="dropTermin(event)" ondragover="allowDrop(event)">
                 <div class="genus-cat-title">&#128100; Personen</div>
@@ -207,10 +204,7 @@ input.blank.wrong { border-color: #e74c3c; background: #ffebee; }
     <!-- ===== TAB 1: TERMINE MACHEN ===== -->
     <div class="section" id="sec-1">
         <h2>&#128197; Termine machen</h2>
-        <div class="help-box">
-            <strong>Aufgabe:</strong> Erg&auml;nze das richtige Wort!<br>
-            &#128313; Termin machen, fragen &quot;Wann haben Sie Zeit?&quot;, absagen, verschieben
-        </div>
+
         <div id="machenContainer"></div>
         <div class="control-bar"><div class="btn-row">
             <button onclick="showMachenLoesung()" style="background:#f5f7ff;border:1px solid #c5cff5;border-radius:8px;padding:6px 16px;font-size:0.85em;color:#667eea;cursor:pointer;font-weight:600;">💡 Lösungen</button>
@@ -224,10 +218,7 @@ input.blank.wrong { border-color: #e74c3c; background: #ffebee; }
     <!-- ===== TAB 2: TERMINE ABSAGEN ===== -->
     <div class="section" id="sec-2">
         <h2>&#10060; Termine absagen</h2>
-        <div class="help-box">
-            <strong>Aufgabe:</strong> Erg&auml;nze das richtige Wort!<br>
-            &#128313; absagen, verschieben, entschuldigen, ein neuer Termin
-        </div>
+
         <div id="absagenContainer"></div>
         <div class="control-bar"><div class="btn-row">
             <button onclick="showAbsagenLoesung()" style="background:#f5f7ff;border:1px solid #c5cff5;border-radius:8px;padding:6px 16px;font-size:0.85em;color:#667eea;cursor:pointer;font-weight:600;">💡 Lösungen</button>
@@ -263,9 +254,7 @@ input.blank.wrong { border-color: #e74c3c; background: #ffebee; }
     <!-- ===== TAB 4: WORTSCHATZ ===== -->
     <div class="section" id="sec-4">
         <h2>&#128218; Wortschatz</h2>
-        <div class="help-box">
-            <strong>Aufgabe:</strong> &Uuml;bersetze die W&ouml;rter ins Deutsche. Bei Nomen: Artikel + Wort + Plural!
-        </div>
+
         <div id="wortschatzContainer"></div>
         <div class="control-bar"><div class="btn-row">
             <button onclick="showWortschatzLoesung()" style="background:#f5f7ff;border:1px solid #c5cff5;border-radius:8px;padding:6px 16px;font-size:0.85em;color:#667eea;cursor:pointer;font-weight:600;">💡 Lösungen</button>

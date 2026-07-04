@@ -157,12 +157,7 @@ input.blank.wrong { border-bottom-color: #e74c3c; background: #fdeaea; }
     <!-- ===== TAB 0: DATUM & ORDNUNGSZAHLEN ===== -->
     <div class="section active" id="sec-0">
         <h2>&#128198; Datum &amp; Ordnungszahlen</h2>
-        <div class="help-box">
-            <strong>Aufgabe:</strong> Schreibe das Datum in W&ouml;rtern!<br>
-            &#128313; der: Ordnungszahl + <strong>-te</strong> / <strong>-ste</strong><br>
-            &#128313; am: Ordnungszahl + <strong>-ten</strong> / <strong>-sten</strong><br>
-            &#128313; Ausnahmen: erste, dritte, siebte, achte
-        </div>
+
         <div id="datumContainer"></div>
         <div class="btn-row">
             <button onclick="showDatumLoesung()" style="background:#f5f7ff;border:1px solid #c5cff5;border-radius:8px;padding:6px 16px;font-size:0.85em;color:#667eea;cursor:pointer;font-weight:600;">💡 Lösungen</button>
@@ -177,11 +172,7 @@ input.blank.wrong { border-bottom-color: #e74c3c; background: #fdeaea; }
     <!-- ===== TAB 1: TREFFEN VEREINBAREN ===== -->
     <div class="section" id="sec-1">
         <h2>&#129309; Treffen vereinbaren</h2>
-        <div class="help-box">
-            <strong>Aufgabe:</strong> Erg&auml;nze die L&uuml;cken!<br>
-            &#128313; <strong>treffen:</strong> ich treffe, du <strong>triffst</strong>, er/sie <strong>trifft</strong><br>
-            &#128313; <strong>am</strong> + Wochentag &middot; <strong>um</strong> + Uhrzeit
-        </div>
+
         <div id="treffContainer"></div>
         <div class="btn-row">
             <button onclick="showTreffLoesung()" style="background:#f5f7ff;border:1px solid #c5cff5;border-radius:8px;padding:6px 16px;font-size:0.85em;color:#667eea;cursor:pointer;font-weight:600;">💡 Lösungen</button>
@@ -196,10 +187,7 @@ input.blank.wrong { border-bottom-color: #e74c3c; background: #fdeaea; }
     <!-- ===== TAB 2: GESTERN / HEUTE / MORGEN ===== -->
     <div class="section" id="sec-2">
         <h2>&#128197; gestern / heute / morgen</h2>
-        <div class="help-box">
-            <strong>Aufgabe:</strong> Ordne die S&auml;tze richtig zu!<br>
-            &#128313; <strong>gestern</strong> = Vergangenheit &middot; <strong>heute</strong> = jetzt &middot; <strong>morgen</strong> = Zukunft
-        </div>
+
         <div class="genus-categories">
             <div class="genus-cat" data-cat="ges" ondrop="dropGhm(event)" ondragover="allowDrop(event)">
                 <div class="genus-cat-title">&#9194; gestern</div>
@@ -225,9 +213,7 @@ input.blank.wrong { border-bottom-color: #e74c3c; background: #fdeaea; }
     <!-- ===== TAB 3: MONATE ZUORDNUNG ===== -->
     <div class="section" id="sec-3">
         <h2>&#127800; Monate &amp; Jahreszeiten</h2>
-        <div class="help-box">
-            <strong>Aufgabe:</strong> Ordne die Feste und Feiertage der richtigen Jahreszeit zu!
-        </div>
+
         <div class="genus-categories" style="grid-template-columns: repeat(4, 1fr);">
             <div class="genus-cat" data-cat="fr" ondrop="dropFest(event)" ondragover="allowDrop(event)">
                 <div class="genus-cat-title">&#127800; Fr&uuml;hling</div>
@@ -279,9 +265,7 @@ input.blank.wrong { border-bottom-color: #e74c3c; background: #fdeaea; }
     <!-- ===== TAB 5: WORTSCHATZ ===== -->
     <div class="section" id="sec-5">
         <h2>&#128218; Wortschatz</h2>
-        <div class="help-box">
-            <strong>Aufgabe:</strong> &Uuml;bersetze die W&ouml;rter ins Deutsche. Bei Nomen: Artikel + Wort + Plural!
-        </div>
+
         <div id="vocabContainer"></div>
         <div class="btn-row">
             <button onclick="showVocabLoesung()" style="background:#f5f7ff;border:1px solid #c5cff5;border-radius:8px;padding:6px 16px;font-size:0.85em;color:#667eea;cursor:pointer;font-weight:600;">💡 Lösungen</button>

@@ -160,10 +160,7 @@ input.blank.wrong { border-color: #e74c3c; background: #ffebee; }
     <!-- ===== TAB 0: FAMILIEN-ZUORDNUNG ===== -->
     <div class="section active" id="sec-0">
         <h2>&#128105;&#128104; Familien-Zuordnung</h2>
-        <div class="help-box">
-            <strong>Aufgabe:</strong> Ordne die Familienmitglieder der richtigen Kategorie zu!<br>
-            &#128313; <strong>Weiblich</strong> = Mutter, Schwester, Tante &middot; <strong>M&auml;nnlich</strong> = Vater, Bruder, Onkel &middot; <strong>Plural</strong> = Eltern, Geschwister, Gro&szlig;eltern
-        </div>
+
         <div class="genus-categories" style="grid-template-columns: repeat(3, 1fr);">
             <div class="genus-cat" data-cat="w" ondrop="dropFamilie(event)" ondragover="allowDrop(event)">
                 <div class="genus-cat-title">&#128105; Weiblich</div>
@@ -188,10 +185,7 @@ input.blank.wrong { border-color: #e74c3c; background: #ffebee; }
     <!-- ===== TAB 1: GENUS-ZUORDNUNG ===== -->
     <div class="section" id="sec-1">
         <h2>&#128099; Genus-Zuordnung (der/die/das)</h2>
-        <div class="help-box">
-            <strong>Aufgabe:</strong> Ordne die Familie-W&ouml;rter dem richtigen Artikel zu!<br>
-            &#128313; <strong>der</strong> = m&auml;nnlich &middot; <strong>die</strong> = weiblich &middot; <strong>das</strong> = S&auml;chlich
-        </div>
+
         <div class="genus-categories" style="grid-template-columns: repeat(3, 1fr);">
             <div class="genus-cat" data-cat="der" ondrop="dropGenus(event)" ondragover="allowDrop(event)">
                 <div class="genus-cat-title">&#128104; der</div>
@@ -216,10 +210,7 @@ input.blank.wrong { border-color: #e74c3c; background: #ffebee; }
     <!-- ===== TAB 2: MEINE FAMILIE L&Uuml;CKENTEXT ===== -->
     <div class="section" id="sec-2">
         <h2>&#128173; Meine Familie</h2>
-        <div class="help-box">
-            <strong>Aufgabe:</strong> Erg&auml;nze die fehlenden W&ouml;rter!<br>
-            &#128313; H&ouml;re auf die Details &uuml;ber die Familie. Welche W&ouml;rter passen?
-        </div>
+
         <div id="familieContainer"></div>
         <div class="control-bar"><div class="btn-row">
             <button onclick="showFamilieTextLoesung()" style="background:#f5f7ff;border:1px solid #c5cff5;border-radius:8px;padding:6px 16px;font-size:0.85em;color:#667eea;cursor:pointer;font-weight:600;">💡 Lösungen</button>
@@ -246,9 +237,7 @@ input.blank.wrong { border-color: #e74c3c; background: #ffebee; }
     <!-- ===== TAB 4: WORTSCHATZ ===== -->
     <div class="section" id="sec-4">
         <h2>&#128218; Wortschatz</h2>
-        <div class="help-box">
-            <strong>Aufgabe:</strong> &Uuml;bersetze die W&ouml;rter ins Deutsche. Bei Nomen: Artikel + Wort + Plural!
-        </div>
+
         <div id="wortschatzContainer"></div>
         <div class="control-bar"><div class="btn-row">
             <button onclick="showWortschatzLoesung()" style="background:#f5f7ff;border:1px solid #c5cff5;border-radius:8px;padding:6px 16px;font-size:0.85em;color:#667eea;cursor:pointer;font-weight:600;">💡 Lösungen</button>

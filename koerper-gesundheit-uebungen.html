@@ -170,10 +170,7 @@ input.blank.wrong { border-color: #e74c3c; background: #ffebee; }
     <!-- ===== TAB 0: K&Ouml;RPERTEILE MIT SVG ===== -->
     <div class="section active" id="sec-0">
         <h2>&#128331; K&ouml;rperteile</h2>
-        <div class="help-box">
-            <strong>Aufgabe:</strong> Ordne die K&ouml;rperteile den richtigen Nummern zu!<br>
-            &#128313; Ziehe die Chipkarten auf die passenden Nummernfelder.
-        </div>
+
         <div class="body-diagram">
             <svg viewBox="0 0 300 500" class="body-svg" xmlns="http://www.w3.org/2000/svg">
                 <!-- Head -->
@@ -270,10 +267,7 @@ input.blank.wrong { border-color: #e74c3c; background: #ffebee; }
     <!-- ===== TAB 1: GENUS-ZUORDNUNG ===== -->
     <div class="section" id="sec-1">
         <h2>&#128346; Genus-Zuordnung (der/die/das)</h2>
-        <div class="help-box">
-            <strong>Aufgabe:</strong> Ordne die W&ouml;rter dem richtigen Artikel zu!<br>
-            &#128313; <strong>der</strong> = maskulin &middot; <strong>die</strong> = feminin &middot; <strong>das</strong> = neutrum
-        </div>
+
         <div class="genus-categories">
             <div class="genus-cat" data-cat="der" ondrop="dropGenus(event)" ondragover="allowDrop(event)">
                 <div class="genus-cat-title">der (m)</div>
@@ -298,10 +292,7 @@ input.blank.wrong { border-color: #e74c3c; background: #ffebee; }
     <!-- ===== TAB 2: BEIM ARZT ===== -->
     <div class="section" id="sec-2">
         <h2>&#128297; Beim Arzt</h2>
-        <div class="help-box">
-            <strong>Aufgabe:</strong> Erg&auml;nze die fehlenden W&ouml;rter!<br>
-            &#128313; Vokabeln zum Thema Arztbesuch und Krankheit
-        </div>
+
         <div id="arztContainer"></div>
         <div class="control-bar"><div class="btn-row">
             <button onclick="showArztLoesung()" style="background:#f5f7ff;border:1px solid #c5cff5;border-radius:8px;padding:6px 16px;font-size:0.85em;color:#667eea;cursor:pointer;font-weight:600;">💡 Lösungen</button>
@@ -315,10 +306,7 @@ input.blank.wrong { border-color: #e74c3c; background: #ffebee; }
     <!-- ===== TAB 3: SCHMERZEN ===== -->
     <div class="section" id="sec-3">
         <h2>&#128325; Es tut weh!</h2>
-        <div class="help-box">
-            <strong>Aufgabe:</strong> Erg&auml;nze die fehlenden K&ouml;rperteile und Schmerz-Ausdr&uuml;cke!<br>
-            &#128313; <strong>mir tut ... weh</strong> &middot; <strong>ich habe ... Schmerzen</strong>
-        </div>
+
         <div id="schmerzenContainer"></div>
         <div class="control-bar"><div class="btn-row">
             <button onclick="showWortschatzLoesung()" style="background:#f5f7ff;border:1px solid #c5cff5;border-radius:8px;padding:6px 16px;font-size:0.85em;color:#667eea;cursor:pointer;font-weight:600;">💡 Lösungen</button>
@@ -345,9 +333,7 @@ input.blank.wrong { border-color: #e74c3c; background: #ffebee; }
     <!-- ===== TAB 5: WORTSCHATZ ===== -->
     <div class="section" id="sec-5">
         <h2>&#128218; Wortschatz</h2>
-        <div class="help-box">
-            <strong>Aufgabe:</strong> &Uuml;bersetze die W&ouml;rter ins Deutsche. Bei Nomen: Artikel + Wort + Plural!
-        </div>
+
         <div id="wortschatzContainer"></div>
         <div class="control-bar"><div class="btn-row">
             <button onclick="showWortschatzLoesung()" style="background:#f5f7ff;border:1px solid #c5cff5;border-radius:8px;padding:6px 16px;font-size:0.85em;color:#667eea;cursor:pointer;font-weight:600;">💡 Lösungen</button>

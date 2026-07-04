@@ -157,11 +157,7 @@ input.blank.wrong { border-bottom-color: #e74c3c; background: #fdeaea; }
     <!-- ===== TAB 0: NOMINATIV/AKKUSATIV ZUORDNUNG ===== -->
     <div class="section active" id="sec-0">
         <h2>&#128300; Nominativ oder Akkusativ?</h2>
-        <div class="help-box">
-            <strong>Aufgabe:</strong> Ordne die S&auml;tze richtig zu!<br>
-            &#128313; <strong>Nominativ</strong> = Subjekt (Wer? Was?) &rarr; der, ein<br>
-            &#128313; <strong>Akkusativ</strong> = Objekt nach haben, m&ouml;chten, brauchen &rarr; de<strong>n</strong>, eine<strong>n</strong>
-        </div>
+
         <div class="genus-categories">
             <div class="genus-cat" data-cat="nom" ondrop="dropAkk(event)" ondragover="allowDrop(event)">
                 <div class="genus-cat-title">&#128994; Nominativ (Subjekt)</div>
@@ -184,11 +180,7 @@ input.blank.wrong { border-bottom-color: #e74c3c; background: #fdeaea; }
     <!-- ===== TAB 1: DER ODER DEN ===== -->
     <div class="section" id="sec-1">
         <h2>&#128308; der oder den?</h2>
-        <div class="help-box">
-            <strong>Aufgabe:</strong> Erg&auml;nze <strong>der</strong> (Nominativ) oder <strong>den</strong> (Akkusativ)!<br>
-            &#128313; Nur <strong>Maskulinum</strong> &auml;ndert sich: der &rarr; de<strong>n</strong><br>
-            &#128313; die, das, die (Pl.) bleiben gleich!
-        </div>
+
         <div id="derContainer"></div>
         <div class="btn-row">
             <button onclick="showDerLoesung()" style="background:#f5f7ff;border:1px solid #c5cff5;border-radius:8px;padding:6px 16px;font-size:0.85em;color:#667eea;cursor:pointer;font-weight:600;">💡 Lösungen</button>
@@ -203,11 +195,7 @@ input.blank.wrong { border-bottom-color: #e74c3c; background: #fdeaea; }
     <!-- ===== TAB 2: EIN ODER EINEN ===== -->
     <div class="section" id="sec-2">
         <h2>&#128309; ein oder einen?</h2>
-        <div class="help-box">
-            <strong>Aufgabe:</strong> Erg&auml;nze <strong>ein</strong> (Nominativ) oder <strong>einen</strong> (Akkusativ)!<br>
-            &#128313; Nur <strong>Maskulinum</strong> &auml;ndert sich: ein &rarr; eine<strong>n</strong><br>
-            &#128313; eine, ein (Neutrum) bleiben gleich!
-        </div>
+
         <div id="einContainer"></div>
         <div class="btn-row">
             <button onclick="showEinLoesung()" style="background:#f5f7ff;border:1px solid #c5cff5;border-radius:8px;padding:6px 16px;font-size:0.85em;color:#667eea;cursor:pointer;font-weight:600;">💡 Lösungen</button>
@@ -222,11 +210,7 @@ input.blank.wrong { border-bottom-color: #e74c3c; background: #fdeaea; }
     <!-- ===== TAB 3: KEIN ODER KEINEN ===== -->
     <div class="section" id="sec-3">
         <h2>&#128683; kein oder keinen?</h2>
-        <div class="help-box">
-            <strong>Aufgabe:</strong> Erg&auml;nze <strong>kein</strong> oder <strong>keinen</strong>!<br>
-            &#128313; Maskulinum Akkusativ: kein &rarr; keine<strong>n</strong><br>
-            &#128313; Neutrum/Femininum: kein/keine bleiben gleich
-        </div>
+
         <div id="keinContainer"></div>
         <div class="btn-row">
             <button onclick="showKeinLoesung()" style="background:#f5f7ff;border:1px solid #c5cff5;border-radius:8px;padding:6px 16px;font-size:0.85em;color:#667eea;cursor:pointer;font-weight:600;">💡 Lösungen</button>
@@ -264,9 +248,7 @@ input.blank.wrong { border-bottom-color: #e74c3c; background: #fdeaea; }
     <!-- ===== TAB 5: WORTSCHATZ ===== -->
     <div class="section" id="sec-5">
         <h2>&#128218; Wortschatz</h2>
-        <div class="help-box">
-            <strong>Aufgabe:</strong> &Uuml;bersetze die W&ouml;rter ins Deutsche. Bei Nomen: Artikel + Wort + Plural!
-        </div>
+
         <div id="vocabContainer"></div>
         <div class="btn-row">
             <button onclick="showVocabLoesung()" style="background:#f5f7ff;border:1px solid #c5cff5;border-radius:8px;padding:6px 16px;font-size:0.85em;color:#667eea;cursor:pointer;font-weight:600;">💡 Lösungen</button>

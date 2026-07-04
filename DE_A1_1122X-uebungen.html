@@ -172,10 +172,7 @@ input.blank.wrong { border-bottom-color: #e74c3c; background: #fdeaea; }
     <!-- ===== TAB 0: REDEMITTEL ===== -->
     <section class="section active" id="sec-0">
         <h2>💬 Redemittel – Aufgaben besprechen</h2>
-        <div class="help-box">
-            <strong>Lernziel:</strong> Diese Phrasen brauchst du, wenn du Aufgaben besprichst, organisierst oder delegierst.<br>
-            🔵 = informell &nbsp;|&nbsp; 🩷 = formell &nbsp;|&nbsp; ⚪ = beides
-        </div>
+
         <div class="rm-card">
             <div class="rm-cat-title">Aufgaben besprechen</div>
             <table class="rm-table">
@@ -199,11 +196,7 @@ input.blank.wrong { border-bottom-color: #e74c3c; background: #fdeaea; }
     <!-- ===== TAB 1: NOMEN/VERB ZUORDNUNG ===== -->
     <div class="section" id="sec-1">
         <h2>&#128221; Nomen oder Verb?</h2>
-        <div class="help-box">
-            <strong>Aufgabe:</strong> Ordne die W&ouml;rter richtig zu!<br>
-            &#128313; <strong>Nomen</strong> schreibt man immer <strong>gro&szlig;</strong> (die Wohnung, der Bus)<br>
-            &#128313; <strong>Verben &amp; Adjektive</strong> schreibt man <strong>klein</strong> (fahren, sch&ouml;n)
-        </div>
+
         <div class="genus-categories">
             <div class="genus-cat" data-cat="nom" ondrop="dropWort(event)" ondragover="allowDrop(event)">
                 <div class="genus-cat-title">&#128316; Nomen (gro&szlig;)</div>
@@ -226,10 +219,7 @@ input.blank.wrong { border-bottom-color: #e74c3c; background: #fdeaea; }
     <!-- ===== TAB 2: GROSS ODER KLEIN? ===== -->
     <div class="section" id="sec-2">
         <h2>&#128292; Gro&szlig; oder klein?</h2>
-        <div class="help-box">
-            <strong>Aufgabe:</strong> Erg&auml;nze den Anfangsbuchstaben &ndash; gro&szlig; oder klein?<br>
-            &#128313; <strong>Nomen</strong> = gro&szlig; (M, W, F ...) &middot; <strong>Verben</strong> = klein (f, z, w ...)
-        </div>
+
         <div id="grossContainer"></div>
         <div class="btn-row">
             <button onclick="showGrossLoesung()" style="background:#f5f7ff;border:1px solid #c5cff5;border-radius:8px;padding:6px 16px;font-size:0.85em;color:#667eea;cursor:pointer;font-weight:600;">💡 Lösungen</button>
@@ -244,11 +234,7 @@ input.blank.wrong { border-bottom-color: #e74c3c; background: #fdeaea; }
     <!-- ===== TAB 3: VERBALISIERUNG ===== -->
     <div class="section" id="sec-3">
         <h2>&#128260; Verbalisierung</h2>
-        <div class="help-box">
-            <strong>Aufgabe:</strong> Schreibe die Komposita als <strong>Nomen + Verb</strong> um!<br>
-            &#128313; Beispiel: die Wohnungssuche &rarr; <strong>Wohnung suchen</strong><br>
-            &#128313; Lasse den Artikel weg!
-        </div>
+
         <div id="verbContainer"></div>
         <div class="btn-row">
             <button onclick="showVerbLoesung()" style="background:#f5f7ff;border:1px solid #c5cff5;border-radius:8px;padding:6px 16px;font-size:0.85em;color:#667eea;cursor:pointer;font-weight:600;">💡 Lösungen</button>
@@ -263,10 +249,7 @@ input.blank.wrong { border-bottom-color: #e74c3c; background: #fdeaea; }
     <!-- ===== TAB 4: TO-DO-LISTE ===== -->
     <div class="section" id="sec-4">
         <h2>&#128203; To-do-Liste</h2>
-        <div class="help-box">
-            <strong>Aufgabe:</strong> Erg&auml;nze die fehlenden W&ouml;rter in der To-do-Liste!<br>
-            &#128313; Nomen + Verb im Infinitiv (z. B. Fahrrad <strong>reparieren</strong>)
-        </div>
+
         <div id="todoContainer"></div>
         <div class="btn-row">
             <button onclick="showTodoLoesung()" style="background:#f5f7ff;border:1px solid #c5cff5;border-radius:8px;padding:6px 16px;font-size:0.85em;color:#667eea;cursor:pointer;font-weight:600;">💡 Lösungen</button>
@@ -304,9 +287,7 @@ input.blank.wrong { border-bottom-color: #e74c3c; background: #fdeaea; }
     <!-- ===== TAB 6: WORTSCHATZ ===== -->
     <div class="section" id="sec-6">
         <h2>&#128218; Wortschatz</h2>
-        <div class="help-box">
-            <strong>Aufgabe:</strong> &Uuml;bersetze die W&ouml;rter ins Deutsche. Bei Nomen: Artikel + Wort + Plural!
-        </div>
+
         <div id="vocabContainer"></div>
         <div class="btn-row">
             <button onclick="showVocabLoesung()" style="background:#f5f7ff;border:1px solid #c5cff5;border-radius:8px;padding:6px 16px;font-size:0.85em;color:#667eea;cursor:pointer;font-weight:600;">💡 Lösungen</button>

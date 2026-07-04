@@ -184,11 +184,7 @@ input.blank.wrong { border-bottom-color: #e74c3c; background: #fdeaea; }
 <!-- ============ TAB 0: WORTSCHATZ ============ -->
 <div class="section active" id="sec-0">
     <button class="help-toggle" onclick="toggleHelp(0)">💡 Hilfe</button>
-    <div class="help-box" id="help-0">
-        <p>🔹 Übersetze von <strong>Englisch → Deutsch</strong>.</p>
-        <p>🔹 Bei Nomen: <strong>Artikel</strong> + deutsches Wort + <strong>Plural</strong>.</p>
-        <p>🔹 Bei Verben und Adjektiven: nur das deutsche Wort.</p>
-    </div>
+
     <div id="ws-container"></div>
     <div class="btn-row">
         <button class="btn btn-check" onclick="startTimer(0);checkWS()">✔ Prüfen</button>
@@ -205,10 +201,7 @@ input.blank.wrong { border-bottom-color: #e74c3c; background: #fdeaea; }
 <!-- ============ TAB 1: ZUORDNUNG (Wie geht's?) ============ -->
 <div class="section" id="sec-1">
     <button class="help-toggle" onclick="toggleHelp(1)">💡 Hilfe</button>
-    <div class="help-box" id="help-1">
-        <p>🔹 Ordne die Antworten den Kategorien zu: <strong>Gut</strong>, <strong>Es geht</strong> oder <strong>Nicht gut</strong>.</p>
-        <p>🔹 Klicke auf eine Antwort, dann auf die Kategorie – oder ziehe sie direkt.</p>
-    </div>
+
     <div class="chip-bank" id="zu-bank"></div>
     <div class="categories">
         <div class="category" data-cat="gut"><h3>😊 Gut</h3><div class="drop-zone"></div></div>
@@ -230,11 +223,7 @@ input.blank.wrong { border-bottom-color: #e74c3c; background: #fdeaea; }
 <!-- ============ TAB 2: KONJUGATION (Lückentext) ============ -->
 <div class="section" id="sec-2">
     <button class="help-toggle" onclick="toggleHelp(2)">💡 Hilfe</button>
-    <div class="help-box" id="help-2">
-        <p>🔹 Wähle das richtige Verb und konjugiere es.</p>
-        <p>🔹 Verbendungen: <strong>ich -e, du -st, er/sie/es -t, wir -en, ihr -t, sie/Sie -en</strong></p>
-        <p>🔹 Verben auf <strong>-d/-t</strong>: ein extra <strong>e</strong> bei du, er/sie/es, ihr (z.B. <em>antwortet</em>)</p>
-    </div>
+
     <div id="luecken-container"></div>
     <div class="btn-row">
         <button class="btn btn-check" onclick="startTimer(2);checkLuecken()">✔ Prüfen</button>

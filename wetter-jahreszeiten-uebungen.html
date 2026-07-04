@@ -160,10 +160,7 @@ input.blank.wrong { border-color: #e74c3c; background: #ffebee; }
     <!-- ===== TAB 0: JAHRESZEITEN-ZUORDNUNG ===== -->
     <div class="section active" id="sec-0">
         <h2>&#9728; Jahreszeiten-Zuordnung</h2>
-        <div class="help-box">
-            <strong>Aufgabe:</strong> Ordne die W&ouml;rter der richtigen Jahreszeit zu!<br>
-            &#128313; <strong>Fr&uuml;hling</strong> = warm, Bl&uuml;ten &middot; <strong>Sommer</strong> = hei&szlig;, schwimmen &middot; <strong>Herbst</strong> = Regen, windig &middot; <strong>Winter</strong> = Schnee, kalt
-        </div>
+
         <div class="genus-categories" style="grid-template-columns: repeat(4, 1fr);">
             <div class="genus-cat" data-cat="fr" ondrop="dropJahreszeit(event)" ondragover="allowDrop(event)">
                 <div class="genus-cat-title">&#127799; Fr&uuml;hling</div>
@@ -191,10 +188,7 @@ input.blank.wrong { border-color: #e74c3c; background: #ffebee; }
     <!-- ===== TAB 1: GENUS-ZUORDNUNG ===== -->
     <div class="section" id="sec-1">
         <h2>&#127758; Genus: der / die / das</h2>
-        <div class="help-box">
-            <strong>Aufgabe:</strong> Ordne die W&ouml;rter dem richtigen Artikel zu!<br>
-            &#128313; <strong>der</strong> = m&auml;nnlich &middot; <strong>die</strong> = weiblich &middot; <strong>das</strong> = s&auml;chlich
-        </div>
+
         <div class="genus-categories" style="grid-template-columns: repeat(3, 1fr);">
             <div class="genus-cat" data-cat="der" ondrop="dropGenus(event)" ondragover="allowDrop(event)">
                 <div class="genus-cat-title">der</div>
@@ -219,10 +213,7 @@ input.blank.wrong { border-color: #e74c3c; background: #ffebee; }
     <!-- ===== TAB 2: WIE IST DAS WETTER? ===== -->
     <div class="section" id="sec-2">
         <h2>&#9925; Wie ist das Wetter?</h2>
-        <div class="help-box">
-            <strong>Aufgabe:</strong> Erg&auml;nze das richtige Wort!<br>
-            &#128313; Es ist sonnig, regnerisch, neblig... &middot; Es schneit, regnet... &middot; Es sind 20 Grad.
-        </div>
+
         <div id="wetterContainer"></div>
         <div class="control-bar"><div class="btn-row">
             <button onclick="showWetterLoesung()" style="background:#f5f7ff;border:1px solid #c5cff5;border-radius:8px;padding:6px 16px;font-size:0.85em;color:#667eea;cursor:pointer;font-weight:600;">💡 Lösungen</button>
@@ -249,9 +240,7 @@ input.blank.wrong { border-color: #e74c3c; background: #ffebee; }
     <!-- ===== TAB 4: WORTSCHATZ ===== -->
     <div class="section" id="sec-4">
         <h2>&#128218; Wortschatz</h2>
-        <div class="help-box">
-            <strong>Aufgabe:</strong> &Uuml;bersetze die W&ouml;rter ins Deutsche. Bei Nomen: Artikel + Wort + Plural!
-        </div>
+
         <div id="wortschatzContainer"></div>
         <div class="control-bar"><div class="btn-row">
             <button onclick="showWortschatzLoesung()" style="background:#f5f7ff;border:1px solid #c5cff5;border-radius:8px;padding:6px 16px;font-size:0.85em;color:#667eea;cursor:pointer;font-weight:600;">💡 Lösungen</button>

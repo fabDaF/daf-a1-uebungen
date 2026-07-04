@@ -191,10 +191,7 @@ h1 { text-align: center; font-size: 1.6em; margin-bottom: 4px; background: linea
         <div class="card">
             <h2>📝 Wortschatz: Englisch → Deutsch</h2>
             <button class="help-toggle" onclick="toggleHelp('wsHelp')">💡 Hilfe</button>
-            <div class="help-box" id="wsHelp">
-                Bei Nomen: Schreibe den Artikel (der/die/das), das deutsche Wort und den Plural.<br>
-                Bei Verben und Adjektiven: Schreibe nur das deutsche Wort.
-            </div>
+
             <div id="wsContainer"></div>
             <div class="btn-row">
                 <button onclick="showWSLoesung()" style="background:#f5f7ff;border:1px solid #c5cff5;border-radius:8px;padding:6px 16px;font-size:0.85em;color:#667eea;cursor:pointer;font-weight:600;">💡 Lösungen</button>
@@ -214,10 +211,7 @@ h1 { text-align: center; font-size: 1.6em; margin-bottom: 4px; background: linea
         <div class="card">
             <h2>🔀 Genus: der, die oder das?</h2>
             <button class="help-toggle" onclick="toggleHelp('genusHelp')">💡 Hilfe</button>
-            <div class="help-box" id="genusHelp">
-                Ziehe jedes Nomen in die richtige Spalte (der/die/das).<br>
-                Auf Mobilgeräten: Tippe auf ein Wort und dann auf die Spalte.
-            </div>
+
             <div class="genus-categories">
                 <div class="genus-cat" data-cat="der" ondrop="dropGenus(event)" ondragover="allowDrop(event)">
                     <div class="genus-cat-title">der</div>
