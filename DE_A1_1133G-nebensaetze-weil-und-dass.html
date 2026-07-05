@@ -415,7 +415,8 @@ input.blank.wrong   { border-color: #e74c3c; background: #ffebee; }
       &#9201; <span class="timer-display" id="timer-2">0:00</span>
       <span class="best-display" id="best-2"></span>
     </div>
-        <div class="wortbank" id="wortbank-luecken"></div>
+        <div style="display:flex;gap:8px;margin:0 0 14px;"><button onclick="fbLtShowLoesung()" style="background:#f5f7ff;border:1px solid #c5cff5;border-radius:8px;padding:6px 16px;font-size:0.85em;color:#667eea;cursor:pointer;font-weight:600;">💡 Lösungen</button><button onclick="fbLtReset(); timerResetOne(2);" style="background:#f5f7ff;border:1px solid #c5cff5;border-radius:8px;padding:6px 16px;font-size:0.85em;color:#667eea;cursor:pointer;font-weight:600;">↺ Neustart</button></div>
+    <div class="wortbank" id="wortbank-luecken"></div>
         <div id="lueckenContainer" class="luecken-story">
           <p>Anna geht in eine Ausstellung. Sie findet, <input class="blank" data-answer="dass" data-base="dass"> die Ausstellung sehr interessant <input class="blank" data-answer="ist" data-base="sein">.</p>
           <p>Sie bleibt lange dort, <input class="blank" data-answer="weil" data-base="weil"> sie die Bilder so schön <input class="blank" data-answer="findet" data-base="finden">.</p>

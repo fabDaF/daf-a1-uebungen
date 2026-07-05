@@ -214,7 +214,8 @@ h1 { text-align: center; font-size: 1.6em; margin-bottom: 4px; background: linea
     <div class="section" id="sec-2">
         <div class="card">
             <h2>✏️ Lückentext: Text ergänzen</h2>
-            <div class="wortbank" id="wortbank-luecken"></div>
+            <div style="display:flex;gap:8px;margin:0 0 14px;"><button onclick="fbLtShowLoesung()" style="background:#f5f7ff;border:1px solid #c5cff5;border-radius:8px;padding:6px 16px;font-size:0.85em;color:#667eea;cursor:pointer;font-weight:600;">💡 Lösungen</button><button onclick="fbLtReset();" style="background:#f5f7ff;border:1px solid #c5cff5;border-radius:8px;padding:6px 16px;font-size:0.85em;color:#667eea;cursor:pointer;font-weight:600;">↺ Neustart</button></div>
+    <div class="wortbank" id="wortbank-luecken"></div>
             <div id="lueckenContainer" class="luecken-story">
                 <p>Am ersten Schultag sitzt Sara im Deutschkurs in Hamburg. Die Lehrerin lächelt und fragt: „Wie ist Ihr <input class="blank" data-answer="Name">?“</p>
                 <p>Ein Mann steht auf. Er <input class="blank" data-answer="heißt"> Diego und <input class="blank" data-answer="kommt"> aus Madrid. Von Beruf ist er <input class="blank" data-answer="Fotograf"> und <input class="blank" data-answer="wohnt"> jetzt bei seiner Schwester in Hamburg.</p>
