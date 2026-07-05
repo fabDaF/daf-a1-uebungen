@@ -1175,7 +1175,7 @@ initWortschatz();
 /* ── Gerüst-Modus Add-on (B1+) — additiv generiert. Mischt row/parts zur Laufzeit in satzbauData,
    hüllt Init/Lösung/Reset. Original-Logik für Sätze ohne row bleibt unberührt. */
 (function(){
-  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":false,"tab":3};
+  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":true,"tab":3};
   var SBGAP = [{"i":0,"row":["_","_","_","heute","Kopfschmerzen"],"parts":["ich","habe","seit"]},{"i":1,"row":["_","_","_","Bauch","weh"],"parts":["mir","tut","der"]},{"i":2,"row":["_","_","_","mir","_","Medikament"],"parts":["der","Arzt","gibt","ein"]},{"i":3,"row":["_","_","_","zum","Arzt"],"parts":["ich","gehe","morgen"]},{"i":4,"row":["_","_","_","wirklich","Fieber"],"parts":["hast","du","heute"]},{"i":5,"row":["_","_","_","eine","Tablette","_"],"parts":["ich","muss","jetzt","nehmen"]},{"i":6,"row":["_","_","_","mir","schon","_","_","weh"],"parts":["meine","Hand","tut","seit","gestern"]},{"i":7,"row":["_","_","_","wirklich","sehr","_"],"parts":["der","Zahnarzt","ist","nett"]}];
   SBGAP.forEach(function(g){ var ex = satzbauData[g.i]; if (!ex) return;
     ex.row = g.row; ex.parts = g.parts;

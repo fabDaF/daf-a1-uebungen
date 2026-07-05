@@ -1968,7 +1968,7 @@ function schreibLeeren() {
 /* ── Gerüst-Modus Add-on (B1+) — additiv generiert. Mischt row/parts zur Laufzeit in satzbauData,
    hüllt Init/Lösung/Reset. Original-Logik für Sätze ohne row bleibt unberührt. */
 (function(){
-  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":false,"tab":5};
+  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":true,"tab":5};
   var SBGAP = [{"i":0,"row":["_","_","_","heute","_","_","alt"],"parts":["Oma","Emma","wird","90","Jahre"]},{"i":1,"row":["_","_","_","keine","Familienfeste"],"parts":["Alex","mag","heute"]},{"i":2,"row":["_","_","_","auch","_","Natur"],"parts":["Frodo","liebt","heute","die"]},{"i":3,"row":["_","_","_","einen","_","Anzug"],"parts":["Tim","trägt","heute","blauen"]},{"i":4,"row":["_","_","_","auch","_","Familie"],"parts":["Lukas","hat","heute","eine"]},{"i":5,"row":["Lisa","_","_","frisch","_"],"parts":["ist","heute","verheiratet"]},{"i":6,"row":["_","_","Eltern","_","_","München"],"parts":["kommen","die","heute","aus"]},{"i":7,"row":["_","Vater","_","_","pensioniert"],"parts":["Alex'","ist","heute"]},{"i":8,"row":["_","_","_","heute","_","Hilfe"],"parts":["Oma","Emma","braucht","keine"]},{"i":9,"row":["_","_","_","auch","_","Laune"],"parts":["Alex","hat","jetzt","gute"]}];
   SBGAP.forEach(function(g){ var ex = satzbauData[g.i]; if (!ex) return;
     ex.row = g.row; ex.parts = g.parts;

@@ -1055,7 +1055,7 @@ function resetGenus(){ initGenus(); genusTimerReset(); }
 /* ── Gerüst-Modus Add-on (B1+) — additiv generiert. Mischt row/parts zur Laufzeit in satzbauData,
    hüllt Init/Lösung/Reset. Original-Logik für Sätze ohne row bleibt unberührt. */
 (function(){
-  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":false,"tab":4};
+  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":true,"tab":4};
   var SBGAP = [{"i":0,"row":["_","_","_","von","Berlin"],"parts":["München","liegt","südlich"]},{"i":1,"row":["_","_","_","Museen","_","_","Stadt"],"parts":["es","gibt","viele","in","der"]},{"i":2,"row":["_","_","_","eine","Bibliothek"],"parts":["gibt","es","hier"]},{"i":3,"row":["_","_","_","einen","_","im","Kino","_"],"parts":["ich","sehe","mir","Film","an"]},{"i":4,"row":["_","_","_","Norden","_","Deutschland"],"parts":["Hamburg","liegt","im","von"]},{"i":5,"row":["_","_","_","keine","Diskothek"],"parts":["hier","gibt","es"]},{"i":6,"row":["_","_","_","ich","_","Theaterstück"],"parts":["im","Theater","sehe","ein"]},{"i":7,"row":["_","_","_","von","München"],"parts":["Wien","liegt","östlich"]}];
   SBGAP.forEach(function(g){ var ex = satzbauData[g.i]; if (!ex) return;
     ex.row = g.row; ex.parts = g.parts;

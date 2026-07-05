@@ -1010,7 +1010,7 @@ function resetGenus(){ initGenus(); genusTimerReset(); }
 /* ── Gerüst-Modus Add-on (B1+) — additiv generiert. Mischt row/parts zur Laufzeit in satzbauData,
    hüllt Init/Lösung/Reset. Original-Logik für Sätze ohne row bleibt unberührt. */
 (function(){
-  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":false,"tab":2};
+  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":true,"tab":2};
   var SBGAP = [{"i":0,"row":["_","_","_","ich","schick"],"parts":["diese","Bluse","finde"]},{"i":1,"row":["_","_","_","du","heute"],"parts":["welchen","Pullover","kaufst"]},{"i":2,"row":["_","_","_","weiße","Blusen"],"parts":["Kara","trägt","gerne"]},{"i":3,"row":["_","_","_","einen","_","Hut"],"parts":["Theo","hat","wirklich","grauen"]},{"i":4,"row":["_","_","_","wirklich","sehr","_"],"parts":["das","Hemd","ist","blau-grün-kariert"]},{"i":5,"row":["_","_","_","cooles","Outfit"],"parts":["ich","brauche","ein"]},{"i":6,"row":["_","_","_","heute","blau"],"parts":["welche","Jacke","ist"]},{"i":7,"row":["_","_","_","warme","Jacke","_"],"parts":["du","musst","eine","mitnehmen"]}];
   SBGAP.forEach(function(g){ var ex = satzbauData[g.i]; if (!ex) return;
     ex.row = g.row; ex.parts = g.parts;

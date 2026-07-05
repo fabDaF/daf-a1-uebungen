@@ -1010,7 +1010,7 @@ function resetGenus(){ initGenus(); genusTimerReset(); }
 /* ── Gerüst-Modus Add-on (B1+) — additiv generiert. Mischt row/parts zur Laufzeit in satzbauData,
    hüllt Init/Lösung/Reset. Original-Logik für Sätze ohne row bleibt unberührt. */
 (function(){
-  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":false,"tab":3};
+  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":true,"tab":3};
   var SBGAP = [{"i":0,"row":["_","_","_","_","der","Box"],"parts":["der","Ball","ist","neben"]},{"i":1,"row":["_","_","_","_","dem","Weißbrot"],"parts":["das","Mettbrötchen","ist","vor"]},{"i":2,"row":["_","_","_","im","Café"],"parts":["Deon","sitzt","heute"]},{"i":3,"row":["_","_","_","die","_","Bäckerei"],"parts":["wo","ist","hier","nächste"]},{"i":4,"row":["_","_","_","hinter","_","Scheibe"],"parts":["die","Torte","steht","der"]},{"i":5,"row":["_","_","_","der","Vitrine"],"parts":["Mariella","steht","vor"]},{"i":6,"row":["_","_","_","im","Garten"],"parts":["die","Kinder","spielen"]},{"i":7,"row":["_","_","_","dem","Tisch"],"parts":["was","steht","auf"]}];
   SBGAP.forEach(function(g){ var ex = satzbauData[g.i]; if (!ex) return;
     ex.row = g.row; ex.parts = g.parts;

@@ -1006,7 +1006,7 @@ function resetGenus(){ initGenus(); genusTimerReset(); }
 /* ── Gerüst-Modus Add-on (B1+) — additiv generiert. Mischt row/parts zur Laufzeit in satzbauData,
    hüllt Init/Lösung/Reset. Original-Logik für Sätze ohne row bleibt unberührt. */
 (function(){
-  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":false,"tab":3};
+  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":true,"tab":3};
   var SBGAP = [{"i":0,"row":["_","_","_","einen","_","Pullover"],"parts":["heute","suche","ich","schwarzen"]},{"i":1,"row":["_","_","_","wirklich","dort","_"],"parts":["die","Umkleidekabine","ist","hinten"]},{"i":2,"row":["_","_","_","schöne","Jacke","_"],"parts":["kann","ich","die","anprobieren"]},{"i":3,"row":["_","_","_","bar","_","_","Karte","_"],"parts":["möchten","Sie","heute","oder","mit","zahlen"]},{"i":4,"row":["_","_","_","mir","leider","_"],"parts":["die","Hose","passt","nicht"]},{"i":5,"row":["_","_","_","Hemd","gern","_"],"parts":["ich","möchte","das","zurückgeben"]},{"i":6,"row":["_","_","_","Kassenbon","noch"],"parts":["haben","Sie","den"]},{"i":7,"row":["_","_","_","fünfzig","Euro"],"parts":["das","macht","zusammen"]}];
   SBGAP.forEach(function(g){ var ex = satzbauData[g.i]; if (!ex) return;
     ex.row = g.row; ex.parts = g.parts;

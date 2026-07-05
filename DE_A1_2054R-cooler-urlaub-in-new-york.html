@@ -2171,7 +2171,7 @@ function schreibLeeren() {
 /* ── Gerüst-Modus Add-on (B1+) — additiv generiert. Mischt row/parts zur Laufzeit in satzbauData,
    hüllt Init/Lösung/Reset. Original-Logik für Sätze ohne row bleibt unberührt. */
 (function(){
-  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":false,"tab":5};
+  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":true,"tab":5};
   var SBGAP = [{"i":0,"row":["_","_","_","keine","Lust","_","_"],"parts":["Alex","hat","heute","zu","arbeiten"]},{"i":1,"row":["_","_","_","seinen","Reisepass","_"],"parts":["Nils","hat","leider","vergessen"]},{"i":2,"row":["_","_","_","_","_","am","Flughafen"],"parts":["sie","waren","fast","zu","spät"]},{"i":3,"row":["_","_","_","wirklich","_","langweilig"],"parts":["der","Flug","war","sehr"]},{"i":4,"row":["_","_","_","alle","_","da"],"parts":["zum","Glück","waren","Koffer"]},{"i":5,"row":["_","_","_","dem","_","_","Manhattan"],"parts":["sie","fuhren","mit","Zug","nach"]},{"i":6,"row":["_","_","_","klein","_","gemütlich"],"parts":["das","Hotelzimmer","war","aber"]},{"i":7,"row":["_","_","_","dem","_","_","Freiheitsstatue"],"parts":["sie","fuhren","mit","Schiff","zur"]},{"i":8,"row":["_","_","_","dem","_","_","Building"],"parts":["sie","waren","auf","Empire","State"]},{"i":9,"row":["_","_","_","viel","Spaß"],"parts":["abends","hatten","sie"]}];
   SBGAP.forEach(function(g){ var ex = satzbauData[g.i]; if (!ex) return;
     ex.row = g.row; ex.parts = g.parts;

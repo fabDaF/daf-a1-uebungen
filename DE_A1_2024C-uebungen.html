@@ -1007,7 +1007,7 @@ function resetGenus(){ initGenus(); genusTimerReset(); }
 /* ── Gerüst-Modus Add-on (B1+) — additiv generiert. Mischt row/parts zur Laufzeit in satzbauData,
    hüllt Init/Lösung/Reset. Original-Logik für Sätze ohne row bleibt unberührt. */
 (function(){
-  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":false,"tab":2};
+  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":true,"tab":2};
   var SBGAP = [{"i":0,"row":["_","_","_","bis","_","Kreuzung"],"parts":["gehen","Sie","geradeaus","zur"]},{"i":1,"row":["_","_","_","einfach","_","links","_"],"parts":["biegen","Sie","jetzt","nach","ab"]},{"i":2,"row":["_","_","_","am","Alexanderplatz","_"],"parts":["ich","steige","jetzt","um"]},{"i":3,"row":["_","_","_","Museen","_","_","Stadt"],"parts":["es","gibt","viele","in","der"]},{"i":4,"row":["_","_","_","genau","_","Minuten"],"parts":["die","Fahrt","dauert","32"]},{"i":5,"row":["_","_","_","nördlich","_","Berlin"],"parts":["Hamburg","liegt","wirklich","von"]},{"i":6,"row":["_","_","_","die","_","Haltestelle"],"parts":["wo","ist","hier","nächste"]},{"i":7,"row":["_","_","_","in","_","Hauptbahnhof"],"parts":["der","Bus","fährt","Richtung"]}];
   SBGAP.forEach(function(g){ var ex = satzbauData[g.i]; if (!ex) return;
     ex.row = g.row; ex.parts = g.parts;

@@ -1045,7 +1045,7 @@ function resetGenus(){ initGenus(); genusTimerReset(); }
 /* ── Gerüst-Modus Add-on (B1+) — additiv generiert. Mischt row/parts zur Laufzeit in satzbauData,
    hüllt Init/Lösung/Reset. Original-Logik für Sätze ohne row bleibt unberührt. */
 (function(){
-  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":false,"tab":4};
+  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":true,"tab":4};
   var SBGAP = [{"i":0,"row":["_","_","_","gerne","Hähnchen"],"parts":["ich","esse","sehr"]},{"i":1,"row":["_","_","_","mir","_","gut"],"parts":["der","Kuchen","schmeckt","sehr"]},{"i":2,"row":["_","_","_","ich","Schnitzel"],"parts":["am","liebsten","esse"]},{"i":3,"row":["_","_","_","heiße","Kaffee"],"parts":["schmeckt","dir","der"]},{"i":4,"row":["_","_","_","keinen","Brokkoli"],"parts":["ich","mag","wirklich"]},{"i":5,"row":["_","_","_","am","besten"],"parts":["Pizza","schmeckt","mir"]},{"i":6,"row":["_","_","_","gern","Kuchen"],"parts":["isst","du","auch"]},{"i":7,"row":["_","_","_","ziemlich","sauer"],"parts":["Zitronen","schmecken","meistens"]}];
   SBGAP.forEach(function(g){ var ex = satzbauData[g.i]; if (!ex) return;
     ex.row = g.row; ex.parts = g.parts;

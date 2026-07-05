@@ -1463,7 +1463,7 @@ function resetGenus(){ initGenus(); genusTimerReset(); }
 /* ── Gerüst-Modus Add-on (B1+) — additiv generiert. Mischt row/parts zur Laufzeit in satzbauData,
    hüllt Init/Lösung/Reset. Original-Logik für Sätze ohne row bleibt unberührt. */
 (function(){
-  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":false,"tab":3};
+  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":true,"tab":3};
   var SBGAP = [{"i":0,"row":["_","_","_","langsam","_","links"],"parts":["gehen","Sie","bitte","nach"]},{"i":1,"row":["_","_","_","der","Kreuzung","_"],"parts":["biegen","Sie","an","ab"]},{"i":2,"row":["_","_","_","die","Straße"],"parts":["überqueren","Sie","hier"]},{"i":3,"row":["_","_","_","hier","_","Apotheke"],"parts":["wo","finde","ich","eine"]},{"i":4,"row":["_","_","_","immer","geradeaus"],"parts":["laufen","Sie","einfach"]},{"i":5,"row":["_","_","_","große","Einkaufszentrum"],"parts":["ich","suche","das"]},{"i":6,"row":["_","_","_","diesen","_","hier"],"parts":["kennen","Sie","vielleicht","Weg"]},{"i":7,"row":["_","_","_","einfach","_","rechts"],"parts":["gehen","Sie","jetzt","nach"]}];
   SBGAP.forEach(function(g){ var ex = satzbauData[g.i]; if (!ex) return;
     ex.row = g.row; ex.parts = g.parts;

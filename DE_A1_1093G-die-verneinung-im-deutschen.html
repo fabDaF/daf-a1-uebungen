@@ -1905,7 +1905,7 @@ function resetGenus(){ initGenus(); genusTimerReset(); }
 /* ── Gerüst-Modus Add-on (B1+) — additiv generiert. Mischt row/parts zur Laufzeit in satzbauData,
    hüllt Init/Lösung/Reset. Original-Logik für Sätze ohne row bleibt unberührt. */
 (function(){
-  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":false,"tab":5};
+  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":true,"tab":5};
   var SBGAP = [{"i":0,"row":["_","_","_","_","in","Paris"],"parts":["ich","wohne","heute","nicht"]},{"i":1,"row":["_","_","_","leider","_","günstig"],"parts":["Madrid","ist","heute","nicht"]},{"i":2,"row":["_","_","_","keine","Schwester"],"parts":["ich","habe","leider"]},{"i":3,"row":["_","_","_","Venedig","_","Autos"],"parts":["gibt","es","in","keine"]},{"i":4,"row":["_","_","_","heute","_","romantisch"],"parts":["der","Film","ist","nicht"]},{"i":5,"row":["_","_","_","kein","Auto"],"parts":["wir","haben","jetzt"]},{"i":6,"row":["_","_","_","_","gern","Fußball"],"parts":["ich","spiele","heute","nicht"]},{"i":7,"row":["_","_","_","hier","_","laut"],"parts":["die","Stadt","ist","nicht"]}];
   SBGAP.forEach(function(g){ var ex = satzbauData[g.i]; if (!ex) return;
     ex.row = g.row; ex.parts = g.parts;

@@ -1589,7 +1589,7 @@ function resetGenus(){ initGenus(); genusTimerReset(); }
 /* ── Gerüst-Modus Add-on (B1+) — additiv generiert. Mischt row/parts zur Laufzeit in satzbauData,
    hüllt Init/Lösung/Reset. Original-Logik für Sätze ohne row bleibt unberührt. */
 (function(){
-  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":false,"tab":4};
+  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":true,"tab":4};
   var SBGAP = [{"i":0,"row":["_","_","_","bitte","_","Milch"],"parts":["wo","finde","ich","die"]},{"i":1,"row":["_","_","_","heute","_","vorne"],"parts":["die","Tomaten","sind","da"]},{"i":2,"row":["_","_","_","zwei","_","Nudeln"],"parts":["ich","kaufe","heute","Packungen"]},{"i":3,"row":["_","_","_","Käse","_","hier"],"parts":["wo","ist","der","heute"]},{"i":4,"row":["_","_","_","_","Lachs","hier"],"parts":["haben","Sie","heute","frischen"]},{"i":5,"row":["_","_","_","da","_","links"],"parts":["die","Bananen","sind","hinten"]},{"i":6,"row":["_","_","_","gern","_","_","Käse"],"parts":["ich","hätte","heute","ein","Pfund"]},{"i":7,"row":["_","_","_","Sie","_","hier"],"parts":["welche","Fischsorten","haben","heute"]}];
   SBGAP.forEach(function(g){ var ex = satzbauData[g.i]; if (!ex) return;
     ex.row = g.row; ex.parts = g.parts;

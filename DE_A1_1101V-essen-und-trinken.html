@@ -1607,7 +1607,7 @@ function schreibLeeren() {
 /* ── Gerüst-Modus Add-on (B1+) — additiv generiert. Mischt row/parts zur Laufzeit in satzbauData,
    hüllt Init/Lösung/Reset. Original-Logik für Sätze ohne row bleibt unberührt. */
 (function(){
-  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":false,"tab":4};
+  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":true,"tab":4};
   var SBGAP = [{"i":0,"row":["_","_","_","gern","Pizza"],"parts":["ich","esse","heute"]},{"i":1,"row":["_","_","_","heute","_","Frühstück"],"parts":["was","isst","du","zum"]},{"i":2,"row":["_","_","_","heute","Pizza"],"parts":["mein","Lieblingsessen","ist"]},{"i":3,"row":["_","_","_","Abend","_","Wein"],"parts":["wir","trinken","am","gern"]},{"i":4,"row":["_","_","_","heute","_","_","Pizza"],"parts":["die","Kinder","mögen","Eis","und"]},{"i":5,"row":["_","_","Fleisch","_","eklig"],"parts":["ich","finde","leider"]},{"i":6,"row":["_","_","_","gern","Kuchen"],"parts":["Jonas","isst","heute"]},{"i":7,"row":["_","_","_","gern","Kaffee"],"parts":["ich","trinke","morgens"]}];
   SBGAP.forEach(function(g){ var ex = satzbauData[g.i]; if (!ex) return;
     ex.row = g.row; ex.parts = g.parts;

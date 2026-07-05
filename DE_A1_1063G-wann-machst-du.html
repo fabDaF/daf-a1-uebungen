@@ -1824,7 +1824,7 @@ function resetGenus(){ initGenus(); genusTimerReset(); }
 /* ── Gerüst-Modus Add-on (B1+) — additiv generiert. Mischt row/parts zur Laufzeit in satzbauData,
    hüllt Init/Lösung/Reset. Original-Logik für Sätze ohne row bleibt unberührt. */
 (function(){
-  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":false,"tab":5};
+  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":true,"tab":5};
   var SBGAP = [{"i":0,"row":["_","_","_","Morgen","_","_","Uhr"],"parts":["ich","frühstücke","am","um","7"]},{"i":1,"row":["_","_","_","heute","_","_","Uhr"],"parts":["der","Kurs","beginnt","um","18"]},{"i":2,"row":["_","_","_","denn","heute"],"parts":["wann","frühstückst","du"]},{"i":3,"row":["_","_","_","von","_","bis","_","Uhr"],"parts":["ich","arbeite","heute","9","17"]},{"i":4,"row":["_","_","_","heute","_","Buch"],"parts":["abends","lese","ich","ein"]},{"i":5,"row":["_","_","_","ich","_","_","Arzt"],"parts":["am","Nachmittag","gehe","heute","zum"]},{"i":6,"row":["_","_","_","heute","_","_","Uhr"],"parts":["die","Party","ist","ab","20"]},{"i":7,"row":["_","_","_","auch","_","_","Nacht"],"parts":["er","arbeitet","heute","in","der"]}];
   SBGAP.forEach(function(g){ var ex = satzbauData[g.i]; if (!ex) return;
     ex.row = g.row; ex.parts = g.parts;

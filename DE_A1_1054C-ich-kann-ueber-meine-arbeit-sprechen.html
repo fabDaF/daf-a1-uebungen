@@ -1691,7 +1691,7 @@ function resetGenus(){ initGenus(); genusTimerReset(); }
 /* ── Gerüst-Modus Add-on (B1+) — additiv generiert. Mischt row/parts zur Laufzeit in satzbauData,
    hüllt Init/Lösung/Reset. Original-Logik für Sätze ohne row bleibt unberührt. */
 (function(){
-  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":false,"tab":4};
+  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":true,"tab":4};
   var SBGAP = [{"i":0,"row":["_","_","_","heute","_","_","Schule"],"parts":["die","Lehrerin","arbeitet","in","der"]},{"i":1,"row":["_","_","_","seinen","_","kreativ"],"parts":["der","Koch","findet","Job"]},{"i":2,"row":["_","_","_","heute","_","langweilig"],"parts":["mein","Beruf","ist","nicht"]},{"i":3,"row":["_","_","_","jeden","_","_","Flughafen"],"parts":["die","Pilotin","fährt","Tag","zum"]},{"i":4,"row":["_","_","_","gern","Bücher"],"parts":["er","liest","heute"]},{"i":5,"row":["_","_","_","auch","_","Sprachen"],"parts":["spricht","sie","heute","drei"]},{"i":6,"row":["_","_","_","Informatiker","heute"],"parts":["wo","arbeitet","der"]},{"i":7,"row":["_","_","_","mir","_","Spaß"],"parts":["die","Arbeit","macht","heute"]}];
   SBGAP.forEach(function(g){ var ex = satzbauData[g.i]; if (!ex) return;
     ex.row = g.row; ex.parts = g.parts;

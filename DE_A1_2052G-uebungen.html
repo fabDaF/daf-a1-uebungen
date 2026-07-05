@@ -1010,7 +1010,7 @@ function resetGenus(){ initGenus(); genusTimerReset(); }
 /* ── Gerüst-Modus Add-on (B1+) — additiv generiert. Mischt row/parts zur Laufzeit in satzbauData,
    hüllt Init/Lösung/Reset. Original-Logik für Sätze ohne row bleibt unberührt. */
 (function(){
-  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":false,"tab":3};
+  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":true,"tab":3};
   var SBGAP = [{"i":0,"row":["_","_","_","im","Restaurant"],"parts":["ich","war","gestern"]},{"i":1,"row":["_","_","_","wirklich","superlecker"],"parts":["das","Essen","war"]},{"i":2,"row":["_","_","_","großen","Hunger"],"parts":["wir","hatten","damals"]},{"i":3,"row":["_","_","_","Samstag","_","Kino"],"parts":["warst","du","am","im"]},{"i":4,"row":["_","_","_","wirklich","sehr","_"],"parts":["meine","Eltern","waren","zufrieden"]},{"i":5,"row":["_","_","Lust","_","Schnitzel"],"parts":["ich","hatte","auf"]},{"i":6,"row":["_","_","_","total","freundlich"],"parts":["die","Kellnerin","war"]},{"i":7,"row":["_","_","_","leckeres","Mittagessen"],"parts":["hattet","ihr","ein"]}];
   SBGAP.forEach(function(g){ var ex = satzbauData[g.i]; if (!ex) return;
     ex.row = g.row; ex.parts = g.parts;

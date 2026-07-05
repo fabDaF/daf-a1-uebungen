@@ -1466,7 +1466,7 @@ function resetGenus(){ initGenus(); genusTimerReset(); }
 /* ── Gerüst-Modus Add-on (B1+) — additiv generiert. Mischt row/parts zur Laufzeit in satzbauData,
    hüllt Init/Lösung/Reset. Original-Logik für Sätze ohne row bleibt unberührt. */
 (function(){
-  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":false,"tab":4};
+  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":true,"tab":4};
   var SBGAP = [{"i":0,"row":["_","_","_","die","Bruschetta"],"parts":["ich","hätte","gern"]},{"i":1,"row":["_","_","_","noch","etwas","_"],"parts":["möchten","Sie","jetzt","trinken"]},{"i":2,"row":["_","_","_","Abend","leider","_","_"],"parts":["wir","sind","heute","zu","viert"]},{"i":3,"row":["_","_","_","einen","Tisch","_"],"parts":["ich","würde","gerne","reservieren"]},{"i":4,"row":["_","_","_","die","Rechnung","_"],"parts":["können","wir","bitte","bekommen"]},{"i":5,"row":["_","_","_","heute","leider","_"],"parts":["das","Essen","ist","kalt"]},{"i":6,"row":["_","_","_","bitte","_","Karte","_"],"parts":["kann","ich","heute","mit","bezahlen"]},{"i":7,"row":["_","_","_","_","Glas","Zitronenlimo"],"parts":["für","mich","bitte","ein"]}];
   SBGAP.forEach(function(g){ var ex = satzbauData[g.i]; if (!ex) return;
     ex.row = g.row; ex.parts = g.parts;

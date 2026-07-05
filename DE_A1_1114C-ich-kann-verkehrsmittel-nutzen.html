@@ -1548,7 +1548,7 @@ function resetGenus(){ initGenus(); genusTimerReset(); }
 /* ── Gerüst-Modus Add-on (B1+) — additiv generiert. Mischt row/parts zur Laufzeit in satzbauData,
    hüllt Init/Lösung/Reset. Original-Logik für Sätze ohne row bleibt unberührt. */
 (function(){
-  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":false,"tab":4};
+  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":true,"tab":4};
   var SBGAP = [{"i":0,"row":["_","_","_","gerne","_","Fahrkarte","_","Braunschweig"],"parts":["ich","hätte","heute","eine","nach"]},{"i":1,"row":["_","_","_","Fahrkarte","_","hier"],"parts":["was","kostet","die","heute"]},{"i":2,"row":["_","_","_","eine","_","25"],"parts":["ich","habe","heute","Bahncard"]},{"i":3,"row":["_","_","Gleis","_","_","der","Zug","_"],"parts":["von","welchem","fährt","heute","ab"]},{"i":4,"row":["_","_","_","Zug","heute","_"],"parts":["wann","fährt","der","ab"]},{"i":5,"row":["_","_","_","eine","_","bitte"],"parts":["ich","möchte","heute","Sitzplatzreservierung"]},{"i":6,"row":["_","_","_","_","dem","_","zur","Arbeit"],"parts":["ich","fahre","heute","mit","Bus"]},{"i":7,"row":["_","_","_","_","der","_","zum","Fitnessstudio"],"parts":["Sonja","fährt","heute","mit","U-Bahn"]}];
   SBGAP.forEach(function(g){ var ex = satzbauData[g.i]; if (!ex) return;
     ex.row = g.row; ex.parts = g.parts;

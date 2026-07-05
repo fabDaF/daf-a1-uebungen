@@ -1375,7 +1375,7 @@ function resetGenus(){ initGenus(); genusTimerReset(); }
 /* ── Gerüst-Modus Add-on (B1+) — additiv generiert. Mischt row/parts zur Laufzeit in satzbauData,
    hüllt Init/Lösung/Reset. Original-Logik für Sätze ohne row bleibt unberührt. */
 (function(){
-  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":false,"tab":4};
+  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":true,"tab":4};
   var SBGAP = [{"i":0,"row":["_","_","_","_","spannendes","Buch","_"],"parts":["Alex","hat","gestern","ein","gelesen"]},{"i":1,"row":["_","_","_","Woche","_","Berlin","_"],"parts":["Louise","ist","letzte","nach","gefahren"]},{"i":2,"row":["_","_","_","Morgen","Kaffee","_"],"parts":["wir","haben","heute","getrunken"]},{"i":3,"row":["_","_","_","die","Zeitung","_"],"parts":["er","hat","gestern","gelesen"]},{"i":4,"row":["_","_","_","sehr","früh","_"],"parts":["ich","bin","heute","aufgestanden"]},{"i":5,"row":["_","_","_","_","neues","Kleid","_"],"parts":["sie","hat","gestern","ein","gekauft"]},{"i":6,"row":["_","_","_","heute","Fußball","_"],"parts":["die","Kinder","haben","gespielt"]},{"i":7,"row":["_","_","_","Kurs","_","viel","_"],"parts":["wir","haben","im","sehr","gelernt"]}];
   SBGAP.forEach(function(g){ var ex = satzbauData[g.i]; if (!ex) return;
     ex.row = g.row; ex.parts = g.parts;

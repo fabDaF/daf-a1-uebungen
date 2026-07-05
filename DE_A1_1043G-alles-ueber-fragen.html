@@ -1736,7 +1736,7 @@ function resetGenus(){ initGenus(); genusTimerReset(); }
 /* ── Gerüst-Modus Add-on (B1+) — additiv generiert. Mischt row/parts zur Laufzeit in satzbauData,
    hüllt Init/Lösung/Reset. Original-Logik für Sätze ohne row bleibt unberührt. */
 (function(){
-  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":false,"tab":5};
+  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":true,"tab":5};
   var SBGAP = [{"i":0,"row":["_","_","_","heute","_","Deutschland"],"parts":["wo","wohnst","du","in"]},{"i":1,"row":["_","_","_","neue","_","bitte"],"parts":["wie","heißt","der","Kellner"]},{"i":2,"row":["_","_","_","Gast","heute"],"parts":["woher","kommt","der"]},{"i":3,"row":["_","_","_","auch","Deutsch"],"parts":["sprichst","du","heute"]},{"i":4,"row":["_","_","_","der","Kellner"],"parts":["welche","Sprachen","spricht"]},{"i":5,"row":["_","_","Sie","heute","_"],"parts":["was","möchten","trinken"]},{"i":6,"row":["_","_","Gast","_","Kinder"],"parts":["hat","der","heute"]},{"i":7,"row":["_","_","_","der","_","heute"],"parts":["wie","viel","kostet","Kaffee"]}];
   SBGAP.forEach(function(g){ var ex = satzbauData[g.i]; if (!ex) return;
     ex.row = g.row; ex.parts = g.parts;

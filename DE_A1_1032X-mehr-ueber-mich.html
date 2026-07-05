@@ -1861,7 +1861,7 @@ function resetGenus(){ initGenus(); genusTimerReset(); }
 /* ── Gerüst-Modus Add-on (B1+) — additiv generiert. Mischt row/parts zur Laufzeit in satzbauData,
    hüllt Init/Lösung/Reset. Original-Logik für Sätze ohne row bleibt unberührt. */
 (function(){
-  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":false,"tab":4};
+  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":true,"tab":4};
   var SBGAP = [{"i":0,"row":["_","_","_","Arabisch","_","Englisch"],"parts":["ich","spreche","heute","und"]},{"i":1,"row":["_","_","_","du","heute"],"parts":["welche","Sprachen","sprichst"]},{"i":2,"row":["_","_","_","auch","Spanisch"],"parts":["meine","Muttersprache","ist"]},{"i":3,"row":["_","_","_","fließend","Deutsch"],"parts":["er","spricht","heute"]},{"i":4,"row":["_","_","_","du","bitte"],"parts":["wie","alt","bist"]},{"i":5,"row":["_","_","_","auch","verheiratet"],"parts":["ich","bin","heute"]},{"i":6,"row":["_","_","_","fließend","Französisch"],"parts":["sprichst","du","heute"]},{"i":7,"row":["_","_","_","Deutsch","_","Fremdsprache"],"parts":["sie","lernt","heute","als"]}];
   SBGAP.forEach(function(g){ var ex = satzbauData[g.i]; if (!ex) return;
     ex.row = g.row; ex.parts = g.parts;

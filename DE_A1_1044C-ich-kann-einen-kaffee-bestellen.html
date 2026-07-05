@@ -2045,7 +2045,7 @@ function resetGenus(){ initGenus(); genusTimerReset(); }
 /* ── Gerüst-Modus Add-on (B1+) — additiv generiert. Mischt row/parts zur Laufzeit in satzbauData,
    hüllt Init/Lösung/Reset. Original-Logik für Sätze ohne row bleibt unberührt. */
 (function(){
-  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":false,"tab":4};
+  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":true,"tab":4};
   var SBGAP = [{"i":0,"row":["_","_","_","einen","Kaffee"],"parts":["ich","möchte","heute"]},{"i":1,"row":["_","_","_","Cappuccino","heute"],"parts":["was","kostet","der"]},{"i":2,"row":["_","_","_","Speisekarte","haben"],"parts":["kann","ich","die"]},{"i":3,"row":["_","_","gern","_","Wasser"],"parts":["ich","hätte","ein"]},{"i":4,"row":["_","_","_","auch","WLAN"],"parts":["haben","Sie","heute"]},{"i":5,"row":["_","_","_","die","Toilette"],"parts":["wo","ist","hier"]},{"i":6,"row":["_","_","_","mit","_","zahlen"],"parts":["kann","ich","heute","Karte"]},{"i":7,"row":["_","_","_","die","Rechnung"],"parts":["ich","möchte","jetzt"]}];
   SBGAP.forEach(function(g){ var ex = satzbauData[g.i]; if (!ex) return;
     ex.row = g.row; ex.parts = g.parts;

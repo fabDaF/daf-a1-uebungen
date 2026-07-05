@@ -1286,7 +1286,7 @@ function resetGenus(){ initGenus(); genusTimerReset(); }
 /* ── Gerüst-Modus Add-on (B1+) — additiv generiert. Mischt row/parts zur Laufzeit in satzbauData,
    hüllt Init/Lösung/Reset. Original-Logik für Sätze ohne row bleibt unberührt. */
 (function(){
-  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":false,"tab":2};
+  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":true,"tab":2};
   var SBGAP = [{"i":0,"row":["_","_","Kind","_","sehr","_"],"parts":["das","vergessene","war","verängstigt"]},{"i":1,"row":["_","_","Eltern","_","_","zum","Parkplatz","_"],"parts":["die","gestressten","fuhren","schnell","zurück"]},{"i":2,"row":["_","_","_","_","Schinken","_","Frühstück"],"parts":["er","aß","100g","gebratenen","zum"]},{"i":3,"row":["_","_","Frau","_","_","ins","Krankenhaus","_"],"parts":["die","verletzte","wurde","sofort","gebracht"]},{"i":4,"row":["_","_","_","Woche","_","_","Waschmaschine"],"parts":["wir","kauften","letzte","eine","gebrauchte"]},{"i":5,"row":["_","_","Fahrrad","_","_","zwei","Tagen","_"],"parts":["das","gestohlene","wurde","nach","gefunden"]},{"i":6,"row":["_","_","Regel","_","_","klar"],"parts":["die","erklärte","ist","jetzt"]},{"i":7,"row":["_","_","_","_","Mann","sofort"],"parts":["er","half","dem","verletzten"]}];
   SBGAP.forEach(function(g){ var ex = satzbauData[g.i]; if (!ex) return;
     ex.row = g.row; ex.parts = g.parts;

@@ -2118,7 +2118,7 @@ function schreibLeeren() {
 /* ── Gerüst-Modus Add-on (B1+) — additiv generiert. Mischt row/parts zur Laufzeit in satzbauData,
    hüllt Init/Lösung/Reset. Original-Logik für Sätze ohne row bleibt unberührt. */
 (function(){
-  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":false,"tab":5};
+  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":true,"tab":5};
   var SBGAP = [{"i":0,"row":["_","_","_","Freund","Alex","_"],"parts":["Louise","ruft","ihren","an"]},{"i":1,"row":["_","_","_","richtig","_","Musik","_"],"parts":["Alex","macht","jetzt","laute","an"]},{"i":2,"row":["_","_","Louise","wirklich","_"],"parts":["er","will","beeindrucken"]},{"i":3,"row":["_","_","_","sehr","_","_","wild"],"parts":["Frodo","knurrt","plötzlich","laut","und"]},{"i":4,"row":["_","_","_","mir","wirklich","_","_"],"parts":["die","Musik","ist","zu","laut"]},{"i":5,"row":["_","_","_","Louise","hoch"],"parts":["Frodo","springt","an"]},{"i":6,"row":["_","_","_","hell","_","gemütlich"],"parts":["die","Wohnung","ist","und"]},{"i":7,"row":["_","_","Kaffee","_","_","Balkon"],"parts":["sie","trinken","auf","dem"]},{"i":8,"row":["_","_","_","hier","stark","_"],"parts":["gestern","hat","es","geregnet"]},{"i":9,"row":["_","_","_","_","die","Sonne"],"parts":["heute","scheint","endlich","wieder"]}];
   SBGAP.forEach(function(g){ var ex = satzbauData[g.i]; if (!ex) return;
     ex.row = g.row; ex.parts = g.parts;

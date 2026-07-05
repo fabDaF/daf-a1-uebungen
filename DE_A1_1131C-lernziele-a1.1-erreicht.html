@@ -1528,7 +1528,7 @@ function resetGenus(){ initGenus(); genusTimerReset(); }
 /* ── Gerüst-Modus Add-on (B1+) — additiv generiert. Mischt row/parts zur Laufzeit in satzbauData,
    hüllt Init/Lösung/Reset. Original-Logik für Sätze ohne row bleibt unberührt. */
 (function(){
-  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":false,"tab":4};
+  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":true,"tab":4};
   var SBGAP = [{"i":0,"row":["_","_","_","gern","Fußball"],"parts":["ich","spiele","heute"]},{"i":1,"row":["_","_","_","am","_","_","Park"],"parts":["wir","treffen","uns","Samstag","im"]},{"i":2,"row":["_","_","_","gern","_","_","Freizeit"],"parts":["was","machst","du","in","deiner"]},{"i":3,"row":["_","_","_","einen","_","bitte"],"parts":["ich","möchte","heute","Kaffee"]},{"i":4,"row":["_","_","_","wir","gern","_"],"parts":["am","Wochenende","gehen","spazieren"]},{"i":5,"row":["_","_","_","heute","_","Milch"],"parts":["wo","finde","ich","die"]},{"i":6,"row":["_","_","_","heute","_","Bücher"],"parts":["meine","Schwester","liest","gern"]},{"i":7,"row":["_","_","_","eine","_","_","Berlin"],"parts":["ich","brauche","heute","Fahrkarte","nach"]}];
   SBGAP.forEach(function(g){ var ex = satzbauData[g.i]; if (!ex) return;
     ex.row = g.row; ex.parts = g.parts;
