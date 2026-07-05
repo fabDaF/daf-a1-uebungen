@@ -291,6 +291,8 @@ input.blank.wrong { border-color: #e74c3c; background: #ffebee; }
 #wortschatzContainer input.blank.correct{border-bottom-color:#27ae60;background:#e8f8f0;}
 #wortschatzContainer input.blank.wrong{border-bottom-color:#e74c3c;background:#fdeaea;}
 @media(max-width:640px){#wortschatzContainer{grid-template-columns:1fr;}}
+
+/* FB-CHIP-WRAP */ .chip-bank .chip, .drop-zone .chip { white-space: normal; display: inline-block; text-align: left; max-width: 100%; overflow-wrap: break-word; }
 </style>
 </head>
 <body>
@@ -2098,5 +2100,6 @@ function schreibLeeren() {
 </script>
 
 <!-- FB-LT-STORY-HOOKS --><script>window.fbLtTimerStart=function(){if(typeof timerAutoStart==='function')timerAutoStart(2);};window.fbLtTimerStop=function(){if(typeof timerStop==='function')timerStop(2);};</script>
+<script>/* FB-SW-INIT */ (function(){ if (typeof initSchreibwerkstatt !== 'function') return; if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', function(){ initSchreibwerkstatt(); }); } else { initSchreibwerkstatt(); } })();</script>
 </body>
 </html>
