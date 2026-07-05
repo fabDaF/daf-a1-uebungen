@@ -1849,7 +1849,7 @@ function schreibLeeren() {
 /* ── Gerüst-Modus Add-on (B1+) — additiv generiert. Mischt row/parts zur Laufzeit in satzbauData,
    hüllt Init/Lösung/Reset. Original-Logik für Sätze ohne row bleibt unberührt. */
 (function(){
-  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":false,"tab":4};
+  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":true,"tab":4};
   var SBGAP = [{"i":0,"row":["_","_","Maria","_","_","_","hier"],"parts":["ich","heiße","und","bin","heute"]},{"i":1,"row":["_","_","_","auch","_","Brasilien"],"parts":["ich","komme","heute","aus"]},{"i":2,"row":["_","_","_","heute","_","_","Deutsch"],"parts":["meine","Mutter","spricht","Portugiesisch","und"]},{"i":3,"row":["_","_","_","in","Berlin"],"parts":["wir","wohnen","jetzt"]},{"i":4,"row":["_","_","_","heute","_","Ingenieur"],"parts":["mein","Vater","ist","auch"]},{"i":5,"row":["_","_","_","Brüder","_","_","Schwester"],"parts":["sie","hat","zwei","und","eine"]},{"i":6,"row":["_","_","_","Bruder","bitte"],"parts":["wie","heißt","dein"]},{"i":7,"row":["_","_","_","heute","_","_","Türkei"],"parts":["seine","Großeltern","sind","aus","der"]}];
   SBGAP.forEach(function(g){ var ex = satzbauData[g.i]; if (!ex) return;
     ex.row = g.row; ex.parts = g.parts;

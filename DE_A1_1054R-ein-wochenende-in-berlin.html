@@ -2001,7 +2001,7 @@ function schreibLeeren() {
 /* ── Gerüst-Modus Add-on (B1+) — additiv generiert. Mischt row/parts zur Laufzeit in satzbauData,
    hüllt Init/Lösung/Reset. Original-Logik für Sätze ohne row bleibt unberührt. */
 (function(){
-  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":false,"tab":5};
+  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":true,"tab":5};
   var SBGAP = [{"i":0,"row":["_","_","_","kalt","_","neblig"],"parts":["es","ist","heute","und"]},{"i":1,"row":["_","_","_","Berliner","_","auch"],"parts":["Alex","mag","den","Winter"]},{"i":2,"row":["_","_","Alex","_","herzlich"],"parts":["Tim","umarmt","heute"]},{"i":3,"row":["_","_","_","die","_","Wohnung"],"parts":["Alex","saugt","jetzt","ganze"]},{"i":4,"row":["_","_","_","Boden","_","nass"],"parts":["Frodo","macht","den","heute"]},{"i":5,"row":["_","_","Berlin","_","_","cool"],"parts":["findet","Hermine","heute","total"]},{"i":6,"row":["_","_","_","zum","Ku'damm"],"parts":["sie","fahren","heute"]},{"i":7,"row":["_","_","_","heute","_","lecker"],"parts":["das","Essen","ist","sehr"]},{"i":8,"row":["_","_","jetzt","_","Selfie"],"parts":["Hermine","macht","ein"]},{"i":9,"row":["_","_","Fotos","_","_","dunkel"],"parts":["sind","die","heute","zu"]}];
   SBGAP.forEach(function(g){ var ex = satzbauData[g.i]; if (!ex) return;
     ex.row = g.row; ex.parts = g.parts;

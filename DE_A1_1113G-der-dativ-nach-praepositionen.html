@@ -1734,7 +1734,7 @@ function resetGenus(){ initGenus(); genusTimerReset(); }
 /* ── Gerüst-Modus Add-on (B1+) — additiv generiert. Mischt row/parts zur Laufzeit in satzbauData,
    hüllt Init/Lösung/Reset. Original-Logik für Sätze ohne row bleibt unberührt. */
 (function(){
-  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":false,"tab":5};
+  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":true,"tab":5};
   var SBGAP = [{"i":0,"row":["_","_","_","dem","_","_","Arbeit"],"parts":["ich","fahre","mit","Bus","zur"]},{"i":1,"row":["_","_","_","zur","Schule"],"parts":["wie","kommst","du"]},{"i":2,"row":["_","_","_","der","_","_","Fitnessstudio"],"parts":["Sonja","fährt","mit","U-Bahn","zum"]},{"i":3,"row":["_","_","_","der","Türkei"],"parts":["ich","komme","aus"]},{"i":4,"row":["_","_","_","Schalter","_","Lena"],"parts":["Tobias","wartet","beim","auf"]},{"i":5,"row":["_","_","_","vom","Supermarkt"],"parts":["Elena","kommt","heute"]},{"i":6,"row":["_","_","Arbeit","_","_","Deutsch"],"parts":["nach","der","lerne","ich"]},{"i":7,"row":["_","_","_","dem","_","_","Hamburg"],"parts":["wir","fahren","mit","Zug","nach"]}];
   SBGAP.forEach(function(g){ var ex = satzbauData[g.i]; if (!ex) return;
     ex.row = g.row; ex.parts = g.parts;

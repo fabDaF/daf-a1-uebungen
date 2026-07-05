@@ -1546,7 +1546,7 @@ function resetGenus(){ initGenus(); genusTimerReset(); }
 /* ── Gerüst-Modus Add-on (B1+) — additiv generiert. Mischt row/parts zur Laufzeit in satzbauData,
    hüllt Init/Lösung/Reset. Original-Logik für Sätze ohne row bleibt unberührt. */
 (function(){
-  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":false,"tab":4};
+  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":true,"tab":4};
   var SBGAP = [{"i":0,"row":["_","_","_","eine","_","_","Hamburg"],"parts":["ich","möchte","heute","Fahrkarte","nach"]},{"i":1,"row":["_","_","_","Zug","heute","_","Leipzig","_"],"parts":["wann","fährt","der","nach","ab"]},{"i":2,"row":["_","_","_","heute","_","Gleis","4","_"],"parts":["der","Zug","fährt","von","ab"]},{"i":3,"row":["_","_","Gleis","_","_","der","ICE","_"],"parts":["von","welchem","fährt","heute","ab"]},{"i":4,"row":["_","_","_","heute","_","_","Uhr"],"parts":["die","Ankunft","ist","um","10:47"]},{"i":5,"row":["_","_","_","heute","_","_","Verspätung"],"parts":["der","Zug","hat","10","Minuten"]},{"i":6,"row":["_","_","_","einen","Sitzplatz","_"],"parts":["möchten","Sie","heute","reservieren"]},{"i":7,"row":["_","_","_","am","_","_","den","Zug"],"parts":["wir","warten","heute","Bahnsteig","auf"]}];
   SBGAP.forEach(function(g){ var ex = satzbauData[g.i]; if (!ex) return;
     ex.row = g.row; ex.parts = g.parts;

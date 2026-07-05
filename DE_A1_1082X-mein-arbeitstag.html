@@ -1602,7 +1602,7 @@ function resetGenus(){ initGenus(); genusTimerReset(); }
 /* ── Gerüst-Modus Add-on (B1+) — additiv generiert. Mischt row/parts zur Laufzeit in satzbauData,
    hüllt Init/Lösung/Reset. Original-Logik für Sätze ohne row bleibt unberührt. */
 (function(){
-  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":false,"tab":4};
+  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":true,"tab":4};
   var SBGAP = [{"i":0,"row":["_","_","_","Tag","_","Apps"],"parts":["Jane","programmiert","jeden","viele"]},{"i":1,"row":["_","_","_","du","_","Meetings"],"parts":["wie","oft","hast","denn"]},{"i":2,"row":["_","_","_","immer","_","viel"],"parts":["Pia","telefoniert","heute","sehr"]},{"i":3,"row":["_","_","Monat","_","_","Überstunden"],"parts":["einmal","im","macht","Hannes"]},{"i":4,"row":["_","_","_","heute","_","Markt"],"parts":["der","Marketingspezialist","analysiert","den"]},{"i":5,"row":["_","_","Dennis","_","_","_","Büro"],"parts":["meistens","trifft","seine","Kunden","im"]},{"i":6,"row":["_","_","Woche","_","_","_","Meeting"],"parts":["dreimal","die","hat","Karen","ein"]},{"i":7,"row":["_","_","_","_","dem","_","zur","Arbeit"],"parts":["Larissa","fährt","oft","mit","Fahrrad"]}];
   SBGAP.forEach(function(g){ var ex = satzbauData[g.i]; if (!ex) return;
     ex.row = g.row; ex.parts = g.parts;

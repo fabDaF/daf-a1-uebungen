@@ -877,7 +877,7 @@ initWortschatz();
 /* ── Gerüst-Modus Add-on (B1+) — additiv generiert. Mischt row/parts zur Laufzeit in satzbauData,
    hüllt Init/Lösung/Reset. Original-Logik für Sätze ohne row bleibt unberührt. */
 (function(){
-  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":false,"tab":2};
+  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":true,"tab":2};
   var SBGAP = [{"i":0,"row":["_","_","_","sehr","sonnig"],"parts":["heute","ist","es"]},{"i":1,"row":["_","_","_","Wetter","heute"],"parts":["wie","ist","das"]},{"i":2,"row":["_","_","_","es","oft"],"parts":["im","Winter","schneit"]},{"i":3,"row":["_","_","_","dreißig","Grad"],"parts":["es","sind","heute"]},{"i":4,"row":["_","_","_","wir","_","Meer"],"parts":["im","Sommer","fahren","ans"]},{"i":5,"row":["_","_","_","drei","Tagen"],"parts":["es","regnet","seit"]},{"i":6,"row":["_","_","_","im","März"],"parts":["der","Frühling","beginnt"]},{"i":7,"row":["_","_","_","die","_","von","_","Bäumen"],"parts":["im","Herbst","fallen","Blätter","den"]}];
   SBGAP.forEach(function(g){ var ex = satzbauData[g.i]; if (!ex) return;
     ex.row = g.row; ex.parts = g.parts;

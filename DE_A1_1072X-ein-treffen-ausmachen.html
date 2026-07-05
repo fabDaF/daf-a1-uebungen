@@ -1552,7 +1552,7 @@ function resetGenus(){ initGenus(); genusTimerReset(); }
 /* ── Gerüst-Modus Add-on (B1+) — additiv generiert. Mischt row/parts zur Laufzeit in satzbauData,
    hüllt Init/Lösung/Reset. Original-Logik für Sätze ohne row bleibt unberührt. */
 (function(){
-  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":false,"tab":4};
+  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":true,"tab":4};
   var SBGAP = [{"i":0,"row":["_","_","_","uns","denn"],"parts":["wann","treffen","wir"]},{"i":1,"row":["_","_","_","Rahim","_","Anna"],"parts":["am","Samstag","trifft","heute"]},{"i":2,"row":["_","_","_","Mittwoch","_","_","Uhr"],"parts":["können","Sie","am","um","15"]},{"i":3,"row":["_","_","_","Donnerstag","_","_","Zeit"],"parts":["ich","habe","am","leider","keine"]},{"i":4,"row":["_","_","_","leider","nicht"],"parts":["das","geht","heute"]},{"i":5,"row":["_","_","_","ich","_","Kollegin"],"parts":["am","Freitag","treffe","meine"]},{"i":6,"row":["_","_","_","_","mit","Samstag"],"parts":["wie","wäre","es","denn"]},{"i":7,"row":["_","_","_","Sonntag","_","Zeit"],"parts":["hast","du","am","auch"]}];
   SBGAP.forEach(function(g){ var ex = satzbauData[g.i]; if (!ex) return;
     ex.row = g.row; ex.parts = g.parts;

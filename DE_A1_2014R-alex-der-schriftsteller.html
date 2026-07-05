@@ -2232,7 +2232,7 @@ function schreibLeeren() {
 /* ── Gerüst-Modus Add-on (B1+) — additiv generiert. Mischt row/parts zur Laufzeit in satzbauData,
    hüllt Init/Lösung/Reset. Original-Logik für Sätze ohne row bleibt unberührt. */
 (function(){
-  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":false,"tab":5};
+  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":true,"tab":5};
   var SBGAP = [{"i":0,"row":["_","_","_","keine","Ideen"],"parts":["Alex","hat","heute"]},{"i":1,"row":["_","_","_","immer","allein"],"parts":["er","arbeitet","fast"]},{"i":2,"row":["_","_","_","seinem","Sohn"],"parts":["Lukas","kommt","mit"]},{"i":3,"row":["_","_","_","Beruf","Anwalt"],"parts":["ist","Tim","von"]},{"i":4,"row":["_","_","_","Beruf","Elektriker"],"parts":["Lukas","ist","von"]},{"i":5,"row":["_","_","_","gern","Krankenschwester","_"],"parts":["Hermine","möchte","später","werden"]},{"i":6,"row":["_","_","_","einmal","König"],"parts":["Noah","wird","vielleicht"]},{"i":7,"row":["_","_","_","lieber","Schriftsteller"],"parts":["Alex","bleibt","doch"]},{"i":8,"row":["_","_","_","einen","Krimi"],"parts":["er","schreibt","gerade"]},{"i":9,"row":["_","_","_","wirklich","sehr","_"],"parts":["Alex","ist","jetzt","aufgeregt"]}];
   SBGAP.forEach(function(g){ var ex = satzbauData[g.i]; if (!ex) return;
     ex.row = g.row; ex.parts = g.parts;

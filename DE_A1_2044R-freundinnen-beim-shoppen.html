@@ -2175,7 +2175,7 @@ function schreibLeeren() {
 /* ── Gerüst-Modus Add-on (B1+) — additiv generiert. Mischt row/parts zur Laufzeit in satzbauData,
    hüllt Init/Lösung/Reset. Original-Logik für Sätze ohne row bleibt unberührt. */
 (function(){
-  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":false,"tab":5};
+  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":true,"tab":5};
   var SBGAP = [{"i":0,"row":["_","_","_","Samstag","_","neun","Uhr","_"],"parts":["Louise","steht","am","um","auf"]},{"i":1,"row":["_","_","_","Kleidung","sehr"],"parts":["sie","liebt","schöne"]},{"i":2,"row":["_","_","_","Freundin","Petra","_"],"parts":["ruft","Louise","ihre","an"]},{"i":3,"row":["_","_","_","dem","_","_","Kaffee"],"parts":["wir","trinken","nach","Shoppen","einen"]},{"i":4,"row":["_","_","_","in","_","Stunde"],"parts":["sie","treffen","sich","einer"]},{"i":5,"row":["_","_","_","schönes","_","_","Fenster"],"parts":["Louise","sieht","ein","Kleid","im"]},{"i":6,"row":["_","_","_","neunundvierzig","Euro"],"parts":["das","Kleid","kostet"]},{"i":7,"row":["_","_","_","_","tolles","Schnäppchen"],"parts":["das","ist","wirklich","ein"]},{"i":8,"row":["_","_","_","auch","_","schönes","Kleid","_"],"parts":["Petra","probiert","heute","ein","an"]},{"i":9,"row":["_","_","Einkaufen","_","_","_","Kaffee"],"parts":["nach","dem","trinken","sie","einen"]}];
   SBGAP.forEach(function(g){ var ex = satzbauData[g.i]; if (!ex) return;
     ex.row = g.row; ex.parts = g.parts;

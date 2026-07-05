@@ -1576,7 +1576,7 @@ function resetGenus(){ initGenus(); genusTimerReset(); }
 /* ── Gerüst-Modus Add-on (B1+) — additiv generiert. Mischt row/parts zur Laufzeit in satzbauData,
    hüllt Init/Lösung/Reset. Original-Logik für Sätze ohne row bleibt unberührt. */
 (function(){
-  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":false,"tab":4};
+  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":true,"tab":4};
   var SBGAP = [{"i":0,"row":["_","_","_","heute","sehr","_"],"parts":["mein","Job","ist","interessant"]},{"i":1,"row":["_","_","_","Job","toll"],"parts":["ich","finde","meinen"]},{"i":2,"row":["_","_","_","mir","_","Spaß"],"parts":["die","Arbeit","macht","heute"]},{"i":3,"row":["_","_","_","heute","_","langweilig"],"parts":["der","Beruf","ist","nicht"]},{"i":4,"row":["_","_","_","heute","beruflich"],"parts":["was","machst","du"]},{"i":5,"row":["_","_","_","Kollegen","heute","_"],"parts":["sie","findet","die","nett"]},{"i":6,"row":["_","_","_","heute","_","gut"],"parts":["das","Gehalt","ist","nicht"]},{"i":7,"row":["_","_","_","kreativ","_","international"],"parts":["meine","Arbeit","ist","und"]}];
   SBGAP.forEach(function(g){ var ex = satzbauData[g.i]; if (!ex) return;
     ex.row = g.row; ex.parts = g.parts;

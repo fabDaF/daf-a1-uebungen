@@ -1329,7 +1329,7 @@ try{window.initWortschatz=initWortschatz;window.wortschatzCheck=wortschatzCheck;
 /* ── Gerüst-Modus Add-on (B1+) — additiv generiert. Mischt row/parts zur Laufzeit in satzbauData,
    hüllt Init/Lösung/Reset. Original-Logik für Sätze ohne row bleibt unberührt. */
 (function(){
-  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":false,"tab":2};
+  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":true,"tab":2};
   var SBGAP = [{"i":0,"row":["_","_","_","den","Kaffee"],"parts":["der","Kellner","bringt"]},{"i":1,"row":["_","_","_","einen","Tee"],"parts":["ich","trinke","heute"]},{"i":2,"row":["_","_","_","im","Café"],"parts":["wir","essen","heute"]},{"i":3,"row":["_","_","_","den","Kellner"],"parts":["fragt","sie","morgen"]},{"i":4,"row":["_","_","_","im","Restaurant"],"parts":["der","Tisch","steht"]},{"i":5,"row":["_","_","_","das","Wasser"],"parts":["ich","bestelle","jetzt"]},{"i":6,"row":["_","_","_","den","Kuchen"],"parts":["er","bezahlt","immer"]},{"i":7,"row":["_","_","_","drei","Euro"],"parts":["das","Brot","kostet"]},{"i":8,"row":["_","_","_","einen","Tisch"],"parts":["wir","suchen","heute"]},{"i":9,"row":["_","_","_","_","dem","Tisch"],"parts":["die","Gabel","liegt","auf"]}];
   SBGAP.forEach(function(g){ var ex = satzbauData[g.i]; if (!ex) return;
     ex.row = g.row; ex.parts = g.parts;

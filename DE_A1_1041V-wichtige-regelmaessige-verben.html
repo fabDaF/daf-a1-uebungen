@@ -1986,7 +1986,7 @@ function resetGenus(){ initGenus(); genusTimerReset(); }
 /* ── Gerüst-Modus Add-on (B1+) — additiv generiert. Mischt row/parts zur Laufzeit in satzbauData,
    hüllt Init/Lösung/Reset. Original-Logik für Sätze ohne row bleibt unberührt. */
 (function(){
-  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":false,"tab":4};
+  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":true,"tab":4};
   var SBGAP = [{"i":0,"row":["_","_","_","einen","Kaffee"],"parts":["ich","möchte","heute"]},{"i":1,"row":["_","_","_","eine","_","Schokolade"],"parts":["ich","nehme","heute","heiße"]},{"i":2,"row":["_","_","Sie","heute","_"],"parts":["was","möchten","bestellen"]},{"i":3,"row":["_","_","_","Tee","_","Zitrone"],"parts":["ich","nehme","den","mit"]},{"i":5,"row":["_","_","_","noch","etwas"],"parts":["möchten","Sie","heute"]},{"i":4,"row":["_","_","gern","_","Croissant"],"parts":["ich","hätte","ein"]},{"i":6,"row":["_","_","_","Ihr","Kaffee"],"parts":["hier","ist","jetzt"]},{"i":7,"row":["_","_","_","Espresso","_","Zucker"],"parts":["ich","nehme","einen","ohne"]}];
   SBGAP.forEach(function(g){ var ex = satzbauData[g.i]; if (!ex) return;
     ex.row = g.row; ex.parts = g.parts;

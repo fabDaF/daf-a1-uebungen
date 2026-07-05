@@ -1540,7 +1540,7 @@ function resetGenus(){ initGenus(); genusTimerReset(); }
 /* ── Gerüst-Modus Add-on (B1+) — additiv generiert. Mischt row/parts zur Laufzeit in satzbauData,
    hüllt Init/Lösung/Reset. Original-Logik für Sätze ohne row bleibt unberührt. */
 (function(){
-  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":false,"tab":4};
+  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":true,"tab":4};
   var SBGAP = [{"i":0,"row":["_","_","_","zur","Bäckerei"],"parts":["ich","gehe","heute"]},{"i":1,"row":["_","_","_","beim","Friseur"],"parts":["er","ist","heute"]},{"i":2,"row":["_","_","_","zur","Apotheke","_"],"parts":["kannst","du","bitte","gehen"]},{"i":3,"row":["_","_","Brot","_","_","Bäckerei"],"parts":["ich","kaufe","in","der"]},{"i":4,"row":["_","_","_","zur","Bank","_"],"parts":["wir","müssen","noch","gehen"]},{"i":5,"row":["_","_","_","_","der","Reinigung"],"parts":["ich","bin","gerade","bei"]},{"i":6,"row":["_","_","_","die","_","Drogerie"],"parts":["wo","ist","hier","nächste"]},{"i":7,"row":["_","_","Kuchen","_","_","Konditorei"],"parts":["sie","kauft","in","der"]}];
   SBGAP.forEach(function(g){ var ex = satzbauData[g.i]; if (!ex) return;
     ex.row = g.row; ex.parts = g.parts;

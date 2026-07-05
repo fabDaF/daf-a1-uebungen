@@ -1495,7 +1495,7 @@ function resetGenus(){ initGenus(); genusTimerReset(); }
 /* ── Gerüst-Modus Add-on (B1+) — additiv generiert. Mischt row/parts zur Laufzeit in satzbauData,
    hüllt Init/Lösung/Reset. Original-Logik für Sätze ohne row bleibt unberührt. */
 (function(){
-  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":false,"tab":5};
+  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":true,"tab":5};
   var SBGAP = [{"i":0,"row":["_","_","_","_","dem","_","zur","Arbeit"],"parts":["du","fährst","heute","mit","Bus"]},{"i":1,"row":["_","_","_","Tag","_","Zeitung"],"parts":["er","liest","jeden","die"]},{"i":2,"row":["_","_","_","auch","_","Sprachen"],"parts":["sprichst","du","heute","drei"]},{"i":3,"row":["_","_","_","immer","_","Zug"],"parts":["er","nimmt","heute","den"]},{"i":4,"row":["_","_","_","Abend","_","Film"],"parts":["siehst","du","heute","einen"]},{"i":5,"row":["_","_","_","Bruder","_","_","den","Hausaufgaben"],"parts":["sie","hilft","ihrem","heute","bei"]},{"i":6,"row":["_","_","_","Tag","_","_","Uhr"],"parts":["er","schläft","jeden","bis","neun"]},{"i":7,"row":["_","_","_","zum","_","Müsli"],"parts":["du","isst","heute","Frühstück"]}];
   SBGAP.forEach(function(g){ var ex = satzbauData[g.i]; if (!ex) return;
     ex.row = g.row; ex.parts = g.parts;

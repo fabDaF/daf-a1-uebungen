@@ -1872,7 +1872,7 @@ function resetGenus(){ initGenus(); genusTimerReset(); }
 /* ── Gerüst-Modus Add-on (B1+) — additiv generiert. Mischt row/parts zur Laufzeit in satzbauData,
    hüllt Init/Lösung/Reset. Original-Logik für Sätze ohne row bleibt unberührt. */
 (function(){
-  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":false,"tab":4};
+  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":true,"tab":4};
   var SBGAP = [{"i":0,"row":["_","_","heute","_","machen"],"parts":["ich","muss","viel"]},{"i":1,"row":["_","_","_","heute","gut","_"],"parts":["mein","Mann","kann","kochen"]},{"i":2,"row":["_","_","heute","_","_","eröffnen"],"parts":["ich","muss","ein","Bankkonto"]},{"i":3,"row":["_","_","_","unsere","Adresse","_"],"parts":["wir","müssen","heute","anmelden"]},{"i":4,"row":["_","_","_","_","neues","Fahrrad","_"],"parts":["soll","ich","heute","ein","kaufen"]},{"i":5,"row":["_","_","_","dem","_","günstig","_"],"parts":["du","kannst","auf","Flohmarkt","kaufen"]},{"i":6,"row":["_","_","_","mehr","Sport","_"],"parts":["er","soll","heute","machen"]},{"i":7,"row":["_","_","uns","morgen","_"],"parts":["können","wir","treffen"]}];
   SBGAP.forEach(function(g){ var ex = satzbauData[g.i]; if (!ex) return;
     ex.row = g.row; ex.parts = g.parts;

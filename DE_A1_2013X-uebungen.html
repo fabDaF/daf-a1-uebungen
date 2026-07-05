@@ -1017,7 +1017,7 @@ function resetGenus(){ initGenus(); genusTimerReset(); }
 /* ── Gerüst-Modus Add-on (B1+) — additiv generiert. Mischt row/parts zur Laufzeit in satzbauData,
    hüllt Init/Lösung/Reset. Original-Logik für Sätze ohne row bleibt unberührt. */
 (function(){
-  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":false,"tab":2};
+  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":true,"tab":2};
   var SBGAP = [{"i":0,"row":["_","_","_","zweitausend","Euro"],"parts":["das","Sofa","kostet"]},{"i":1,"row":["_","_","_","der","Schreibtisch"],"parts":["wie","viel","kostet"]},{"i":2,"row":["_","_","_","wirklich","_","teuer"],"parts":["die","Küche","ist","zu"]},{"i":3,"row":["_","_","_","schön","_","_","teuer"],"parts":["der","Stuhl","ist","und","leider"]},{"i":4,"row":["_","_","_","heute","_","Geld"],"parts":["die","Möbel","kosten","viel"]},{"i":5,"row":["_","_","_","gemütlich","_","_","klein"],"parts":["das","Bett","ist","und","ziemlich"]},{"i":6,"row":["_","_","_","sehr","_","Geld"],"parts":["die","Wohnung","kostet","viel"]},{"i":7,"row":["_","_","_","Möbel","_","_","Wohnung"],"parts":["ich","brauche","neue","für","die"]}];
   SBGAP.forEach(function(g){ var ex = satzbauData[g.i]; if (!ex) return;
     ex.row = g.row; ex.parts = g.parts;

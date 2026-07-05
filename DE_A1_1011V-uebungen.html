@@ -1302,7 +1302,7 @@ function resetGenus(){ initGenus(); genusTimerReset(); }
 /* ── Gerüst-Modus Add-on (B1+) — additiv generiert. Mischt row/parts zur Laufzeit in satzbauData,
    hüllt Init/Lösung/Reset. Original-Logik für Sätze ohne row bleibt unberührt. */
 (function(){
-  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":false,"tab":4};
+  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":true,"tab":4};
   var SBGAP = [{"i":0,"row":["_","_","Maria","_","_","_","hier"],"parts":["ich","heiße","und","bin","auch"]},{"i":1,"row":["_","_","_","Anna","_","Maria"],"parts":["bist","du","heute","oder"]},{"i":2,"row":["_","_","_","auch","_","hier"],"parts":["du","bist","heute","willkommen"]},{"i":3,"row":["_","_","_","bitte","_","Kindergarten"],"parts":["wo","ist","heute","ein"]},{"i":4,"row":["_","_","_","_","auch","hier"],"parts":["das","Hotel","ist","heute"]},{"i":5,"row":["_","_","_","gute","Nacht"],"parts":["vielen","Dank","und"]},{"i":6,"row":["_","_","_","Buch","_","Rucksack"],"parts":["ist","das","ein","oder"]},{"i":7,"row":["_","_","Tom","_","_","_","Paul"],"parts":["ich","heiße","und","du","heißt"]}];
   SBGAP.forEach(function(g){ var ex = satzbauData[g.i]; if (!ex) return;
     ex.row = g.row; ex.parts = g.parts;

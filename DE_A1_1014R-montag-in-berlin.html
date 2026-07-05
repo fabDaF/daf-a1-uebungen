@@ -2068,7 +2068,7 @@ function schreibLeeren() {
 /* ── Gerüst-Modus Add-on (B1+) — additiv generiert. Mischt row/parts zur Laufzeit in satzbauData,
    hüllt Init/Lösung/Reset. Original-Logik für Sätze ohne row bleibt unberührt. */
 (function(){
-  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":false,"tab":5};
+  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":true,"tab":5};
   var SBGAP = [{"i":0,"row":["_","_","Frodo","_","_","Montag","_","Berlin"],"parts":["Alex","und","sind","am","in"]},{"i":1,"row":["_","_","Schriftsteller","_","_","_","gerne","Geschichten"],"parts":["er","ist","und","schreibt","sehr"]},{"i":2,"row":["_","_","_","Frankreich","_","_","_","in","Berlin"],"parts":["Louise","kommt","aus","und","wohnt","jetzt"]},{"i":3,"row":["_","_","Mode-Designerin","_","_","_","schöne","Kleider"],"parts":["sie","ist","und","macht","sehr"]},{"i":4,"row":["_","_","_","am","_","in","_","sehr","_"],"parts":["das","Wetter","ist","Montag","Berlin","schlecht"]},{"i":5,"row":["_","_","_","Dienstag","_","im","Park","_"],"parts":["gehen","wir","am","zusammen","spazieren"]}];
   SBGAP.forEach(function(g){ var ex = satzbauData[g.i]; if (!ex) return;
     ex.row = g.row; ex.parts = g.parts;

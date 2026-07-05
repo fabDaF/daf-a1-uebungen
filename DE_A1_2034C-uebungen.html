@@ -1010,7 +1010,7 @@ function resetGenus(){ initGenus(); genusTimerReset(); }
 /* ── Gerüst-Modus Add-on (B1+) — additiv generiert. Mischt row/parts zur Laufzeit in satzbauData,
    hüllt Init/Lösung/Reset. Original-Logik für Sätze ohne row bleibt unberührt. */
 (function(){
-  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":false,"tab":3};
+  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":true,"tab":3};
   var SBGAP = [{"i":0,"row":["_","_","_","ich","_","Kleidungsgeschäft"],"parts":["eine","Hose","kaufe","im"]},{"i":1,"row":["_","_","_","ich","_","der","Post","_"],"parts":["das","Paket","schicke","bei","ab"]},{"i":2,"row":["_","_","_","hier","Briefmarken","_"],"parts":["wo","kann","ich","kaufen"]},{"i":3,"row":["_","_","_","hinter","_","Scheibe"],"parts":["die","Croissants","sind","der"]},{"i":4,"row":["_","_","_","_","der","Frau"],"parts":["der","Mann","steht","neben"]},{"i":5,"row":["_","_","_","Brief","heute","_"],"parts":["ich","muss","den","frankieren"]},{"i":6,"row":["_","_","_","du","_","Geldautomaten","_"],"parts":["das","Geld","kannst","beim","abheben"]},{"i":7,"row":["_","_","_","_","dem","Regal"],"parts":["die","Schuhe","stehen","unter"]}];
   SBGAP.forEach(function(g){ var ex = satzbauData[g.i]; if (!ex) return;
     ex.row = g.row; ex.parts = g.parts;

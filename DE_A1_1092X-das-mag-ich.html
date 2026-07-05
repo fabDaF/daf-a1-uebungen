@@ -1606,7 +1606,7 @@ function resetGenus(){ initGenus(); genusTimerReset(); }
 /* ── Gerüst-Modus Add-on (B1+) — additiv generiert. Mischt row/parts zur Laufzeit in satzbauData,
    hüllt Init/Lösung/Reset. Original-Logik für Sätze ohne row bleibt unberührt. */
 (function(){
-  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":false,"tab":4};
+  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":true,"tab":4};
   var SBGAP = [{"i":0,"row":["_","_","_","den","_","auch"],"parts":["ich","mag","heute","Sommer"]},{"i":1,"row":["_","_","_","gern","Bücher"],"parts":["ich","lese","heute"]},{"i":2,"row":["_","_","_","heute","lieber"],"parts":["was","magst","du"]},{"i":3,"row":["_","_","_","ich","_","_","Hause"],"parts":["im","Winter","bleibe","gern","zu"]},{"i":4,"row":["_","_","_","alle","Montage"],"parts":["Elena","hasst","heute"]},{"i":5,"row":["_","_","_","den","_","auch"],"parts":["meine","Großeltern","mögen","Sommer"]},{"i":6,"row":["_","_","_","leider","_","gern"],"parts":["ich","koche","heute","nicht"]},{"i":7,"row":["_","_","_","unseren","_","Hund"],"parts":["wir","lieben","heute","kleinen"]}];
   SBGAP.forEach(function(g){ var ex = satzbauData[g.i]; if (!ex) return;
     ex.row = g.row; ex.parts = g.parts;

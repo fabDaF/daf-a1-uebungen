@@ -1585,7 +1585,7 @@ function schreibLeeren() {
 /* ── Gerüst-Modus Add-on (B1+) — additiv generiert. Mischt row/parts zur Laufzeit in satzbauData,
    hüllt Init/Lösung/Reset. Original-Logik für Sätze ohne row bleibt unberührt. */
 (function(){
-  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":false,"tab":6};
+  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":true,"tab":6};
   var SBGAP = [{"i":0,"row":["_","_","_","heute","_","_","Küche"],"parts":["der","Küchenschrank","hängt","in","unserer"]},{"i":1,"row":["_","_","_","heute","_","_","Garderobe"],"parts":["das","Regal","steht","in","der"]},{"i":2,"row":["_","_","Sofa","_","_","Wohnzimmer"],"parts":["steht","das","heute","im"]},{"i":3,"row":["_","_","_","heute","_","Schlafzimmer"],"parts":["das","Bett","steht","im"]},{"i":4,"row":["_","_","_","heute","_","_","Boden"],"parts":["der","Teppich","liegt","auf","dem"]},{"i":5,"row":["_","_","_","heute","_","Esszimmer"],"parts":["der","Esstisch","steht","im"]},{"i":6,"row":["_","_","_","heute","_","_","Tisch"],"parts":["die","Lampe","hängt","über","dem"]},{"i":7,"row":["_","_","_","heute","_","_","Sofa"],"parts":["der","Sessel","steht","neben","dem"]}];
   SBGAP.forEach(function(g){ var ex = satzbauData[g.i]; if (!ex) return;
     ex.row = g.row; ex.parts = g.parts;

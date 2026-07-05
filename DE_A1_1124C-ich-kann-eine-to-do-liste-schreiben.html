@@ -1548,7 +1548,7 @@ function resetGenus(){ initGenus(); genusTimerReset(); }
 /* ── Gerüst-Modus Add-on (B1+) — additiv generiert. Mischt row/parts zur Laufzeit in satzbauData,
    hüllt Init/Lösung/Reset. Original-Logik für Sätze ohne row bleibt unberührt. */
 (function(){
-  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":false,"tab":4};
+  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":true,"tab":4};
   var SBGAP = [{"i":0,"row":["_","_","heute","_","abschließen"],"parts":["ich","muss","Versicherungen"]},{"i":1,"row":["_","_","_","deine","Adresse","_"],"parts":["du","musst","heute","anmelden"]},{"i":2,"row":["_","_","_","heute","gut","_"],"parts":["meine","Schwester","kann","kochen"]},{"i":3,"row":["_","_","_","heute","_","deinem","Job","_"],"parts":["was","sollst","du","in","machen"]},{"i":4,"row":["_","_","heute","_","_","eröffnen"],"parts":["wir","müssen","ein","Bankkonto"]},{"i":5,"row":["_","_","_","heute","_","Berlin"],"parts":["sein","Bruder","wohnt","in"]},{"i":6,"row":["_","_","_","heute","_","Wochenende","_"],"parts":["was","kannst","du","am","machen"]},{"i":7,"row":["_","_","_","heute","_","Spanien"],"parts":["unsere","Eltern","kommen","aus"]}];
   SBGAP.forEach(function(g){ var ex = satzbauData[g.i]; if (!ex) return;
     ex.row = g.row; ex.parts = g.parts;

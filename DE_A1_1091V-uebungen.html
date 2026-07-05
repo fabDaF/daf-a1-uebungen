@@ -1022,7 +1022,7 @@ function resetGenus(){ initGenus(); genusTimerReset(); }
 /* ── Gerüst-Modus Add-on (B1+) — additiv generiert. Mischt row/parts zur Laufzeit in satzbauData,
    hüllt Init/Lösung/Reset. Original-Logik für Sätze ohne row bleibt unberührt. */
 (function(){
-  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":false,"tab":4};
+  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":true,"tab":4};
   var SBGAP = [{"i":0,"row":["_","_","_","_","gern","Fußball"],"parts":["ich","spiele","am","Wochenende"]},{"i":1,"row":["_","_","_","_","in","_","Bergen"],"parts":["am","Wochenende","wandere","ich","den"]},{"i":2,"row":["_","_","_","gern","_","_","Freizeit"],"parts":["was","machst","du","in","der"]},{"i":3,"row":["_","_","_","Gitarre","_","Klavier"],"parts":["meine","Schwester","spielt","und"]},{"i":4,"row":["_","_","_","Samstag","gern","_"],"parts":["wir","gehen","am","schwimmen"]},{"i":5,"row":["_","_","_","Abend","_","Bücher"],"parts":["Anna","liest","am","gern"]},{"i":6,"row":["_","_","_","Tennis","_","Fußball"],"parts":["spielst","du","lieber","oder"]},{"i":7,"row":["_","_","_","gern","Briefmarken"],"parts":["mein","Opa","sammelt"]}];
   SBGAP.forEach(function(g){ var ex = satzbauData[g.i]; if (!ex) return;
     ex.row = g.row; ex.parts = g.parts;

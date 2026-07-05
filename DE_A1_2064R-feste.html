@@ -2200,7 +2200,7 @@ function schreibLeeren() {
 /* ── Gerüst-Modus Add-on (B1+) — additiv generiert. Mischt row/parts zur Laufzeit in satzbauData,
    hüllt Init/Lösung/Reset. Original-Logik für Sätze ohne row bleibt unberührt. */
 (function(){
-  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":false,"tab":5};
+  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":true,"tab":5};
   var SBGAP = [{"i":0,"row":["_","_","_","schon","Heiligabend"],"parts":["es","ist","heute"]},{"i":1,"row":["_","_","_","zur","Kirche"],"parts":["die","Familie","geht"]},{"i":2,"row":["_","_","Kinder","_","Geschenke","_"],"parts":["packen","alle","die","aus"]},{"i":3,"row":["_","_","_","wirklich","sehr","_"],"parts":["die","Kinder","sind","aufgeregt"]},{"i":4,"row":["_","_","_","_","Ostereier","_","Garten"],"parts":["die","Kinder","suchen","bunte","im"]},{"i":5,"row":["_","_","_","seine","Jugend"],"parts":["Alex","vermisst","oft"]},{"i":6,"row":["_","_","Alex","_","SMS"],"parts":["Louise","schreibt","eine"]},{"i":7,"row":["_","_","_","Geburtstag","_","Silvester"],"parts":["Louise","feiert","ihren","an"]},{"i":8,"row":["_","_","_","_","schönes","Geschenk"],"parts":["Alex","braucht","noch","ein"]},{"i":9,"row":["_","_","_","einen","Neujahrskuss"],"parts":["Alex","hofft","auf"]}];
   SBGAP.forEach(function(g){ var ex = satzbauData[g.i]; if (!ex) return;
     ex.row = g.row; ex.parts = g.parts;

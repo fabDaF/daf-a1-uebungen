@@ -942,7 +942,7 @@ function resetGenus(){ initGenus(); genusTimerReset(); }
 /* ── Gerüst-Modus Add-on (B1+) — additiv generiert. Mischt row/parts zur Laufzeit in satzbauData,
    hüllt Init/Lösung/Reset. Original-Logik für Sätze ohne row bleibt unberührt. */
 (function(){
-  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":false,"tab":2};
+  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":true,"tab":2};
   var SBGAP = [{"i":0,"row":["_","_","_","einen","Termin","_"],"parts":["ich","möchte","gerne","machen"]},{"i":1,"row":["_","_","Sie","_","Zeit"],"parts":["wann","haben","morgen"]},{"i":2,"row":["_","_","_","am","_","_","10","Uhr"],"parts":["der","Termin","ist","Montag","um"]},{"i":3,"row":["_","_","_","Termin","leider","_"],"parts":["ich","muss","den","absagen"]},{"i":4,"row":["_","_","_","Termin","bitte","_"],"parts":["können","wir","den","verschieben"]},{"i":5,"row":["_","_","_","zum","Zahnarzt"],"parts":["ich","gehe","morgen"]},{"i":6,"row":["_","_","_","Freitag","_","_","Uhr"],"parts":["geht","es","am","um","15"]},{"i":7,"row":["_","_","_","leider","schon","_","_","_"],"parts":["mein","Auto","ist","seit","gestern","kaputt"]}];
   SBGAP.forEach(function(g){ var ex = satzbauData[g.i]; if (!ex) return;
     ex.row = g.row; ex.parts = g.parts;

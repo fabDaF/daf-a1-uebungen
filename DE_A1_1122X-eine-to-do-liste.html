@@ -1546,7 +1546,7 @@ function resetGenus(){ initGenus(); genusTimerReset(); }
 /* ── Gerüst-Modus Add-on (B1+) — additiv generiert. Mischt row/parts zur Laufzeit in satzbauData,
    hüllt Init/Lösung/Reset. Original-Logik für Sätze ohne row bleibt unberührt. */
 (function(){
-  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":false,"tab":4};
+  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":true,"tab":4};
   var SBGAP = [{"i":0,"row":["_","_","_","noch","_","Papierkram","_"],"parts":["Tom","muss","heute","viel","erledigen"]},{"i":1,"row":["_","_","_","eine","_","Wohnung"],"parts":["er","sucht","heute","neue"]},{"i":2,"row":["_","_","du","heute","_"],"parts":["was","musst","kaufen"]},{"i":3,"row":["_","_","_","eine","To-do-Liste"],"parts":["ich","habe","heute"]},{"i":4,"row":["_","_","_","die","Adresse","_"],"parts":["wir","müssen","heute","anmelden"]},{"i":5,"row":["_","_","_","_","Fahrrad","_","Möbel","_"],"parts":["er","muss","heute","ein","und","kaufen"]},{"i":6,"row":["_","_","_","heute","_","alles"],"parts":["wie","organisierst","du","das"]},{"i":7,"row":["_","_","_","heute","_","Deutschland","_"],"parts":["ich","muss","mich","in","einleben"]}];
   SBGAP.forEach(function(g){ var ex = satzbauData[g.i]; if (!ex) return;
     ex.row = g.row; ex.parts = g.parts;

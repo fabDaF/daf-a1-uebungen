@@ -1538,7 +1538,7 @@ function resetGenus(){ initGenus(); genusTimerReset(); }
 /* ── Gerüst-Modus Add-on (B1+) — additiv generiert. Mischt row/parts zur Laufzeit in satzbauData,
    hüllt Init/Lösung/Reset. Original-Logik für Sätze ohne row bleibt unberührt. */
 (function(){
-  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":false,"tab":4};
+  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":true,"tab":4};
   var SBGAP = [{"i":0,"row":["_","_","_","gern","Fußball"],"parts":["ich","spiele","heute"]},{"i":1,"row":["_","_","_","oft","Computerspiele"],"parts":["mein","Sohn","spielt"]},{"i":2,"row":["_","_","_","Sommer","heute","_"],"parts":["ich","mag","den","nicht"]},{"i":3,"row":["_","_","_","keine","Kinder"],"parts":["wir","haben","leider"]},{"i":4,"row":["_","_","_","heute","lieber"],"parts":["was","magst","du"]},{"i":5,"row":["_","_","_","Sommer","gern","_"],"parts":["wir","grillen","im","draußen"]},{"i":6,"row":["_","_","_","heute","_","romantisch"],"parts":["der","Film","ist","nicht"]},{"i":7,"row":["_","_","_","_","gern","früh","_"],"parts":["ich","stehe","heute","nicht","auf"]}];
   SBGAP.forEach(function(g){ var ex = satzbauData[g.i]; if (!ex) return;
     ex.row = g.row; ex.parts = g.parts;

@@ -1778,7 +1778,7 @@ function resetGenus(){ initGenus(); genusTimerReset(); }
 /* ── Gerüst-Modus Add-on (B1+) — additiv generiert. Mischt row/parts zur Laufzeit in satzbauData,
    hüllt Init/Lösung/Reset. Original-Logik für Sätze ohne row bleibt unberührt. */
 (function(){
-  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":false,"tab":4};
+  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":true,"tab":4};
   var SBGAP = [{"i":0,"row":["_","_","_","Ihren","_","bitte"],"parts":["wie","schreibt","man","Nachnamen"]},{"i":1,"row":["_","_","_","bitte","heute","_"],"parts":["kannst","du","das","buchstabieren"]},{"i":2,"row":["_","_","Anna","_","_","_","hier"],"parts":["ich","heiße","Schmidt","und","bin"]},{"i":3,"row":["_","_","_","Ihr","Vorname"],"parts":["wie","ist","bitte"]},{"i":4,"row":["_","_","_","_","informell","heute"],"parts":["ist","das","formell","oder"]},{"i":5,"row":["_","_","_","heute","Müller"],"parts":["der","Nachname","ist"]},{"i":6,"row":["_","_","_","Anna","_","Schmidt"],"parts":["die","E-Mail-Adresse","ist","at"]},{"i":7,"row":["_","_","_","Ihre","_","heute"],"parts":["was","ist","bitte","E-Mail-Adresse"]}];
   SBGAP.forEach(function(g){ var ex = satzbauData[g.i]; if (!ex) return;
     ex.row = g.row; ex.parts = g.parts;

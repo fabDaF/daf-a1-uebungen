@@ -1585,7 +1585,7 @@ function resetGenus(){ initGenus(); genusTimerReset(); }
 /* ── Gerüst-Modus Add-on (B1+) — additiv generiert. Mischt row/parts zur Laufzeit in satzbauData,
    hüllt Init/Lösung/Reset. Original-Logik für Sätze ohne row bleibt unberührt. */
 (function(){
-  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":false,"tab":4};
+  var CFG = {"bank":"sb-bank-","row":"sb-row-","fb":"sb-fb-","caps":true,"click":true,"tab":4};
   var SBGAP = [{"i":0,"row":["_","_","_","meine","Adresse","_"],"parts":["ich","muss","heute","anmelden"]},{"i":1,"row":["_","_","heute","_","_","beantragen"],"parts":["musst","du","ein","Visum"]},{"i":2,"row":["_","_","heute","_","_","er\u00F6ffnen"],"parts":["Tom","muss","ein","Bankkonto"]},{"i":3,"row":["_","_","heute","_","abschlie\u00DFen"],"parts":["wir","m\u00FCssen","Versicherungen"]},{"i":4,"row":["_","_","_","eine","Meldebescheinigung"],"parts":["ich","brauche","heute"]},{"i":5,"row":["_","_","_","eine","Wohnung","_"],"parts":["Elena","muss","heute","suchen"]},{"i":6,"row":["_","_","_","eine","SIM-Karte","_"],"parts":["du","musst","heute","kaufen"]},{"i":7,"row":["_","_","_","einen","Aufenthaltstitel"],"parts":["er","braucht","heute"]}];
   SBGAP.forEach(function(g){ var ex = satzbauData[g.i]; if (!ex) return;
     ex.row = g.row; ex.parts = g.parts;
