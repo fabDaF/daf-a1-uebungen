@@ -1734,8 +1734,7 @@ function schreibSendenEinzeln(nr) {
   if (fbEl)     fbEl.innerHTML = '';
   fetch(FORMSUBMIT_ENDPOINT, {
     method:'POST',
-    headers:{'Content-Type':'application/json','Accept':'application/json'},
-    body:JSON.stringify({ access_key:FORMSUBMIT_ACCESS_KEY, name:name, subject:subject, from_name:'fabDaF Schreibwerkstatt', lektion:SW_NIVEAU+' '+SW_CODE, message:text })
+    body:schreibToFormData({ access_key:FORMSUBMIT_ACCESS_KEY, name:name, subject:subject, from_name:'fabDaF Schreibwerkstatt', lektion:SW_NIVEAU+' '+SW_CODE, message:text })
   })
   .then(function(r){ if(!r.ok) throw new Error('HTTP_'+r.status); return r.json(); })
   .then(function(data){
@@ -1930,8 +1929,7 @@ function schreibNamePflicht() {
 function schreibPostFormsubmit(subject, message, onOk, onErr) {
   return fetch(FORMSUBMIT_ENDPOINT, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-    body: JSON.stringify({
+    body: schreibToFormData({
       access_key: FORMSUBMIT_ACCESS_KEY,
       name: schreibAktuellerName(),
       subject: subject,
@@ -2466,6 +2464,9 @@ function resetGenus(){ initGenus(); genusTimerReset(); }
   var pRow = rowEl(0), pBank = bankEl(0);
   if ((pRow && pRow.children.length) || (pBank && pBank.children.length)) rebuildAll();
 })();
+
+// Wandelt ein Objekt in FormData: preflight-freier Versand (kein application/json-Header, keine CORS-OPTIONS-Vorabanfrage, die Firmen-Proxys mit HTTP 405 blocken).
+function schreibToFormData(o){var fd=new FormData();Object.keys(o).forEach(function(k){fd.append(k,o[k]);});return fd;}
 </script>
 </body>
 </html>
