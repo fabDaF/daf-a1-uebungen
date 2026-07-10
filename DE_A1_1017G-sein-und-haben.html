@@ -1272,6 +1272,7 @@ var sbTimers = {};
 
 function sbInit() {
   var container = document.getElementById('sb-container-4');
+  if (!container) return;
   container.innerHTML = '';
   var _el_total4 = document.getElementById('total4'); if (_el_total4) _el_total4.textContent = SB_DATA.length;
 
