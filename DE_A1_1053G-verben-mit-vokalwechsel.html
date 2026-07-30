@@ -908,10 +908,7 @@ html[data-theme="dark"] button, html[data-theme="dark"] input, html[data-theme="
           </figure>
         </div>
         <div id="wortschatzContainer"></div>
-        <div class="btn-row">
-            <button onclick="showWortschatzLoesung()" style="background:var(--bg-f5f7ff);border:1px solid var(--bd-c5cff5);border-radius:8px;padding:6px 16px;font-size:0.85em;color:var(--tx-667eea);cursor:pointer;font-weight:600;">💡 Lösungen</button>
-            <button onclick="resetWortschatz()" style="background:var(--bg-f5f7ff);border:1px solid var(--bd-c5cff5);border-radius:8px;padding:6px 16px;font-size:0.85em;color:var(--tx-667eea);cursor:pointer;font-weight:600;">↺ Neustart</button>
-        </div>
+        <div class="control-bar" style="display:flex;align-items:center;justify-content:space-between;padding:6px 12px;background:var(--bg-f8f9fa,#f8f9fa);border-radius:8px;"><div style="display:flex;gap:8px;"><button onclick="showWortschatzLoesung()" style="background:var(--bg-f5f7ff);border:1px solid var(--bd-c5cff5);border-radius:8px;padding:6px 16px;font-size:0.85em;color:var(--tx-667eea);cursor:pointer;font-weight:600;">💡 Lösungen</button> <button onclick="resetWortschatz(); timerResetOne(8);" style="background:var(--bg-f5f7ff);border:1px solid var(--bd-c5cff5);border-radius:8px;padding:6px 16px;font-size:0.85em;color:var(--tx-667eea);cursor:pointer;font-weight:600;">↺ Neustart</button></div><div class="timer-display" style="display:flex;gap:14px;align-items:center;font-size:0.82em;color:var(--tx-bbb,#bbb);font-variant-numeric:tabular-nums;"><span class="current-time">&#9201; <span id="timer-8">00:00</span></span><span class="best-time">&#127942; <span id="best-8">--:--</span></span></div></div>
     </div><div class="section" id="sec-schreib">
       <img class="tab-banner" style="object-position:top" src="https://images.pexels.com/photos/733856/pexels-photo-733856.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Notizbuch und Stift, bereit zum Schreiben">
       <div class="section-title">📨 Schreibwerkstatt</div>
@@ -1097,7 +1094,7 @@ function initWortschatz(){
     var row=document.createElement("div"); row.className="luecken-item"; row.style.marginBottom="0";
     var p=document.createElement("div"); p.style.cssText="font-weight:600;color:#667eea;margin-bottom:6px;font-size:1.05em;"; p.textContent=en; row.appendChild(p);
     var fl=document.createElement("div"); fl.style.cssText="display:flex;gap:8px;flex-wrap:wrap;align-items:center;";
-    function mk(ph,w,ans,fld){var i=document.createElement("input");i.className="blank";i.type="text";i.placeholder=ph;i.style.width=w;i.dataset.answer=ans;i.dataset.field=fld;i.oninput=function(){wortschatzCheck(this);if(typeof timerAutoStart==="function")timerAutoStart(6);checkWortschatzAllOk();};return i;}
+    function mk(ph,w,ans,fld){var i=document.createElement("input");i.className="blank";i.type="text";i.placeholder=ph;i.style.width=w;i.dataset.answer=ans;i.dataset.field=fld;i.oninput=function(){wortschatzCheck(this);if(typeof timerAutoStart==="function")timerAutoStart(8);checkWortschatzAllOk();};return i;}
     if(type==="n"){
       fl.appendChild(mk("Artikel","70px",artikel,"art"));
       fl.appendChild(mk("Wort","160px",de,"word"));
@@ -1116,10 +1113,10 @@ function wortschatzCheck(inp){
 function checkWortschatzAllOk(){
   var ins=document.querySelectorAll("#sec-6 input.blank");
   var ok=ins.length>0 && Array.from(ins).every(function(i){return i.disabled||i.classList.contains("correct");});
-  if(ok){try{if(typeof timerStop==="function") timerStop(6);}catch(e){}}
+  if(ok){try{if(typeof timerStop==="function") timerStop(8);}catch(e){}}
 }
 function showWortschatzLoesung(){
-  try{if(typeof timerStop==="function") timerStop(6);}catch(e){}
+  try{if(typeof timerStop==="function") timerStop(8);}catch(e){}
   document.querySelectorAll("#sec-6 input.blank").forEach(function(inp){inp.value=inp.dataset.answer;inp.classList.add("correct");inp.classList.remove("wrong");});
 }
 function resetWortschatz(){
@@ -1161,10 +1158,10 @@ function mcCheck(step,btn,correct){
 
 /* ============================================================ TIMER ============================================================ */
 var TIMER_PREFIX='a1-1053g-vokalwechsel-';
-var timerStarted=[false,false,false,false,false,false,false];
-var timerRunning=[false,false,false,false,false,false,false];
-var timerSeconds=[0,0,0,0,0,0,0];
-var timerIntervals=[null,null,null,null,null,null,null];
+var timerStarted = [false, false, false, false, false, false, false, false, false];
+var timerRunning = [false, false, false, false, false, false, false, false, false];
+var timerSeconds = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+var timerIntervals = [null, null, null, null, null, null, null, null, null];
 function timerAutoStart(n){
     if(timerStarted[n])return;
     timerStarted[n]=true;timerRunning[n]=true;
@@ -1178,7 +1175,7 @@ function timerStop(n){
 }
 function timerResetOne(n){clearInterval(timerIntervals[n]);timerRunning[n]=false;timerStarted[n]=false;timerSeconds[n]=0;var el=document.getElementById('timer-'+n);if(el)el.textContent='0:00';}
 function fmtTime(s){return Math.floor(s/60)+':'+(s%60<10?'0':'')+(s%60);}
-function loadBestTimes(){for(var i=1;i<=6;i++){var v=localStorage.getItem(TIMER_PREFIX+i);if(v){var el=document.getElementById('best-'+i);if(el)el.textContent=fmtTime(parseInt(v));}}}
+function loadBestTimes(){for(var i=1;i<=8;i++){var v=localStorage.getItem(TIMER_PREFIX+i);if(v){var el=document.getElementById('best-'+i);if(el)el.textContent=fmtTime(parseInt(v));}}}
 
 /* ============================================================ LIVE CHECK ============================================================ */
 function liveCheck(inp){
