@@ -165,21 +165,22 @@ body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background
 /* ===== TAB 3: GENUS DRAG & DROP ===== */
 .genus-pool { display: flex; flex-wrap: wrap; gap: 10px; padding: 14px; background: var(--bg-f0f0f8); border-radius: 10px; min-height: 80px; margin-bottom: 20px; border: 1px dashed var(--bd-bbb); }
 .genus-chip { background: var(--bg-white); border: 2px solid var(--bd-c5cae9); border-radius: 10px; padding: 6px 10px; cursor: grab; display: flex; flex-direction: column; align-items: center; gap: 4px; min-width: 88px; user-select: none; transition: border-color 0.3s, background 0.3s; }
-.genus-chip img { width: 68px; height: 52px; object-fit: cover; border-radius: 6px; pointer-events: none; }
-.genus-chip .chip-wort { font-size: 0.78em; font-weight: 600; color: var(--tx-333); pointer-events: none; }
+.genus-chip .chip-wort { font-size: 0.95em; font-weight: 600; color: var(--tx-333); pointer-events: none; }
 .genus-chip.dragging { opacity: 0.4; }
 .genus-chip.correct { border-color: var(--bd-4caf50); background: var(--bg-f1fff1); }
 .genus-chip.wrong   { border-color: var(--bd-e74c3c); background: var(--bg-fff5f5); animation: shake 0.4s; }
 .genus-chip.selected { border-color: var(--bd-667eea); background: var(--bg-eef0ff); }
-.genus-kategorien { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+.genus-kategorien { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; }
 .genus-kat { border-radius: 10px; min-height: 120px; padding: 10px; }
 .kat-der { background: var(--bg-e3f2fd); border: 2px dashed var(--bd-1976d2); }
 .kat-die { background: var(--bg-fce4ec); border: 2px dashed var(--bd-c2185b); }
 .kat-das { background: var(--bg-e8f5e9); border: 2px dashed var(--bd-388e3c); }
+.kat-pl  { background: var(--bg-f0ecff); border: 2px dashed var(--bd-764ba2); }
 .kat-title { font-weight: 700; font-size: 1.1em; margin-bottom: 8px; text-align: center; }
 .kat-der .kat-title { color: var(--tx-1565c0); }
 .kat-die .kat-title { color: var(--tx-880e4f); }
 .kat-das .kat-title { color: var(--tx-1b5e20); }
+.kat-pl .kat-title { color: var(--tx-4a148c); }
 .genus-drop { min-height: 80px; display: flex; flex-wrap: wrap; gap: 8px; padding: 6px; border-radius: 8px; }
 .genus-drop.dragover { background: rgba(255,255,255,0.6); }
 
@@ -731,6 +732,7 @@ html[data-theme="dark"] button, html[data-theme="dark"] input, html[data-theme="
 <div class="genus-kat kat-der"><div class="kat-title">🔵 der</div><div class="genus-drop" id="drop-der" data-kat="der"></div></div>
 <div class="genus-kat kat-die"><div class="kat-title">🔴 die</div><div class="genus-drop" id="drop-die" data-kat="die"></div></div>
 <div class="genus-kat kat-das"><div class="kat-title">🟢 das</div><div class="genus-drop" id="drop-das" data-kat="das"></div></div>
+<div class="genus-kat kat-pl"><div class="kat-title">🟣 Plural</div><div class="genus-drop" id="drop-pl" data-kat="pl"></div></div>
 </div>
 <div id="genusFeedback" style="margin-top:14px;font-weight:600;"></div>
 </div>
@@ -1026,18 +1028,18 @@ var GENUS_DATA = [
   { word: "Teppich", cat: "der" },
   { word: "Sessel", cat: "der" },
   { word: "Fernseher", cat: "der" },
-  { word: "Sofas", cat: "die" },
-  { word: "Stühle", cat: "die" },
-  { word: "Tische", cat: "die" },
-  { word: "Betten", cat: "die" },
-  { word: "Schränke", cat: "die" },
-  { word: "Regale", cat: "die" },
-  { word: "Lampen", cat: "die" },
-  { word: "Teppiche", cat: "die" },
+  { word: "Sofas", cat: "pl" },
+  { word: "Stühle", cat: "pl" },
+  { word: "Tische", cat: "pl" },
+  { word: "Betten", cat: "pl" },
+  { word: "Schränke", cat: "pl" },
+  { word: "Regale", cat: "pl" },
+  { word: "Lampen", cat: "pl" },
+  { word: "Teppiche", cat: "pl" },
   { word: "Foto", cat: "das" },
   { word: "Kompositum", cat: "das" },
   { word: "Garderobenregal", cat: "das" },
-  { word: "Chips", cat: "die" }
+  { word: "Chips", cat: "pl" }
 ];
 
 var draggedGenus = null, touchGenus = null, selectedGenus = null;
@@ -1045,7 +1047,7 @@ var draggedGenus = null, touchGenus = null, selectedGenus = null;
 function initGenus() {
     var pool = document.getElementById('genusPool');
     pool.innerHTML = '';
-    ['drop-der','drop-die','drop-das'].forEach(function(id){ document.getElementById(id).innerHTML=''; });
+    ['drop-der','drop-die','drop-das','drop-pl'].forEach(function(id){ document.getElementById(id).innerHTML=''; });
     document.getElementById('genusFeedback').textContent = '';
 
     shuffle(GENUS_DATA).forEach(function(d){ pool.appendChild(createGenusChip(d)); });
@@ -1080,7 +1082,7 @@ function initGenus() {
 }
 
 function checkGenusChip(chip, kat) {
-    var ok = chip.dataset.art === kat;
+    var ok = chip.dataset.cat === kat;
     chip.classList.toggle('correct', ok);
     chip.classList.toggle('wrong', !ok);
     if (!ok) { setTimeout(function(){ chip.classList.remove('wrong'); document.getElementById('genusPool').appendChild(chip); updateGenusFeedback(); }, 1000); }
@@ -1101,8 +1103,8 @@ function updateGenusFeedback() {
 function createGenusChip(d) {
     var chip = document.createElement('div');
     chip.className='genus-chip'; chip.draggable=true;
-    chip.dataset.art=d.art; chip.dataset.key=d.key;
-    chip.innerHTML='<img src="'+FOTOS[d.key]+'" alt="'+d.wort+'" loading="lazy"><span class="chip-wort">'+d.wort+'</span>';
+    chip.dataset.cat=d.cat;
+    chip.innerHTML='<span class="chip-wort">'+d.word+'</span>';
 
     chip.addEventListener('dragstart', function(e){ timerAutoStart(2); draggedGenus=chip; chip.classList.add('dragging'); e.dataTransfer.setData('text/plain',''); });
     chip.addEventListener('dragend',   function(){ chip.classList.remove('dragging'); });
